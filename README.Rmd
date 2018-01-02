@@ -12,9 +12,9 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
-# FitzRoy
+# fitzRoy
 
-The goal of FitzRoy is to ...
+The goal of fitzRoy is to ...
 
 ## Example
 
