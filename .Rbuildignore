@@ -7,3 +7,4 @@
 ^_pkgdown\.yml$
 ^doc$
 ^docs$
+create_package.R
