@@ -1,5 +1,7 @@
 ---
-output: github_document
+output:
+  github_document:
+    html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -10,7 +12,10 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+options(tibble.print_min = 5, tibble.print_max = 5)
 ```
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # fitzRoy
 
@@ -25,7 +30,7 @@ You can install fitzRoy from github with:
 devtools::install_github("jimmyday12/FitzRoy")
 ```
 
-## Example
+## Usage
 
 This is a basic example which shows you how to solve a common problem:
 
