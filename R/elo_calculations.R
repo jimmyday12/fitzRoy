@@ -1,6 +1,6 @@
 #' Find the expected outcome given an ELO difference.
 #'
-#' \code{sum} returns the expected outcome of winning based on an ELO points difference. 
+#' \code{find_expected_outcome} returns the expected outcome of winning based on an ELO points difference. 
 #'
 #' This is a generic ELO function in the form of prob = 1/1+10^(elo/M) 
 #' where elo is the elo difference between two teams and 
@@ -57,33 +57,32 @@ find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
   
 }
 
-
-
-margin_of_victory_multiplier <- function(elo_difference, margin , J = 2.2){
-  # performs a Margin of Victory Multiplier
-  # this allows for scaling of new result depending on if fav won or not
+#' Find new season ELO score by applying carryover factor. 
+#'
+#' \code{calculate_season_carryover} returns an ELO rating that is scaled towards the mean based on a carryover weight.
+#'
+#' INSERT DESCRIPTION
+#'
+#' @param elo An ELO rating, typically taken as the end of season value. 
+#' @param initial_team Rating given to the intial team. All values are scaled towards this value
+#' @param weight A weighting for how much to regress the score towards `initial_team`. 
+#' A value of 1 would not regress the ELO rating at all 
+#' while a value of 0 would regress all the way to `initial_team`
+#' @return A numeric value indicating the new ELO rating
+#'
+#' @examples
+#' calculate_season_carryover(1600, initial_team = 1500, weight = 0.3)
+#' calculate_season_carryover(1400, initial_team = 1550, weight = 0.5)
+#'
+#' \dontrun{
+#' calculate_season_carryover(1650, weight = -10)
+#' }
+calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
+  # error checks
+  if(weight < 0) stop("carryover_weight must be positive and between 0 and 1, inclusive")
+  if(weight > 1) stop("carryover_weight must be between 0 and 1, inclusive")
   
-  # First find if Fav won if so, make ELO_Fav positive
-  if ((elo_difference * margin) > 0) {
-    #then both are same sign, meaning fav won
-    elo_advantage_of_favourite <- elo_difference
-  } else #otherwise, they are different so underdog won
-  {
-    elo_advantage_of_favourite <- -elo_difference
-  }
-  multiplier <- J / ((0.001 * elo_difference) + J) #find multiplier
-  margin_of_victory <-  log(abs(margin) + 1) * multiplier #multiply by nat log of abs margin
-  return (margin_of_victory)
-}
-
-calculate_season_carryover <- function(elo, initial_team = 1500, carryover_weight = 0.5){
-  #performs carryover calculation - carry is a percentage
-  # this just moves the rating back toward the mean. Larger carryover
-  # means that last seasons ratings are more influential
-  
-  # check carry is between 0 and 1
-  carryover_weight <- max(min(carryover_weight, 1), 0)
-  new_elo <- (carryover_weight * elo) + (initial_team * (1 - carryover_weight))
+  new_elo <- (weight * elo) + (initial_team * (1 - weight))
   new_elo <- as.integer(floor(new_elo))
   return(new_elo)
   
