@@ -1,26 +1,29 @@
-#' Find the expected probability given an ELO difference.
+#' Find the expected outcome given an ELO difference.
 #'
-#' \code{sum} returns the expected probability of winning based on an ELO points difference. 
+#' \code{sum} returns the expected outcome of winning based on an ELO points difference. 
 #'
 #' This is a generic ELO function in the form of prob = 1/1+10^(elo/M) 
 #' where elo is the elo difference between two teams and 
 #' M is the scaling factor for the elo difference (EXPAND)
 #'
-#' @param elo_difference Numeric Test
+#' @param elo_difference Difference in elo ratings between two teams. Can be a positive or negative number. 
 #' @param M Test
-#' @return TEST
+#' @return A numeric value between 0 and 1, where values >0.5 indicate a win 
+#' while values of <0.5 indicate a loss. 
+#' A value of 0.5 indicates a draw.
 #'
 #' @examples
-#' sum(1:10)
+#' find_expected_outcome(100, M = 400)
+#' find_expected_outcome(0)
 #'
 #' \dontrun{
-#' sum("a")
+#' find_expected_outcome("a")
 #' }
 find_expected_outcome <- function(elo_difference, M = 400){
-  # Traditinoal ELO equation for expected outcome
-  #format is ExpOutcome = 1/ 1+ 10^(ELO_Diff/M)
-  # X is ELO Diff
-  # M is scaling factor
+  # Error checks
+  if(!is.numeric(elo_difference)) stop("elo_difference must be numeric")
+  
+  # Use traditional elo calculation
   expected_outcome <- 1 / (1 + (10 ^(-elo_difference/M)))
   return(expected_outcome)
 }
@@ -48,7 +51,7 @@ find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
   # Now run existing map_margin_to_prob to outcome convert to margin
   # Find expected (predicted) Margin
   points <- -200:200
-  points_norm <- map_margin_to_prob(points, M = M, B = B) # create vector of results
+  points_norm <- map_margin_to_prob(points) # create vector of results
   expected_margin <- points[which.min(abs(points_norm - expected_outcome))]
   return(expected_margin)
   
