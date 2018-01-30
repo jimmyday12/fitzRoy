@@ -10,7 +10,7 @@
 #' @param M Test
 #' @return A numeric value between 0 and 1, where values >0.5 indicate a win 
 #' while values of <0.5 indicate a loss. 
-#' A value of 0.5 indicates a draw.
+#' A value of 0.5 indicates a draw
 #'
 #' @examples
 #' find_expected_outcome(100, M = 400)
@@ -79,8 +79,13 @@ find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
 #' }
 calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
   # error checks
-  if(weight < 0) stop("carryover_weight must be positive and between 0 and 1, inclusive")
+  if(!is.numeric(elo)) stop("elo must be numeric")
+  if(!is.numeric(weight)) stop("weight must be numeric")
+  if(!is.numeric(intial_team)) stop("initial_team must be numeric")
+  if(weight < 0) stop("carryover_weight must be positive")
   if(weight > 1) stop("carryover_weight must be between 0 and 1, inclusive")
+
+  
   
   new_elo <- (weight * elo) + (initial_team * (1 - weight))
   new_elo <- as.integer(floor(new_elo))

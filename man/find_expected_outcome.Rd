@@ -14,7 +14,7 @@ find_expected_outcome(elo_difference, M = 400)
 \value{
 A numeric value between 0 and 1, where values >0.5 indicate a win
 while values of <0.5 indicate a loss.
-A value of 0.5 indicates a draw.
+A value of 0.5 indicates a draw
 }
 \description{
 \code{find_expected_outcome} returns the expected outcome of winning based on an ELO points difference.
