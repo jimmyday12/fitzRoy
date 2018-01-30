@@ -37,21 +37,10 @@ find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
   # M is scaling factor
   expected_outcome <- find_expected_outcome(elo_difference, M = M)
   
-  # Now we need to convert this to a margin. 
-  map_margin_to_prob <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1, C = 1){
-    #Generalised logistic function is in format
-    #Y <- A + ((K-A) / ((C + (Q*exp(-B * X)))^(1/v)))
-    numer <- K-A #create numerator
-    denom <- C + (Q*exp(-B * margin)) #create denomenator
-    divis <- numer / denom^(1/v) #perform division
-    prob <- A + divis #add to A
-    return(prob)
-  }
-  
   # Now run existing map_margin_to_prob to outcome convert to margin
   # Find expected (predicted) Margin
   points <- -200:200
-  points_norm <- map_margin_to_prob(points) # create vector of results
+  points_norm <- map_margin_to_outcome(points) # create vector of results
   expected_margin <- points[which.min(abs(points_norm - expected_outcome))]
   return(expected_margin)
   
@@ -92,3 +81,25 @@ calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
   return(new_elo)
   
 }
+
+
+map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 , C = 1){
+  #Generalised logistic function is in format
+  #Y <- A + ((K-A) / ((C + (Q*exp(-B * X)))^(1/v)))
+  numer <- K-A #create numerator
+  denom <- C + (Q*exp(-B * Marg)) #create denomenator
+  divis <- numer / denom^(1/v) #perform division
+  actOut <- A + divis #add to A
+  return(actOut)
+  
+  #I'll do it step by step to ensure thigns work
+  # A <- 0 #lower limit
+  #K <- 0.8 #upper limit
+  #B <- 0.04 #rate of growth
+  #v <- 1 #unsure - where is most growth
+  #Q <- 0.6 #unsure - affect centre
+  #C <- 1 #unsure - leave as 1
+}
+
+
+
