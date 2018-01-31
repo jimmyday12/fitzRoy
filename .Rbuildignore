@@ -8,3 +8,4 @@
 ^doc$
 ^docs$
 create_package.R
+^data-raw$
