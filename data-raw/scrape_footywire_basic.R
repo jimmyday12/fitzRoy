@@ -8,9 +8,6 @@ library(tidyverse)
 # Create URL
 default.url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
 
-# Create empty dataframe
-basic_data <- data.frame()
-
 # Create function to do different years
 footywire_basic <- function(ids) {
   dat <- data.frame()
@@ -37,20 +34,31 @@ footywire_basic <- function(ids) {
     dat <- bind_rows(dat, ind.table)
 
     Sys.sleep(2)
+    
   }
-
+  return(dat)
 }
 
 # Run function on range of id's ----
-# Create ID's
-# Using 2013 and 2016?
-ids <- c(5550:5747, 6172:6234)
+# Create ID's - can do multiple years in one ids 
+# e.g. ids <- c(5550:5747, 6172:6234)
+# As a test, run for 2017
+ids <- c(9307:9513)
+
+# Run function
+ptm <- proc.time() # set a time
 player_stats_basic <- footywire_basic(ids)
+proc.time() - ptm # return time
 
 # Clean up 
 # Fix names
 names(player_stats_basic) <- names(player_stats_basic) %>%
   map_chr(function(x) str_replace(x, "NULL.", ""))
 
-# Write data using
+# Write data using devtools
 devtools::use_data(player_stats_basic)
+
+# TODO
+# - Fix for missing games
+# - Run for set period
+# - Any other cleaning?
