@@ -9,14 +9,18 @@ library(tidyverse)
 default.url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
 
 # Create function to do different years
-footywire_basic <- function(ids) {
+footywire_basic <- function(ids, type = "basic") {
   dat <- data.frame()
   for (i in seq_along(ids)) {
     
     id <- ids[i]
     print(paste("Retreiving data from id", id))
     # Create URL
-    sel.url <- paste(default.url, id, sep = "")
+    if(type == "basic"){
+      sel.url <- paste(default.url, id, sep = "")
+    } else if(type == "advanced"){
+      sel.url <-     paste(default.url, i, "&advv=Y", sep="")
+    }
     htmlcode <- readLines(sel.url)
 
     # Get Data
@@ -53,9 +57,9 @@ mid_2010 = 5089:5146
 ids <- c(mid_2010, mid_2011, mid_2012, mid_2013, mid_2014,
          mid_2015, mid_2016, mid_2017)
 
-# Run function
+# Run basic function ----
 ptm <- proc.time() # set a time
-player_stats_basic <- footywire_basic(ids)
+player_stats_basic <- footywire_basic(ids, type = "basic")
 proc.time() - ptm # return time
 
 # Clean up 
@@ -66,7 +70,16 @@ names(player_stats_basic) <- names(player_stats_basic) %>%
 # Write data using devtools
 devtools::use_data(player_stats_basic)
 
-# TODO
-# - Fix for missing games
-# - Run for set period
-# - Any other cleaning?
+# Run basic function ----
+ptm <- proc.time() # set a time
+player_stats_advanced <- footywire_basic(ids, type = "basic")
+proc.time() - ptm # return time
+
+# Clean up 
+# Fix names
+names(player_stats_advanced) <- names(player_stats_advanced) %>%
+  map_chr(function(x) str_replace(x, "NULL.", ""))
+
+# Write data using devtools
+devtools::use_data(player_stats_advanced)
+
