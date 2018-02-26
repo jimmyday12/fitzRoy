@@ -2,8 +2,7 @@
 library(RCurl)
 library(XML)
 library(tidyverse)
-### for 2013 afl data
-### for (i in 5550:5747) {
+
 
 # Create URL
 default.url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
