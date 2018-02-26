@@ -5,17 +5,17 @@
 #' This calculates an updated ELO based on the ELO rating of each team,
 #' the home ground advatnage assigned and the actual margin. It can return either the home team ELO, the away team ELO or both
 #'
-#' @param margin The actual margin of the match, in points, from the home team perspective. Positive numbers indicate a home team win, negative numbers indicate an away team win. A value of 0 indicates a draw.
 #' @param elo_home The absolute ELO rating of the home team
 #' @param elo_away The absolute ELO rating of the away team
+#' @param margin The actual margin of the match, in points, from the home team perspective. Positive numbers indicate a home team win, negative numbers indicate an away team win. A value of 0 indicates a draw.
 #' @param returns The value to return as an output. Can be either the home team ELO, the away team ELO or both. Returning both will return a vector of two values with the home team ELO listed first.
 #' @param HGA Home ground advantage
 #' @return Returns the ELO of the team specified in `returns`
 #'
 #' @examples
-#' update_elo(36, elo_home = 1650, elo_away = 1500, returns = "home", HGA = 20)
+#' update_elo(1650, elo_away = 1500, margin = 26, returns = "home", HGA = 20)
 #' 
-update_elo <- function(margin, elo_home, elo_away,
+update_elo <- function(elo_home, elo_away, margin, 
                        returns = c("home", "away", "both"), HGA = 10, M, B) {
 
   # Error checks

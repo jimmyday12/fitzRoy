@@ -70,7 +70,7 @@ calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
   # error checks
   if(!is.numeric(elo)) stop("elo must be numeric")
   if(!is.numeric(weight)) stop("weight must be numeric")
-  if(!is.numeric(intial_team)) stop("initial_team must be numeric")
+  if(!is.numeric(initial_team)) stop("initial_team must be numeric")
   if(weight < 0) stop("carryover_weight must be positive")
   if(weight > 1) stop("carryover_weight must be between 0 and 1, inclusive")
 
