@@ -12,14 +12,17 @@ footywire_basic <- function(ids, type = "basic") {
   dat <- data.frame()
   for (i in seq_along(ids)) {
     
-    id <- ids[i]
-    print(paste("Retreiving data from id", id))
+    ind <- ids[i]
+    print(paste("Retreiving data from id", ind))
     # Create URL
     if(type == "basic"){
-      sel.url <- paste(default.url, id, sep = "")
+      sel.url <- paste(default.url, ind, sep = "")
     } else if(type == "advanced"){
       sel.url <-     paste(default.url, i, "&advv=Y", sep="")
     }
+    
+    # Check if URL exists
+    if(url.exists(sel.url)){
     htmlcode <- readLines(sel.url)
 
     # Get Data
@@ -31,10 +34,11 @@ footywire_basic <- function(ids, type = "basic") {
     ind.table <- rbind(top.table, bot.table)
 
     # Add match ID
-    ind.table <- ind.table %>% mutate(match_id = id)
+    ind.table <- ind.table %>% mutate(match_id = ind)
 
     # Bind to dataframe
     dat <- bind_rows(dat, ind.table)
+    }
 
     Sys.sleep(2)
     
