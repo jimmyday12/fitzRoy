@@ -41,9 +41,17 @@ footywire_basic <- function(ids) {
 
 # Run function on range of id's ----
 # Create ID's - can do multiple years in one ids 
-# e.g. ids <- c(5550:5747, 6172:6234)
-# As a test, run for 2017
-ids <- c(9307:9513)
+# will do 2010 onwards as that's when advanced stats began.
+mid_2017 = 9307:9513
+mid_2016 = 6172:6234
+mid_2015 = 5964:6171
+mid_2014 = 5757:5963
+mid_2013= 5550:5756
+mid_2012 = 5343:5549
+mid_2011 = 5147:5342
+mid_2010 = 5089:5146
+ids <- c(mid_2010, mid_2011, mid_2012, mid_2013, mid_2014,
+         mid_2015, mid_2016, mid_2017)
 
 # Run function
 ptm <- proc.time() # set a time
