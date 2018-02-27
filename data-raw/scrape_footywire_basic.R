@@ -3,6 +3,7 @@ library(RCurl)
 library(XML)
 library(tidyverse)
 library(rvest)
+library(lubridate)
 
 
 # Create function to do different years
@@ -47,10 +48,13 @@ footywire_basic <- function(ids) {
     ind.table.basic <- get_table_data(sel.url.basic)
     ind.table.advanced <- get_table_data(sel.url.advanced)
     
-    ind.table <- left_join(ind.table.basic, ind.table.advanced, by = "Player")
+    # Join them
+    ind.table <- ind.table.basic %>%
+      select(-GA) %>%
+      left_join(ind.table.advanced, by = "Player")
     
-    # Get basic info
-    footywire <- read_html(sel.url) 
+    # Get other info
+    footywire <- read_html(sel.url.basic) 
     
     # Game details
     game_details <- footywire %>% 
@@ -76,17 +80,17 @@ footywire_basic <- function(ids) {
       html_node("#matchscoretable tr~ tr+ tr a") %>%
       html_text()
     
-
+    
     ## Add data to ind.table
     ind.table <- ind.table %>%
-      mutate(home.team = home_team,
-             away.team = away_team,
-             round = round,
-             venue = venue,
-             season = season,
-             date = game_date,
-             match_id = ind) %>%
-      select(date, season, round, home.team, away.team, venue, everything())
+      mutate(Home.Team = home_team,
+             Away.Team = away_team,
+             Round = round,
+             Venue = venue,
+             Season = season,
+             Date = game_date,
+             Match_id = ind) %>%
+      select(Date, Season, Round, Home.Team, Away.Team, Venue, everything())
     
     # Bind to dataframe
     dat <- bind_rows(dat, ind.table)
@@ -112,33 +116,8 @@ ids <- c(mid_2010, mid_2011, mid_2012, mid_2013, mid_2014,
 
 # Run basic function ----
 ptm <- proc.time() # set a time
-player_stats_basic <- footywire_basic(ids, type = "basic")
+player_stats <- footywire_basic(ids)
 proc.time() - ptm # return time
 
-
-
 # Write data using devtools
-devtools::use_data(player_stats_basic, overwrite = TRUE)
-
-# Run advanced function ----
-ptm <- proc.time() # set a time
-player_stats_advanced <- footywire_basic(ids, type = "advanced")
-proc.time() - ptm # return time
-
-# Clean up 
-# Fix names
-names(player_stats_advanced) <- names(player_stats_advanced) %>%
-  map_chr(function(x) str_replace(x, "NULL.", ""))
-
-# Write data using devtools
-devtools::use_data(player_stats_advanced, overwrite = TRUE)
-
-### Add
-# Data
-# Season
-# Round
-# Venue
-# Home Team
-# Away Team
-
-
+devtools::use_data(player_stats, overwrite = TRUE)
