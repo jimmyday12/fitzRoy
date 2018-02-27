@@ -26,9 +26,6 @@ footywire_basic <- function(ids) {
         # Combine into one
         ind.table <- rbind(top.table, bot.table)
         
-        # Add match ID
-        ind.table <- ind.table %>% mutate(match_id = ind)
-        
         # Clean up 
         # Fix names
         names(ind.table) <- names(ind.table) %>%
@@ -55,9 +52,21 @@ footywire_basic <- function(ids) {
     # Get basic info
     footywire <- read_html(sel.url) 
     
+    # Game details
     game_details <- footywire %>% 
       html_node("tr:nth-child(2) .lnorm") %>% 
       html_text()
+    
+    round <- str_split(game_details, ",")[[1]][1] %>% trimws()
+    venue <- str_split(game_details, ",")[[1]][2] %>% trimws()
+    
+    # Game date
+    game_details_date <- footywire %>% 
+      html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
+      html_text()
+    
+    game_date <- str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
+    season <- year(game_date)
     
     home_team <- footywire %>%
       html_node("#matchscoretable tr:nth-child(2) a") %>%
@@ -67,14 +76,17 @@ footywire_basic <- function(ids) {
       html_node("#matchscoretable tr~ tr+ tr a") %>%
       html_text()
     
-    game_date <- footywire %>% 
-      html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
-      html_text()
-    
+
     ## Add data to ind.table
     ind.table <- ind.table %>%
       mutate(home.team = home_team,
-             away.team = away_team)
+             away.team = away_team,
+             round = round,
+             venue = venue,
+             season = season,
+             date = game_date,
+             match_id = ind) %>%
+      select(date, season, round, home.team, away.team, venue, everything())
     
     # Bind to dataframe
     dat <- bind_rows(dat, ind.table)
