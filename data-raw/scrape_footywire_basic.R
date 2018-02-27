@@ -15,8 +15,6 @@ footywire_basic <- function(ids) {
     print(paste("Retreiving data from id", ind))
     
     get_table_data <- function(x){
-      # Check if URL exists
-      if(url.exists(x)){
         htmlcode <- readLines(x)
         
         # Get Data
@@ -34,7 +32,6 @@ footywire_basic <- function(ids) {
         
         ind.table <- as.data.frame(ind.table)
         return(ind.table)
-      }
     }
     
     # Create URL
@@ -44,17 +41,19 @@ footywire_basic <- function(ids) {
     sel.url.basic <- paste(default.url, ind, sep = "")
     sel.url.advanced <- paste(default.url, ind, "&advv=Y", sep="")
     
+    # Check if URL exists
+    footywire <- tryCatch(read_html(sel.url.basic), error = function(e) FALSE)
+    if(is.list(footywire)){
+    
     # Do basic and advanced
     ind.table.basic <- get_table_data(sel.url.basic)
+    Sys.sleep(2)
     ind.table.advanced <- get_table_data(sel.url.advanced)
     
     # Join them
     ind.table <- ind.table.basic %>%
       select(-GA) %>%
       left_join(ind.table.advanced, by = "Player")
-    
-    # Get other info
-    footywire <- read_html(sel.url.basic) 
     
     # Game details
     game_details <- footywire %>% 
@@ -95,6 +94,7 @@ footywire_basic <- function(ids) {
     # Bind to dataframe
     dat <- bind_rows(dat, ind.table)
     Sys.sleep(2)
+    }
     
   }
   return(dat)
