@@ -2,6 +2,7 @@
 library(RCurl)
 library(XML)
 library(tidyverse)
+library(rvest)
 
 
 # Create URL
@@ -71,11 +72,11 @@ names(player_stats_basic) <- names(player_stats_basic) %>%
   map_chr(function(x) str_replace(x, "NULL.", ""))
 
 # Write data using devtools
-devtools::use_data(player_stats_basic)
+devtools::use_data(player_stats_basic, overwrite = TRUE)
 
-# Run basic function ----
+# Run advanced function ----
 ptm <- proc.time() # set a time
-player_stats_advanced <- footywire_basic(ids, type = "basic")
+player_stats_advanced <- footywire_basic(ids, type = "advanced")
 proc.time() - ptm # return time
 
 # Clean up 
@@ -84,5 +85,31 @@ names(player_stats_advanced) <- names(player_stats_advanced) %>%
   map_chr(function(x) str_replace(x, "NULL.", ""))
 
 # Write data using devtools
-devtools::use_data(player_stats_advanced)
+devtools::use_data(player_stats_advanced, overwrite = TRUE)
 
+### Add
+# Data
+# Season
+# Round
+# Venue
+# Home Team
+# Away Team
+
+footywire <- read_html(sel.url) 
+
+game_details <- footywire %>% 
+  html_node("tr:nth-child(2) .lnorm") %>% 
+  html_text()
+
+home_team <- footywire %>%
+html_node("#matchscoretable tr:nth-child(2) a") %>%
+  html_text()
+
+away_team <- footywire %>%
+  html_node("#matchscoretable tr~ tr+ tr a") %>%
+  html_text()
+
+game_date <- footywire %>% 
+  html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
+  html_text()
+  
