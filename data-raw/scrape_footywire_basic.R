@@ -15,23 +15,69 @@ footywire_basic <- function(ids) {
     print(paste("Retreiving data from id", ind))
     
     get_table_data <- function(x){
-        htmlcode <- readLines(x)
-        
-        # Get Data
-        export.table <- readHTMLTable(htmlcode)
-        top.table <- as.data.frame(export.table[13])
-        bot.table <- as.data.frame(export.table[17])
-        
-        # Combine into one
-        ind.table <- rbind(top.table, bot.table)
-        
-        # Clean up 
-        # Fix names
-        names(ind.table) <- names(ind.table) %>%
-          map_chr(function(x) str_replace(x, "NULL.", ""))
-        
-        ind.table <- as.data.frame(ind.table)
-        return(ind.table)
+      
+      # First get extra information
+      game_details <- x %>% 
+        html_node("tr:nth-child(2) .lnorm") %>% 
+        html_text()
+      
+      round <- str_split(game_details, ",")[[1]][1] %>% trimws()
+      venue <- str_split(game_details, ",")[[1]][2] %>% trimws()
+      
+      # Game date
+      game_details_date <- x %>% 
+        html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
+        html_text()
+      
+      game_date <- str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
+      season <- year(game_date)
+      
+      home_team <- x %>%
+        html_node("#matchscoretable tr:nth-child(2) a") %>%
+        html_text()
+      
+      away_team <- x %>%
+        html_node("#matchscoretable tr~ tr+ tr a") %>%
+        html_text()
+      
+      # Now get the table data
+      home_stats <- x %>% 
+        html_nodes("table") %>%
+        .[[13]] %>%
+        html_table()
+      
+      names(home_stats) <- home_stats[1,]
+      home_stats <- home_stats[2:nrow(home_stats),] %>%
+        mutate(Team = home_team,
+               Opposition = away_team,
+               Status = "Home")
+      
+      # Now get the table data
+      away_stats <- x %>% 
+        html_nodes("table") %>%
+        .[[17]] %>%
+        html_table()
+      
+      names(away_stats) <- away_stats[1,]
+      away_stats <- away_stats[2:nrow(away_stats),] %>%
+        mutate(Team = away_team,
+               Opposition = home_team,
+               Status = "Away")
+      
+      ## Add data to ind.table
+      player_stats <- home_stats %>%
+        rbind(away_stats) %>%
+        mutate(Round = round,
+               Venue = venue,
+               Season = season,
+               Date = game_date,
+               Match_id = ind) %>%
+        select(Date, Season, Round, Venue, Player, Team, Opposition, Status, everything())
+      
+      names(player_stats) <- make.names(names(player_stats))
+      
+      return(player_stats)
+  
     }
     
     # Create URL
@@ -42,59 +88,39 @@ footywire_basic <- function(ids) {
     sel.url.advanced <- paste(default.url, ind, "&advv=Y", sep="")
     
     # Check if URL exists
-    footywire <- tryCatch(read_html(sel.url.basic), error = function(e) FALSE)
-    if(is.list(footywire)){
+    footywire_basic <- tryCatch(
+      read_html(sel.url.basic), 
+      error = function(e) FALSE)
     
-    # Do basic and advanced
-    ind.table.basic <- get_table_data(sel.url.basic)
     Sys.sleep(2)
-    ind.table.advanced <- get_table_data(sel.url.advanced)
+    
+    # Check if Advanced URL exists
+    footywire_advanced <- tryCatch(
+      read_html(sel.url.advanced), 
+      error = function(e) FALSE)
+    
+    # If that worked, run the basic stats
+    if(is.list(footywire_basic)){
+      player_stats_basic <- get_table_data(footywire_basic)
+      player_stats_advanced <- get_table_data(footywire_advanced)
     
     # Join them
-    ind.table <- ind.table.basic %>%
-      select(-GA) %>%
-      left_join(ind.table.advanced, by = "Player")
+      info_columns <- c("Date", "Season", "Round", "Venue", "Player", "Team", "Opposition", "Status", "GA", "Match_id")
+    player_stats_table <- player_stats_advanced %>%
+      select(-one_of(info_columns)) %>%
+      bind_cols(player_stats_basic) %>%
+      select(one_of(info_columns), everything())
     
-    # Game details
-    game_details <- footywire %>% 
-      html_node("tr:nth-child(2) .lnorm") %>% 
-      html_text()
-    
-    round <- str_split(game_details, ",")[[1]][1] %>% trimws()
-    venue <- str_split(game_details, ",")[[1]][2] %>% trimws()
-    
-    # Game date
-    game_details_date <- footywire %>% 
-      html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
-      html_text()
-    
-    game_date <- str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
-    season <- year(game_date)
-    
-    home_team <- footywire %>%
-      html_node("#matchscoretable tr:nth-child(2) a") %>%
-      html_text()
-    
-    away_team <- footywire %>%
-      html_node("#matchscoretable tr~ tr+ tr a") %>%
-      html_text()
-    
-    
-    ## Add data to ind.table
-    ind.table <- ind.table %>%
-      mutate(Home.Team = home_team,
-             Away.Team = away_team,
-             Round = round,
-             Venue = venue,
-             Season = season,
-             Date = game_date,
-             Match_id = ind) %>%
-      select(Date, Season, Round, Home.Team, Away.Team, Venue, everything())
-    
+    # Tidy Names
+    player_stats_table <- player_stats_table %>%
+      rename(DE = DE.,
+             TOG = TOG.,
+             One.Percenters = X1.)
+      
     # Bind to dataframe
-    dat <- bind_rows(dat, ind.table)
-    Sys.sleep(2)
+    dat <- bind_rows(dat, player_stats_table)
     }
+
     
   }
   return(dat)
@@ -116,8 +142,11 @@ ids <- c(mid_2010, mid_2011, mid_2012, mid_2013, mid_2014,
 
 # Run basic function ----
 ptm <- proc.time() # set a time
-player_stats <- footywire_basic(ids)
+player_stats <- footywire_basic(5089:5090)
 proc.time() - ptm # return time
 
 # Write data using devtools
 devtools::use_data(player_stats, overwrite = TRUE)
+
+
+
