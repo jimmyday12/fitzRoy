@@ -21,4 +21,10 @@ BugReports: https://github.com/jimmyday12/fitzRoy/issues
 Imports: 
     rvest,
     lubridate,
-    dplyr
+    dplyr,
+    tibble,
+    tidyr,
+    purrr,
+    readr,
+    stringr,
+    forcats
