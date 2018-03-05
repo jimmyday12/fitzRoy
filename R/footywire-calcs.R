@@ -1,6 +1,6 @@
-#' Scrape footywire player statitstics for matches from 2010 onwards.
+#' Scrape footywire player statitstics.
 #'
-#' \code{get_footywire_stats} returns a dataframe containing player match stats from footywire.
+#' \code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
 #'
 #' The dataframe contains both basic and advanced player statistics from each match specified in the match_id input. 
 #' To find match ID, find the relevent matches on footywire.com
