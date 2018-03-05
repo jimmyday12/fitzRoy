@@ -70,4 +70,6 @@ ids <- 1:9999
 dat <- get_ids(ids)
 proc.time() - ptm # return time
 
-save(dat, file = "./data-raw/id_data.rda")
+#save(dat, file = "./data-raw/id_data.rda")
+id_data <- dat
+use_data(id_data, internal = TRUE)
