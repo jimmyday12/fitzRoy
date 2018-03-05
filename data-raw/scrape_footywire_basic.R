@@ -167,5 +167,9 @@ ptm <- proc.time() # set a time
 player_stats <- get_footywire_stats(ids$Match_id)
 proc.time() - ptm # return time
 
+# Rearrange
+player_stats <- player_stats %>%
+  arrange(Date, Match_id, desc(Status))
+
 # Write data using devtools
 devtools::use_data(player_stats, overwrite = TRUE)
