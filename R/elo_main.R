@@ -13,10 +13,10 @@
 #' @return Returns the ELO of the team specified in `returns`
 #'
 #' @examples
-#' update_elo(1650, elo_away = 1500, margin = 26, returns = "home", HGA = 20)
+#' update_elo(26, elo_home = 1650, elo_away = 1500, returns = "home")
 #' 
-update_elo <- function(elo_home, elo_away, margin, 
-                       returns = c("home", "away", "both"), HGA = 10, M, B) {
+update_elo <- function(margin, elo_home, elo_away, k = 20,
+                       returns = "home", HGA = 10, M = 400, B = 0.025) {
 
   # Error checks
 
@@ -31,7 +31,7 @@ update_elo <- function(elo_home, elo_away, margin,
 
   # First normalises actual Outcome between 0 and 1, slightly squashed so that
   # there are diminishing gains at higher levels.
-  actual_outcome <- map_margin_to_outcome(actual_margin, B = B)
+  actual_outcome <- map_margin_to_outcome(margin, B = B)
 
   # Expected outcome is for home team. Away team is the negative of it, since
   # ELO is zero sum
@@ -40,5 +40,6 @@ update_elo <- function(elo_home, elo_away, margin,
   # Depending on returns value
   if (returns == "home") return(elo_home + elo_change)
   if (returns == "away") return(elo_away - elo_change)
-  if (returns == "home") return(c(elo_home + elo_change, elo_away - elo_change))
+  if (returns == "both") return(c(elo_home + elo_change, elo_away - elo_change))
+  if (!returns %in% c("home", "away", "both")) stop("Returns was not a valid argument. Use one of 'home', 'away' or 'both'")
 }

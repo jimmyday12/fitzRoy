@@ -9,8 +9,9 @@
 #' @return Returns a data frame containing player match stats for each match ID
 #'
 #' @examples
+#' \dontrun{
 #' get_footywire_stats(100)
-#' 
+#' }
 get_footywire_stats <- function(ids) {
   dat <- data.frame()
   for (i in seq_along(ids)) {
@@ -175,8 +176,9 @@ get_footywire_stats <- function(ids) {
 #' @return Returns a data frame containing player match stats for each match ID
 #'
 #' @examples
+#' \dontrun{
 #' update_footywire_stats()
-#' 
+#' }
 update_footywire_stats <- function(end_date = Sys.Date()){
   
   # First, load data from github

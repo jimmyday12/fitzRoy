@@ -87,7 +87,7 @@ map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 ,
   #Generalised logistic function is in format
   #Y <- A + ((K-A) / ((C + (Q*exp(-B * X)))^(1/v)))
   numer <- K-A #create numerator
-  denom <- C + (Q*exp(-B * Marg)) #create denomenator
+  denom <- C + (Q*exp(-B * margin)) #create denomenator
   divis <- numer / denom^(1/v) #perform division
   actOut <- A + divis #add to A
   return(actOut)
