@@ -30,5 +30,4 @@ the home ground advatnage assigned and the actual margin. It can return either t
 }
 \examples{
 update_elo(26, elo_home = 1650, elo_away = 1500, returns = "home")
-
 }
