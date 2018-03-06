@@ -20,6 +20,7 @@ The dataframe contains both basic and advanced player statistics from each match
 To find match ID, find the relevent matches on footywire.com
 }
 \examples{
+\dontrun{
 get_footywire_stats(100)
-
+}
 }

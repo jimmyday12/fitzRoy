@@ -114,12 +114,16 @@
     <p><code>update_elo</code> returns a new ELO value for the specified team.</p>
     
 
-    <pre class="usage"><span class='fu'>update_elo</span>(<span class='no'>elo_home</span>, <span class='no'>elo_away</span>, <span class='no'>margin</span>, <span class='kw'>returns</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"home"</span>, <span class='st'>"away"</span>, <span class='st'>"both"</span>),
-  <span class='kw'>HGA</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>M</span>, <span class='no'>B</span>)</pre>
+    <pre class="usage"><span class='fu'>update_elo</span>(<span class='no'>margin</span>, <span class='no'>elo_home</span>, <span class='no'>elo_away</span>, <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>returns</span> <span class='kw'>=</span> <span class='st'>"home"</span>, <span class='kw'>HGA</span> <span class='kw'>=</span> <span class='fl'>10</span>,
+  <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>400</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fl'>0.025</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>margin</th>
+      <td><p>The actual margin of the match, in points, from the home team perspective. Positive numbers indicate a home team win, negative numbers indicate an away team win. A value of 0 indicates a draw.</p></td>
+    </tr>
     <tr>
       <th>elo_home</th>
       <td><p>The absolute ELO rating of the home team</p></td>
@@ -127,10 +131,6 @@
     <tr>
       <th>elo_away</th>
       <td><p>The absolute ELO rating of the away team</p></td>
-    </tr>
-    <tr>
-      <th>margin</th>
-      <td><p>The actual margin of the match, in points, from the home team perspective. Positive numbers indicate a home team win, negative numbers indicate an away team win. A value of 0 indicates a draw.</p></td>
     </tr>
     <tr>
       <th>returns</th>
@@ -153,7 +153,7 @@ the home ground advatnage assigned and the actual margin. It can return either t
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>update_elo</span>(<span class='fl'>1650</span>, <span class='kw'>elo_away</span> <span class='kw'>=</span> <span class='fl'>1500</span>, <span class='kw'>margin</span> <span class='kw'>=</span> <span class='fl'>26</span>, <span class='kw'>returns</span> <span class='kw'>=</span> <span class='st'>"home"</span>, <span class='kw'>HGA</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='output co'>#&gt; <span class='error'>Error in find_expected_outcome(elo_diff, M = M): argument "M" is missing, with no default</span></div><div class='input'>
+    <pre class="examples"><div class='input'><span class='fu'>update_elo</span>(<span class='fl'>26</span>, <span class='kw'>elo_home</span> <span class='kw'>=</span> <span class='fl'>1650</span>, <span class='kw'>elo_away</span> <span class='kw'>=</span> <span class='fl'>1500</span>, <span class='kw'>returns</span> <span class='kw'>=</span> <span class='st'>"home"</span>)</div><div class='output co'>#&gt; [1] 1649</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

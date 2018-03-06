@@ -19,6 +19,7 @@ Returns a data frame containing player match stats for each match ID
 The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
 }
 \examples{
+\dontrun{
 update_footywire_stats()
-
+}
 }
