@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>fitzRoy: What the Package Does (one line, title case) — fitzRoy-package • fitzRoy</title>
+<title>Find a team's new ELO given their previous ELO, home ground advantage and actual result. — update_elo • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -95,39 +95,66 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>fitzRoy: What the Package Does (one line, title case)</h1>
+    <h1>Find a team's new ELO given their previous ELO, home ground advantage and actual result.</h1>
     </div>
 
     
-    <p>What the package does (one paragraph).</p>
+    <p><code>update_elo</code> returns a new ELO value for the specified team.</p>
     
 
-        
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <pre class="usage"><span class='fu'>update_elo</span>(<span class='no'>elo_home</span>, <span class='no'>elo_away</span>, <span class='no'>margin</span>, <span class='kw'>returns</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"home"</span>, <span class='st'>"away"</span>, <span class='st'>"both"</span>),
+  <span class='kw'>HGA</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='no'>M</span>, <span class='no'>B</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>elo_home</th>
+      <td><p>The absolute ELO rating of the home team</p></td>
+    </tr>
+    <tr>
+      <th>elo_away</th>
+      <td><p>The absolute ELO rating of the away team</p></td>
+    </tr>
+    <tr>
+      <th>margin</th>
+      <td><p>The actual margin of the match, in points, from the home team perspective. Positive numbers indicate a home team win, negative numbers indicate an away team win. A value of 0 indicates a draw.</p></td>
+    </tr>
+    <tr>
+      <th>returns</th>
+      <td><p>The value to return as an output. Can be either the home team ELO, the away team ELO or both. Returning both will return a vector of two values with the home team ELO listed first.</p></td>
+    </tr>
+    <tr>
+      <th>HGA</th>
+      <td><p>Home ground advantage</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Useful links:</p><ul>
-<li><p><a href='https://github.com/jimmyday12/fitzRoy'>https://github.com/jimmyday12/fitzRoy</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/jimmyday12/fitzRoy/issues'>https://github.com/jimmyday12/fitzRoy/issues</a></p></li>
-</ul>
+    <p>Returns the ELO of the team specified in <code>returns</code></p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This calculates an updated ELO based on the ELO rating of each team,
+the home ground advatnage assigned and the actual margin. It can return either the home team ELO, the away team ELO or both</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>update_elo</span>(<span class='fl'>1650</span>, <span class='kw'>elo_away</span> <span class='kw'>=</span> <span class='fl'>1500</span>, <span class='kw'>margin</span> <span class='kw'>=</span> <span class='fl'>26</span>, <span class='kw'>returns</span> <span class='kw'>=</span> <span class='st'>"home"</span>, <span class='kw'>HGA</span> <span class='kw'>=</span> <span class='fl'>20</span>)</div><div class='output co'>#&gt; <span class='error'>Error in find_expected_outcome(elo_diff, M = M): argument "M" is missing, with no default</span></div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#see-also">See also</a></li>
-          </ul>
+      <li><a href="#value">Value</a></li>
 
-    <h2>Author</h2>
-    
-<strong>Maintainer</strong>: James Day <a href='mailto:jamesthomasday@gmail.com'>jamesthomasday@gmail.com</a>
-
-Authors:
-<ul>
-<li><p>Robert Nguyen <a href='mailto:nguyen.n.robert@gmail.com'>nguyen.n.robert@gmail.com</a></p></li>
-</ul>
-
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

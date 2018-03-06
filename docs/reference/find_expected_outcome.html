@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • fitzRoy</title>
+<title>Find the expected outcome given an ELO difference. — find_expected_outcome • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -93,33 +93,62 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>Find the expected outcome given an ELO difference.</h1>
     </div>
 
-    <div class="contents">
-    <div id="fitzroy-0-0-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#fitzroy-0-0-0-9000" class="anchor"></a>FitzRoy 0.0.0.9000</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Test</li>
-</ul>
-</div>
-    </div>
+    
+    <p><code>find_expected_outcome</code> returns the expected outcome of winning based on an ELO points difference.</p>
+    
+
+    <pre class="usage"><span class='fu'>find_expected_outcome</span>(<span class='no'>elo_difference</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>400</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>elo_difference</th>
+      <td><p>Difference in elo ratings between two teams. Can be a positive or negative number.</p></td>
+    </tr>
+    <tr>
+      <th>M</th>
+      <td><p>Test</p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A numeric value between 0 and 1, where values &gt;0.5 indicate a win
+while values of &lt;0.5 indicate a loss.
+A value of 0.5 indicates a draw</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>This is a generic ELO function in the form of prob = 1/1+10^(elo/M)
+where elo is the elo difference between two teams and
+M is the scaling factor for the elo difference (EXPAND)</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>find_expected_outcome</span>(<span class='fl'>100</span>, <span class='kw'>M</span> <span class='kw'>=</span> <span class='fl'>400</span>)</div><div class='output co'>#&gt; [1] 0.640065</div><div class='input'><span class='fu'>find_expected_outcome</span>(<span class='fl'>0</span>)</div><div class='output co'>#&gt; [1] 0.5</div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>find_expected_outcome</span>(<span class='st'>"a"</span>)
+<span class='co'># }</span></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#fitzroy-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
+  </div>
 </div>
 
       <footer>

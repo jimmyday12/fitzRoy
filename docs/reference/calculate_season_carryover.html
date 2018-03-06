@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>All news • fitzRoy</title>
+<title>Find new season ELO score by applying carryover factor. — calculate_season_carryover • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -37,7 +37,7 @@
   </head>
 
   <body>
-    <div class="container template-news">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -93,33 +93,64 @@
       </header>
 
       <div class="row">
-
-  <div class="col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Change log <small>All releases</small></h1>
+    <h1>Find new season ELO score by applying carryover factor.</h1>
     </div>
 
-    <div class="contents">
-    <div id="fitzroy-0-0-0-9000" class="section level1">
-<h1 class="hasAnchor">
-<a href="#fitzroy-0-0-0-9000" class="anchor"></a>FitzRoy 0.0.0.9000</h1>
-<ul>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-<li>Test</li>
-</ul>
-</div>
-    </div>
+    
+    <p><code>calculate_season_carryover</code> returns an ELO rating that is scaled towards the mean based on a carryover weight.</p>
+    
+
+    <pre class="usage"><span class='fu'>calculate_season_carryover</span>(<span class='no'>elo</span>, <span class='kw'>initial_team</span> <span class='kw'>=</span> <span class='fl'>1500</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>elo</th>
+      <td><p>An ELO rating, typically taken as the end of season value.</p></td>
+    </tr>
+    <tr>
+      <th>initial_team</th>
+      <td><p>Rating given to the intial team. All values are scaled towards this value</p></td>
+    </tr>
+    <tr>
+      <th>weight</th>
+      <td><p>A weighting for how much to regress the score towards <code>initial_team</code>.
+A value of 1 would not regress the ELO rating at all
+while a value of 0 would regress all the way to <code>initial_team</code></p></td>
+    </tr>
+    </table>
+    
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A numeric value indicating the new ELO rating</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>INSERT DESCRIPTION</p>
+    
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>calculate_season_carryover</span>(<span class='fl'>1600</span>, <span class='kw'>initial_team</span> <span class='kw'>=</span> <span class='fl'>1500</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>0.3</span>)</div><div class='output co'>#&gt; [1] 1530</div><div class='input'><span class='fu'>calculate_season_carryover</span>(<span class='fl'>1400</span>, <span class='kw'>initial_team</span> <span class='kw'>=</span> <span class='fl'>1550</span>, <span class='kw'>weight</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] 1475</div><div class='input'>
+</div><span class='co'># NOT RUN {</span>
+<span class='fu'>calculate_season_carryover</span>(<span class='fl'>1650</span>, <span class='kw'>weight</span> <span class='kw'>=</span> -<span class='fl'>10</span>)
+<span class='co'># }</span></pre>
   </div>
-
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#fitzroy-0-0-0-9000">0.0.0.9000</a></li>
-      </ul>
-    </div>
-  </div>
+    <h2>Contents</h2>
+    <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
+      
+      <li><a href="#value">Value</a></li>
 
+      <li><a href="#details">Details</a></li>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
+
+  </div>
 </div>
 
       <footer>

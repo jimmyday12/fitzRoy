@@ -2,7 +2,7 @@
 % Please edit documentation in R/footywire-calcs.R
 \name{get_footywire_stats}
 \alias{get_footywire_stats}
-\title{Scrape footywire player statitstics for matches from 2010 onwards.}
+\title{Scrape footywire player statitstics.}
 \usage{
 get_footywire_stats(ids)
 }
@@ -13,7 +13,7 @@ get_footywire_stats(ids)
 Returns a data frame containing player match stats for each match ID
 }
 \description{
-\code{get_footywire_stats} returns a dataframe containing player match stats from footywire.
+\code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
 }
 \details{
 The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
