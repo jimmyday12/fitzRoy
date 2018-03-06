@@ -13,15 +13,10 @@
 #' get_footywire_stats(100)
 #' }
 #' @export
-<<<<<<< HEAD
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @importFrom rvest html_node
 #' @importFrom rvest html_text
-=======
-#' @import dplyr
-#' @import rvest
->>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
 get_footywire_stats <- function(ids) {
   dat <- data.frame()
   for (i in seq_along(ids)) {
@@ -85,13 +80,8 @@ get_footywire_stats <- function(ids) {
       
       ## Add data to ind.table
       player_stats <- home_stats %>%
-<<<<<<< HEAD
         bind_rows(away_stats) %>%
         mutate(
-=======
-        dplyr::bind_rows(away_stats) %>%
-        dplyr::mutate(
->>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
           Round = round,
           Venue = venue,
           Season = season,
@@ -196,10 +186,7 @@ get_footywire_stats <- function(ids) {
 #' }
 #' @export
 #' @importFrom magrittr %>%
-<<<<<<< HEAD
 #' @import dplyr
-=======
->>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
 update_footywire_stats <- function(end_date = Sys.Date()){
   
   # First, load data from github
