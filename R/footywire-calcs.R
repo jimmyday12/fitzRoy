@@ -12,6 +12,11 @@
 #' \dontrun{
 #' get_footywire_stats(100)
 #' }
+#' @export
+#' @importFrom magrittr %>%
+#' @import dplyr
+#' @importFrom rvest html_node
+#' @importFrom rvest html_text
 get_footywire_stats <- function(ids) {
   dat <- data.frame()
   for (i in seq_along(ids)) {
@@ -30,8 +35,8 @@ get_footywire_stats <- function(ids) {
         html_text()
       
       # We need to extract round and venue from that text
-      round <- str_split(game_details, ",")[[1]][1] %>% trimws()
-      venue <- str_split(game_details, ",")[[1]][2] %>% trimws()
+      round <- stringr::str_split(game_details, ",")[[1]][1] %>% trimws()
+      venue <- stringr::str_split(game_details, ",")[[1]][2] %>% trimws()
       
       # Get Game date
       game_details_date <- x %>%
@@ -39,7 +44,7 @@ get_footywire_stats <- function(ids) {
         html_text()
       
       # Again, we have to extract the details
-      game_date <- str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
+      game_date <- stringr::str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
       season <- year(game_date)
       
       # Get home and away team names
@@ -75,7 +80,7 @@ get_footywire_stats <- function(ids) {
       
       ## Add data to ind.table
       player_stats <- home_stats %>%
-        rbind(away_stats) %>%
+        bind_rows(away_stats) %>%
         mutate(
           Round = round,
           Venue = venue,
@@ -100,7 +105,7 @@ get_footywire_stats <- function(ids) {
     
     # Check if URL exists
     footywire_basic <- tryCatch(
-      read_html(sel.url.basic),
+      xml2::read_html(sel.url.basic),
       error = function(e) FALSE
     )
     
@@ -112,7 +117,7 @@ get_footywire_stats <- function(ids) {
       advanced_empty <- footywire_basic %>% 
         html_nodes(".notice") %>% 
         html_text() %>% 
-        str_detect("Advanced") %>%
+        stringr::str_detect("Advanced") %>%
         is_empty()
       
       # Check advanced exists
@@ -128,7 +133,7 @@ get_footywire_stats <- function(ids) {
         
         # Check if Advanced URL exists
         footywire_advanced <- tryCatch(
-          read_html(sel.url.advanced),
+          xml2::read_html(sel.url.advanced),
           error = function(e) FALSE
         )
         
@@ -179,6 +184,9 @@ get_footywire_stats <- function(ids) {
 #' \dontrun{
 #' update_footywire_stats()
 #' }
+#' @export
+#' @importFrom magrittr %>%
+#' @import dplyr
 update_footywire_stats <- function(end_date = Sys.Date()){
   
   # First, load data from github

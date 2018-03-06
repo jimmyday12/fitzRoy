@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' update_elo(26, elo_home = 1650, elo_away = 1500, returns = "home")
-#' 
+#' @export
 update_elo <- function(margin, elo_home, elo_away, k = 20,
                        returns = "home", HGA = 10, M = 400, B = 0.025) {
 
