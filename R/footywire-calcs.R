@@ -13,10 +13,15 @@
 #' get_footywire_stats(100)
 #' }
 #' @export
+<<<<<<< HEAD
 #' @importFrom magrittr %>%
 #' @import dplyr
 #' @importFrom rvest html_node
 #' @importFrom rvest html_text
+=======
+#' @import dplyr
+#' @import rvest
+>>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
 get_footywire_stats <- function(ids) {
   dat <- data.frame()
   for (i in seq_along(ids)) {
@@ -31,8 +36,8 @@ get_footywire_stats <- function(ids) {
       
       # First get extra information
       game_details <- x %>%
-        html_node("tr:nth-child(2) .lnorm") %>%
-        html_text()
+        rvest::html_node("tr:nth-child(2) .lnorm") %>%
+        rvest::html_text()
       
       # We need to extract round and venue from that text
       round <- stringr::str_split(game_details, ",")[[1]][1] %>% trimws()
@@ -40,8 +45,8 @@ get_footywire_stats <- function(ids) {
       
       # Get Game date
       game_details_date <- x %>%
-        html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
-        html_text()
+        rvest::html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
+        rvest::html_text()
       
       # Again, we have to extract the details
       game_date <- stringr::str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
@@ -49,19 +54,19 @@ get_footywire_stats <- function(ids) {
       
       # Get home and away team names
       home_team <- x %>%
-        html_node("#matchscoretable tr:nth-child(2) a") %>%
-        html_text()
+        rvest::html_node("#matchscoretable tr:nth-child(2) a") %>%
+        rvest::html_text()
       
       away_team <- x %>%
-        html_node("#matchscoretable tr~ tr+ tr a") %>%
-        html_text()
+        rvest::html_node("#matchscoretable tr~ tr+ tr a") %>%
+        rvest::html_text()
       
       # Now get the table data. The Home Team is in the 13th table
       home_stats <- x %>%
-        html_nodes("table") %>%
+        rvest::html_nodes("table") %>%
         .[[13]] %>%
-        html_table(header = T) %>%
-        mutate(
+        rvest::html_table(header = T) %>%
+        dplyr::mutate(
           Team = home_team,
           Opposition = away_team,
           Status = "Home"
@@ -69,10 +74,10 @@ get_footywire_stats <- function(ids) {
       
       # Now get the table data
       away_stats <- x %>%
-        html_nodes("table") %>%
+        rvest::html_nodes("table") %>%
         .[[17]] %>%
-        html_table(header = T) %>%
-        mutate(
+        rvest::html_table(header = T) %>%
+        dplyr::mutate(
           Team = away_team,
           Opposition = home_team,
           Status = "Away"
@@ -80,15 +85,20 @@ get_footywire_stats <- function(ids) {
       
       ## Add data to ind.table
       player_stats <- home_stats %>%
+<<<<<<< HEAD
         bind_rows(away_stats) %>%
         mutate(
+=======
+        dplyr::bind_rows(away_stats) %>%
+        dplyr::mutate(
+>>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
           Round = round,
           Venue = venue,
           Season = season,
           Date = game_date,
           Match_id = ind
         ) %>%
-        select(Date, Season, Round, Venue, Player, Team, Opposition, Status, everything())
+        dplyr::select(Date, Season, Round, Venue, Player, Team, Opposition, Status, everything())
       
       names(player_stats) <- make.names(names(player_stats))
       
@@ -186,7 +196,10 @@ get_footywire_stats <- function(ids) {
 #' }
 #' @export
 #' @importFrom magrittr %>%
+<<<<<<< HEAD
 #' @import dplyr
+=======
+>>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
 update_footywire_stats <- function(end_date = Sys.Date()){
   
   # First, load data from github
@@ -197,8 +210,8 @@ update_footywire_stats <- function(end_date = Sys.Date()){
   # Now find the max date of existing dataset
   max(player_stats$Date)
   new_data_ids <- id_data %>%
-    filter( Season > 2009) %>%
-    filter(Date > max(player_stats$Date))
+    dplyr::filter( Season > 2009) %>%
+    dplyr::filter(Date > max(player_stats$Date))
   
   if(nrow(new_data_ids) == 0){
     message("Data is up to date. Returning original player_stats data")
@@ -212,7 +225,7 @@ update_footywire_stats <- function(end_date = Sys.Date()){
     
     # Merge with existing data
     dat <- player_stats %>%
-      bind_rows(new_data)
+      dplyr::bind_rows(new_data)
     return(dat)
 
   }

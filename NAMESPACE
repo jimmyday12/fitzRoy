@@ -7,6 +7,11 @@ export(map_margin_to_outcome)
 export(update_elo)
 export(update_footywire_stats)
 import(dplyr)
+<<<<<<< HEAD
 importFrom(magrittr,"%>%")
 importFrom(rvest,html_node)
 importFrom(rvest,html_text)
+=======
+import(rvest)
+importFrom(magrittr,"%>%")
+>>>>>>> 521f53182a750f64dd2ae07d42a9568396d51b4d
