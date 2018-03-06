@@ -19,7 +19,6 @@
 #' \dontrun{
 #' find_expected_outcome("a")
 #' }
-#' @export
 find_expected_outcome <- function(elo_difference, M = 400){
   # Error checks
   if(!is.numeric(elo_difference)) stop("elo_difference must be numeric")
@@ -67,7 +66,6 @@ find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
 #' \dontrun{
 #' calculate_season_carryover(1650, weight = -10)
 #' }
-#' @export
 calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
   # error checks
   if(!is.numeric(elo)) stop("elo must be numeric")
@@ -84,7 +82,6 @@ calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
   
 }
 
-#' @export
 map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 , C = 1){
   #Generalised logistic function is in format
   #Y <- A + ((K-A) / ((C + (Q*exp(-B * X)))^(1/v)))
