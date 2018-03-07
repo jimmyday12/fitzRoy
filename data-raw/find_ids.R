@@ -57,20 +57,33 @@ get_ids <- function(ids) {
         Match_id = ids[i],
         Exist = FALSE
       )
-      message(paste("URL for ID", ind, "doesn't exist"))
+      message(paste0("URL for ID ", ind, " doesn't exist (", i, " of ", length(ids), ")"))
     }
     dat <- bind_rows(dat, ind.dat)
     
   }
+  print(paste0("Finished updating records. ", sum(dat$Exist), " new records found"))
   return(dat)
 }
-ptm <- proc.time() # set a time
 
-ids <- 1:9999
-dat <- get_ids(ids)
-proc.time() - ptm # return time
+# Process through script ----
+library(tidyverse)
+library(rvest)
+library(lubridate)
+load("./data-raw/id_data.rda")
 
+# Filter out matches we know exist
+ids <- id_data %>% 
+  filter(!Exist)
 
-id_data <- dat
+# Check for new matches
+dat <- get_ids(ids$Match_id)
+
+# Merge back into file
+id_data <- id_data %>%
+  filter(Exist) %>%
+  bind_rows(dat)
+
+# Save data
 use_data(id_data, internal = TRUE, overwrite = TRUE)
 save(id_data, file = "./data-raw/id_data.rda")
