@@ -19,6 +19,7 @@
 #' \dontrun{
 #' find_expected_outcome("a")
 #' }
+#' @export
 find_expected_outcome <- function(elo_difference, M = 400){
   # Error checks
   if(!is.numeric(elo_difference)) stop("elo_difference must be numeric")
@@ -29,7 +30,7 @@ find_expected_outcome <- function(elo_difference, M = 400){
 }
 
 
-
+#' @export
 find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
   # Traditinoal ELO equation for expected outcome
   # format is expected_outcome = 1/ 1+ 10^(elo_difference/M)
@@ -101,6 +102,7 @@ map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 ,
 }
 
 
+#' @export
 simSeason <- function(fixture, team_elo = data.frame(), simulation = 1) {
   
   # initialise data frame
