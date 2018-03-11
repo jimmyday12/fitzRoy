@@ -21,6 +21,6 @@ To find match ID, find the relevent matches on footywire.com
 }
 \examples{
 \dontrun{
-get_footywire_stats(100)
+get_footywire_stats(ids = 5000:5100)
 }
 }

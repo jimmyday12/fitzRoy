@@ -4,9 +4,9 @@
 \name{fitzRoy-package}
 \alias{fitzRoy}
 \alias{fitzRoy-package}
-\title{fitzRoy: What the Package Does (one line, title case)}
+\title{fitzRoy: Easily Scrape and Process AFL Data}
 \description{
-What the package does (one paragraph).
+An easy to use tool for scraping and processing AFL data.
 }
 \seealso{
 Useful links:
