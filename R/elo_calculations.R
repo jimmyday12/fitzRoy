@@ -101,9 +101,23 @@ map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 ,
   #C <- 1 #unsure - leave as 1
 }
 
-
+#' Simulate a season based on ELO
+#'
+#' \code{simulated_season} takes a fixture and simulates remaining games based upon the teams starting ELO. 
+#'
+#' INSERT DESCRIPTION
+#'
+#' @param fixture A dataframe containing upcoming matches EXPAND 
+#' @param team_elo A dataframe with each teams current ELO ratings
+#' @param simulation An optional simulation ID number
+#' @param HGA Home ground advantage, in arbitrary units
+#' @param M Weighting factor for ELO calculations
+#' @param stdev Standard Deviation of results
+#' @return A dataframe of simulated results
+#'
 #' @export
-simSeason <- function(fixture, team_elo = data.frame(), simulation = 1) {
+simulate_season <- function(fixture, team_elo = data.frame(), simulation = 1,
+                            HGA = 20, M = 400, stdev = 41) {
   
   # initialise data frame
   simulated_results <- tibble()

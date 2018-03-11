@@ -3,7 +3,7 @@
 export(find_expected_margin)
 export(find_expected_outcome)
 export(get_footywire_stats)
-export(simSeason)
+export(simulate_season)
 export(update_footywire_stats)
 import(dplyr)
 importFrom(magrittr,"%>%")
