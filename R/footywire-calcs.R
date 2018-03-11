@@ -18,16 +18,11 @@
 #' @importFrom rvest html_node
 #' @importFrom rvest html_text
 get_footywire_stats <- function(ids) {
+  
   dat <- data.frame()
-  for (i in seq_along(ids)) {
-    
-    # Set the index
-    ind <- ids[i]
-    print(paste("Retreiving data from match ID ", ind, " (", i, " of ", length(ids), ")",
-                sep = ""))
-    
+ 
     # First, let's create a function that access the date
-    get_table_data <- function(x) {
+    get_table_data <- function(x, id) {
       
       # First get extra information
       game_details <- x %>%
@@ -86,7 +81,7 @@ get_footywire_stats <- function(ids) {
           Venue = venue,
           Season = season,
           Date = game_date,
-          Match_id = ind
+          Match_id = id
         ) %>%
         dplyr::select(Date, Season, Round, Venue, Player, Team, Opposition, Status, everything())
       
@@ -95,79 +90,92 @@ get_footywire_stats <- function(ids) {
       return(player_stats)
     }
     
-    # Now we can run the function
-    # Create URL
-    default.url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
     
+
     # Create URLs
-    sel.url.basic <- paste(default.url, ind, sep = "")
-    sel.url.advanced <- paste(default.url, ind, "&advv=Y", sep = "")
+    get_tables <- function(id){
+      
+      # Create URL
+      default_url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
+      basic_url <- paste(default_url, id, sep = "")
+      advanced_url <- paste(default_url, id, "&advv=Y", sep = "")
+      
+      # Check if URL exists
+      footywire_basic <- tryCatch(
+        xml2::read_html(basic_url),
+        error = function(e) FALSE
+      )
     
-    # Check if URL exists
-    footywire_basic <- tryCatch(
-      xml2::read_html(sel.url.basic),
-      error = function(e) FALSE
-    )
+      if (is.list(footywire_basic)) {
+        
+        # Check if Advanced Page exist? If it doesn't, the script breaks since the html tables have different nodes
+        advanced_empty <- footywire_basic %>% 
+          html_nodes(".notice") %>% 
+          html_text() %>% 
+          stringr::str_detect("Advanced") %>%
+          is_empty()
+        
+        # Check advanced exists
+        if(advanced_empty){
+          stop("This function only works on matches from 2010 onwards")
+        } else {
+          
+          # If it does, grab the basic data
+          player_stats_basic <- get_table_data(footywire_basic, id)
+          
+          # If it does, create access the URL and create the data table. Also merge with basic
+          Sys.sleep(2)
+          
+          # Check if Advanced URL exists
+          footywire_advanced <- tryCatch(
+            xml2::read_html(advanced_url),
+            error = function(e) FALSE
+          )
+          
+          if (is.list(footywire_advanced)) {
+            player_stats_advanced <- get_table_data(footywire_advanced, id)
+            
+            # Join them
+            info_columns <- c("Date", "Season", "Round", "Venue", "Player", 
+                              "Team", "Opposition", "Status", "GA", "Match_id")
+            player_stats_table <- player_stats_advanced %>%
+              select(-one_of(info_columns)) %>%
+              bind_cols(player_stats_basic) %>%
+              select(one_of(info_columns), everything())
+            
+            # Tidy Names
+            player_stats_table <- player_stats_table %>%
+              rename(
+                DE = DE.,
+                TOG = TOG.,
+                One.Percenters = X1.
+              ) 
+            
+          } 
+          
+
+        }
+      }  
+     return(player_stats_table) 
+    }
+    
+
+
     
     # Now get data
     # First, only proceed if we've accessed the URL
-    if (is.list(footywire_basic)) {
-      
-      # Check if Advanced Page exist? If it doesn't, the script breaks since the html tables have different nodes
-      advanced_empty <- footywire_basic %>% 
-        html_nodes(".notice") %>% 
-        html_text() %>% 
-        stringr::str_detect("Advanced") %>%
-        is_empty()
-      
-      # Check advanced exists
-      if(advanced_empty){
-        stop("This function only works on matches from 2010 onwards")
-      } else {
-        
-        # If it does, grab the basic data
-        player_stats_basic <- get_table_data(footywire_basic)
-        
-        # If it does, create access the URL and create the data table. Also merge with basic
-        Sys.sleep(2)
-        
-        # Check if Advanced URL exists
-        footywire_advanced <- tryCatch(
-          xml2::read_html(sel.url.advanced),
-          error = function(e) FALSE
-        )
-        
-        if (is.list(footywire_advanced)) {
-          player_stats_advanced <- get_table_data(footywire_advanced)
-          
-          # Join them
-          info_columns <- c("Date", "Season", "Round", "Venue", "Player", 
-                            "Team", "Opposition", "Status", "GA", "Match_id")
-          player_stats_table <- player_stats_advanced %>%
-            select(-one_of(info_columns)) %>%
-            bind_cols(player_stats_basic) %>%
-            select(one_of(info_columns), everything())
-          
-          # Tidy Names
-          player_stats_table <- player_stats_table %>%
-            rename(
-              DE = DE.,
-              TOG = TOG.,
-              One.Percenters = X1.
-            )
-          
-        } 
-        
-        # Bind to dataframe
-        dat <- bind_rows(dat, player_stats_table)
-        
-      }
-    }
-  }
+    message("Getting data from footywire.com")
+    pb <- progress_estimated(length(ids), min_time = 5)
+    dat <- ids %>%
+      purrr::map_df(~{
+        pb$tick()$print() # update the progress bar (tick())
+        get_tables(id = .x) # do function
+      })
+  
   # Rearrange
   dat <- dat %>%
     arrange(Date, Match_id, desc(Status))
-  message("Finished getting data.")
+  message("Finished getting data")
   return(dat)
 }
 
