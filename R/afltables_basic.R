@@ -1,4 +1,17 @@
-
+#' Get basic match results from afltables.com
+#'
+#' \code{get_match_results} returns a dataframe containing all match results from 1897-current
+#'
+#' The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access. 
+#' It generally is updated on the day after the last game
+#' 
+#' @return Returns a data frame containing a line for each match
+#'
+#' @examples
+#' \dontrun{
+#' get_match_results()
+#' }
+#' @export
 #' @importFrom magrittr %>%
 #' @import dplyr
 get_match_results <- function() {
@@ -52,16 +65,7 @@ get_match_results <- function() {
     ungroup()
 
   # Fix teams ----
-  # Create mapping function - update this as needed
-  replace_teams <- function(team) {
-    if (team == "Kangaroos") return("North Melbourne")
-    if (team == "Western Bulldog") return("Footscray")
-    if (team == "South Melbourne") return("Sydney")
-    if (team == "Brisbane Bears") return("Brisbane Lions")
-    return(team)
-  }
-
-  # Replace all teams
+  # Replace all teams - uses internal function
   match_data <- match_data %>%
     group_by(Game) %>%
     mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
@@ -70,4 +74,18 @@ get_match_results <- function() {
 
   # Return data
   return(match_data)
+}
+
+#' Internal function to ensure names match between different sources and also name changes. 
+#' This gets applied to any web scraper
+replace_teams <- function(team) {
+  # Internal function
+  if (team == "Kangaroos") return("North Melbourne")
+  if (team == "Western Bulldog") return("Footscray")
+  if (team == "Western Bulldogs") return("Footscray")
+  if (team == "South Melbourne") return("Sydney")
+  if (team == "Brisbane Bears") return("Brisbane Lions")
+  if (team == "Brisbane") return("Brisbane Lions")
+  if (team == "GW Sydney") return("GWS")
+  return(team)
 }

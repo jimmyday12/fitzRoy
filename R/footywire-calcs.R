@@ -29,8 +29,8 @@ get_footywire_stats <- function(ids) {
         rvest::html_node("tr:nth-child(2) .lnorm") %>%
         rvest::html_text()
       
-      # We need to extract round and venue from that text
-      round <- stringr::str_split(game_details, ",")[[1]][1] %>% trimws()
+      # We need to extract Round and venue from that text
+      Round <- stringr::str_split(game_details, ",")[[1]][1] %>% trimws()
       venue <- stringr::str_split(game_details, ",")[[1]][2] %>% trimws()
       
       # Get Game date
@@ -77,7 +77,7 @@ get_footywire_stats <- function(ids) {
       player_stats <- home_stats %>%
         bind_rows(away_stats) %>%
         mutate(
-          Round = round,
+          Round = Round,
           Venue = venue,
           Season = season,
           Date = game_date,
@@ -224,4 +224,84 @@ update_footywire_stats <- function(end_date = Sys.Date()){
     return(dat)
 
   }
+}
+
+#' Get upcoming fixture from footywire.com
+#'
+#' \code{get_fixture} returns a dataframe containing upcoming fixture
+#'
+#' The dataframe contains the home and away team as well as venue. 
+#' 
+#' @param season Season to return. 
+#' @return Returns a data frame containing the date, teams and venue of each game
+#'
+#' @examples
+#' \dontrun{
+#' get_fixture(2018)
+#' }
+#' @export
+#' @importFrom magrittr %>%
+#' @import dplyr
+get_fixture <- function(season = 2018){
+  
+  # create url
+  url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
+  fixture_xml <- xml2::read_html(url_fixture)
+
+  # Get XML and extract text from .data
+  games_text <- fixture_xml %>% 
+    rvest::html_nodes(".data") %>% 
+    rvest::html_text()
+  
+  # Put this into dataframe format
+  games_df <- matrix(games_text, ncol = 7, byrow = T) %>% 
+    as_data_frame() %>%
+    select(V1:V3)
+  
+  # Update names
+  names(games_df) <- c("Date", "Teams", "Venue")
+  
+  # Work out day and week of each game. Games on Thursday > Wednesday go in same Round
+  games_df <- games_df %>%
+    mutate(
+      Date = lubridate::ydm_hm(paste(season, Date)),
+      epiweek = lubridate::epiweek(Date),
+      w.Day = lubridate::wday(Date),
+      Round = ifelse(between(w.Day, 1, 4), epiweek - 1, epiweek),
+      Round = as.integer(Round - min(Round) + 1)) %>%
+    select(Date, Round, Teams, Venue)
+  
+  # Calculation to fix the names column
+  fixnames <- function(x, team = "Home"){
+    cleaned <- str_split(x, "v", simplify = T) %>%
+      stringr::str_remove_all("[\r\n]") %>% 
+      trimws()
+    if(team == "Home") return(cleaned[1])
+    if(team == "Away") return(cleaned[2])
+    
+  }
+  
+  # Fix names
+  games_df <- games_df %>%
+    group_by(Date, Round, Venue) %>%
+    mutate(Home.Team = fixnames(Teams, "Home"),
+           Away.Team = fixnames(Teams, "Away")) 
+  
+  # Fix Teams
+  # Uses internal replace teams function
+  games_df <- games_df %>%
+    group_by(Date, Round, Venue, Teams) %>%
+    mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
+    ungroup() 
+  
+  # Add season game number
+  games_df <- games_df %>%
+    mutate(Season.Game = row_number(),
+           Season = as.integer(season))
+  
+  # Tidy columns
+  games_df <- games_df %>%
+    select(Date, Season, Season.Game, Round, Home.Team, Away.Team, Venue)
+  
+  return(games_df)
 }
