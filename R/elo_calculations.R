@@ -20,6 +20,7 @@
 #' find_expected_outcome("a")
 #' }
 #' @export
+
 find_expected_outcome <- function(elo_difference, M = 400){
   # Error checks
   if(!is.numeric(elo_difference)) stop("elo_difference must be numeric")
@@ -41,7 +42,7 @@ find_expected_margin <- function(elo_difference, M = 400, B = 0.025){
   # Now run existing map_margin_to_prob to outcome convert to margin
   # Find expected (predicted) Margin
   points <- -200:200
-  points_norm <- map_margin_to_outcome(points) # create vector of results
+  points_norm <- map_margin_to_outcome(points, B = B) # create vector of results
   expected_margin <- points[which.min(abs(points_norm - expected_outcome))]
   return(expected_margin)
   
@@ -83,7 +84,8 @@ calculate_season_carryover <- function(elo, initial_team = 1500, weight = 0.5){
   
 }
 
-map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 , C = 1){
+
+map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.025, v = 1, Q = 1 , C = 1){
   #Generalised logistic function is in format
   #Y <- A + ((K-A) / ((C + (Q*exp(-B * X)))^(1/v)))
   numer <- K-A #create numerator
@@ -91,14 +93,23 @@ map_margin_to_outcome <- function(margin, A = 0, K = 1, B = 0.05, v = 1, Q = 1 ,
   divis <- numer / denom^(1/v) #perform division
   actOut <- A + divis #add to A
   return(actOut)
+}
+
+calculate_MOV <- function(elo_diff, margin, J = 2.2){
+  #performs a Margin of Victory Multiplier
+  # this allows for scaling of new result depending on if fav won or not
   
-  #I'll do it step by step to ensure thigns work
-  # A <- 0 #lower limit
-  #K <- 0.8 #upper limit
-  #B <- 0.04 #rate of growth
-  #v <- 1 #unsure - where is most growth
-  #Q <- 0.6 #unsure - affect centre
-  #C <- 1 #unsure - leave as 1
+  # First find if Fav won if so, make ELO_Fav positive
+  if ((elo_diff * margin) > 0) {
+    #then both are same sign, meaning fav won
+    elo_fav <- elo_diff
+  } else #otherwise, they are different so underdog won
+  {
+    elo_fav <- -elo_diff
+  }
+  mult <- J / ((0.001 * elo_diff) + J) #find multiplier
+  MOV <-  log(abs(margin) + 1) * mult #multiply by nat log of abs margin
+  return (MOV)
 }
 
 #' Simulate a season based on ELO
@@ -139,8 +150,8 @@ simulate_season <- function(fixture, team_elo = data.frame(), simulation = 1,
     # sample from rnorm of mean marg and historical SD
     game$margin <- round(rnorm(1, exp_margin, sd = 41))
     
-    team_elo$ELO[(team_elo$Team == game$Home)] <- update_elo(game$margin, home_elo, away_elo)
-    team_elo$ELO[(team_elo$Team == game$Away)] <- update_elo(game$margin, home_elo, away_elo, returns = "away")
+    team_elo$ELO[(team_elo$Team == game$Home)] <- update_elo(game$margin, game$home_elo, game$away_elo)
+    team_elo$ELO[(team_elo$Team == game$Away)] <- update_elo(game$margin, game$home_elo, game$away_elo, returns = "away")
     
     simulated_results <- simulated_results %>%
       bind_rows(game)
