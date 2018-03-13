@@ -4,19 +4,18 @@
 \alias{update_footywire_stats}
 \title{Update the included footywire stats data to the specified date.}
 \usage{
-update_footywire_stats(end_date = Sys.Date())
-}
-\arguments{
-\item{end_date}{X}
+update_footywire_stats()
 }
 \value{
 Returns a data frame containing player match stats for each match ID
 }
 \description{
-\code{update_footywire_stats} returns a dataframe containing player match stats from footywire.
+\code{update_footywire_stats} returns a dataframe containing player match stats from \href{footywire.com}{footywire}
 }
 \details{
 The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
+
+This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.
 }
 \examples{
 \dontrun{

@@ -4,16 +4,16 @@
 \alias{get_fixture}
 \title{Get upcoming fixture from footywire.com}
 \usage{
-get_fixture(season = 2018)
+get_fixture(season = lubridate::year(Sys.Date()))
 }
 \arguments{
-\item{season}{Season to return.}
+\item{season}{Season to return, in yyyy format}
 }
 \value{
 Returns a data frame containing the date, teams and venue of each game
 }
 \description{
-\code{get_fixture} returns a dataframe containing upcoming fixture
+\code{get_fixture} returns a dataframe containing upcoming AFL Men's season fixture.
 }
 \details{
 The dataframe contains the home and away team as well as venue.
