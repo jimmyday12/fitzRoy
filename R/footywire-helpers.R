@@ -102,7 +102,7 @@ get_match_data <- function(id) {
       html_nodes(".notice") %>%
       html_text() %>%
       stringr::str_detect("Advanced") %>%
-      is_empty()
+      rlang::is_empty()
 
     # Check advanced exists
     if (advanced_empty) {

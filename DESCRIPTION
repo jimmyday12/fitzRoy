@@ -9,7 +9,7 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-Suggests: 
+Suggests:
     testthat,
     knitr,
     rmarkdown
@@ -18,7 +18,7 @@ RoxygenNote: 6.0.1
 VignetteBuilder: knitr
 URL: https://github.com/jimmyday12/fitzRoy
 BugReports: https://github.com/jimmyday12/fitzRoy/issues
-Imports: 
+Imports:
     rvest,
     lubridate,
     dplyr,
@@ -26,4 +26,5 @@ Imports:
     tidyr,
     purrr,
     readr,
-    stringr
+    stringr,
+    rlang
