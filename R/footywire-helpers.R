@@ -1,3 +1,36 @@
+#' Convert AFL Men's results into long format
+#'
+#' \code{convert_results} returns a dataframe containing the results in long format.
+#'
+#' The standard results returned by afltables.com will be in wide format. 
+#' This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis. 
+#'
+#' @param results A dataframe that has been returned from get_match_results
+#' @return A data frame with match results where each row is a team-match combination
+#'
+#' @examples
+#' results <- get_match_results()
+#' convert_results(results)
+#' @export
+#' @importFrom magrittr %>%
+#' @import dplyr
+#' @import tidyr
+convert_results <- function(results){
+  
+  # Convert results to wide format
+  results_long <- results %>%
+    gather(variable, value, Home.Team:Away.Points) %>%
+    separate(variable, into = c("Status", "variable")) %>%
+    spread(variable, value) %>%
+    arrange(Game) %>%
+    mutate(Margin = ifelse(Status == "Home", Margin, Margin*-1)) %>%
+    select(Game, Date, Season, Round, Round.Type, Round.Number, Venue, Team, Status, Goals, Behinds, Points)
+  
+  return(results_long)
+
+  }
+
+
 #' Helper function for \code{get_footywire_stats}
 #'
 #' @importFrom magrittr %>%
