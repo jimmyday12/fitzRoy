@@ -68,7 +68,7 @@ update_footywire_stats <- function() {
 
   # First, load data from github
   message("Getting match ID's...")
-  ids_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/id_data.rda"
+  ids_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/Match_ids/id_data.rda"
   load(url(ids_url))
 
   # Now find the max date of existing dataset

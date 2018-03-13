@@ -25,7 +25,7 @@ The goal of fitzRoy is to provide a set of functions that allows for users to ea
 
 You can install fitzRoy from github with:
 
-```{r gh-installation}
+```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
 devtools::install_github("jimmyday12/fitzRoy")
 library(fitzRoy)
@@ -46,7 +46,7 @@ You can access the data directly from the package using `match_results`. This wi
 
 ```{r results}
 library(fitzRoy)
-results <- fitzRoy::get_match_results()
+results <- get_match_results()
 
 tail(results)
 
@@ -55,7 +55,7 @@ tail(results)
 You can also convert this format into a more analysis friendly "long" format using the helper function `convert_results`. 
 
 ```{r convert}
-results_long <- fitzRoy::convert_results(results)
+results_long <- convert_results(results)
 
 head(results_long)
 ```
@@ -64,7 +64,7 @@ head(results_long)
 You can access the fixture using `get_fixture` function. This will download the fixture for the current calendar year by default. 
 
 ```{r fixture}
-fixture <- fitzRoy::get_fixture()
+fixture <- get_fixture()
 
 head(fixture)
 ```
@@ -82,7 +82,7 @@ We can also use the `update_footywire_stats` function to get the most up to date
 
 ```{r update_footywire}
 ## Update footywire data
-dat <- fitzRoy::update_footywire_stats()
+dat <- update_footywire_stats()
 
 tail(dat)
 ```
