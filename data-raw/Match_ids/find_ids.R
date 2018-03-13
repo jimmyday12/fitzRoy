@@ -65,9 +65,10 @@ get_ids <- function(ids) {
 
 # Process through script ----
 library(tidyverse)
+library(fitzRoy)
 library(rvest)
 library(lubridate)
-load("./data-raw/id_data.rda")
+load("./data-raw/Match_ids/id_data.rda")
 
 # Filter out matches we know exist
 ids <- id_data %>%
@@ -83,4 +84,4 @@ id_data <- id_data %>%
 
 # Save data
 use_data(id_data, internal = TRUE, overwrite = TRUE)
-save(id_data, file = "./data-raw/id_data.rda")
+save(id_data, file = "./data-raw/Match_ids/id_data.rda")
