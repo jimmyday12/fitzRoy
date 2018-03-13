@@ -15,10 +15,12 @@
 #' @export
 #' @importFrom magrittr %>%
 #' @import dplyr
-#' @importFrom rvest html_node
+#' @importFrom rvest html_nodes
 #' @importFrom rvest html_text
 get_footywire_stats <- function(ids) {
   
+  if(missing(ids)) stop("Please provide an ID between 1 and 9999")
+  if(!is.numeric(ids)) stop("ID must be numeric between 1 and 9999")
   dat <- data.frame()
  
     # First, let's create a function that access the date
@@ -39,8 +41,10 @@ get_footywire_stats <- function(ids) {
         rvest::html_text()
       
       # Again, we have to extract the details
-      game_date <- stringr::str_split(game_details_date, ",")[[1]][2] %>% trimws() %>% dmy()
-      season <- year(game_date)
+      game_date <- stringr::str_split(game_details_date, ",")[[1]][2] %>% 
+        trimws() %>% 
+        lubridate::dmy()
+      season <- lubridate::year(game_date)
       
       # Get home and away team names
       home_team <- x %>%
