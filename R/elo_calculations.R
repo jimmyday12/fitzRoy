@@ -146,20 +146,20 @@ update_elo <- function(margin, elo_diff, MOV = 1, k = 20,
 }
 
 
-process_matches <- function(data, team_elo, type = "historical",
+process_matches <- function(data, team_elo, type = "Historical",
                             stdev = 41, HGA = 35, k = 20, M = 400,
                             B = 0.025, carryover_weight = 0.6,
                             init_elo = 1500) {
 
   # Start progress bar
-  pb <- progress_estimated(nrow(data))
+  if(type == "Historical") pb <- progress_estimated(nrow(data))
 
   # Initialise a data frame
   results <- tibble()
 
   # Step through each game
   for (i in seq_along(data$Game)) {
-    pb$tick()$print() # update the progress bar (tick())
+    if(type == "Historical") pb$tick()$print() # update the progress bar (tick())
 
     # get game details
     game <- data[i, ]

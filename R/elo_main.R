@@ -56,7 +56,7 @@ simulate_season <- function(fixture, team_elo = data.frame(), simulation = 1,
                             stdev = 41, HGA = 35, k = 20, M = 400,
                             B = 0.025, carryover_weight = 0.6,
                             init_elo = 1500) {
-  simulated <- process_matches(
+  simulated_results <- process_matches(
     results, team_elo = team_elo, type = "Simulation",
     HGA = HGA, k = k, M = M, B = B,
     stdev = stdev,
