@@ -8,7 +8,7 @@ url.2 <- "http://www.afl.com.au/static-resources/js/stats/player-stats.js?v=5eb1
 lines <- readLines("data-raw/scrape.js")
 
 # replace with URL
-lines[1] <- paste0("var url ='", url ,"';")
+lines[1] <- paste0("var url ='", url, "';")
 
 # write out file
 writeLines(lines, "data-raw/scrape.js")
@@ -21,12 +21,13 @@ xml_ref %>%
   html_nodes("table") %>%
   .[[2]] %>%
   html_table()
-  
+
 # Testing reselenium
 RSelenium::rsDriver()
 RSelenium::startServer()
-remDr <- remoteDriver(remoteServerAddr = "localhost"
-                      , port = 5556
-                      , browserName = "firefox"
+remDr <- remoteDriver(
+  remoteServerAddr = "localhost"
+  , port = 5556
+  , browserName = "firefox"
 )
 remDr$open()

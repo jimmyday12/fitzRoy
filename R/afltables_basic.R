@@ -2,9 +2,9 @@
 #'
 #' \code{get_match_results} returns a dataframe containing all match results from 1897-current
 #'
-#' The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access. 
+#' The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access.
 #' It generally is updated on the day after the last game
-#' 
+#'
 #' @return Returns a data frame containing a line for each match
 #'
 #' @examples
@@ -15,7 +15,7 @@
 #' @importFrom magrittr %>%
 #' @import dplyr
 get_match_results <- function() {
-  
+
   # Get data ----
   column_names <- c("Game", "Date", "Round", "Home.Team", "Home.Score", "Away.Team", "Away.Score", "Venue")
   url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
@@ -63,8 +63,8 @@ get_match_results <- function() {
     mutate(Round.Number = dense_rank(Round.New)) %>%
     select(-Round.New) %>%
     ungroup()
-  
-  
+
+
 
   # Fix teams ----
   # Replace all teams - uses internal function
@@ -78,7 +78,7 @@ get_match_results <- function() {
   return(match_data)
 }
 
-#' Internal function to ensure names match between different sources and also name changes. 
+#' Internal function to ensure names match between different sources and also name changes.
 #' This gets applied to any web scraper
 replace_teams <- function(team) {
   # Internal function
