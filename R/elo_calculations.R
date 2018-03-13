@@ -155,7 +155,7 @@ process_matches <- function(data, team_elo, type = "historical",
   pb <- progress_estimated(nrow(data))
 
   # Initialise a data frame
-  processed_results <- tibble()
+  results <- tibble()
 
   # Step through each game
   for (i in seq_along(data$Game)) {
@@ -204,13 +204,18 @@ process_matches <- function(data, team_elo, type = "historical",
       mutate(
         home_elo = home_elo,
         away_elo = away_elo,
+        home_elo_post = new_home_elo,
+        away_elo_post = new_away_elo,
         exp_margin = exp_margin,
         exp_outcome = exp_outcome
       )
-
+    
+    
     # Bind to bigger data frame
-    processed_results <- processed_results %>%
+    results <- results %>%
       bind_rows(game)
   }
-  return(processed_results)
+  
+
+  return(results)
 }
