@@ -141,7 +141,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
   # Calculation to fix the names column
   fixnames <- function(x, team = "Home") {
-    cleaned <- str_split(x, "v", simplify = T) %>%
+    cleaned <- stringr::str_split(x, "v", simplify = T) %>%
       stringr::str_remove_all("[\r\n]") %>%
       trimws()
     if (team == "Home") return(cleaned[1])
