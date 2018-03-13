@@ -4,7 +4,7 @@
 fitzRoy
 =======
 
-The goal of fitzRoy is to ...
+The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions.
 
 Installation
 ------------
@@ -21,6 +21,10 @@ Usage
 -----
 
 The `fitzRoy` package can be used to simply get data from various sources. Some minimal working examples are below.
+
+### Getting Data
+
+Primarily, the tool can be used to access data from various sources. Data is included in the package and can be access directly however this will not be up to date. Each source of data has functions for updating data during the season.
 
 ### Footywire
 

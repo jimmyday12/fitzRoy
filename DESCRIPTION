@@ -26,5 +26,4 @@ Imports:
     tidyr,
     purrr,
     readr,
-    stringr,
-    forcats
+    stringr

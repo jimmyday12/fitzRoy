@@ -47,16 +47,16 @@ Footywire data from 2010-2017 is included in the package. This will be updated p
 
 ```{r footywire}
 ## Show the top of player_stats
-head(player_stats)
+# head(player_stats)
 ```
 
 We can also use the `update_footywire_stats` function to get the most up to date data. This will merge data from 2010-2017 with any new data points. 
 
 ```{r update_footywire}
 ## Update footywire data
-dat <- update_footywire_stats()
+# dat <- update_footywire_stats()
 
-tail(dat)
+# tail(dat)
 ```
 
 
