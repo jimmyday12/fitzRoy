@@ -193,7 +193,7 @@ process_matches <- function(data, team_elo, type = "historical",
       game$Margin, elo_diff, MOV = MOV,
       k = k, M = M, B = B
     )
-    
+
     new_home_elo <- home_elo + elo_change
     new_away_elo <- away_elo - elo_change
     team_elo$ELO[(team_elo$Team == game$Home.Team)] <- new_home_elo
