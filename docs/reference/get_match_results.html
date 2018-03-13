@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scrape footywire player statitstics. — get_footywire_stats • fitzRoy</title>
+<title>Get basic match results from afltables.com — get_match_results • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,43 +107,33 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Scrape footywire player statitstics.</h1>
+    <h1>Get basic match results from afltables.com</h1>
     </div>
 
     
-    <p><code>get_footywire_stats</code> returns a dataframe containing player match stats from footywire from 2010 onwards.</p>
+    <p><code>get_match_results</code> returns a dataframe containing all match results from 1897-current</p>
     
 
-    <pre class="usage"><span class='fu'>get_footywire_stats</span>(<span class='no'>ids</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>ids</th>
-      <td><p>A vector containing match id's to return. Can be a single value or vector of values.</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>get_match_results</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a data frame containing player match stats for each match ID</p>
+    <p>Returns a data frame containing a line for each match</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
-To find match ID, find the relevent matches on footywire.com</p>
+    <p>The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access.
+It generally is updated on the day after the last game</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>get_footywire_stats</span>(<span class='kw'>ids</span> <span class='kw'>=</span> <span class='fl'>5000</span>:<span class='fl'>5100</span>)
+<span class='fu'>get_match_results</span>()
 <span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
 
