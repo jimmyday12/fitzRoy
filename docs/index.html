@@ -108,18 +108,121 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 <a href="#getting-data" class="anchor"></a>Getting Data</h3>
 <p>Primarily, the tool can be used to access data from various sources. Data is included in the package and can be access directly however this will not be up to date. Each source of data has functions for updating data during the season.</p>
 </div>
-<div id="footywire" class="section level3">
+<div id="afl-tables-match-results" class="section level3">
 <h3 class="hasAnchor">
-<a href="#footywire" class="anchor"></a>Footywire</h3>
+<a href="#afl-tables-match-results" class="anchor"></a>AFL Tables match results</h3>
+<p>You can access the basic afl tables match results data. This includes all matches from 1897-current. It is generally updated on the day after a round finishes.</p>
+<p>You can access the data directly from the package using <code>match_results</code>. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use <code>get_match_results</code> directly, as this will give you up to date results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fitzRoy)
+results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_match_results.html">get_match_results</a></span>()
+
+<span class="kw">tail</span>(results)
+<span class="co">#&gt; # A tibble: 6 x 16</span>
+<span class="co">#&gt;     Game Date       Round Home.Team  Home.Goals Home.Behinds Home.Points</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;           &lt;int&gt;        &lt;int&gt;       &lt;int&gt;</span>
+<span class="co">#&gt; 1 15195. 2017-09-09 EF    West Coast         12            6          78</span>
+<span class="co">#&gt; 2 15196. 2017-09-15 SF    Geelong            15            8          98</span>
+<span class="co">#&gt; 3 15197. 2017-09-16 SF    GWS                19           11         125</span>
+<span class="co">#&gt; 4 15198. 2017-09-22 PF    Adelaide           21           10         136</span>
+<span class="co">#&gt; 5 15199. 2017-09-23 PF    Richmond           15           13         103</span>
+<span class="co">#&gt; # ... with 1 more row, and 9 more variables: Away.Team &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Away.Goals &lt;int&gt;, Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Margin &lt;int&gt;, Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></code></pre></div>
+<p>You can also convert this format into a more analysis friendly “long” format using the helper function <code>convert_results</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">results_long &lt;-<span class="st"> </span><span class="kw"><a href="reference/convert_results.html">convert_results</a></span>(results)
+
+<span class="kw">head</span>(results_long)
+<span class="co">#&gt; # A tibble: 6 x 12</span>
+<span class="co">#&gt;    Game Date       Season Round Round.Type Round.Number Venue Team  Status</span>
+<span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; </span>
+<span class="co">#&gt; 1    1. 1897-05-08  1897. R1    Regular               1 Brun… Fitz… Home  </span>
+<span class="co">#&gt; 2    1. 1897-05-08  1897. R1    Regular               1 Brun… Carl… Away  </span>
+<span class="co">#&gt; 3    2. 1897-05-08  1897. R1    Regular               1 Vict… Coll… Home  </span>
+<span class="co">#&gt; 4    2. 1897-05-08  1897. R1    Regular               1 Vict… St K… Away  </span>
+<span class="co">#&gt; 5    3. 1897-05-08  1897. R1    Regular               1 Cori… Geel… Home  </span>
+<span class="co">#&gt; # ... with 1 more row, and 3 more variables: Goals &lt;chr&gt;, Behinds &lt;chr&gt;,</span>
+<span class="co">#&gt; #   Points &lt;chr&gt;</span></code></pre></div>
+</div>
+<div id="fixture" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fixture" class="anchor"></a>Fixture</h3>
+<p>You can access the fixture using <code>get_fixture</code> function. This will download the fixture for the current calendar year by default.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">fixture &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_fixture.html">get_fixture</a></span>()
+
+<span class="kw">head</span>(fixture)
+<span class="co">#&gt; # A tibble: 6 x 7</span>
+<span class="co">#&gt;   Date                Season Season.Game Round Home.Team  Away.Team Venue </span>
+<span class="co">#&gt;   &lt;dttm&gt;               &lt;int&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt; </span>
+<span class="co">#&gt; 1 2018-03-22 19:25:00   2018           1     1 Richmond   Carlton   MCG   </span>
+<span class="co">#&gt; 2 2018-03-23 19:50:00   2018           2     1 Essendon   Adelaide  Etiha…</span>
+<span class="co">#&gt; 3 2018-03-24 15:35:00   2018           3     1 St Kilda   Brisbane… Etiha…</span>
+<span class="co">#&gt; 4 2018-03-24 16:05:00   2018           4     1 Port Adel… Fremantle Adela…</span>
+<span class="co">#&gt; 5 2018-03-24 18:25:00   2018           5     1 Gold Coast North Me… Cazal…</span>
+<span class="co">#&gt; # ... with 1 more row</span></code></pre></div>
+</div>
+<div id="footywire-advanced-player-stats" class="section level3">
+<h3 class="hasAnchor">
+<a href="#footywire-advanced-player-stats" class="anchor"></a>Footywire Advanced Player Stats</h3>
 <p>Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.</p>
 <p>Footywire data from 2010-2017 is included in the package. This will be updated periodically but you will need to update your R package to get access to the latest data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Show the top of player_stats
-<span class="co"># head(player_stats)</span></code></pre></div>
+<span class="kw">head</span>(fitzRoy<span class="op">::</span>player_stats)
+<span class="co">#&gt;         Date Season   Round Venue         Player     Team Opposition</span>
+<span class="co">#&gt; 1 2010-03-25   2010 Round 1   MCG Daniel Connors Richmond    Carlton</span>
+<span class="co">#&gt; 2 2010-03-25   2010 Round 1   MCG Daniel Jackson Richmond    Carlton</span>
+<span class="co">#&gt; 3 2010-03-25   2010 Round 1   MCG  Brett Deledio Richmond    Carlton</span>
+<span class="co">#&gt; 4 2010-03-25   2010 Round 1   MCG    Ben Cousins Richmond    Carlton</span>
+<span class="co">#&gt; 5 2010-03-25   2010 Round 1   MCG  Trent Cotchin Richmond    Carlton</span>
+<span class="co">#&gt; 6 2010-03-25   2010 Round 1   MCG  Dustin Martin Richmond    Carlton</span>
+<span class="co">#&gt;   Status GA Match_id CP UP ED   DE CM MI5 One.Percenters BO TOG  K HB  D M</span>
+<span class="co">#&gt; 1   Home  0     5089  8 15 16 66.7  0   0              1  0  69 14 10 24 3</span>
+<span class="co">#&gt; 2   Home  0     5089 11 10 14 60.9  1   0              0  0  80 11 12 23 2</span>
+<span class="co">#&gt; 3   Home  0     5089  7 14 16 76.2  0   0              0  0  89 12  9 21 5</span>
+<span class="co">#&gt; 4   Home  1     5089  9 10 11 57.9  0   0              0  0  69 13  6 19 1</span>
+<span class="co">#&gt; 5   Home  0     5089  8 10 13 68.4  1   0              0  1  77 11  8 19 6</span>
+<span class="co">#&gt; 6   Home  0     5089  6 12 16 88.9  0   0              1  0  81  5 13 18 4</span>
+<span class="co">#&gt;   G B T HO I50 CL CG R50 FF FA AF SC CCL SCL SI MG TO ITC T5</span>
+<span class="co">#&gt; 1 0 0 1  0   2  2  4   6  2  0 77 85  NA  NA NA NA NA  NA NA</span>
+<span class="co">#&gt; 2 0 0 5  0   8  5  4   1  2  0 85 89  NA  NA NA NA NA  NA NA</span>
+<span class="co">#&gt; 3 1 0 6  0   4  3  4   3  1  2 94 93  NA  NA NA NA NA  NA NA</span>
+<span class="co">#&gt; 4 1 0 1  0   1  2  3   4  1  0 65 70  NA  NA NA NA NA  NA NA</span>
+<span class="co">#&gt; 5 0 0 1  0   2  3  3   2  0  2 65 63  NA  NA NA NA NA  NA NA</span>
+<span class="co">#&gt; 6 0 0 3  0   2  3  1   0  0  1 62 72  NA  NA NA NA NA  NA NA</span></code></pre></div>
 <p>We can also use the <code>update_footywire_stats</code> function to get the most up to date data. This will merge data from 2010-2017 with any new data points.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Update footywire data
-<span class="co"># dat &lt;- update_footywire_stats()</span>
+dat &lt;-<span class="st"> </span><span class="kw"><a href="reference/update_footywire_stats.html">update_footywire_stats</a></span>()
+<span class="co">#&gt; Getting match ID's...</span>
+<span class="co">#&gt; Data is up to date. Returning original player_stats data</span>
 
-<span class="co"># tail(dat)</span></code></pre></div>
+<span class="kw">tail</span>(dat)
+<span class="co">#&gt;             Date Season       Round Venue          Player     Team</span>
+<span class="co">#&gt; 71099 2017-09-30   2017 Grand Final   MCG  Jason Castagna Richmond</span>
+<span class="co">#&gt; 71100 2017-09-30   2017 Grand Final   MCG Kamdyn Mcintosh Richmond</span>
+<span class="co">#&gt; 71101 2017-09-30   2017 Grand Final   MCG   Daniel Butler Richmond</span>
+<span class="co">#&gt; 71102 2017-09-30   2017 Grand Final   MCG  Jacob Townsend Richmond</span>
+<span class="co">#&gt; 71103 2017-09-30   2017 Grand Final   MCG   David Astbury Richmond</span>
+<span class="co">#&gt; 71104 2017-09-30   2017 Grand Final   MCG    Dylan Grimes Richmond</span>
+<span class="co">#&gt;       Opposition Status GA Match_id CP UP ED   DE CM MI5 One.Percenters BO</span>
+<span class="co">#&gt; 71099   Adelaide   Away  0     9513  3  6  3 30.0  0   0              2  1</span>
+<span class="co">#&gt; 71100   Adelaide   Away  0     9513  3  6  7 77.8  0   0              1  0</span>
+<span class="co">#&gt; 71101   Adelaide   Away  1     9513  7  3  4 44.4  0   0              1  0</span>
+<span class="co">#&gt; 71102   Adelaide   Away  0     9513  4  4  6 75.0  0   2              3  0</span>
+<span class="co">#&gt; 71103   Adelaide   Away  0     9513  3  3  5 71.4  0   0              4  0</span>
+<span class="co">#&gt; 71104   Adelaide   Away  0     9513  2  4  4 66.7  0   0              1  0</span>
+<span class="co">#&gt;       TOG K HB  D M G B T HO I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO</span>
+<span class="co">#&gt; 71099  81 4  6 10 0 1 0 3  0   1  0  4   0  0  0 42 33   0   0  3  57  2</span>
+<span class="co">#&gt; 71100  76 5  4  9 2 0 0 2  0   1  0  1   1  0  0 37 36   0   0  1 121  0</span>
+<span class="co">#&gt; 71101  80 5  4  9 0 1 0 4  0   2  1  2   0  1  0 46 45   0   1  3 125  4</span>
+<span class="co">#&gt; 71102  87 4  4  8 2 2 0 5  0   0  0  5   0  3  3 52 59   0   0  5  41  3</span>
+<span class="co">#&gt; 71103 100 4  3  7 1 0 0 0  0   0  0  4   3  0  2 15 26   0   0  0  90  2</span>
+<span class="co">#&gt; 71104  88 4  2  6 2 0 0 2  0   0  0  1   0  0  0 30 25   0   0  1 106  0</span>
+<span class="co">#&gt;       ITC T5</span>
+<span class="co">#&gt; 71099   0  2</span>
+<span class="co">#&gt; 71100   4  0</span>
+<span class="co">#&gt; 71101   1  2</span>
+<span class="co">#&gt; 71102   1  3</span>
+<span class="co">#&gt; 71103   5  0</span>
+<span class="co">#&gt; 71104   2  0</span></code></pre></div>
 <hr>
 <p>Please note that this project is released with a <a href="CONDUCT.md">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
@@ -138,7 +241,7 @@ devtools<span class="op">::</span><span class="kw"><a href="http://www.rdocument
 </li>
 </ul>
 <h2>License</h2>
-<p><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE.html">LICENSE</a></p>
+<p><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></p>
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>James Day <br><small class="roles"> Maintainer </small> </li>

@@ -109,7 +109,7 @@
     <div class="page-header">
       <h1>
         Reference
-        <small>version&nbsp;0.0.0.9000</small>
+        <small>version&nbsp;0.1.0.9000</small>
       </h1>
     </div>
 
@@ -124,8 +124,8 @@
       <tbody>
         <tr>
           <th colspan="2">
-            <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-            <p class="section-desc"></p>
+            <h2 id="section-main-functions" class="hasAnchor"><a href="#section-main-functions" class="anchor"></a>Main Functions</h2>
+            <p class="section-desc"><p>Functions used to download and process data</p></p>
           </th>
         </tr>
         <tr>
@@ -149,9 +149,49 @@
         </tr><tr>
           <!--  -->
           <td>
+            <p><code><a href="update_footywire_stats.html">update_footywire_stats</a></code> </p>
+          </td>
+          <td><p>Update the included footywire stats data to the specified date.</p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="convert_results.html">convert_results</a></code> </p>
+          </td>
+          <td><p>Convert AFL Men's results into long format</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
+            <p class="section-desc"><p>Included data</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
             <p><code><a href="player_stats.html">player_stats</a></code> </p>
           </td>
           <td><p>Advanced player match statistics.</p></td>
+        </tr>
+      </tbody><tbody>
+        <tr>
+          <th colspan="2">
+            <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
+            <p class="section-desc"><p>Internal functions and helpers</p></p>
+          </th>
+        </tr>
+        <tr>
+          <!--  -->
+          <td>
+            <p><code><a href="footywire_html.html">footywire_html</a></code> </p>
+          </td>
+          <td><p>Helper function for <code>get_footywire_stats</code></p></td>
+        </tr><tr>
+          <!--  -->
+          <td>
+            <p><code><a href="get_match_data.html">get_match_data</a></code> </p>
+          </td>
+          <td><p>Helper function for <code>get_footywire_stats</code></p></td>
         </tr><tr>
           <!--  -->
           <td>
@@ -159,12 +199,6 @@
           </td>
           <td><p>Internal function to ensure names match between different sources and also name changes.
 This gets applied to any web scraper</p></td>
-        </tr><tr>
-          <!--  -->
-          <td>
-            <p><code><a href="update_footywire_stats.html">update_footywire_stats</a></code> </p>
-          </td>
-          <td><p>Update the included footywire stats data to the specified date.</p></td>
         </tr>
       </tbody>
       </table>
@@ -174,7 +208,9 @@ This gets applied to any web scraper</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-all-functions">All functions</a></li>
+      <li><a href="#section-main-functions">Main Functions</a></li>
+      <li><a href="#section-data">Data</a></li>
+      <li><a href="#section-internals">Internals</a></li>
     </ul>
   </div>
 </div>

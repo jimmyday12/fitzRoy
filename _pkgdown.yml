@@ -4,3 +4,23 @@ template:
   params:
     bootswatch: flatly
     ganalytics: UA-77406420-2
+    
+reference:
+  - title: Main Functions
+    desc: Functions used to download and process data
+    contents:
+      - '`get_fixture`'
+      - '`get_footywire_stats`'
+      - '`get_match_results`'
+      - '`update_footywire_stats`'
+      - '`convert_results`'
+  - title: Data
+    desc: Included data 
+    contents:
+      - '`player_stats`'
+  - title: Internals
+    desc: Internal functions and helpers
+    contents:
+      - '`footywire_html`'
+      - '`get_match_data`'
+      - '`replace_teams`'

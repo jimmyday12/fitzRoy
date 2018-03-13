@@ -111,20 +111,11 @@
     </div>
 
     
-    <p><code>update_footywire_stats</code> returns a dataframe containing player match stats from footywire.</p>
+    <p><code>update_footywire_stats</code> returns a dataframe containing player match stats from <a href='footywire.com'>footywire</a></p>
     
 
-    <pre class="usage"><span class='fu'>update_footywire_stats</span>(<span class='kw'>end_date</span> <span class='kw'>=</span> <span class='fu'>Sys.Date</span>())</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>end_date</th>
-      <td><p>X</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>update_footywire_stats</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>Returns a data frame containing player match stats for each match ID</p>
@@ -132,6 +123,7 @@
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.</p>
+<p>This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -142,7 +134,6 @@
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
 

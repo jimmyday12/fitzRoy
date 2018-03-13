@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get upcoming fixture from footywire.com — get_fixture • fitzRoy</title>
+<title>Convert AFL Men's results into long format — convert_results • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,37 +107,51 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get upcoming fixture from footywire.com</h1>
+    <h1>Convert AFL Men's results into long format</h1>
     </div>
 
     
-    <p><code>get_fixture</code> returns a dataframe containing upcoming AFL Men's season fixture.</p>
+    <p><code>convert_results</code> returns a dataframe containing the results in long format.</p>
     
 
-    <pre class="usage"><span class='fu'>get_fixture</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw pkg'>lubridate</span><span class='kw ns'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/year.html'>year</a></span>(<span class='fu'>Sys.Date</span>()))</pre>
+    <pre class="usage"><span class='fu'>convert_results</span>(<span class='no'>results</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>season</th>
-      <td><p>Season to return, in yyyy format</p></td>
+      <th>results</th>
+      <td><p>A dataframe that has been returned from get_match_results</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a data frame containing the date, teams and venue of each game</p>
+    <p>A data frame with match results where each row is a team-match combination</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The dataframe contains the home and away team as well as venue.</p>
+    <p>The standard results returned by afltables.com will be in wide format.
+This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis.</p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>get_fixture</span>(<span class='fl'>2018</span>)
-<span class='co'># }</span></pre>
+    <pre class="examples"><div class='input'><span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_match_results.html'>get_match_results</a></span>()
+<span class='fu'>convert_results</span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; # A tibble: 30,400 x 12
+#&gt;     Game Date       Season Round Round.Type Round.Number Venue    Team   Status
+#&gt;    &lt;dbl&gt; &lt;date&gt;      &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt; 
+#&gt;  1    1. 1897-05-08  1897. R1    Regular               1 Brunswi… Fitzr… Home  
+#&gt;  2    1. 1897-05-08  1897. R1    Regular               1 Brunswi… Carlt… Away  
+#&gt;  3    2. 1897-05-08  1897. R1    Regular               1 Victori… Colli… Home  
+#&gt;  4    2. 1897-05-08  1897. R1    Regular               1 Victori… St Ki… Away  
+#&gt;  5    3. 1897-05-08  1897. R1    Regular               1 Corio O… Geelo… Home  
+#&gt;  6    3. 1897-05-08  1897. R1    Regular               1 Corio O… Essen… Away  
+#&gt;  7    4. 1897-05-08  1897. R1    Regular               1 Lake Ov… Sydney Home  
+#&gt;  8    4. 1897-05-08  1897. R1    Regular               1 Lake Ov… Melbo… Away  
+#&gt;  9    5. 1897-05-15  1897. R2    Regular               2 Lake Ov… Sydney Home  
+#&gt; 10    5. 1897-05-15  1897. R2    Regular               2 Lake Ov… Carlt… Away  
+#&gt; # ... with 30,390 more rows, and 3 more variables: Goals &lt;chr&gt;, Behinds &lt;chr&gt;,
+#&gt; #   Points &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
