@@ -31,6 +31,14 @@ convert_results <- function(results) {
 
 
 #' Helper function for \code{get_footywire_stats}
+#' 
+#' \code{get_footywire_stats} returns a data table of advanced player data table from footywire.com.
+#'
+#' Paragraph
+#'
+#' @param x URL of the match
+#' @param id Match ID number
+#' @return A data frame with advanced player results
 #'
 #' @importFrom magrittr %>%
 #' @import dplyr

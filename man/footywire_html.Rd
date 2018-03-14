@@ -6,6 +6,17 @@
 \usage{
 footywire_html(x, id)
 }
+\arguments{
+\item{x}{URL of the match}
+
+\item{id}{Match ID number}
+}
+\value{
+A data frame with advanced player results
+}
 \description{
-Helper function for \code{get_footywire_stats}
+\code{get_footywire_stats} returns a data table of advanced player data table from footywire.com.
+}
+\details{
+Paragraph
 }
