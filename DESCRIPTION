@@ -19,6 +19,7 @@ VignetteBuilder: knitr
 URL: https://github.com/jimmyday12/fitzRoy
 BugReports: https://github.com/jimmyday12/fitzRoy/issues
 Imports:
+    magrittr,
     rvest,
     lubridate,
     dplyr,
