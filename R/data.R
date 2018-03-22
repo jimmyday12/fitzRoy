@@ -69,3 +69,25 @@
 #' }
 #' @source \url{http://www.afltables.com}
 "fixture"
+
+#' Resulsts from all AFL Men's matches
+#'
+#' A dataset for all AFL Men's matches since 1897
+#'
+#' @format A data frame with 15200 rows and 16 variables:
+#' \describe{
+#'   \item{Date}{Date of game}
+#' }
+#' @source \url{http://www.afltables.com}
+"match_results"
+
+#' Results with weather data.
+#'
+#' A dataset with match results combined with weather data.
+#'
+#' @format A data frame with 15200 rows and 19 variables:
+#' \describe{
+#'   \item{date}{Date of game}
+#' }
+#' @source \url{http://www.afltables.com}
+"fixture"

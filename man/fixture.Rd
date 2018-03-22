@@ -3,6 +3,7 @@
 \docType{data}
 \name{fixture}
 \alias{fixture}
+\alias{fixture}
 \title{Fixture for upcoming afl seasons.}
 \format{A data frame with 198 rows and 7 variables:
 \describe{
@@ -16,11 +17,17 @@
 }}
 \source{
 \url{http://www.afltables.com}
+
+\url{http://www.afltables.com}
 }
 \usage{
+fixture
+
 fixture
 }
 \description{
 A dataset for games in the upcoming afl season
+
+A dataset with match results combined with weather data.
 }
 \keyword{datasets}

@@ -18,6 +18,9 @@ reference:
     desc: Included data 
     contents:
       - '`player_stats`'
+      - '`fixture`'
+      - '`results_weather`'
+      - '`match_results`'      
   - title: Internals
     desc: Internal functions and helpers
     contents:
