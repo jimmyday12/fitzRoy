@@ -52,3 +52,20 @@
 #' }
 #' @source \url{http://www.footywire.com}
 "player_stats"
+
+#' Fixture for upcoming afl seasons.
+#'
+#' A dataset for games in the upcoming afl season
+#'
+#' @format A data frame with 198 rows and 7 variables:
+#' \describe{
+#'   \item{Date}{Date of game}
+#'   \item{Season}{Season of game}
+#'   \item{Season.Game}{Game of the season}
+#'   \item{Round}{Round of season}
+#'   \item{Home.Team}{Designated home team}
+#'   \item{Away.Team}{Designated away team}
+#'   \item{Venue}{Venue of game}
+#' }
+#' @source \url{http://www.afltables.com}
+"fixture"

@@ -135,7 +135,9 @@ get_match_data <- function(id) {
     error = function(e) FALSE
   )
 
-  if (is.list(footywire_basic)) {
+  if (!is.list(footywire_basic)){
+    stop("Couldn't Find basic table")
+  } else {
 
     # Check if Advanced Page exist? If it doesn't, the script breaks since the html tables have different nodes
     advanced_empty <- footywire_basic %>%

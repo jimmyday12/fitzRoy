@@ -3,7 +3,7 @@ library(fitzRoy)
 
 # Run function on range of id's ----
 # I've got a list of ID's that I scraped in a file called id_data.rda
-player_stats <- update_footywire_stats()
+player_stats <- update_footywire_stats(check_existing = FALSE)
 
 # Write data using devtools
 devtools::use_data(player_stats, overwrite = TRUE)
