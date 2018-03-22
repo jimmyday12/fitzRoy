@@ -64,31 +64,40 @@ get_footywire_stats <- function(ids) {
 #' @export
 #' @importFrom magrittr %>%
 #' @import dplyr
-update_footywire_stats <- function() {
+update_footywire_stats <- function(check_existing = TRUE) {
 
   # First, load data from github
-  message("Getting match ID's...")
-  ids_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/Match_ids/id_data.rda"
-  load(url(ids_url))
+  if (check_existing) {
+    message("Getting match ID's...")
+    ids_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/Match_ids/id_data.rda"
+    load(url(ids_url))
 
-  # Now find the max date of existing dataset
-  max(player_stats$Date)
-  new_data_ids <- id_data %>%
-    dplyr::filter(Season > 2009) %>%
-    dplyr::filter(Date > max(player_stats$Date))
+    # Now find the max date of existing dataset
+    max(player_stats$Date)
+    new_data_ids <- id_data %>%
+      dplyr::filter(Season > 2009) %>%
+      dplyr::filter(Date > max(player_stats$Date))
 
-  if (nrow(new_data_ids) == 0) {
-    message("Data is up to date. Returning original player_stats data")
-    return(player_stats)
+    if (nrow(new_data_ids) == 0) {
+      message("Data is up to date. Returning original player_stats data")
+      return(player_stats)
+    } else {
+
+      # Get new data
+      message("Downloading new data...")
+      new_data <- get_footywire_stats(new_data_ids$Match_id)
+
+      # Merge with existing data
+      dat <- player_stats %>%
+        dplyr::bind_rows(new_data)
+      return(dat)
+    }
   } else {
+    message("Downloading all data. Warning - this takes a long time")
+    all_data_ids <- id_data %>%
+      dplyr::filter(Season > 2009)
 
-    # Get new data
-    message("Downloading new data...")
-    new_data <- get_footywire_stats(new_data_ids$Match_id)
-
-    # Merge with existing data
-    dat <- player_stats %>%
-      dplyr::bind_rows(new_data)
+    dat <- get_footywire_stats(all_data_ids$Match_id)
     return(dat)
   }
 }

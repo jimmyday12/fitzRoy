@@ -80,14 +80,24 @@ get_match_results <- function() {
 
 #' Internal function to ensure names match between different sources and also name changes.
 #' This gets applied to any web scraper
+#' @export
 replace_teams <- function(team) {
   # Internal function
-  if (team == "Kangaroos") return("North Melbourne")
-  if (team == "Western Bulldog") return("Footscray")
-  if (team == "Western Bulldogs") return("Footscray")
-  if (team == "South Melbourne") return("Sydney")
-  if (team == "Brisbane Bears") return("Brisbane Lions")
-  if (team == "Brisbane") return("Brisbane Lions")
-  if (team == "GW Sydney") return("GWS")
-  return(team)
+  case_when(
+    team == "Kangaroos" ~ "North Melbourne",
+    team == "NM" ~  "North Melbourne",
+    team == "Western Bulldog" ~ "Footscray",
+    team == "Western Bulldogs" ~ "Footscray",
+    team == "WB" ~ "Footscray",
+    team == "South Melbourne" ~ "Sydney",
+    team == "Brisbane Bears" ~ "Brisbane Lions",
+    team == "Lions" ~ "Brisbane Lions",
+    team == "Brisbane" ~ "Brisbane Lions",
+    team == "GW Sydney" ~ "GWS",
+    team == "GC" ~ "Gold Coast",
+    team == "StK" ~ "St Kilda",
+    team == "PA" ~ "Port Adelaide",
+    team == "WCE" ~ "West Coast",
+    TRUE ~ team
+  )
 }
