@@ -7,4 +7,4 @@ player_stats <- update_footywire_stats(check_existing = FALSE)
 
 # Write data using devtools
 devtools::use_data(player_stats, overwrite = TRUE)
-save(player_stats, file = "./data-raw/player_stats.rda")
+save(player_stats, file = "./data-raw/player_stats/player_stats.rda")
