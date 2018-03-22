@@ -4,7 +4,7 @@
 \alias{update_footywire_stats}
 \title{Update the included footywire stats data to the specified date.}
 \usage{
-update_footywire_stats()
+update_footywire_stats(check_existing = TRUE)
 }
 \value{
 Returns a data frame containing player match stats for each match ID
