@@ -90,4 +90,4 @@
 #'   \item{date}{Date of game}
 #' }
 #' @source \url{http://www.afltables.com}
-"fixture"
+"results_weather"

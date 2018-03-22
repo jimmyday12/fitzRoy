@@ -96,7 +96,7 @@ library(ggplot2)
 library(dplyr)
 
 # Get 2017 weather data
-weather <- results_weather %>%
+weather <- fitzRoy::results_weather %>%
   filter(Season == 2017)
 
 # Plot total rainfal for each home team

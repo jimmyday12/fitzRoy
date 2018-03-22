@@ -158,6 +158,26 @@ tail(dat)
 #> 71104   2  0
 ```
 
+### Weather
+
+We have also included weather data for the 2017 season. This is a work in progress but includes rainfall data from the nearest observation station to each ground. This data is included in the package as `results_weather`.
+
+``` r
+library(ggplot2)
+library(dplyr)
+
+# Get 2017 weather data
+weather <- fitzRoy::results_weather %>%
+  filter(Season == 2017)
+
+# Plot total rainfal for each home team
+ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
+  geom_col() + 
+  coord_flip()
+```
+
+![](README-weather-1.png)
+
 ------------------------------------------------------------------------
 
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
