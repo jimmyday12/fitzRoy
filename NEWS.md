@@ -1,6 +1,7 @@
 # FitzRoy 0.1.1
 
 * Added raw scoring progession data
+* Added `get_score_procession_raw` function
 
 # FitzRoy 0.1.0.9000
 Initial release of FitzRoy package. 

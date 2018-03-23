@@ -68,6 +68,6 @@ score_progression_raw <- seasons %>%
   purrr::map_df(~get_progression_season(.x))
 
 # Write data using devtools
-devtools::use_data(score_progression_raw, overwrite = TRUE)
+#devtools::use_data(score_progression_raw, overwrite = TRUE)
 save(score_progression_raw, file = "./data-raw/scoring_progression/score_progression_raw.rda")
 
