@@ -22,7 +22,7 @@ get_footywire_stats <- function(ids) {
   if (!is.numeric(ids)) stop("ID must be numeric between 1 and 9999")
 
   # Initialise dataframe
-  dat <- data.frame()
+  dat <- as.data.frame(matrix(ncol = 42, nrow = 44))
 
   # Now get data
   # First, only proceed if we've accessed the URL
