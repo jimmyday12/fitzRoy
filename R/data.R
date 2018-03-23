@@ -91,3 +91,14 @@
 #' }
 #' @source \url{http://www.afltables.com}
 "results_weather"
+
+#' Scoring progression data from afltables.
+#'
+#' A dataset with score progression data from afltables. The data is unprocessed and so is in the simple raw, event format
+#' Data is only available for 2010-2017
+#' @format A data frame with 110807 rows and 5 variables:
+#' \describe{
+#'   \item{Scoring progression}{x}
+#' }
+#' @source \url{http://www.afltables.com}
+"score_progression_raw"

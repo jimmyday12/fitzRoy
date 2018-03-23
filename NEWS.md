@@ -1,3 +1,7 @@
+# FitzRoy 0.1.1
+
+* Added raw scoring progession data
+
 # FitzRoy 0.1.0.9000
 Initial release of FitzRoy package. 
 

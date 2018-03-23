@@ -20,7 +20,8 @@ reference:
       - '`player_stats`'
       - '`fixture`'
       - '`results_weather`'
-      - '`match_results`'      
+      - '`match_results`'  
+      - '`score_progression_raw`'
   - title: Internals
     desc: Internal functions and helpers
     contents:
