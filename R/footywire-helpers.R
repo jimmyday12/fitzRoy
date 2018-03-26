@@ -23,9 +23,7 @@ convert_results <- function(results) {
     separate(variable, into = c("Status", "variable")) %>%
     spread(variable, value) %>%
     arrange(Game) %>%
-    mutate(Margin = ifelse(Status == "Home", Margin, Margin * -1)) %>%
-    select(Game, Date, Season, Round, Round.Type, Round.Number, Venue, Team, Status, Goals, Behinds, Points)
-
+    mutate(Margin = ifelse(Status == "Home", Margin, Margin * -1)) 
   return(results_long)
 }
 
