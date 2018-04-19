@@ -1,20 +1,28 @@
-#' Title
+#' Access Squiggle data using the squiggle API service. 
 #'
-#' @param query
-#' @param year
-#' @param round
-#' @param game
-#' @param source
+#' @param query 
+#' @param ...
 #'
-#' @return
+#' @return 
 #' @export
 #'
 #' @examples
-get_squiggle <- function(query = c("source", "games", "tips"), ...) {
-  
-  ## Add errors and warnings
-  # e.g. wrong query, wrong url, no internet
-  exp <- enexprs(...)
+get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
+
+  # Ensure query is valid
+  query <- match.arg(query)
+
+  # Get optional expressions and check that they are valid
+  exp <- rlang::enexprs(...)
+  valid <- c("year", "round", "game", "source")
+
+  if (!all(names(exp) %in% valid)) {
+    rlang::abort(paste0(
+      "Provided paramters must be one of\nyear, round, game, source\n",
+      "You provided the following: ", toString(names(exp))
+    ))
+  }
+
 
   url <- "https://api.squiggle.com.au/?" %>%
     paste0("q=", query)
@@ -30,11 +38,15 @@ get_squiggle <- function(query = c("source", "games", "tips"), ...) {
       paste0(url, .)
   }
 
-  print(url)
-  dat <- jsonlite::fromJSON(url)
-  
-  # Return DF
+  message(paste("Getting data from", url))
+
+  dat <- tryCatch(
+    jsonlite::fromJSON(url),
+    error = function(e) rlang::abort(paste("The URL did not work. Did your query make sense?\nTry the following URL in your browser:", url))
+  )
+
+  # Convert the
   df <- as.data.frame(dat[[1]])
   df[, ] <- lapply(df[, ], as.character)
-  as.data.frame(lapply(df, function(x) type.convert(x, as.is=TRUE)), stringsAsFactors=FALSE)
+  as.data.frame(lapply(df, function(x) type.convert(x, as.is = TRUE)), stringsAsFactors = FALSE)
 }
