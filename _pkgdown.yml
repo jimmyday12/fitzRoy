@@ -15,6 +15,7 @@ reference:
       - '`get_match_results`'
       - '`get_score_progression_raw`'
       - '`convert_results`'
+      - '`get_squiggle_data`'
   - title: Data
     desc: Included data 
     contents:

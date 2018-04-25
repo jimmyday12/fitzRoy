@@ -105,7 +105,26 @@ ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
   coord_flip()
 
 ```
+### Squiggle Data
+You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link. 
 
+```{r squiggle1, message=FALSE, warning=FALSE}
+# You can get the sources
+sources <- get_squiggle_data("sources")
+head(sources)
+```
+
+```{r squiggle2, message=FALSE, warning=FALSE}
+# Get all tips
+tips <- get_squiggle_data("tips")
+head(tips)  
+```
+
+```{r squiggle3, message=FALSE, warning=FALSE}
+# Get` just tips from round 1, 2018
+tips <- get_squiggle_data("tips", round = 1, year = 2018)
+head(tips)
+```
 ---
 Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
 By participating in this project you agree to abide by its terms.
