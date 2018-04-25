@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert AFL Men's results into long format — convert_results • fitzRoy</title>
+<title>Access Squiggle data using the squiggle API service. — get_squiggle_data • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -107,51 +107,52 @@
       <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert AFL Men's results into long format</h1>
+    <h1>Access Squiggle data using the squiggle API service.</h1>
     </div>
 
     
-    <p><code>convert_results</code> returns a dataframe containing the results in long format.</p>
+    <p>Use <code>get_squiggle_data</code> to access the <a href='squiggle.com.au'>Squiggle</a> API. See instructions at <a href='api.squiggle.com.au'>api.squiggle.com.au</a>.</p>
     
 
-    <pre class="usage"><span class='fu'>convert_results</span>(<span class='no'>results</span>)</pre>
+    <pre class="usage"><span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'>c</span>(<span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a> Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>results</th>
-      <td><p>A dataframe that has been returned from get_match_results</p></td>
+      <th>query</th>
+      <td><p>A text string. The main query to use with the API.  to one of <code>sources</code>, <code>games</code> or <code>tips</code>.</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>(optional) An optional argument provided to the <a href='api.squiggle.com.au'>Squiggle API</a>. See details for more info.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with match results where each row is a team-match combination</p>
+    <p>A dataframe, with the resultant data that matches the query specified in <code>query</code>, as well as any optional filters.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The standard results returned by afltables.com will be in wide format.
-This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis.</p>
+    <p>The optional arguments to squiggle can be one of the following.</p>
+<p>#'</p><ul>
+<li><p>year: an integer specifying the year to return data from, e.g. year = 2018</p></li>
+<li><p>round: an integer specifying the round to return data from, e.g. round = 12</p></li>
+<li><p>game: an integer specifying the game ID to return data from, e.g. game = 10</p></li>
+<li><p>source: an integer specifying the ID of the source to return data from, e.g. source = 1</p></li>
+</ul>
+    <p>For full instructions, see <a href='api.squiggle.com.au'>api.squiggle.com.au</a></p>
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>results</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_match_results.html'>get_match_results</a></span>()
-<span class='fu'>convert_results</span>(<span class='no'>results</span>)</div><div class='output co'>#&gt; # A tibble: 30,472 x 13
-#&gt;     Game Date       Round Venue    Margin Season Round.Type Round.Number Status
-#&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; 
-#&gt;  1    1. 1897-05-08 R1    Brunswi…    33.  1897. Regular               1 Home  
-#&gt;  2    1. 1897-05-08 R1    Brunswi…   -33.  1897. Regular               1 Away  
-#&gt;  3    2. 1897-05-08 R1    Victori…    25.  1897. Regular               1 Home  
-#&gt;  4    2. 1897-05-08 R1    Victori…   -25.  1897. Regular               1 Away  
-#&gt;  5    3. 1897-05-08 R1    Corio O…   -23.  1897. Regular               1 Home  
-#&gt;  6    3. 1897-05-08 R1    Corio O…    23.  1897. Regular               1 Away  
-#&gt;  7    4. 1897-05-08 R1    Lake Ov…   -17.  1897. Regular               1 Home  
-#&gt;  8    4. 1897-05-08 R1    Lake Ov…    17.  1897. Regular               1 Away  
-#&gt;  9    5. 1897-05-15 R2    Lake Ov…     4.  1897. Regular               2 Home  
-#&gt; 10    5. 1897-05-15 R2    Lake Ov…    -4.  1897. Regular               2 Away  
-#&gt; # ... with 30,462 more rows, and 4 more variables: Behinds &lt;chr&gt;, Goals &lt;chr&gt;,
-#&gt; #   Points &lt;chr&gt;, Team &lt;chr&gt;</div></pre>
+    <pre class="examples"><div class='input'>
+<span class='co'># Return a list of the sources, with ID's</span>
+<span class='no'>sources</span> <span class='kw'>&lt;-</span> <span class='fu'>get_squiggle_data</span>(<span class='st'>"sources"</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data from https://api.squiggle.com.au/?q=sources</span></div><div class='input'>
+<span class='co'># Get tips for Round 1, 2018</span>
+<span class='no'>tips</span> <span class='kw'>&lt;-</span> <span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"tips"</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data from https://api.squiggle.com.au/?q=tips;round=1;year=2018</span></div><div class='input'>
+<span class='co'># Get tips from Squiggle</span>
+<span class='no'>squiggle</span> <span class='kw'>&lt;-</span> <span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"tips"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='output co'>#&gt; <span class='message'>Getting data from https://api.squiggle.com.au/?q=tips;source=1</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

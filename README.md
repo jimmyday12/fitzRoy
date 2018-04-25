@@ -38,13 +38,13 @@ results <- get_match_results()
 
 tail(results)
 #> # A tibble: 6 x 16
-#>     Game Date       Round Home.Team  Home.Goals Home.Behinds Home.Points
-#>    <dbl> <date>     <chr> <chr>           <int>        <int>       <int>
-#> 1 15195. 2017-09-09 EF    West Coast         12            6          78
-#> 2 15196. 2017-09-15 SF    Geelong            15            8          98
-#> 3 15197. 2017-09-16 SF    GWS                19           11         125
-#> 4 15198. 2017-09-22 PF    Adelaide           21           10         136
-#> 5 15199. 2017-09-23 PF    Richmond           15           13         103
+#>     Game Date       Round Home.Team    Home.Goals Home.Behinds Home.Points
+#>    <dbl> <date>     <chr> <chr>             <int>        <int>       <int>
+#> 1 15231. 2018-04-14 R4    Footscray            11           13          79
+#> 2 15232. 2018-04-14 R4    North Melbo…         18            8         116
+#> 3 15233. 2018-04-14 R4    West Coast           21           13         139
+#> 4 15234. 2018-04-15 R4    Essendon             16           10         106
+#> 5 15235. 2018-04-15 R4    Hawthorn             18            7         115
 #> # ... with 1 more row, and 9 more variables: Away.Team <chr>,
 #> #   Away.Goals <int>, Away.Behinds <int>, Away.Points <int>, Venue <chr>,
 #> #   Margin <int>, Season <dbl>, Round.Type <chr>, Round.Number <int>
@@ -56,16 +56,16 @@ You can also convert this format into a more analysis friendly "long" format usi
 results_long <- convert_results(results)
 
 head(results_long)
-#> # A tibble: 6 x 12
-#>    Game Date       Season Round Round.Type Round.Number Venue Team  Status
-#>   <dbl> <date>      <dbl> <chr> <chr>             <int> <chr> <chr> <chr> 
-#> 1    1. 1897-05-08  1897. R1    Regular               1 Brun… Fitz… Home  
-#> 2    1. 1897-05-08  1897. R1    Regular               1 Brun… Carl… Away  
-#> 3    2. 1897-05-08  1897. R1    Regular               1 Vict… Coll… Home  
-#> 4    2. 1897-05-08  1897. R1    Regular               1 Vict… St K… Away  
-#> 5    3. 1897-05-08  1897. R1    Regular               1 Cori… Geel… Home  
-#> # ... with 1 more row, and 3 more variables: Goals <chr>, Behinds <chr>,
-#> #   Points <chr>
+#> # A tibble: 6 x 13
+#>    Game Date       Round Venue       Margin Season Round.Type Round.Number
+#>   <dbl> <date>     <chr> <chr>        <dbl>  <dbl> <chr>             <int>
+#> 1    1. 1897-05-08 R1    Brunswick …    33.  1897. Regular               1
+#> 2    1. 1897-05-08 R1    Brunswick …   -33.  1897. Regular               1
+#> 3    2. 1897-05-08 R1    Victoria P…    25.  1897. Regular               1
+#> 4    2. 1897-05-08 R1    Victoria P…   -25.  1897. Regular               1
+#> 5    3. 1897-05-08 R1    Corio Oval    -23.  1897. Regular               1
+#> # ... with 1 more row, and 5 more variables: Status <chr>, Behinds <chr>,
+#> #   Goals <chr>, Points <chr>, Team <chr>
 ```
 
 ### Fixture
@@ -125,37 +125,39 @@ We can also use the `update_footywire_stats` function to get the most up to date
 ## Update footywire data
 dat <- update_footywire_stats()
 #> Getting match ID's...
-#> Data is up to date. Returning original player_stats data
+#> Downloading new data...
+#> Getting data from footywire.com
+#> Finished getting data
 
 tail(dat)
-#>             Date Season       Round Venue          Player     Team
-#> 71099 2017-09-30   2017 Grand Final   MCG  Jason Castagna Richmond
-#> 71100 2017-09-30   2017 Grand Final   MCG Kamdyn Mcintosh Richmond
-#> 71101 2017-09-30   2017 Grand Final   MCG   Daniel Butler Richmond
-#> 71102 2017-09-30   2017 Grand Final   MCG  Jacob Townsend Richmond
-#> 71103 2017-09-30   2017 Grand Final   MCG   David Astbury Richmond
-#> 71104 2017-09-30   2017 Grand Final   MCG    Dylan Grimes Richmond
+#>             Date Season   Round         Venue          Player    Team
+#> 72287 2018-04-08   2018 Round 3 Optus Stadium    Zach Guthrie Geelong
+#> 72288 2018-04-08   2018 Round 3 Optus Stadium Lachlan Fogarty Geelong
+#> 72289 2018-04-08   2018 Round 3 Optus Stadium    Mark Blicavs Geelong
+#> 72290 2018-04-08   2018 Round 3 Optus Stadium   James Parsons Geelong
+#> 72291 2018-04-08   2018 Round 3 Optus Stadium   Daniel Menzel Geelong
+#> 72292 2018-04-08   2018 Round 3 Optus Stadium Cameron Guthrie Geelong
 #>       Opposition Status GA Match_id CP UP ED   DE CM MI5 One.Percenters BO
-#> 71099   Adelaide   Away  0     9513  3  6  3 30.0  0   0              2  1
-#> 71100   Adelaide   Away  0     9513  3  6  7 77.8  0   0              1  0
-#> 71101   Adelaide   Away  1     9513  7  3  4 44.4  0   0              1  0
-#> 71102   Adelaide   Away  0     9513  4  4  6 75.0  0   2              3  0
-#> 71103   Adelaide   Away  0     9513  3  3  5 71.4  0   0              4  0
-#> 71104   Adelaide   Away  0     9513  2  4  4 66.7  0   0              1  0
-#>       TOG K HB  D M G B T HO I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO
-#> 71099  81 4  6 10 0 1 0 3  0   1  0  4   0  0  0 42 33   0   0  3  57  2
-#> 71100  76 5  4  9 2 0 0 2  0   1  0  1   1  0  0 37 36   0   0  1 121  0
-#> 71101  80 5  4  9 0 1 0 4  0   2  1  2   0  1  0 46 45   0   1  3 125  4
-#> 71102  87 4  4  8 2 2 0 5  0   0  0  5   0  3  3 52 59   0   0  5  41  3
-#> 71103 100 4  3  7 1 0 0 0  0   0  0  4   3  0  2 15 26   0   0  0  90  2
-#> 71104  88 4  2  6 2 0 0 2  0   0  0  1   0  0  0 30 25   0   0  1 106  0
+#> 72287 West Coast   Away  0     9540  1 13 10 71.4  1   0              1  0
+#> 72288 West Coast   Away  0     9540  3 10  8 57.1  0   1              0  0
+#> 72289 West Coast   Away  0     9540  7  6  9 75.0  0   0              5  0
+#> 72290 West Coast   Away  0     9540  4  7 10 83.3  0   0              0  0
+#> 72291 West Coast   Away  0     9540  3  5  7 87.5  2   2              2  0
+#> 72292 West Coast   Away  0     9540  0  3  2 50.0  0   0              0  0
+#>       TOG  K HB  D M G B T HO I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO
+#> 72287  83 10  4 14 5 0 0 2  0   0  0  0   6  1  0 62 55   0   0  3 197  1
+#> 72288  88 12  2 14 4 1 4 1  0   2  0  0   0  1  0 67 70   0   0  7 332  1
+#> 72289  81  5  7 12 2 0 0 8 17   2  3  4   2  3  2 81 91   1   2  4 131  2
+#> 72290  79  8  4 12 3 0 0 2  0   4  0  3   2  0  2 43 46   0   0  5 231  4
+#> 72291  96  6  2  8 5 1 1 0  0   1  0  1   0  0  1 41 48   0   0  3 139  1
+#> 72292  23  2  2  4 0 0 0 0  0   0  0  1   2  0  0 10  7   0   0  1  71  2
 #>       ITC T5
-#> 71099   0  2
-#> 71100   4  0
-#> 71101   1  2
-#> 71102   1  3
-#> 71103   5  0
-#> 71104   2  0
+#> 72287   4  0
+#> 72288   0  0
+#> 72289   1  0
+#> 72290   2  0
+#> 72291   0  0
+#> 72292   0  0
 ```
 
 ### Weather
@@ -176,7 +178,74 @@ ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
   coord_flip()
 ```
 
-![](README-weather-1.png)
+![](README-weather-1.png) \#\#\# Squiggle Data You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link.
+
+``` r
+# You can get the sources
+sources <- get_squiggle_data("sources")
+head(sources)
+#>   id                                url                  name
+#> 1  1      https://live.squiggle.com.au/              Squiggle
+#> 2  2           https://thearcfooty.com/               The Arc
+#> 3  3          http://figuringfooty.com/        Figuring Footy
+#> 4  4      http://www.matterofstats.com/       Matter of Stats
+#> 5  5                                                  Punters
+#> 6  6 https://footymaths.blogspot.com.au Footy Maths Institute
+```
+
+``` r
+# Get all tips
+tips <- get_squiggle_data("tips")
+head(tips)  
+#>                    ateam              tip confidence                date
+#> 1               Richmond         Richmond       50.0 2017-03-23 19:20:00
+#> 2               Richmond         Richmond       58.0 2017-03-23 19:20:00
+#> 3               Richmond          Carlton       56.7 2017-03-23 19:20:00
+#> 4       Western Bulldogs Western Bulldogs       62.7 2017-03-24 19:50:00
+#> 5       Western Bulldogs Western Bulldogs       62.0 2017-03-24 19:50:00
+#> 6 Greater Western Sydney         Adelaide       50.0 2017-03-26 15:20:00
+#>   year       hteam          source             updated correct margin
+#> 1 2017     Carlton        Squiggle 2017-07-11 13:59:46       1   1.00
+#> 2 2017     Carlton  Figuring Footy 2017-04-10 12:18:02       1     NA
+#> 3 2017     Carlton Matter of Stats 2017-07-11 13:59:46       0   5.39
+#> 4 2017 Collingwood Matter of Stats 2017-07-11 13:59:46       1  10.31
+#> 5 2017 Collingwood        Squiggle 2017-07-11 13:59:46       1  17.00
+#> 6 2017    Adelaide        Squiggle 2017-07-11 13:59:46       1   3.00
+#>      bits   err round sourceid gameid         venue
+#> 1  0.0000 42.00     1        1      1        M.C.G.
+#> 2  0.2141    NA     1        3      1        M.C.G.
+#> 3 -0.2076 48.39     1        4      1        M.C.G.
+#> 4  0.3265  3.69     1        4      2        M.C.G.
+#> 5  0.3103  3.00     1        1      2        M.C.G.
+#> 6  0.0000 53.00     1        1      8 Adelaide Oval
+```
+
+``` r
+# Get` just tips from round 1, 2018
+tips <- get_squiggle_data("tips", round = 1, year = 2018)
+head(tips)
+#>   year     venue margin    hteam             updated   err    bits gameid
+#> 1 2018 Docklands  11.00 Essendon 2018-03-23 22:54:38 23.00 -0.1844    373
+#> 2 2018 Docklands   9.00 Essendon 2018-03-23 22:54:38 21.00 -0.3147    373
+#> 3 2018 Docklands   9.78 Essendon 2018-03-23 22:54:38 21.78 -0.3040    373
+#> 4 2018 Docklands     NA Essendon 2018-03-23 22:54:38    NA  0.0588    373
+#> 5 2018 Docklands  21.00 Essendon 2018-03-23 22:54:38 33.00 -0.5564    373
+#> 6 2018 Docklands   8.00 Essendon 2018-03-23 22:54:38 20.00 -0.1571    373
+#>                  date    ateam correct round      tip sourceid
+#> 1 2018-03-23 19:50:00 Adelaide       0     1 Adelaide        1
+#> 2 2018-03-23 19:50:00 Adelaide       0     1 Adelaide        2
+#> 3 2018-03-23 19:50:00 Adelaide       0     1 Adelaide        4
+#> 4 2018-03-23 19:50:00 Adelaide       1     1 Essendon        5
+#> 5 2018-03-23 19:50:00 Adelaide       0     1 Adelaide        6
+#> 6 2018-03-23 19:50:00 Adelaide       0     1 Adelaide        7
+#>                  source confidence
+#> 1              Squiggle      56.00
+#> 2               The Arc      59.80
+#> 3       Matter of Stats      59.50
+#> 4               Punters      52.08
+#> 5 Footy Maths Institute      66.00
+#> 6            PlusSixOne      55.16
+```
 
 ------------------------------------------------------------------------
 

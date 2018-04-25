@@ -1,12 +1,35 @@
-#' Access Squiggle data using the squiggle API service. 
+#' Access Squiggle data using the squiggle API service.
 #'
-#' @param query 
-#' @param ...
+#' Use `get_squiggle_data` to access the [Squiggle](squiggle.com.au) API. See instructions at [api.squiggle.com.au](api.squiggle.com.au).
 #'
-#' @return 
+#' The optional arguments to squiggle can be one of the following.
+#'
+#' #' \itemize{
+#'   \item year: an integer specifying the year to return data from, e.g. year = 2018
+#'   \item round: an integer specifying the round to return data from, e.g. round = 12
+#'   \item game: an integer specifying the game ID to return data from, e.g. game = 10
+#'   \item source: an integer specifying the ID of the source to return data from, e.g. source = 1
+#' }
+#'
+#' For full instructions, see [api.squiggle.com.au](api.squiggle.com.au)
+#'
+#' @param query A text string. The main query to use with the API.  to one of `sources`, `games` or `tips`.
+#'
+#' @param ... (optional) An optional argument provided to the [Squiggle API](api.squiggle.com.au). See details for more info.
+#'
+#' @return A dataframe, with the resultant data that matches the query specified in `query`, as well as any optional filters.
 #' @export
 #'
 #' @examples
+#'
+#' # Return a list of the sources, with ID's
+#' sources <- get_squiggle_data("sources")
+#'
+#' # Get tips for Round 1, 2018
+#' tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
+#'
+#' # Get tips from Squiggle
+#' squiggle <- get_squiggle_data(query = "tips", source = 1)
 get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
 
   # Ensure query is valid
