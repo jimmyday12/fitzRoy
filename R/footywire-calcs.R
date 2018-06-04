@@ -137,6 +137,10 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   # Update names
   names(games_df) <- c("Date", "Teams", "Venue")
 
+  # Remove Bye
+  games_df <- games_df %>%
+    filter(Venue != "BYE")
+  
   # Work out day and week of each game. Games on Thursday > Wednesday go in same Round
   games_df <- games_df %>%
     mutate(

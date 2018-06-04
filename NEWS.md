@@ -1,3 +1,7 @@
+# fitzRoy 0.1.3
+
+* Fixed bug where Fixture returned NA due to Bye rounds
+
 # fitzRoy 0.1.2
 
 * Added `get_squggle_data` function to return data from the [Squiggle API](api.squiggle.com.au)
