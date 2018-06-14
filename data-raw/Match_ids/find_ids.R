@@ -68,7 +68,7 @@ library(tidyverse)
 library(fitzRoy)
 library(rvest)
 library(lubridate)
-load("./data-raw/Match_ids/id_data.rda")
+load(here::here("data-raw", "Match_ids", "id_data.rda"))
 
 # Filter out matches we know exist
 ids <- id_data %>%
@@ -84,4 +84,4 @@ id_data <- id_data %>%
 
 # Save data
 #use_data(id_data, internal = TRUE, overwrite = TRUE)
-save(id_data, file = "./data-raw/Match_ids/id_data.rda")
+save(id_data, file = here::here("data-raw", "Match_ids", "id_data.rda"))
