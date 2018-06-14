@@ -1,5 +1,6 @@
 # Weekly Script to update data
 library(here)
+library(fitzRoy)
 
 setwd("~/Documents/R_scripts/fitzRoy")
 
