@@ -69,23 +69,27 @@ update_footywire_stats <- function(check_existing = TRUE) {
   # First, load data from github
   if (check_existing) {
     message("Getting match ID's...")
-    ids_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/Match_ids/id_data.rda"
-    load(url(ids_url))
+    
+    # Get all URL's from 2010 (advanced stats) to current year
+    fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
+      purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
+      purrr::map(xml2::read_html) %>%
+      purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
+      purrr::map(~ rvest::html_attr(., "href")) %>%
+      purrr::map(~ stringr::str_extract(., "\\d+")) %>% 
+      purrr::map_if(is.character, as.numeric) %>%
+      purrr::reduce(c)
+    
+    new_data_ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
 
-    # Now find the max date of existing dataset
-    max(player_stats$Date)
-    new_data_ids <- id_data %>%
-      dplyr::filter(Season > 2009) %>%
-      dplyr::filter(Date > max(player_stats$Date))
-
-    if (nrow(new_data_ids) == 0) {
+    if (length(new_data_ids) == 0) {
       message("Data is up to date. Returning original player_stats data")
       return(player_stats)
     } else {
 
       # Get new data
-      message("Downloading new data...")
-      new_data <- get_footywire_stats(new_data_ids$Match_id)
+      message(paste0("Downloading new data for ", length(new_data_ids), " matches..."))
+      new_data <- get_footywire_stats(new_data_ids)
 
       # Merge with existing data
       dat <- player_stats %>%
@@ -94,10 +98,9 @@ update_footywire_stats <- function(check_existing = TRUE) {
     }
   } else {
     message("Downloading all data. Warning - this takes a long time")
-    all_data_ids <- id_data %>%
-      dplyr::filter(Season > 2009)
+    all_data_ids <- fw_ids
 
-    dat <- get_footywire_stats(all_data_ids$Match_id)
+    dat <- get_footywire_stats(all_data_ids)
     return(dat)
   }
 }
