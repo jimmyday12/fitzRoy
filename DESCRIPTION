@@ -1,5 +1,5 @@
 Package: fitzRoy
-Version: 0.1.3
+Version: 0.1.4
 Title: Easily Scrape and Process AFL Data
 Description: An easy to use tool for scraping and processing AFL data. 
 Authors@R: c(

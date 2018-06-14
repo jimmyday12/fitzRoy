@@ -1,3 +1,7 @@
+# fitzRoy 0.1.4
+
+* `update_footywire` now more efficiently searches through missing match_ids
+
 # fitzRoy 0.1.3
 
 * Fixed bug where Fixture returned NA due to Bye rounds

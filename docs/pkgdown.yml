@@ -1,6 +1,9 @@
+pandoc: 1.19.2.1
+pkgdown: 1.1.0
+pkgdown_sha: ~
+articles:
+  vignette-name: vignette-name.html
 urls:
   reference: https://jimmyday12.github.io/fitzRoy//reference
   article: https://jimmyday12.github.io/fitzRoy//articles
-articles:
-  vignette-name: vignette-name.html
 
