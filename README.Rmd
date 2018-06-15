@@ -16,8 +16,29 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='right', fig.asp=1, out.width='100px',out.height='100px'}
+library(hexSticker)
+sticker(
+  package = "fitzRoy",                     # package name to display on sticker             
+  p_size = 8,                          # size of package name
+  p_y = 1.5,                            # y of package name
+  p_color = "#C9B128",                  # color of package name
+  subplot = "inst/figures/footy_flipped.png",          # sticker feature
+  s_x = 1,                               # x of feature
+  s_y = 0.9,                             # y of feature
+  s_width = 0.55,                        # width of feature - maintains aspect ratio
+  h_size = 2,                           # border
+  h_color = "#C9B128",                  # color of border
+  h_fill = "white",                     # color of background
+  url = "jimmyday12.github.io/fitzRoy",   # url at the bottom
+  u_color = "#C9B128",                    # color of url at the bottom
+  u_size = 1.5,                         # size of url at the bottom
+  filename = "inst/figures/fitz_hex.png"                 # location to save the image
+)
+knitr::include_graphics("inst/figures/fitz_hex.png", dpi = 600)
+```
 
-# fitzRoy
+# fitzRoy <img src="inst/figures/fitz_hex.png" align="right" />
 
 The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
 
