@@ -46,10 +46,9 @@ The goal of fitzRoy is to provide a set of functions that allows for users to ea
 
 You can install fitzRoy from github with:
 
-```{r gh-installation, eval = FALSE}
+```{r gh-installation, eval = FALSE, echo = TRUE}
 # install.packages("devtools")
 devtools::install_github("jimmyday12/fitzRoy")
-library(fitzRoy)
 ```
 
 ## Usage
