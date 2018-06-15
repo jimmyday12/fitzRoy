@@ -40,7 +40,7 @@ sticker(
 # knitr::include_graphics("inst/figures/fitz_hex.png", dpi = 600)
 ```
 
-# fitzRoy <img src="inst/figures/fitz_hex.png" align="right" height="42" width="42"/>
+# <img src="inst/figures/fitz_hex.png" align="left" height="42" width="42"/> fitzRoy 
 
 # Overview
 The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
