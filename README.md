@@ -1,10 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<img src="inst/figures/fitz_hex.png" width="100px" height="100px" style="display: block; margin: auto 0 auto auto;" />
+fitzRoy <img src="inst/figures/fitz_hex.png" align="right" height="42" width="42"/>
+===================================================================================
 
-fitzRoy <img src="inst/figures/fitz_hex.png" align="right" />
-=============================================================
+Overview
+========
 
 The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions.
 
@@ -186,74 +187,74 @@ ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
 # You can get the sources
 sources <- get_squiggle_data("sources")
 head(sources)
-#>                                  url id                  name
-#> 1      https://live.squiggle.com.au/  1              Squiggle
-#> 2           https://thearcfooty.com/  2               The Arc
-#> 3          http://figuringfooty.com/  3        Figuring Footy
-#> 4      http://www.matterofstats.com/  4       Matter of Stats
-#> 5                                     5               Punters
-#> 6 https://footymaths.blogspot.com.au  6 Footy Maths Institute
+#>                                  url                  name id
+#> 1      https://live.squiggle.com.au/              Squiggle  1
+#> 2           https://thearcfooty.com/               The Arc  2
+#> 3          http://figuringfooty.com/        Figuring Footy  3
+#> 4      http://www.matterofstats.com/       Matter of Stats  4
+#> 5                                                  Punters  5
+#> 6 https://footymaths.blogspot.com.au Footy Maths Institute  6
 ```
 
 ``` r
 # Get all tips
 tips <- get_squiggle_data("tips")
 head(tips)  
-#>           venue hconfidence       hteam year   err tipteamid    bits
-#> 1        M.C.G.        50.0     Carlton 2017 42.00        14  0.0000
-#> 2        M.C.G.        42.0     Carlton 2017    NA        14  0.2141
-#> 3        M.C.G.        56.7     Carlton 2017 48.39         3 -0.2076
-#> 4        M.C.G.        37.3 Collingwood 2017  3.69        18  0.3265
-#> 5        M.C.G.        38.0 Collingwood 2017  3.00        18  0.3103
-#> 6 Adelaide Oval        50.0    Adelaide 2017 53.00         1  0.0000
-#>   sourceid             updated round gameid margin              tip
-#> 1        1 2017-07-11 13:59:46     1      1   1.00         Richmond
-#> 2        3 2017-04-10 12:18:02     1      1     NA         Richmond
-#> 3        4 2017-07-11 13:59:46     1      1   5.39          Carlton
-#> 4        4 2017-07-11 13:59:46     1      2  10.31 Western Bulldogs
-#> 5        1 2017-07-11 13:59:46     1      2  17.00 Western Bulldogs
-#> 6        1 2017-07-11 13:59:46     1      8   3.00         Adelaide
-#>                  date                  ateam hteamid confidence
-#> 1 2017-03-23 19:20:00               Richmond       3       50.0
-#> 2 2017-03-23 19:20:00               Richmond       3       58.0
-#> 3 2017-03-23 19:20:00               Richmond       3       56.7
-#> 4 2017-03-24 19:50:00       Western Bulldogs       4       62.7
-#> 5 2017-03-24 19:50:00       Western Bulldogs       4       62.0
-#> 6 2017-03-26 15:20:00 Greater Western Sydney       1       50.0
-#>            source correct ateamid
-#> 1        Squiggle       1      14
-#> 2  Figuring Footy       1      14
-#> 3 Matter of Stats       0      14
-#> 4 Matter of Stats       1      18
-#> 5        Squiggle       1      18
-#> 6        Squiggle       1       9
+#>      bits tipteamid             updated correct hteamid              tip
+#> 1  0.0000        14 2017-07-11 13:59:46       1       3         Richmond
+#> 2  0.2141        14 2017-04-10 12:18:02       1       3         Richmond
+#> 3 -0.2076         3 2017-07-11 13:59:46       0       3          Carlton
+#> 4  0.3265        18 2017-07-11 13:59:46       1       4 Western Bulldogs
+#> 5  0.3103        18 2017-07-11 13:59:46       1       4 Western Bulldogs
+#> 6  0.0000         1 2017-07-11 13:59:46       1       1         Adelaide
+#>   confidence         venue margin gameid   err round hconfidence ateamid
+#> 1       50.0        M.C.G.   1.00      1 42.00     1        50.0      14
+#> 2       58.0        M.C.G.     NA      1    NA     1        42.0      14
+#> 3       56.7        M.C.G.   5.39      1 48.39     1        56.7      14
+#> 4       62.7        M.C.G.  10.31      2  3.69     1        37.3      18
+#> 5       62.0        M.C.G.  17.00      2  3.00     1        38.0      18
+#> 6       50.0 Adelaide Oval   3.00      8 53.00     1        50.0       9
+#>                    ateam year          source       hteam
+#> 1               Richmond 2017        Squiggle     Carlton
+#> 2               Richmond 2017  Figuring Footy     Carlton
+#> 3               Richmond 2017 Matter of Stats     Carlton
+#> 4       Western Bulldogs 2017 Matter of Stats Collingwood
+#> 5       Western Bulldogs 2017        Squiggle Collingwood
+#> 6 Greater Western Sydney 2017        Squiggle    Adelaide
+#>                  date sourceid
+#> 1 2017-03-23 19:20:00        1
+#> 2 2017-03-23 19:20:00        3
+#> 3 2017-03-23 19:20:00        4
+#> 4 2017-03-24 19:50:00        4
+#> 5 2017-03-24 19:50:00        1
+#> 6 2017-03-26 15:20:00        1
 ```
 
 ``` r
 # Get` just tips from round 1, 2018
 tips <- get_squiggle_data("tips", round = 1, year = 2018)
 head(tips)
-#>               updated     venue margin                source    hteam
-#> 1 2018-03-23 22:54:38 Docklands  11.00              Squiggle Essendon
-#> 2 2018-03-23 22:54:38 Docklands   9.00               The Arc Essendon
-#> 3 2018-03-23 22:54:38 Docklands   9.78       Matter of Stats Essendon
-#> 4 2018-03-23 22:54:38 Docklands     NA               Punters Essendon
-#> 5 2018-03-23 22:54:38 Docklands  21.00 Footy Maths Institute Essendon
-#> 6 2018-03-23 22:54:38 Docklands   8.00            PlusSixOne Essendon
-#>   ateamid confidence    bits tipteamid gameid sourceid hconfidence round
-#> 1       1      56.00 -0.1844         1    373        1       44.00     1
-#> 2       1      59.80 -0.3147         1    373        2       40.20     1
-#> 3       1      59.50 -0.3040         1    373        4       40.50     1
-#> 4       1      52.08  0.0588         5    373        5       52.08     1
-#> 5       1      66.00 -0.5564         1    373        6       34.00     1
-#> 6       1      55.16 -0.1571         1    373        7       44.84     1
-#>        tip    ateam   err year hteamid correct                date
-#> 1 Adelaide Adelaide 23.00 2018       5       0 2018-03-23 19:50:00
-#> 2 Adelaide Adelaide 21.00 2018       5       0 2018-03-23 19:50:00
-#> 3 Adelaide Adelaide 21.78 2018       5       0 2018-03-23 19:50:00
-#> 4 Essendon Adelaide    NA 2018       5       1 2018-03-23 19:50:00
-#> 5 Adelaide Adelaide 33.00 2018       5       0 2018-03-23 19:50:00
-#> 6 Adelaide Adelaide 20.00 2018       5       0 2018-03-23 19:50:00
+#>                  source                date hteamid    bits gameid
+#> 1              Squiggle 2018-03-23 19:50:00       5 -0.1844    373
+#> 2               The Arc 2018-03-23 19:50:00       5 -0.3147    373
+#> 3       Matter of Stats 2018-03-23 19:50:00       5 -0.3040    373
+#> 4               Punters 2018-03-23 19:50:00       5  0.0588    373
+#> 5 Footy Maths Institute 2018-03-23 19:50:00       5 -0.5564    373
+#> 6            PlusSixOne 2018-03-23 19:50:00       5 -0.1571    373
+#>               updated      tip tipteamid sourceid hconfidence    ateam
+#> 1 2018-03-23 22:54:38 Adelaide         1        1       44.00 Adelaide
+#> 2 2018-03-23 22:54:38 Adelaide         1        2       40.20 Adelaide
+#> 3 2018-03-23 22:54:38 Adelaide         1        4       40.50 Adelaide
+#> 4 2018-03-23 22:54:38 Essendon         5        5       52.08 Adelaide
+#> 5 2018-03-23 22:54:38 Adelaide         1        6       34.00 Adelaide
+#> 6 2018-03-23 22:54:38 Adelaide         1        7       44.84 Adelaide
+#>   margin correct ateamid    hteam year confidence   err     venue round
+#> 1  11.00       0       1 Essendon 2018      56.00 23.00 Docklands     1
+#> 2   9.00       0       1 Essendon 2018      59.80 21.00 Docklands     1
+#> 3   9.78       0       1 Essendon 2018      59.50 21.78 Docklands     1
+#> 4     NA       1       1 Essendon 2018      52.08    NA Docklands     1
+#> 5  21.00       0       1 Essendon 2018      66.00 33.00 Docklands     1
+#> 6   8.00       0       1 Essendon 2018      55.16 20.00 Docklands     1
 ```
 
 ------------------------------------------------------------------------
