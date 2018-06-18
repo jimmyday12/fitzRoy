@@ -40,12 +40,12 @@ sticker(
 # knitr::include_graphics("inst/figures/fitz_hex.png", dpi = 600)
 ```
 
-# fitzRoy <img src="man/figures/fitz_hex.png" align="right" />
+# fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
 [![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
 [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)   
 
 
-# Overview
+## Overview
 The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
 
 ## Installation
