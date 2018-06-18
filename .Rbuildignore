@@ -9,3 +9,4 @@
 ^docs$
 create_package.R
 ^data-raw$
+^\.travis\.yml$
