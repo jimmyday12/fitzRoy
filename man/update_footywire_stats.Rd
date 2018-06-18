@@ -6,6 +6,9 @@
 \usage{
 update_footywire_stats(check_existing = TRUE)
 }
+\arguments{
+\item{check_existing}{A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time.}
+}
 \value{
 Returns a data frame containing player match stats for each match ID
 }

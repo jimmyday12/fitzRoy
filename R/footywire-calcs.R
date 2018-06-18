@@ -54,7 +54,7 @@ get_footywire_stats <- function(ids) {
 #' The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
 #'
 #' This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.
-#'
+#' @param check_existing A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time. 
 #' @return Returns a data frame containing player match stats for each match ID
 #'
 #' @examples
@@ -70,6 +70,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
   if (check_existing) {
     message("Getting match ID's...")
     
+
     # Get all URL's from 2010 (advanced stats) to current year
     fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
       purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
@@ -80,21 +81,39 @@ update_footywire_stats <- function(check_existing = TRUE) {
       purrr::map_if(is.character, as.numeric) %>%
       purrr::reduce(c)
     
-    new_data_ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
+    ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
+    
 
-    if (length(new_data_ids) == 0) {
+    if (length(ids) == 0) {
       message("Data is up to date. Returning original player_stats data")
       return(player_stats)
     } else {
 
       # Get new data
-      message(paste0("Downloading new data for ", length(new_data_ids), " matches..."))
-      new_data <- get_footywire_stats(new_data_ids)
-
-      # Merge with existing data
-      dat <- player_stats %>%
-        dplyr::bind_rows(new_data)
-      return(dat)
+      message(paste0("Downloading new data for ", length(ids), " matches..."))
+      
+      message("\nChecking Github")
+      # Check fitzRoy GitHub
+      dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda"
+      
+      loadRData <- function(fileName){
+        load(fileName)
+        get(ls()[ls() != "fileName"])
+      }
+      
+      dat_git <- loadRData(url(dat_url))
+      
+      # Check what's still missing
+      git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
+      ids <- ids[ids == git_ids]
+      
+      if(length(ids) == 0){
+        message("Finished getting data")
+        dat_git
+      } else {
+        new_data <- get_footywire_stats(ids)
+        player_stats %>% dplyr::bind_rows(new_data)
+      }
     }
   } else {
     message("Downloading all data. Warning - this takes a long time")
