@@ -40,8 +40,8 @@ sticker(
 # knitr::include_graphics("inst/figures/fitz_hex.png", dpi = 600)
 ```
 
-# fitzRoy <img src="man/figures/fitz_hex.png" align="left" height="42" width="42"/> 
-[![Build status](https://travis-ci.org/jimmyday12/FitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/FitzRoy)   
+# fitzRoy <img src="man/figures/fitz_hex.png" align="right" />
+[![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
 [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)   
 
 
