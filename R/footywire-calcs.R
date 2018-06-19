@@ -66,21 +66,22 @@ get_footywire_stats <- function(ids) {
 #' @import dplyr
 update_footywire_stats <- function(check_existing = TRUE) {
 
+  message("Getting match ID's...")
+  
+  
+  # Get all URL's from 2010 (advanced stats) to current year
+  fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
+    purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
+    purrr::map(xml2::read_html) %>%
+    purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
+    purrr::map(~ rvest::html_attr(., "href")) %>%
+    purrr::map(~ stringr::str_extract(., "\\d+")) %>% 
+    purrr::map_if(is.character, as.numeric) %>%
+    purrr::reduce(c)
+  
   # First, load data from github
   if (check_existing) {
-    message("Getting match ID's...")
-    
 
-    # Get all URL's from 2010 (advanced stats) to current year
-    fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
-      purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
-      purrr::map(xml2::read_html) %>%
-      purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
-      purrr::map(~ rvest::html_attr(., "href")) %>%
-      purrr::map(~ stringr::str_extract(., "\\d+")) %>% 
-      purrr::map_if(is.character, as.numeric) %>%
-      purrr::reduce(c)
-    
     ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
     
 
