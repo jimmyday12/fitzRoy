@@ -141,7 +141,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @importFrom magrittr %>%
 #' @import dplyr
 get_fixture <- function(season = lubridate::year(Sys.Date())) {
-
+  if(!is.numeric(season)) stop(paste0("'season' must be in 4-digit year format. 'season' is currently ", season))
+  if(nchar(season) != 4) stop(paste0("'season' must be in 4-digit year format (e.g. 2018). 'season' is currently ", season))
   # create url
   url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
   fixture_xml <- xml2::read_html(url_fixture)
