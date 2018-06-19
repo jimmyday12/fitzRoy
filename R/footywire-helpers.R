@@ -167,7 +167,7 @@ get_match_data <- function(id) {
         # Join them
         info_columns <- c(
           "Date", "Season", "Round", "Venue", "Player",
-          "Team", "Opposition", "Status", "GA", "Match_id"
+          "Team", "Opposition", "Status", "Match_id"
         )
         player_stats_table <- player_stats_advanced %>%
           select(-one_of(info_columns)) %>%
