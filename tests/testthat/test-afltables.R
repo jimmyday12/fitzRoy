@@ -12,3 +12,8 @@ test_that("replace_teams returns corrected teams", {
   expect_error(replace_teams())
   expect_error(replace_teams(1))
 })
+
+test_that("conver_results works", {
+  expect_type(convert_results(get_match_results()), "list")
+  expect_error(convert_results("a"))
+})
