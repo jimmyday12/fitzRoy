@@ -16,8 +16,9 @@ options(tibble.print_min = 5, tibble.print_max = 5)
 ```
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-```{r echo=FALSE, message=FALSE, warning=FALSE, fig.align='right', fig.asp=1, out.width='100px',out.height='100px'}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(hexSticker)
+library(tidyverse)
 sticker(
   package = "fitzRoy",                     # package name to display on sticker             
   p_size = 8,                          # size of package name
@@ -36,13 +37,19 @@ sticker(
   filename = "man/figures/fitz_hex.png"                 # location to save the image
 )
 
-
-# knitr::include_graphics("inst/figures/fitz_hex.png", dpi = 600)
+# Get version and dependancy from description
+version <- as.vector(read.dcf('DESCRIPTION')[, 'Version']) %>%
+                       gsub('-', '.', .)
+dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
+  stringr::str_extract("\\d+\\.*\\d+\\.*\\d*")
 ```
 
 # fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
 [![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
-[![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)   
+[![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
+[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master)
+[![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
+[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master)
 
 
 ## Overview
@@ -131,6 +138,8 @@ ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
   coord_flip()
 
 ```
+
+
 ### Squiggle Data
 You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link. 
 

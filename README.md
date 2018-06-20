@@ -4,7 +4,7 @@
 fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
 ====================================================================================
 
-[![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy) [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
+[![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy) [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square)](commits/master) [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2018--06--20-yellowgreen.svg)](/commits/master)
 
 Overview
 --------
@@ -108,20 +108,20 @@ head(fitzRoy::player_stats)
 #> 4 2010-03-25   2010 Round 1   MCG    Ben Cousins Richmond    Carlton
 #> 5 2010-03-25   2010 Round 1   MCG  Trent Cotchin Richmond    Carlton
 #> 6 2010-03-25   2010 Round 1   MCG  Dustin Martin Richmond    Carlton
-#>   Status GA Match_id CP UP ED   DE CM MI5 One.Percenters BO TOG  K HB  D M
-#> 1   Home  0     5089  8 15 16 66.7  0   0              1  0  69 14 10 24 3
-#> 2   Home  0     5089 11 10 14 60.9  1   0              0  0  80 11 12 23 2
-#> 3   Home  0     5089  7 14 16 76.2  0   0              0  0  89 12  9 21 5
-#> 4   Home  1     5089  9 10 11 57.9  0   0              0  0  69 13  6 19 1
-#> 5   Home  0     5089  8 10 13 68.4  1   0              0  1  77 11  8 19 6
-#> 6   Home  0     5089  6 12 16 88.9  0   0              1  0  81  5 13 18 4
-#>   G B T HO I50 CL CG R50 FF FA AF SC CCL SCL SI MG TO ITC T5
-#> 1 0 0 1  0   2  2  4   6  2  0 77 85  NA  NA NA NA NA  NA NA
-#> 2 0 0 5  0   8  5  4   1  2  0 85 89  NA  NA NA NA NA  NA NA
-#> 3 1 0 6  0   4  3  4   3  1  2 94 93  NA  NA NA NA NA  NA NA
-#> 4 1 0 1  0   1  2  3   4  1  0 65 70  NA  NA NA NA NA  NA NA
-#> 5 0 0 1  0   2  3  3   2  0  2 65 63  NA  NA NA NA NA  NA NA
-#> 6 0 0 3  0   2  3  1   0  0  1 62 72  NA  NA NA NA NA  NA NA
+#>   Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO TOG  K HB  D M
+#> 1   Home     5089  8 15 16 66.7  0  0   0              1  0  69 14 10 24 3
+#> 2   Home     5089 11 10 14 60.9  1  0   0              0  0  80 11 12 23 2
+#> 3   Home     5089  7 14 16 76.2  0  0   0              0  0  89 12  9 21 5
+#> 4   Home     5089  9 10 11 57.9  0  1   0              0  0  69 13  6 19 1
+#> 5   Home     5089  8 10 13 68.4  1  0   0              0  1  77 11  8 19 6
+#> 6   Home     5089  6 12 16 88.9  0  0   0              1  0  81  5 13 18 4
+#>   G B T HO GA1 I50 CL CG R50 FF FA AF SC CCL SCL SI MG TO ITC T5
+#> 1 0 0 1  0   0   2  2  4   6  2  0 77 85  NA  NA NA NA NA  NA NA
+#> 2 0 0 5  0   0   8  5  4   1  2  0 85 89  NA  NA NA NA NA  NA NA
+#> 3 1 0 6  0   0   4  3  4   3  1  2 94 93  NA  NA NA NA NA  NA NA
+#> 4 1 0 1  0   1   1  2  3   4  1  0 65 70  NA  NA NA NA NA  NA NA
+#> 5 0 0 1  0   0   2  3  3   2  0  2 65 63  NA  NA NA NA NA  NA NA
+#> 6 0 0 3  0   0   2  3  1   0  0  1 62 72  NA  NA NA NA NA  NA NA
 ```
 
 We can also use the `update_footywire_stats` function to get the most up to date data. This will merge data from 2010-current with any new data points.
@@ -130,32 +130,37 @@ We can also use the `update_footywire_stats` function to get the most up to date
 ## Update footywire data
 dat <- update_footywire_stats()
 #> Getting match ID's...
-#> Downloading new data for 6 matches...
-#> Getting data from footywire.com
-#> Finished getting data
+#> Data is up to date. Returning original player_stats data
 
 tail(dat)
 #>             Date Season    Round Venue          Player     Team Opposition
-#> 76335 2018-06-17   2018 Round 13   MCG    Daniel Rioli Richmond    Geelong
-#> 76336 2018-06-17   2018 Round 13   MCG  Toby Nankervis Richmond    Geelong
-#> 76337 2018-06-17   2018 Round 13   MCG     Jack Graham Richmond    Geelong
-#> 76338 2018-06-17   2018 Round 13   MCG Kamdyn Mcintosh Richmond    Geelong
-#> 76339 2018-06-17   2018 Round 13   MCG Ryan Garthwaite Richmond    Geelong
-#> 76340 2018-06-17   2018 Round 13   MCG  Jason Castagna Richmond    Geelong
-#>       Status GA Match_id CP UP ED    DE CM MI5 One.Percenters BO TOG K HB
-#> 76335   Away  0     9624  6  5  9  75.0  0   1              0  0  79 9  3
-#> 76336   Away  0     9624  6  5  7  63.6  0   0              6  0  83 5  6
-#> 76337   Away  0     9624  8  3  8  72.7  0   0              2  0  74 3  8
-#> 76338   Away  0     9624  3  6  5  55.6  0   0              1  0  58 3  6
-#> 76339   Away  0     9624  4  6  9 100.0  0   0              9  1  96 6  3
-#> 76340   Away  1     9624  4  3  6  75.0  2   2              0  0  84 4  4
-#>        D M G B  T HO I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO ITC T5
-#> 76335 12 2 1 2  8  0   2  1  1   0  3  0 82 81   0   1  5 263  2   2  2
-#> 76336 11 1 1 0  2 29   1  2  5   2  0  5 58 90   0   2  4 119  2   2  2
-#> 76337 11 0 0 0 13  0   1  2  3   1  3  3 71 84   0   2  1  55  2   3  4
-#> 76338  9 1 0 0  3  0   2  0  4   0  0  2 30 23   0   0  1 155  3   3  1
-#> 76339  9 3 0 0  4  0   1  1  3   3  1  1 47 71   0   1  1 235  3   3  0
-#> 76340  8 3 2 1  4  0   0  0  1   1  1  0 59 65   0   0  5  71  0   0  2
+#> 76291 2018-06-17   2018 Round 13   MCG    Daniel Rioli Richmond    Geelong
+#> 76292 2018-06-17   2018 Round 13   MCG  Toby Nankervis Richmond    Geelong
+#> 76293 2018-06-17   2018 Round 13   MCG     Jack Graham Richmond    Geelong
+#> 76294 2018-06-17   2018 Round 13   MCG Kamdyn Mcintosh Richmond    Geelong
+#> 76295 2018-06-17   2018 Round 13   MCG Ryan Garthwaite Richmond    Geelong
+#> 76296 2018-06-17   2018 Round 13   MCG  Jason Castagna Richmond    Geelong
+#>       Status Match_id CP UP ED    DE CM GA MI5 One.Percenters BO TOG K HB
+#> 76291   Away     9624  6  5  9  75.0  0  0   1              0  0  79 9  3
+#> 76292   Away     9624  6  5  7  63.6  0  0   0              6  0  83 5  6
+#> 76293   Away     9624  8  3  8  72.7  0  0   0              2  0  74 3  8
+#> 76294   Away     9624  3  6  5  55.6  0  0   0              1  0  58 3  6
+#> 76295   Away     9624  4  6  9 100.0  0  0   0              9  1  96 6  3
+#> 76296   Away     9624  4  3  6  75.0  2  1   2              0  0  84 4  4
+#>        D M G B  T HO GA1 I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO ITC
+#> 76291 12 2 1 2  8  0   0   2  1  1   0  3  0 82 81   0   1  5 263  2   2
+#> 76292 11 1 1 0  2 29   0   1  2  5   2  0  5 58 90   0   2  4 119  2   2
+#> 76293 11 0 0 0 13  0   0   1  2  3   1  3  3 71 84   0   2  1  55  2   3
+#> 76294  9 1 0 0  3  0   0   2  0  4   0  0  2 30 23   0   0  1 155  3   3
+#> 76295  9 3 0 0  4  0   0   1  1  3   3  1  1 47 71   0   1  1 235  3   3
+#> 76296  8 3 2 1  4  0   1   0  0  1   1  1  0 59 65   0   0  5  71  0   0
+#>       T5
+#> 76291  2
+#> 76292  2
+#> 76293  4
+#> 76294  1
+#> 76295  0
+#> 76296  2
 ```
 
 ### Weather
@@ -176,80 +181,84 @@ ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
   coord_flip()
 ```
 
-![](README-weather-1.png) \#\#\# Squiggle Data You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link.
+![](README-weather-1.png)
+
+### Squiggle Data
+
+You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link.
 
 ``` r
 # You can get the sources
 sources <- get_squiggle_data("sources")
 head(sources)
-#>                                  url id                  name
-#> 1      https://live.squiggle.com.au/  1              Squiggle
-#> 2           https://thearcfooty.com/  2               The Arc
-#> 3          http://figuringfooty.com/  3        Figuring Footy
-#> 4      http://www.matterofstats.com/  4       Matter of Stats
-#> 5                                     5               Punters
-#> 6 https://footymaths.blogspot.com.au  6 Footy Maths Institute
+#>                    name                                url id
+#> 1              Squiggle      https://live.squiggle.com.au/  1
+#> 2               The Arc           https://thearcfooty.com/  2
+#> 3        Figuring Footy          http://figuringfooty.com/  3
+#> 4       Matter of Stats      http://www.matterofstats.com/  4
+#> 5               Punters                                     5
+#> 6 Footy Maths Institute https://footymaths.blogspot.com.au  6
 ```
 
 ``` r
 # Get all tips
 tips <- get_squiggle_data("tips")
 head(tips)  
-#>      bits ateamid             updated                  ateam year   err
-#> 1  0.0000      14 2017-07-11 13:59:46               Richmond 2017 42.00
-#> 2  0.2141      14 2017-04-10 12:18:02               Richmond 2017    NA
-#> 3 -0.2076      14 2017-07-11 13:59:46               Richmond 2017 48.39
-#> 4  0.3265      18 2017-07-11 13:59:46       Western Bulldogs 2017  3.69
-#> 5  0.3103      18 2017-07-11 13:59:46       Western Bulldogs 2017  3.00
-#> 6  0.0000       9 2017-07-11 13:59:46 Greater Western Sydney 2017 53.00
-#>            source              tip correct tipteamid         venue gameid
-#> 1        Squiggle         Richmond       1        14        M.C.G.      1
-#> 2  Figuring Footy         Richmond       1        14        M.C.G.      1
-#> 3 Matter of Stats          Carlton       0         3        M.C.G.      1
-#> 4 Matter of Stats Western Bulldogs       1        18        M.C.G.      2
-#> 5        Squiggle Western Bulldogs       1        18        M.C.G.      2
-#> 6        Squiggle         Adelaide       1         1 Adelaide Oval      8
-#>         hteam hconfidence margin hteamid round sourceid confidence
-#> 1     Carlton        50.0   1.00       3     1        1       50.0
-#> 2     Carlton        42.0     NA       3     1        3       58.0
-#> 3     Carlton        56.7   5.39       3     1        4       56.7
-#> 4 Collingwood        37.3  10.31       4     1        4       62.7
-#> 5 Collingwood        38.0  17.00       4     1        1       62.0
-#> 6    Adelaide        50.0   3.00       1     1        1       50.0
-#>                  date
-#> 1 2017-03-23 19:20:00
-#> 2 2017-03-23 19:20:00
-#> 3 2017-03-23 19:20:00
-#> 4 2017-03-24 19:50:00
-#> 5 2017-03-24 19:50:00
-#> 6 2017-03-26 15:20:00
+#>           venue             updated   err       hteam
+#> 1        M.C.G. 2017-07-11 13:59:46 42.00     Carlton
+#> 2        M.C.G. 2017-04-10 12:18:02    NA     Carlton
+#> 3        M.C.G. 2017-07-11 13:59:46 48.39     Carlton
+#> 4        M.C.G. 2017-07-11 13:59:46  3.69 Collingwood
+#> 5        M.C.G. 2017-07-11 13:59:46  3.00 Collingwood
+#> 6 Adelaide Oval 2017-07-11 13:59:46 53.00    Adelaide
+#>                    ateam    bits correct sourceid hconfidence gameid
+#> 1               Richmond  0.0000       1        1        50.0      1
+#> 2               Richmond  0.2141       1        3        42.0      1
+#> 3               Richmond -0.2076       0        4        56.7      1
+#> 4       Western Bulldogs  0.3265       1        4        37.3      2
+#> 5       Western Bulldogs  0.3103       1        1        38.0      2
+#> 6 Greater Western Sydney  0.0000       1        1        50.0      8
+#>                tip margin round hteamid confidence          source
+#> 1         Richmond   1.00     1       3       50.0        Squiggle
+#> 2         Richmond     NA     1       3       58.0  Figuring Footy
+#> 3          Carlton   5.39     1       3       56.7 Matter of Stats
+#> 4 Western Bulldogs  10.31     1       4       62.7 Matter of Stats
+#> 5 Western Bulldogs  17.00     1       4       62.0        Squiggle
+#> 6         Adelaide   3.00     1       1       50.0        Squiggle
+#>                  date year ateamid tipteamid
+#> 1 2017-03-23 19:20:00 2017      14        14
+#> 2 2017-03-23 19:20:00 2017      14        14
+#> 3 2017-03-23 19:20:00 2017      14         3
+#> 4 2017-03-24 19:50:00 2017      18        18
+#> 5 2017-03-24 19:50:00 2017      18        18
+#> 6 2017-03-26 15:20:00 2017       9         1
 ```
 
 ``` r
 # Get` just tips from round 1, 2018
 tips <- get_squiggle_data("tips", round = 1, year = 2018)
 head(tips)
-#>   confidence tipteamid     venue year hconfidence             updated
-#> 1      56.00         1 Docklands 2018       44.00 2018-03-23 22:54:38
-#> 2      59.80         1 Docklands 2018       40.20 2018-03-23 22:54:38
-#> 3      59.50         1 Docklands 2018       40.50 2018-03-23 22:54:38
-#> 4      52.08         5 Docklands 2018       52.08 2018-03-23 22:54:38
-#> 5      66.00         1 Docklands 2018       34.00 2018-03-23 22:54:38
-#> 6      55.16         1 Docklands 2018       44.84 2018-03-23 22:54:38
-#>      hteam round                source hteamid   err    ateam margin
-#> 1 Essendon     1              Squiggle       5 23.00 Adelaide  11.00
-#> 2 Essendon     1               The Arc       5 21.00 Adelaide   9.00
-#> 3 Essendon     1       Matter of Stats       5 21.78 Adelaide   9.78
-#> 4 Essendon     1               Punters       5    NA Adelaide     NA
-#> 5 Essendon     1 Footy Maths Institute       5 33.00 Adelaide  21.00
-#> 6 Essendon     1            PlusSixOne       5 20.00 Adelaide   8.00
-#>   ateamid gameid                date    bits sourceid      tip correct
-#> 1       1    373 2018-03-23 19:50:00 -0.1844        1 Adelaide       0
-#> 2       1    373 2018-03-23 19:50:00 -0.3147        2 Adelaide       0
-#> 3       1    373 2018-03-23 19:50:00 -0.3040        4 Adelaide       0
-#> 4       1    373 2018-03-23 19:50:00  0.0588        5 Essendon       1
-#> 5       1    373 2018-03-23 19:50:00 -0.5564        6 Adelaide       0
-#> 6       1    373 2018-03-23 19:50:00 -0.1571        7 Adelaide       0
+#>      hteam     venue sourceid year hconfidence ateamid    ateam   err
+#> 1 Essendon Docklands        1 2018       44.00       1 Adelaide 23.00
+#> 2 Essendon Docklands        2 2018       40.20       1 Adelaide 21.00
+#> 3 Essendon Docklands        4 2018       40.50       1 Adelaide 21.78
+#> 4 Essendon Docklands        5 2018       52.08       1 Adelaide    NA
+#> 5 Essendon Docklands        6 2018       34.00       1 Adelaide 33.00
+#> 6 Essendon Docklands        7 2018       44.84       1 Adelaide 20.00
+#>   correct tipteamid hteamid    bits margin                date round
+#> 1       0         1       5 -0.1844  11.00 2018-03-23 19:50:00     1
+#> 2       0         1       5 -0.3147   9.00 2018-03-23 19:50:00     1
+#> 3       0         1       5 -0.3040   9.78 2018-03-23 19:50:00     1
+#> 4       1         5       5  0.0588     NA 2018-03-23 19:50:00     1
+#> 5       0         1       5 -0.5564  21.00 2018-03-23 19:50:00     1
+#> 6       0         1       5 -0.1571   8.00 2018-03-23 19:50:00     1
+#>   confidence gameid                source             updated      tip
+#> 1      56.00    373              Squiggle 2018-03-23 22:54:38 Adelaide
+#> 2      59.80    373               The Arc 2018-03-23 22:54:38 Adelaide
+#> 3      59.50    373       Matter of Stats 2018-03-23 22:54:38 Adelaide
+#> 4      52.08    373               Punters 2018-03-23 22:54:38 Essendon
+#> 5      66.00    373 Footy Maths Institute 2018-03-23 22:54:38 Adelaide
+#> 6      55.16    373            PlusSixOne 2018-03-23 22:54:38 Adelaide
 ```
 
 ------------------------------------------------------------------------
