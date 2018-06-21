@@ -54,7 +54,7 @@ get_footywire_stats <- function(ids) {
 #' The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
 #'
 #' This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.
-#' @param check_existing A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time. 
+#' @param check_existing A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time.
 #' @return Returns a data frame containing player match stats for each match ID
 #'
 #' @examples
@@ -65,25 +65,23 @@ get_footywire_stats <- function(ids) {
 #' @importFrom magrittr %>%
 #' @import dplyr
 update_footywire_stats <- function(check_existing = TRUE) {
-
   message("Getting match ID's...")
-  
-  
+
+
   # Get all URL's from 2010 (advanced stats) to current year
   fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
     purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
     purrr::map(xml2::read_html) %>%
     purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
     purrr::map(~ rvest::html_attr(., "href")) %>%
-    purrr::map(~ stringr::str_extract(., "\\d+")) %>% 
+    purrr::map(~ stringr::str_extract(., "\\d+")) %>%
     purrr::map_if(is.character, as.numeric) %>%
     purrr::reduce(c)
-  
+
   # First, load data from github
   if (check_existing) {
-
     ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
-    
+
 
     if (length(ids) == 0) {
       message("Data is up to date. Returning original player_stats data")
@@ -92,23 +90,23 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
       # Get new data
       message(paste0("Downloading new data for ", length(ids), " matches..."))
-      
+
       message("\nChecking Github")
       # Check fitzRoy GitHub
       dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda"
-      
-      loadRData <- function(fileName){
+
+      loadRData <- function(fileName) {
         load(fileName)
         get(ls()[ls() != "fileName"])
       }
-      
+
       dat_git <- loadRData(url(dat_url))
-      
+
       # Check what's still missing
       git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
       ids <- ids[ids == git_ids]
-      
-      if(length(ids) == 0){
+
+      if (length(ids) == 0) {
         message("Finished getting data")
         dat_git
       } else {
@@ -142,8 +140,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @importFrom magrittr %>%
 #' @import dplyr
 get_fixture <- function(season = lubridate::year(Sys.Date())) {
-  if(!is.numeric(season)) stop(paste0("'season' must be in 4-digit year format. 'season' is currently ", season))
-  if(nchar(season) != 4) stop(paste0("'season' must be in 4-digit year format (e.g. 2018). 'season' is currently ", season))
+  if (!is.numeric(season)) stop(paste0("'season' must be in 4-digit year format. 'season' is currently ", season))
+  if (nchar(season) != 4) stop(paste0("'season' must be in 4-digit year format (e.g. 2018). 'season' is currently ", season))
   # create url
   url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
   fixture_xml <- xml2::read_html(url_fixture)
@@ -164,7 +162,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   # Remove Bye
   games_df <- games_df %>%
     filter(Venue != "BYE")
-  
+
   # Work out day and week of each game. Games on Thursday > Wednesday go in same Round
   games_df <- games_df %>%
     mutate(

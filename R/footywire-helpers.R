@@ -23,13 +23,13 @@ convert_results <- function(results) {
     separate(variable, into = c("Status", "variable")) %>%
     spread(variable, value) %>%
     arrange(Game) %>%
-    mutate(Margin = ifelse(Status == "Home", Margin, Margin * -1)) 
+    mutate(Margin = ifelse(Status == "Home", Margin, Margin * -1))
   return(results_long)
 }
 
 
 #' Helper function for \code{get_footywire_stats}
-#' 
+#'
 #' \code{get_footywire_stats} returns a data table of advanced player data table from footywire.com.
 #'
 #' Paragraph
@@ -133,7 +133,7 @@ get_match_data <- function(id) {
     error = function(e) FALSE
   )
 
-  if (!is.list(footywire_basic)){
+  if (!is.list(footywire_basic)) {
     stop("Couldn't Find basic table")
   } else {
 

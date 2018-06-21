@@ -98,7 +98,7 @@ for (i in seq_along(seasons)) {
     }
     output <- rbind(output, sub.output)
   }
-  
+
   # Write data to all data table
   scoring_progression <- bind_rows(scoring_progression, output)
 }
