@@ -1,33 +1,6 @@
 library(tidyverse)
-library(rvest)
 
-match <- read_html("https://afltables.com/afl/stats/games/2018/031420180322.html")
-
-# top table "br+ table"
-match %>%
-  html_nodes("br+ table") %>%
-  html_table(fill = TRUE)
-
-
-# details "br+ table tr:nth-child(1) td:nth-child(2)"
-match %>%
-  html_nodes("br+ table tr:nth-child(1) td:nth-child(2)") %>%
-  html_text()
-
-# umpires "br+ table tr:nth-child(6) td
-match %>%
-  html_nodes("br+ table tr:nth-child(6) td") %>%
-  html_text()
-
-# table1 "#sortableTable0 th , #sortableTable0 tbody td"
-match %>%
-  html_nodes("td") %>%
-  html_table()
-
-match_list <- read_html("https://afltables.com/afl/seas/2018.html")
-# lists"tr+ tr b+ a"
-
-
+#Get basic player stats
 get_afltables_player <- function(Years) {
   
   # Get XML and extract text from .data
@@ -86,48 +59,6 @@ get_afltables_player <- function(Years) {
 }
 
 
-get_afltables_match_ids <- function(Seasons = NULL, Teams = "all", Rounds = "all"){
-  
-    html_game <- Seasons %>%
-    purrr::map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
-    purrr::map(xml2::read_html)
-  
-    home_teams <- match_list %>%
-      html_nodes("td:nth-child(1) tr:nth-child(1) td:nth-child(1)") %>%
-      html_text()
-    
-    away_teams <- match_list %>%
-      html_nodes("td:nth-child(1) tr+ tr td:nth-child(1)") %>%
-      html_text()
-    
-    dates <- match_list %>%
-      html_nodes("td tr:nth-child(1) td:nth-child(4)") %>%
-      html_text() %>%
-      
-    
-    purrr::map(~ rvest::html_nodes(.,"tr+ tr b+ a")) %>%
-    purrr::map(~ rvest::html_attr(., "href")) %>%
-    purrr::reduce(c) %>%
-    purrr::map_chr(stringr::str_replace, "..", "https://afltables.com/afl")
-  
-  "td:nth-child(1) tr:nth-child(1) td:nth-child(1)"
-}
-
-match_list %>%
-  html_nodes()
-
-
-
-get_afltables_stats()
-
-# IDea
-# OPtion 1 - provide URL/ID
-# Option 2 - Provide date - gets all from date
-# Option 3 - provide Season
-# Option 4 - provide Season/
-
-Fri 24-Aug-2018 Venue: Gabba
-Fri 24-Aug-2018 Venue: Docklands
-Fri 24-Aug-2018 Venue: M.C.G.
-Fri 24-Aug-2018 Venue: Adelaide Oval
-Fri 24-Aug-2018 Venue: Perth Stadium
+Years <- 2017:2018
+dat <- get_afltables_player(Years)
+write_rds(dat, path = "./data-raw/player_stats/player_stats_afltables.rds", compress = "gz")
