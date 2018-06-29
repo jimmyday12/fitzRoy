@@ -28,17 +28,17 @@ match_list <- read_html("https://afltables.com/afl/seas/2018.html")
 # lists"tr+ tr b+ a"
 
 
-get_afltables_player <- function(Years) {
+get_afltables_player <- function(match_ids) {
   
-  # Get XML and extract text from .data
-  game_urls <-
-    Years %>%
-    purrr::map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
-    purrr::map(xml2::read_html) %>%
-    purrr::map(~ rvest::html_nodes(.,"tr+ tr b+ a")) %>%
-    purrr::map(~ rvest::html_attr(., "href")) %>%
-    purrr::reduce(c) %>%
-    purrr::map_chr(stringr::str_replace, "..", "https://afltables.com/afl")
+  # # Get XML and extract text from .data
+  # game_urls <-
+  #   Years %>%
+  #   purrr::map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
+  #   purrr::map(xml2::read_html) %>%
+  #   purrr::map(~ rvest::html_nodes(.,"tr+ tr b+ a")) %>%
+  #   purrr::map(~ rvest::html_attr(., "href")) %>%
+  #   purrr::reduce(c) %>%
+  #   purrr::map_chr(stringr::str_replace, "..", "https://afltables.com/afl")
   
   
   replace_names <- function(x) {
@@ -86,37 +86,63 @@ get_afltables_player <- function(Years) {
 }
 
 
-get_afltables_match_ids <- function(Seasons = NULL, Teams = "all", Rounds = "all"){
+get_afltables_match_ids <- function(Seasons = format(Sys.Date(), "%Y"), 
+                                    Teams = unique(fitzRoy::match_results$Home.Team)){
   
-    html_game <- Seasons %>%
+  Seasons <- as.numeric(Seasons)
+  
+  html_game <- Seasons %>%
     purrr::map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
     purrr::map(xml2::read_html)
   
+  bye_rounds <- match_list %>%
+      html_nodes("td tr:nth-child(1) td:nth-child(2)") %>%
+      html_text() %>%
+      `%in%`("Bye")
+    
     home_teams <- match_list %>%
-      html_nodes("td:nth-child(1) tr:nth-child(1) td:nth-child(1)") %>%
-      html_text()
+      html_nodes("td tr:nth-child(1) a:nth-child(1)") %>%
+      html_text() %>% 
+      replace_teams() %>%
+      `%in%`(Teams) %>%
+      `[`(!bye_rounds)
     
     away_teams <- match_list %>%
-      html_nodes("td:nth-child(1) tr+ tr td:nth-child(1)") %>%
-      html_text()
-    
-    dates <- match_list %>%
-      html_nodes("td tr:nth-child(1) td:nth-child(4)") %>%
+      html_nodes("td tr+ tr a:nth-child(1)") %>%
       html_text() %>%
-      
+      replace_teams() %>%
+      `%in%`(Teams) 
     
-    purrr::map(~ rvest::html_nodes(.,"tr+ tr b+ a")) %>%
-    purrr::map(~ rvest::html_attr(., "href")) %>%
-    purrr::reduce(c) %>%
-    purrr::map_chr(stringr::str_replace, "..", "https://afltables.com/afl")
+    #dates <- match_list %>%
+    #  html_nodes("td tr:nth-child(1) td:nth-child(4)") %>%
+    #  html_text() %>%
+      
+      
+    match_ids <- match_list %>%
+      html_nodes("tr+ tr b+ a") %>%
+      html_attr("href") %>%
+      stringr::str_replace("..", "https://afltables.com/afl") 
+    
+    ind <- home_teams | away_teams 
+    ind <- ind[seq_along(match_ids)]
+    
+    match_ids[ind]
+    
+    #purrr::map(~ rvest::html_nodes(.,"tr+ tr b+ a")) %>%
+    #purrr::map(~ rvest::html_attr(., "href")) %>%
+    #purrr::reduce(c) %>%
+    #purrr::map_chr(stringr::str_replace, "..", "https://afltables.com/afl")
   
-  "td:nth-child(1) tr:nth-child(1) td:nth-child(1)"
+  #"td:nth-child(1) tr:nth-child(1) td:nth-child(1)"
 }
 
 match_list %>%
   html_nodes()
 
 
+match_list %>%
+  html_nodes("table") %>%
+  html_table(fill = TRUE)
 
 get_afltables_stats()
 
