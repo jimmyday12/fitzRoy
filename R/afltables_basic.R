@@ -94,6 +94,7 @@ replace_teams <- function(team) {
     team == "Lions" ~ "Brisbane Lions",
     team == "Brisbane" ~ "Brisbane Lions",
     team == "GW Sydney" ~ "GWS",
+    team == "Greater Western Sydney" ~ "GWS",
     team == "GC" ~ "Gold Coast",
     team == "StK" ~ "St Kilda",
     team == "PA" ~ "Port Adelaide",
