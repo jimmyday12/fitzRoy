@@ -1,6 +1,7 @@
 # fitzRoy 0.1.4
 
 * `update_footywire` now more efficiently searches through missing match_ids
+* fixed bug where `get_fixture` returned wrong teams [#23](https://github.com/jimmyday12/fitzRoy/issues/23)
 
 # fitzRoy 0.1.3
 
