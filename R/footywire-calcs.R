@@ -174,29 +174,12 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
     ) %>%
     select(Date, Round, Teams, Venue)
 
-  # Calculation to fix the names column
-  fixnames <- function(x, team = "Home") {
-    cleaned <- stringr::str_split(x, "v", simplify = T) %>%
-      stringr::str_remove_all("[\r\n]") %>%
-      trimws()
-    if (team == "Home") return(cleaned[1])
-    if (team == "Away") return(cleaned[2])
-  }
 
   # Fix names
   games_df <- games_df %>%
     group_by(Date, Round, Venue) %>%
-    mutate(
-      Home.Team = fixnames(Teams, "Home"),
-      Away.Team = fixnames(Teams, "Away")
-    )
-
-  # Fix Teams
-  # Uses internal replace teams function
-  games_df <- games_df %>%
-    group_by(Date, Round, Venue, Teams) %>%
-    mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    ungroup()
+    separate(Teams, into = c("Home.Team", "Away.Team"), sep = "\\\nv\\s\\\n") %>%
+    mutate_at(c("Home.Team", "Away.Team"), stringr::str_remove_all, "[\r\n]")
 
   # Add season game number
   games_df <- games_df %>%
@@ -204,6 +187,15 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Season.Game = row_number(),
       Season = as.integer(season)
     )
+  
+  # Fix Teams
+  # Uses internal replace teams function
+  games_df <- games_df %>%
+    group_by(Season.Game) %>%
+    mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
+    ungroup()
+
+
 
   # Tidy columns
   games_df <- games_df %>%

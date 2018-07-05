@@ -127,13 +127,13 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_ma
 
 <span class="kw">tail</span>(results)
 <span class="co">#&gt; # A tibble: 6 x 16</span>
-<span class="co">#&gt;     Game Date       Round Home.Team    Home.Goals Home.Behinds Home.Points</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;             &lt;int&gt;        &lt;int&gt;       &lt;int&gt;</span>
-<span class="co">#&gt; 1 15306. 2018-06-14 R13   Port Adelai…         20           12         132</span>
-<span class="co">#&gt; 2 15307. 2018-06-15 R13   Sydney               10           12          72</span>
-<span class="co">#&gt; 3 15308. 2018-06-16 R13   Carlton               6           10          46</span>
-<span class="co">#&gt; 4 15309. 2018-06-16 R13   Gold Coast           11           12          78</span>
-<span class="co">#&gt; 5 15310. 2018-06-16 R13   Hawthorn             12           16          88</span>
+<span class="co">#&gt;     Game Date       Round Home.Team  Home.Goals Home.Behinds Home.Points</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;           &lt;int&gt;        &lt;int&gt;       &lt;int&gt;</span>
+<span class="co">#&gt; 1 15321. 2018-06-30 R15   Adelaide           12           16          88</span>
+<span class="co">#&gt; 2 15322. 2018-06-30 R15   Gold Coast          8           12          60</span>
+<span class="co">#&gt; 3 15323. 2018-06-30 R15   GWS                13           17          95</span>
+<span class="co">#&gt; 4 15324. 2018-07-01 R15   Melbourne          18            9         117</span>
+<span class="co">#&gt; 5 15325. 2018-07-01 R15   Essendon           19           11         125</span>
 <span class="co">#&gt; # ... with 1 more row, and 9 more variables: Away.Team &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Away.Goals &lt;int&gt;, Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Margin &lt;int&gt;, Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></code></pre></div>
@@ -201,37 +201,35 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_ma
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Update footywire data
 dat &lt;-<span class="st"> </span><span class="kw"><a href="reference/update_footywire_stats.html">update_footywire_stats</a></span>()
 <span class="co">#&gt; Getting match ID's...</span>
-<span class="co">#&gt; Data is up to date. Returning original player_stats data</span>
+<span class="co">#&gt; Downloading new data for 15 matches...</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Checking Github</span>
+<span class="co">#&gt; Warning in ids == git_ids: longer object length is not a multiple of</span>
+<span class="co">#&gt; shorter object length</span>
+<span class="co">#&gt; Finished getting data</span>
 
 <span class="kw">tail</span>(dat)
-<span class="co">#&gt;             Date Season    Round Venue          Player     Team Opposition</span>
-<span class="co">#&gt; 76291 2018-06-17   2018 Round 13   MCG    Daniel Rioli Richmond    Geelong</span>
-<span class="co">#&gt; 76292 2018-06-17   2018 Round 13   MCG  Toby Nankervis Richmond    Geelong</span>
-<span class="co">#&gt; 76293 2018-06-17   2018 Round 13   MCG     Jack Graham Richmond    Geelong</span>
-<span class="co">#&gt; 76294 2018-06-17   2018 Round 13   MCG Kamdyn Mcintosh Richmond    Geelong</span>
-<span class="co">#&gt; 76295 2018-06-17   2018 Round 13   MCG Ryan Garthwaite Richmond    Geelong</span>
-<span class="co">#&gt; 76296 2018-06-17   2018 Round 13   MCG  Jason Castagna Richmond    Geelong</span>
-<span class="co">#&gt;       Status Match_id CP UP ED    DE CM GA MI5 One.Percenters BO TOG K HB</span>
-<span class="co">#&gt; 76291   Away     9624  6  5  9  75.0  0  0   1              0  0  79 9  3</span>
-<span class="co">#&gt; 76292   Away     9624  6  5  7  63.6  0  0   0              6  0  83 5  6</span>
-<span class="co">#&gt; 76293   Away     9624  8  3  8  72.7  0  0   0              2  0  74 3  8</span>
-<span class="co">#&gt; 76294   Away     9624  3  6  5  55.6  0  0   0              1  0  58 3  6</span>
-<span class="co">#&gt; 76295   Away     9624  4  6  9 100.0  0  0   0              9  1  96 6  3</span>
-<span class="co">#&gt; 76296   Away     9624  4  3  6  75.0  2  1   2              0  0  84 4  4</span>
-<span class="co">#&gt;        D M G B  T HO GA1 I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO ITC</span>
-<span class="co">#&gt; 76291 12 2 1 2  8  0   0   2  1  1   0  3  0 82 81   0   1  5 263  2   2</span>
-<span class="co">#&gt; 76292 11 1 1 0  2 29   0   1  2  5   2  0  5 58 90   0   2  4 119  2   2</span>
-<span class="co">#&gt; 76293 11 0 0 0 13  0   0   1  2  3   1  3  3 71 84   0   2  1  55  2   3</span>
-<span class="co">#&gt; 76294  9 1 0 0  3  0   0   2  0  4   0  0  2 30 23   0   0  1 155  3   3</span>
-<span class="co">#&gt; 76295  9 3 0 0  4  0   0   1  1  3   3  1  1 47 71   0   1  1 235  3   3</span>
-<span class="co">#&gt; 76296  8 3 2 1  4  0   1   0  0  1   1  1  0 59 65   0   0  5  71  0   0</span>
-<span class="co">#&gt;       T5</span>
-<span class="co">#&gt; 76291  2</span>
-<span class="co">#&gt; 76292  2</span>
-<span class="co">#&gt; 76293  4</span>
-<span class="co">#&gt; 76294  1</span>
-<span class="co">#&gt; 76295  0</span>
-<span class="co">#&gt; 76296  2</span></code></pre></div>
+<span class="co">#&gt;             Date Season    Round Venue          Player    Team  Opposition</span>
+<span class="co">#&gt; 76555 2018-06-24   2018 Round 14   MCG  Jarrod Garlett Carlton Collingwood</span>
+<span class="co">#&gt; 76556 2018-06-24   2018 Round 14   MCG Matthew Kreuzer Carlton Collingwood</span>
+<span class="co">#&gt; 76557 2018-06-24   2018 Round 14   MCG  Lochie O'Brien Carlton Collingwood</span>
+<span class="co">#&gt; 76558 2018-06-24   2018 Round 14   MCG        Sam Rowe Carlton Collingwood</span>
+<span class="co">#&gt; 76559 2018-06-24   2018 Round 14   MCG  Cameron Polson Carlton Collingwood</span>
+<span class="co">#&gt; 76560 2018-06-24   2018 Round 14   MCG Lachlan Plowman Carlton Collingwood</span>
+<span class="co">#&gt;       Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO TOG K HB</span>
+<span class="co">#&gt; 76555   Away     9630  1  9  6 60.0  0  0   0              1  0  81 5  5</span>
+<span class="co">#&gt; 76556   Away     9630  5  4  6 66.7  0  0   0              1  0  38 5  4</span>
+<span class="co">#&gt; 76557   Away     9630  1  9  7 77.8  0  1   0              1  0  80 7  2</span>
+<span class="co">#&gt; 76558   Away     9630  4  4  5 71.4  0  0   1              6  0  84 4  3</span>
+<span class="co">#&gt; 76559   Away     9630  3  1  3 75.0  0  0   0              0  0  79 1  3</span>
+<span class="co">#&gt; 76560   Away     9630  1  3  2 66.7  0  0   0              5  0  26 3  0</span>
+<span class="co">#&gt;        D M G B T HO GA1 I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO ITC T5</span>
+<span class="co">#&gt; 76555 10 4 0 2 0  0   0   1  1  0   0  0  0 39 32   1   0  4 210  1   0  0</span>
+<span class="co">#&gt; 76556  9 3 1 0 0  6   0   4  3  2   1  1  1 42 39   3   0  2 172  4   1  0</span>
+<span class="co">#&gt; 76557  9 5 0 0 3  0   1   2  0  3   0  0  2 46 34   0   0  2 112  1   1  0</span>
+<span class="co">#&gt; 76558  7 3 1 0 4  8   0   1  1  5   2  1  3 49 37   1   0  2 133  3   3  2</span>
+<span class="co">#&gt; 76559  4 0 0 0 5  0   0   0  0  0   0  0  0 29 37   0   0  2  43  0   1  3</span>
+<span class="co">#&gt; 76560  3 2 0 0 0  0   0   0  0  0   1  0  0 15 28   0   0  1  55  1   1  0</span></code></pre></div>
 </div>
 <div id="weather" class="section level3">
 <h3 class="hasAnchor">
@@ -267,65 +265,65 @@ sources &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_sq
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get all tips</span>
 tips &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>)
 <span class="kw">head</span>(tips)  
-<span class="co">#&gt;   gameid margin             updated    bits hteamid          source</span>
-<span class="co">#&gt; 1      1   1.00 2017-07-11 13:59:46  0.0000       3        Squiggle</span>
-<span class="co">#&gt; 2      1     NA 2017-04-10 12:18:02  0.2141       3  Figuring Footy</span>
-<span class="co">#&gt; 3      1   5.39 2017-07-11 13:59:46 -0.2076       3 Matter of Stats</span>
-<span class="co">#&gt; 4      2  10.31 2017-07-11 13:59:46  0.3265       4 Matter of Stats</span>
-<span class="co">#&gt; 5      2  17.00 2017-07-11 13:59:46  0.3103       4        Squiggle</span>
-<span class="co">#&gt; 6      8   3.00 2017-07-11 13:59:46  0.0000       1        Squiggle</span>
-<span class="co">#&gt;                tip       hteam confidence   err ateamid sourceid</span>
-<span class="co">#&gt; 1         Richmond     Carlton       50.0 42.00      14        1</span>
-<span class="co">#&gt; 2         Richmond     Carlton       58.0    NA      14        3</span>
-<span class="co">#&gt; 3          Carlton     Carlton       56.7 48.39      14        4</span>
-<span class="co">#&gt; 4 Western Bulldogs Collingwood       62.7  3.69      18        4</span>
-<span class="co">#&gt; 5 Western Bulldogs Collingwood       62.0  3.00      18        1</span>
-<span class="co">#&gt; 6         Adelaide    Adelaide       50.0 53.00       9        1</span>
-<span class="co">#&gt;                  date year tipteamid         venue hconfidence correct</span>
-<span class="co">#&gt; 1 2017-03-23 19:20:00 2017        14        M.C.G.        50.0       1</span>
-<span class="co">#&gt; 2 2017-03-23 19:20:00 2017        14        M.C.G.        42.0       1</span>
-<span class="co">#&gt; 3 2017-03-23 19:20:00 2017         3        M.C.G.        56.7       0</span>
-<span class="co">#&gt; 4 2017-03-24 19:50:00 2017        18        M.C.G.        37.3       1</span>
-<span class="co">#&gt; 5 2017-03-24 19:50:00 2017        18        M.C.G.        38.0       1</span>
-<span class="co">#&gt; 6 2017-03-26 15:20:00 2017         1 Adelaide Oval        50.0       1</span>
-<span class="co">#&gt;   round                  ateam</span>
-<span class="co">#&gt; 1     1               Richmond</span>
-<span class="co">#&gt; 2     1               Richmond</span>
-<span class="co">#&gt; 3     1               Richmond</span>
-<span class="co">#&gt; 4     1       Western Bulldogs</span>
-<span class="co">#&gt; 5     1       Western Bulldogs</span>
-<span class="co">#&gt; 6     1 Greater Western Sydney</span></code></pre></div>
+<span class="co">#&gt;           venue ateamid    bits       hteam sourceid year</span>
+<span class="co">#&gt; 1        M.C.G.      14  0.0000     Carlton        1 2017</span>
+<span class="co">#&gt; 2        M.C.G.      14  0.2141     Carlton        3 2017</span>
+<span class="co">#&gt; 3        M.C.G.      14 -0.2076     Carlton        4 2017</span>
+<span class="co">#&gt; 4        M.C.G.      18  0.3265 Collingwood        4 2017</span>
+<span class="co">#&gt; 5        M.C.G.      18  0.3103 Collingwood        1 2017</span>
+<span class="co">#&gt; 6 Adelaide Oval       9  0.0000    Adelaide        1 2017</span>
+<span class="co">#&gt;               updated gameid              tip round hconfidence tipteamid</span>
+<span class="co">#&gt; 1 2017-07-11 13:59:46      1         Richmond     1        50.0        14</span>
+<span class="co">#&gt; 2 2017-04-10 12:18:02      1         Richmond     1        42.0        14</span>
+<span class="co">#&gt; 3 2017-07-11 13:59:46      1          Carlton     1        56.7         3</span>
+<span class="co">#&gt; 4 2017-07-11 13:59:46      2 Western Bulldogs     1        37.3        18</span>
+<span class="co">#&gt; 5 2017-07-11 13:59:46      2 Western Bulldogs     1        38.0        18</span>
+<span class="co">#&gt; 6 2017-07-11 13:59:46      8         Adelaide     1        50.0         1</span>
+<span class="co">#&gt;            source margin                  ateam   err correct hteamid</span>
+<span class="co">#&gt; 1        Squiggle   1.00               Richmond 42.00       1       3</span>
+<span class="co">#&gt; 2  Figuring Footy     NA               Richmond    NA       1       3</span>
+<span class="co">#&gt; 3 Matter of Stats   5.39               Richmond 48.39       0       3</span>
+<span class="co">#&gt; 4 Matter of Stats  10.31       Western Bulldogs  3.69       1       4</span>
+<span class="co">#&gt; 5        Squiggle  17.00       Western Bulldogs  3.00       1       4</span>
+<span class="co">#&gt; 6        Squiggle   3.00 Greater Western Sydney 53.00       1       1</span>
+<span class="co">#&gt;                  date confidence</span>
+<span class="co">#&gt; 1 2017-03-23 19:20:00       50.0</span>
+<span class="co">#&gt; 2 2017-03-23 19:20:00       58.0</span>
+<span class="co">#&gt; 3 2017-03-23 19:20:00       56.7</span>
+<span class="co">#&gt; 4 2017-03-24 19:50:00       62.7</span>
+<span class="co">#&gt; 5 2017-03-24 19:50:00       62.0</span>
+<span class="co">#&gt; 6 2017-03-26 15:20:00       50.0</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get` just tips from round 1, 2018</span>
 tips &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="dt">round =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2018</span>)
 <span class="kw">head</span>(tips)
-<span class="co">#&gt;   ateamid tipteamid    hteam correct             updated    ateam margin</span>
-<span class="co">#&gt; 1       1         1 Essendon       0 2018-03-23 22:54:38 Adelaide  11.00</span>
-<span class="co">#&gt; 2       1         1 Essendon       0 2018-03-23 22:54:38 Adelaide   9.00</span>
-<span class="co">#&gt; 3       1         1 Essendon       0 2018-03-23 22:54:38 Adelaide   9.78</span>
-<span class="co">#&gt; 4       1         5 Essendon       1 2018-03-23 22:54:38 Adelaide     NA</span>
-<span class="co">#&gt; 5       1         1 Essendon       0 2018-03-23 22:54:38 Adelaide  21.00</span>
-<span class="co">#&gt; 6       1         1 Essendon       0 2018-03-23 22:54:38 Adelaide   8.00</span>
-<span class="co">#&gt;      bits round confidence                date sourceid</span>
-<span class="co">#&gt; 1 -0.1844     1      56.00 2018-03-23 19:50:00        1</span>
-<span class="co">#&gt; 2 -0.3147     1      59.80 2018-03-23 19:50:00        2</span>
-<span class="co">#&gt; 3 -0.3040     1      59.50 2018-03-23 19:50:00        4</span>
-<span class="co">#&gt; 4  0.0588     1      52.08 2018-03-23 19:50:00        5</span>
-<span class="co">#&gt; 5 -0.5564     1      66.00 2018-03-23 19:50:00        6</span>
-<span class="co">#&gt; 6 -0.1571     1      55.16 2018-03-23 19:50:00        7</span>
-<span class="co">#&gt;                  source   err gameid     venue hconfidence year      tip</span>
-<span class="co">#&gt; 1              Squiggle 23.00    373 Docklands       44.00 2018 Adelaide</span>
-<span class="co">#&gt; 2               The Arc 21.00    373 Docklands       40.20 2018 Adelaide</span>
-<span class="co">#&gt; 3       Matter of Stats 21.78    373 Docklands       40.50 2018 Adelaide</span>
-<span class="co">#&gt; 4               Punters    NA    373 Docklands       52.08 2018 Essendon</span>
-<span class="co">#&gt; 5 Footy Maths Institute 33.00    373 Docklands       34.00 2018 Adelaide</span>
-<span class="co">#&gt; 6            PlusSixOne 20.00    373 Docklands       44.84 2018 Adelaide</span>
-<span class="co">#&gt;   hteamid</span>
-<span class="co">#&gt; 1       5</span>
-<span class="co">#&gt; 2       5</span>
-<span class="co">#&gt; 3       5</span>
-<span class="co">#&gt; 4       5</span>
-<span class="co">#&gt; 5       5</span>
-<span class="co">#&gt; 6       5</span></code></pre></div>
+<span class="co">#&gt;   hteamid hconfidence round      tip margin tipteamid gameid     venue</span>
+<span class="co">#&gt; 1       5       44.00     1 Adelaide  11.00         1    373 Docklands</span>
+<span class="co">#&gt; 2       5       40.20     1 Adelaide   9.00         1    373 Docklands</span>
+<span class="co">#&gt; 3       5       40.50     1 Adelaide   9.78         1    373 Docklands</span>
+<span class="co">#&gt; 4       5       52.08     1 Essendon     NA         5    373 Docklands</span>
+<span class="co">#&gt; 5       5       34.00     1 Adelaide  21.00         1    373 Docklands</span>
+<span class="co">#&gt; 6       5       44.84     1 Adelaide   8.00         1    373 Docklands</span>
+<span class="co">#&gt;   year confidence ateamid   err correct    hteam sourceid</span>
+<span class="co">#&gt; 1 2018      56.00       1 23.00       0 Essendon        1</span>
+<span class="co">#&gt; 2 2018      59.80       1 21.00       0 Essendon        2</span>
+<span class="co">#&gt; 3 2018      59.50       1 21.78       0 Essendon        4</span>
+<span class="co">#&gt; 4 2018      52.08       1    NA       1 Essendon        5</span>
+<span class="co">#&gt; 5 2018      66.00       1 33.00       0 Essendon        6</span>
+<span class="co">#&gt; 6 2018      55.16       1 20.00       0 Essendon        7</span>
+<span class="co">#&gt;               updated                source                date    bits</span>
+<span class="co">#&gt; 1 2018-03-23 22:54:38              Squiggle 2018-03-23 19:50:00 -0.1844</span>
+<span class="co">#&gt; 2 2018-03-23 22:54:38               The Arc 2018-03-23 19:50:00 -0.3147</span>
+<span class="co">#&gt; 3 2018-03-23 22:54:38       Matter of Stats 2018-03-23 19:50:00 -0.3040</span>
+<span class="co">#&gt; 4 2018-03-23 22:54:38               Punters 2018-03-23 19:50:00  0.0588</span>
+<span class="co">#&gt; 5 2018-03-23 22:54:38 Footy Maths Institute 2018-03-23 19:50:00 -0.5564</span>
+<span class="co">#&gt; 6 2018-03-23 22:54:38            PlusSixOne 2018-03-23 19:50:00 -0.1571</span>
+<span class="co">#&gt;      ateam</span>
+<span class="co">#&gt; 1 Adelaide</span>
+<span class="co">#&gt; 2 Adelaide</span>
+<span class="co">#&gt; 3 Adelaide</span>
+<span class="co">#&gt; 4 Adelaide</span>
+<span class="co">#&gt; 5 Adelaide</span>
+<span class="co">#&gt; 6 Adelaide</span></code></pre></div>
 <hr>
 <p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
@@ -364,7 +362,7 @@ tips &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squig
 <li><a href="https://codecov.io/github/jimmyday12/FitzRoy?branch=master"><img src="https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.1.4-orange.svg?style=flat-square" alt="packageversion"></a></li>
 <li><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--06--20-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--07--05-yellowgreen.svg" alt="Last-changedate"></a></li>
 </ul>
 </div>
 </div>
