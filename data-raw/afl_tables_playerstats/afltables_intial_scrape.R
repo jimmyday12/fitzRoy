@@ -4,9 +4,29 @@ library(rvest)
 match <- read_html("https://afltables.com/afl/stats/games/2018/031420180322.html")
 
 # top table "br+ table"
-match %>%
-  html_nodes("br+ table") %>%
-  html_table(fill = TRUE)
+home <- match %>%
+  html_nodes("br+ table td") %>%
+  html_text() 
+
+away <- match %>%
+  html_nodes("br+ table tr:nth-child(3) td") %>%
+  html_text() 
+
+
+umpires <- match %>%
+  html_nodes("br+ table tr:nth-child(6) td+ td") %>%
+  html_text()
+
+tab
+
+%>%
+  matrix(., ncol =  5, byrow = TRUE) %>%
+  data.frame() 
+  
+
+separate_
+matrix(c(tab, , ncol=5, byrow=TRUE) %>%
+  as.data.frame()
 
 
 # details "br+ table tr:nth-child(1) td:nth-child(2)"

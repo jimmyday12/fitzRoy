@@ -77,20 +77,44 @@ get_afltables_player <- function(match_urls) {
     x[-1, ]
   }
   
+  details <- match_xmls %>%
+    map(rvest::html_nodes, "br+ table td") %>%
+    map(rvest::html_text)
+
   games <- match_xmls %>%
     map(rvest::html_table, fill = TRUE) %>%
     map(magrittr::extract, c(3, 5)) %>%
-    purrr::modify_depth(1, ~ purrr::map_dfr(., replace_names))
+    purrr::modify_depth(1, ~ purrr::map(., replace_names)) 
   
-  details <- match_xmls %>%
-    map(rvest::html_nodes, "br+ table tr:nth-child(1) td:nth-child(2)") %>%
-    map(rvest::html_text)
+  home_games <- games %>%
+    rvest::pluck(1) %>%
+    map2(.y = details, ~ mutate(.x, Playing.for = .y[4]))
+  
+  away_games <- games %>%
+    rvest::pluck(2) %>%
+    map2(.y = details, ~ mutate(.x, Playing.for = .y[9]))
+
+  games <- home_games %>%
+    map2(.y = away_games, ~bind_rows(.x, .y))
   
   games_df <- games %>%
-    map2(.y = details, ~ mutate(.x, Round = stringr::str_extract(.y, "(?<=Round:\\s)(.*)(?=\\sVenue)"))) %>%
-    map2(.y = details, ~ mutate(.x, Venue = stringr::str_extract(.y, "(?<=Venue:\\s)(.*)(?=\\Date)"))) %>%
-    map2(.y = details, ~ mutate(.x, Date = stringr::str_extract(.y, "(?<=Date:\\s)(.*)(?=\\sAtt)"))) %>%
-    map2(.y = details, ~ mutate(.x, Attendance = stringr::str_extract(.y, "(?<=Attendance:\\s)(.*)"))) %>%
+    map2(.y = details, ~ mutate(.x, 
+                                Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
+                                Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
+                                Date = stringr::str_extract(.y[2], "(?<=Date:\\s)(.*)(?=\\sAtt)"),
+                                Attendance = stringr::str_extract(.y[2], "(?<=Attendance:\\s)(.*)"),
+                                Home.team = .y[4],
+                                HQ1 = .y[5],
+                                HQ2 = .y[6],
+                                HQ3 = .y[7],
+                                HQ4 = .y[8],
+                                Away.team = .y[9],
+                                AQ1 = .y[10],
+                                AQ2 = .y[11],
+                                AQ3 = .y[12],
+                                AQ4 = .y[13],
+                                Umpires = .y[25]
+                                )) %>%
     purrr::reduce(dplyr::bind_rows)
   
   games_df <- games_df %>%
@@ -117,17 +141,22 @@ get_afltables_player <- function(match_urls) {
            Local.start.time = format(Date, "%H%M"),
            Date = format(Date, "%Y-%m-%d"),
            Season = lubridate::year(Date)) %>%
-    separate(Player, into = c("Surname", "First.name"), sep = ",")
+    separate(Player, into = c("Surname", "First.name"), sep = ",") %>%
+    separate(Umpires, into = c("Umpire.1", "Umpire.2", "Umpire.3", "Umpire.4"), sep = ",", fill = "right") %>%
+    mutate_at(vars(starts_with("Umpire")), str_replace, " \\(.*\\)", "")
   
+  sep <- function(...) {
+    dots <- list(...)
+    separate_(..., into = sprintf("%s%s", dots[[2]], c("G","B","P")), sep = "\\.")
+  }
   
-  # Home.team
-  #HQ1G
-  #HQ1B
-  #...
-  #Home.score
-  #ID
-  #Playing.for
+  games_cleaned <- games_cleaned %>% 
+    Reduce(f = sep, x = c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")) %>%
+    rename(Home.score = HQ4P, 
+           Away.score = AQ4P)
+  
   #Expand on abbreviations
+  #reorder
   
   # message(paste("Returned data for", min(Years), "to", max(Years)))
   # games_df[is.na(games_df)] <- 0
