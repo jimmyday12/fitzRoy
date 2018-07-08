@@ -1,184 +1,73 @@
 library(tidyverse)
-library(rvest)
+library(fitzRoy)
 
-match <- read_html("https://afltables.com/afl/stats/games/2018/031420180322.html")
+# First lets load afldata provided
+load(here::here("data-raw", "afl_tables_playerstats", "afltables_playerstats_provided.rda"))
 
-# top table "br+ table"
-home <- match %>%
-  html_nodes("br+ table td") %>%
-  html_text() 
+# Select out the columns we want
+afldata <- afldata %>%
+  select(-X, -year, -month, -day, 
+         -Home.coach, -Home.coach.DOB, -Away.coach, -Away.coach.DOB,
+         -Height, -Weight, -DOB)
 
-away <- match %>%
-  html_nodes("br+ table tr:nth-child(3) td") %>%
-  html_text() 
+# Save the names of the columns. Will be used internally by the package
+afldata_cols <- names(afldata)
 
-
-umpires <- match %>%
-  html_nodes("br+ table tr:nth-child(6) td+ td") %>%
-  html_text()
-
-tab
-
-%>%
-  matrix(., ncol =  5, byrow = TRUE) %>%
-  data.frame() 
-  
-
-separate_
-matrix(c(tab, , ncol=5, byrow=TRUE) %>%
-  as.data.frame()
-
-
-# details "br+ table tr:nth-child(1) td:nth-child(2)"
-det <- match %>%
-  html_nodes("br+ table tr:nth-child(1) td:nth-child(2)") %>%
-  html_text()
-
-Round <- str_extract(det, "(?<=Round:\\s)(.*)(?=\\sVenue)")
-Venue <- str_extract(det, "(?<=Venue:\\s)(.*)(?=\\Date)")
-Date <- str_extract(det, "(?<=Date:\\s)(.*)(?=\\s\\()") %>% lubridate::dmy_hm()
-Attendance <- str_extract(det, "(?<=Attendance:\\s)(.*)") %>% as.numeric()
-
-# umpires "br+ table tr:nth-child(6) td
-match %>%
-  html_nodes("br+ table tr:nth-child(6) td") %>%
-  html_text()
-
-# table1 "#sortableTable0 th , #sortableTable0 tbody td"
-match %>%
-  html_nodes("td") %>%
-  html_table()
-
-match_list <- read_html("https://afltables.com/afl/seas/2018.html")
-# lists"tr+ tr b+ a"
-
-
-get_afltables_match_ids <- function(start_date,
-                                    end_date = Sys.Date()) {
-  start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
-  end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
-
-  Seasons <- format(start_date, "%Y"):format(end_date, "%Y")
-
-  html_games <- Seasons %>%
-    purrr::map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
-    purrr::map(xml2::read_html)
-
-  dates <- html_games %>%
-    purrr::map(rvest::html_nodes, "td tr:nth-child(1) td:nth-child(4)") %>%
-    purrr::map(rvest::html_text) %>%
-    purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
-    purrr::map(lubridate::dmy) %>%
-    purrr::map(~.x > start_date & .x < end_date)
-
-  match_ids <- html_games %>%
-    purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
-    purrr::map(rvest::html_attr, "href") %>%
-    purrr::map(~stringr::str_replace(., "..", "https://afltables.com/afl"))
-
-  # Return only id's that match
-  match_ids %>%
-    purrr::map2(.y = dates, ~magrittr::extract(.x, .y)) %>%
-    reduce(c)
+# Function to fix abbreviations
+fix_abbreviations <- function(x){
+  map_chr(x, ~
+  case_when(
+    . == "KI" ~ "Kicks",
+    . == "MK" ~ "Marks",
+    . == "HB" ~ "Handballs",
+   . == "GL" ~ "Goals",
+   . == "BH" ~ "Behinds",
+   . == "HO" ~ "Hit.Outs",
+   . == "TK" ~ "Tackles",
+   . == "RB" ~ "Rebounds",
+   . == "IF" ~ "Inside.50s",
+   . == "CL" ~ "Clearances",
+   . == "CG" ~ "Clangers",
+   . == "FF" ~ "Frees.For",
+   . == "FA" ~ "Frees.Against",
+   . == "BR" ~ "Brownlow.Votes",
+   . == "CP" ~ "Contested.Possessions",
+   . == "UP" ~ "Uncontested.Possessions",
+   . == "CM" ~ "Contested.Marks",
+   . == "MI" ~ "Marks.Inside.50",
+   . == "One.Percenters" ~ "One.Percenters",
+   . == "BO" ~ "Bounces",
+   . == "GA" ~ "Goal.Assists",
+   . == "TOG" ~ "Time.on.Ground..",
+   . == "Jumper" ~ "Jumper.No",
+    TRUE ~ ""
+  ))
 }
 
 
-get_afltables_player <- function(match_urls) {
+# Let's get the stats
+#match_urls <- get_afltables_urls("01/06/2018", "15/06/2018")
+#dat <- get_afltables_player(match_urls)
+load(here::here("data-raw", "afl_tables_playerstats", "afltables_raw.rda"))
 
-  # For each game url, download data, extract the stats tables #3 and #5 and bind together
-  message("Downloading data\n")
-  pb <- progress_estimated(length(match_urls))
+abb <- fix_abbreviations(names(afltables_raw))
 
-  match_xmls <- match_urls %>%
-    purrr::map(~{
-      pb$tick()$print()
-      xml2::read_html(.)
-    })
-  message("\nFinished downloading data. Processing XMLs\n")
-
-
-  replace_names <- function(x) {
-    names(x) <- x[1, ]
-    x[-1, ]
-  }
-
-  games <- match_xmls %>%
-    purrr::map(rvest::html_table, fill = TRUE) %>%
-    purrr::map(magrittr::extract, c(3, 5)) %>%
-    purrr::modify_depth(1, ~ purrr::map_dfr(., replace_names))
-
-  details <- match_xmls %>%
-    purrr::map(rvest::html_nodes, "br+ table tr:nth-child(1) td:nth-child(2)") %>%
-    purrr::map(rvest::html_text)
-
-  games_df <- games %>%
-    purrr::map2(.y = details, ~ dplyr::mutate(.x, Round = stringr::str_extract(.y, "(?<=Round:\\s)(.*)(?=\\sVenue)"))) %>%
-    purrr::map2(.y = details, ~ dplyr::mutate(.x, Venue = stringr::str_extract(.y, "(?<=Venue:\\s)(.*)(?=\\Date)"))) %>%
-    purrr::map2(.y = details, ~ dplyr::mutate(.x, Date = stringr::str_extract(.y, "(?<=Date:\\s)(.*)(?=\\sAtt)"))) %>%
-    purrr::map2(.y = details, ~ dplyr::mutate(.x, Attendance = stringr::str_extract(.y, "(?<=Attendance:\\s)(.*)"))) %>%
-    purrr::reduce(dplyr::bind_rows)
-
-  games_df <- games_df %>%
-    mutate(Date = gsub("\\([^]]*)", "", Date))
-  
-  # Remove columns with NA and abbreviations
-  games_df <- games_df[, !(names(games_df) %in% "NA")]
-  games_df <- games_df[, !(stringr::str_detect(names(games_df), "Abbreviations"))]
-
-  # Fix names
-  names(games_df) <- make.names(names(games_df))
-  if ("X." %in% names(games_df)) games_df <- rename(games_df, Number = X.)
-  if ("X1." %in% names(games_df)) games_df <- rename(games_df, One.Percenters = X1.)
-  if ("X.P" %in% names(games_df)) games_df <- rename(games_df, TOG = X.P)
-
-  # change column types
-  games_df <- games_df %>%
-    filter(!Player %in% c("Rushed", "Totals", "Opposition"))
-
-  games_df <- as.data.frame(lapply(games_df, function(x) type.convert(x, na.strings = "NA", as.is = TRUE)), stringsAsFactors = FALSE)
-
-  games_cleaned <- games_df %>%
-    mutate(Date = lubridate::dmy_hm(Date),
-           Local.start.time = format(Date, "%H%M"),
-           Date = format(Date, "%Y-%m-%d"),
-           Season = lubridate::year(Date)) %>%
-    separate(Player, into = c("Surname", "First.name"), sep = ",")
+stat_abbr <- tibble(
+  stat = abb[abb !=""],
+  stat.abb = names(dat)[abb != ""]
+)
   
 
-  # Home.team
-  #HQ1G
-  #HQ1B
-  #...
-  #Home.score
-  #ID
-  #Playing.for
-  #Expand on abbreviations
-  
-  # message(paste("Returned data for", min(Years), "to", max(Years)))
-  # games_df[is.na(games_df)] <- 0
-  return(games_df)
-}
+## Write data for abbreviations Team and Stats to a data frame that can be used
+team_abbr <- tibble(
+  Team = c("Adelaide", "Brisbane Lions", "Carlton", "Collingwood", "Essendon",
+           "Fremantle", "Gold Coast", "Geelong",  "Greater Western Sydney", "Hawthorn",
+           "Melbourne", "North Melbourne", "Port Adelaide", "Richmond", "St Kilda", 
+           "Sydney", "Western Bulldogs", "West Coast"),
+  Team.abb = c("AD", "BL", "CA", "CW", "ES", "FR", 
+               "GC", "GE", "GW", "HW", "ME", "NM", 
+               "PA", "RI", "SK", "SY", "WB", "WC"))
 
+usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
 
-
-match_list %>%
-  html_nodes()
-
-
-match_list %>%
-  html_nodes("table") %>%
-  html_table(fill = TRUE)
-
-get_afltables_stats()
-
-# IDea
-# OPtion 1 - provide URL/ID
-# Option 2 - Provide date - gets all from date
-# Option 3 - provide Season
-# Option 4 - provide Season/
-
-# Fri 24-Aug-2018 Venue: Gabba
-# Fri 24-Aug-2018 Venue: Docklands
-# Fri 24-Aug-2018 Venue: M.C.G.
-# Fri 24-Aug-2018 Venue: Adelaide Oval
-# Fri 24-Aug-2018 Venue: Perth Stadium
+# Now let's save to 2018
