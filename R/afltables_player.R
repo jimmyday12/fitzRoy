@@ -40,9 +40,11 @@ get_afltables_urls <- function(start_date,
     map(~stringr::str_replace(., "..", "https://afltables.com/afl"))
 
   # Return only id's that match
-  match_ids %>%
+  match_ids <- match_ids %>%
     purrr::map2(.y = dates, ~magrittr::extract(.x, .y)) %>%
     purrr::reduce(c)
+  
+  match_ids[!is.na(match_ids)]
 }
 
 
@@ -126,7 +128,7 @@ get_afltables_player <- function(match_urls) {
   
   # Fix names
   names(games_df) <- make.names(names(games_df))
-  if ("X." %in% names(games_df)) games_df <- rename(games_df, Number = X.)
+  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = X.)
   if ("X1." %in% names(games_df)) games_df <- rename(games_df, One.Percenters = X1.)
   if ("X.P" %in% names(games_df)) games_df <- rename(games_df, TOG = X.P)
   
@@ -140,8 +142,9 @@ get_afltables_player <- function(match_urls) {
     mutate(Date = lubridate::dmy_hm(Date),
            Local.start.time = format(Date, "%H%M"),
            Date = format(Date, "%Y-%m-%d"),
-           Season = lubridate::year(Date)) %>%
+           Season = as.integer(lubridate::year(Date))) %>%
     separate(Player, into = c("Surname", "First.name"), sep = ",") %>%
+    mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
     separate(Umpires, into = c("Umpire.1", "Umpire.2", "Umpire.3", "Umpire.4"), sep = ",", fill = "right") %>%
     mutate_at(vars(starts_with("Umpire")), str_replace, " \\(.*\\)", "")
   
@@ -155,10 +158,51 @@ get_afltables_player <- function(match_urls) {
     rename(Home.score = HQ4P, 
            Away.score = AQ4P)
   
-  #Expand on abbreviations
-  #reorder
+  ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season))
   
-  # message(paste("Returned data for", min(Years), "to", max(Years)))
+  games_joined <- games_cleaned %>%
+    mutate(Player = paste(First.name, Surname)) %>%
+    left_join(ids, by = c("Season", "Player", "Playing.for" = "Team")) %>%
+    select(-Player)
+  
+  df <- games_joined %>%
+    rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat)))) %>%
+    select(one_of(afldata_cols))
+  
+  message(paste("Returned data for", min(df$Season), "to", max(df$Season)))
   # games_df[is.na(games_df)] <- 0
-  return(games_cleaned)
+  return(df)
+}
+
+
+get_afltables_player_ids <- function(seasons){
+  
+  base_url <- function(x){
+    if(x < 2017){
+      stop("season must be greater than 2017")
+      } else if(x == 2017){
+      "https://afltables.com/public/"
+    } else {
+      "https://afltables.com/afl/stats/"
+    }
+  }
+   
+  end_url <- "_stats.txt"
+  
+  urls <- seasons %>%
+    map_chr(~paste0(base_url(.), ., end_url))
+  
+  vars <- c("Season", "Player", "ID", "Team")
+  
+  id_data <- urls %>%
+    map(readr::read_csv, col_types = cols()) %>%
+    map2_dfr(.y = seasons, ~mutate(., Season = .y))
+  
+  id_data %>%
+    select(!!vars) %>%
+    distinct() %>%
+    rename(Team.abb = Team) %>%
+    left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
+    select(!!vars)
+  
 }
