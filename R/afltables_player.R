@@ -3,10 +3,40 @@
 #' \code{get_afltables_urls} returns a character vector containing match URLs for the specified date range
 #'
 #' This function returns match URLs for the specified date range. This will typically be used to pass to
-#' to `get_afltables_player_stats` to return player match results.
+#' to `get_afltables_player` to return player match results.
 #'
-#' @param start_date
-#' @param end_date
+#' @param start_date character string for start date return to URLs from, in "dmy" or "ymd" format
+#' @param end_date optional, character string for end date to return URLS, in "dmy" or "ymd" format
+#'
+#' @return a character vector of match URL's between `start_date` and `end_date`
+#' @export
+#'
+#' @examples
+#' get_afltables_urls("01/01/2018")
+#' get_afltables_urls("01/01/2018", end_date = "01/04/2018")
+#' @importFrom magrittr %>%
+#' @importFrom purrr map
+get_afltables_urls <- function(start_date){
+  
+  dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/afl_tables_playerstats/afldata.rds"
+}
+  
+  
+
+
+
+
+
+
+#' Return match URLs for specified dates
+#'
+#' \code{get_afltables_urls} returns a character vector containing match URLs for the specified date range
+#'
+#' This function returns match URLs for the specified date range. This will typically be used to pass to
+#' to `get_afltables_player` to return player match results.
+#'
+#' @param start_date character string for start date return to URLs from, in "dmy" or "ymd" format
+#' @param end_date optional, character string for end date to return URLS, in "dmy" or "ymd" format
 #'
 #' @return a character vector of match URL's between `start_date` and `end_date`
 #' @export
@@ -28,7 +58,7 @@ get_afltables_urls <- function(start_date,
     map(xml2::read_html)
 
   dates <- html_games %>%
-    map(rvest::html_nodes, "td tr:nth-child(1) td:nth-child(4)") %>%
+    map(rvest::html_nodes, "table+ table tr:nth-child(1) > td:nth-child(4)") %>%
     map(rvest::html_text) %>%
     map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     map(lubridate::dmy) %>%
@@ -48,14 +78,23 @@ get_afltables_urls <- function(start_date,
 }
 
 
-#' Title
+#' Return afltables playr match stats
 #'
-#' @param match_urls 
+#' \code{get_afltables_player} returns a character vector containing match URLs for the specified date range
 #'
-#' @return
+#' This function returns the full afltables.com match stats for each player and each game specified in `match_urls`.
+#' It is useful to use the helper function `get_afltables_urls` to return these or simply navigate to afltables.com 
+#' and find the match of interest. 
+#'
+#' @param match_urls
+#' @return data table of afltables.com match results, with a row per player per match. 
 #' @export
 #'
 #' @examples
+#' get_afl_tables_player("https://afltables.com/afl/stats/games/2018/071120180602.html")
+#' \dontrun{
+#' get_afltables_player(get_afltables_urls("01/06/2018, "01/06/2018"))
+#' }
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
 #' @importFrom purrr map2
@@ -82,6 +121,14 @@ get_afltables_player <- function(match_urls) {
   details <- match_xmls %>%
     map(rvest::html_nodes, "br+ table td") %>%
     map(rvest::html_text)
+  
+  home_scores <- match_xmls %>%
+    map(rvest::html_nodes, "br+ table tr:nth-child(2) td") %>%
+    map(rvest::html_text)
+  
+  away_scores <- match_xmls %>%
+    map(rvest::html_nodes, "br+ table tr:nth-child(3) td") %>%
+    map(rvest::html_text)
 
   games <- match_xmls %>%
     map(rvest::html_table, fill = TRUE) %>%
@@ -99,24 +146,26 @@ get_afltables_player <- function(match_urls) {
   games <- home_games %>%
     map2(.y = away_games, ~bind_rows(.x, .y))
   
+  
   games_df <- games %>%
     map2(.y = details, ~ mutate(.x, 
                                 Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
                                 Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
                                 Date = stringr::str_extract(.y[2], "(?<=Date:\\s)(.*)(?=\\sAtt)"),
                                 Attendance = stringr::str_extract(.y[2], "(?<=Attendance:\\s)(.*)"),
-                                Home.team = .y[4],
-                                HQ1 = .y[5],
-                                HQ2 = .y[6],
-                                HQ3 = .y[7],
-                                HQ4 = .y[8],
-                                Away.team = .y[9],
-                                AQ1 = .y[10],
-                                AQ2 = .y[11],
-                                AQ3 = .y[12],
-                                AQ4 = .y[13],
-                                Umpires = .y[25]
-                                )) %>%
+                                Umpires = .y[length(.y)])) %>%
+    map2(.y = home_scores, ~mutate(.x,
+                                   Home.team = .y[1],
+                                   HQ1 = .y[2],
+                                   HQ2 = .y[3],
+                                   HQ3 = .y[4],
+                                   HQ4 = .y[5])) %>%
+      map2(.y = away_scores, ~mutate(.x,
+                                     Away.team = .y[1],
+                                     AQ1 = .y[2],
+                                     AQ2 = .y[3],
+                                     AQ3 = .y[4],
+                                     AQ4 = .y[5])) %>%           
     purrr::reduce(dplyr::bind_rows)
   
   games_df <- games_df %>%
@@ -140,8 +189,8 @@ get_afltables_player <- function(match_urls) {
   
   games_cleaned <- games_df %>%
     mutate(Date = lubridate::dmy_hm(Date),
-           Local.start.time = format(Date, "%H%M"),
-           Date = format(Date, "%Y-%m-%d"),
+           Local.start.time = as.integer(format(Date, "%H%M")),
+           Date = lubridate::ymd(format(Date, "%Y-%m-%d")),
            Season = as.integer(lubridate::year(Date))) %>%
     separate(Player, into = c("Surname", "First.name"), sep = ",") %>%
     mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
@@ -153,10 +202,14 @@ get_afltables_player <- function(match_urls) {
     separate_(..., into = sprintf("%s%s", dots[[2]], c("G","B","P")), sep = "\\.")
   }
   
+  score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")
   games_cleaned <- games_cleaned %>% 
-    Reduce(f = sep, x = c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")) %>%
+    Reduce(f = sep, x = score_cols) %>%
+    mutate_at(vars(contains("HQ")), as.integer) %>%
+    mutate_at(vars(contains("AQ")), as.integer) %>%
     rename(Home.score = HQ4P, 
-           Away.score = AQ4P)
+           Away.score = AQ4P) 
+    
   
   ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season))
   
@@ -169,14 +222,16 @@ get_afltables_player <- function(match_urls) {
     rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat)))) %>%
     select(one_of(afldata_cols))
   
+  df <- df %>%
+    mutate_if(is.numeric, ~ifelse(is.na(.), 0, .))
+  
   message(paste("Returned data for", min(df$Season), "to", max(df$Season)))
-  # games_df[is.na(games_df)] <- 0
+  
   return(df)
 }
 
 
 get_afltables_player_ids <- function(seasons){
-  
   base_url <- function(x){
     if(x < 2017){
       stop("season must be greater than 2017")
@@ -195,7 +250,7 @@ get_afltables_player_ids <- function(seasons){
   vars <- c("Season", "Player", "ID", "Team")
   
   id_data <- urls %>%
-    map(readr::read_csv, col_types = cols()) %>%
+    map(readr::read_csv, col_types = cols(Round = "c")) %>%
     map2_dfr(.y = seasons, ~mutate(., Season = .y))
   
   id_data %>%

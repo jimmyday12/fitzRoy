@@ -71,3 +71,28 @@ team_abbr <- tibble(
 usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
 
 # Now let's save to 2018
+afldata <- afldata %>% 
+  as.tibble() %>%
+  mutate(Date = lubridate::ymd(Date)) %>%
+  mutate_if(is.factor, as.character) 
+
+maxdate <- max(afldata$Date)
+
+# get new results
+urls <- get_afltables_urls(maxdate + 1, "01/07/2018")
+df <- get_afltables_player(urls)
+
+df <- df %>%
+  mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%
+  mutate(Date = lubridate::ymd(format(Date, "%Y-%m-%d")),
+         Local.start.time = as.integer(Local.start.time)) %>%
+  mutate_at(vars(contains("HQ")), as.integer) %>%
+  mutate_at(vars(contains("AQ")), as.integer) 
+
+# join with afltables
+afldata <- afldata %>%
+  bind_rows(df)
+
+write_rds(afldata, here::here("data-raw", "afl_tables_playerstats", "afldata.rds"), compress = "xz")
+# Use function to add 2017 and save it
+# Write new 'update_stats' function
