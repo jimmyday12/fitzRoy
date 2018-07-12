@@ -1,7 +1,14 @@
+# fitzRoy 0.1.5
+
+* new function `get_aflplayer_data` returns a data frame containing aflplayer stats for the specified games [#19](https://github.com/jimmyday12/fitzRoy/issues/19)
+* new helper function `get_aflplayer_urls` returns the URLs of games falling within a date range. Useful to pass to `get_aflplayer_data` 
+* BREAKING CHANGE: removed `afldata` from the included data to reduce package size (in preperation for CRAN submission). Please use `update_aflplayer_data` or the helper functions
+* fixed bug where `get_fixture` returned wrong teams [#23](https://github.com/jimmyday12/fitzRoy/issues/23)
+
+
 # fitzRoy 0.1.4
 
 * `update_footywire` now more efficiently searches through missing match_ids
-* fixed bug where `get_fixture` returned wrong teams [#23](https://github.com/jimmyday12/fitzRoy/issues/23)
 
 # fitzRoy 0.1.3
 

@@ -86,7 +86,7 @@ get_afltables_urls <- function(start_date,
 #' It is useful to use the helper function `get_afltables_urls` to return these or simply navigate to afltables.com 
 #' and find the match of interest. 
 #'
-#' @param match_urls
+#' @param match_urls 
 #' @return data table of afltables.com match results, with a row per player per match. 
 #' @export
 #'
@@ -99,6 +99,7 @@ get_afltables_urls <- function(start_date,
 #' @importFrom purrr map
 #' @importFrom purrr map2
 #' @importFrom dplyr mutate
+#' @importFrom utils type.convert
 get_afltables_player <- function(match_urls) {
   
   # For each game url, download data, extract the stats tables #3 and #5 and bind together
