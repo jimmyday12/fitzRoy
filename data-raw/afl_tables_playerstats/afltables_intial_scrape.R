@@ -47,7 +47,7 @@ fix_abbreviations <- function(x){
 
 # Let's get the stats
 #match_urls <- get_afltables_urls("01/06/2018", "15/06/2018")
-#dat <- get_afltables_player(match_urls)
+#dat <- scrape_afltables_match(match_urls)
 load(here::here("data-raw", "afl_tables_playerstats", "afltables_raw.rda"))
 
 abb <- fix_abbreviations(names(afltables_raw))
@@ -80,7 +80,7 @@ maxdate <- max(afldata$Date)
 
 # get new results
 urls <- get_afltables_urls(maxdate + 1, "01/07/2018")
-df <- get_afltables_player(urls)
+df <- scrape_afltables_match(urls)
 
 df <- df %>%
   mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%
@@ -94,5 +94,6 @@ afldata <- afldata %>%
   bind_rows(df)
 
 write_rds(afldata, here::here("data-raw", "afl_tables_playerstats", "afldata.rds"))
+save(afldata, file = here::here("data-raw", "afl_tables_playerstats", "afldata.rda"))
 # Use function to add 2017 and save it
 # Write new 'update_stats' function
