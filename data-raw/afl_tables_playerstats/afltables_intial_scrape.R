@@ -54,7 +54,7 @@ abb <- fix_abbreviations(names(afltables_raw))
 
 stat_abbr <- tibble(
   stat = abb[abb !=""],
-  stat.abb = names(dat)[abb != ""]
+  stat.abb = names(afltables_raw)[abb != ""]
 )
   
 
@@ -93,6 +93,6 @@ df <- df %>%
 afldata <- afldata %>%
   bind_rows(df)
 
-write_rds(afldata, here::here("data-raw", "afl_tables_playerstats", "afldata.rds"), compress = "xz")
+write_rds(afldata, here::here("data-raw", "afl_tables_playerstats", "afldata.rds"))
 # Use function to add 2017 and save it
 # Write new 'update_stats' function

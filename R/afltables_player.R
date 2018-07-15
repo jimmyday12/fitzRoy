@@ -16,9 +16,13 @@
 #' get_afltables_urls("01/01/2018", end_date = "01/04/2018")
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
-update_afltables_player_stats <- function(){
+update_afltables_stats <- function(){
   
-  dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/afl_tables_playerstats/afldata.rds"
+  dat_url <- "https://github.com/jimmyday12/fitzRoy/raw/afltables-playerstats/data-raw/afl_tables_playerstats/afldata.rds"
+  dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/afltables-playerstats/data-raw/afl_tables_playerstats/afldata.rds"
+  dat_url <- here::here("dat-raw", "afl_tables_playerstats", "afldata.rds")
+  readr::read_rds()
+  dat <- readr::read_rds(dat_url)
 }
   
   
