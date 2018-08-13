@@ -79,7 +79,7 @@ afldata <- afldata %>%
 maxdate <- max(afldata$Date)
 
 # get new results
-urls <- get_afltables_urls(maxdate + 1, "01/07/2018")
+urls <- get_afltables_urls(maxdate + 1, "01/08/2018")
 df <- scrape_afltables_match(urls)
 
 df <- df %>%
