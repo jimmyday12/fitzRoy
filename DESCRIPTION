@@ -1,9 +1,10 @@
 Package: fitzRoy
 Version: 0.1.4
+Date: 2018-08-13
 Title: Easily Scrape and Process AFL Data
 Description: An easy to use tool for scraping and processing AFL data. 
 Authors@R: c(
-    person("James", "Day", email = "jamesthomasday@gmail.com", role = "cre"),
+    person("James", "Day", email = "jamesthomasday@gmail.com", role = c("cre", "aut")),
     person("Robert", "Nguyen", email = "nguyen.n.robert@gmail.com", role = "aut"))
 License: GPL-3
 Encoding: UTF-8
