@@ -252,18 +252,15 @@ scrape_afltables_match <- function(match_urls) {
 get_afltables_player_ids <- function(seasons){
   base_url <- function(x){
     if(x < 2017){
-      stop("season must be greater than 2017")
-      } else if(x == 2017){
-      "https://afltables.com/public/"
+      stop("season must be greater than 2016")
+    } else if (x == 2017){
+      "https://raw.githubusercontent.com/jimmyday12/fitzRoy/afltables-playerstats/data-raw/afl_tables_playerstats/afltables_playerstats_2017.csv"
     } else {
-      "https://afltables.com/afl/stats/"
+      paste0("https://afltables.com/afl/stats/", x, "_stats.txt")
     }
   }
-   
-  end_url <- "_stats.txt"
   
-  urls <- seasons %>%
-    purrr::map_chr(~paste0(base_url(.), ., end_url))
+  urls <- purrr::map_chr(seasons, base_url)
   
   vars <- c("Season", "Player", "ID", "Team")
   
