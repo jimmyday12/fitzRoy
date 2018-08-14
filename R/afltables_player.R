@@ -23,7 +23,9 @@
 get_afltables_stats <- function(start_date = "1897-05-08", end_date = Sys.Date()){
   
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
+  if(is.na(start_date)) stop(paste("Date format not reccognised. Check that start_date is in dmy or ymd format"))
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
+  if(is.na(end_date)) stop(paste("Date format not reccognised. Check that end_date is in dmy or ymd format"))
   message(paste0("Returning data from ", start_date, " to ", end_date))
   
   dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/afltables-playerstats/data-raw/afl_tables_playerstats/afldata.rda")
@@ -65,8 +67,11 @@ get_afltables_stats <- function(start_date = "1897-05-08", end_date = Sys.Date()
 #' @importFrom purrr map
 get_afltables_urls <- function(start_date,
                                end_date = Sys.Date()) {
+  
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
+  if(is.na(start_date)) stop(paste("Date format not reccognised. Check that start_date is in dmy or ymd format"))
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
+  if(is.na(end_date)) stop(paste("Date format not reccognised. Check that end_date is in dmy or ymd format"))
 
   Seasons <- format(start_date, "%Y"):format(end_date, "%Y")
 
@@ -106,6 +111,7 @@ get_afltables_player_ids <- function(seasons){
     }
   }
   
+  if(min(seasons) < 2017) stop("season must be 2017 onwards")
   urls <- purrr::map_chr(seasons, base_url)
   
   vars <- c("Season", "Player", "ID", "Team")
