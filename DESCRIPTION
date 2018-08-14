@@ -31,4 +31,5 @@ Imports:
     readr,
     stringr,
     rlang,
-    jsonlite
+    jsonlite,
+    xml2
