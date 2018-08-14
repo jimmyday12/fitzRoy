@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get basic match results from afltables.com — get_match_results • fitzRoy</title>
+<title>Return afltables playr match stats — scrape_afltables_match • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,9 @@
 
 
 
-<meta property="og:title" content="Get basic match results from afltables.com — get_match_results" />
+<meta property="og:title" content="Return afltables playr match stats — scrape_afltables_match" />
 
-<meta property="og:description" content="get_match_results returns a dataframe containing all match results from 1897-current" />
+<meta property="og:description" content="scrape_afltables_match returns a character vector containing match URLs for the specified date range" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -122,44 +122,49 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get basic match results from afltables.com</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/afltables_basic.R'><code>R/afltables_basic.R</code></a></small>
-    <div class="hidden name"><code>get_match_results.Rd</code></div>
+    <h1>Return afltables playr match stats</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/afltables_player_main.R'><code>R/afltables_player_main.R</code></a></small>
+    <div class="hidden name"><code>scrape_afltables_match.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>get_match_results</code> returns a dataframe containing all match results from 1897-current</p>
+    <p><code>scrape_afltables_match</code> returns a character vector containing match URLs for the specified date range</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_match_results</span>()</pre>
-        
+    <pre class="usage"><span class='fu'>scrape_afltables_match</span>(<span class='no'>match_urls</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>match_urls</th>
+      <td><p>A list of URL's for matches to scrape data from</p></td>
+    </tr>
+    </table>
+    
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a data frame containing a line for each match</p>
+    <p>data table of afltables.com match results, with a row per player per match.</p>
     
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access.
-It generally is updated on the day after the last game</p>
+    <p>This function returns the full afltables.com match stats for each player and each game specified in <code>match_urls</code>.
+It is useful to use the helper function <code>get_afltables_urls</code> to return these or simply navigate to afltables.com
+and find the match of interest.</p>
     
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><span class='co'># NOT RUN {</span>
-<span class='fu'>get_match_results</span>()
-<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
 
       <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+          </ul>
 
   </div>
 </div>

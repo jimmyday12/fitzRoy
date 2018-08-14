@@ -27,5 +27,3 @@ test_that("scape_afltables_ works", {
   expect_error(scrape_afltables_match(1))
   expect_error(scrape_afltables_match("a"))
 })
-
-

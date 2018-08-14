@@ -10,6 +10,7 @@ reference:
     desc: Functions used to download and process data
     contents:
       - '`get_fixture`'
+      - '`get_afltables_stats`'
       - '`get_footywire_stats`'
       - '`update_footywire_stats`'
       - '`get_match_results`'
@@ -29,4 +30,5 @@ reference:
       - '`footywire_html`'
       - '`get_match_data`'
       - '`replace_teams`'
+      - '`scrape_afltables_match`'
       

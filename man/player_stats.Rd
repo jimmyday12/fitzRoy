@@ -18,7 +18,6 @@
 \item{CM}{todo}
 \item{D}{todo}
 \item{DE}{todo}
-\item{Date}{todo}
 \item{ED}{todo}
 \item{FA}{todo}
 \item{FF}{todo}
@@ -41,7 +40,6 @@
 \item{SC}{todo}
 \item{SCL}{todo}
 \item{SI}{todo}
-\item{Season}{todo}
 \item{Status}{todo}
 \item{T}{todo}
 \item{T5}{todo}

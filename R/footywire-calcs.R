@@ -187,7 +187,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Season.Game = row_number(),
       Season = as.integer(season)
     )
-  
+
   # Fix Teams
   # Uses internal replace teams function
   games_df <- games_df %>%

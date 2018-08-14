@@ -16,7 +16,6 @@
 #'   \item{CM}{todo}
 #'   \item{D}{todo}
 #'   \item{DE}{todo}
-#'   \item{Date}{todo}
 #'   \item{ED}{todo}
 #'   \item{FA}{todo}
 #'   \item{FF}{todo}
@@ -91,7 +90,7 @@
 #'   \item{Season}{todo}
 #'   \item{Round.Type}{todo}
 #'   \item{Round.Number}{todo}
-#'   
+#'
 #' }
 #' @source \url{http://www.afltables.com}
 "match_results"
@@ -119,10 +118,10 @@
 #'   \item{Round.Type}{todo}
 #'   \item{Season}{todo}
 #'   \item{StationNo}{todo}
-#'   \item{Venue}{todo} 
-#'   \item{date}{todo}   
-#'   
-#'        
+#'   \item{Venue}{todo}
+#'   \item{date}{todo}
+#'
+#'
 #' }
 #' @source \url{http://www.afltables.com}
 "results_weather"
