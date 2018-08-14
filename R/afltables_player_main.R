@@ -7,7 +7,7 @@
 #' It is useful to use the helper function `get_afltables_urls` to return these or simply navigate to afltables.com 
 #' and find the match of interest. 
 #'
-#' @param match_urls 
+#' @param match_urls A list of URL's for matches to scrape data from
 #' @return data table of afltables.com match results, with a row per player per match. 
 #' @export
 #'

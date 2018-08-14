@@ -80,6 +80,7 @@ get_match_results <- function() {
 
 #' Internal function to ensure names match between different sources and also name changes.
 #' This gets applied to any web scraper
+#' @param team Team name
 #' @export
 replace_teams <- function(team) {
   # Internal function
