@@ -95,5 +95,9 @@ afldata <- afldata %>%
 
 write_rds(afldata, here::here("data-raw", "afl_tables_playerstats", "afldata.rds"))
 save(afldata, file = here::here("data-raw", "afl_tables_playerstats", "afldata.rda"))
-# Use function to add 2017 and save it
+
+# Todo
 # Write new 'update_stats' function
+# Document new functions
+# Write test cases
+# Update readme, documentation 
