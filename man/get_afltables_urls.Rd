@@ -2,42 +2,26 @@
 % Please edit documentation in R/afltables_player.R
 \name{get_afltables_urls}
 \alias{get_afltables_urls}
-\alias{get_afltables_urls}
 \title{Return match URLs for specified dates}
 \usage{
-get_afltables_urls(start_date, end_date = Sys.Date())
-
 get_afltables_urls(start_date, end_date = Sys.Date())
 }
 \arguments{
 \item{start_date}{character string for start date return to URLs from, in "dmy" or "ymd" format}
 
 \item{end_date}{optional, character string for end date to return URLS, in "dmy" or "ymd" format}
-
-\item{start_date}{character string for start date return to URLs from, in "dmy" or "ymd" format}
-
-\item{end_date}{optional, character string for end date to return URLS, in "dmy" or "ymd" format}
 }
 \value{
-a character vector of match URL's between \code{start_date} and \code{end_date}
-
 a character vector of match URL's between \code{start_date} and \code{end_date}
 }
 \description{
 \code{get_afltables_urls} returns a character vector containing match URLs for the specified date range
-
-\code{get_afltables_urls} returns a character vector containing match URLs for the specified date range
 }
 \details{
 This function returns match URLs for the specified date range. This will typically be used to pass to
-to \code{get_afltables_player} to return player match results.
-
-This function returns match URLs for the specified date range. This will typically be used to pass to
-to \code{get_afltables_player} to return player match results.
+to \code{scrape_afltables_match} to return player match results.
 }
 \examples{
-get_afltables_urls("01/01/2018")
-get_afltables_urls("01/01/2018", end_date = "01/04/2018")
 get_afltables_urls("01/01/2018")
 get_afltables_urls("01/01/2018", end_date = "01/04/2018")
 }

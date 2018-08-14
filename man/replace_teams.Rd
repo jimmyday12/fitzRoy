@@ -7,6 +7,9 @@ This gets applied to any web scraper}
 \usage{
 replace_teams(team)
 }
+\arguments{
+\item{team}{Team name}
+}
 \description{
 Internal function to ensure names match between different sources and also name changes.
 This gets applied to any web scraper

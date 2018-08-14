@@ -24,6 +24,7 @@
 \item{FF}{todo}
 \item{G}{todo}
 \item{GA}{todo}
+\item{GA1}{todo}
 \item{HB}{todo}
 \item{HO}{todo}
 \item{I50}{todo}
@@ -37,7 +38,6 @@
 \item{Opposition}{todo}
 \item{Player}{todo}
 \item{R50}{todo}
-\item{Round}{todo}
 \item{SC}{todo}
 \item{SCL}{todo}
 \item{SI}{todo}
