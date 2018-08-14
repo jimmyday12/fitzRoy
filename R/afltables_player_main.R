@@ -148,7 +148,7 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%
     mutate(Round = as.character(Round))
   
-  message(paste("Returned data for", min(df$Season), "to", max(df$Season)))
+  #message(paste("Returned data for", min(df$Season), "to", max(df$Season)))
   
   return(df)
 }

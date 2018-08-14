@@ -24,6 +24,7 @@ get_afltables_stats <- function(start_date = "1897-05-08", end_date = Sys.Date()
   
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
+  message(paste0("Returning data from ", start_date, " to ", end_date))
   
   dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/afltables-playerstats/data-raw/afl_tables_playerstats/afldata.rda")
   
@@ -40,7 +41,7 @@ get_afltables_stats <- function(start_date = "1897-05-08", end_date = Sys.Date()
     dat_new <- scrape_afltables_match(urls)
     dat <- dplyr::bind_rows(dat, dat_new)
   }
-  
+  message("Finished getting afltables data")
   dplyr::filter(dat, Date > start_date & Date < end_date)
 }
 
@@ -92,8 +93,6 @@ get_afltables_urls <- function(start_date,
   
   match_ids[!is.na(match_ids)]
 }
-
-
 
 
 get_afltables_player_ids <- function(seasons){
