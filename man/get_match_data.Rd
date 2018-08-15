@@ -6,6 +6,9 @@
 \usage{
 get_match_data(id)
 }
+\arguments{
+\item{id}{A match id from afltables}
+}
 \description{
 Helper function for \code{get_footywire_stats}
 }

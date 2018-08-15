@@ -1,5 +1,5 @@
 Package: fitzRoy
-Version: 0.1.4
+Version: 0.1.5
 Date: 2018-08-13
 Title: Easily Scrape and Process AFL Data
 Description: An easy to use tool for scraping and processing AFL data. 
@@ -32,4 +32,5 @@ Imports:
     readr,
     stringr,
     rlang,
-    jsonlite
+    jsonlite,
+    xml2

@@ -16,6 +16,12 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/footywire_html.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_urls.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_fixture.html</loc>
   </url>
   <url>
@@ -44,6 +50,9 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/results_weather.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/scrape_afltables_match.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/update_footywire_stats.html</loc>

@@ -93,6 +93,17 @@ results_long <- convert_results(results)
 head(results_long)
 ```
 
+### AFL Tables player results
+A new function will return all detailed player stats from afltables.com. Primarily, the easiest way to use this is simply to call `get_afltables_stats` with your required `start_date` and `end_date`.
+
+```{r afltables_match}
+#stats <- get_afltables_stats(start_date = "2000-01-01", end_date = "2018-06-01")
+
+#tail(stats)
+```
+
+
+
 ### Fixture
 You can access the fixture using `get_fixture` function. This will download the fixture for the current calendar year by default. 
 

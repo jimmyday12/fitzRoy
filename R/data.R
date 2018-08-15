@@ -16,12 +16,12 @@
 #'   \item{CM}{todo}
 #'   \item{D}{todo}
 #'   \item{DE}{todo}
-#'   \item{Date}{todo}
 #'   \item{ED}{todo}
 #'   \item{FA}{todo}
 #'   \item{FF}{todo}
 #'   \item{G}{todo}
 #'   \item{GA}{todo}
+#'   \item{GA1}{todo}
 #'   \item{HB}{todo}
 #'   \item{HO}{todo}
 #'   \item{I50}{todo}
@@ -35,11 +35,9 @@
 #'   \item{Opposition}{todo}
 #'   \item{Player}{todo}
 #'   \item{R50}{todo}
-#'   \item{Round}{todo}
 #'   \item{SC}{todo}
 #'   \item{SCL}{todo}
 #'   \item{SI}{todo}
-#'   \item{Season}{todo}
 #'   \item{Status}{todo}
 #'   \item{T}{todo}
 #'   \item{T5}{todo}
@@ -76,7 +74,23 @@
 #'
 #' @format A data frame with 15200 rows and 16 variables:
 #' \describe{
-#'   \item{Date}{Date of game}
+#'   \item{Game}{todo}
+#'   \item{Date}{todo}
+#'   \item{Round}{todo}
+#'   \item{Home.Team}{todo}
+#'   \item{Home.Goals}{todo}
+#'   \item{Home.Behinds}{todo}
+#'   \item{Home.Points}{todo}
+#'   \item{Away.Team}{todo}
+#'   \item{Away.Goals}{todo}
+#'   \item{Away.Behinds}{todo}
+#'   \item{Away.Points}{todo}
+#'   \item{Venue}{todo}
+#'   \item{Margin}{todo}
+#'   \item{Season}{todo}
+#'   \item{Round.Type}{todo}
+#'   \item{Round.Number}{todo}
+#'
 #' }
 #' @source \url{http://www.afltables.com}
 "match_results"
@@ -87,7 +101,27 @@
 #'
 #' @format A data frame with 15200 rows and 19 variables:
 #' \describe{
-#'   \item{date}{Date of game}
+#'   \item{Away.Behinds}{todo}
+#'   \item{Away.Goals}{todo}
+#'   \item{Away.Team}{todo}
+#'   \item{Away.Points}{todo}
+#'   \item{Description}{todo}
+#'   \item{Game}{todo}
+#'   \item{Home.Behinds}{todo}
+#'   \item{Home.Goals}{todo}
+#'   \item{Home.Points}{todo}
+#'   \item{Home.Team}{todo}
+#'   \item{Margin}{todo}
+#'   \item{Rainfall}{todo}
+#'   \item{Round}{todo}
+#'   \item{Round.Number}{todo}
+#'   \item{Round.Type}{todo}
+#'   \item{Season}{todo}
+#'   \item{StationNo}{todo}
+#'   \item{Venue}{todo}
+#'   \item{date}{todo}
+#'
+#'
 #' }
 #' @source \url{http://www.afltables.com}
 "results_weather"

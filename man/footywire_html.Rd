@@ -15,8 +15,5 @@ footywire_html(x, id)
 A data frame with advanced player results
 }
 \description{
-\code{get_footywire_stats} returns a data table of advanced player data table from footywire.com.
-}
-\details{
-Paragraph
+Helper function for \code{get_footywire_stats}
 }

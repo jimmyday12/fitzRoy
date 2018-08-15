@@ -5,15 +5,25 @@ test_that("get_match_results works", {
   expect_error(get_match_results("a"))
 })
 
-test_that("replace_teams returns corrected teams", {
-  expect_equal(replace_teams("A"), "A")
-  expect_equal(replace_teams("Kangaroos"), "North Melbourne")
-  expect_equal(replace_teams("WB"), "Footscray")
-  expect_error(replace_teams())
-  expect_error(replace_teams(1))
+test_that("get_afltables_urls works", {
+  expect_type(get_afltables_urls("2018-01-01", "2018-06-01"), "character")
+  expect_type(get_afltables_urls("1930-01-01", "1930-12-01"), "character")
+  expect_error(get_afltables_urls())
+  expect_error(get_afltables_urls("a"))
 })
 
-test_that("conver_results works", {
-  expect_type(convert_results(get_match_results()), "list")
-  expect_error(convert_results("a"))
+test_that("get_afltables_player_ids works", {
+  expect_type(get_afltables_player_ids(2018), "list")
+  expect_type(get_afltables_player_ids(2017), "list")
+  expect_error(get_afltables_player_ids())
+  expect_error(get_afltables_player_ids("a"))
+  expect_error(get_afltables_player_ids(2016))
+})
+
+
+test_that("scape_afltables_ works", {
+  expect_type(scrape_afltables_match("https://afltables.com/afl/stats/games/2018/030820180812.html"), "list")
+  expect_error(scrape_afltables_match())
+  expect_error(scrape_afltables_match(1))
+  expect_error(scrape_afltables_match("a"))
 })

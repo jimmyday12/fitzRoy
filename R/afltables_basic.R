@@ -80,6 +80,7 @@ get_match_results <- function() {
 
 #' Internal function to ensure names match between different sources and also name changes.
 #' This gets applied to any web scraper
+#' @param team Team name
 #' @export
 replace_teams <- function(team) {
   # Internal function
@@ -94,6 +95,7 @@ replace_teams <- function(team) {
     team == "Lions" ~ "Brisbane Lions",
     team == "Brisbane" ~ "Brisbane Lions",
     team == "GW Sydney" ~ "GWS",
+    team == "Greater Western Sydney" ~ "GWS",
     team == "GC" ~ "Gold Coast",
     team == "StK" ~ "St Kilda",
     team == "PA" ~ "Port Adelaide",
