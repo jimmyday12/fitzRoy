@@ -1,3 +1,8 @@
+# fitzRoy 0.1.6
+
+* fixed bug data was missing for Adelaide [#27](https://github.com/jimmyday12/fitzRoy/issues/27)
+* fixed bug where the default `start_date` missed Round 1, 1987 [#29](https://github.com/jimmyday12/fitzRoy/issues/29)
+
 # fitzRoy 0.1.5
 
 * new function `get_aflplayer_data` returns a data frame containing aflplayer stats for the specified games [#19](https://github.com/jimmyday12/fitzRoy/issues/19)
