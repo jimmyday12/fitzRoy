@@ -81,7 +81,8 @@ usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite
 afldata <- afldata %>%
   as.tibble() %>%
   mutate(Date = lubridate::ymd(Date)) %>%
-  mutate_if(is.factor, as.character)
+  mutate_if(is.factor, as.character) %>%
+  filter(Season < 2017)
 
 maxdate <- max(afldata$Date)
 
