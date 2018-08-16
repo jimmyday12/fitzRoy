@@ -59,11 +59,11 @@ scrape_afltables_match <- function(match_urls) {
 
   home_games <- games %>%
     rvest::pluck(1) %>%
-    map2(.y = details, ~ mutate(.x, Playing.for = .y[4]))
+    map2(.y = home_scores, ~ mutate(.x, Playing.for = .y[1]))
 
   away_games <- games %>%
     rvest::pluck(2) %>%
-    map2(.y = details, ~ mutate(.x, Playing.for = .y[9]))
+    map2(.y = away_scores, ~ mutate(.x, Playing.for = .y[1]))
 
   games <- home_games %>%
     map2(.y = away_games, ~bind_rows(.x, .y))
