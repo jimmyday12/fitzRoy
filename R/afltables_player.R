@@ -20,7 +20,7 @@
 #' get_afltables_stats("01/01/2018", end_date = "01/04/2018")
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
-get_afltables_stats <- function(start_date = "1897-05-08", end_date = Sys.Date()) {
+get_afltables_stats <- function(start_date = "1897-01-01", end_date = Sys.Date()) {
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
   if (is.na(start_date)) stop(paste("Date format not reccognised. Check that start_date is in dmy or ymd format"))
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
