@@ -27,7 +27,7 @@ get_afltables_stats <- function(start_date = "1897-05-08", end_date = Sys.Date()
   if (is.na(end_date)) stop(paste("Date format not reccognised. Check that end_date is in dmy or ymd format"))
   message(paste0("Returning data from ", start_date, " to ", end_date))
 
-  dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/afltables-playerstats/data-raw/afl_tables_playerstats/afldata.rda")
+  dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/master/data-raw/afl_tables_playerstats/afldata.rda")
 
   loadRData <- function(fileName) {
     load(fileName)
