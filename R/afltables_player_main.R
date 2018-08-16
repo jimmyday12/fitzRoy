@@ -52,9 +52,26 @@ scrape_afltables_match <- function(match_urls) {
     map(rvest::html_nodes, "br+ table tr:nth-child(3) td") %>%
     map(rvest::html_text)
 
+  # Check if notes table exists
+  notes_tbl <- match_xmls %>%
+    map(rvest::html_nodes, "table:nth-child(10)") %>%
+    map(rvest::html_text) %>%
+    map(is_empty)
+  
+  notes_fn <- function(x){
+    if (x) {
+      ind <- c(3, 5)
+      } else {
+        ind <- c(4, 6)
+      }
+    }
+  
+  notes_ind <- notes_tbl %>%
+    map(notes_fn)
+  
   games <- match_xmls %>%
     map(rvest::html_table, fill = TRUE) %>%
-    map(magrittr::extract, c(3, 5)) %>%
+    purrr::map2(.y = notes_ind, ~magrittr::extract(.x, .y)) %>%
     purrr::modify_depth(1, ~ purrr::map(., replace_names))
 
   home_games <- games %>%
