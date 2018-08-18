@@ -77,12 +77,67 @@ team_abbr <- tibble(
 
 usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
 
+# Fix some random games identified by Tony Corke
+old_urls <- c("https://afltables.com/afl/stats/games/1901/050619010511.html",
+          "https://afltables.com/afl/stats/games/1912/061719120525.html",
+          "https://afltables.com/afl/stats/games/1907/050919070427.html",
+          "https://afltables.com/afl/stats/games/1907/051119070504.html",
+          "https://afltables.com/afl/stats/games/1907/051519070511.html",
+          "https://afltables.com/afl/stats/games/1907/040519070525.html",
+          "https://afltables.com/afl/stats/games/1907/050619070603.html",
+          "https://afltables.com/afl/stats/games/1907/030519070615.html",
+          "https://afltables.com/afl/stats/games/1907/051119070629.html",
+          "https://afltables.com/afl/stats/games/1907/040519070720.html",
+          "https://afltables.com/afl/stats/games/1900/030919000623.html")
+
+old_urls <- sort(old_urls)
+
+# Add match numbers
+
+afldata <- afldata %>%
+  ungroup() %>%
+  arrange(Season, Round, Local.start.time, Home.team) %>%
+  mutate(row_id = row_number())
+
+
+bad_dat <- afldata %>%
+  filter((Season == 1901 & Round == "3" & Home.team == "Essendon") | 
+           (Season == 1912 & Round == "5" & Home.team == "Fitzroy") | 
+           (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") | 
+           (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") | 
+           (Season == 1900 & Round == "8" & Home.team == "Geelong")) %>%
+  select(Season, Round, Home.team, Away.team, row_id)
+
+# Filter out the data
+afldata <- afldata %>%
+  filter(!(Season == 1901 & Round == "3" & Home.team == "Essendon")) %>%
+  filter(!(Season == 1912 & Round == "5" & Home.team == "Fitzroy")) %>%
+  filter(!(Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon")) %>%
+  filter(!(Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon")) %>%
+  filter(!(Season == 1900 & Round == "8" & Home.team == "Geelong"))
+  
+
+# Get new data
+old_dat <- scrape_afltables_match(old_urls) %>%
+  left_join(bad_dat, by = c("Season", "Round", "Home.team", "Away.team"))
+
+
 # Now let's save to 2018
 afldata <- afldata %>%
   as.tibble() %>%
   mutate(Date = lubridate::ymd(Date)) %>%
   mutate_if(is.factor, as.character) %>%
   filter(Season < 2017)
+
+
+# Bind data
+afldata <- bind_rows(afldata, old_dat) %>%
+  group_by(Season, Round, Home.team, Away.team) %>%
+  arrange(row_id)
+
+# Somehow make match #'s
+# Add old data back in right spot
+# Save
 
 maxdate <- max(afldata$Date)
 

@@ -101,27 +101,41 @@ get_afltables_urls <- function(start_date,
 get_afltables_player_ids <- function(seasons) {
   base_url <- function(x) {
     if (x < 2017) {
-      stop("season must be greater than 2016")
+      "https://raw.githubusercontent.com/jimmyday12/fitzRoy/bug/old_games/data-raw/afl_tables_playerstats/player_ids.csv"
     } else if (x == 2017) {
-      "https://raw.githubusercontent.com/jimmyday12/fitzRoy/afltables-playerstats/data-raw/afl_tables_playerstats/afltables_playerstats_2017.csv"
+      "https://raw.githubusercontent.com/jimmyday12/fitzRoy/bug/old_games/data-raw/afl_tables_playerstats/afltables_playerstats_2017.csv"
     } else {
       paste0("https://afltables.com/afl/stats/", x, "_stats.txt")
     }
   }
 
-  if (min(seasons) < 2017) stop("season must be 2017 onwards")
   urls <- purrr::map_chr(seasons, base_url)
 
   vars <- c("Season", "Player", "ID", "Team")
 
   id_data <- urls %>%
-    purrr::map(readr::read_csv, col_types = readr::cols(Round = "c")) %>%
-    purrr::map2_dfr(.y = seasons, ~mutate(., Season = .y))
-
-  id_data %>%
+    purrr::map(readr::read_csv, col_types = readr::cols()) %>%
+    purrr::map2_dfr(.y = seasons, ~mutate(., Season = .y)) %>%
     dplyr::select(!! vars) %>%
-    dplyr::distinct() %>%
-    dplyr::rename(Team.abb = Team) %>%
-    dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
-    dplyr::select(!! vars)
+    dplyr::distinct() 
+
+  if (min(seasons) <= 2017 & max(seasons) <= 2017) {
+    return(id_data)
+  } else if (min(seasons) > 2017){
+    id_data <- id_data %>%
+      dplyr::rename(Team.abb = Team) %>%
+      dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
+      dplyr::select(!! vars)
+    return(id_data)
+  } else {
+    pre_2017 <- filter(id_data, Season <= 2017)
+    post_2017 <- filter(id_data, Season > 2017) %>%
+      dplyr::rename(Team.abb = Team) %>%
+      dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
+      dplyr::select(!! vars)
+    
+    id_data <- bind_rows(pre_2017, post_2017)
+    return(id_data)
+  }
+  
 }
