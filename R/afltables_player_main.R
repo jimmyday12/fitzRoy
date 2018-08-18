@@ -85,16 +85,35 @@ scrape_afltables_match <- function(match_urls) {
   games <- home_games %>%
     map2(.y = away_games, ~bind_rows(.x, .y))
 
+  att_lgl <- details %>%
+    map(~stringr::str_detect(.x[2], "Attendance"))
+  
+  att_fn <- function(x){
+    if (x) {
+      att_str <- "(?<=Date:\\s)(.*)(?=\\sAtt)"
+    } else {
+      att_str <- "(?<=Date:\\s)(.*)(?=\\s)"
+    }
+  }
+  
+  date_str <- att_lgl %>%
+    map(att_fn)
 
-  games_df <- games %>%
+  args <- list(games, details, date_str)
+  
+  games_df <- args %>%
+    pmap(~ mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
+  
+  games_df <- games_df %>%
     map2(.y = details, ~ mutate(
       .x,
       Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
       Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
-      Date = stringr::str_extract(.y[2], "(?<=Date:\\s)(.*)(?=\\sAtt)"),
       Attendance = stringr::str_extract(.y[2], "(?<=Attendance:\\s)(.*)"),
       Umpires = .y[length(.y)]
-    )) %>%
+    ))
+  
+  games_df <- games_df %>%
     map2(.y = home_scores, ~mutate(
       .x,
       Home.team = .y[1],
