@@ -102,7 +102,7 @@ scrape_afltables_match <- function(match_urls) {
   args <- list(games, details, date_str)
   
   games_df <- args %>%
-    pmap(~ mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
+    purrr::pmap(~ mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
   
   games_df <- games_df %>%
     map2(.y = details, ~ mutate(

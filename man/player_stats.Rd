@@ -16,6 +16,7 @@
 \item{CG}{todo}
 \item{CL}{todo}
 \item{CM}{todo}
+\item{CP}{todo}
 \item{D}{todo}
 \item{DE}{todo}
 \item{ED}{todo}

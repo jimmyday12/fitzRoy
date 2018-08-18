@@ -17,7 +17,6 @@ test_that("get_afltables_player_ids works", {
   expect_type(get_afltables_player_ids(2017), "list")
   expect_error(get_afltables_player_ids())
   expect_error(get_afltables_player_ids("a"))
-  expect_error(get_afltables_player_ids(2016))
 })
 
 

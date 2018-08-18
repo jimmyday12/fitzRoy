@@ -4,7 +4,7 @@
 \alias{get_afltables_stats}
 \title{Return afltables match stats}
 \usage{
-get_afltables_stats(start_date = "1897-05-08", end_date = Sys.Date())
+get_afltables_stats(start_date = "1897-01-01", end_date = Sys.Date())
 }
 \arguments{
 \item{start_date}{character string for start date return to URLs from, in "dmy" or "ymd" format}
