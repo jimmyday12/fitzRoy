@@ -56,7 +56,7 @@ scrape_afltables_match <- function(match_urls) {
   notes_tbl <- match_xmls %>%
     map(rvest::html_nodes, "table:nth-child(10)") %>%
     map(rvest::html_text) %>%
-    map(is_empty)
+    map(purrr::is_empty)
   
   notes_fn <- function(x){
     if (x) {
