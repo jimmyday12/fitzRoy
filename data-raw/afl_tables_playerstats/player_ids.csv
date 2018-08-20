@@ -1553,7 +1553,7 @@ Season,Player,ID,Team
 1902,Charlie Ross,4785,Carlton
 1902,Gordon Ross,4762,Carlton
 1902,Archie Snell,4998,Carlton
-1902,George Topping,5000,Carlton
+1902,George Topping,5.00E+03,Carlton
 1902,Charlie Tough,5001,Carlton
 1902,Fred Webber,5003,Carlton
 1902,Gerry Balme,4913,St Kilda
@@ -1844,7 +1844,7 @@ Season,Player,ID,Team
 1903,George Bruce,5082,Carlton
 1903,Mick Grace,4353,Carlton
 1903,Frank Hince,4858,Carlton
-1903,George Topping,5000,Carlton
+1903,George Topping,5.00E+03,Carlton
 1903,Jim Anderson,4308,Essendon
 1903,George Barker,5053,Essendon
 1903,Son Barry,4310,Essendon
@@ -2153,7 +2153,7 @@ Season,Player,ID,Team
 1904,Harry Newbound,5008,Carlton
 1904,Pat Pelly,5182,Carlton
 1904,Eddie Prescott,5184,Carlton
-1904,George Topping,5000,Carlton
+1904,George Topping,5.00E+03,Carlton
 1904,Frank Bowey,4868,Geelong
 1904,George Doull,5166,Geelong
 1904,Jack Knell,5170,Geelong
@@ -2260,7 +2260,7 @@ Season,Player,ID,Team
 1905,Billy Payne,5181,Carlton
 1905,Charlie Roland,4784,Carlton
 1905,Archie Snell,4998,Carlton
-1905,George Topping,5000,Carlton
+1905,George Topping,5.00E+03,Carlton
 1905,Edgar Yeomans,5290,Carlton
 1905,George Barker,5053,Essendon
 1905,Ben Baxter,4947,Essendon
@@ -2531,7 +2531,7 @@ Season,Player,ID,Team
 1906,Rod McGregor,5285,Carlton
 1906,Billy Payne,5181,Carlton
 1906,Archie Snell,4998,Carlton
-1906,George Topping,5000,Carlton
+1906,George Topping,5.00E+03,Carlton
 1906,Syd Anderson,4904,Melbourne
 1906,Vin Coutie,4805,Melbourne
 1906,Jack Gardiner,4879,Melbourne
@@ -2821,7 +2821,7 @@ Season,Player,ID,Team
 1907,Rod McGregor,5285,Carlton
 1907,Billy Payne,5181,Carlton
 1907,Archie Snell,4998,Carlton
-1907,George Topping,5000,Carlton
+1907,George Topping,5.00E+03,Carlton
 1907,Frank Williams,5494,Carlton
 1907,Horrie Bant,5314,St Kilda
 1907,Vic Barwick,5021,St Kilda
@@ -3092,7 +3092,7 @@ Season,Player,ID,Team
 1908,Alex Lang,5397,Carlton
 1908,Rod McGregor,5285,Carlton
 1908,Billy Payne,5181,Carlton
-1908,George Topping,5000,Carlton
+1908,George Topping,5.00E+03,Carlton
 1908,Frank Williams,5494,Carlton
 1908,Horrie Bant,5314,St Kilda
 1908,Vic Barwick,5021,St Kilda
@@ -3440,7 +3440,7 @@ Season,Player,ID,Team
 1909,Andy Pattison,5626,Carlton
 1909,George Renwick,5762,Carlton
 1909,George Stewart,5764,Carlton
-1909,George Topping,5000,Carlton
+1909,George Topping,5.00E+03,Carlton
 1909,Denby Browning,5578,University
 1909,Harry Cordner,5012,University
 1909,Ted Cordner,5198,University
@@ -3793,7 +3793,7 @@ Season,Player,ID,Team
 1910,Andy McDonald,5879,Carlton
 1910,Andy ODonnell,5880,Carlton
 1910,Billy Payne,5181,Carlton
-1910,George Topping,5000,Carlton
+1910,George Topping,5.00E+03,Carlton
 1910,Jack Wells,5325,Carlton
 1910,George Angus,5006,Collingwood
 1910,Tom Baxter,5497,Collingwood
@@ -4246,7 +4246,7 @@ Season,Player,ID,Team
 1911,Alec Eason,5753,Geelong
 1911,Bill Eason,4972,Geelong
 1911,Les Fairbairn,5368,Geelong
-1911,Neil Freeman,6000,Geelong
+1911,Neil Freeman,6.00E+03,Geelong
 1911,Dick Grigg,5167,Geelong
 1911,George Heinz,5870,Geelong
 1911,Les James,5754,Geelong
@@ -4512,7 +4512,7 @@ Season,Player,ID,Team
 1912,Fen McDonald,6016,Carlton
 1912,Rod McGregor,5285,Carlton
 1912,Billy Payne,5181,Carlton
-1912,George Topping,5000,Carlton
+1912,George Topping,5.00E+03,Carlton
 1912,Viv Valentine,6018,Carlton
 1912,Jack Wells,5325,Carlton
 1912,Archie Wilson,5882,Carlton
@@ -4524,7 +4524,7 @@ Season,Player,ID,Team
 1912,Alec Eason,5753,Geelong
 1912,Bill Eason,4972,Geelong
 1912,Les Fairbairn,5368,Geelong
-1912,Neil Freeman,6000,Geelong
+1912,Neil Freeman,6.00E+03,Geelong
 1912,Jack Gray,6001,Geelong
 1912,Dick Grigg,5167,Geelong
 1912,Leo Healy,6003,Geelong
@@ -4901,7 +4901,7 @@ Season,Player,ID,Team
 1913,Alec Eason,5753,Geelong
 1913,Bill Eason,4972,Geelong
 1913,Les Fairbairn,5368,Geelong
-1913,Neil Freeman,6000,Geelong
+1913,Neil Freeman,6.00E+03,Geelong
 1913,Dick Grigg,5167,Geelong
 1913,Leo Healy,6003,Geelong
 1913,George Heinz,5870,Geelong
@@ -5247,7 +5247,7 @@ Season,Player,ID,Team
 1914,Tom Brownlees,6191,Geelong
 1914,Bert Dalton,5752,Geelong
 1914,Bill Eason,4972,Geelong
-1914,Neil Freeman,6000,Geelong
+1914,Neil Freeman,6.00E+03,Geelong
 1914,Jack Gray,6001,Geelong
 1914,Dick Grigg,5167,Geelong
 1914,Leo Healy,6003,Geelong
@@ -5487,7 +5487,7 @@ Season,Player,ID,Team
 1914,Wally Gant,5520,St Kilda
 1914,Joe Andrew,6300,Carlton
 1914,Albert Scaddan,6311,Carlton
-1914,George Topping,5000,Carlton
+1914,George Topping,5.00E+03,Carlton
 1914,Basil Nehill,6045,Essendon
 1914,Bob Teasdale,6295,Fitzroy
 1914,Cyril Steele,5786,University
@@ -5877,7 +5877,7 @@ Season,Player,ID,Team
 1916,Horrie Jose,6391,Collingwood
 1916,Clarrie Hall,6050,Richmond
 1916,Andy McDonald,5879,Carlton
-1916,George Topping,5000,Carlton
+1916,George Topping,5.00E+03,Carlton
 1916,Bill Burns,5162,Richmond
 1916,George Lambert,5741,Fitzroy
 1916,Harry Smith,6373,Fitzroy
@@ -7825,7 +7825,7 @@ Season,Player,ID,Team
 1923,Jack ORourke,6667,St Kilda
 1923,George Rawle,6915,Essendon
 1924,Reg Baker,2509,Collingwood
-1924,Vin Batchelor,7000,Collingwood
+1924,Vin Batchelor,7.00E+03,Collingwood
 1924,Jack Benson,6936,Collingwood
 1924,Syd Burt,7003,Collingwood
 1924,Harry Chesswas,2674,Collingwood
@@ -11823,7 +11823,7 @@ Season,Player,ID,Team
 1933,Keith Marshall,7830,Fitzroy
 1933,Mark Daffey,2750,Hawthorn
 1933,Reg Peterson,7656,St Kilda
-1933,Wilbur Harris,3000,Sydney
+1933,Wilbur Harris,3.00E+03,Sydney
 1933,Colin Strang,7805,St Kilda
 1933,George Bates,2526,Collingwood
 1933,Tom Mercer,7844,Hawthorn
@@ -12148,7 +12148,7 @@ Season,Player,ID,Team
 1934,Jack Lyons,7910,Geelong
 1934,Jack Power,3546,Melbourne
 1934,Bert Beard,2534,Sydney
-1934,Wilbur Harris,3000,Sydney
+1934,Wilbur Harris,3.00E+03,Sydney
 1934,Jack Diprose,7785,North Melbourne
 1934,Clarrie Jordon,7883,Richmond
 1934,Alan Fuller,7912,Hawthorn
@@ -12541,7 +12541,7 @@ Season,Player,ID,Team
 1935,Alex Lee,7842,Hawthorn
 1935,Vin Smith,7999,Hawthorn
 1935,Bob Williams,3887,Hawthorn
-1935,Ted Williams,8000,Hawthorn
+1935,Ted Williams,8.00E+03,Hawthorn
 1935,Alec Fyfe,7924,Collingwood
 1935,Eddie Gray,8003,Collingwood
 1935,Jack Knight,3173,Collingwood
@@ -12600,7 +12600,7 @@ Season,Player,ID,Team
 1935,Jack Keane,7965,Western Bulldogs
 1935,Harry Clarke,1598,Sydney
 1935,Rowley Flynne,7950,Sydney
-1935,Wilbur Harris,3000,Sydney
+1935,Wilbur Harris,3.00E+03,Sydney
 1935,Ron Todd,3790,Collingwood
 1935,Marty Phelan,7970,Western Bulldogs
 1935,Bill Borwick,7985,Geelong
@@ -13036,7 +13036,7 @@ Season,Player,ID,Team
 1936,Frank Finn,7922,Western Bulldogs
 1936,Les Johnson,8051,Western Bulldogs
 1936,Vern Lamprell,7966,Western Bulldogs
-1936,Wilbur Harris,3000,Sydney
+1936,Wilbur Harris,3.00E+03,Sydney
 1936,Eric Coutts,8042,Essendon
 1936,Harry Mallett,8044,Essendon
 1936,Archie Roberts,3597,Melbourne
@@ -13117,7 +13117,7 @@ Season,Player,ID,Team
 1937,Jim Cleary,2691,Sydney
 1937,Bill Faul,2864,Sydney
 1937,Jack Graham,2951,Sydney
-1937,Wilbur Harris,3000,Sydney
+1937,Wilbur Harris,3.00E+03,Sydney
 1937,Maurie Johnson,3127,Sydney
 1937,Laurie Leask,8037,Sydney
 1937,Jimmy Maher,8114,Sydney
@@ -13741,7 +13741,7 @@ Season,Player,ID,Team
 1938,Bill Faul,2864,Sydney
 1938,Jack Graham,2951,Sydney
 1938,Jack Hacker,2983,Sydney
-1938,Wilbur Harris,3000,Sydney
+1938,Wilbur Harris,3.00E+03,Sydney
 1938,Alf Hedge,8111,Sydney
 1938,Don Howard,3087,Sydney
 1938,Reg Humphries,7885,Sydney
@@ -14213,7 +14213,7 @@ Season,Player,ID,Team
 1939,George Collard,8001,Sydney
 1939,Ken Dineen,8241,Sydney
 1939,Grahame Hall,8242,Sydney
-1939,Wilbur Harris,3000,Sydney
+1939,Wilbur Harris,3.00E+03,Sydney
 1939,Brian Kelly,8243,Sydney
 1939,Pat McNamara,7869,Sydney
 1939,Allan Mullenger,8245,Sydney
@@ -14583,7 +14583,7 @@ Season,Player,ID,Team
 1940,Owen Evans,2848,Sydney
 1940,Jack Graham,2951,Sydney
 1940,Jack Hacker,2983,Sydney
-1940,Wilbur Harris,3000,Sydney
+1940,Wilbur Harris,3.00E+03,Sydney
 1940,Lindsay McNamara,8244,Sydney
 1940,Herbie Matthews,3275,Sydney
 1940,Pat McNamara,7869,Sydney
@@ -15053,7 +15053,7 @@ Season,Player,ID,Team
 1941,Charlie Newman,8365,Collingwood
 1941,Lou Richards,3582,Collingwood
 1941,Archie Baxter,8397,Sydney
-1941,Wilbur Harris,3000,Sydney
+1941,Wilbur Harris,3.00E+03,Sydney
 1941,Billy King,3170,Sydney
 1941,Alan Linden,8403,Sydney
 1941,Des Martin,8405,Sydney
@@ -17609,7 +17609,7 @@ Season,Player,ID,Team
 1947,Rex Ritchie,3593,Sydney
 1947,Tom Roulent,3631,Sydney
 1947,Keith Schaefer,3666,Sydney
-1947,Allan Strang,9000,Sydney
+1947,Allan Strang,9.00E+03,Sydney
 1947,Peter Tippett,8844,Sydney
 1947,William Williams,3890,Sydney
 1947,Don Bauer,2527,Geelong
@@ -18249,7 +18249,7 @@ Season,Player,ID,Team
 1948,George Kennedy,3159,Sydney
 1948,Bert Lucas,3237,Sydney
 1948,Jack Mullane,8997,Sydney
-1948,Allan Strang,9000,Sydney
+1948,Allan Strang,9.00E+03,Sydney
 1948,Jack Hedley,9039,North Melbourne
 1948,Jack Collins,8862,Fitzroy
 1948,Jim Kettle,8866,Fitzroy
@@ -23976,7 +23976,7 @@ Season,Player,ID,Team
 1961,Robert Hickman,9976,Richmond
 1961,Charles Abbott,2452,Hawthorn
 1961,Owen Madigan,3253,Western Bulldogs
-1961,Graeme Taylor,10000,Western Bulldogs
+1961,Graeme Taylor,1.00E+04,Western Bulldogs
 1961,Ian Slockwitch,9983,Richmond
 1962,Bill Arch,2467,Carlton
 1962,Leo Brereton,2593,Carlton
@@ -24373,7 +24373,7 @@ Season,Player,ID,Team
 1962,Duncan Harris,10077,Hawthorn
 1962,Kevin Billing,10036,St Kilda
 1962,Graeme Clyne,10070,Fitzroy
-1962,Graeme Taylor,10000,Western Bulldogs
+1962,Graeme Taylor,1.00E+04,Western Bulldogs
 1962,Ron Fitzpatrick,10028,North Melbourne
 1962,Dennis Railton,9902,North Melbourne
 1962,Alan Hayes,3025,Richmond
@@ -29639,7 +29639,7 @@ Season,Player,ID,Team
 1974,Garry Davidson,10718,Geelong
 1974,Doug Scale,10810,Geelong
 1974,Mike Power,10779,Melbourne
-1974,Peter Moore,2000,Collingwood
+1974,Peter Moore,2.00E+03,Collingwood
 1974,Mark Dawson,2342,North Melbourne
 1974,Wes Barrot,10740,Richmond
 1974,Barry Richardson,2414,Richmond
@@ -29676,7 +29676,7 @@ Season,Player,ID,Team
 1975,Rene Kink,1879,Collingwood
 1975,Phil Manassa,1938,Collingwood
 1975,Peter McKenna,1969,Collingwood
-1975,Peter Moore,2000,Collingwood
+1975,Peter Moore,2.00E+03,Collingwood
 1975,Rod Oborne,2046,Collingwood
 1975,Barry Price,2085,Collingwood
 1975,Max Richardson,1896,Collingwood
@@ -30137,7 +30137,7 @@ Season,Player,ID,Team
 1976,Rene Kink,1879,Collingwood
 1976,Phil Manassa,1938,Collingwood
 1976,Peter McCormack,1957,Collingwood
-1976,Peter Moore,2000,Collingwood
+1976,Peter Moore,2.00E+03,Collingwood
 1976,Bill Picken,2076,Collingwood
 1976,Max Richardson,1896,Collingwood
 1976,Wayne Richardson,2109,Collingwood
@@ -30794,7 +30794,7 @@ Season,Player,ID,Team
 1977,Wayne Gordon,2359,Collingwood
 1977,Rene Kink,1879,Collingwood
 1977,Phil Manassa,1938,Collingwood
-1977,Peter Moore,2000,Collingwood
+1977,Peter Moore,2.00E+03,Collingwood
 1977,Terry Wight,2444,Collingwood
 1977,Andy Demetriou,10915,Sydney
 1977,Graham Dempster,2344,Sydney
@@ -31067,7 +31067,7 @@ Season,Player,ID,Team
 1978,Rene Kink,1879,Collingwood
 1978,Stan Magro,1934,Collingwood
 1978,Phil Manassa,1938,Collingwood
-1978,Peter Moore,2000,Collingwood
+1978,Peter Moore,2.00E+03,Collingwood
 1978,Rod Oborne,2046,Collingwood
 1978,Bill Picken,2076,Collingwood
 1978,Max Richardson,1896,Collingwood
@@ -31478,7 +31478,7 @@ Season,Player,ID,Team
 1979,Stan Magro,1934,Collingwood
 1979,Phil Manassa,1938,Collingwood
 1979,Peter McCormack,1957,Collingwood
-1979,Peter Moore,2000,Collingwood
+1979,Peter Moore,2.00E+03,Collingwood
 1979,Kevin Morris,2003,Collingwood
 1979,Bill Picken,2076,Collingwood
 1979,Stephen Roach,10962,Collingwood
@@ -31792,7 +31792,7 @@ Season,Player,ID,Team
 1979,Kevin Sheehan,2164,Geelong
 1979,Alan Woodman,2446,Geelong
 1979,Mick Nolan,2399,North Melbourne
-1979,Craig Considine,11000,Richmond
+1979,Craig Considine,1.10E+04,Richmond
 1979,Rod Oborne,2046,Richmond
 1979,Gerald Betts,10784,Collingwood
 1979,Ross Brewer,1549,Collingwood
@@ -31912,7 +31912,7 @@ Season,Player,ID,Team
 1980,Andrew Ireland,1930,Collingwood
 1980,Stan Magro,1934,Collingwood
 1980,Peter McCormack,1957,Collingwood
-1980,Peter Moore,2000,Collingwood
+1980,Peter Moore,2.00E+03,Collingwood
 1980,Kevin Morris,2003,Collingwood
 1980,Russell Ohlsen,2049,Collingwood
 1980,Bill Picken,2076,Collingwood
@@ -32402,7 +32402,7 @@ Season,Player,ID,Team
 1981,Rene Kink,1879,Collingwood
 1981,Stan Magro,1934,Collingwood
 1981,Peter McCormack,1957,Collingwood
-1981,Peter Moore,2000,Collingwood
+1981,Peter Moore,2.00E+03,Collingwood
 1981,Kevin Morris,2003,Collingwood
 1981,Bill Picken,2076,Collingwood
 1981,Ray Shaw,2161,Collingwood
@@ -32864,7 +32864,7 @@ Season,Player,ID,Team
 1982,Noel Lovell,11118,Collingwood
 1982,Stan Magro,1934,Collingwood
 1982,Peter McCormack,1957,Collingwood
-1982,Peter Moore,2000,Collingwood
+1982,Peter Moore,2.00E+03,Collingwood
 1982,Neil Peart,2064,Collingwood
 1982,Tony Shaw,1166,Collingwood
 1982,Craig Stewart,2195,Collingwood
@@ -33408,7 +33408,7 @@ Season,Player,ID,Team
 1983,Stephen Icke,1830,Melbourne
 1983,Alan Jarrott,1839,Melbourne
 1983,Glenn McLean,1976,Melbourne
-1983,Peter Moore,2000,Melbourne
+1983,Peter Moore,2.00E+03,Melbourne
 1983,Paul OBrien,2042,Melbourne
 1983,Michael OSullivan,2044,Melbourne
 1983,Russell Richards,2111,Melbourne
@@ -33749,7 +33749,7 @@ Season,Player,ID,Team
 1984,Stephen Icke,1830,Melbourne
 1984,Alan Jarrott,1839,Melbourne
 1984,Alan Johnson,1337,Melbourne
-1984,Peter Moore,2000,Melbourne
+1984,Peter Moore,2.00E+03,Melbourne
 1984,Michael Reynolds,11174,Melbourne
 1984,Russell Richards,2111,Melbourne
 1984,Francesco Rugolo,11175,Melbourne
@@ -34317,7 +34317,7 @@ Season,Player,ID,Team
 1985,Danny Hughes,1394,Melbourne
 1985,Stephen Icke,1830,Melbourne
 1985,Alan Jarrott,1839,Melbourne
-1985,Peter Moore,2000,Melbourne
+1985,Peter Moore,2.00E+03,Melbourne
 1985,Michael OSullivan,2044,Melbourne
 1985,Russell Richards,2111,Melbourne
 1985,Francesco Rugolo,11175,Melbourne
@@ -34791,7 +34791,7 @@ Season,Player,ID,Team
 1986,Alan Johnson,1337,Melbourne
 1986,Nigel Kol,1885,Melbourne
 1986,Garry Lyon,695,Melbourne
-1986,Peter Moore,2000,Melbourne
+1986,Peter Moore,2.00E+03,Melbourne
 1986,Stephen Newport,1266,Melbourne
 1986,Michael Reynolds,11174,Melbourne
 1986,Russell Richards,2111,Melbourne
@@ -35236,7 +35236,7 @@ Season,Player,ID,Team
 1987,Danny Hughes,1394,Melbourne
 1987,Alan Johnson,1337,Melbourne
 1987,Brett Lovett,706,Melbourne
-1987,Peter Moore,2000,Melbourne
+1987,Peter Moore,2.00E+03,Melbourne
 1987,Stephen Newport,1266,Melbourne
 1987,Earl Spalding,145,Melbourne
 1987,Steven Stretch,392,Melbourne
@@ -38337,7 +38337,7 @@ Season,Player,ID,Team
 1993,Michael Sexton,137,Carlton
 1993,Stephen Silvagni,136,Carlton
 1993,Earl Spalding,145,Carlton
-1993,Scott Spalding,4000,Carlton
+1993,Scott Spalding,4.00E+03,Carlton
 1993,Rohan Welsh,169,Carlton
 1993,Greg Williams,142,Carlton
 1993,Matt Armstrong,763,Fitzroy
@@ -39762,7 +39762,7 @@ Season,Player,ID,Team
 1995,Scott Direen,996,Sydney
 1995,Simon Garlick,459,Sydney
 1995,Dale Lewis,997,Sydney
-1995,Michael OLoughlin,1000,Sydney
+1995,Michael OLoughlin,1.00E+03,Sydney
 1995,Anthony Rocca,251,Sydney
 1995,John Hutton,503,Fremantle
 1995,Anthony Jones,497,Fremantle
@@ -40198,7 +40198,7 @@ Season,Player,ID,Team
 1996,Stuart Maxfield,867,Sydney
 1996,Dean McRae,986,Sydney
 1996,Craig OBrien,928,Sydney
-1996,Michael OLoughlin,1000,Sydney
+1996,Michael OLoughlin,1.00E+03,Sydney
 1996,Anthony Rocca,251,Sydney
 1996,Paul Roos,985,Sydney
 1996,Gavin Rose,991,Sydney
@@ -40750,7 +40750,7 @@ Season,Player,ID,Team
 1997,Troy Luff,998,Sydney
 1997,Jason Mooney,606,Sydney
 1997,Craig OBrien,928,Sydney
-1997,Michael OLoughlin,1000,Sydney
+1997,Michael OLoughlin,1.00E+03,Sydney
 1997,Mark Orchard,232,Sydney
 1997,Paul Roos,985,Sydney
 1997,Brad Seymour,984,Sydney
@@ -41270,7 +41270,7 @@ Season,Player,ID,Team
 1998,Jason Mooney,606,Sydney
 1998,Matthew Nicks,1005,Sydney
 1998,Craig OBrien,928,Sydney
-1998,Michael OLoughlin,1000,Sydney
+1998,Michael OLoughlin,1.00E+03,Sydney
 1998,Mark Orchard,232,Sydney
 1998,Paul Roos,985,Sydney
 1998,Jason Saddington,1010,Sydney
@@ -42075,7 +42075,7 @@ Season,Player,ID,Team
 1999,Fred Campbell,970,Sydney
 1999,Nic Fosdike,1018,Sydney
 1999,Ben Mathews,1009,Sydney
-1999,Michael OLoughlin,1000,Sydney
+1999,Michael OLoughlin,1.00E+03,Sydney
 1999,Brad Seymour,984,Sydney
 1999,Adrian Hickmott,166,Carlton
 1999,Darren Hulme,179,Carlton
@@ -42259,583 +42259,583 @@ Season,Player,ID,Team
 1999,Tom Carr,833,Port Adelaide
 1999,Adam Ramanauskas,358,Essendon
 1999,Chris Naish,840,Port Adelaide
-2e3,Matthew Allan,153,Carlton
-2e3,Simon Beaumont,160,Carlton
-2e3,Craig Bradley,151,Carlton
-2e3,Fraser Brown,147,Carlton
-2e3,Scott Camporeale,143,Carlton
-2e3,Brendan Fevola,196,Carlton
-2e3,Simon Fletcher,193,Carlton
-2e3,Anthony Franchina,181,Carlton
-2e3,Aaron Hamill,171,Carlton
-2e3,Adrian Hickmott,166,Carlton
-2e3,Trent Hotton,197,Carlton
-2e3,Darren Hulme,179,Carlton
-2e3,Anthony Koutoufides,144,Carlton
-2e3,Matthew Lappin,191,Carlton
-2e3,Michael Mansfield,198,Carlton
-2e3,Kris Massie,187,Carlton
-2e3,Andrew McKay,140,Carlton
-2e3,Ben Nelson,176,Carlton
-2e3,Brett Ratten,135,Carlton
-2e3,Dean Rice,158,Carlton
-2e3,Michael Sexton,137,Carlton
-2e3,Lance Whitnall,173,Carlton
-2e3,Jason Akermanis,119,Brisbane Lions
-2e3,Marcus Ashcroft,110,Brisbane Lions
-2e3,Simon Black,1083,Brisbane Lions
-2e3,Craig Bolton,1090,Brisbane Lions
-2e3,Daniel Bradshaw,134,Brisbane Lions
-2e3,Stefan Carey,1006,Brisbane Lions
-2e3,Shaun Hart,111,Brisbane Lions
-2e3,Adam Heuskes,829,Brisbane Lions
-2e3,Chris Johnson,385,Brisbane Lions
-2e3,Matthew Kennedy,117,Brisbane Lions
-2e3,Craig Lambert,123,Brisbane Lions
-2e3,Nigel Lappin,100,Brisbane Lions
-2e3,Steven Lawrence,118,Brisbane Lions
-2e3,Justin Leppitsch,98,Brisbane Lions
-2e3,Beau McDonald,1086,Brisbane Lions
-2e3,Martin McKinnon,6,Brisbane Lions
-2e3,Craig McRae,106,Brisbane Lions
-2e3,Jarrod Molloy,295,Brisbane Lions
-2e3,Luke Power,1084,Brisbane Lions
-2e3,Chris Scott,97,Brisbane Lions
-2e3,Michael Voss,102,Brisbane Lions
-2e3,Darryl White,114,Brisbane Lions
-2e3,Damien Adkins,283,Collingwood
-2e3,Rupert Betheras,278,Collingwood
-2e3,Gavin Brown,216,Collingwood
-2e3,Nathan Buckley,217,Collingwood
-2e3,Scott Burns,211,Collingwood
-2e3,Leon Davis,284,Collingwood
-2e3,Josh Fraser,285,Collingwood
-2e3,Glenn Freeborn,273,Collingwood
-2e3,Ben Johnson,286,Collingwood
-2e3,Ben Kinnear,266,Collingwood
-2e3,Paul Licuria,275,Collingwood
-2e3,Tarkyn Lockyer,279,Collingwood
-2e3,Mal Michael,255,Collingwood
-2e3,Shane OBree,287,Collingwood
-2e3,Mark Orchard,232,Collingwood
-2e3,Simon Prestigiacomo,249,Collingwood
-2e3,Anthony Rocca,251,Collingwood
-2e3,Saverio Rocca,228,Collingwood
-2e3,Brent Tuckey,270,Collingwood
-2e3,Andrew Ukovic,288,Collingwood
-2e3,James Wasley,268,Collingwood
-2e3,Paul Williams,215,Collingwood
-2e3,John Barker,387,Hawthorn
-2e3,Kris Barlow,668,Hawthorn
-2e3,Daniel Chick,649,Hawthorn
-2e3,Michael Collica,669,Hawthorn
-2e3,Shane Crawford,633,Hawthorn
-2e3,Trent Croad,660,Hawthorn
-2e3,Mark Graham,628,Hawthorn
-2e3,Daniel Harford,648,Hawthorn
-2e3,Jonathan Hay,659,Hawthorn
-2e3,Nick Holland,637,Hawthorn
-2e3,Angelo Lekkas,655,Hawthorn
-2e3,Aaron Lord,574,Hawthorn
-2e3,Luke McCabe,638,Hawthorn
-2e3,Chris Obst,666,Hawthorn
-2e3,Jade Rawlings,654,Hawthorn
-2e3,Anthony Rock,674,Hawthorn
-2e3,Paul Salmon,314,Hawthorn
-2e3,Joel Smith,672,Hawthorn
-2e3,Richard Taylor,645,Hawthorn
-2e3,Nathan Thompson,662,Hawthorn
-2e3,Tony Woods,644,Hawthorn
-2e3,Barry Young,308,Hawthorn
-2e3,Mark Bickley,12,Adelaide
-2e3,Brett Burton,68,Adelaide
-2e3,James Byrne,77,Adelaide
-2e3,Matthew Clarke,78,Adelaide
-2e3,Andrew Crowell,79,Adelaide
-2e3,Andrew Eccles,61,Adelaide
-2e3,Tyson Edwards,34,Adelaide
-2e3,Shane Ellen,35,Adelaide
-2e3,Simon Goodwin,51,Adelaide
-2e3,Ben Hart,22,Adelaide
-2e3,Brett James,46,Adelaide
-2e3,Darren Jarman,36,Adelaide
-2e3,Kym Koster,39,Adelaide
-2e3,Ken McGregor,73,Adelaide
-2e3,Andrew McLeod,30,Adelaide
-2e3,Shaun Rehn,16,Adelaide
-2e3,Mark Ricciuto,4,Adelaide
-2e3,Matthew Robran,23,Adelaide
-2e3,Nigel Smart,5,Adelaide
-2e3,James Thiessen,60,Adelaide
-2e3,Peter Vardy,44,Adelaide
-2e3,Scott Welsh,80,Adelaide
-2e3,Mark Alvey,460,Western Bulldogs
-2e3,Trent Bartlett,127,Western Bulldogs
-2e3,Nathan Brown,452,Western Bulldogs
-2e3,Simon Cox,441,Western Bulldogs
-2e3,Matthew Croft,414,Western Bulldogs
-2e3,Todd Curley,447,Western Bulldogs
-2e3,Luke Darcy,436,Western Bulldogs
-2e3,Nathan Eagleton,465,Western Bulldogs
-2e3,Simon Garlick,459,Western Bulldogs
-2e3,Chris Grant,422,Western Bulldogs
-2e3,Paul Hudson,451,Western Bulldogs
-2e3,Kingsley Hunter,464,Western Bulldogs
-2e3,Brad Johnson,421,Western Bulldogs
-2e3,Steven Kolyniuk,428,Western Bulldogs
-2e3,Steven Kretiuk,419,Western Bulldogs
-2e3,Tony Liberatore,426,Western Bulldogs
-2e3,Jim Plunkett,205,Western Bulldogs
-2e3,Jose Romero,423,Western Bulldogs
-2e3,Rohan Smith,429,Western Bulldogs
-2e3,Daniel Southern,431,Western Bulldogs
-2e3,Scott West,418,Western Bulldogs
-2e3,Scott Wynd,424,Western Bulldogs
-2e3,Daniel Bandy,510,Fremantle
-2e3,Leigh Brown,539,Fremantle
-2e3,Troy Cook,540,Fremantle
-2e3,Brad Dodd,526,Fremantle
-2e3,Brendon Fewster,541,Fremantle
-2e3,Adrian Fletcher,101,Fremantle
-2e3,Mark Gale,509,Fremantle
-2e3,Antoni Grover,534,Fremantle
-2e3,Paul Hasleby,542,Fremantle
-2e3,Dale Kickett,477,Fremantle
-2e3,Steven Koops,517,Fremantle
-2e3,Justin Longmuir,535,Fremantle
-2e3,Troy Longmuir,543,Fremantle
-2e3,Shaun McManus,504,Fremantle
-2e3,Clem Michael,527,Fremantle
-2e3,Tony Modra,14,Fremantle
-2e3,Jason Norrish,475,Fremantle
-2e3,Shane Parker,501,Fremantle
-2e3,Ashley Prescott,532,Fremantle
-2e3,Jess Sinclair,523,Fremantle
-2e3,James Walker,531,Fremantle
-2e3,Clive Waterhouse,515,Fremantle
-2e3,Clint Bizzell,589,Geelong
-2e3,Ronnie Burns,585,Geelong
-2e3,Ben Graham,556,Geelong
-2e3,Derek Hall,576,Geelong
-2e3,Tom Harley,608,Geelong
-2e3,Garry Hocking,577,Geelong
-2e3,Adam Houlihan,593,Geelong
-2e3,Glenn Kilpatrick,588,Geelong
-2e3,Steven King,587,Geelong
-2e3,Paul Lynch,570,Geelong
-2e3,Tim McGrath,558,Geelong
-2e3,David Mensch,566,Geelong
-2e3,Darren Milburn,590,Geelong
-2e3,Jason Mooney,606,Geelong
-2e3,Peter Riccardi,560,Geelong
-2e3,Brenton Sanderson,562,Geelong
-2e3,Matthew Scarlett,604,Geelong
-2e3,Brad Sholl,555,Geelong
-2e3,Jason Snell,586,Geelong
-2e3,David Spriggs,611,Geelong
-2e3,Carl Steinfort,296,Geelong
-2e3,Barry Stoneham,584,Geelong
-2e3,Winston Abraham,485,North Melbourne
-2e3,Glenn Archer,777,North Melbourne
-2e3,Peter Bell,486,North Melbourne
-2e3,John Blakey,762,North Melbourne
-2e3,Matthew Burton,489,North Melbourne
-2e3,David Calthorpe,329,North Melbourne
-2e3,Matthew Capuano,774,North Melbourne
-2e3,Wayne Carey,766,North Melbourne
-2e3,Shane Clayton,408,North Melbourne
-2e3,Shannon Grant,794,North Melbourne
-2e3,Brent Harvey,788,North Melbourne
-2e3,Evan Hewitt,86,North Melbourne
-2e3,David King,759,North Melbourne
-2e3,Adam Lange,798,North Melbourne
-2e3,Jason McCartney,11,North Melbourne
-2e3,Corey McKernan,775,North Melbourne
-2e3,Shannon Motlop,800,North Melbourne
-2e3,Ryan Pagan,801,North Melbourne
-2e3,Byron Pickett,791,North Melbourne
-2e3,Robert Scott,768,North Melbourne
-2e3,Adam Simpson,780,North Melbourne
-2e3,Anthony Stevens,772,North Melbourne
-2e3,Drew Banfield,1031,West Coast
-2e3,Michael Braun,1058,West Coast
-2e3,Ben Cousins,1051,West Coast
-2e3,Scott Cummings,315,West Coast
-2e3,Andrew Embley,1065,West Coast
-2e3,Chad Fletcher,1067,West Coast
-2e3,Michael Gardiner,1056,West Coast
-2e3,Fraser Gehrig,976,West Coast
-2e3,Glen Jakovich,1038,West Coast
-2e3,Dean Kemp,1028,West Coast
-2e3,Peter Matera,1040,West Coast
-2e3,Phillip Matera,1052,West Coast
-2e3,Ashley McIntosh,1034,West Coast
-2e3,Guy McKenna,1032,West Coast
-2e3,Daniel Metropolis,550,West Coast
-2e3,Chad Morrison,1050,West Coast
-2e3,Phillip Read,1060,West Coast
-2e3,Chad Rintoul,48,West Coast
-2e3,Ryan Turnbull,1043,West Coast
-2e3,Mitchell White,620,West Coast
-2e3,Andrew Williams,1063,West Coast
-2e3,David Wirrpanda,1053,West Coast
-2e3,Cameron Bruce,747,Melbourne
-2e3,Scott Chisholm,480,Melbourne
-2e3,James Cook,156,Melbourne
-2e3,Jeff Farmer,703,Melbourne
-2e3,Steven Febey,690,Melbourne
-2e3,Brent Grgic,729,Melbourne
-2e3,Anthony Ingerson,25,Melbourne
-2e3,Travis Johnstone,732,Melbourne
-2e3,Andrew Leoncelli,724,Melbourne
-2e3,Anthony McDonald,727,Melbourne
-2e3,James McDonald,730,Melbourne
-2e3,David Neitz,689,Melbourne
-2e3,Alistair Nicholson,728,Melbourne
-2e3,Stephen Powell,456,Melbourne
-2e3,Guy Rigoni,734,Melbourne
-2e3,Russell Robertson,731,Melbourne
-2e3,David Schwarz,713,Melbourne
-2e3,Troy Simmonds,743,Melbourne
-2e3,Peter Walsh,744,Melbourne
-2e3,Jeff White,502,Melbourne
-2e3,Shane Woewodin,725,Melbourne
-2e3,Adem Yze,714,Melbourne
-2e3,Joel Bowden,890,Richmond
-2e3,Leon Cameron,425,Richmond
-2e3,Wayne Campbell,869,Richmond
-2e3,Nick Daffy,873,Richmond
-2e3,Marc Dragicevic,903,Richmond
-2e3,Brendon Gale,868,Richmond
-2e3,Darren Gaspar,886,Richmond
-2e3,Ben Harrison,163,Richmond
-2e3,Ben Holland,913,Richmond
-2e3,Aaron James,237,Richmond
-2e3,Andrew Kellaway,899,Richmond
-2e3,Duncan Kellaway,861,Richmond
-2e3,Clinton King,269,Richmond
-2e3,Matthew Knights,865,Richmond
-2e3,Mark Merenda,866,Richmond
-2e3,Brad Ottens,897,Richmond
-2e3,Matthew Richardson,870,Richmond
-2e3,Matthew Rogers,864,Richmond
-2e3,John Rombotis,399,Richmond
-2e3,Clay Sampson,55,Richmond
-2e3,Greg Tivendale,901,Richmond
-2e3,Jason Torney,883,Richmond
-2e3,James Begley,965,St Kilda
-2e3,Tony Brown,941,St Kilda
-2e3,Nathan Burke,919,St Kilda
-2e3,Matthew Carr,548,St Kilda
-2e3,Sean Charles,183,St Kilda
-2e3,Tony Delaney,483,St Kilda
-2e3,Tim Elliott,962,St Kilda
-2e3,Peter Everitt,922,St Kilda
-2e3,Barry Hall,953,St Kilda
-2e3,Robert Harvey,930,St Kilda
-2e3,Lenny Hayes,966,St Kilda
-2e3,Max Hudghton,955,St Kilda
-2e3,Austinn Jones,929,St Kilda
-2e3,Stewart Loewe,927,St Kilda
-2e3,Joe McLaren,809,St Kilda
-2e3,Gavin Mitchell,513,St Kilda
-2e3,Damian Monkhorst,223,St Kilda
-2e3,Justin Peckett,921,St Kilda
-2e3,Justin Plapp,900,St Kilda
-2e3,Steven Sziller,914,St Kilda
-2e3,Andrew Thompson,957,St Kilda
-2e3,Matthew Young,643,St Kilda
-2e3,Robert AhMat,239,Sydney
-2e3,Brett Allison,770,Sydney
-2e3,Jason Ball,1020,Sydney
-2e3,Leo Barry,1003,Sydney
-2e3,Daryn Cresswell,992,Sydney
-2e3,Jared Crouch,1011,Sydney
-2e3,Andrew Dunkley,983,Sydney
-2e3,Peter Filandia,1004,Sydney
-2e3,Ryan Fitzgerald,1021,Sydney
-2e3,Adam Goodes,1012,Sydney
-2e3,Dale Lewis,997,Sydney
-2e3,Ben Mathews,1009,Sydney
-2e3,Stuart Maxfield,867,Sydney
-2e3,Matthew Nicks,1005,Sydney
-2e3,Craig OBrien,928,Sydney
-2e3,Michael OLoughlin,1000,Sydney
-2e3,Jason Saddington,1010,Sydney
-2e3,Andrew Schauble,241,Sydney
-2e3,Wayne Schwass,764,Sydney
-2e3,Brad Seymour,984,Sydney
-2e3,Greg Stafford,994,Sydney
-2e3,Rowan Warfe,369,Sydney
-2e3,Steven Alessio,307,Essendon
-2e3,Paul Barnard,340,Essendon
-2e3,John Barnes,360,Essendon
-2e3,Darren Bewick,311,Essendon
-2e3,Justin Blumfield,341,Essendon
-2e3,Blake Caracella,343,Essendon
-2e3,Sean Denham,319,Essendon
-2e3,Dustin Fletcher,304,Essendon
-2e3,Damien Hardwick,324,Essendon
-2e3,Chris Heffernan,347,Essendon
-2e3,James Hird,312,Essendon
-2e3,Jason Johnson,346,Essendon
-2e3,Mark Johnson,354,Essendon
-2e3,Matthew Lloyd,336,Essendon
-2e3,Michael Long,313,Essendon
-2e3,Mark Mercuri,310,Essendon
-2e3,Joe Misiti,316,Essendon
-2e3,Adam Ramanauskas,358,Essendon
-2e3,Dean Rioli,356,Essendon
-2e3,Dean Solomon,352,Essendon
-2e3,Dean Wallis,333,Essendon
-2e3,Sean Wellman,10,Essendon
-2e3,Matthew Bode,90,Port Adelaide
-2e3,Peter Burgoyne,824,Port Adelaide
-2e3,Che Cockatoo-Collins,328,Port Adelaide
-2e3,Chad Cornes,847,Port Adelaide
-2e3,Stephen Daniels,834,Port Adelaide
-2e3,Fabian Francis,817,Port Adelaide
-2e3,Josh Francou,819,Port Adelaide
-2e3,Barnaby French,844,Port Adelaide
-2e3,Roger James,835,Port Adelaide
-2e3,Adam Kingsley,825,Port Adelaide
-2e3,Brendon Lade,822,Port Adelaide
-2e3,Brayden Lyle,818,Port Adelaide
-2e3,Darren Mead,827,Port Adelaide
-2e3,Brett Montgomery,454,Port Adelaide
-2e3,Danny Morton,400,Port Adelaide
-2e3,Stephen Paxman,379,Port Adelaide
-2e3,Matthew Primus,407,Port Adelaide
-2e3,Nathan Steinberner,839,Port Adelaide
-2e3,Nick Stevens,842,Port Adelaide
-2e3,Warren Tredrea,831,Port Adelaide
-2e3,Gavin Wanganeen,303,Port Adelaide
-2e3,Michael Wilson,820,Port Adelaide
-2e3,Rhett Biglands,83,Adelaide
-2e3,David Gallagher,69,Adelaide
-2e3,Kane Johnson,43,Adelaide
-2e3,Ben Marsh,65,Adelaide
-2e3,Ian Perrie,64,Adelaide
-2e3,Tyson Stenglein,75,Adelaide
-2e3,Danny Jacobs,359,Essendon
-2e3,Scott Lucas,339,Essendon
-2e3,Brad Bootsma,545,Fremantle
-2e3,Craig Callaghan,508,Fremantle
-2e3,Anthony Jones,497,Fremantle
-2e3,Matthew Pavlich,544,Fremantle
-2e3,Andrew Shipp,536,Fremantle
-2e3,Luke Toia,518,Fremantle
-2e3,Gary Dhurrkay,492,North Melbourne
-2e3,Troy Makepeace,802,North Melbourne
-2e3,Mick Martyn,757,North Melbourne
-2e3,Martin Pike,373,North Melbourne
-2e3,Craig Sholl,761,North Melbourne
-2e3,Nick Davis,272,Collingwood
-2e3,Tyson Lane,274,Collingwood
-2e3,Steven McKee,289,Collingwood
-2e3,Mark Richardson,221,Collingwood
-2e3,Heath Scotland,280,Collingwood
-2e3,Chris Tarrant,264,Collingwood
-2e3,Craig Biddiscombe,582,Richmond
-2e3,David Bourke,876,Richmond
-2e3,Paul Broderick,872,Richmond
-2e3,Mark Chaffey,891,Richmond
-2e3,Aaron Fiora,911,Richmond
-2e3,Rory Hilton,902,Richmond
-2e3,Royce Vardy,908,Richmond
-2e3,Adam Contessa,457,Western Bulldogs
-2e3,Paul Dimattina,443,Western Bulldogs
-2e3,Craig Ellis,444,Western Bulldogs
-2e3,Mitch Hahn,467,Western Bulldogs
-2e3,Jude Bolton,1013,Sydney
-2e3,Andrew Bomford,342,Sydney
-2e3,Nic Fosdike,1018,Sydney
-2e3,Troy Luff,998,Sydney
-2e3,Ryan OConnor,327,Sydney
-2e3,Ryan OKeefe,1024,Sydney
-2e3,John Stevens,1007,Sydney
-2e3,Glen Bowyer,673,Hawthorn
-2e3,Ben Dixon,658,Hawthorn
-2e3,Rayden Tallis,631,Hawthorn
-2e3,Craig Treleven,651,Hawthorn
-2e3,Richard Vandenberg,667,Hawthorn
-2e3,Callum Chambers,1069,West Coast
-2e3,Andrew Donnelly,1049,West Coast
-2e3,Darren Glass,1068,West Coast
-2e3,Rowan Jones,1064,West Coast
-2e3,Nicholas Stone,1057,West Coast
-2e3,Paul Symmons,1044,West Coast
-2e3,Josh Wooden,1055,West Coast
-2e3,Nathan Brown,737,Melbourne
-2e3,Paul Wheatley,749,Melbourne
-2e3,Matthew Whelan,750,Melbourne
-2e3,Luke Williams,746,Melbourne
-2e3,Richard Champion,95,Brisbane Lions
-2e3,Alastair Lynch,104,Brisbane Lions
-2e3,Michael Martin,438,Brisbane Lions
-2e3,Aaron Shattock,1093,Brisbane Lions
-2e3,Brett Voss,975,Brisbane Lions
-2e3,Simon Arnott,605,Geelong
-2e3,David Clarke,607,Geelong
-2e3,Paul Corrigan,591,Geelong
-2e3,Daniel Foster,618,Geelong
-2e3,Cameron Ling,617,Geelong
-2e3,Tristan Lynch,131,Geelong
-2e3,James Rahilly,599,Geelong
-2e3,Matthew Bishop,738,Port Adelaide
-2e3,Josh Carr,851,Port Adelaide
-2e3,Stuart Dew,838,Port Adelaide
-2e3,Mark Harwood,843,Port Adelaide
-2e3,Derek Murray,848,Port Adelaide
-2e3,Jared Poulton,845,Port Adelaide
-2e3,Jarrad Schofield,846,Port Adelaide
-2e3,Ang Christou,138,Carlton
-2e3,Scott Freeborn,200,Carlton
-2e3,Glenn Manton,161,Carlton
-2e3,Stephen OReilly,199,Carlton
-2e3,Stephen Silvagni,136,Carlton
-2e3,Caydn Beetham,973,St Kilda
-2e3,Jason Blake,974,St Kilda
-2e3,Jason Heatley,958,St Kilda
-2e3,Brett Knowles,960,St Kilda
-2e3,Brett Moyle,972,St Kilda
-2e3,Jason Traianidis,949,St Kilda
-2e3,Darryl Wakelin,855,St Kilda
-2e3,Nathan Bassett,56,Adelaide
-2e3,Ricky OLoughlin,84,Adelaide
-2e3,Ryan Houlihan,201,Carlton
-2e3,Leigh Colbert,557,North Melbourne
-2e3,Stephen Patterson,224,Collingwood
-2e3,Brett Evans,892,Richmond
-2e3,Jonathan Brown,1092,Brisbane Lions
-2e3,Damian Cupido,1096,Brisbane Lions
-2e3,Marcus Picken,1085,Brisbane Lions
-2e3,Andrew Wills,466,Western Bulldogs
-2e3,James Clement,299,Fremantle
-2e3,Aaron Henneman,362,Essendon
-2e3,Shane Bond,816,Port Adelaide
-2e3,Bowen Lockwood,830,Port Adelaide
-2e3,Chad Davis,969,St Kilda
-2e3,Dale Baynes,292,Collingwood
-2e3,Craig Jacotine,281,Collingwood
-2e3,Bradley Smith,293,Collingwood
-2e3,Paul Chapman,614,Geelong
-2e3,Joel McKay,603,Geelong
-2e3,Matthew Collins,41,Melbourne
-2e3,Matthew Febey,691,Melbourne
-2e3,Brad Green,748,Melbourne
-2e3,Brady Rawlings,799,North Melbourne
-2e3,Scott Bassett,849,Port Adelaide
-2e3,Brent Guerra,852,Port Adelaide
-2e3,Matthew Connell,19,Adelaide
-2e3,Gerrard Bennett,1017,Sydney
-2e3,James White,912,Richmond
-2e3,Gary Moorcroft,331,Essendon
-2e3,Greg Harding,514,Fremantle
-2e3,Brad Wira,446,Fremantle
-2e3,Nathan Chapman,121,Hawthorn
-2e3,Fred Campbell,970,St Kilda
-2e3,David Sierakowski,924,St Kilda
-2e3,John Spaull,804,North Melbourne
-2e3,Luke Penny,469,Western Bulldogs
-2e3,Lance Picioane,58,Hawthorn
-2e3,Daniel McPherson,1001,Sydney
-2e3,Andrew Dimattina,290,Collingwood
-2e3,David Antonowicz,1074,West Coast
-2e3,Jaxon Crabb,1061,West Coast
-2e3,David Haynes,1071,West Coast
-2e3,Todd Holmes,1062,West Coast
-2e3,David Wojcinski,609,Geelong
-2e3,Brad Oborne,282,Collingwood
-2e3,Ben Beams,745,Melbourne
-2e3,Matthew Dent,389,Western Bulldogs
-2e3,Robert Powell,889,Richmond
-2e3,Ben Walton,964,St Kilda
-2e3,Michael Prior,337,Essendon
-2e3,Simon Feast,1016,Sydney
-2e3,Brett Kirk,1015,Sydney
-2e3,Michael Stevens,1102,Port Adelaide
-2e3,Brett Chandler,388,North Melbourne
-2e3,Trent Knobel,1094,Brisbane Lions
-2e3,Brodie Holland,298,Fremantle
-2e3,Daniel Schell,547,Fremantle
-2e3,Paul Kelly,993,Sydney
-2e3,Peter Caven,38,Adelaide
-2e3,Andrew Merrington,203,Carlton
-2e3,Tim Notting,1087,Brisbane Lions
-2e3,Matthew Robbins,463,Western Bulldogs
-2e3,Patrick Wiggins,470,Western Bulldogs
-2e3,Laurie Bellotti,1066,West Coast
-2e3,Michael OBrien,1076,West Coast
-2e3,Heath Black,520,Fremantle
-2e3,Danny OBrien,612,Geelong
-2e3,Steven Pitt,244,Melbourne
-2e3,Justin Cicolella,81,Adelaide
-2e3,Mark Porter,180,Carlton
-2e3,Des Headland,1089,Brisbane Lions
-2e3,Ben Robbins,133,Brisbane Lions
-2e3,Rhyce Shaw,291,Collingwood
-2e3,Shane Watson,214,Collingwood
-2e3,Brett Johnson,676,Hawthorn
-2e3,Luke McPharlin,677,Hawthorn
-2e3,Steven Baker,967,St Kilda
-2e3,Troy Schwarze,971,St Kilda
-2e3,Mark Fraser,325,Essendon
-2e3,Lionel Proctor,898,Richmond
-2e3,Kasey Green,1070,West Coast
-2e3,Paul Dooley,458,Western Bulldogs
-2e3,Bryan Beinke,71,Adelaide
-2e3,Donald Dickie,821,Port Adelaide
-2e3,Joel Corey,616,Geelong
-2e3,Cameron Mooney,615,Geelong
-2e3,Sam Cranage,963,St Kilda
-2e3,Heath Culpitt,195,Carlton
-2e3,Gavin Crosisca,212,Collingwood
-2e3,Daniel Ward,740,Melbourne
-2e3,Ben Fixter,1022,Sydney
-2e3,Paul Koulouriotis,853,Port Adelaide
-2e3,Nathan Clarke,1095,Brisbane Lions
-2e3,Kent Kingsley,623,North Melbourne
-2e3,Adam Chatfield,202,Carlton
-2e3,Robert Murphy,468,Western Bulldogs
-2e3,Ben Haynes,910,Richmond
-2e3,Hamish Simpson,598,Geelong
-2e3,Stuart Cochrane,795,North Melbourne
-2e3,Shane Wakelin,297,St Kilda
-2e3,Jonathon Robran,361,Essendon
-2e3,Marcus Seecamp,698,Melbourne
-2e3,Chance Bateman,675,Hawthorn
-2e3,Simon Godfrey,751,Melbourne
-2e3,Ty Zantuck,909,Richmond
-2e3,Brad Stephens,803,North Melbourne
-2e3,Stephen Doyle,1023,Sydney
-2e3,Kane Munro,1073,West Coast
-2e3,Justin Murphy,167,Carlton
-2e3,Adam White,175,Carlton
-2e3,Marcus Baldwin,613,Geelong
-2e3,Paul Hopgood,711,Melbourne
-2e3,Damien Ryan,887,St Kilda
-2e3,Adam Hunter,1072,West Coast
-2e3,Mark Bolton,350,Essendon
-2e3,Mark McVeigh,355,Essendon
-2e3,Ben Cunningham,546,Fremantle
-2e3,Garth Taylor,533,Fremantle
-2e3,Brendan Krummel,488,Hawthorn
-2e3,Shannon Rusca,1091,Brisbane Lions
-2e3,Josh Mahoney,256,Western Bulldogs
-2e3,Steven Brosnan,850,Port Adelaide
-2e3,Robert Shirley,82,Adelaide
-2e3,Ezra Poyas,906,Richmond
-2e3,Chris Lewis,1039,West Coast
-2e3,Andrew Mills,907,Richmond
-2e3,Mark Stevens,59,Adelaide
-2e3,Shannon Watt,797,North Melbourne
-2e3,Christin Macri,462,Western Bulldogs
-2e3,Steven Rode,678,Hawthorn
-2e3,Brett Backwell,190,Carlton
-2e3,Brady Anderson,793,North Melbourne
-2e3,Michael Doughty,85,Adelaide
-2e3,Scott Bennett,1075,West Coast
+2.00E+03,Matthew Allan,153,Carlton
+2.00E+03,Simon Beaumont,160,Carlton
+2.00E+03,Craig Bradley,151,Carlton
+2.00E+03,Fraser Brown,147,Carlton
+2.00E+03,Scott Camporeale,143,Carlton
+2.00E+03,Brendan Fevola,196,Carlton
+2.00E+03,Simon Fletcher,193,Carlton
+2.00E+03,Anthony Franchina,181,Carlton
+2.00E+03,Aaron Hamill,171,Carlton
+2.00E+03,Adrian Hickmott,166,Carlton
+2.00E+03,Trent Hotton,197,Carlton
+2.00E+03,Darren Hulme,179,Carlton
+2.00E+03,Anthony Koutoufides,144,Carlton
+2.00E+03,Matthew Lappin,191,Carlton
+2.00E+03,Michael Mansfield,198,Carlton
+2.00E+03,Kris Massie,187,Carlton
+2.00E+03,Andrew McKay,140,Carlton
+2.00E+03,Ben Nelson,176,Carlton
+2.00E+03,Brett Ratten,135,Carlton
+2.00E+03,Dean Rice,158,Carlton
+2.00E+03,Michael Sexton,137,Carlton
+2.00E+03,Lance Whitnall,173,Carlton
+2.00E+03,Jason Akermanis,119,Brisbane Lions
+2.00E+03,Marcus Ashcroft,110,Brisbane Lions
+2.00E+03,Simon Black,1083,Brisbane Lions
+2.00E+03,Craig Bolton,1090,Brisbane Lions
+2.00E+03,Daniel Bradshaw,134,Brisbane Lions
+2.00E+03,Stefan Carey,1006,Brisbane Lions
+2.00E+03,Shaun Hart,111,Brisbane Lions
+2.00E+03,Adam Heuskes,829,Brisbane Lions
+2.00E+03,Chris Johnson,385,Brisbane Lions
+2.00E+03,Matthew Kennedy,117,Brisbane Lions
+2.00E+03,Craig Lambert,123,Brisbane Lions
+2.00E+03,Nigel Lappin,100,Brisbane Lions
+2.00E+03,Steven Lawrence,118,Brisbane Lions
+2.00E+03,Justin Leppitsch,98,Brisbane Lions
+2.00E+03,Beau McDonald,1086,Brisbane Lions
+2.00E+03,Martin McKinnon,6,Brisbane Lions
+2.00E+03,Craig McRae,106,Brisbane Lions
+2.00E+03,Jarrod Molloy,295,Brisbane Lions
+2.00E+03,Luke Power,1084,Brisbane Lions
+2.00E+03,Chris Scott,97,Brisbane Lions
+2.00E+03,Michael Voss,102,Brisbane Lions
+2.00E+03,Darryl White,114,Brisbane Lions
+2.00E+03,Damien Adkins,283,Collingwood
+2.00E+03,Rupert Betheras,278,Collingwood
+2.00E+03,Gavin Brown,216,Collingwood
+2.00E+03,Nathan Buckley,217,Collingwood
+2.00E+03,Scott Burns,211,Collingwood
+2.00E+03,Leon Davis,284,Collingwood
+2.00E+03,Josh Fraser,285,Collingwood
+2.00E+03,Glenn Freeborn,273,Collingwood
+2.00E+03,Ben Johnson,286,Collingwood
+2.00E+03,Ben Kinnear,266,Collingwood
+2.00E+03,Paul Licuria,275,Collingwood
+2.00E+03,Tarkyn Lockyer,279,Collingwood
+2.00E+03,Mal Michael,255,Collingwood
+2.00E+03,Shane OBree,287,Collingwood
+2.00E+03,Mark Orchard,232,Collingwood
+2.00E+03,Simon Prestigiacomo,249,Collingwood
+2.00E+03,Anthony Rocca,251,Collingwood
+2.00E+03,Saverio Rocca,228,Collingwood
+2.00E+03,Brent Tuckey,270,Collingwood
+2.00E+03,Andrew Ukovic,288,Collingwood
+2.00E+03,James Wasley,268,Collingwood
+2.00E+03,Paul Williams,215,Collingwood
+2.00E+03,John Barker,387,Hawthorn
+2.00E+03,Kris Barlow,668,Hawthorn
+2.00E+03,Daniel Chick,649,Hawthorn
+2.00E+03,Michael Collica,669,Hawthorn
+2.00E+03,Shane Crawford,633,Hawthorn
+2.00E+03,Trent Croad,660,Hawthorn
+2.00E+03,Mark Graham,628,Hawthorn
+2.00E+03,Daniel Harford,648,Hawthorn
+2.00E+03,Jonathan Hay,659,Hawthorn
+2.00E+03,Nick Holland,637,Hawthorn
+2.00E+03,Angelo Lekkas,655,Hawthorn
+2.00E+03,Aaron Lord,574,Hawthorn
+2.00E+03,Luke McCabe,638,Hawthorn
+2.00E+03,Chris Obst,666,Hawthorn
+2.00E+03,Jade Rawlings,654,Hawthorn
+2.00E+03,Anthony Rock,674,Hawthorn
+2.00E+03,Paul Salmon,314,Hawthorn
+2.00E+03,Joel Smith,672,Hawthorn
+2.00E+03,Richard Taylor,645,Hawthorn
+2.00E+03,Nathan Thompson,662,Hawthorn
+2.00E+03,Tony Woods,644,Hawthorn
+2.00E+03,Barry Young,308,Hawthorn
+2.00E+03,Mark Bickley,12,Adelaide
+2.00E+03,Brett Burton,68,Adelaide
+2.00E+03,James Byrne,77,Adelaide
+2.00E+03,Matthew Clarke,78,Adelaide
+2.00E+03,Andrew Crowell,79,Adelaide
+2.00E+03,Andrew Eccles,61,Adelaide
+2.00E+03,Tyson Edwards,34,Adelaide
+2.00E+03,Shane Ellen,35,Adelaide
+2.00E+03,Simon Goodwin,51,Adelaide
+2.00E+03,Ben Hart,22,Adelaide
+2.00E+03,Brett James,46,Adelaide
+2.00E+03,Darren Jarman,36,Adelaide
+2.00E+03,Kym Koster,39,Adelaide
+2.00E+03,Ken McGregor,73,Adelaide
+2.00E+03,Andrew McLeod,30,Adelaide
+2.00E+03,Shaun Rehn,16,Adelaide
+2.00E+03,Mark Ricciuto,4,Adelaide
+2.00E+03,Matthew Robran,23,Adelaide
+2.00E+03,Nigel Smart,5,Adelaide
+2.00E+03,James Thiessen,60,Adelaide
+2.00E+03,Peter Vardy,44,Adelaide
+2.00E+03,Scott Welsh,80,Adelaide
+2.00E+03,Mark Alvey,460,Western Bulldogs
+2.00E+03,Trent Bartlett,127,Western Bulldogs
+2.00E+03,Nathan Brown,452,Western Bulldogs
+2.00E+03,Simon Cox,441,Western Bulldogs
+2.00E+03,Matthew Croft,414,Western Bulldogs
+2.00E+03,Todd Curley,447,Western Bulldogs
+2.00E+03,Luke Darcy,436,Western Bulldogs
+2.00E+03,Nathan Eagleton,465,Western Bulldogs
+2.00E+03,Simon Garlick,459,Western Bulldogs
+2.00E+03,Chris Grant,422,Western Bulldogs
+2.00E+03,Paul Hudson,451,Western Bulldogs
+2.00E+03,Kingsley Hunter,464,Western Bulldogs
+2.00E+03,Brad Johnson,421,Western Bulldogs
+2.00E+03,Steven Kolyniuk,428,Western Bulldogs
+2.00E+03,Steven Kretiuk,419,Western Bulldogs
+2.00E+03,Tony Liberatore,426,Western Bulldogs
+2.00E+03,Jim Plunkett,205,Western Bulldogs
+2.00E+03,Jose Romero,423,Western Bulldogs
+2.00E+03,Rohan Smith,429,Western Bulldogs
+2.00E+03,Daniel Southern,431,Western Bulldogs
+2.00E+03,Scott West,418,Western Bulldogs
+2.00E+03,Scott Wynd,424,Western Bulldogs
+2.00E+03,Daniel Bandy,510,Fremantle
+2.00E+03,Leigh Brown,539,Fremantle
+2.00E+03,Troy Cook,540,Fremantle
+2.00E+03,Brad Dodd,526,Fremantle
+2.00E+03,Brendon Fewster,541,Fremantle
+2.00E+03,Adrian Fletcher,101,Fremantle
+2.00E+03,Mark Gale,509,Fremantle
+2.00E+03,Antoni Grover,534,Fremantle
+2.00E+03,Paul Hasleby,542,Fremantle
+2.00E+03,Dale Kickett,477,Fremantle
+2.00E+03,Steven Koops,517,Fremantle
+2.00E+03,Justin Longmuir,535,Fremantle
+2.00E+03,Troy Longmuir,543,Fremantle
+2.00E+03,Shaun McManus,504,Fremantle
+2.00E+03,Clem Michael,527,Fremantle
+2.00E+03,Tony Modra,14,Fremantle
+2.00E+03,Jason Norrish,475,Fremantle
+2.00E+03,Shane Parker,501,Fremantle
+2.00E+03,Ashley Prescott,532,Fremantle
+2.00E+03,Jess Sinclair,523,Fremantle
+2.00E+03,James Walker,531,Fremantle
+2.00E+03,Clive Waterhouse,515,Fremantle
+2.00E+03,Clint Bizzell,589,Geelong
+2.00E+03,Ronnie Burns,585,Geelong
+2.00E+03,Ben Graham,556,Geelong
+2.00E+03,Derek Hall,576,Geelong
+2.00E+03,Tom Harley,608,Geelong
+2.00E+03,Garry Hocking,577,Geelong
+2.00E+03,Adam Houlihan,593,Geelong
+2.00E+03,Glenn Kilpatrick,588,Geelong
+2.00E+03,Steven King,587,Geelong
+2.00E+03,Paul Lynch,570,Geelong
+2.00E+03,Tim McGrath,558,Geelong
+2.00E+03,David Mensch,566,Geelong
+2.00E+03,Darren Milburn,590,Geelong
+2.00E+03,Jason Mooney,606,Geelong
+2.00E+03,Peter Riccardi,560,Geelong
+2.00E+03,Brenton Sanderson,562,Geelong
+2.00E+03,Matthew Scarlett,604,Geelong
+2.00E+03,Brad Sholl,555,Geelong
+2.00E+03,Jason Snell,586,Geelong
+2.00E+03,David Spriggs,611,Geelong
+2.00E+03,Carl Steinfort,296,Geelong
+2.00E+03,Barry Stoneham,584,Geelong
+2.00E+03,Winston Abraham,485,North Melbourne
+2.00E+03,Glenn Archer,777,North Melbourne
+2.00E+03,Peter Bell,486,North Melbourne
+2.00E+03,John Blakey,762,North Melbourne
+2.00E+03,Matthew Burton,489,North Melbourne
+2.00E+03,David Calthorpe,329,North Melbourne
+2.00E+03,Matthew Capuano,774,North Melbourne
+2.00E+03,Wayne Carey,766,North Melbourne
+2.00E+03,Shane Clayton,408,North Melbourne
+2.00E+03,Shannon Grant,794,North Melbourne
+2.00E+03,Brent Harvey,788,North Melbourne
+2.00E+03,Evan Hewitt,86,North Melbourne
+2.00E+03,David King,759,North Melbourne
+2.00E+03,Adam Lange,798,North Melbourne
+2.00E+03,Jason McCartney,11,North Melbourne
+2.00E+03,Corey McKernan,775,North Melbourne
+2.00E+03,Shannon Motlop,800,North Melbourne
+2.00E+03,Ryan Pagan,801,North Melbourne
+2.00E+03,Byron Pickett,791,North Melbourne
+2.00E+03,Robert Scott,768,North Melbourne
+2.00E+03,Adam Simpson,780,North Melbourne
+2.00E+03,Anthony Stevens,772,North Melbourne
+2.00E+03,Drew Banfield,1031,West Coast
+2.00E+03,Michael Braun,1058,West Coast
+2.00E+03,Ben Cousins,1051,West Coast
+2.00E+03,Scott Cummings,315,West Coast
+2.00E+03,Andrew Embley,1065,West Coast
+2.00E+03,Chad Fletcher,1067,West Coast
+2.00E+03,Michael Gardiner,1056,West Coast
+2.00E+03,Fraser Gehrig,976,West Coast
+2.00E+03,Glen Jakovich,1038,West Coast
+2.00E+03,Dean Kemp,1028,West Coast
+2.00E+03,Peter Matera,1040,West Coast
+2.00E+03,Phillip Matera,1052,West Coast
+2.00E+03,Ashley McIntosh,1034,West Coast
+2.00E+03,Guy McKenna,1032,West Coast
+2.00E+03,Daniel Metropolis,550,West Coast
+2.00E+03,Chad Morrison,1050,West Coast
+2.00E+03,Phillip Read,1060,West Coast
+2.00E+03,Chad Rintoul,48,West Coast
+2.00E+03,Ryan Turnbull,1043,West Coast
+2.00E+03,Mitchell White,620,West Coast
+2.00E+03,Andrew Williams,1063,West Coast
+2.00E+03,David Wirrpanda,1053,West Coast
+2.00E+03,Cameron Bruce,747,Melbourne
+2.00E+03,Scott Chisholm,480,Melbourne
+2.00E+03,James Cook,156,Melbourne
+2.00E+03,Jeff Farmer,703,Melbourne
+2.00E+03,Steven Febey,690,Melbourne
+2.00E+03,Brent Grgic,729,Melbourne
+2.00E+03,Anthony Ingerson,25,Melbourne
+2.00E+03,Travis Johnstone,732,Melbourne
+2.00E+03,Andrew Leoncelli,724,Melbourne
+2.00E+03,Anthony McDonald,727,Melbourne
+2.00E+03,James McDonald,730,Melbourne
+2.00E+03,David Neitz,689,Melbourne
+2.00E+03,Alistair Nicholson,728,Melbourne
+2.00E+03,Stephen Powell,456,Melbourne
+2.00E+03,Guy Rigoni,734,Melbourne
+2.00E+03,Russell Robertson,731,Melbourne
+2.00E+03,David Schwarz,713,Melbourne
+2.00E+03,Troy Simmonds,743,Melbourne
+2.00E+03,Peter Walsh,744,Melbourne
+2.00E+03,Jeff White,502,Melbourne
+2.00E+03,Shane Woewodin,725,Melbourne
+2.00E+03,Adem Yze,714,Melbourne
+2.00E+03,Joel Bowden,890,Richmond
+2.00E+03,Leon Cameron,425,Richmond
+2.00E+03,Wayne Campbell,869,Richmond
+2.00E+03,Nick Daffy,873,Richmond
+2.00E+03,Marc Dragicevic,903,Richmond
+2.00E+03,Brendon Gale,868,Richmond
+2.00E+03,Darren Gaspar,886,Richmond
+2.00E+03,Ben Harrison,163,Richmond
+2.00E+03,Ben Holland,913,Richmond
+2.00E+03,Aaron James,237,Richmond
+2.00E+03,Andrew Kellaway,899,Richmond
+2.00E+03,Duncan Kellaway,861,Richmond
+2.00E+03,Clinton King,269,Richmond
+2.00E+03,Matthew Knights,865,Richmond
+2.00E+03,Mark Merenda,866,Richmond
+2.00E+03,Brad Ottens,897,Richmond
+2.00E+03,Matthew Richardson,870,Richmond
+2.00E+03,Matthew Rogers,864,Richmond
+2.00E+03,John Rombotis,399,Richmond
+2.00E+03,Clay Sampson,55,Richmond
+2.00E+03,Greg Tivendale,901,Richmond
+2.00E+03,Jason Torney,883,Richmond
+2.00E+03,James Begley,965,St Kilda
+2.00E+03,Tony Brown,941,St Kilda
+2.00E+03,Nathan Burke,919,St Kilda
+2.00E+03,Matthew Carr,548,St Kilda
+2.00E+03,Sean Charles,183,St Kilda
+2.00E+03,Tony Delaney,483,St Kilda
+2.00E+03,Tim Elliott,962,St Kilda
+2.00E+03,Peter Everitt,922,St Kilda
+2.00E+03,Barry Hall,953,St Kilda
+2.00E+03,Robert Harvey,930,St Kilda
+2.00E+03,Lenny Hayes,966,St Kilda
+2.00E+03,Max Hudghton,955,St Kilda
+2.00E+03,Austinn Jones,929,St Kilda
+2.00E+03,Stewart Loewe,927,St Kilda
+2.00E+03,Joe McLaren,809,St Kilda
+2.00E+03,Gavin Mitchell,513,St Kilda
+2.00E+03,Damian Monkhorst,223,St Kilda
+2.00E+03,Justin Peckett,921,St Kilda
+2.00E+03,Justin Plapp,900,St Kilda
+2.00E+03,Steven Sziller,914,St Kilda
+2.00E+03,Andrew Thompson,957,St Kilda
+2.00E+03,Matthew Young,643,St Kilda
+2.00E+03,Robert AhMat,239,Sydney
+2.00E+03,Brett Allison,770,Sydney
+2.00E+03,Jason Ball,1020,Sydney
+2.00E+03,Leo Barry,1003,Sydney
+2.00E+03,Daryn Cresswell,992,Sydney
+2.00E+03,Jared Crouch,1011,Sydney
+2.00E+03,Andrew Dunkley,983,Sydney
+2.00E+03,Peter Filandia,1004,Sydney
+2.00E+03,Ryan Fitzgerald,1021,Sydney
+2.00E+03,Adam Goodes,1012,Sydney
+2.00E+03,Dale Lewis,997,Sydney
+2.00E+03,Ben Mathews,1009,Sydney
+2.00E+03,Stuart Maxfield,867,Sydney
+2.00E+03,Matthew Nicks,1005,Sydney
+2.00E+03,Craig OBrien,928,Sydney
+2.00E+03,Michael OLoughlin,1.00E+03,Sydney
+2.00E+03,Jason Saddington,1010,Sydney
+2.00E+03,Andrew Schauble,241,Sydney
+2.00E+03,Wayne Schwass,764,Sydney
+2.00E+03,Brad Seymour,984,Sydney
+2.00E+03,Greg Stafford,994,Sydney
+2.00E+03,Rowan Warfe,369,Sydney
+2.00E+03,Steven Alessio,307,Essendon
+2.00E+03,Paul Barnard,340,Essendon
+2.00E+03,John Barnes,360,Essendon
+2.00E+03,Darren Bewick,311,Essendon
+2.00E+03,Justin Blumfield,341,Essendon
+2.00E+03,Blake Caracella,343,Essendon
+2.00E+03,Sean Denham,319,Essendon
+2.00E+03,Dustin Fletcher,304,Essendon
+2.00E+03,Damien Hardwick,324,Essendon
+2.00E+03,Chris Heffernan,347,Essendon
+2.00E+03,James Hird,312,Essendon
+2.00E+03,Jason Johnson,346,Essendon
+2.00E+03,Mark Johnson,354,Essendon
+2.00E+03,Matthew Lloyd,336,Essendon
+2.00E+03,Michael Long,313,Essendon
+2.00E+03,Mark Mercuri,310,Essendon
+2.00E+03,Joe Misiti,316,Essendon
+2.00E+03,Adam Ramanauskas,358,Essendon
+2.00E+03,Dean Rioli,356,Essendon
+2.00E+03,Dean Solomon,352,Essendon
+2.00E+03,Dean Wallis,333,Essendon
+2.00E+03,Sean Wellman,10,Essendon
+2.00E+03,Matthew Bode,90,Port Adelaide
+2.00E+03,Peter Burgoyne,824,Port Adelaide
+2.00E+03,Che Cockatoo-Collins,328,Port Adelaide
+2.00E+03,Chad Cornes,847,Port Adelaide
+2.00E+03,Stephen Daniels,834,Port Adelaide
+2.00E+03,Fabian Francis,817,Port Adelaide
+2.00E+03,Josh Francou,819,Port Adelaide
+2.00E+03,Barnaby French,844,Port Adelaide
+2.00E+03,Roger James,835,Port Adelaide
+2.00E+03,Adam Kingsley,825,Port Adelaide
+2.00E+03,Brendon Lade,822,Port Adelaide
+2.00E+03,Brayden Lyle,818,Port Adelaide
+2.00E+03,Darren Mead,827,Port Adelaide
+2.00E+03,Brett Montgomery,454,Port Adelaide
+2.00E+03,Danny Morton,400,Port Adelaide
+2.00E+03,Stephen Paxman,379,Port Adelaide
+2.00E+03,Matthew Primus,407,Port Adelaide
+2.00E+03,Nathan Steinberner,839,Port Adelaide
+2.00E+03,Nick Stevens,842,Port Adelaide
+2.00E+03,Warren Tredrea,831,Port Adelaide
+2.00E+03,Gavin Wanganeen,303,Port Adelaide
+2.00E+03,Michael Wilson,820,Port Adelaide
+2.00E+03,Rhett Biglands,83,Adelaide
+2.00E+03,David Gallagher,69,Adelaide
+2.00E+03,Kane Johnson,43,Adelaide
+2.00E+03,Ben Marsh,65,Adelaide
+2.00E+03,Ian Perrie,64,Adelaide
+2.00E+03,Tyson Stenglein,75,Adelaide
+2.00E+03,Danny Jacobs,359,Essendon
+2.00E+03,Scott Lucas,339,Essendon
+2.00E+03,Brad Bootsma,545,Fremantle
+2.00E+03,Craig Callaghan,508,Fremantle
+2.00E+03,Anthony Jones,497,Fremantle
+2.00E+03,Matthew Pavlich,544,Fremantle
+2.00E+03,Andrew Shipp,536,Fremantle
+2.00E+03,Luke Toia,518,Fremantle
+2.00E+03,Gary Dhurrkay,492,North Melbourne
+2.00E+03,Troy Makepeace,802,North Melbourne
+2.00E+03,Mick Martyn,757,North Melbourne
+2.00E+03,Martin Pike,373,North Melbourne
+2.00E+03,Craig Sholl,761,North Melbourne
+2.00E+03,Nick Davis,272,Collingwood
+2.00E+03,Tyson Lane,274,Collingwood
+2.00E+03,Steven McKee,289,Collingwood
+2.00E+03,Mark Richardson,221,Collingwood
+2.00E+03,Heath Scotland,280,Collingwood
+2.00E+03,Chris Tarrant,264,Collingwood
+2.00E+03,Craig Biddiscombe,582,Richmond
+2.00E+03,David Bourke,876,Richmond
+2.00E+03,Paul Broderick,872,Richmond
+2.00E+03,Mark Chaffey,891,Richmond
+2.00E+03,Aaron Fiora,911,Richmond
+2.00E+03,Rory Hilton,902,Richmond
+2.00E+03,Royce Vardy,908,Richmond
+2.00E+03,Adam Contessa,457,Western Bulldogs
+2.00E+03,Paul Dimattina,443,Western Bulldogs
+2.00E+03,Craig Ellis,444,Western Bulldogs
+2.00E+03,Mitch Hahn,467,Western Bulldogs
+2.00E+03,Jude Bolton,1013,Sydney
+2.00E+03,Andrew Bomford,342,Sydney
+2.00E+03,Nic Fosdike,1018,Sydney
+2.00E+03,Troy Luff,998,Sydney
+2.00E+03,Ryan OConnor,327,Sydney
+2.00E+03,Ryan OKeefe,1024,Sydney
+2.00E+03,John Stevens,1007,Sydney
+2.00E+03,Glen Bowyer,673,Hawthorn
+2.00E+03,Ben Dixon,658,Hawthorn
+2.00E+03,Rayden Tallis,631,Hawthorn
+2.00E+03,Craig Treleven,651,Hawthorn
+2.00E+03,Richard Vandenberg,667,Hawthorn
+2.00E+03,Callum Chambers,1069,West Coast
+2.00E+03,Andrew Donnelly,1049,West Coast
+2.00E+03,Darren Glass,1068,West Coast
+2.00E+03,Rowan Jones,1064,West Coast
+2.00E+03,Nicholas Stone,1057,West Coast
+2.00E+03,Paul Symmons,1044,West Coast
+2.00E+03,Josh Wooden,1055,West Coast
+2.00E+03,Nathan Brown,737,Melbourne
+2.00E+03,Paul Wheatley,749,Melbourne
+2.00E+03,Matthew Whelan,750,Melbourne
+2.00E+03,Luke Williams,746,Melbourne
+2.00E+03,Richard Champion,95,Brisbane Lions
+2.00E+03,Alastair Lynch,104,Brisbane Lions
+2.00E+03,Michael Martin,438,Brisbane Lions
+2.00E+03,Aaron Shattock,1093,Brisbane Lions
+2.00E+03,Brett Voss,975,Brisbane Lions
+2.00E+03,Simon Arnott,605,Geelong
+2.00E+03,David Clarke,607,Geelong
+2.00E+03,Paul Corrigan,591,Geelong
+2.00E+03,Daniel Foster,618,Geelong
+2.00E+03,Cameron Ling,617,Geelong
+2.00E+03,Tristan Lynch,131,Geelong
+2.00E+03,James Rahilly,599,Geelong
+2.00E+03,Matthew Bishop,738,Port Adelaide
+2.00E+03,Josh Carr,851,Port Adelaide
+2.00E+03,Stuart Dew,838,Port Adelaide
+2.00E+03,Mark Harwood,843,Port Adelaide
+2.00E+03,Derek Murray,848,Port Adelaide
+2.00E+03,Jared Poulton,845,Port Adelaide
+2.00E+03,Jarrad Schofield,846,Port Adelaide
+2.00E+03,Ang Christou,138,Carlton
+2.00E+03,Scott Freeborn,200,Carlton
+2.00E+03,Glenn Manton,161,Carlton
+2.00E+03,Stephen OReilly,199,Carlton
+2.00E+03,Stephen Silvagni,136,Carlton
+2.00E+03,Caydn Beetham,973,St Kilda
+2.00E+03,Jason Blake,974,St Kilda
+2.00E+03,Jason Heatley,958,St Kilda
+2.00E+03,Brett Knowles,960,St Kilda
+2.00E+03,Brett Moyle,972,St Kilda
+2.00E+03,Jason Traianidis,949,St Kilda
+2.00E+03,Darryl Wakelin,855,St Kilda
+2.00E+03,Nathan Bassett,56,Adelaide
+2.00E+03,Ricky OLoughlin,84,Adelaide
+2.00E+03,Ryan Houlihan,201,Carlton
+2.00E+03,Leigh Colbert,557,North Melbourne
+2.00E+03,Stephen Patterson,224,Collingwood
+2.00E+03,Brett Evans,892,Richmond
+2.00E+03,Jonathan Brown,1092,Brisbane Lions
+2.00E+03,Damian Cupido,1096,Brisbane Lions
+2.00E+03,Marcus Picken,1085,Brisbane Lions
+2.00E+03,Andrew Wills,466,Western Bulldogs
+2.00E+03,James Clement,299,Fremantle
+2.00E+03,Aaron Henneman,362,Essendon
+2.00E+03,Shane Bond,816,Port Adelaide
+2.00E+03,Bowen Lockwood,830,Port Adelaide
+2.00E+03,Chad Davis,969,St Kilda
+2.00E+03,Dale Baynes,292,Collingwood
+2.00E+03,Craig Jacotine,281,Collingwood
+2.00E+03,Bradley Smith,293,Collingwood
+2.00E+03,Paul Chapman,614,Geelong
+2.00E+03,Joel McKay,603,Geelong
+2.00E+03,Matthew Collins,41,Melbourne
+2.00E+03,Matthew Febey,691,Melbourne
+2.00E+03,Brad Green,748,Melbourne
+2.00E+03,Brady Rawlings,799,North Melbourne
+2.00E+03,Scott Bassett,849,Port Adelaide
+2.00E+03,Brent Guerra,852,Port Adelaide
+2.00E+03,Matthew Connell,19,Adelaide
+2.00E+03,Gerrard Bennett,1017,Sydney
+2.00E+03,James White,912,Richmond
+2.00E+03,Gary Moorcroft,331,Essendon
+2.00E+03,Greg Harding,514,Fremantle
+2.00E+03,Brad Wira,446,Fremantle
+2.00E+03,Nathan Chapman,121,Hawthorn
+2.00E+03,Fred Campbell,970,St Kilda
+2.00E+03,David Sierakowski,924,St Kilda
+2.00E+03,John Spaull,804,North Melbourne
+2.00E+03,Luke Penny,469,Western Bulldogs
+2.00E+03,Lance Picioane,58,Hawthorn
+2.00E+03,Daniel McPherson,1001,Sydney
+2.00E+03,Andrew Dimattina,290,Collingwood
+2.00E+03,David Antonowicz,1074,West Coast
+2.00E+03,Jaxon Crabb,1061,West Coast
+2.00E+03,David Haynes,1071,West Coast
+2.00E+03,Todd Holmes,1062,West Coast
+2.00E+03,David Wojcinski,609,Geelong
+2.00E+03,Brad Oborne,282,Collingwood
+2.00E+03,Ben Beams,745,Melbourne
+2.00E+03,Matthew Dent,389,Western Bulldogs
+2.00E+03,Robert Powell,889,Richmond
+2.00E+03,Ben Walton,964,St Kilda
+2.00E+03,Michael Prior,337,Essendon
+2.00E+03,Simon Feast,1016,Sydney
+2.00E+03,Brett Kirk,1015,Sydney
+2.00E+03,Michael Stevens,1102,Port Adelaide
+2.00E+03,Brett Chandler,388,North Melbourne
+2.00E+03,Trent Knobel,1094,Brisbane Lions
+2.00E+03,Brodie Holland,298,Fremantle
+2.00E+03,Daniel Schell,547,Fremantle
+2.00E+03,Paul Kelly,993,Sydney
+2.00E+03,Peter Caven,38,Adelaide
+2.00E+03,Andrew Merrington,203,Carlton
+2.00E+03,Tim Notting,1087,Brisbane Lions
+2.00E+03,Matthew Robbins,463,Western Bulldogs
+2.00E+03,Patrick Wiggins,470,Western Bulldogs
+2.00E+03,Laurie Bellotti,1066,West Coast
+2.00E+03,Michael OBrien,1076,West Coast
+2.00E+03,Heath Black,520,Fremantle
+2.00E+03,Danny OBrien,612,Geelong
+2.00E+03,Steven Pitt,244,Melbourne
+2.00E+03,Justin Cicolella,81,Adelaide
+2.00E+03,Mark Porter,180,Carlton
+2.00E+03,Des Headland,1089,Brisbane Lions
+2.00E+03,Ben Robbins,133,Brisbane Lions
+2.00E+03,Rhyce Shaw,291,Collingwood
+2.00E+03,Shane Watson,214,Collingwood
+2.00E+03,Brett Johnson,676,Hawthorn
+2.00E+03,Luke McPharlin,677,Hawthorn
+2.00E+03,Steven Baker,967,St Kilda
+2.00E+03,Troy Schwarze,971,St Kilda
+2.00E+03,Mark Fraser,325,Essendon
+2.00E+03,Lionel Proctor,898,Richmond
+2.00E+03,Kasey Green,1070,West Coast
+2.00E+03,Paul Dooley,458,Western Bulldogs
+2.00E+03,Bryan Beinke,71,Adelaide
+2.00E+03,Donald Dickie,821,Port Adelaide
+2.00E+03,Joel Corey,616,Geelong
+2.00E+03,Cameron Mooney,615,Geelong
+2.00E+03,Sam Cranage,963,St Kilda
+2.00E+03,Heath Culpitt,195,Carlton
+2.00E+03,Gavin Crosisca,212,Collingwood
+2.00E+03,Daniel Ward,740,Melbourne
+2.00E+03,Ben Fixter,1022,Sydney
+2.00E+03,Paul Koulouriotis,853,Port Adelaide
+2.00E+03,Nathan Clarke,1095,Brisbane Lions
+2.00E+03,Kent Kingsley,623,North Melbourne
+2.00E+03,Adam Chatfield,202,Carlton
+2.00E+03,Robert Murphy,468,Western Bulldogs
+2.00E+03,Ben Haynes,910,Richmond
+2.00E+03,Hamish Simpson,598,Geelong
+2.00E+03,Stuart Cochrane,795,North Melbourne
+2.00E+03,Shane Wakelin,297,St Kilda
+2.00E+03,Jonathon Robran,361,Essendon
+2.00E+03,Marcus Seecamp,698,Melbourne
+2.00E+03,Chance Bateman,675,Hawthorn
+2.00E+03,Simon Godfrey,751,Melbourne
+2.00E+03,Ty Zantuck,909,Richmond
+2.00E+03,Brad Stephens,803,North Melbourne
+2.00E+03,Stephen Doyle,1023,Sydney
+2.00E+03,Kane Munro,1073,West Coast
+2.00E+03,Justin Murphy,167,Carlton
+2.00E+03,Adam White,175,Carlton
+2.00E+03,Marcus Baldwin,613,Geelong
+2.00E+03,Paul Hopgood,711,Melbourne
+2.00E+03,Damien Ryan,887,St Kilda
+2.00E+03,Adam Hunter,1072,West Coast
+2.00E+03,Mark Bolton,350,Essendon
+2.00E+03,Mark McVeigh,355,Essendon
+2.00E+03,Ben Cunningham,546,Fremantle
+2.00E+03,Garth Taylor,533,Fremantle
+2.00E+03,Brendan Krummel,488,Hawthorn
+2.00E+03,Shannon Rusca,1091,Brisbane Lions
+2.00E+03,Josh Mahoney,256,Western Bulldogs
+2.00E+03,Steven Brosnan,850,Port Adelaide
+2.00E+03,Robert Shirley,82,Adelaide
+2.00E+03,Ezra Poyas,906,Richmond
+2.00E+03,Chris Lewis,1039,West Coast
+2.00E+03,Andrew Mills,907,Richmond
+2.00E+03,Mark Stevens,59,Adelaide
+2.00E+03,Shannon Watt,797,North Melbourne
+2.00E+03,Christin Macri,462,Western Bulldogs
+2.00E+03,Steven Rode,678,Hawthorn
+2.00E+03,Brett Backwell,190,Carlton
+2.00E+03,Brady Anderson,793,North Melbourne
+2.00E+03,Michael Doughty,85,Adelaide
+2.00E+03,Scott Bennett,1075,West Coast
 2001,Clint Bizzell,589,Geelong
 2001,Ronnie Burns,585,Geelong
 2001,David Clarke,607,Geelong
@@ -43005,7 +43005,7 @@ Season,Player,ID,Team
 2001,Ben Mathews,1009,Sydney
 2001,Stuart Maxfield,867,Sydney
 2001,Daniel McPherson,1001,Sydney
-2001,Michael OLoughlin,1000,Sydney
+2001,Michael OLoughlin,1.00E+03,Sydney
 2001,Jason Saddington,1010,Sydney
 2001,Andrew Schauble,241,Sydney
 2001,Wayne Schwass,764,Sydney
@@ -43413,7 +43413,7 @@ Season,Player,ID,Team
 2002,Daniel McPherson,1001,Sydney
 2002,Ricky Mott,1111,Sydney
 2002,Matthew Nicks,1005,Sydney
-2002,Michael OLoughlin,1000,Sydney
+2002,Michael OLoughlin,1.00E+03,Sydney
 2002,Jason Saddington,1010,Sydney
 2002,Andrew Schauble,241,Sydney
 2002,Scott Stevens,1112,Sydney
@@ -44389,7 +44389,7 @@ Season,Player,ID,Team
 2003,Scott Thornton,1148,Fremantle
 2003,Jared Brennan,1438,Brisbane Lions
 2003,Paul Barnard,340,Essendon
-2003,Michael OLoughlin,1000,Sydney
+2003,Michael OLoughlin,1.00E+03,Sydney
 2003,Jason McCartney,11,North Melbourne
 2003,Brad Ottens,897,Richmond
 2003,Damien Adkins,283,West Coast
@@ -44811,7 +44811,7 @@ Season,Player,ID,Team
 2004,Stuart Maxfield,867,Sydney
 2004,Jarrad McVeigh,3950,Sydney
 2004,Ryan OKeefe,1024,Sydney
-2004,Michael OLoughlin,1000,Sydney
+2004,Michael OLoughlin,1.00E+03,Sydney
 2004,Mark Powell,1448,Sydney
 2004,Lewis Roberts-Thomson,1453,Sydney
 2004,Jason Saddington,1010,Sydney
@@ -45466,7 +45466,7 @@ Season,Player,ID,Team
 2005,Justin Peckett,921,St Kilda
 2005,Stephen Powell,456,St Kilda
 2005,Luke Ablett,1175,Sydney
-2005,Michael OLoughlin,1000,Sydney
+2005,Michael OLoughlin,1.00E+03,Sydney
 2005,Jason Saddington,1010,Sydney
 2005,Luke Vogels,4097,Sydney
 2005,Daniel Bell,4042,Melbourne
@@ -45866,7 +45866,7 @@ Season,Player,ID,Team
 2006,Ben Mathews,1009,Sydney
 2006,Jarrad McVeigh,3950,Sydney
 2006,Ryan OKeefe,1024,Sydney
-2006,Michael OLoughlin,1000,Sydney
+2006,Michael OLoughlin,1.00E+03,Sydney
 2006,Ted Richards,1119,Sydney
 2006,Lewis Roberts-Thomson,1453,Sydney
 2006,Adam Schneider,1432,Sydney
@@ -46460,7 +46460,7 @@ Season,Player,ID,Team
 2007,Ben Mathews,1009,Sydney
 2007,Jarrad McVeigh,3950,Sydney
 2007,Ryan OKeefe,1024,Sydney
-2007,Michael OLoughlin,1000,Sydney
+2007,Michael OLoughlin,1.00E+03,Sydney
 2007,Simon Phillips,4198,Sydney
 2007,Ted Richards,1119,Sydney
 2007,Luke Vogels,4097,Sydney
@@ -47053,7 +47053,7 @@ Season,Player,ID,Team
 2008,Jarrad McVeigh,3950,Sydney
 2008,Jarred Moore,4096,Sydney
 2008,Ryan OKeefe,1024,Sydney
-2008,Michael OLoughlin,1000,Sydney
+2008,Michael OLoughlin,1.00E+03,Sydney
 2008,Ted Richards,1119,Sydney
 2008,Lewis Roberts-Thomson,1453,Sydney
 2008,Gary Ablett,1105,Geelong
@@ -47715,7 +47715,7 @@ Season,Player,ID,Team
 2009,Liam Picken,11731,Western Bulldogs
 2009,Scott Welsh,80,Western Bulldogs
 2009,Luke Ablett,1175,Sydney
-2009,Michael OLoughlin,1000,Sydney
+2009,Michael OLoughlin,1.00E+03,Sydney
 2009,Leigh Brown,539,Collingwood
 2009,Brad Dick,11552,Collingwood
 2009,Heath Shaw,4132,Collingwood
@@ -49073,7 +49073,7 @@ Season,Player,ID,Team
 2011,Tony Armstrong,11807,Adelaide
 2011,Josh Dyson,11999,Brisbane Lions
 2011,Matt Dea,11829,Richmond
-2011,Peter Faulks,12000,Fremantle
+2011,Peter Faulks,1.20E+04,Fremantle
 2011,John Butcher,12001,Port Adelaide
 2011,Tom Jonas,12002,Port Adelaide
 2011,Joseph Daye,11946,Gold Coast
@@ -50442,7 +50442,7 @@ Season,Player,ID,Team
 2013,Kristian Jaksch,12227,Greater Western Sydney
 2013,James Stewart,12232,Greater Western Sydney
 2013,Jesse Crichton,11864,Fremantle
-2013,Peter Faulks,12000,Fremantle
+2013,Peter Faulks,1.20E+04,Fremantle
 2013,Alex Forster,12230,Fremantle
 2013,Josh Mellington,11983,Fremantle
 2013,Craig Moller,12231,Fremantle
@@ -52521,28 +52521,28 @@ Season,Player,ID,Team
 2017,Adam Treloar,12054,Collingwood
 2017,Travis Varcoe,11549,Collingwood
 2017,Jesse White,11657,Collingwood
-2017,Shane Biggs,12228,Footscray
-2017,Marcus Bontempelli,12269,Footscray
-2017,Matthew Boyd,1450,Footscray
-2017,Tom Boyd,12270,Footscray
-2017,Travis Cloke,4086,Footscray
-2017,Zaine Cordy,12392,Footscray
-2017,Stewart Crameri,11872,Footscray
-2017,Luke Dahlhaus,11974,Footscray
-2017,Caleb Daniel,12373,Footscray
-2017,Lachie Hunter,12203,Footscray
-2017,Jason Johannisen,12122,Footscray
-2017,Lin Jong,12125,Footscray
-2017,Tom Liberatore,11898,Footscray
-2017,Jack Macrae,12166,Footscray
-2017,Toby McLean,12363,Footscray
-2017,Dale Morris,4084,Footscray
-2017,Robert Murphy,468,Footscray
-2017,Liam Picken,11731,Footscray
-2017,Fletcher Roberts,12126,Footscray
-2017,Jake Stringer,12167,Footscray
-2017,Matt Suckling,11718,Footscray
-2017,Easton Wood,11788,Footscray
+2017,Shane Biggs,12228,Western Bulldogs
+2017,Marcus Bontempelli,12269,Western Bulldogs
+2017,Matthew Boyd,1450,Western Bulldogs
+2017,Tom Boyd,12270,Western Bulldogs
+2017,Travis Cloke,4086,Western Bulldogs
+2017,Zaine Cordy,12392,Western Bulldogs
+2017,Stewart Crameri,11872,Western Bulldogs
+2017,Luke Dahlhaus,11974,Western Bulldogs
+2017,Caleb Daniel,12373,Western Bulldogs
+2017,Lachie Hunter,12203,Western Bulldogs
+2017,Jason Johannisen,12122,Western Bulldogs
+2017,Lin Jong,12125,Western Bulldogs
+2017,Tom Liberatore,11898,Western Bulldogs
+2017,Jack Macrae,12166,Western Bulldogs
+2017,Toby McLean,12363,Western Bulldogs
+2017,Dale Morris,4084,Western Bulldogs
+2017,Robert Murphy,468,Western Bulldogs
+2017,Liam Picken,11731,Western Bulldogs
+2017,Fletcher Roberts,12126,Western Bulldogs
+2017,Jake Stringer,12167,Western Bulldogs
+2017,Matt Suckling,11718,Western Bulldogs
+2017,Easton Wood,11788,Western Bulldogs
 2017,Angus Brayshaw,12322,Melbourne
 2017,Jeff Garlett,11711,Melbourne
 2017,Max Gawn,11966,Melbourne
@@ -52785,28 +52785,28 @@ Season,Player,ID,Team
 2017,Rory Sloane,11792,Adelaide
 2017,Brodie Smith,11891,Adelaide
 2017,Daniel Talia,11989,Adelaide
-2017,Matt Buntine,12082,GWS
-2017,Jeremy Cameron,12017,GWS
-2017,Phil Davis,11825,GWS
-2017,Toby Greene,12025,GWS
-2017,Ryan Griffen,4080,GWS
-2017,Nick Haynes,12091,GWS
-2017,Steve Johnson,1140,GWS
-2017,Josh Kelly,12255,GWS
-2017,Adam Kennedy,12031,GWS
-2017,Matthew Kennedy,12455,GWS
-2017,Rory Lobb,12282,GWS
-2017,Shane Mumford,11656,GWS
-2017,Tendai Mzungu,11956,GWS
-2017,Jonathon Patton,12096,GWS
-2017,Tom Scully,11802,GWS
-2017,Heath Shaw,4132,GWS
-2017,Dylan Shiel,12022,GWS
-2017,Devon Smith,12029,GWS
-2017,Tim Taranto,12504,GWS
-2017,Adam Tomlinson,12027,GWS
-2017,Callan Ward,11677,GWS
-2017,Zac Williams,12175,GWS
+2017,Matt Buntine,12082,Greater Western Sydney
+2017,Jeremy Cameron,12017,Greater Western Sydney
+2017,Phil Davis,11825,Greater Western Sydney
+2017,Toby Greene,12025,Greater Western Sydney
+2017,Ryan Griffen,4080,Greater Western Sydney
+2017,Nick Haynes,12091,Greater Western Sydney
+2017,Steve Johnson,1140,Greater Western Sydney
+2017,Josh Kelly,12255,Greater Western Sydney
+2017,Adam Kennedy,12031,Greater Western Sydney
+2017,Matthew Kennedy,12455,Greater Western Sydney
+2017,Rory Lobb,12282,Greater Western Sydney
+2017,Shane Mumford,11656,Greater Western Sydney
+2017,Tendai Mzungu,11956,Greater Western Sydney
+2017,Jonathon Patton,12096,Greater Western Sydney
+2017,Tom Scully,11802,Greater Western Sydney
+2017,Heath Shaw,4132,Greater Western Sydney
+2017,Dylan Shiel,12022,Greater Western Sydney
+2017,Devon Smith,12029,Greater Western Sydney
+2017,Tim Taranto,12504,Greater Western Sydney
+2017,Adam Tomlinson,12027,Greater Western Sydney
+2017,Callan Ward,11677,Greater Western Sydney
+2017,Zac Williams,12175,Greater Western Sydney
 2017,Connor Blakely,12397,Fremantle
 2017,Zac Dawson,4141,Fremantle
 2017,Nat Fyfe,11834,Fremantle
@@ -52860,8 +52860,8 @@ Season,Player,ID,Team
 2017,Robbie Fox,12510,Sydney
 2017,Will Hayward,12509,Sydney
 2017,Nic Newman,12508,Sydney
-2017,Marcus Adams,12409,Footscray
-2017,Tom Campbell,12097,Footscray
+2017,Marcus Adams,12409,Western Bulldogs
+2017,Tom Campbell,12097,Western Bulldogs
 2017,Ryan Burton,12477,Hawthorn
 2017,Luke Hodge,1134,Hawthorn
 2017,Teia Miles,12507,Hawthorn
@@ -52869,9 +52869,9 @@ Season,Player,ID,Team
 2017,Taylor Walker,11713,Adelaide
 2017,Jack Leslie,12309,Gold Coast
 2017,David Swallow,11919,Gold Coast
-2017,Jacob Hopper,12440,GWS
-2017,Sam Reid,11705,GWS
-2017,Nathan Wilson,12024,GWS
+2017,Jacob Hopper,12440,Greater Western Sydney
+2017,Sam Reid,11705,Greater Western Sydney
+2017,Nathan Wilson,12024,Greater Western Sydney
 2017,Blake Acres,12276,St Kilda
 2017,Paddy McCartin,12339,St Kilda
 2017,Leigh Montagna,1137,St Kilda
@@ -52893,7 +52893,7 @@ Season,Player,ID,Team
 2017,Levi Greenwood,11745,Collingwood
 2017,Ryan Clarke,12461,North Melbourne
 2017,Sam Durdin,12515,North Melbourne
-2017,Aidan Corr,12181,GWS
+2017,Aidan Corr,12181,Greater Western Sydney
 2017,Todd Elton,12100,Richmond
 2017,Dean Kent,12184,Melbourne
 2017,Tim Smith,12514,Melbourne
@@ -52926,8 +52926,8 @@ Season,Player,ID,Team
 2017,Sam Butler,3983,West Coast
 2017,Liam Duggan,12334,West Coast
 2017,Will Schofield,11605,West Coast
-2017,Josh Dunkley,12408,Footscray
-2017,Clay Smith,12042,Footscray
+2017,Josh Dunkley,12408,Western Bulldogs
+2017,Clay Smith,12042,Western Bulldogs
 2017,Tomas Bugg,12016,Melbourne
 2017,Sam Frost,12119,Melbourne
 2017,Jake Spencer,11722,Melbourne
@@ -52962,8 +52962,8 @@ Season,Player,ID,Team
 2017,Daniel Wells,1427,Collingwood
 2017,Aaron Francis,12467,Essendon
 2017,Ben McNiece,12527,Essendon
-2017,Bailey Dale,12354,Footscray
-2017,Bailey Williams,12441,Footscray
+2017,Bailey Dale,12354,Western Bulldogs
+2017,Bailey Williams,12441,Western Bulldogs
 2017,Jack Sinclair,12325,St Kilda
 2017,Koby Stevens,11852,St Kilda
 2017,Brandon Jack,12200,Sydney
@@ -52980,8 +52980,8 @@ Season,Player,ID,Team
 2017,Lynden Dunn,4166,Collingwood
 2017,Jed Bews,12278,Geelong
 2017,Steven Morris,12033,Richmond
-2017,Stephen Coniglio,12028,GWS
-2017,Harry Himmelberg,12462,GWS
+2017,Stephen Coniglio,12028,Greater Western Sydney
+2017,Harry Himmelberg,12462,Greater Western Sydney
 2017,Corey Wagner,12453,North Melbourne
 2017,Jordan de Goey,12318,Collingwood
 2017,Corey Ellis,12346,Richmond
@@ -52994,25 +52994,25 @@ Season,Player,ID,Team
 2017,Matthew Taberner,12205,Fremantle
 2017,Josh Wagner,12424,Melbourne
 2017,Fraser McInnes,12345,West Coast
-2017,Jack Redpath,12296,Footscray
-2017,Lukas Webb,12337,Footscray
+2017,Jack Redpath,12296,Western Bulldogs
+2017,Lukas Webb,12337,Western Bulldogs
 2017,Jack Fitzpatrick,12013,Hawthorn
 2017,Josh Walker,12109,Brisbane Lions
-2017,Daniel Lloyd,12532,GWS
-2017,Lachie Whitfield,12143,GWS
+2017,Daniel Lloyd,12532,Greater Western Sydney
+2017,Lachie Whitfield,12143,Greater Western Sydney
 2017,James Stewart,12232,Essendon
 2017,Jake Kolodjashnij,12370,Geelong
 2017,Mark OConnor,12531,Geelong
 2017,Jake Batchelor,11889,Richmond
 2017,Brendon Ah Chee,12338,Port Adelaide
 2017,Keegan Brooksby,12362,Gold Coast
-2017,Tory Dickson,12043,Footscray
-2017,Mitch Wallis,11934,Footscray
+2017,Tory Dickson,12043,Western Bulldogs
+2017,Mitch Wallis,11934,Western Bulldogs
 2017,Scott Selwood,11644,Geelong
 2017,Daniel McKenzie,12350,St Kilda
 2017,Shai Bolton,12535,Richmond
-2017,Matt de Boer,11746,GWS
-2017,Harry Perryman,12536,GWS
+2017,Matt de Boer,11746,Greater Western Sydney
+2017,Harry Perryman,12536,Greater Western Sydney
 2017,Matthew Hammelmann,12457,Brisbane Lions
 2017,Jordan Gallucci,12534,Adelaide
 2017,Hugh Greenwood,12533,Adelaide
@@ -53021,14 +53021,14 @@ Season,Player,ID,Team
 2017,Jordan Cunico,12538,Geelong
 2017,James Cousins,12539,Hawthorn
 2017,Dallas Willsmore,12540,Hawthorn
-2017,Tim English,12537,Footscray
-2017,Jordan Roughead,11833,Footscray
+2017,Tim English,12537,Western Bulldogs
+2017,Jordan Roughead,11833,Western Bulldogs
 2017,Will Brodie,12541,Gold Coast
 2017,Rhys Mathieson,12443,Brisbane Lions
 2017,Archie Smith,12472,Brisbane Lions
 2017,Matt Scharenberg,12384,Collingwood
 2017,Malcolm Karpany,12471,West Coast
-2017,Tim Mohr,12030,GWS
+2017,Tim Mohr,12030,Greater Western Sydney
 2017,Liam Sumner,12073,Carlton
 2017,Jimmy Toumpas,12149,Port Adelaide
 2017,Ben Crocker,12436,Collingwood
@@ -53044,7 +53044,7 @@ Season,Player,ID,Team
 2017,Tom Cole,12446,West Coast
 2017,Jake Neade,12151,Port Adelaide
 2017,Blaine Boekhorst,12341,Carlton
-2017,Mitch Honeychurch,12293,Footscray
+2017,Mitch Honeychurch,12293,Western Bulldogs
 2017,Alex Witherden,12546,Brisbane Lions
 2017,Hayden Ballantyne,11770,Fremantle
 2017,Sean Darcy,12547,Fremantle
@@ -53054,7 +53054,7 @@ Season,Player,ID,Team
 2017,Ciaran Sheehan,12301,Carlton
 2017,Ryan Davis,11667,Gold Coast
 2017,Tyson Stengle,12552,Richmond
-2017,Jeremy Finlayson,12553,GWS
+2017,Jeremy Finlayson,12553,Greater Western Sydney
 2017,Wylie Buzza,12549,Geelong
 2017,Zach Guthrie,12551,Geelong
 2017,Sam Simpson,12550,Geelong
@@ -53073,7 +53073,7 @@ Season,Player,ID,Team
 2017,Nathan Broad,12456,Richmond
 2017,Dylan Buckley,12159,Carlton
 2017,Ciaran Byrne,12336,Carlton
-2017,Lewis Young,12559,Footscray
+2017,Lewis Young,12559,Western Bulldogs
 2017,Alex Keath,12560,Adelaide
 2017,Nick Larkey,12563,North Melbourne
 2017,Josh Williams,12562,North Melbourne
@@ -53082,10 +53082,10 @@ Season,Player,ID,Team
 2017,Jack Scrimshaw,12565,Gold Coast
 2017,Conor Glass,12561,Hawthorn
 2017,Rowan Marshall,12564,St Kilda
-2017,Will Setterfield,12567,GWS
+2017,Will Setterfield,12567,Greater Western Sydney
 2017,Rupert Wills,12468,Collingwood
 2017,Harry McKay,12566,Carlton
-2017,Dawson Simpson,11822,GWS
+2017,Dawson Simpson,11822,Greater Western Sydney
 2017,Brandon White,12486,St Kilda
 2017,Max Spencer,12568,Gold Coast
 2017,Luke Partington,12569,West Coast
@@ -53094,7 +53094,7 @@ Season,Player,ID,Team
 2017,Sam Skinner,12571,Brisbane Lions
 2017,Paul Seedsman,12035,Adelaide
 2017,Corey Maynard,12572,Melbourne
-2017,Brett Deledio,4068,GWS
+2017,Brett Deledio,4068,Greater Western Sydney
 2017,Daniel Currie,12257,Gold Coast
 2017,Jarrad Grant,11744,Gold Coast
 2017,Mitch Hallahan,12271,Gold Coast
@@ -53108,6 +53108,6 @@ Season,Player,ID,Team
 2017,Jacob Townsend,12023,Richmond
 2017,Harley Bennell,11916,Fremantle
 2017,Harry Morrison,12579,Hawthorn
-2017,Patrick Lipinski,12578,Footscray
+2017,Patrick Lipinski,12578,Western Bulldogs
 2017,Kayle Kirby,12577,Collingwood
 2017,Ben McKay,12580,North Melbourne
