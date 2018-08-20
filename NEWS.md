@@ -5,11 +5,12 @@
 * fixed bug where the default `start_date` missed Round 1, 1987 [#29](https://github.com/jimmyday12/fitzRoy/issues/29)
 * fixed bug where certain games from 2018 that had 'notes' were being parsed incorrectly [#30](https://github.com/jimmyday12/fitzRoy/issues/30)
 * fixed bug where certain games from early 1900 were missing. Thanks to [Tony](https://twitter.com/MatterOfStats) [#31](https://github.com/jimmyday12/fitzRoy/issues/31)
+* fixed bug with `get_afltables_player_ids` where it was returning 0 for all players [#34](https://github.com/jimmyday12/fitzRoy/issues/34)
 
 
 # fitzRoy 0.1.5
 
-* new function `get_aflplayer_data` returns a data frame containing aflplayer stats for the specified games [#19](https://github.com/jimmyday12/fitzRoy/issues/19)
+* new function `get_afltables_stats` returns a data frame containing aflplayer stats for the specified games [#19](https://github.com/jimmyday12/fitzRoy/issues/19)
 * new helper function `get_aflplayer_urls` returns the URLs of games falling within a date range. Useful to pass to `get_aflplayer_data` 
 * BREAKING CHANGE: removed `afldata` from the included data to reduce package size (in preperation for CRAN submission). Please use `update_aflplayer_data` or the helper functions
 * fixed bug where `get_fixture` returned wrong teams [#23](https://github.com/jimmyday12/fitzRoy/issues/23)

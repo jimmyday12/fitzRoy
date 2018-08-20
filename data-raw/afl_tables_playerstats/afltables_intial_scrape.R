@@ -135,11 +135,33 @@ afldata <- bind_rows(afldata, old_dat) %>%
   group_by(Season, Round, Home.team, Away.team) %>%
   arrange(row_id)
 
+# Write ids file
+id <- afldata %>%
+  ungroup() %>%
+  mutate(Player = paste(First.name, Surname),
+         Team = Playing.for) %>%
+  select(Season, Player, ID, Team) %>%
+  distinct()
+
+ids_2017 <- read_csv(here::here("data-raw", "afl_tables_playerstats", "afltables_playerstats_2017.csv")) %>%
+  ungroup() %>%
+  mutate(Season = 2017) %>%
+  select(Season, Player, ID, Team) %>%
+  distinct() 
+
+  id <- id %>%
+    bind_rows(ids_2017)
+  
+write_csv(id, here::here("data-raw", "afl_tables_playerstats", "player_ids.csv"))
+
 # Somehow make match #'s
 # Add old data back in right spot
 # Save
 
 maxdate <- max(afldata$Date)
+
+# Todo
+# Fix scrape not returning ID's
 
 # get new results
 urls <- get_afltables_urls(maxdate + 1, "01/08/2018")

@@ -1553,7 +1553,7 @@ Season,Player,ID,Team
 1902,Charlie Ross,4785,Carlton
 1902,Gordon Ross,4762,Carlton
 1902,Archie Snell,4998,Carlton
-1902,George Topping,5e3,Carlton
+1902,George Topping,5000,Carlton
 1902,Charlie Tough,5001,Carlton
 1902,Fred Webber,5003,Carlton
 1902,Gerry Balme,4913,St Kilda
@@ -1844,7 +1844,7 @@ Season,Player,ID,Team
 1903,George Bruce,5082,Carlton
 1903,Mick Grace,4353,Carlton
 1903,Frank Hince,4858,Carlton
-1903,George Topping,5e3,Carlton
+1903,George Topping,5000,Carlton
 1903,Jim Anderson,4308,Essendon
 1903,George Barker,5053,Essendon
 1903,Son Barry,4310,Essendon
@@ -2153,7 +2153,7 @@ Season,Player,ID,Team
 1904,Harry Newbound,5008,Carlton
 1904,Pat Pelly,5182,Carlton
 1904,Eddie Prescott,5184,Carlton
-1904,George Topping,5e3,Carlton
+1904,George Topping,5000,Carlton
 1904,Frank Bowey,4868,Geelong
 1904,George Doull,5166,Geelong
 1904,Jack Knell,5170,Geelong
@@ -2260,7 +2260,7 @@ Season,Player,ID,Team
 1905,Billy Payne,5181,Carlton
 1905,Charlie Roland,4784,Carlton
 1905,Archie Snell,4998,Carlton
-1905,George Topping,5e3,Carlton
+1905,George Topping,5000,Carlton
 1905,Edgar Yeomans,5290,Carlton
 1905,George Barker,5053,Essendon
 1905,Ben Baxter,4947,Essendon
@@ -2531,7 +2531,7 @@ Season,Player,ID,Team
 1906,Rod McGregor,5285,Carlton
 1906,Billy Payne,5181,Carlton
 1906,Archie Snell,4998,Carlton
-1906,George Topping,5e3,Carlton
+1906,George Topping,5000,Carlton
 1906,Syd Anderson,4904,Melbourne
 1906,Vin Coutie,4805,Melbourne
 1906,Jack Gardiner,4879,Melbourne
@@ -2821,7 +2821,7 @@ Season,Player,ID,Team
 1907,Rod McGregor,5285,Carlton
 1907,Billy Payne,5181,Carlton
 1907,Archie Snell,4998,Carlton
-1907,George Topping,5e3,Carlton
+1907,George Topping,5000,Carlton
 1907,Frank Williams,5494,Carlton
 1907,Horrie Bant,5314,St Kilda
 1907,Vic Barwick,5021,St Kilda
@@ -3092,7 +3092,7 @@ Season,Player,ID,Team
 1908,Alex Lang,5397,Carlton
 1908,Rod McGregor,5285,Carlton
 1908,Billy Payne,5181,Carlton
-1908,George Topping,5e3,Carlton
+1908,George Topping,5000,Carlton
 1908,Frank Williams,5494,Carlton
 1908,Horrie Bant,5314,St Kilda
 1908,Vic Barwick,5021,St Kilda
@@ -3440,7 +3440,7 @@ Season,Player,ID,Team
 1909,Andy Pattison,5626,Carlton
 1909,George Renwick,5762,Carlton
 1909,George Stewart,5764,Carlton
-1909,George Topping,5e3,Carlton
+1909,George Topping,5000,Carlton
 1909,Denby Browning,5578,University
 1909,Harry Cordner,5012,University
 1909,Ted Cordner,5198,University
@@ -3793,7 +3793,7 @@ Season,Player,ID,Team
 1910,Andy McDonald,5879,Carlton
 1910,Andy ODonnell,5880,Carlton
 1910,Billy Payne,5181,Carlton
-1910,George Topping,5e3,Carlton
+1910,George Topping,5000,Carlton
 1910,Jack Wells,5325,Carlton
 1910,George Angus,5006,Collingwood
 1910,Tom Baxter,5497,Collingwood
@@ -4246,7 +4246,7 @@ Season,Player,ID,Team
 1911,Alec Eason,5753,Geelong
 1911,Bill Eason,4972,Geelong
 1911,Les Fairbairn,5368,Geelong
-1911,Neil Freeman,6e3,Geelong
+1911,Neil Freeman,6000,Geelong
 1911,Dick Grigg,5167,Geelong
 1911,George Heinz,5870,Geelong
 1911,Les James,5754,Geelong
@@ -4512,7 +4512,7 @@ Season,Player,ID,Team
 1912,Fen McDonald,6016,Carlton
 1912,Rod McGregor,5285,Carlton
 1912,Billy Payne,5181,Carlton
-1912,George Topping,5e3,Carlton
+1912,George Topping,5000,Carlton
 1912,Viv Valentine,6018,Carlton
 1912,Jack Wells,5325,Carlton
 1912,Archie Wilson,5882,Carlton
@@ -4524,7 +4524,7 @@ Season,Player,ID,Team
 1912,Alec Eason,5753,Geelong
 1912,Bill Eason,4972,Geelong
 1912,Les Fairbairn,5368,Geelong
-1912,Neil Freeman,6e3,Geelong
+1912,Neil Freeman,6000,Geelong
 1912,Jack Gray,6001,Geelong
 1912,Dick Grigg,5167,Geelong
 1912,Leo Healy,6003,Geelong
@@ -4901,7 +4901,7 @@ Season,Player,ID,Team
 1913,Alec Eason,5753,Geelong
 1913,Bill Eason,4972,Geelong
 1913,Les Fairbairn,5368,Geelong
-1913,Neil Freeman,6e3,Geelong
+1913,Neil Freeman,6000,Geelong
 1913,Dick Grigg,5167,Geelong
 1913,Leo Healy,6003,Geelong
 1913,George Heinz,5870,Geelong
@@ -5247,7 +5247,7 @@ Season,Player,ID,Team
 1914,Tom Brownlees,6191,Geelong
 1914,Bert Dalton,5752,Geelong
 1914,Bill Eason,4972,Geelong
-1914,Neil Freeman,6e3,Geelong
+1914,Neil Freeman,6000,Geelong
 1914,Jack Gray,6001,Geelong
 1914,Dick Grigg,5167,Geelong
 1914,Leo Healy,6003,Geelong
@@ -5487,7 +5487,7 @@ Season,Player,ID,Team
 1914,Wally Gant,5520,St Kilda
 1914,Joe Andrew,6300,Carlton
 1914,Albert Scaddan,6311,Carlton
-1914,George Topping,5e3,Carlton
+1914,George Topping,5000,Carlton
 1914,Basil Nehill,6045,Essendon
 1914,Bob Teasdale,6295,Fitzroy
 1914,Cyril Steele,5786,University
@@ -5877,7 +5877,7 @@ Season,Player,ID,Team
 1916,Horrie Jose,6391,Collingwood
 1916,Clarrie Hall,6050,Richmond
 1916,Andy McDonald,5879,Carlton
-1916,George Topping,5e3,Carlton
+1916,George Topping,5000,Carlton
 1916,Bill Burns,5162,Richmond
 1916,George Lambert,5741,Fitzroy
 1916,Harry Smith,6373,Fitzroy
@@ -7825,7 +7825,7 @@ Season,Player,ID,Team
 1923,Jack ORourke,6667,St Kilda
 1923,George Rawle,6915,Essendon
 1924,Reg Baker,2509,Collingwood
-1924,Vin Batchelor,7e3,Collingwood
+1924,Vin Batchelor,7000,Collingwood
 1924,Jack Benson,6936,Collingwood
 1924,Syd Burt,7003,Collingwood
 1924,Harry Chesswas,2674,Collingwood
@@ -11823,7 +11823,7 @@ Season,Player,ID,Team
 1933,Keith Marshall,7830,Fitzroy
 1933,Mark Daffey,2750,Hawthorn
 1933,Reg Peterson,7656,St Kilda
-1933,Wilbur Harris,3e3,Sydney
+1933,Wilbur Harris,3000,Sydney
 1933,Colin Strang,7805,St Kilda
 1933,George Bates,2526,Collingwood
 1933,Tom Mercer,7844,Hawthorn
@@ -12148,7 +12148,7 @@ Season,Player,ID,Team
 1934,Jack Lyons,7910,Geelong
 1934,Jack Power,3546,Melbourne
 1934,Bert Beard,2534,Sydney
-1934,Wilbur Harris,3e3,Sydney
+1934,Wilbur Harris,3000,Sydney
 1934,Jack Diprose,7785,North Melbourne
 1934,Clarrie Jordon,7883,Richmond
 1934,Alan Fuller,7912,Hawthorn
@@ -12541,7 +12541,7 @@ Season,Player,ID,Team
 1935,Alex Lee,7842,Hawthorn
 1935,Vin Smith,7999,Hawthorn
 1935,Bob Williams,3887,Hawthorn
-1935,Ted Williams,8e3,Hawthorn
+1935,Ted Williams,8000,Hawthorn
 1935,Alec Fyfe,7924,Collingwood
 1935,Eddie Gray,8003,Collingwood
 1935,Jack Knight,3173,Collingwood
@@ -12600,7 +12600,7 @@ Season,Player,ID,Team
 1935,Jack Keane,7965,Western Bulldogs
 1935,Harry Clarke,1598,Sydney
 1935,Rowley Flynne,7950,Sydney
-1935,Wilbur Harris,3e3,Sydney
+1935,Wilbur Harris,3000,Sydney
 1935,Ron Todd,3790,Collingwood
 1935,Marty Phelan,7970,Western Bulldogs
 1935,Bill Borwick,7985,Geelong
@@ -13036,7 +13036,7 @@ Season,Player,ID,Team
 1936,Frank Finn,7922,Western Bulldogs
 1936,Les Johnson,8051,Western Bulldogs
 1936,Vern Lamprell,7966,Western Bulldogs
-1936,Wilbur Harris,3e3,Sydney
+1936,Wilbur Harris,3000,Sydney
 1936,Eric Coutts,8042,Essendon
 1936,Harry Mallett,8044,Essendon
 1936,Archie Roberts,3597,Melbourne
@@ -13117,7 +13117,7 @@ Season,Player,ID,Team
 1937,Jim Cleary,2691,Sydney
 1937,Bill Faul,2864,Sydney
 1937,Jack Graham,2951,Sydney
-1937,Wilbur Harris,3e3,Sydney
+1937,Wilbur Harris,3000,Sydney
 1937,Maurie Johnson,3127,Sydney
 1937,Laurie Leask,8037,Sydney
 1937,Jimmy Maher,8114,Sydney
@@ -13741,7 +13741,7 @@ Season,Player,ID,Team
 1938,Bill Faul,2864,Sydney
 1938,Jack Graham,2951,Sydney
 1938,Jack Hacker,2983,Sydney
-1938,Wilbur Harris,3e3,Sydney
+1938,Wilbur Harris,3000,Sydney
 1938,Alf Hedge,8111,Sydney
 1938,Don Howard,3087,Sydney
 1938,Reg Humphries,7885,Sydney
@@ -14213,7 +14213,7 @@ Season,Player,ID,Team
 1939,George Collard,8001,Sydney
 1939,Ken Dineen,8241,Sydney
 1939,Grahame Hall,8242,Sydney
-1939,Wilbur Harris,3e3,Sydney
+1939,Wilbur Harris,3000,Sydney
 1939,Brian Kelly,8243,Sydney
 1939,Pat McNamara,7869,Sydney
 1939,Allan Mullenger,8245,Sydney
@@ -14583,7 +14583,7 @@ Season,Player,ID,Team
 1940,Owen Evans,2848,Sydney
 1940,Jack Graham,2951,Sydney
 1940,Jack Hacker,2983,Sydney
-1940,Wilbur Harris,3e3,Sydney
+1940,Wilbur Harris,3000,Sydney
 1940,Lindsay McNamara,8244,Sydney
 1940,Herbie Matthews,3275,Sydney
 1940,Pat McNamara,7869,Sydney
@@ -15053,7 +15053,7 @@ Season,Player,ID,Team
 1941,Charlie Newman,8365,Collingwood
 1941,Lou Richards,3582,Collingwood
 1941,Archie Baxter,8397,Sydney
-1941,Wilbur Harris,3e3,Sydney
+1941,Wilbur Harris,3000,Sydney
 1941,Billy King,3170,Sydney
 1941,Alan Linden,8403,Sydney
 1941,Des Martin,8405,Sydney
@@ -17609,7 +17609,7 @@ Season,Player,ID,Team
 1947,Rex Ritchie,3593,Sydney
 1947,Tom Roulent,3631,Sydney
 1947,Keith Schaefer,3666,Sydney
-1947,Allan Strang,9e3,Sydney
+1947,Allan Strang,9000,Sydney
 1947,Peter Tippett,8844,Sydney
 1947,William Williams,3890,Sydney
 1947,Don Bauer,2527,Geelong
@@ -18249,7 +18249,7 @@ Season,Player,ID,Team
 1948,George Kennedy,3159,Sydney
 1948,Bert Lucas,3237,Sydney
 1948,Jack Mullane,8997,Sydney
-1948,Allan Strang,9e3,Sydney
+1948,Allan Strang,9000,Sydney
 1948,Jack Hedley,9039,North Melbourne
 1948,Jack Collins,8862,Fitzroy
 1948,Jim Kettle,8866,Fitzroy
@@ -23976,7 +23976,7 @@ Season,Player,ID,Team
 1961,Robert Hickman,9976,Richmond
 1961,Charles Abbott,2452,Hawthorn
 1961,Owen Madigan,3253,Western Bulldogs
-1961,Graeme Taylor,1e4,Western Bulldogs
+1961,Graeme Taylor,10000,Western Bulldogs
 1961,Ian Slockwitch,9983,Richmond
 1962,Bill Arch,2467,Carlton
 1962,Leo Brereton,2593,Carlton
@@ -24373,7 +24373,7 @@ Season,Player,ID,Team
 1962,Duncan Harris,10077,Hawthorn
 1962,Kevin Billing,10036,St Kilda
 1962,Graeme Clyne,10070,Fitzroy
-1962,Graeme Taylor,1e4,Western Bulldogs
+1962,Graeme Taylor,10000,Western Bulldogs
 1962,Ron Fitzpatrick,10028,North Melbourne
 1962,Dennis Railton,9902,North Melbourne
 1962,Alan Hayes,3025,Richmond
@@ -29639,7 +29639,7 @@ Season,Player,ID,Team
 1974,Garry Davidson,10718,Geelong
 1974,Doug Scale,10810,Geelong
 1974,Mike Power,10779,Melbourne
-1974,Peter Moore,2e3,Collingwood
+1974,Peter Moore,2000,Collingwood
 1974,Mark Dawson,2342,North Melbourne
 1974,Wes Barrot,10740,Richmond
 1974,Barry Richardson,2414,Richmond
@@ -29676,7 +29676,7 @@ Season,Player,ID,Team
 1975,Rene Kink,1879,Collingwood
 1975,Phil Manassa,1938,Collingwood
 1975,Peter McKenna,1969,Collingwood
-1975,Peter Moore,2e3,Collingwood
+1975,Peter Moore,2000,Collingwood
 1975,Rod Oborne,2046,Collingwood
 1975,Barry Price,2085,Collingwood
 1975,Max Richardson,1896,Collingwood
@@ -30137,7 +30137,7 @@ Season,Player,ID,Team
 1976,Rene Kink,1879,Collingwood
 1976,Phil Manassa,1938,Collingwood
 1976,Peter McCormack,1957,Collingwood
-1976,Peter Moore,2e3,Collingwood
+1976,Peter Moore,2000,Collingwood
 1976,Bill Picken,2076,Collingwood
 1976,Max Richardson,1896,Collingwood
 1976,Wayne Richardson,2109,Collingwood
@@ -30794,7 +30794,7 @@ Season,Player,ID,Team
 1977,Wayne Gordon,2359,Collingwood
 1977,Rene Kink,1879,Collingwood
 1977,Phil Manassa,1938,Collingwood
-1977,Peter Moore,2e3,Collingwood
+1977,Peter Moore,2000,Collingwood
 1977,Terry Wight,2444,Collingwood
 1977,Andy Demetriou,10915,Sydney
 1977,Graham Dempster,2344,Sydney
@@ -31067,7 +31067,7 @@ Season,Player,ID,Team
 1978,Rene Kink,1879,Collingwood
 1978,Stan Magro,1934,Collingwood
 1978,Phil Manassa,1938,Collingwood
-1978,Peter Moore,2e3,Collingwood
+1978,Peter Moore,2000,Collingwood
 1978,Rod Oborne,2046,Collingwood
 1978,Bill Picken,2076,Collingwood
 1978,Max Richardson,1896,Collingwood
@@ -31478,7 +31478,7 @@ Season,Player,ID,Team
 1979,Stan Magro,1934,Collingwood
 1979,Phil Manassa,1938,Collingwood
 1979,Peter McCormack,1957,Collingwood
-1979,Peter Moore,2e3,Collingwood
+1979,Peter Moore,2000,Collingwood
 1979,Kevin Morris,2003,Collingwood
 1979,Bill Picken,2076,Collingwood
 1979,Stephen Roach,10962,Collingwood
@@ -31792,7 +31792,7 @@ Season,Player,ID,Team
 1979,Kevin Sheehan,2164,Geelong
 1979,Alan Woodman,2446,Geelong
 1979,Mick Nolan,2399,North Melbourne
-1979,Craig Considine,11e3,Richmond
+1979,Craig Considine,11000,Richmond
 1979,Rod Oborne,2046,Richmond
 1979,Gerald Betts,10784,Collingwood
 1979,Ross Brewer,1549,Collingwood
@@ -31912,7 +31912,7 @@ Season,Player,ID,Team
 1980,Andrew Ireland,1930,Collingwood
 1980,Stan Magro,1934,Collingwood
 1980,Peter McCormack,1957,Collingwood
-1980,Peter Moore,2e3,Collingwood
+1980,Peter Moore,2000,Collingwood
 1980,Kevin Morris,2003,Collingwood
 1980,Russell Ohlsen,2049,Collingwood
 1980,Bill Picken,2076,Collingwood
@@ -32402,7 +32402,7 @@ Season,Player,ID,Team
 1981,Rene Kink,1879,Collingwood
 1981,Stan Magro,1934,Collingwood
 1981,Peter McCormack,1957,Collingwood
-1981,Peter Moore,2e3,Collingwood
+1981,Peter Moore,2000,Collingwood
 1981,Kevin Morris,2003,Collingwood
 1981,Bill Picken,2076,Collingwood
 1981,Ray Shaw,2161,Collingwood
@@ -32864,7 +32864,7 @@ Season,Player,ID,Team
 1982,Noel Lovell,11118,Collingwood
 1982,Stan Magro,1934,Collingwood
 1982,Peter McCormack,1957,Collingwood
-1982,Peter Moore,2e3,Collingwood
+1982,Peter Moore,2000,Collingwood
 1982,Neil Peart,2064,Collingwood
 1982,Tony Shaw,1166,Collingwood
 1982,Craig Stewart,2195,Collingwood
@@ -33408,7 +33408,7 @@ Season,Player,ID,Team
 1983,Stephen Icke,1830,Melbourne
 1983,Alan Jarrott,1839,Melbourne
 1983,Glenn McLean,1976,Melbourne
-1983,Peter Moore,2e3,Melbourne
+1983,Peter Moore,2000,Melbourne
 1983,Paul OBrien,2042,Melbourne
 1983,Michael OSullivan,2044,Melbourne
 1983,Russell Richards,2111,Melbourne
@@ -33749,7 +33749,7 @@ Season,Player,ID,Team
 1984,Stephen Icke,1830,Melbourne
 1984,Alan Jarrott,1839,Melbourne
 1984,Alan Johnson,1337,Melbourne
-1984,Peter Moore,2e3,Melbourne
+1984,Peter Moore,2000,Melbourne
 1984,Michael Reynolds,11174,Melbourne
 1984,Russell Richards,2111,Melbourne
 1984,Francesco Rugolo,11175,Melbourne
@@ -34317,7 +34317,7 @@ Season,Player,ID,Team
 1985,Danny Hughes,1394,Melbourne
 1985,Stephen Icke,1830,Melbourne
 1985,Alan Jarrott,1839,Melbourne
-1985,Peter Moore,2e3,Melbourne
+1985,Peter Moore,2000,Melbourne
 1985,Michael OSullivan,2044,Melbourne
 1985,Russell Richards,2111,Melbourne
 1985,Francesco Rugolo,11175,Melbourne
@@ -34791,7 +34791,7 @@ Season,Player,ID,Team
 1986,Alan Johnson,1337,Melbourne
 1986,Nigel Kol,1885,Melbourne
 1986,Garry Lyon,695,Melbourne
-1986,Peter Moore,2e3,Melbourne
+1986,Peter Moore,2000,Melbourne
 1986,Stephen Newport,1266,Melbourne
 1986,Michael Reynolds,11174,Melbourne
 1986,Russell Richards,2111,Melbourne
@@ -35236,7 +35236,7 @@ Season,Player,ID,Team
 1987,Danny Hughes,1394,Melbourne
 1987,Alan Johnson,1337,Melbourne
 1987,Brett Lovett,706,Melbourne
-1987,Peter Moore,2e3,Melbourne
+1987,Peter Moore,2000,Melbourne
 1987,Stephen Newport,1266,Melbourne
 1987,Earl Spalding,145,Melbourne
 1987,Steven Stretch,392,Melbourne
@@ -38337,7 +38337,7 @@ Season,Player,ID,Team
 1993,Michael Sexton,137,Carlton
 1993,Stephen Silvagni,136,Carlton
 1993,Earl Spalding,145,Carlton
-1993,Scott Spalding,4e3,Carlton
+1993,Scott Spalding,4000,Carlton
 1993,Rohan Welsh,169,Carlton
 1993,Greg Williams,142,Carlton
 1993,Matt Armstrong,763,Fitzroy
@@ -39762,7 +39762,7 @@ Season,Player,ID,Team
 1995,Scott Direen,996,Sydney
 1995,Simon Garlick,459,Sydney
 1995,Dale Lewis,997,Sydney
-1995,Michael OLoughlin,1e3,Sydney
+1995,Michael OLoughlin,1000,Sydney
 1995,Anthony Rocca,251,Sydney
 1995,John Hutton,503,Fremantle
 1995,Anthony Jones,497,Fremantle
@@ -40198,7 +40198,7 @@ Season,Player,ID,Team
 1996,Stuart Maxfield,867,Sydney
 1996,Dean McRae,986,Sydney
 1996,Craig OBrien,928,Sydney
-1996,Michael OLoughlin,1e3,Sydney
+1996,Michael OLoughlin,1000,Sydney
 1996,Anthony Rocca,251,Sydney
 1996,Paul Roos,985,Sydney
 1996,Gavin Rose,991,Sydney
@@ -40750,7 +40750,7 @@ Season,Player,ID,Team
 1997,Troy Luff,998,Sydney
 1997,Jason Mooney,606,Sydney
 1997,Craig OBrien,928,Sydney
-1997,Michael OLoughlin,1e3,Sydney
+1997,Michael OLoughlin,1000,Sydney
 1997,Mark Orchard,232,Sydney
 1997,Paul Roos,985,Sydney
 1997,Brad Seymour,984,Sydney
@@ -41270,7 +41270,7 @@ Season,Player,ID,Team
 1998,Jason Mooney,606,Sydney
 1998,Matthew Nicks,1005,Sydney
 1998,Craig OBrien,928,Sydney
-1998,Michael OLoughlin,1e3,Sydney
+1998,Michael OLoughlin,1000,Sydney
 1998,Mark Orchard,232,Sydney
 1998,Paul Roos,985,Sydney
 1998,Jason Saddington,1010,Sydney
@@ -42075,7 +42075,7 @@ Season,Player,ID,Team
 1999,Fred Campbell,970,Sydney
 1999,Nic Fosdike,1018,Sydney
 1999,Ben Mathews,1009,Sydney
-1999,Michael OLoughlin,1e3,Sydney
+1999,Michael OLoughlin,1000,Sydney
 1999,Brad Seymour,984,Sydney
 1999,Adrian Hickmott,166,Carlton
 1999,Darren Hulme,179,Carlton
@@ -42560,7 +42560,7 @@ Season,Player,ID,Team
 2e3,Stuart Maxfield,867,Sydney
 2e3,Matthew Nicks,1005,Sydney
 2e3,Craig OBrien,928,Sydney
-2e3,Michael OLoughlin,1e3,Sydney
+2e3,Michael OLoughlin,1000,Sydney
 2e3,Jason Saddington,1010,Sydney
 2e3,Andrew Schauble,241,Sydney
 2e3,Wayne Schwass,764,Sydney
@@ -43005,7 +43005,7 @@ Season,Player,ID,Team
 2001,Ben Mathews,1009,Sydney
 2001,Stuart Maxfield,867,Sydney
 2001,Daniel McPherson,1001,Sydney
-2001,Michael OLoughlin,1e3,Sydney
+2001,Michael OLoughlin,1000,Sydney
 2001,Jason Saddington,1010,Sydney
 2001,Andrew Schauble,241,Sydney
 2001,Wayne Schwass,764,Sydney
@@ -43413,7 +43413,7 @@ Season,Player,ID,Team
 2002,Daniel McPherson,1001,Sydney
 2002,Ricky Mott,1111,Sydney
 2002,Matthew Nicks,1005,Sydney
-2002,Michael OLoughlin,1e3,Sydney
+2002,Michael OLoughlin,1000,Sydney
 2002,Jason Saddington,1010,Sydney
 2002,Andrew Schauble,241,Sydney
 2002,Scott Stevens,1112,Sydney
@@ -44389,7 +44389,7 @@ Season,Player,ID,Team
 2003,Scott Thornton,1148,Fremantle
 2003,Jared Brennan,1438,Brisbane Lions
 2003,Paul Barnard,340,Essendon
-2003,Michael OLoughlin,1e3,Sydney
+2003,Michael OLoughlin,1000,Sydney
 2003,Jason McCartney,11,North Melbourne
 2003,Brad Ottens,897,Richmond
 2003,Damien Adkins,283,West Coast
@@ -44811,7 +44811,7 @@ Season,Player,ID,Team
 2004,Stuart Maxfield,867,Sydney
 2004,Jarrad McVeigh,3950,Sydney
 2004,Ryan OKeefe,1024,Sydney
-2004,Michael OLoughlin,1e3,Sydney
+2004,Michael OLoughlin,1000,Sydney
 2004,Mark Powell,1448,Sydney
 2004,Lewis Roberts-Thomson,1453,Sydney
 2004,Jason Saddington,1010,Sydney
@@ -45466,7 +45466,7 @@ Season,Player,ID,Team
 2005,Justin Peckett,921,St Kilda
 2005,Stephen Powell,456,St Kilda
 2005,Luke Ablett,1175,Sydney
-2005,Michael OLoughlin,1e3,Sydney
+2005,Michael OLoughlin,1000,Sydney
 2005,Jason Saddington,1010,Sydney
 2005,Luke Vogels,4097,Sydney
 2005,Daniel Bell,4042,Melbourne
@@ -45866,7 +45866,7 @@ Season,Player,ID,Team
 2006,Ben Mathews,1009,Sydney
 2006,Jarrad McVeigh,3950,Sydney
 2006,Ryan OKeefe,1024,Sydney
-2006,Michael OLoughlin,1e3,Sydney
+2006,Michael OLoughlin,1000,Sydney
 2006,Ted Richards,1119,Sydney
 2006,Lewis Roberts-Thomson,1453,Sydney
 2006,Adam Schneider,1432,Sydney
@@ -46460,7 +46460,7 @@ Season,Player,ID,Team
 2007,Ben Mathews,1009,Sydney
 2007,Jarrad McVeigh,3950,Sydney
 2007,Ryan OKeefe,1024,Sydney
-2007,Michael OLoughlin,1e3,Sydney
+2007,Michael OLoughlin,1000,Sydney
 2007,Simon Phillips,4198,Sydney
 2007,Ted Richards,1119,Sydney
 2007,Luke Vogels,4097,Sydney
@@ -47053,7 +47053,7 @@ Season,Player,ID,Team
 2008,Jarrad McVeigh,3950,Sydney
 2008,Jarred Moore,4096,Sydney
 2008,Ryan OKeefe,1024,Sydney
-2008,Michael OLoughlin,1e3,Sydney
+2008,Michael OLoughlin,1000,Sydney
 2008,Ted Richards,1119,Sydney
 2008,Lewis Roberts-Thomson,1453,Sydney
 2008,Gary Ablett,1105,Geelong
@@ -47715,7 +47715,7 @@ Season,Player,ID,Team
 2009,Liam Picken,11731,Western Bulldogs
 2009,Scott Welsh,80,Western Bulldogs
 2009,Luke Ablett,1175,Sydney
-2009,Michael OLoughlin,1e3,Sydney
+2009,Michael OLoughlin,1000,Sydney
 2009,Leigh Brown,539,Collingwood
 2009,Brad Dick,11552,Collingwood
 2009,Heath Shaw,4132,Collingwood
@@ -49073,7 +49073,7 @@ Season,Player,ID,Team
 2011,Tony Armstrong,11807,Adelaide
 2011,Josh Dyson,11999,Brisbane Lions
 2011,Matt Dea,11829,Richmond
-2011,Peter Faulks,12e3,Fremantle
+2011,Peter Faulks,12000,Fremantle
 2011,John Butcher,12001,Port Adelaide
 2011,Tom Jonas,12002,Port Adelaide
 2011,Joseph Daye,11946,Gold Coast
@@ -50442,7 +50442,7 @@ Season,Player,ID,Team
 2013,Kristian Jaksch,12227,Greater Western Sydney
 2013,James Stewart,12232,Greater Western Sydney
 2013,Jesse Crichton,11864,Fremantle
-2013,Peter Faulks,12e3,Fremantle
+2013,Peter Faulks,12000,Fremantle
 2013,Alex Forster,12230,Fremantle
 2013,Josh Mellington,11983,Fremantle
 2013,Craig Moller,12231,Fremantle

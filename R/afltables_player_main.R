@@ -179,8 +179,8 @@ scrape_afltables_match <- function(match_urls) {
     )
 
 
-  ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season))
-
+  ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season)) 
+  
   games_joined <- games_cleaned %>%
     mutate(Player = paste(First.name, Surname)) %>%
     dplyr::left_join(ids, by = c("Season", "Player", "Playing.for" = "Team")) %>%
