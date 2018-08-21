@@ -95,10 +95,10 @@ old_urls <- sort(old_urls)
 # Add match numbers
 
 afldata <- afldata %>%
-  ungroup() %>%
-  arrange(Season, Round, Local.start.time, Home.team) %>%
-  mutate(row_id = row_number())
+  group_by(Date, Season, Round, Home.team, Away.team) 
 
+afldata$group_id <- group_indices(afldata)
+afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id)) 
 
 bad_dat <- afldata %>%
   filter((Season == 1901 & Round == "3" & Home.team == "Essendon") | 
@@ -106,7 +106,9 @@ bad_dat <- afldata %>%
            (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") | 
            (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") | 
            (Season == 1900 & Round == "8" & Home.team == "Geelong")) %>%
-  select(Season, Round, Home.team, Away.team, row_id)
+  ungroup() %>%
+  select(Season, Round, Home.team, Away.team, group_id_num) %>%
+  distinct()
 
 # Filter out the data
 afldata <- afldata %>%
@@ -124,6 +126,7 @@ old_dat <- scrape_afltables_match(old_urls) %>%
 
 # Now let's save to 2018
 afldata <- afldata %>%
+  ungroup() %>%
   as.tibble() %>%
   mutate(Date = lubridate::ymd(Date)) %>%
   mutate_if(is.factor, as.character) %>%
@@ -133,7 +136,8 @@ afldata <- afldata %>%
 # Bind data
 afldata <- bind_rows(afldata, old_dat) %>%
   group_by(Season, Round, Home.team, Away.team) %>%
-  arrange(row_id)
+  arrange(group_id_num) %>%
+  select(-group_id_num)
 
 # Write ids file
 id <- afldata %>%
