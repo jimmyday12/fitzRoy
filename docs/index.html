@@ -128,11 +128,11 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_ma
 <span class="co">#&gt; # A tibble: 6 x 16</span>
 <span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt;</span>
-<span class="co">#&gt; 1 15375 2018-08-11 R21   Port Ade…          9            4          58</span>
-<span class="co">#&gt; 2 15376 2018-08-11 R21   GWS               15           16         106</span>
-<span class="co">#&gt; 3 15377 2018-08-11 R21   Collingw…         14           20         104</span>
-<span class="co">#&gt; 4 15378 2018-08-12 R21   North Me…         12           13          85</span>
-<span class="co">#&gt; 5 15379 2018-08-12 R21   Melbourne         10           18          78</span>
+<span class="co">#&gt; 1 15393 2018-08-25 R23   Fremantle          9           13          67</span>
+<span class="co">#&gt; 2 15394 2018-08-25 R23   Carlton            8           13          61</span>
+<span class="co">#&gt; 3 15395 2018-08-25 R23   Sydney            10           14          74</span>
+<span class="co">#&gt; 4 15396 2018-08-26 R23   Brisbane…         11            6          72</span>
+<span class="co">#&gt; 5 15397 2018-08-26 R23   Melbourne         15           12         102</span>
 <span class="co">#&gt; # ... with 1 more row, and 9 more variables: Away.Team &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Away.Goals &lt;int&gt;, Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;,</span>
 <span class="co">#&gt; #   Margin &lt;int&gt;, Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></code></pre></div>
@@ -155,9 +155,35 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_ma
 <h3 class="hasAnchor">
 <a href="#afl-tables-player-results" class="anchor"></a>AFL Tables player results</h3>
 <p>A new function will return all detailed player stats from afltables.com. Primarily, the easiest way to use this is simply to call <code>get_afltables_stats</code> with your required <code>start_date</code> and <code>end_date</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#stats &lt;- get_afltables_stats(start_date = "2000-01-01", end_date = "2018-06-01")</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stats &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_afltables_stats.html">get_afltables_stats</a></span>(<span class="dt">start_date =</span> <span class="st">"2000-01-01"</span>, <span class="dt">end_date =</span> <span class="st">"2018-06-01"</span>)
+<span class="co">#&gt; Returning data from 2000-01-01 to 2018-06-01</span>
+<span class="co">#&gt; Finished getting afltables data</span>
 
-<span class="co">#tail(stats)</span></code></pre></div>
+<span class="kw">tail</span>(stats)
+<span class="co">#&gt; # A tibble: 6 x 59</span>
+<span class="co">#&gt; # Groups:   Season, Round, Home.team, Away.team [1]</span>
+<span class="co">#&gt;   Season Round Date       Local.start.time Venue Attendance Home.team  HQ1G</span>
+<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;                &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;     &lt;int&gt;</span>
+<span class="co">#&gt; 1   2018 10    2018-05-27             1440 "Per…      37575 Fremantle     3</span>
+<span class="co">#&gt; 2   2018 10    2018-05-27             1440 "Per…      37575 Fremantle     3</span>
+<span class="co">#&gt; 3   2018 10    2018-05-27             1440 "Per…      37575 Fremantle     3</span>
+<span class="co">#&gt; 4   2018 10    2018-05-27             1440 "Per…      37575 Fremantle     3</span>
+<span class="co">#&gt; 5   2018 10    2018-05-27             1440 "Per…      37575 Fremantle     3</span>
+<span class="co">#&gt; # ... with 1 more row, and 51 more variables: HQ1B &lt;int&gt;, HQ2G &lt;int&gt;,</span>
+<span class="co">#&gt; #   HQ2B &lt;int&gt;, HQ3G &lt;int&gt;, HQ3B &lt;int&gt;, HQ4G &lt;int&gt;, HQ4B &lt;int&gt;,</span>
+<span class="co">#&gt; #   Home.score &lt;int&gt;, Away.team &lt;chr&gt;, AQ1G &lt;int&gt;, AQ1B &lt;int&gt;, AQ2G &lt;int&gt;,</span>
+<span class="co">#&gt; #   AQ2B &lt;int&gt;, AQ3G &lt;int&gt;, AQ3B &lt;int&gt;, AQ4G &lt;int&gt;, AQ4B &lt;int&gt;,</span>
+<span class="co">#&gt; #   Away.score &lt;int&gt;, First.name &lt;chr&gt;, Surname &lt;chr&gt;, ID &lt;int&gt;,</span>
+<span class="co">#&gt; #   Jumper.No. &lt;dbl&gt;, Playing.for &lt;chr&gt;, Kicks &lt;dbl&gt;, Marks &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Handballs &lt;dbl&gt;, Goals &lt;dbl&gt;, Behinds &lt;dbl&gt;, Hit.Outs &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Tackles &lt;dbl&gt;, Rebounds &lt;dbl&gt;, Inside.50s &lt;dbl&gt;, Clearances &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Clangers &lt;dbl&gt;, Frees.For &lt;dbl&gt;, Frees.Against &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Brownlow.Votes &lt;dbl&gt;, Contested.Possessions &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Uncontested.Possessions &lt;dbl&gt;, Contested.Marks &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Marks.Inside.50 &lt;dbl&gt;, One.Percenters &lt;dbl&gt;, Bounces &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   Goal.Assists &lt;dbl&gt;, Time.on.Ground.. &lt;int&gt;, Substitute &lt;int&gt;,</span>
+<span class="co">#&gt; #   Umpire.1 &lt;chr&gt;, Umpire.2 &lt;chr&gt;, Umpire.3 &lt;chr&gt;, Umpire.4 &lt;chr&gt;,</span>
+<span class="co">#&gt; #   group_id &lt;int&gt;</span></code></pre></div>
 </div>
 <div id="fixture" class="section level3">
 <h3 class="hasAnchor">
@@ -208,41 +234,34 @@ results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_ma
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">## Update footywire data
 dat &lt;-<span class="st"> </span><span class="kw"><a href="reference/update_footywire_stats.html">update_footywire_stats</a></span>()
 <span class="co">#&gt; Getting match ID's...</span>
-<span class="co">#&gt; Downloading new data for 19 matches...</span>
+<span class="co">#&gt; Downloading new data for 36 matches...</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; Checking Github</span>
 <span class="co">#&gt; Getting data from footywire.com</span>
 <span class="co">#&gt; Finished getting data</span>
 
 <span class="kw">tail</span>(dat)
-<span class="co">#&gt;             Date Season    Round Venue               Player     Team</span>
-<span class="co">#&gt; 79371 2018-08-17   2018 Round 22   MCG        Aaron Francis Essendon</span>
-<span class="co">#&gt; 79372 2018-08-17   2018 Round 22   MCG          Matt Guelfi Essendon</span>
-<span class="co">#&gt; 79373 2018-08-17   2018 Round 22   MCG        Travis Colyer Essendon</span>
-<span class="co">#&gt; 79374 2018-08-17   2018 Round 22   MCG       Mitchell Brown Essendon</span>
-<span class="co">#&gt; 79375 2018-08-17   2018 Round 22   MCG         Mark Baguley Essendon</span>
-<span class="co">#&gt; 79376 2018-08-17   2018 Round 22   MCG Anthony M-Tipungwuti Essendon</span>
-<span class="co">#&gt;       Opposition Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO</span>
-<span class="co">#&gt; 79371   Richmond   Away     9694  6  7 11 84.6  4  0   0              5  0</span>
-<span class="co">#&gt; 79372   Richmond   Away     9694  3 11 10 76.9  0  0   0              4  0</span>
-<span class="co">#&gt; 79373   Richmond   Away     9694  5  8  9 81.8  0  1   0              1  0</span>
-<span class="co">#&gt; 79374   Richmond   Away     9694  5  5  8 80.0  0  0   0              1  0</span>
-<span class="co">#&gt; 79375   Richmond   Away     9694  2  5  6 85.7  0  0   1              0  1</span>
-<span class="co">#&gt; 79376   Richmond   Away     9694  4  3  6 85.7  0  0   0              1  0</span>
-<span class="co">#&gt;       TOG  K HB  D M G B T HO GA1 I50 CL CG R50 FF FA AF SC CCL SCL SI  MG</span>
-<span class="co">#&gt; 79371  88 12  1 13 8 0 0 1  0   0   2  0  1   4  2  0 68 94   0   0  3 296</span>
-<span class="co">#&gt; 79372  62  4  9 13 3 0 0 0  0   0   4  0  2   0  0  0 39 42   0   0  2 128</span>
-<span class="co">#&gt; 79373  69  6  5 11 2 1 0 0  0   1   3  0  2   0  0  0 40 55   0   0  5 165</span>
-<span class="co">#&gt; 79374  97  9  1 10 4 2 0 4  0   0   3  0  1   0  2  0 71 76   0   0  3 277</span>
-<span class="co">#&gt; 79375  86  4  3  7 4 1 0 1  0   0   0  0  3   0  1  2 35 24   0   0  1  54</span>
-<span class="co">#&gt; 79376  72  4  3  7 1 0 0 5  0   0   2  2  1   0  2  1 40 39   0   2  1  99</span>
-<span class="co">#&gt;       TO ITC T5</span>
-<span class="co">#&gt; 79371  2   8  0</span>
-<span class="co">#&gt; 79372  3   1  0</span>
-<span class="co">#&gt; 79373  2   2  0</span>
-<span class="co">#&gt; 79374  1   1  1</span>
-<span class="co">#&gt; 79375  1   2  1</span>
-<span class="co">#&gt; 79376  1   0  1</span></code></pre></div>
+<span class="co">#&gt;             Date Season    Round Venue          Player Team Opposition</span>
+<span class="co">#&gt; 80119 2018-08-26   2018 Round 23   MCG       Rory Lobb  GWS  Melbourne</span>
+<span class="co">#&gt; 80120 2018-08-26   2018 Round 23   MCG     Samuel Reid  GWS  Melbourne</span>
+<span class="co">#&gt; 80121 2018-08-26   2018 Round 23   MCG  Lachlan Keeffe  GWS  Melbourne</span>
+<span class="co">#&gt; 80122 2018-08-26   2018 Round 23   MCG Matthew Buntine  GWS  Melbourne</span>
+<span class="co">#&gt; 80123 2018-08-26   2018 Round 23   MCG     Zac Langdon  GWS  Melbourne</span>
+<span class="co">#&gt; 80124 2018-08-26   2018 Round 23   MCG    Daniel Lloyd  GWS  Melbourne</span>
+<span class="co">#&gt;       Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO TOG K HB</span>
+<span class="co">#&gt; 80119   Away     9709  2  7  7 70.0  0  0   1              9  0  67 7  3</span>
+<span class="co">#&gt; 80120   Away     9709  4  5  6 66.7  2  1   2              0  0  75 4  5</span>
+<span class="co">#&gt; 80121   Away     9709  1  8  6 75.0  0  0   0              6  0  88 2  6</span>
+<span class="co">#&gt; 80122   Away     9709  4  5  6 75.0  1  0   0              4  0  79 4  4</span>
+<span class="co">#&gt; 80123   Away     9709  4  4  6 75.0  0  0   1              0  0  76 3  5</span>
+<span class="co">#&gt; 80124   Away     9709  0  9  6 85.7  0  0   0              1  0  80 5  2</span>
+<span class="co">#&gt;        D M G B T HO GA1 I50 CL CG R50 FF FA AF SC CCL SCL SI  MG TO ITC T5</span>
+<span class="co">#&gt; 80119 10 4 1 0 2 12   0   3  1  0   1  1  0 66 91   0   1  4 225  1   0  0</span>
+<span class="co">#&gt; 80120  9 6 0 1 5  0   1   2  0  0   0  0  0 61 54   0   0  4 123  2   1  2</span>
+<span class="co">#&gt; 80121  8 3 0 0 0  1   0   0  0  1   3  0  0 28 35   0   0  0  82  2   2  0</span>
+<span class="co">#&gt; 80122  8 2 0 0 1  0   0   1  0  1   2  1  0 31 41   0   0  0 174  2   3  0</span>
+<span class="co">#&gt; 80123  8 2 1 0 2  0   0   2  0  3   0  1  3 31 25   0   0  1 110  4   1  0</span>
+<span class="co">#&gt; 80124  7 5 0 0 1  0   0   1  0  1   0  0  1 35 30   0   0  2 164  1   0  0</span></code></pre></div>
 </div>
 <div id="weather" class="section level3">
 <h3 class="hasAnchor">
@@ -268,68 +287,68 @@ weather &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span>results_w
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can get the sources</span>
 sources &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"sources"</span>)
 <span class="kw">head</span>(sources)
-<span class="co">#&gt;   id                  name                                url</span>
-<span class="co">#&gt; 1  1              Squiggle      https://live.squiggle.com.au/</span>
-<span class="co">#&gt; 2  2               The Arc           https://thearcfooty.com/</span>
-<span class="co">#&gt; 3  3        Figuring Footy          http://figuringfooty.com/</span>
-<span class="co">#&gt; 4  4       Matter of Stats      http://www.matterofstats.com/</span>
-<span class="co">#&gt; 5  5               Punters                                   </span>
-<span class="co">#&gt; 6  6 Footy Maths Institute https://footymaths.blogspot.com.au</span></code></pre></div>
+<span class="co">#&gt;                                  url id                  name</span>
+<span class="co">#&gt; 1      https://live.squiggle.com.au/  1              Squiggle</span>
+<span class="co">#&gt; 2           https://thearcfooty.com/  2               The Arc</span>
+<span class="co">#&gt; 3          http://figuringfooty.com/  3        Figuring Footy</span>
+<span class="co">#&gt; 4      http://www.matterofstats.com/  4       Matter of Stats</span>
+<span class="co">#&gt; 5                                     5               Punters</span>
+<span class="co">#&gt; 6 https://footymaths.blogspot.com.au  6 Footy Maths Institute</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get all tips</span>
 tips &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>)
 <span class="kw">head</span>(tips)  
-<span class="co">#&gt;   confidence margin hconfidence              tip ateamid round correct</span>
-<span class="co">#&gt; 1       50.0   1.00        50.0         Richmond      14     1       1</span>
-<span class="co">#&gt; 2       58.0     NA        42.0         Richmond      14     1       1</span>
-<span class="co">#&gt; 3       56.7   5.39        56.7          Carlton      14     1       0</span>
-<span class="co">#&gt; 4       62.7  10.31        37.3 Western Bulldogs      18     1       1</span>
-<span class="co">#&gt; 5       62.0  17.00        38.0 Western Bulldogs      18     1       1</span>
-<span class="co">#&gt; 6       50.0   3.00        50.0         Adelaide       9     1       1</span>
-<span class="co">#&gt;                  date   err          source gameid hteamid sourceid</span>
-<span class="co">#&gt; 1 2017-03-23 19:20:00 42.00        Squiggle      1       3        1</span>
-<span class="co">#&gt; 2 2017-03-23 19:20:00    NA  Figuring Footy      1       3        3</span>
-<span class="co">#&gt; 3 2017-03-23 19:20:00 48.39 Matter of Stats      1       3        4</span>
-<span class="co">#&gt; 4 2017-03-24 19:50:00  3.69 Matter of Stats      2       4        4</span>
-<span class="co">#&gt; 5 2017-03-24 19:50:00  3.00        Squiggle      2       4        1</span>
-<span class="co">#&gt; 6 2017-03-26 15:20:00 53.00        Squiggle      8       1        1</span>
-<span class="co">#&gt;   tipteamid    bits             updated       hteam                  ateam</span>
-<span class="co">#&gt; 1        14  0.0000 2017-07-11 13:59:46     Carlton               Richmond</span>
-<span class="co">#&gt; 2        14  0.2141 2017-04-10 12:18:02     Carlton               Richmond</span>
-<span class="co">#&gt; 3         3 -0.2076 2017-07-11 13:59:46     Carlton               Richmond</span>
-<span class="co">#&gt; 4        18  0.3265 2017-07-11 13:59:46 Collingwood       Western Bulldogs</span>
-<span class="co">#&gt; 5        18  0.3103 2017-07-11 13:59:46 Collingwood       Western Bulldogs</span>
-<span class="co">#&gt; 6         1  0.0000 2017-07-11 13:59:46    Adelaide Greater Western Sydney</span>
-<span class="co">#&gt;   year         venue</span>
-<span class="co">#&gt; 1 2017        M.C.G.</span>
-<span class="co">#&gt; 2 2017        M.C.G.</span>
-<span class="co">#&gt; 3 2017        M.C.G.</span>
-<span class="co">#&gt; 4 2017        M.C.G.</span>
-<span class="co">#&gt; 5 2017        M.C.G.</span>
-<span class="co">#&gt; 6 2017 Adelaide Oval</span></code></pre></div>
+<span class="co">#&gt;         hteam ateamid                  ateam margin                date</span>
+<span class="co">#&gt; 1     Carlton      14               Richmond   1.00 2017-03-23 19:20:00</span>
+<span class="co">#&gt; 2     Carlton      14               Richmond     NA 2017-03-23 19:20:00</span>
+<span class="co">#&gt; 3     Carlton      14               Richmond   5.39 2017-03-23 19:20:00</span>
+<span class="co">#&gt; 4 Collingwood      18       Western Bulldogs  10.31 2017-03-24 19:50:00</span>
+<span class="co">#&gt; 5 Collingwood      18       Western Bulldogs  17.00 2017-03-24 19:50:00</span>
+<span class="co">#&gt; 6    Adelaide       9 Greater Western Sydney   3.00 2017-03-26 15:20:00</span>
+<span class="co">#&gt;   hteamid gameid tipteamid             updated correct    bits hconfidence</span>
+<span class="co">#&gt; 1       3      1        14 2017-07-11 13:59:46       1  0.0000        50.0</span>
+<span class="co">#&gt; 2       3      1        14 2017-04-10 12:18:02       1  0.2141        42.0</span>
+<span class="co">#&gt; 3       3      1         3 2017-07-11 13:59:46       0 -0.2076        56.7</span>
+<span class="co">#&gt; 4       4      2        18 2017-07-11 13:59:46       1  0.3265        37.3</span>
+<span class="co">#&gt; 5       4      2        18 2017-07-11 13:59:46       1  0.3103        38.0</span>
+<span class="co">#&gt; 6       1      8         1 2017-07-11 13:59:46       1  0.0000        50.0</span>
+<span class="co">#&gt;   year confidence              tip   err         venue round</span>
+<span class="co">#&gt; 1 2017       50.0         Richmond 42.00        M.C.G.     1</span>
+<span class="co">#&gt; 2 2017       58.0         Richmond    NA        M.C.G.     1</span>
+<span class="co">#&gt; 3 2017       56.7          Carlton 48.39        M.C.G.     1</span>
+<span class="co">#&gt; 4 2017       62.7 Western Bulldogs  3.69        M.C.G.     1</span>
+<span class="co">#&gt; 5 2017       62.0 Western Bulldogs  3.00        M.C.G.     1</span>
+<span class="co">#&gt; 6 2017       50.0         Adelaide 53.00 Adelaide Oval     1</span>
+<span class="co">#&gt;            source sourceid</span>
+<span class="co">#&gt; 1        Squiggle        1</span>
+<span class="co">#&gt; 2  Figuring Footy        3</span>
+<span class="co">#&gt; 3 Matter of Stats        4</span>
+<span class="co">#&gt; 4 Matter of Stats        4</span>
+<span class="co">#&gt; 5        Squiggle        1</span>
+<span class="co">#&gt; 6        Squiggle        1</span></code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get` just tips from round 1, 2018</span>
 tips &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="dt">round =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2018</span>)
 <span class="kw">head</span>(tips)
-<span class="co">#&gt;   hconfidence year   err margin    hteam                source sourceid</span>
-<span class="co">#&gt; 1       44.00 2018 23.00  11.00 Essendon              Squiggle        1</span>
-<span class="co">#&gt; 2       40.20 2018 21.00   9.00 Essendon               The Arc        2</span>
-<span class="co">#&gt; 3       40.50 2018 21.78   9.78 Essendon       Matter of Stats        4</span>
-<span class="co">#&gt; 4       52.08 2018    NA     NA Essendon               Punters        5</span>
-<span class="co">#&gt; 5       34.00 2018 33.00  21.00 Essendon Footy Maths Institute        6</span>
-<span class="co">#&gt; 6       44.84 2018 20.00   8.00 Essendon            PlusSixOne        7</span>
-<span class="co">#&gt;      bits ateamid    ateam      tip gameid     venue hteamid correct</span>
-<span class="co">#&gt; 1 -0.1844       1 Adelaide Adelaide    373 Docklands       5       0</span>
-<span class="co">#&gt; 2 -0.3147       1 Adelaide Adelaide    373 Docklands       5       0</span>
-<span class="co">#&gt; 3 -0.3040       1 Adelaide Adelaide    373 Docklands       5       0</span>
-<span class="co">#&gt; 4  0.0588       1 Adelaide Essendon    373 Docklands       5       1</span>
-<span class="co">#&gt; 5 -0.5564       1 Adelaide Adelaide    373 Docklands       5       0</span>
-<span class="co">#&gt; 6 -0.1571       1 Adelaide Adelaide    373 Docklands       5       0</span>
-<span class="co">#&gt;   confidence                date             updated round tipteamid</span>
-<span class="co">#&gt; 1      56.00 2018-03-23 19:50:00 2018-03-23 22:54:38     1         1</span>
-<span class="co">#&gt; 2      59.80 2018-03-23 19:50:00 2018-03-23 22:54:38     1         1</span>
-<span class="co">#&gt; 3      59.50 2018-03-23 19:50:00 2018-03-23 22:54:38     1         1</span>
-<span class="co">#&gt; 4      52.08 2018-03-23 19:50:00 2018-03-23 22:54:38     1         5</span>
-<span class="co">#&gt; 5      66.00 2018-03-23 19:50:00 2018-03-23 22:54:38     1         1</span>
-<span class="co">#&gt; 6      55.16 2018-03-23 19:50:00 2018-03-23 22:54:38     1         1</span></code></pre></div>
+<span class="co">#&gt;      bits    ateam ateamid round sourceid   err                date</span>
+<span class="co">#&gt; 1 -0.1844 Adelaide       1     1        1 23.00 2018-03-23 19:50:00</span>
+<span class="co">#&gt; 2 -0.3147 Adelaide       1     1        2 21.00 2018-03-23 19:50:00</span>
+<span class="co">#&gt; 3 -0.3040 Adelaide       1     1        4 21.78 2018-03-23 19:50:00</span>
+<span class="co">#&gt; 4  0.0588 Adelaide       1     1        5    NA 2018-03-23 19:50:00</span>
+<span class="co">#&gt; 5 -0.5564 Adelaide       1     1        6 33.00 2018-03-23 19:50:00</span>
+<span class="co">#&gt; 6 -0.1571 Adelaide       1     1        7 20.00 2018-03-23 19:50:00</span>
+<span class="co">#&gt;       venue hteamid      tip margin    hteam             updated tipteamid</span>
+<span class="co">#&gt; 1 Docklands       5 Adelaide  11.00 Essendon 2018-03-23 22:54:38         1</span>
+<span class="co">#&gt; 2 Docklands       5 Adelaide   9.00 Essendon 2018-03-23 22:54:38         1</span>
+<span class="co">#&gt; 3 Docklands       5 Adelaide   9.78 Essendon 2018-03-23 22:54:38         1</span>
+<span class="co">#&gt; 4 Docklands       5 Essendon     NA Essendon 2018-03-23 22:54:38         5</span>
+<span class="co">#&gt; 5 Docklands       5 Adelaide  21.00 Essendon 2018-03-23 22:54:38         1</span>
+<span class="co">#&gt; 6 Docklands       5 Adelaide   8.00 Essendon 2018-03-23 22:54:38         1</span>
+<span class="co">#&gt;                  source correct year gameid confidence hconfidence</span>
+<span class="co">#&gt; 1              Squiggle       0 2018    373      56.00       44.00</span>
+<span class="co">#&gt; 2               The Arc       0 2018    373      59.80       40.20</span>
+<span class="co">#&gt; 3       Matter of Stats       0 2018    373      59.50       40.50</span>
+<span class="co">#&gt; 4               Punters       1 2018    373      52.08       52.08</span>
+<span class="co">#&gt; 5 Footy Maths Institute       0 2018    373      66.00       34.00</span>
+<span class="co">#&gt; 6            PlusSixOne       0 2018    373      55.16       44.84</span></code></pre></div>
 <hr>
 <p>Please note that this project is released with a <a href="CONDUCT.html">Contributor Code of Conduct</a>. By participating in this project you agree to abide by its terms.</p>
 </div>
@@ -368,7 +387,7 @@ tips &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_squig
 <li><a href="https://codecov.io/github/jimmyday12/FitzRoy?branch=master"><img src="https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
 <li><a href="commits/master"><img src="https://img.shields.io/badge/Package%20version-0.1.6-orange.svg?style=flat-square" alt="packageversion"></a></li>
 <li><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a></li>
-<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--08--18-yellowgreen.svg" alt="Last-changedate"></a></li>
+<li><a href="/commits/master"><img src="https://img.shields.io/badge/last%20change-2018--08--31-yellowgreen.svg" alt="Last-changedate"></a></li>
 </ul>
 </div>
 </div>
