@@ -30,7 +30,7 @@ Imports:
     tidyr,
     purrr,
     readr,
-    stringr,
+    stringr (>= 1.3.0),
     rlang,
     jsonlite,
     xml2

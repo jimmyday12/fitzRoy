@@ -1,3 +1,8 @@
+# fitzRoy 0.1.6.9000 (unreleased)
+
+* fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/himmyday12/fitzRoy/issues/33)
+
+
 # fitzRoy 0.1.6
 
 * fixed bug data was missing for Adelaide [#27](https://github.com/jimmyday12/fitzRoy/issues/27)
