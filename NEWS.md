@@ -1,7 +1,7 @@
 # fitzRoy 0.1.6.9000 (unreleased)
 
-* fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/himmyday12/fitzRoy/issues/33)
-
+* fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
+* fixed bug with round number for finals [#40](https://github.com/jimmyday12/fitzRoy/issues/40)
 
 # fitzRoy 0.1.6
 

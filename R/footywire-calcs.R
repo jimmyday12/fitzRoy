@@ -173,7 +173,18 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Round = as.integer(Round - min(Round) + 1)
     ) %>%
     select(Date, Round, Teams, Venue)
-
+  
+  games_df <- games_df %>% 
+    mutate(diff = Round - lag(Round, default = 0)) %>%
+    group_by(Round) %>%
+    mutate(diff_grp = max(diff, na.rm = T)) %>%
+    ungroup() %>%
+    mutate(Round = ifelse(diff_grp == 2, Round - 1, Round)) %>%
+    select(-diff, -diff_grp)
+    
+  rle_round <- rle(diff(games_df$Round))
+  srt_ind <- which(diff(games_df$Round) == 2)
+  end_ind <- rle_round$lengths[which(rle_round$values == 2) + 1] + 1
 
   # Fix names
   games_df <- games_df %>%
