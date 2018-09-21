@@ -24,5 +24,10 @@ Authors:
   \item Robert Nguyen \email{nguyen.n.robert@gmail.com}
 }
 
+Other contributors:
+\itemize{
+  \item Matthew Erbs \email{matthew.erbs@merbla.com} [contributor]
+}
+
 }
 \keyword{internal}

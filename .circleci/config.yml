@@ -1,0 +1,39 @@
+version: 2
+jobs:
+  build:
+    working_directory: /workdir
+    docker:
+      - image: docker:git
+        environment:
+          IMAGE_NAME: fitzroy:rstudio
+          DOCKER_PROJECT: jimmyday12
+          RSTUDIO_VERSION: 3.4.1
+
+    steps:
+      - checkout
+      - setup_remote_docker:
+          version: 18.05.0-ce
+      - run:
+          name: Docker info
+          command: |
+            docker version
+            docker info 
+      - restore_cache:
+          keys:
+            - cache-{{ .Branch }}
+          paths:
+            - /cache/layers.tar
+      - run:
+          name: Build docker image
+          command: |
+            docker build -t jimmyday12/fitzroy:rstudio-${RSTUDIO_VERSION} -f docker/rstudio/Dockerfile . 
+            docker tag jimmyday12/fitzroy:rstudio-${RSTUDIO_VERSION} jimmyday12/fitzroy:latest
+            docker tag jimmyday12/fitzroy:rstudio-${RSTUDIO_VERSION} jimmyday12/fitzroy:rstudio
+      - run:
+          name: Push Docker Image
+          command: |
+            docker login --username ${DOCKER_USER} --password ${DOCKER_PASSWORD}
+            docker push jimmyday12/fitzroy:latest
+            docker push jimmyday12/fitzroy:rstudio
+            docker push jimmyday12/fitzroy:rstudio-${RSTUDIO_VERSION}
+            docker logout

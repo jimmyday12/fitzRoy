@@ -5,7 +5,8 @@ Title: Easily Scrape and Process AFL Data
 Description: An easy to use tool for scraping and processing AFL data. 
 Authors@R: c(
     person("James", "Day", email = "jamesthomasday@gmail.com", role = c("cre", "aut")),
-    person("Robert", "Nguyen", email = "nguyen.n.robert@gmail.com", role = "aut"))
+    person("Robert", "Nguyen", email = "nguyen.n.robert@gmail.com", role = "aut"),
+    person("Matthew", "Erbs", email = "matthew.erbs@merbla.com", role = "ctb"))
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
