@@ -43,7 +43,8 @@ get_afltables_stats <- function(start_date = "1897-01-01", end_date = Sys.Date()
     dat <- dplyr::bind_rows(dat, dat_new)
   }
   message("Finished getting afltables data")
-  dplyr::filter(dat, Date > start_date & Date < end_date)
+  dplyr::filter(dat, Date > start_date & Date < end_date) %>% 
+    ungroup()
 }
 
 #' Return match URLs for specified dates
