@@ -1,0 +1,160 @@
+---
+title: "Easily Scrape and Process AFL Data"
+author: "James Day"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+<!-- This vignette was automatically created from README.Rmd -->
+
+```{r, echo = FALSE}
+options(tibble.print_min = 5, tibble.print_max = 5)
+requireNamespace("ggplot2", quietly = TRUE)
+```
+
+# fitzRoy <img src="../man/figures/fitz_hex.png" align="right" width="120" height="139"/>
+
+## Overview
+The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
+
+## Installation
+
+You can install fitzRoy from github with:
+
+```{r gh-installation, eval = FALSE, echo = TRUE}
+# install.packages("devtools")
+devtools::install_github("jimmyday12/fitzRoy")
+```
+
+## Usage
+
+The `fitzRoy` package can be used to simply get data from various sources. Some minimal working examples are below.
+
+### Getting Data
+
+Primarily, the tool can be used to access data from various sources. Data is included in the package and can be access directly however this will not be up to date. Each source of data has functions for updating data during the season. 
+
+### AFL Tables match results
+You can access the basic afl tables match results data. This includes all matches from 1897-current. It is generally updated on the day after a round finishes. 
+
+You can access the data directly from the package using `match_results`. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use `get_match_results` directly, as this will give you up to date results.
+
+```{r results}
+library(fitzRoy)
+results <- get_match_results()
+
+tail(results)
+
+```
+
+You can also convert this format into a more analysis friendly "long" format using the helper function `convert_results`. 
+
+```{r convert}
+results_long <- convert_results(results)
+
+head(results_long)
+```
+
+### AFL Tables player results
+A new function will return all detailed player stats from afltables.com. Primarily, the easiest way to use this is simply to call `get_afltables_stats` with your required `start_date` and `end_date`.
+
+```{r afltables_match}
+stats <- get_afltables_stats(start_date = "2000-01-01", end_date = "2018-06-01")
+
+tail(stats)
+```
+
+
+### Fixture
+You can access the fixture using `get_fixture` function. This will download the fixture for the current calendar year by default. 
+
+```{r fixture}
+fixture <- get_fixture()
+
+head(fixture)
+```
+### Footywire Advanced Player Stats
+Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.
+
+Footywire data from 2010-2017 is included in the package. This will be updated periodically but you will need to update your R package to get access to the latest data.
+
+```{r footywire}
+## Show the top of player_stats
+head(fitzRoy::player_stats)
+```
+
+We can also use the `update_footywire_stats` function to get the most up to date data. This will merge data from 2010-current with any new data points. 
+
+```{r update_footywire}
+## Update footywire data
+dat <- update_footywire_stats()
+
+tail(dat)
+```
+
+
+### Weather
+We have also included weather data for the 2017 season. This is a work in progress but includes rainfall data from the nearest observation station to each ground. This data is included in the package as `results_weather`.
+
+```{r weather, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+
+# Get 2017 weather data
+weather <- fitzRoy::results_weather %>%
+  filter(Season == 2017)
+
+# Plot total rainfal for each home team
+ggplot2::ggplot(dat = weather, ggplot2::aes(x = Home.Team, y = Rainfall)) +
+  ggplot2::geom_col() + 
+  ggplot2::coord_flip()
+
+```
+
+
+### Squiggle Data
+You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link. 
+
+```{r squiggle1, message=FALSE, warning=FALSE}
+# You can get the sources
+sources <- get_squiggle_data("sources")
+head(sources)
+```
+
+```{r squiggle2, message=FALSE, warning=FALSE}
+# Get all tips
+tips <- get_squiggle_data("tips")
+head(tips)  
+```
+
+```{r squiggle3, message=FALSE, warning=FALSE}
+# Get` just tips from round 1, 2018
+tips <- get_squiggle_data("tips", round = 1, year = 2018)
+head(tips)
+```
+---
+
+
+
+## Docker Support
+
+fitzRoy now provides [Docker](https://www.docker.com/get-started) support in the form of an image hosted on [DockerHub](https://hub.docker.com/r/jimmyday12/fitzroy/).
+
+### Usage
+ 
+Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`) run one of the following commands.
+
+* To start [RStudio](https://www.rstudio.com/) with Fitzroy ready to use:
+  * `docker run -d -p 8787:8787 --name fitzroy jimmyday12/fitzroy:latest` and open http://localhost:8787.  *(Username: `rstudio`, Password: `rstudio`)
+* To start an R terminal prompt with fitzRoy ready to use:
+  * `docker run -it jimmyday12/fitzroy:latest R` to start with an R terminal prompt.
+  * Run `quit()` to exit the container
+
+### Building the image locally
+
+To build the Docker image run the following from the root of the repository.
+* `docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .`
+

@@ -1,4 +1,4 @@
-#' Scrape footywire player statitstics.
+#' Scrape footywire player statistics.
 #'
 #' \code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
 #'

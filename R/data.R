@@ -69,7 +69,7 @@
 #' @source \url{http://www.afltables.com}
 "fixture"
 
-#' Resulsts from all AFL Men's matches
+#' Results from all AFL Men's matches
 #'
 #' A dataset for all AFL Men's matches since 1897
 #'
