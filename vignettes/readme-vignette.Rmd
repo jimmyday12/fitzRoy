@@ -12,6 +12,7 @@ vignette: >
 
 ```{r, echo = FALSE}
 options(tibble.print_min = 5, tibble.print_max = 5)
+requireNamespace("ggplot2", quietly = TRUE)
 ```
 
 # fitzRoy <img src="../man/figures/fitz_hex.png" align="right" width="120" height="139"/>
@@ -107,9 +108,9 @@ weather <- fitzRoy::results_weather %>%
   filter(Season == 2017)
 
 # Plot total rainfal for each home team
-ggplot(dat = weather, aes(x = Home.Team, y = Rainfall)) +
-  geom_col() + 
-  coord_flip()
+ggplot2::ggplot(dat = weather, ggplot2::aes(x = Home.Team, y = Rainfall)) +
+  ggplot2::geom_col() + 
+  ggplot2::coord_flip()
 
 ```
 
