@@ -7,6 +7,7 @@
 * fixed bug where certain games from early 1900 were missing. Thanks to [Tony](https://twitter.com/MatterOfStats) [#31](https://github.com/jimmyday12/fitzRoy/issues/31)
 * fixed bug with `get_afltables_player_ids` where it was returning 0 for all players [#34](https://github.com/jimmyday12/fitzRoy/issues/34)
 * fixed bug with `get_afltables_player_ids` where it was returning 0 for GWS and Bulldogs players
+* Added a basic vignette. Thanks to [@Lingtax](https://github.com/Lingtax) 
 
 
 # fitzRoy 0.1.5
