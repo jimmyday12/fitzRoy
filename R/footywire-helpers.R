@@ -73,7 +73,7 @@ footywire_html <- function(x, id) {
   home_stats <- x %>%
     rvest::html_nodes("table") %>%
     .[[13]] %>%
-    rvest::html_table(header = T) %>%
+    rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
       Team = home_team,
       Opposition = away_team,
@@ -84,7 +84,7 @@ footywire_html <- function(x, id) {
   away_stats <- x %>%
     rvest::html_nodes("table") %>%
     .[[17]] %>%
-    rvest::html_table(header = T) %>%
+    rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
       Team = away_team,
       Opposition = home_team,

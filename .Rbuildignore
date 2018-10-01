@@ -1,3 +1,5 @@
+^docker$
+^.circleci$
 ^README\.Rmd$
 ^LICENSE\.md$
 ^.*\.Rproj$
