@@ -2,7 +2,7 @@
 % Please edit documentation in R/afltables_player_main.R
 \name{scrape_afltables_match}
 \alias{scrape_afltables_match}
-\title{Return afltables playr match stats}
+\title{Return afltables player match stats}
 \usage{
 scrape_afltables_match(match_urls)
 }

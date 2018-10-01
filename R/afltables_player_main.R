@@ -1,5 +1,5 @@
 
-#' Return afltables playr match stats
+#' Return afltables player match stats
 #'
 #' \code{scrape_afltables_match} returns a character vector containing match URLs for the specified date range
 #'
@@ -23,8 +23,11 @@
 #' @importFrom utils type.convert
 scrape_afltables_match <- function(match_urls) {
 
-  # For each game url, download data, extract the stats tables #3 and #5 and bind together
+  # For each game url, download data, extract the stats
+  # tables #3 and #5 and bind together
   message("Downloading data\n")
+
+  # nolint start
   pb <- progress_estimated(length(match_urls))
 
   match_xmls <- match_urls %>%
@@ -32,6 +35,8 @@ scrape_afltables_match <- function(match_urls) {
       pb$tick()$print()
       xml2::read_html(.)
     })
+  # nolint end
+
   message("\nFinished downloading data. Processing XMLs\n")
 
 
@@ -57,62 +62,62 @@ scrape_afltables_match <- function(match_urls) {
     map(rvest::html_nodes, "table:nth-child(10)") %>%
     map(rvest::html_text) %>%
     map(purrr::is_empty)
-  
-  notes_fn <- function(x){
+
+  notes_fn <- function(x) {
     if (x) {
-      ind <- c(3, 5)
-      } else {
-        ind <- c(4, 6)
-      }
+      c(3, 5)
+    } else {
+      c(4, 6)
     }
-  
+  }
+
   notes_ind <- notes_tbl %>%
     map(notes_fn)
-  
+
   games <- match_xmls %>%
     map(rvest::html_table, fill = TRUE) %>%
     purrr::map2(.y = notes_ind, ~magrittr::extract(.x, .y)) %>%
-    purrr::modify_depth(1, ~ purrr::map(., replace_names))
+    purrr::modify_depth(1, ~purrr::map(., replace_names))
 
   home_games <- games %>%
     rvest::pluck(1) %>%
-    map2(.y = home_scores, ~ mutate(.x, Playing.for = .y[1]))
+    map2(.y = home_scores, ~mutate(.x, Playing.for = .y[1]))
 
   away_games <- games %>%
     rvest::pluck(2) %>%
-    map2(.y = away_scores, ~ mutate(.x, Playing.for = .y[1]))
+    map2(.y = away_scores, ~mutate(.x, Playing.for = .y[1]))
 
   games <- home_games %>%
     map2(.y = away_games, ~bind_rows(.x, .y))
 
   att_lgl <- details %>%
     map(~stringr::str_detect(.x[2], "Attendance"))
-  
-  att_fn <- function(x){
+
+  att_fn <- function(x) {
     if (x) {
-      att_str <- "(?<=Date:\\s)(.*)(?=\\sAtt)"
+      "(?<=Date:\\s)(.*)(?=\\sAtt)"
     } else {
-      att_str <- "(?<=Date:\\s)(.*)(?=\\s)"
+      "(?<=Date:\\s)(.*)(?=\\s)"
     }
   }
-  
+
   date_str <- att_lgl %>%
     map(att_fn)
 
   args <- list(games, details, date_str)
-  
+
   games_df <- args %>%
-    purrr::pmap(~ mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
-  
+    purrr::pmap(~mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
+
   games_df <- games_df %>%
-    map2(.y = details, ~ mutate(
+    map2(.y = details, ~mutate(
       .x,
       Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
       Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
       Attendance = stringr::str_extract(.y[2], "(?<=Attendance:\\s)(.*)"),
       Umpires = .y[length(.y)]
     ))
-  
+
   games_df <- games_df %>%
     map2(.y = home_scores, ~mutate(
       .x,
@@ -137,19 +142,35 @@ scrape_afltables_match <- function(match_urls) {
 
   # Remove columns with NA and abbreviations
   games_df <- games_df[, !(names(games_df) %in% "NA")]
-  games_df <- games_df[, !(stringr::str_detect(names(games_df), "Abbreviations"))]
+  games_df <- games_df[, !(stringr::str_detect(
+    names(games_df),
+    "Abbreviations"
+  ))]
 
   # Fix names
   names(games_df) <- make.names(names(games_df))
-  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = X.)
-  if ("X1." %in% names(games_df)) games_df <- rename(games_df, One.Percenters = X1.)
+
+  # nolint start
+  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = X.) 
+  if ("X1." %in% names(games_df)) {
+    games_df <- rename(games_df,
+      One.Percenters = X1.
+    )
+  }
   if ("X.P" %in% names(games_df)) games_df <- rename(games_df, TOG = X.P)
+  # nolint end
 
   # change column types
   games_df <- games_df %>%
     dplyr::filter(!Player %in% c("Rushed", "Totals", "Opposition"))
 
-  games_df <- as.data.frame(lapply(games_df, function(x) type.convert(x, na.strings = "NA", as.is = TRUE)), stringsAsFactors = FALSE)
+  games_df <- as.data.frame(
+    lapply(games_df, function(x) type.convert(x,
+        na.strings = "NA",
+        as.is = TRUE
+      )),
+    stringsAsFactors = FALSE
+  )
 
   games_cleaned <- games_df %>%
     mutate(
@@ -160,12 +181,24 @@ scrape_afltables_match <- function(match_urls) {
     ) %>%
     tidyr::separate(Player, into = c("Surname", "First.name"), sep = ",") %>%
     dplyr::mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
-    tidyr::separate(Umpires, into = c("Umpire.1", "Umpire.2", "Umpire.3", "Umpire.4"), sep = ",", fill = "right") %>%
-    dplyr::mutate_at(vars(starts_with("Umpire")), stringr::str_replace, " \\(.*\\)", "")
+    tidyr::separate(Umpires,
+      into = c(
+        "Umpire.1", "Umpire.2",
+        "Umpire.3", "Umpire.4"
+      ),
+      sep = ",", fill = "right"
+    ) %>%
+    dplyr::mutate_at(
+      vars(starts_with("Umpire")),
+      stringr::str_replace, " \\(.*\\)", ""
+    )
 
   sep <- function(...) {
     dots <- list(...)
-    tidyr::separate_(..., into = sprintf("%s%s", dots[[2]], c("G", "B", "P")), sep = "\\.")
+    tidyr::separate_(..., into = sprintf(
+      "%s%s", dots[[2]],
+      c("G", "B", "P")
+    ), sep = "\\.")
   }
 
   score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")
@@ -178,23 +211,23 @@ scrape_afltables_match <- function(match_urls) {
       Away.score = AQ4P
     )
 
+  ids <- get_afltables_player_ids(
+    min(games_cleaned$Season):max(games_cleaned$Season)
+  )
 
-  ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season)) 
-  
   games_joined <- games_cleaned %>%
     mutate(Player = paste(First.name, Surname)) %>%
-    dplyr::left_join(ids, by = c("Season", "Player", "Playing.for" = "Team")) %>%
+    dplyr::left_join(ids,
+                     by = c("Season", "Player", "Playing.for" = "Team")) %>%
     dplyr::select(-Player)
 
   df <- games_joined %>%
-    dplyr::rename(!!! rlang::syms(with(stat_abbr, setNames(stat.abb, stat)))) %>%
+    dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat)))) %>%
     dplyr::select(one_of(afldata_cols))
 
   df <- df %>%
     dplyr::mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%
     mutate(Round = as.character(Round))
-
-  # message(paste("Returned data for", min(df$Season), "to", max(df$Season)))
 
   return(df)
 }

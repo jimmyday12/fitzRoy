@@ -78,34 +78,36 @@ team_abbr <- tibble(
 usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
 
 # Fix some random games identified by Tony Corke
-old_urls <- c("https://afltables.com/afl/stats/games/1901/050619010511.html",
-          "https://afltables.com/afl/stats/games/1912/061719120525.html",
-          "https://afltables.com/afl/stats/games/1907/050919070427.html",
-          "https://afltables.com/afl/stats/games/1907/051119070504.html",
-          "https://afltables.com/afl/stats/games/1907/051519070511.html",
-          "https://afltables.com/afl/stats/games/1907/040519070525.html",
-          "https://afltables.com/afl/stats/games/1907/050619070603.html",
-          "https://afltables.com/afl/stats/games/1907/030519070615.html",
-          "https://afltables.com/afl/stats/games/1907/051119070629.html",
-          "https://afltables.com/afl/stats/games/1907/040519070720.html",
-          "https://afltables.com/afl/stats/games/1900/030919000623.html")
+old_urls <- c(
+  "https://afltables.com/afl/stats/games/1901/050619010511.html",
+  "https://afltables.com/afl/stats/games/1912/061719120525.html",
+  "https://afltables.com/afl/stats/games/1907/050919070427.html",
+  "https://afltables.com/afl/stats/games/1907/051119070504.html",
+  "https://afltables.com/afl/stats/games/1907/051519070511.html",
+  "https://afltables.com/afl/stats/games/1907/040519070525.html",
+  "https://afltables.com/afl/stats/games/1907/050619070603.html",
+  "https://afltables.com/afl/stats/games/1907/030519070615.html",
+  "https://afltables.com/afl/stats/games/1907/051119070629.html",
+  "https://afltables.com/afl/stats/games/1907/040519070720.html",
+  "https://afltables.com/afl/stats/games/1900/030919000623.html"
+)
 
 old_urls <- sort(old_urls)
 
 # Add match numbers
 
 afldata <- afldata %>%
-  group_by(Date, Season, Round, Home.team, Away.team) 
+  group_by(Date, Season, Round, Home.team, Away.team)
 
 afldata$group_id <- group_indices(afldata)
-afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id)) 
+afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
 
 bad_dat <- afldata %>%
-  filter((Season == 1901 & Round == "3" & Home.team == "Essendon") | 
-           (Season == 1912 & Round == "5" & Home.team == "Fitzroy") | 
-           (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") | 
-           (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") | 
-           (Season == 1900 & Round == "8" & Home.team == "Geelong")) %>%
+  filter((Season == 1901 & Round == "3" & Home.team == "Essendon") |
+    (Season == 1912 & Round == "5" & Home.team == "Fitzroy") |
+    (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") |
+    (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") |
+    (Season == 1900 & Round == "8" & Home.team == "Geelong")) %>%
   ungroup() %>%
   select(Season, Round, Home.team, Away.team, group_id_num) %>%
   distinct()
@@ -117,7 +119,7 @@ afldata <- afldata %>%
   filter(!(Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon")) %>%
   filter(!(Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon")) %>%
   filter(!(Season == 1900 & Round == "8" & Home.team == "Geelong"))
-  
+
 
 # Get new data
 old_dat <- scrape_afltables_match(old_urls) %>%
@@ -142,8 +144,10 @@ afldata <- bind_rows(afldata, old_dat) %>%
 # Write ids file
 id <- afldata %>%
   ungroup() %>%
-  mutate(Player = paste(First.name, Surname),
-         Team = Playing.for) %>%
+  mutate(
+    Player = paste(First.name, Surname),
+    Team = Playing.for
+  ) %>%
   select(Season, Player, ID, Team) %>%
   distinct()
 
@@ -151,11 +155,11 @@ ids_2017 <- read_csv(here::here("data-raw", "afl_tables_playerstats", "afltables
   ungroup() %>%
   mutate(Season = 2017) %>%
   select(Season, Player, ID, Team) %>%
-  distinct() 
+  distinct()
 
-  id <- id %>%
-    bind_rows(ids_2017)
-  
+id <- id %>%
+  bind_rows(ids_2017)
+
 write_csv(id, here::here("data-raw", "afl_tables_playerstats", "player_ids.csv"))
 
 # Somehow make match #'s

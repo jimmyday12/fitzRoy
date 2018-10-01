@@ -101,7 +101,15 @@ footywire_html <- function(x, id) {
       Date = game_date,
       Match_id = id
     ) %>%
-    dplyr::select(Date, Season, Round, Venue, Player, Team, Opposition, Status, everything())
+    dplyr::select(Date,
+                  Season,
+                  Round,
+                  Venue,
+                  Player,
+                  Team,
+                  Opposition,
+                  Status,
+                  everything())
 
   names(player_stats) <- make.names(names(player_stats))
 
@@ -133,8 +141,8 @@ get_match_data <- function(id) {
   if (!is.list(footywire_basic)) {
     stop("Couldn't Find basic table")
   } else {
-
-    # Check if Advanced Page exist? If it doesn't, the script breaks since the html tables have different nodes
+    # Check if Advanced Page exist? If it doesn't, the script breaks
+    # since the html tables have different nodes
     advanced_empty <- footywire_basic %>%
       html_nodes(".notice") %>%
       html_text() %>%
@@ -149,7 +157,8 @@ get_match_data <- function(id) {
       # If it does, grab the basic data
       player_stats_basic <- footywire_html(footywire_basic, id)
 
-      # If it does, create access the URL and create the data table. Also merge with basic
+      # If it does, create access the URL and create the data table.
+      # Also merge with basic
       Sys.sleep(2)
 
       # Check if Advanced URL exists

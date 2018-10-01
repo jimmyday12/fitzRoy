@@ -1,4 +1,4 @@
 library(testthat)
-library(fitzRoy)
+library(fitzRoy) # nolint
 
 test_check("fitzRoy")

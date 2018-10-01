@@ -3,7 +3,7 @@
 #' \code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
 #'
 #' The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
-#' To find match ID, find the relevent matches on footywire.com
+#' To find match ID, find the relevant matches on footywire.com
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
 #' @return Returns a data frame containing player match stats for each match ID
@@ -29,6 +29,7 @@ get_footywire_stats <- function(ids) {
   message("Getting data from footywire.com")
 
   # Create Progress Bar
+  # nolint start
   pb <- progress_estimated(length(ids), min_time = 5)
 
   # Loop through data using map
@@ -37,6 +38,7 @@ get_footywire_stats <- function(ids) {
       pb$tick()$print() # update the progress bar (tick())
       get_match_data(id = .x) # do function
     })
+  # nolint end
 
   # Rearrange
   dat <- dat %>%
@@ -69,12 +71,13 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
 
   # Get all URL's from 2010 (advanced stats) to current year
+
   fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
-    purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
+    purrr::map(~paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>% # nolint
     purrr::map(xml2::read_html) %>%
-    purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
-    purrr::map(~ rvest::html_attr(., "href")) %>%
-    purrr::map(~ stringr::str_extract(., "\\d+")) %>%
+    purrr::map(~rvest::html_nodes(., ".data:nth-child(5) a")) %>%
+    purrr::map(~rvest::html_attr(., "href")) %>%
+    purrr::map(~stringr::str_extract(., "\\d+")) %>%
     purrr::map_if(is.character, as.numeric) %>%
     purrr::reduce(c)
 
@@ -93,14 +96,14 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
       message("\nChecking Github")
       # Check fitzRoy GitHub
-      dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda"
+      dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda" # nolint
 
-      loadRData <- function(fileName) {
-        load(fileName)
-        get(ls()[ls() != "fileName"])
+      load_r_data <- function(fname) {
+        load(fname)
+        get(ls()[ls() != "fname"])
       }
 
-      dat_git <- loadRData(url(dat_url))
+      dat_git <- load_r_data(url(dat_url))
 
       # Check what's still missing
       git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
@@ -140,10 +143,18 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @importFrom magrittr %>%
 #' @import dplyr
 get_fixture <- function(season = lubridate::year(Sys.Date())) {
-  if (!is.numeric(season)) stop(paste0("'season' must be in 4-digit year format. 'season' is currently ", season))
-  if (nchar(season) != 4) stop(paste0("'season' must be in 4-digit year format (e.g. 2018). 'season' is currently ", season))
+  if (!is.numeric(season)) {
+    stop(paste0("'season' must be in 4-digit year format.",
+                "'season' is currently ",
+                season))
+    }
+  if (nchar(season) != 4) {
+    stop(paste0("'season' must be in 4-digit year format (e.g. 2018).",
+                "'season' is currently ",
+                season))
+    }
   # create url
-  url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
+  url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season) # nolint
   fixture_xml <- xml2::read_html(url_fixture)
 
   # Get XML and extract text from .data
@@ -152,7 +163,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
     rvest::html_text()
 
   # Put this into dataframe format
-  games_df <- matrix(games_text, ncol = 7, byrow = T) %>%
+  games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
     as_data_frame() %>%
     select(V1:V3)
 
@@ -163,7 +174,8 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   games_df <- games_df %>%
     filter(Venue != "BYE")
 
-  # Work out day and week of each game. Games on Thursday > Wednesday go in same Round
+  # Work out day and week of each game.
+  # Games on Thursday > Wednesday go in same Round
   games_df <- games_df %>%
     mutate(
       Date = lubridate::ydm_hm(paste(season, Date)),
@@ -173,23 +185,24 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Round = as.integer(Round - min(Round) + 1)
     ) %>%
     select(Date, Round, Teams, Venue)
-  
-  games_df <- games_df %>% 
+
+  games_df <- games_df %>%
     mutate(diff = Round - lag(Round, default = 0)) %>%
     group_by(Round) %>%
-    mutate(diff_grp = max(diff, na.rm = T)) %>%
+    mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
     ungroup() %>%
     mutate(Round = ifelse(diff_grp == 2, Round - 1, Round)) %>%
     select(-diff, -diff_grp)
-    
-  rle_round <- rle(diff(games_df$Round))
-  srt_ind <- which(diff(games_df$Round) == 2)
-  end_ind <- rle_round$lengths[which(rle_round$values == 2) + 1] + 1
+
+  #rle_round <- rle(diff(games_df$Round))
+  #srt_ind <- which(diff(games_df$Round) == 2)
+  #end_ind <- rle_round$lengths[which(rle_round$values == 2) + 1] + 1
 
   # Fix names
   games_df <- games_df %>%
     group_by(Date, Round, Venue) %>%
-    separate(Teams, into = c("Home.Team", "Away.Team"), sep = "\\\nv\\s\\\n") %>%
+    separate(Teams, into = c("Home.Team", "Away.Team"),
+             sep = "\\\nv\\s\\\n") %>%
     mutate_at(c("Home.Team", "Away.Team"), stringr::str_remove_all, "[\r\n]")
 
   # Add season game number

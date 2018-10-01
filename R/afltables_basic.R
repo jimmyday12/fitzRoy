@@ -17,7 +17,8 @@
 get_match_results <- function() {
 
   # Get data ----
-  column_names <- c("Game", "Date", "Round", "Home.Team", "Home.Score", "Away.Team", "Away.Score", "Venue")
+  column_names <- c("Game", "Date", "Round", "Home.Team", "Home.Score",
+                    "Away.Team", "Away.Score", "Venue")
   url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
   match_data <- suppressMessages(
     readr::read_table(url_text, skip = 2, col_names = column_names)
@@ -25,8 +26,14 @@ get_match_results <- function() {
 
   # Separate score out into components ----
   match_data <- match_data %>%
-    tidyr::separate(Home.Score, into = c("Home.Goals", "Home.Behinds", "Home.Points"), sep = "\\.", convert = T) %>%
-    tidyr::separate(Away.Score, into = c("Away.Goals", "Away.Behinds", "Away.Points"), sep = "\\.", convert = T)
+    tidyr::separate(Home.Score,
+      into = c("Home.Goals", "Home.Behinds", "Home.Points"),
+      sep = "\\.", convert = TRUE
+    ) %>%
+    tidyr::separate(Away.Score,
+      into = c("Away.Goals", "Away.Behinds", "Away.Points"),
+      sep = "\\.", convert = TRUE
+    )
 
   # Fix columns ----
   match_data <- match_data %>%
@@ -86,7 +93,7 @@ replace_teams <- function(team) {
   # Internal function
   case_when(
     team == "Kangaroos" ~ "North Melbourne",
-    team == "NM" ~  "North Melbourne",
+    team == "NM" ~ "North Melbourne",
     team == "Western Bulldog" ~ "Footscray",
     team == "Western Bulldogs" ~ "Footscray",
     team == "WB" ~ "Footscray",

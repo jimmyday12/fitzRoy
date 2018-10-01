@@ -65,11 +65,19 @@ get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
 
   dat <- tryCatch(
     jsonlite::fromJSON(url),
-    error = function(e) rlang::abort(paste("The URL did not work. Did your query make sense?\nTry the following URL in your browser:", url))
-  )
+    error = function(e) rlang::abort(paste("The URL did not work",
+                                           "Did your query make sense?\n",
+                                           "Try the following URL in your",
+                                           "browser:",
+                                           url)
+                                     )
+    )
 
   # Convert the
   df <- as.data.frame(dat[[1]])
   df[, ] <- lapply(df[, ], as.character)
-  as.data.frame(lapply(df, function(x) type.convert(x, as.is = TRUE)), stringsAsFactors = FALSE)
+  as.data.frame(
+    lapply(df, function(x) type.convert(x, as.is = TRUE)),
+    stringsAsFactors = FALSE
+  )
 }

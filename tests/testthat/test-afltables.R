@@ -21,7 +21,11 @@ test_that("get_afltables_player_ids works", {
 
 
 test_that("scape_afltables_ works", {
-  expect_type(scrape_afltables_match("https://afltables.com/afl/stats/games/2018/030820180812.html"), "list")
+  expect_type(
+    scrape_afltables_match(
+      "https://afltables.com/afl/stats/games/2018/030820180812.html"
+    ), "list"
+  )
   expect_error(scrape_afltables_match())
   expect_error(scrape_afltables_match(1))
   expect_error(scrape_afltables_match("a"))

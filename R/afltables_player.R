@@ -20,30 +20,43 @@
 #' get_afltables_stats("01/01/2018", end_date = "01/04/2018")
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
-get_afltables_stats <- function(start_date = "1897-01-01", end_date = Sys.Date()) {
+get_afltables_stats <- function(start_date = "1897-01-01",
+                                end_date = Sys.Date()) {
+
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
-  if (is.na(start_date)) stop(paste("Date format not reccognised. Check that start_date is in dmy or ymd format"))
-  end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
-  if (is.na(end_date)) stop(paste("Date format not reccognised. Check that end_date is in dmy or ymd format"))
-  message(paste0("Returning data from ", start_date, " to ", end_date))
-  
-  dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/develop/data-raw/afl_tables_playerstats/afldata.rda")
-  
-  loadRData <- function(fileName) {
-    load(fileName)
-    get(ls()[ls() != "fileName"])
+  if (is.na(start_date)) {
+    stop(paste("Date format not reccognised",
+               "Check that start_date is in dmy or ymd format"))
   }
-  
-  dat <- loadRData(dat_url)
+
+  end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
+
+  if (is.na(end_date)) {
+    stop(paste("Date format not reccognised",
+               "Check that end_date is in dmy or ymd format"))
+  }
+
+  message(paste0("Returning data from ", start_date, " to ", end_date))
+
+  # nolint start
+  dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/develop/data-raw/afl_tables_playerstats/afldata.rda")
+  # nolint end
+
+  load_r_data <- function(fname) {
+    load(fname)
+    get(ls()[ls() != "fname"])
+  }
+
+  dat <- load_r_data(dat_url)
   max_date <- max(dat$Date)
-  
+
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
     dat_new <- scrape_afltables_match(urls)
     dat <- dplyr::bind_rows(dat, dat_new)
   }
   message("Finished getting afltables data")
-  dplyr::filter(dat, Date > start_date & Date < end_date) %>% 
+  dplyr::filter(dat, Date > start_date & Date < end_date) %>%
     ungroup()
 }
 
@@ -68,33 +81,41 @@ get_afltables_stats <- function(start_date = "1897-01-01", end_date = Sys.Date()
 get_afltables_urls <- function(start_date,
                                end_date = Sys.Date()) {
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
-  if (is.na(start_date)) stop(paste("Date format not reccognised. Check that start_date is in dmy or ymd format"))
+
+  if (is.na(start_date)) {
+    stop(paste("Date format not reccognised",
+               "Check that start_date is in dmy or ymd format"))
+  }
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
-  if (is.na(end_date)) stop(paste("Date format not reccognised. Check that end_date is in dmy or ymd format"))
-  
+
+  if (is.na(end_date)) {
+    stop(paste("Date format not reccognised.",
+               "Check that end_date is in dmy or ymd format"))
+  }
+
   Seasons <- format(start_date, "%Y"):format(end_date, "%Y")
-  
+
   html_games <- Seasons %>%
-    map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
+    map(~paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
     map(xml2::read_html)
-  
+
   dates <- html_games %>%
     map(rvest::html_nodes, "table+ table tr:nth-child(1) > td:nth-child(4)") %>%
     map(rvest::html_text) %>%
     map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     map(lubridate::dmy) %>%
     map(~.x > start_date & .x < end_date)
-  
+
   match_ids <- html_games %>%
     map(rvest::html_nodes, "tr+ tr b+ a") %>%
     map(rvest::html_attr, "href") %>%
     map(~stringr::str_replace(., "..", "https://afltables.com/afl"))
-  
+
   # Return only id's that match
   match_ids <- match_ids %>%
     purrr::map2(.y = dates, ~magrittr::extract(.x, .y)) %>%
     purrr::reduce(c)
-  
+
   match_ids[!is.na(match_ids)]
 }
 
@@ -103,41 +124,41 @@ get_afltables_player_ids <- function(seasons) {
   base_url <- function(x) {
     paste0("https://afltables.com/afl/stats/", x, "_stats.txt")
   }
-  
+
+  # nolint start
   pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/develop/data-raw/afl_tables_playerstats/player_ids.csv"
-  
-  
+  # nolint end
+
   vars <- c("Season", "Player", "ID", "Team")
-  
+
 
   if (min(seasons) <= 2017) {
     pre_2018 <- pre_urls %>%
       readr::read_csv(col_types = c("dcdc")) %>%
       mutate(ID = as.integer(ID)) %>%
-      dplyr::select(!! vars) %>%
+      dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
       filter(Season %in% seasons)
-  } 
-  
-  if(max(seasons) > 2017) {
+  }
+
+  if (max(seasons) > 2017) {
     urls <- purrr::map_chr(seasons[seasons > 2017], base_url)
     post_2017 <- urls %>%
-      purrr::map(readr::read_csv, col_types =  readr::cols()) %>%
+      purrr::map(readr::read_csv, col_types = readr::cols()) %>%
       purrr::map2_dfr(.y = seasons[seasons > 2017], ~mutate(., Season = .y)) %>%
-      dplyr::select(!! vars) %>%
+      dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
       dplyr::rename(Team.abb = Team) %>%
       dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
-      dplyr::select(!! vars)
+      dplyr::select(!!vars)
   }
-  
-  if(max(seasons) <= 2017){
+
+  if (max(seasons) <= 2017) {
     return(pre_2018)
-  } else if(min(seasons) > 2017){
+  } else if (min(seasons) > 2017) {
     return(post_2017)
   } else {
     id_data <- bind_rows(pre_2018, post_2017)
     return(id_data)
   }
-  
 }

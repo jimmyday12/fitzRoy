@@ -3,7 +3,7 @@
 \docType{data}
 \name{match_results}
 \alias{match_results}
-\title{Resulsts from all AFL Men's matches}
+\title{Results from all AFL Men's matches}
 \format{A data frame with 15200 rows and 16 variables:
 \describe{
 \item{Game}{todo}
