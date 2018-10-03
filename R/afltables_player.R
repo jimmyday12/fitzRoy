@@ -25,7 +25,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
   if (is.na(start_date)) {
     stop(paste(
-      "Date format not reccognised",
+      "Date format not recognised",
       "Check that start_date is in dmy or ymd format"
     ))
   }
@@ -34,7 +34,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
 
   if (is.na(end_date)) {
     stop(paste(
-      "Date format not reccognised",
+      "Date format not recognised",
       "Check that end_date is in dmy or ymd format"
     ))
   }
@@ -87,7 +87,7 @@ get_afltables_urls <- function(start_date,
 
   if (is.na(start_date)) {
     stop(paste(
-      "Date format not reccognised",
+      "Date format not recognised",
       "Check that start_date is in dmy or ymd format"
     ))
   }
@@ -95,7 +95,7 @@ get_afltables_urls <- function(start_date,
 
   if (is.na(end_date)) {
     stop(paste(
-      "Date format not reccognised.",
+      "Date format not recognised.",
       "Check that end_date is in dmy or ymd format"
     ))
   }
