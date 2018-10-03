@@ -12,8 +12,8 @@
 #' @export
 #'
 #' @examples
-#' scrape_afltables_match("https://afltables.com/afl/stats/games/2018/071120180602.html")
 #' \dontrun{
+#' scrape_afltables_match("https://afltables.com/afl/stats/games/2018/071120180602.html")
 #' scrape_afltables_match(get_afltables_urls("01/06/2018, "01/06/2018"))
 #' }
 #' @importFrom magrittr %>%
