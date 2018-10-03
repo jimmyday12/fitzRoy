@@ -12,9 +12,11 @@
 #' }
 #' @export
 get_score_progression_raw <- function() {
-  message(paste("Downloading score progression from Github.",
-                "Note this is quite a large file (~8MB)\n",
-                "It is also only up to date to end of 2017"))
+  message(paste(
+    "Downloading score progression from Github.",
+    "Note this is quite a large file (~8MB)\n",
+    "It is also only up to date to end of 2017"
+  ))
 
   # Create URL
   dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/scoring_progression/score_progression_raw.rda" # nolint

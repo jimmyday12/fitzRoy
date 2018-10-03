@@ -144,15 +144,19 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @import dplyr
 get_fixture <- function(season = lubridate::year(Sys.Date())) {
   if (!is.numeric(season)) {
-    stop(paste0("'season' must be in 4-digit year format.",
-                "'season' is currently ",
-                season))
-    }
+    stop(paste0(
+      "'season' must be in 4-digit year format.",
+      "'season' is currently ",
+      season
+    ))
+  }
   if (nchar(season) != 4) {
-    stop(paste0("'season' must be in 4-digit year format (e.g. 2018).",
-                "'season' is currently ",
-                season))
-    }
+    stop(paste0(
+      "'season' must be in 4-digit year format (e.g. 2018).",
+      "'season' is currently ",
+      season
+    ))
+  }
   # create url
   url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season) # nolint
   fixture_xml <- xml2::read_html(url_fixture)
@@ -194,15 +198,17 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
     mutate(Round = ifelse(diff_grp == 2, Round - 1, Round)) %>%
     select(-diff, -diff_grp)
 
-  #rle_round <- rle(diff(games_df$Round))
-  #srt_ind <- which(diff(games_df$Round) == 2)
-  #end_ind <- rle_round$lengths[which(rle_round$values == 2) + 1] + 1
+  # rle_round <- rle(diff(games_df$Round))
+  # srt_ind <- which(diff(games_df$Round) == 2)
+  # end_ind <- rle_round$lengths[which(rle_round$values == 2) + 1] + 1
 
   # Fix names
   games_df <- games_df %>%
     group_by(Date, Round, Venue) %>%
-    separate(Teams, into = c("Home.Team", "Away.Team"),
-             sep = "\\\nv\\s\\\n") %>%
+    separate(Teams,
+      into = c("Home.Team", "Away.Team"),
+      sep = "\\\nv\\s\\\n"
+    ) %>%
     mutate_at(c("Home.Team", "Away.Team"), stringr::str_remove_all, "[\r\n]")
 
   # Add season game number

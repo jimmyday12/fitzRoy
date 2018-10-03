@@ -151,7 +151,7 @@ scrape_afltables_match <- function(match_urls) {
   names(games_df) <- make.names(names(games_df))
 
   # nolint start
-  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = X.) 
+  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = X.)
   if ("X1." %in% names(games_df)) {
     games_df <- rename(games_df,
       One.Percenters = X1.
@@ -218,7 +218,8 @@ scrape_afltables_match <- function(match_urls) {
   games_joined <- games_cleaned %>%
     mutate(Player = paste(First.name, Surname)) %>%
     dplyr::left_join(ids,
-                     by = c("Season", "Player", "Playing.for" = "Team")) %>%
+      by = c("Season", "Player", "Playing.for" = "Team")
+    ) %>%
     dplyr::select(-Player)
 
   df <- games_joined %>%

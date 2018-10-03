@@ -31,4 +31,9 @@ reference:
       - '`get_match_data`'
       - '`replace_teams`'
       - '`scrape_afltables_match`'
+      - '`get_afltables_urls`'
+      - '`convert_results`'
+      - '`get_afltables_player_ids`'
+      
+      
       

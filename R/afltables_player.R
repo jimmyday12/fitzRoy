@@ -22,18 +22,21 @@
 #' @importFrom purrr map
 get_afltables_stats <- function(start_date = "1897-01-01",
                                 end_date = Sys.Date()) {
-
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
   if (is.na(start_date)) {
-    stop(paste("Date format not reccognised",
-               "Check that start_date is in dmy or ymd format"))
+    stop(paste(
+      "Date format not reccognised",
+      "Check that start_date is in dmy or ymd format"
+    ))
   }
 
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
 
   if (is.na(end_date)) {
-    stop(paste("Date format not reccognised",
-               "Check that end_date is in dmy or ymd format"))
+    stop(paste(
+      "Date format not reccognised",
+      "Check that end_date is in dmy or ymd format"
+    ))
   }
 
   message(paste0("Returning data from ", start_date, " to ", end_date))
@@ -57,7 +60,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
   }
   message("Finished getting afltables data")
   dplyr::filter(dat, Date > start_date & Date < end_date) %>%
-   dplyr:: ungroup()
+    dplyr::ungroup()
 }
 
 #' Return match URLs for specified dates
@@ -83,14 +86,18 @@ get_afltables_urls <- function(start_date,
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
 
   if (is.na(start_date)) {
-    stop(paste("Date format not reccognised",
-               "Check that start_date is in dmy or ymd format"))
+    stop(paste(
+      "Date format not reccognised",
+      "Check that start_date is in dmy or ymd format"
+    ))
   }
   end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
 
   if (is.na(end_date)) {
-    stop(paste("Date format not reccognised.",
-               "Check that end_date is in dmy or ymd format"))
+    stop(paste(
+      "Date format not reccognised.",
+      "Check that end_date is in dmy or ymd format"
+    ))
   }
 
   Seasons <- format(start_date, "%Y"):format(end_date, "%Y")

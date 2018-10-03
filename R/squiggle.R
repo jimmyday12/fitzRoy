@@ -65,13 +65,14 @@ get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
 
   dat <- tryCatch(
     jsonlite::fromJSON(url),
-    error = function(e) rlang::abort(paste("The URL did not work",
-                                           "Did your query make sense?\n",
-                                           "Try the following URL in your",
-                                           "browser:",
-                                           url)
-                                     )
-    )
+    error = function(e) rlang::abort(paste(
+        "The URL did not work",
+        "Did your query make sense?\n",
+        "Try the following URL in your",
+        "browser:",
+        url
+      ))
+  )
 
   # Convert the
   df <- as.data.frame(dat[[1]])

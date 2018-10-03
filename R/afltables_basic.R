@@ -17,8 +17,10 @@
 get_match_results <- function() {
 
   # Get data ----
-  column_names <- c("Game", "Date", "Round", "Home.Team", "Home.Score",
-                    "Away.Team", "Away.Score", "Venue")
+  column_names <- c(
+    "Game", "Date", "Round", "Home.Team", "Home.Score",
+    "Away.Team", "Away.Score", "Venue"
+  )
   url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
   match_data <- suppressMessages(
     readr::read_table(url_text, skip = 2, col_names = column_names)

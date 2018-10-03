@@ -1,8 +1,11 @@
-# fitzRoy 0.1.6.9000 (unreleased)
+# fitzRoy 0.1.7
 
 * fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
 * fixed bug with round number for finals [#40](https://github.com/jimmyday12/fitzRoy/issues/40)
 * added docker support, thanks to Matthew Erbs [#13](https://github.com/jimmyday12/fitzRoy/issues/13)
+* fixed bug with `get_afltables_stats()` where it was returning a grouped `tibble`. Thanks to [tyluRp](https://github.com/tyluRp) [#38](https://github.com/jimmyday12/fitzRoy/issues/38)
+* added a basic vignette. Thanks to [@Lingtax](https://github.com/Lingtax)
+
 
 # fitzRoy 0.1.6
 

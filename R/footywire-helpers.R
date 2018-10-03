@@ -101,15 +101,17 @@ footywire_html <- function(x, id) {
       Date = game_date,
       Match_id = id
     ) %>%
-    dplyr::select(Date,
-                  Season,
-                  Round,
-                  Venue,
-                  Player,
-                  Team,
-                  Opposition,
-                  Status,
-                  everything())
+    dplyr::select(
+      Date,
+      Season,
+      Round,
+      Venue,
+      Player,
+      Team,
+      Opposition,
+      Status,
+      everything()
+    )
 
   names(player_stats) <- make.names(names(player_stats))
 
