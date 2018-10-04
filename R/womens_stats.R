@@ -13,18 +13,18 @@ get_womens_cookie <- function() {
 }
 
 
-#' Get round data
+#' Get rounds
 #' 
 #' Returns data frame for available round data. Includes the rounds played, 
 #' as well as identifiers to make further requests.
 #'
 #' @param cookie a cookie produced by `get_womens_cookie()`
 #'
-#' @return A list of season round data
+#' @return A dataframe with information about each round
 #' @export
 #'
 #' @examples get_womens_cookie() %>% get_round_metadata()
-get_round_data <- function(cookie) {
+get_rounds <- function(cookie) {
   years <- 2017:2100
   meta <- vector(mode = "list")
   continue <- TRUE
@@ -51,24 +51,46 @@ get_round_data <- function(cookie) {
   dplyr::bind_rows(meta)
 }
 
-#' Get round match metadata
+#' Get match data
 #' 
-#' For a given round, get the metadata for each match played
+#' For a given round ID, get the data for each match played. Use the column
+#' `roundId` in the dataframe created by the `get_rounds` function to specify
+#' matches to fetch
 #'
 #' @param x a dataframe of round metadata, as produces by 
 #' `process_round_metadata`
 #'
 #' @return
 #' @export
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #'
 #' @examples get_match_metadata("CD_R201826401", get_womens_cookie())
-get_match_metadata <- function(roundid, cookie) {
+get_match_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
-  x <- httr::GET(url_head,
+  httr::GET(url_head,
                  httr::add_headers(`X-media-mis-token` = cookie)) %>% 
-    httr::content()
-  purrr::map_dfr(x$items, process_match_metadata)
+    httr::content(as = "text", encoding = "UTF-8") %>% 
+    jsonlite::fromJSON(flatten = TRUE) %>% 
+    .$items %>% as_data_frame() %>% # Run up to here to see all variables
+    dplyr::select(match.matchId, 
+                  match.date, 
+                  round.roundNumber,
+                  venue.name,
+                  score.weather.weatherType,
+                  
+                  match.homeTeam.name, 
+                  score.homeTeamScore.matchScore.goals,
+                  score.homeTeamScore.matchScore.behinds,
+                  score.homeTeamScore.matchScore.totalScore,
+                  
+                  match.awayTeam.name, 
+                  score.awayTeamScore.matchScore.goals,
+                  score.awayTeamScore.matchScore.behinds,
+                  score.awayTeamScore.matchScore.totalScore
+                  # There are many more variables that could be added to these
+                  )
 }
 
 #' Process match metadata
