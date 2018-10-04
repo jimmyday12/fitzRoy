@@ -13,17 +13,18 @@ get_womens_cookie <- function() {
 }
 
 
-#' Get round metadata
+#' Get round data
 #' 
-#' Returns metadata for available match data
+#' Returns data frame for available round data. Includes the rounds played, 
+#' as well as identifiers to make further requests.
 #'
 #' @param cookie a cookie produced by `get_womens_cookie()`
 #'
-#' @return A list of season match metadata
+#' @return A list of season round data
 #' @export
 #'
 #' @examples get_womens_cookie() %>% get_round_metadata()
-get_round_metadata <- function(cookie) {
+get_round_data <- function(cookie) {
   years <- 2017:2100
   meta <- vector(mode = "list")
   continue <- TRUE
@@ -37,31 +38,18 @@ get_round_metadata <- function(cookie) {
     if (response_code != 200) {
       continue <- FALSE
     } else {
-      meta[[i]] <- httr::content(match_metadata)
+      x <- httr::content(match_metadata, as = "text", 
+                         encoding = "UTF-8") %>% 
+        jsonlite::fromJSON() %>% 
+        .$season %>% .$competitions %>% 
+        tibble::as_data_frame() %>% 
+        tidyr::unnest()
+      meta[[i]] <- x
       i <- i + 1
     }
   }
-  meta
+  dplyr::bind_rows(meta)
 }
-
-
-#' Process round metadata
-#' 
-#' Internal function to process AFL Womens' league metadata into a dataframe
-#'
-#' @param x a metadata entry
-#'
-#' @return a dataframe with metadata for each round
-#' @export
-#'
-#' @examples get_womens_cookie() %>% 
-#'   get_round_metadata() %>% 
-#'   map_dfr(process_round_metadata)
-process_round_metadata <- function(x) {
-  x$season$competitions[[1]]$rounds %>% 
-    purrr::map_dfr(tibble::as_data_frame)
-}
-
 
 #' Get round match metadata
 #' 
