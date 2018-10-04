@@ -1,0 +1,76 @@
+---
+title: "Womens' AFL Stats"
+author: "Oscar Lane <lane.oscar@gmail.com>"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Womens' AFL Stats}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+These functions are a work-in-progress on the `womens-stat` branch, but this 
+vignette explains the functionality already present.
+
+### Authentication
+
+The AFL Stats website requires a cookie to retrieve data through GET requests.
+The `get_womens_cookie` function retrieves this cookie as a string. It
+requires no arguments.
+
+```{r, message=FALSE}
+library(fitzRoy)
+library(dplyr)
+library(magrittr)
+cookie <- get_aflw_cookie()
+cookie
+```
+
+### Round list
+
+The `get_rounds` function looks for available data. There is currently only 
+2017 and 2018 data present, but the function will look for all years up to 2100.
+(This is built as a while loop so it will cut off if it finds that it is
+getting null responses, as it does for 2019 onwards at the moment, but it should
+be relatively future-proof, given the site API doesn't change.)
+
+```{r}
+rounds <- get_aflw_rounds(cookie)
+glimpse(rounds)
+```
+
+There are 16 observations, as there have been two seasons with 8 rounds each.
+
+### Match data
+
+Given the `roundId` in the round list above, we can get match data using the
+`get_match_data` function.
+
+```{r}
+match_data <- purrr::map_dfr(rounds$roundId, ~ get_aflw_match_data(., cookie))
+glimpse(match_data)
+```
+
+There are some more stats available in addition to these that we could add.
+These include left/right behinds, left/right posters, rushed/touched behinds
+
+### Detailed stats
+
+If we have the match, round, and competition IDs (which are returned by the 
+`get_aflw_match_data` function), we can retrieve more detailed stats. I have
+not cleaned these yes, but the dataframe below shows what is available:
+
+```{r}
+matchid <- match_data$match.matchId[[1]]
+roundid <- match_data$round.roundId[[1]]
+compid <- match_data$round.competitionId[[1]]
+get_aflw_detailed_match_data(matchid, roundid, compid, cookie) %>% glimpse()
+```
+
