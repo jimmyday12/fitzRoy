@@ -42,7 +42,7 @@ get_rounds <- function(cookie) {
                          encoding = "UTF-8") %>% 
         jsonlite::fromJSON() %>% 
         .$season %>% .$competitions %>% 
-        tibble::as_data_frame() %>% 
+        dplyr::as_data_frame() %>% 
         tidyr::unnest()
       meta[[i]] <- x
       i <- i + 1
@@ -59,13 +59,14 @@ get_rounds <- function(cookie) {
 #'
 #' @param x a dataframe of round metadata, as produces by 
 #' `process_round_metadata`
+#' @param cookie a cookie produced by `get_womens_cookie()`
 #'
-#' @return
+#' @return a dataframe containing match data
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-#' @examples get_match_metadata("CD_R201826401", get_womens_cookie())
+#' @examples get_match_data("CD_R201826401", get_womens_cookie())
 get_match_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
@@ -75,8 +76,11 @@ get_match_data <- function(roundid, cookie) {
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$items %>% as_data_frame() %>% # Run up to here to see all variables
     dplyr::select(match.matchId, 
+                  round.roundId,
+                  round.competitionId,
                   match.date, 
                   round.roundNumber,
+                  round.abbreviation,
                   venue.name,
                   score.weather.weatherType,
                   
@@ -89,69 +93,36 @@ get_match_data <- function(roundid, cookie) {
                   score.awayTeamScore.matchScore.goals,
                   score.awayTeamScore.matchScore.behinds,
                   score.awayTeamScore.matchScore.totalScore
-                  # There are many more variables that could be added to these
+                  # There are more variables that could be added to these
                   )
 }
 
-#' Process match metadata
+#' Get detailed womens match data
 #' 
-#' Helper function for `get_match_metadata` that gets metadata for each matchup,
-#' so we can get match-level data.
+#' Gets detailed match data for a given match
 #'
-#' @param x Node from round request
+#' @param matchid matchid from `get_match_data()`
+#' @param roundid roundid from `get_match_data()`
+#' @param competitionid competitionid from `get_match_data()`
+#' @param cookie cookie from `get_womens_cookie()`
 #'
-#' @return
-#' @export
-#'
-#' @examples rl_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
-#'                     roundid)
-process_match_metadata <- function(x) {
-  out <- list()
-  out$matchup <- x$match$name
-  out$date <- x$match$date
-  out$matchId <- x$match$matchId
-  out$startTimeUTC <- x$match$utcStartTime
-  out$startTimeLocal <- x$match$venueLocalStartTime
-  out$homeTeam <- x$match$homeTeam$name
-  out$awayTeam <- x$match$awayTeam$name
-  out$roundId <- x$match$round
-  out$venue <- x$venue$name
-  out$roundNumber <- x$round$roundNumber
-  out$competitionId <- x$round$CompetitionId
-  tibble::as_data_frame(out)
-}
-
-#' Get womens match data
-#'
-#' @param matchid matchid from `get_match_metadata`
-#' @param roundid roundid from `get_match_metadata`
-#' @param matchid matchid from `get_match_metadata`
-#' @param cookie cookie from `get_womens_cookie`
-#'
-#' @return
+#' @return 
 #' @export
 #'
 #' @examples get_womens_match_data("CD_M20182640101", "CD_R201826401", 
 #' "CD_S2018264", get_womens_cookie())
 get_womens_match_data <- function(matchid, roundid, competitionid, cookie) {
-  request <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
+  httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
                        query = list(matchId = matchid,
                                     roundId = roundid,
                                     competitionId = competitionid),
-                       httr::add_headers(`X-media-mis-token` = cookie))
-  x <- httr::content(request)
-  x
-  #TODO: parse x
+                       httr::add_headers(`X-media-mis-token` = cookie)) %>% 
+    httr::content(as = "text", encoding = "UTF-8") %>% 
+    jsonlite::fromJSON(flatten = TRUE) %>% 
+    .$lists %>% 
+    dplyr::as_data_frame() %>% 
+    dplyr::mutate(matchId = matchid, 
+           roundId = roundid, 
+           competitionId = competitionid)
 }
-
-# Tests ---------------------------------------------------
-cookie <- get_womens_cookie()
-
-rounds <- get_round_metadata(cookie) %>% 
-  purrr::map_dfr(process_round_metadata)
-
-round_metadata <- purrr::map_dfr(rounds$roundId, ~ get_match_metadata(., cookie))
-
-x <- get_womens_match_data("CD_M20182640101", "CD_R201826401", 
- "CD_S2018264", get_womens_cookie())
 
