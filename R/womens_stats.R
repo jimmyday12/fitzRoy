@@ -6,8 +6,8 @@
 #' @export
 #' @importFrom magrittr %>%
 #'
-#' @examples cookie <- get_afl_stats_cookie()
-get_womens_cookie <- function() {
+#' @examples cookie <- get_aflw_cookie()
+get_aflw_cookie <- function() {
   response <- httr::POST("http://www.afl.com.au/api/cfs/afl/WMCTok")
   httr::content(response)$token
 }
@@ -23,8 +23,8 @@ get_womens_cookie <- function() {
 #' @return A dataframe with information about each round
 #' @export
 #'
-#' @examples get_womens_cookie() %>% get_round_metadata()
-get_rounds <- function(cookie) {
+#' @examples get_aflw_cookie() %>% get_aflw_metadata()
+get_aflw_rounds <- function(cookie) {
   years <- 2017:2100
   meta <- vector(mode = "list")
   continue <- TRUE
@@ -66,8 +66,8 @@ get_rounds <- function(cookie) {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-#' @examples get_match_data("CD_R201826401", get_womens_cookie())
-get_match_data <- function(roundid, cookie) {
+#' @examples get_aflw_match_data("CD_R201826401", get_womens_cookie())
+get_aflw_match_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
   httr::GET(url_head,
@@ -106,12 +106,13 @@ get_match_data <- function(roundid, cookie) {
 #' @param competitionid competitionid from `get_match_data()`
 #' @param cookie cookie from `get_womens_cookie()`
 #'
-#' @return 
+#' @return dataframe with detailed match data
 #' @export
 #'
-#' @examples get_womens_match_data("CD_M20182640101", "CD_R201826401", 
+#' @examples get_aflw_match_data("CD_M20182640101", "CD_R201826401", 
 #' "CD_S2018264", get_womens_cookie())
-get_womens_match_data <- function(matchid, roundid, competitionid, cookie) {
+get_aflw_detailed_match_data <- function(matchid, roundid, competitionid, 
+                                         cookie) {
   httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
                        query = list(matchId = matchid,
                                     roundId = roundid,
