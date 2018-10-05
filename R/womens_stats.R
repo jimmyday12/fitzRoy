@@ -55,9 +55,9 @@ get_aflw_rounds <- function(cookie) {
 
 #' Get match data
 #' 
-#' For a given round ID, get the data for each match played. Use the column
-#' `roundId` in the dataframe created by the `get_rounds()` function to specify
-#' matches to fetch
+#' For a given round ID, get the data for each match played in that round. Use 
+#' the column `roundId` in the dataframe created by the `get_rounds()` function
+#' to specify matches to fetch
 #'
 #' @param x a round ID string
 #' @param cookie a cookie produced by `get_womens_cookie()`
@@ -67,8 +67,8 @@ get_aflw_rounds <- function(cookie) {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-#' @examples get_aflw_match_data("CD_R201826401", get_aflw_cookie())
-get_aflw_match_data <- function(roundid, cookie) {
+#' @examples get_aflw_round_data("CD_R201826401", get_aflw_cookie())
+get_aflw_round_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
   httr::GET(url_head,
@@ -115,25 +115,25 @@ get_aflw_match_data <- function(roundid, cookie) {
     dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
 }
 
-#' Get all AFLW match data
+#' Get AFLW match data
 #' 
 #' Retrieves all available AFLW match data.
 #'
 #' @return a data frame
 #' @export
 #'
-#' @examples get_all_aflw_match_data()
-get_all_aflw_match_data <- function() {
+#' @examples get_aflw_match_data()
+get_aflw_match_data <- function() {
   cookie <- get_aflw_cookie()
   available_matches <- get_aflw_rounds(cookie)
-  purrr::map_dfr(available_matches$roundId, ~ get_aflw_match_data(., cookie))
+  purrr::map_dfr(available_matches$roundId, ~ get_aflw_round_data(., cookie))
 }
 
 #' Get detailed womens match data
 #' 
 #' Gets detailed match data for a given match. Requires the match, round, and
 #' competition IDs, which are given in the tables produced by 
-#' `get_aflw_match_data()`
+#' `get_aflw_round_data()`
 #'
 #' @param matchid matchid from `get_match_data()`
 #' @param roundid roundid from `get_match_data()`
@@ -158,20 +158,4 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$lists %>% 
     dplyr::as_data_frame()
-  home_team <- match_data$team.teamName[[1]] # First row: home team
-  away_team <- match_data$team.teamName[[2]] # Second row: away team
-  match_data %>% 
-    gather(
-      measure, 
-      value,
-      stats.averages.goals:stats.totals.interchangeCounts.interchangeCountQ4
-    )
-  match_data %>% 
-    mutate(home_away = ifelse(team.teamName == home_team,
-                              paste0()))
 }
-
-x %>% gather(measure, value, 
-             stats.averages.goals:stats.totals.interchangeCounts.interchangeCountQ4)
-
-
