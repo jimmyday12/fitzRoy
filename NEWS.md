@@ -1,6 +1,3 @@
-# fitzRoy 0.1.7.9000 (unreleased)
-
-
 # fitzRoy 0.1.7
 
 * fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
