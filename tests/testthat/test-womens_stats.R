@@ -15,8 +15,8 @@ test_that("get_aflw_rounds returns data frame with correct variables", {
 })
 
 test_that("get_aflw_match_data returns data frame with correct variables", {
-  expect_type(get_aflw_match_data("CD_R201826401", get_aflw_cookie()), "list")
-  expect_equal(colnames(get_aflw_match_data("CD_R201826401", 
+  expect_type(get_aflw_round_data("CD_R201826401", get_aflw_cookie()), "list")
+  expect_equal(colnames(get_aflw_round_data("CD_R201826401", 
                                             get_aflw_cookie())),
                c("Match.Id", "Round.Id", "Competition.Id", "Venue",
                  "Local.Start.Time", "Round.Number", "Round.Abbreviation",
