@@ -2,23 +2,16 @@
 % Please edit documentation in R/womens_stats.R
 \name{get_aflw_match_data}
 \alias{get_aflw_match_data}
-\title{Get match data}
+\title{Get AFLW match data}
 \usage{
-get_aflw_match_data(roundid, cookie)
-}
-\arguments{
-\item{cookie}{a cookie produced by \code{get_womens_cookie()}}
-
-\item{x}{a round ID string}
+get_aflw_match_data()
 }
 \value{
-a dataframe containing match data
+a data frame
 }
 \description{
-For a given round ID, get the data for each match played. Use the column
-\code{roundId} in the dataframe created by the \code{get_rounds()} function to specify
-matches to fetch
+Retrieves all available AFLW match data.
 }
 \examples{
-get_aflw_match_data("CD_R201826401", get_womens_cookie())
+get_aflw_match_data()
 }

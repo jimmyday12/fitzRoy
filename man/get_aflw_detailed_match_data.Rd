@@ -21,9 +21,5 @@ dataframe with detailed match data
 \description{
 Gets detailed match data for a given match. Requires the match, round, and
 competition IDs, which are given in the tables produced by
-\code{get_aflw_match_data()}
-}
-\examples{
-get_aflw_match_data("CD_M20182640101", "CD_R201826401", 
-"CD_S2018264", get_womens_cookie())
+\code{get_aflw_round_data()}
 }

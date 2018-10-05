@@ -7,7 +7,7 @@
 get_aflw_rounds(cookie)
 }
 \arguments{
-\item{cookie}{a cookie produced by \code{get_womens_cookie()}}
+\item{cookie}{a cookie produced by \code{get_aflw_cookie()}}
 }
 \value{
 A dataframe with information about each round
