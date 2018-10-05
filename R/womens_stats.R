@@ -67,7 +67,7 @@ get_aflw_rounds <- function(cookie) {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-#' @examples get_aflw_match_data("CD_R201826401", get_womens_cookie())
+#' @examples get_aflw_match_data("CD_R201826401", get_aflw_cookie())
 get_aflw_match_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
@@ -115,6 +115,20 @@ get_aflw_match_data <- function(roundid, cookie) {
     dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
 }
 
+#' Get all AFLW match data
+#' 
+#' Retrieves all available AFLW match data.
+#'
+#' @return a data frame
+#' @export
+#'
+#' @examples get_all_aflw_match_data()
+get_all_aflw_match_data <- function() {
+  cookie <- get_aflw_cookie()
+  available_matches <- get_aflw_rounds(cookie)
+  purrr::map_dfr(available_matches$roundId, ~ get_aflw_match_data(., cookie))
+}
+
 #' Get detailed womens match data
 #' 
 #' Gets detailed match data for a given match. Requires the match, round, and
@@ -135,7 +149,7 @@ get_aflw_match_data <- function(roundid, cookie) {
 #' "CD_S2018264", get_aflw_cookie())
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid, 
                                          cookie) {
-  httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
+  match_data <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
             query = list(matchId = matchid,
                          roundId = roundid,
                          competitionId = competitionid),
@@ -143,19 +157,21 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     httr::content(as = "text", encoding = "UTF-8") %>% 
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$lists %>% 
-    dplyr::as_data_frame() #%>% 
-    # dplyr::mutate(matchId = matchid, 
-    #               roundId = roundid, 
-    #               competitionId = competitionid)
+    dplyr::as_data_frame()
+  home_team <- match_data$team.teamName[[1]] # First row: home team
+  away_team <- match_data$team.teamName[[2]] # Second row: away team
+  match_data %>% 
+    gather(
+      measure, 
+      value,
+      stats.averages.goals:stats.totals.interchangeCounts.interchangeCountQ4
+    )
+  match_data %>% 
+    mutate(home_away = ifelse(team.teamName == home_team,
+                              paste0()))
 }
 
-x2 <- x %>% select(-c(team.teamId, team.teamAbbr, team.teamNickname)) %>% 
-  gather(measure, value, 
-  stats.averages.goals:stats.totals.interchangeCounts.interchangeCountQ4)
-x2  
-
-
-
-
+x %>% gather(measure, value, 
+             stats.averages.goals:stats.totals.interchangeCounts.interchangeCountQ4)
 
 
