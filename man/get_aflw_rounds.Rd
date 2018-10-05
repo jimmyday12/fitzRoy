@@ -2,7 +2,7 @@
 % Please edit documentation in R/womens_stats.R
 \name{get_aflw_rounds}
 \alias{get_aflw_rounds}
-\title{Get rounds}
+\title{Get rounds (internal function)}
 \usage{
 get_aflw_rounds(cookie)
 }

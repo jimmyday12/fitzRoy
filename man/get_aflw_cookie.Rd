@@ -2,7 +2,7 @@
 % Please edit documentation in R/womens_stats.R
 \name{get_aflw_cookie}
 \alias{get_aflw_cookie}
-\title{Get AFL Stats cookie
+\title{Get AFL Stats cookie (internal function)
 Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
 further requests.}
 \usage{
@@ -12,7 +12,7 @@ get_aflw_cookie()
 token code
 }
 \description{
-Get AFL Stats cookie
+Get AFL Stats cookie (internal function)
 Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
 further requests.
 }

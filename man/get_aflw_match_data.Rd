@@ -9,15 +9,14 @@ get_aflw_match_data(roundid, cookie)
 \arguments{
 \item{cookie}{a cookie produced by \code{get_womens_cookie()}}
 
-\item{x}{a dataframe of round metadata, as produces by
-\code{process_round_metadata}}
+\item{x}{a round ID string}
 }
 \value{
 a dataframe containing match data
 }
 \description{
 For a given round ID, get the data for each match played. Use the column
-\code{roundId} in the dataframe created by the \code{get_rounds} function to specify
+\code{roundId} in the dataframe created by the \code{get_rounds()} function to specify
 matches to fetch
 }
 \examples{
