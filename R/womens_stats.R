@@ -13,7 +13,7 @@ get_aflw_cookie <- function() {
 }
 
 
-#' Get rounds
+#' Get rounds (internal function)
 #' 
 #' Returns data frame for available round data. Includes the rounds played, 
 #' as well as identifiers to make further requests.
@@ -21,7 +21,6 @@ get_aflw_cookie <- function() {
 #' @param cookie a cookie produced by `get_womens_cookie()`
 #'
 #' @return A dataframe with information about each round
-#' @export
 #'
 #' @examples get_aflw_cookie() %>% get_aflw_metadata()
 get_aflw_rounds <- function(cookie) {
@@ -54,11 +53,10 @@ get_aflw_rounds <- function(cookie) {
 #' Get match data
 #' 
 #' For a given round ID, get the data for each match played. Use the column
-#' `roundId` in the dataframe created by the `get_rounds` function to specify
+#' `roundId` in the dataframe created by the `get_rounds()` function to specify
 #' matches to fetch
 #'
-#' @param x a dataframe of round metadata, as produces by 
-#' `process_round_metadata`
+#' @param x a round ID string
 #' @param cookie a cookie produced by `get_womens_cookie()`
 #'
 #' @return a dataframe containing match data
@@ -75,31 +73,48 @@ get_aflw_match_data <- function(roundid, cookie) {
     httr::content(as = "text", encoding = "UTF-8") %>% 
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$items %>% as_data_frame() %>% # Run up to here to see all variables
-    dplyr::select(match.matchId, 
-                  round.roundId,
-                  round.competitionId,
-                  match.date, 
-                  round.roundNumber,
-                  round.abbreviation,
-                  venue.name,
-                  score.weather.weatherType,
-                  
-                  match.homeTeam.name, 
-                  score.homeTeamScore.matchScore.goals,
-                  score.homeTeamScore.matchScore.behinds,
-                  score.homeTeamScore.matchScore.totalScore,
-                  
-                  match.awayTeam.name, 
-                  score.awayTeamScore.matchScore.goals,
-                  score.awayTeamScore.matchScore.behinds,
-                  score.awayTeamScore.matchScore.totalScore
-                  # There are more variables that could be added to these
-                  )
+    # There are more variables that could be added to these
+    # Rename variables
+    dplyr::select(Match.Id = match.matchId,
+           Round.Id = round.roundId,
+           Competition.Id = round.competitionId,
+           Venue = venue.name,
+           Local.Start.Time = match.venueLocalStartTime,
+           Round.Number = round.roundNumber,
+           Round.Abbreviation = round.abbreviation,
+           Weather.Type = score.weather.weatherType,
+           Weather.Description = score.weather.description,
+           Temperature = score.weather.tempInCelsius,
+           Home.Team = match.homeTeam.name,
+           Home.Goals = score.homeTeamScore.matchScore.goals,
+           Home.Behinds = score.homeTeamScore.matchScore.behinds,
+           Home.Points = score.homeTeamScore.matchScore.totalScore,
+           Home.Left.Behinds = score.homeTeamScoreChart.leftBehinds,
+           Home.Right.Behinds = score.homeTeamScoreChart.rightBehinds,
+           Home.Left.Posters = score.homeTeamScoreChart.leftPosters,
+           Home.Right.Posters = score.homeTeamScoreChart.rightPosters,
+           Home.Rushed.Behinds = score.homeTeamScoreChart.rushedBehinds,
+           Home.Touched.Behinds = score.homeTeamScoreChart.touchedBehinds,
+           Away.Team = match.awayTeam.name,
+           Away.Goals = score.awayTeamScore.matchScore.goals,
+           Away.Behinds = score.awayTeamScore.matchScore.behinds,
+           Away.Points = score.awayTeamScore.matchScore.totalScore,
+           Away.Left.Behinds = score.awayTeamScoreChart.leftBehinds,
+           Away.Right.Behinds = score.awayTeamScoreChart.rightBehinds,
+           Away.Left.Posters = score.awayTeamScoreChart.leftPosters,
+           Away.Right.Posters = score.awayTeamScoreChart.rightPosters,
+           Away.Rushed.Behinds = score.awayTeamScoreChart.rushedBehinds,
+           Away.Touched.Behinds = score.awayTeamScoreChart.touchedBehinds
+           ) %>% 
+    # Parse date/start time
+    dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
 }
 
 #' Get detailed womens match data
 #' 
-#' Gets detailed match data for a given match
+#' Gets detailed match data for a given match. Requires the match, round, and
+#' competition IDs, which are given in the tables produced by 
+#' `get_aflw_match_data()`
 #'
 #' @param matchid matchid from `get_match_data()`
 #' @param roundid roundid from `get_match_data()`
