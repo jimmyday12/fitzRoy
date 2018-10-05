@@ -83,7 +83,6 @@ stats <- get_afltables_stats(start_date = "2000-01-01", end_date = "2018-06-01")
 
 tail(stats)
 #> # A tibble: 6 x 59
-#> # Groups:   Season, Round, Home.team, Away.team [1]
 #>   Season Round Date       Local.start.time Venue Attendance Home.team  HQ1G
 #>    <dbl> <chr> <date>                <int> <chr>      <int> <chr>     <int>
 #> 1   2018 10    2018-05-27             1440 "Per…      37575 Fremantle     3
