@@ -191,10 +191,9 @@ Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`) run one
 
 ### Building the image locally
 
-To build the Docker image run the following from the root of the repository.
+To build the Docker image run the following from the root of the repository.   
 * `docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .`
 
 ---
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md).
-By participating in this project you agree to abide by its terms.
+Please note that the [34m'fitzRoy'[39m project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

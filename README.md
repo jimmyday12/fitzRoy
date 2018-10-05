@@ -4,7 +4,7 @@
 fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
 ====================================================================================
 
-[![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy) [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.7-orange.svg?style=flat-square)](commits/master) [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2018--10--03-yellowgreen.svg)](/commits/master)
+[![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy) [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master) [![packageversion](https://img.shields.io/badge/Package%20version-0.1.7.9000-orange.svg?style=flat-square)](commits/master) [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2018--10--05-yellowgreen.svg)](/commits/master)
 
 Overview
 --------
@@ -243,68 +243,68 @@ head(sources)
 # Get all tips
 tips <- get_squiggle_data("tips")
 head(tips)  
-#>                    ateam year confidence    bits hteamid   err margin
-#> 1               Richmond 2017       50.0  0.0000       3 42.00   1.00
-#> 2               Richmond 2017       58.0  0.2141       3    NA     NA
-#> 3               Richmond 2017       56.7 -0.2076       3 48.39   5.39
-#> 4       Western Bulldogs 2017       62.7  0.3265       4  3.69  10.31
-#> 5       Western Bulldogs 2017       62.0  0.3103       4  3.00  17.00
-#> 6 Greater Western Sydney 2017       50.0  0.0000       1 53.00   3.00
-#>   correct gameid hconfidence ateamid round       hteam         venue
-#> 1       1      1        50.0      14     1     Carlton        M.C.G.
-#> 2       1      1        42.0      14     1     Carlton        M.C.G.
-#> 3       0      1        56.7      14     1     Carlton        M.C.G.
-#> 4       1      2        37.3      18     1 Collingwood        M.C.G.
-#> 5       1      2        38.0      18     1 Collingwood        M.C.G.
-#> 6       1      8        50.0       9     1    Adelaide Adelaide Oval
-#>                  date          source tipteamid              tip
-#> 1 2017-03-23 19:20:00        Squiggle        14         Richmond
-#> 2 2017-03-23 19:20:00  Figuring Footy        14         Richmond
-#> 3 2017-03-23 19:20:00 Matter of Stats         3          Carlton
-#> 4 2017-03-24 19:50:00 Matter of Stats        18 Western Bulldogs
-#> 5 2017-03-24 19:50:00        Squiggle        18 Western Bulldogs
-#> 6 2017-03-26 15:20:00        Squiggle         1         Adelaide
-#>               updated sourceid
-#> 1 2017-07-11 13:59:46        1
-#> 2 2017-04-10 12:18:02        3
-#> 3 2017-07-11 13:59:46        4
-#> 4 2017-07-11 13:59:46        4
-#> 5 2017-07-11 13:59:46        1
-#> 6 2017-07-11 13:59:46        1
+#>   correct hteamid year         venue round hconfidence              tip
+#> 1       1       3 2017        M.C.G.     1        50.0         Richmond
+#> 2       1       3 2017        M.C.G.     1        42.0         Richmond
+#> 3       0       3 2017        M.C.G.     1        56.7          Carlton
+#> 4       1       4 2017        M.C.G.     1        37.3 Western Bulldogs
+#> 5       1       4 2017        M.C.G.     1        38.0 Western Bulldogs
+#> 6       1       1 2017 Adelaide Oval     1        50.0         Adelaide
+#>   sourceid                date                  ateam             updated
+#> 1        1 2017-03-23 19:20:00               Richmond 2017-07-11 13:59:46
+#> 2        3 2017-03-23 19:20:00               Richmond 2017-04-10 12:18:02
+#> 3        4 2017-03-23 19:20:00               Richmond 2017-07-11 13:59:46
+#> 4        4 2017-03-24 19:50:00       Western Bulldogs 2017-07-11 13:59:46
+#> 5        1 2017-03-24 19:50:00       Western Bulldogs 2017-07-11 13:59:46
+#> 6        1 2017-03-26 15:20:00 Greater Western Sydney 2017-07-11 13:59:46
+#>      bits confidence margin       hteam          source ateamid tipteamid
+#> 1  0.0000       50.0   1.00     Carlton        Squiggle      14        14
+#> 2  0.2141       58.0     NA     Carlton  Figuring Footy      14        14
+#> 3 -0.2076       56.7   5.39     Carlton Matter of Stats      14         3
+#> 4  0.3265       62.7  10.31 Collingwood Matter of Stats      18        18
+#> 5  0.3103       62.0  17.00 Collingwood        Squiggle      18        18
+#> 6  0.0000       50.0   3.00    Adelaide        Squiggle       9         1
+#>     err gameid
+#> 1 42.00      1
+#> 2    NA      1
+#> 3 48.39      1
+#> 4  3.69      2
+#> 5  3.00      2
+#> 6 53.00      8
 ```
 
 ``` r
 # Get` just tips from round 1, 2018
 tips <- get_squiggle_data("tips", round = 1, year = 2018)
 head(tips)
-#>   hteamid    ateam             updated ateamid      tip hconfidence
-#> 1       5 Adelaide 2018-03-23 22:54:38       1 Adelaide       44.00
-#> 2       5 Adelaide 2018-03-23 22:54:38       1 Adelaide       40.20
-#> 3       5 Adelaide 2018-03-23 22:54:38       1 Adelaide       40.50
-#> 4       5 Adelaide 2018-03-23 22:54:38       1 Essendon       52.08
-#> 5       5 Adelaide 2018-03-23 22:54:38       1 Adelaide       34.00
-#> 6       5 Adelaide 2018-03-23 22:54:38       1 Adelaide       44.84
-#>   confidence    hteam gameid                date correct year
-#> 1      56.00 Essendon    373 2018-03-23 19:50:00       0 2018
-#> 2      59.80 Essendon    373 2018-03-23 19:50:00       0 2018
-#> 3      59.50 Essendon    373 2018-03-23 19:50:00       0 2018
-#> 4      52.08 Essendon    373 2018-03-23 19:50:00       1 2018
-#> 5      66.00 Essendon    373 2018-03-23 19:50:00       0 2018
-#> 6      55.16 Essendon    373 2018-03-23 19:50:00       0 2018
-#>                  source sourceid tipteamid margin    bits   err     venue
-#> 1              Squiggle        1         1  11.00 -0.1844 23.00 Docklands
-#> 2               The Arc        2         1   9.00 -0.3147 21.00 Docklands
-#> 3       Matter of Stats        4         1   9.78 -0.3040 21.78 Docklands
-#> 4               Punters        5         5     NA  0.0588    NA Docklands
-#> 5 Footy Maths Institute        6         1  21.00 -0.5564 33.00 Docklands
-#> 6            PlusSixOne        7         1   8.00 -0.1571 20.00 Docklands
-#>   round
-#> 1     1
-#> 2     1
-#> 3     1
-#> 4     1
-#> 5     1
-#> 6     1
+#>   ateamid margin hteamid      tip round confidence year
+#> 1       1  11.00       5 Adelaide     1      56.00 2018
+#> 2       1   9.00       5 Adelaide     1      59.80 2018
+#> 3       1   9.78       5 Adelaide     1      59.50 2018
+#> 4       1     NA       5 Essendon     1      52.08 2018
+#> 5       1  21.00       5 Adelaide     1      66.00 2018
+#> 6       1   8.00       5 Adelaide     1      55.16 2018
+#>               updated tipteamid    ateam                date correct
+#> 1 2018-03-23 22:54:38         1 Adelaide 2018-03-23 19:50:00       0
+#> 2 2018-03-23 22:54:38         1 Adelaide 2018-03-23 19:50:00       0
+#> 3 2018-03-23 22:54:38         1 Adelaide 2018-03-23 19:50:00       0
+#> 4 2018-03-23 22:54:38         5 Adelaide 2018-03-23 19:50:00       1
+#> 5 2018-03-23 22:54:38         1 Adelaide 2018-03-23 19:50:00       0
+#> 6 2018-03-23 22:54:38         1 Adelaide 2018-03-23 19:50:00       0
+#>      bits sourceid   err gameid hconfidence    hteam                source
+#> 1 -0.1844        1 23.00    373       44.00 Essendon              Squiggle
+#> 2 -0.3147        2 21.00    373       40.20 Essendon               The Arc
+#> 3 -0.3040        4 21.78    373       40.50 Essendon       Matter of Stats
+#> 4  0.0588        5    NA    373       52.08 Essendon               Punters
+#> 5 -0.5564        6 33.00    373       34.00 Essendon Footy Maths Institute
+#> 6 -0.1571        7 20.00    373       44.84 Essendon            PlusSixOne
+#>       venue
+#> 1 Docklands
+#> 2 Docklands
+#> 3 Docklands
+#> 4 Docklands
+#> 5 Docklands
+#> 6 Docklands
 ```
 
 ------------------------------------------------------------------------
@@ -326,8 +326,9 @@ Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`) run one
 
 ### Building the image locally
 
-To build the Docker image run the following from the root of the repository. \* `docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .`
+To build the Docker image run the following from the root of the repository.
+\* `docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .`
 
 ------------------------------------------------------------------------
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that the \[34m'fitzRoy'\[39m project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.

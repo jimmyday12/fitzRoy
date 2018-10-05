@@ -1,36 +1,48 @@
 Package: fitzRoy
-Version: 0.1.7.9000
 Title: Easily Scrape and Process AFL Data
-Description: An easy to use tool for scraping and processing AFL data. 
-Authors@R: c(
-    person("James", "Day", email = "jamesthomasday@gmail.com", role = c("cre", "aut")),
-    person("Robert", "Nguyen", email = "nguyen.n.robert@gmail.com", role = "aut"),
-    person("Matthew", "Erbs", email = "matthew.erbs@merbla.com", role = "ctb"))
+Version: 0.1.7.9000
+Authors@R: 
+    c(person(given = "James",
+             family = "Day",
+             role = c("cre", "aut"),
+             email = "jamesthomasday@gmail.com"),
+      person(given = "Robert",
+             family = "Nguyen",
+             role = "aut",
+             email = "nguyen.n.robert@gmail.com"),
+      person(given = "Matthew",
+             family = "Erbs",
+             role = "ctb",
+             email = "matthew.erbs@merbla.com"))
+Description: An easy to use tool for scraping and processing AFL
+    data.
 License: GPL-3
-Encoding: UTF-8
-LazyData: true
-ByteCompile: true
-Depends: R (>= 3.2.0)
-Suggests: 
-    testthat,
-    knitr,
-    rmarkdown,
-    covr,
-    ggplot2
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 6.1.0
-VignetteBuilder: knitr
 URL: https://github.com/jimmyday12/fitzRoy
 BugReports: https://github.com/jimmyday12/fitzRoy/issues
+Depends: 
+    R (>= 3.1)
 Imports:
-    magrittr,
-    rvest,
-    lubridate,
     dplyr,
-    tidyr,
+    jsonlite,
+    lubridate,
+    magrittr,
     purrr,
     readr,
-    stringr (>= 1.3.0),
     rlang,
-    jsonlite,
+    rvest,
+    stringr (>= 1.3.0),
+    tidyr,
     xml2
+Suggests: 
+    covr,
+    ggplot2,
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.0

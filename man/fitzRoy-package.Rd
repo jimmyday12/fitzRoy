@@ -6,7 +6,8 @@
 \alias{fitzRoy-package}
 \title{fitzRoy: Easily Scrape and Process AFL Data}
 \description{
-An easy to use tool for scraping and processing AFL data.
+An easy to use tool for scraping and processing AFL
+    data.
 }
 \seealso{
 Useful links:
