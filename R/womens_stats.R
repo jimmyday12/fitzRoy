@@ -136,7 +136,7 @@ get_aflw_match_data <- function() {
 #' `get_aflw_match_data()`
 #' @param cookie 
 #'
-#' @return a long data frame with detailed match statistics
+#' @return Dataframe with detailed match data. Each row is a match.
 #' @export
 #'
 #' @examples get_detailed_data(c("CD_M20172640101", "CD_M20172640102"), 
@@ -168,12 +168,13 @@ get_detailed_data <- function(matchid_vector, cookie) {
 #' @param competitionid competitionid from `get_match_data()`
 #' @param cookie cookie from `get_womens_cookie()`
 #'
-#' @return dataframe with detailed match data
+#' @return Dataframe with detailed match data (wide)
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
-#' @examples 
+#' @examples get_aflw_detailed_match_data("CD_M20172640101",
+#' "CD_R201726401", "CD_S2017264")
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid, 
                                          cookie) {
   match_data <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
@@ -187,5 +188,25 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     dplyr::as_data_frame() %>% 
     dplyr::mutate(Match.Id = matchid,
                   Round.Id = roundid,
-                  Competition.Id = competitionid)
+                  Competition.Id = competitionid) %>% 
+    # TODO: Assumption: row 1 is home, row 2 is away. Test this.
+    dplyr::mutate(home.away = c("Home", "Away")) %>% 
+    tidyr::gather(stat, value, 
+                  .data$stats.averages.goals:.data$team.teamNickname) %>% 
+    dplyr::mutate(stat = case_when(
+      .data$home.away == "Home" ~ stringr::str_c("home.", .data$stat),
+      .data$home.away == "Away" ~ stringr::str_c("away.", .data$stat)
+    )) %>% 
+    dplyr::select(-.data$home.away) %>% 
+    tidyr::spread(.data$stat, .data$value) %>% 
+    dplyr::rename_at(dplyr::vars(contains(".lastUpdated")), 
+                     funs(stringr::str_replace(., "stats", "STATS"))) %>% 
+    dplyr::mutate_at(
+      dplyr::vars(tidyselect::contains(".stats", ignore.case = FALSE)), 
+      readr::parse_number
+    ) %>% 
+    dplyr::rename_at(dplyr::vars(tidyselect::contains(".lastUpdated")), 
+                     funs(stringr::str_replace(., "STATS", "stats"))) %>% 
+    dplyr::mutate_at(dplyr::vars(tidyselect::contains(".lastUpdated")),
+                     readr::parse_datetime)
 }
