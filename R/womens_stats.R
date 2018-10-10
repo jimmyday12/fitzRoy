@@ -53,6 +53,7 @@ get_aflw_rounds <- function(cookie) {
   dplyr::bind_rows(match_data)
 }
 
+
 #' Get match data
 #' 
 #' For a given round ID, get the data for each match played in that round. Use 
@@ -139,9 +140,9 @@ get_aflw_match_data <- function() {
 #' @return Dataframe with detailed match data. Each row is a match.
 #' @export
 #'
-#' @examples get_detailed_data(c("CD_M20172640101", "CD_M20172640102"), 
+#' @examples get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"), 
 #'                            get_aflw_cookie())
-get_detailed_data <- function(matchid_vector, cookie) {
+get_aflw_detailed_data <- function(matchid_vector, cookie) {
   # Round and competition IDs can be inferred from match Ids:
   # Match ID:       "CD_M20172640101"
   # Round ID:       "CD_R201726401"     M->R, last two characters removed
