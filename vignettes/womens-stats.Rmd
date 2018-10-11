@@ -2,7 +2,7 @@
 title: "Womens' AFL Stats"
 author: "Oscar Lane <lane.oscar@gmail.com>"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: github_document
 vignette: >
   %\VignetteIndexEntry{Womens' AFL Stats}
   %\VignetteEngine{knitr::rmarkdown}
