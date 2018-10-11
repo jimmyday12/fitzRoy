@@ -133,7 +133,7 @@ get_aflw_match_data <- function() {
 
 #' Get detailed AFLW data
 #'
-#' @param matchid_vector vector of match IDs, like those returned by
+#' @param matchids vector of match IDs, like those returned by
 #' `get_aflw_match_data()`
 #' @param cookie 
 #'
@@ -142,18 +142,18 @@ get_aflw_match_data <- function() {
 #'
 #' @examples get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"), 
 #'                            get_aflw_cookie())
-get_aflw_detailed_data <- function(matchid_vector, cookie) {
+get_aflw_detailed_data <- function(matchids, cookie) {
   # Round and competition IDs can be inferred from match Ids:
   # Match ID:       "CD_M20172640101"
   # Round ID:       "CD_R201726401"     M->R, last two characters removed
   # Competition ID: "CD_S2017264"       R->S, last two characters removed
-  roundid_vector <- matchid_vector %>% 
+  roundid_vector <- matchids %>% 
     stringr::str_sub(1, -3) %>%    # Remove last two characters
     stringr::str_replace("M", "R") # Replace R with S
   compid_vector <- roundid_vector %>% 
     stringr::str_sub(1, -3) %>%    # Remove last two characters
     stringr::str_replace("R", "S")
-  purrr::pmap_dfr(list(matchid_vector, roundid_vector, compid_vector),
+  purrr::pmap_dfr(list(matchids, roundid_vector, compid_vector),
                   ~ get_aflw_detailed_match_data(..1, ..2, ..3, cookie))
 }
 

@@ -16,10 +16,14 @@ get_aflw_detailed_match_data(matchid, roundid, competitionid, cookie)
 \item{cookie}{cookie from \code{get_womens_cookie()}}
 }
 \value{
-dataframe with detailed match data
+Dataframe with detailed match data (wide)
 }
 \description{
 Gets detailed match data for a given match. Requires the match, round, and
 competition IDs, which are given in the tables produced by
 \code{get_aflw_round_data()}
+}
+\examples{
+get_aflw_detailed_match_data("CD_M20172640101",
+"CD_R201726401", "CD_S2017264")
 }

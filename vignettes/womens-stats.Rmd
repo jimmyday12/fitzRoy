@@ -16,13 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-These functions are a work-in-progress on the `womens-stat` branch, but this 
-vignette explains the functionality already present.
-
 ### Authentication
 
 The AFL Stats website requires a cookie to retrieve data through GET requests.
-The `get_womens_cookie` function retrieves this cookie as a string. It
+The `get_womens_cookie()` function retrieves this cookie as a string. It
 requires no arguments.
 
 ```{r, message=FALSE}
@@ -50,27 +47,37 @@ There are 16 observations, as there have been two seasons with 8 rounds each.
 
 ### Match data
 
-Given the `roundId` in the round list above, we can get match data using the
-`get_match_data` function.
+We can use the `get_aflw_match_data()` function to retrieve match data for all
+matches. Under the hood, this works by taking the `roundId` in the round list 
+above, and using the internal `get_match_data()` function.
+
+This could be extended to take a year argument, so that only games in
+specified years are downloaded. There are only two seasons so far in the womens'
+league, however, so we probably do want all the data!
 
 ```{r}
-match_data <- purrr::map_dfr(rounds$roundId, ~ get_aflw_match_data(., cookie))
+match_data <- get_aflw_match_data()
 glimpse(match_data)
 ```
 
-There are some more stats available in addition to these that we could add.
-These include left/right behinds, left/right posters, rushed/touched behinds
-
 ### Detailed stats
 
-If we have the match, round, and competition IDs (which are returned by the 
-`get_aflw_match_data` function), we can retrieve more detailed stats. I have
-not cleaned these yes, but the dataframe below shows what is available:
+The `get_aflw_detailed_data()` can be used to return more detailed data than the
+match data shown above. It takes a vector of match IDs as an argument. For
+example, let's say we want detailed stats for the last 10 games in `match_data`
+above. Then we would do:
 
 ```{r}
-matchid <- match_data$match.matchId[[1]]
-roundid <- match_data$round.roundId[[1]]
-compid <- match_data$round.competitionId[[1]]
-get_aflw_detailed_match_data(matchid, roundid, compid, cookie) %>% glimpse()
+last10 <- tail(match_data, 10) %>% 
+  pull(Match.Id)
+last10
 ```
+
+
+```{r}
+detailed_data <- get_aflw_detailed_data(matchids = last10, cookie)
+detailed_data %>% glimpse
+```
+
+
 
