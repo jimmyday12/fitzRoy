@@ -4,7 +4,7 @@
 \alias{get_aflw_detailed_data}
 \title{Get detailed AFLW data}
 \usage{
-get_aflw_detailed_data(matchids, cookie)
+get_aflw_detailed_data(matchids)
 }
 \arguments{
 \item{matchids}{vector of match IDs, like those returned by
@@ -19,6 +19,5 @@ Dataframe with detailed match data. Each row is a match.
 Get detailed AFLW data
 }
 \examples{
-get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"), 
-                           get_aflw_cookie())
+get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
 }

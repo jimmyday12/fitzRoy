@@ -2,7 +2,7 @@
 % Please edit documentation in R/womens_stats.R
 \name{get_aflw_detailed_match_data}
 \alias{get_aflw_detailed_match_data}
-\title{Get detailed womens match data}
+\title{Get detailed womens match data (internal function)}
 \usage{
 get_aflw_detailed_match_data(matchid, roundid, competitionid, cookie)
 }
@@ -25,5 +25,5 @@ competition IDs, which are given in the tables produced by
 }
 \examples{
 get_aflw_detailed_match_data("CD_M20172640101",
-"CD_R201726401", "CD_S2017264")
+"CD_R201726401", "CD_S2017264", get_aflw_cookie())
 }

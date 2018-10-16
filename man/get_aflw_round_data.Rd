@@ -2,7 +2,7 @@
 % Please edit documentation in R/womens_stats.R
 \name{get_aflw_round_data}
 \alias{get_aflw_round_data}
-\title{Get match data}
+\title{Get match data (internal function)}
 \usage{
 get_aflw_round_data(roundid, cookie)
 }
@@ -17,7 +17,7 @@ a dataframe containing match data
 \description{
 For a given round ID, get the data for each match played in that round. Use
 the column \code{roundId} in the dataframe created by the \code{get_rounds()} function
-to specify matches to fetch
+to specify matches to fetch.
 }
 \examples{
 get_aflw_round_data("CD_R201826401", get_aflw_cookie())

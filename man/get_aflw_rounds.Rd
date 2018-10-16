@@ -14,7 +14,7 @@ A dataframe with information about each round
 }
 \description{
 Returns data frame for available round data. Includes the rounds played,
-as well as identifiers to make further requests.
+as well as identifiers to make further requests, importantly the roundId.
 }
 \examples{
 get_aflw_cookie() \%>\% get_aflw_metadata()

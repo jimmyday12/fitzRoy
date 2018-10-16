@@ -16,7 +16,7 @@ get_aflw_cookie <- function() {
 #' Get rounds (internal function)
 #' 
 #' Returns data frame for available round data. Includes the rounds played, 
-#' as well as identifiers to make further requests.
+#' as well as identifiers to make further requests, importantly the roundId.
 #'
 #' @param cookie a cookie produced by `get_aflw_cookie()`
 #'
@@ -75,40 +75,40 @@ get_aflw_round_data <- function(roundid, cookie) {
     httr::content(as = "text", encoding = "UTF-8") %>% 
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$items %>% # Select data from flattened JSON file
-    as_data_frame() %>% # Run up to here to see all variables
+    dplyr::as_data_frame() %>% # Run up to here to see all variables
     # There are more variables that could be added to these
     # Rename variables
     dplyr::select(
-      Match.Id = match.matchId,
-      Round.Id = round.roundId,
-      Competition.Id = round.competitionId,
-      Venue = venue.name,
-      Local.Start.Time = match.venueLocalStartTime,
-      Round.Number = round.roundNumber,
-      Round.Abbreviation = round.abbreviation,
-      Weather.Type = score.weather.weatherType,
-      Weather.Description = score.weather.description,
-      Temperature = score.weather.tempInCelsius,
-      Home.Team = match.homeTeam.name,
-      Home.Goals = score.homeTeamScore.matchScore.goals,
-      Home.Behinds = score.homeTeamScore.matchScore.behinds,
-      Home.Points = score.homeTeamScore.matchScore.totalScore,
-      Home.Left.Behinds = score.homeTeamScoreChart.leftBehinds,
-      Home.Right.Behinds = score.homeTeamScoreChart.rightBehinds,
-      Home.Left.Posters = score.homeTeamScoreChart.leftPosters,
-      Home.Right.Posters = score.homeTeamScoreChart.rightPosters,
-      Home.Rushed.Behinds = score.homeTeamScoreChart.rushedBehinds,
-      Home.Touched.Behinds = score.homeTeamScoreChart.touchedBehinds,
-      Away.Team = match.awayTeam.name,
-      Away.Goals = score.awayTeamScore.matchScore.goals,
-      Away.Behinds = score.awayTeamScore.matchScore.behinds,
-      Away.Points = score.awayTeamScore.matchScore.totalScore,
-      Away.Left.Behinds = score.awayTeamScoreChart.leftBehinds,
-      Away.Right.Behinds = score.awayTeamScoreChart.rightBehinds,
-      Away.Left.Posters = score.awayTeamScoreChart.leftPosters,
-      Away.Right.Posters = score.awayTeamScoreChart.rightPosters,
-      Away.Rushed.Behinds = score.awayTeamScoreChart.rushedBehinds,
-      Away.Touched.Behinds = score.awayTeamScoreChart.touchedBehinds
+      Match.Id = .data$match.matchId,
+      Round.Id = .data$round.roundId,
+      Competition.Id = .data$round.competitionId,
+      Venue = .data$venue.name,
+      Local.Start.Time = .data$match.venueLocalStartTime,
+      Round.Number = .data$round.roundNumber,
+      Round.Abbreviation = .data$round.abbreviation,
+      Weather.Type = .data$score.weather.weatherType,
+      Weather.Description = .data$score.weather.description,
+      Temperature = .data$score.weather.tempInCelsius,
+      Home.Team = .data$match.homeTeam.name,
+      Home.Goals = .data$score.homeTeamScore.matchScore.goals,
+      Home.Behinds = .data$score.homeTeamScore.matchScore.behinds,
+      Home.Points = .data$score.homeTeamScore.matchScore.totalScore,
+      Home.Left.Behinds = .data$score.homeTeamScoreChart.leftBehinds,
+      Home.Right.Behinds = .data$score.homeTeamScoreChart.rightBehinds,
+      Home.Left.Posters = .data$score.homeTeamScoreChart.leftPosters,
+      Home.Right.Posters = .data$score.homeTeamScoreChart.rightPosters,
+      Home.Rushed.Behinds = .data$score.homeTeamScoreChart.rushedBehinds,
+      Home.Touched.Behinds = .data$score.homeTeamScoreChart.touchedBehinds,
+      Away.Team = .data$match.awayTeam.name,
+      Away.Goals = .data$score.awayTeamScore.matchScore.goals,
+      Away.Behinds = .data$score.awayTeamScore.matchScore.behinds,
+      Away.Points = .data$score.awayTeamScore.matchScore.totalScore,
+      Away.Left.Behinds = .data$score.awayTeamScoreChart.leftBehinds,
+      Away.Right.Behinds = .data$score.awayTeamScoreChart.rightBehinds,
+      Away.Left.Posters = .data$score.awayTeamScoreChart.leftPosters,
+      Away.Right.Posters = .data$score.awayTeamScoreChart.rightPosters,
+      Away.Rushed.Behinds = .data$score.awayTeamScoreChart.rushedBehinds,
+      Away.Touched.Behinds = .data$score.awayTeamScoreChart.touchedBehinds
     ) %>% 
     # Parse date/start time
     dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
@@ -116,13 +116,16 @@ get_aflw_round_data <- function(roundid, cookie) {
 
 #' Get AFLW match data
 #' 
-#' Retrieves AFLW match data for all available matches.
+#' Retrieves AFLW match data for all available matches. Sources data from 
+#' \url{http://www.afl.com.au/womens/matches/stats}
 #'
 #' @param start_year optional, integer for start year to return match data 
 #' onwards from
 #'
 #' @return a data frame of data for all available AFLW matches
 #' @export
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #'
 #' @examples ## All data
 #' get_aflw_match_data()
@@ -145,6 +148,8 @@ get_aflw_match_data <- function(start_year = 2017) {
 #'
 #' @return Dataframe with detailed match data. Each row is a match.
 #' @export
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
 #'
 #' @examples get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
 get_aflw_detailed_data <- function(matchids) {

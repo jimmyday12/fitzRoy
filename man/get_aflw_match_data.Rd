@@ -4,14 +4,22 @@
 \alias{get_aflw_match_data}
 \title{Get AFLW match data}
 \usage{
-get_aflw_match_data()
+get_aflw_match_data(start_year = 2017)
+}
+\arguments{
+\item{start_year}{optional, integer for start year to return match data
+onwards from}
 }
 \value{
-a data frame
+a data frame of data for all available AFLW matches
 }
 \description{
-Retrieves all available AFLW match data.
+Retrieves AFLW match data for all available matches. Sources data from
+\url{http://www.afl.com.au/womens/matches/stats}
 }
 \examples{
+## All data
 get_aflw_match_data()
+## 2018 data onward
+get_aflw_match_data(start_year = 2018)
 }
