@@ -1,9 +1,9 @@
 #' Get AFL Stats cookie (internal function)
+#' 
 #' Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
 #' further requests.
 #'
 #' @return token code
-#' @export
 #' @importFrom magrittr %>%
 #'
 #' @examples cookie <- get_aflw_cookie()
@@ -21,7 +21,6 @@ get_aflw_cookie <- function() {
 #' @param cookie a cookie produced by `get_aflw_cookie()`
 #'
 #' @return A dataframe with information about each round
-#' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @examples get_aflw_cookie() %>% get_aflw_metadata()
@@ -54,17 +53,16 @@ get_aflw_rounds <- function(cookie) {
 }
 
 
-#' Get match data
+#' Get match data (internal function)
 #' 
 #' For a given round ID, get the data for each match played in that round. Use 
 #' the column `roundId` in the dataframe created by the `get_rounds()` function
-#' to specify matches to fetch
+#' to specify matches to fetch.
 #'
 #' @param x a round ID string
 #' @param cookie a cookie produced by `get_womens_cookie()`
 #'
 #' @return a dataframe containing match data
-#' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
@@ -118,9 +116,9 @@ get_aflw_round_data <- function(roundid, cookie) {
 
 #' Get AFLW match data
 #' 
-#' Retrieves all available AFLW match data.
+#' Retrieves AFLW match data for all available matches.
 #'
-#' @return a data frame
+#' @return a data frame of data for all available AFLW matches
 #' @export
 #'
 #' @examples get_aflw_match_data()
@@ -140,9 +138,9 @@ get_aflw_match_data <- function() {
 #' @return Dataframe with detailed match data. Each row is a match.
 #' @export
 #'
-#' @examples get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"), 
-#'                            get_aflw_cookie())
-get_aflw_detailed_data <- function(matchids, cookie) {
+#' @examples get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
+get_aflw_detailed_data <- function(matchids) {
+  cookie <- get_aflw_cookie()
   # Round and competition IDs can be inferred from match Ids:
   # Match ID:       "CD_M20172640101"
   # Round ID:       "CD_R201726401"     M->R, last two characters removed
@@ -158,7 +156,7 @@ get_aflw_detailed_data <- function(matchids, cookie) {
 }
 
 
-#' Get detailed womens match data
+#' Get detailed womens match data (internal function)
 #' 
 #' Gets detailed match data for a given match. Requires the match, round, and
 #' competition IDs, which are given in the tables produced by 
@@ -170,7 +168,6 @@ get_aflw_detailed_data <- function(matchids, cookie) {
 #' @param cookie cookie from `get_womens_cookie()`
 #'
 #' @return Dataframe with detailed match data (wide)
-#' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #'
