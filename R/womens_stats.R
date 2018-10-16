@@ -118,13 +118,21 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' 
 #' Retrieves AFLW match data for all available matches.
 #'
+#' @param start_year optional, integer for start year to return match data 
+#' onwards from
+#'
 #' @return a data frame of data for all available AFLW matches
 #' @export
 #'
-#' @examples get_aflw_match_data()
-get_aflw_match_data <- function() {
+#' @examples ## All data
+#' get_aflw_match_data()
+#' ## 2018 data onward
+#' get_aflw_match_data(start_year = 2018)
+get_aflw_match_data <- function(start_year = 2017) {
   cookie <- get_aflw_cookie()
-  available_matches <- get_aflw_rounds(cookie)
+  available_matches <- get_aflw_rounds(cookie) %>% 
+    dplyr::mutate(year = as.integer(.data$year)) %>% 
+    dplyr::filter(.data$year >= start_year)
   purrr::map_dfr(available_matches$roundId, ~ get_aflw_round_data(., cookie))
 }
 
