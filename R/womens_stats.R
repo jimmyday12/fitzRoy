@@ -200,7 +200,7 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     dplyr::mutate(Match.Id = matchid,
                   Round.Id = roundid,
                   Competition.Id = competitionid) %>% 
-    # TODO: Assumption: row 1 is home, row 2 is away. Test this.
+    # Assumption: row 1 is home, row 2 is away. Have tested for correctness.
     dplyr::mutate(home.away = c("Home", "Away")) %>% 
     tidyr::gather(stat, value, 
                   .data$stats.averages.goals:.data$team.teamNickname) %>% 
