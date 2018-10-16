@@ -180,7 +180,7 @@ get_aflw_detailed_data <- function(matchids) {
 #' @importFrom rlang .data
 #'
 #' @examples get_aflw_detailed_match_data("CD_M20172640101",
-#' "CD_R201726401", "CD_S2017264")
+#' "CD_R201726401", "CD_S2017264", get_aflw_cookie())
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid, 
                                          cookie) {
   match_data <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
