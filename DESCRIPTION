@@ -32,7 +32,9 @@ Imports:
     rvest,
     stringr (>= 1.3.0),
     tidyr,
-    xml2
+    xml2,
+    httr,
+    tidyselect
 Suggests: 
     covr,
     ggplot2,

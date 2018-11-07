@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return afltables player match stats — scrape_afltables_match • fitzRoy</title>
+<title>Get rounds (internal function) — get_aflw_rounds • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Return afltables player match stats — scrape_afltables_match" />
+<meta property="og:title" content="Get rounds (internal function) — get_aflw_rounds" />
 
-<meta property="og:description" content="scrape_afltables_match returns a character vector containing match URLs for the specified date range" />
+<meta property="og:description" content="Returns data frame for available round data. Includes the rounds played,
+as well as identifiers to make further requests, importantly the roundId." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,39 +126,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return afltables player match stats</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/afltables_player_main.R'><code>R/afltables_player_main.R</code></a></small>
-    <div class="hidden name"><code>scrape_afltables_match.Rd</code></div>
+    <h1>Get rounds (internal function)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/womens_stats.R'><code>R/womens_stats.R</code></a></small>
+    <div class="hidden name"><code>get_aflw_rounds.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>scrape_afltables_match</code> returns a character vector containing match URLs for the specified date range</p>
+    <p>Returns data frame for available round data. Includes the rounds played,
+as well as identifiers to make further requests, importantly the roundId.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>scrape_afltables_match</span>(<span class='no'>match_urls</span>)</pre>
+    <pre class="usage"><span class='fu'>get_aflw_rounds</span>(<span class='no'>cookie</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>match_urls</th>
-      <td><p>A list of URL's for matches to scrape data from</p></td>
+      <th>cookie</th>
+      <td><p>a cookie produced by <code><a href='get_aflw_cookie.html'>get_aflw_cookie()</a></code></p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data table of afltables.com match results, with a row per player per match.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function returns the full afltables.com match stats for each player and each game specified in <code>match_urls</code>.
-It is useful to use the helper function <code>get_afltables_urls</code> to return these or simply navigate to afltables.com
-and find the match of interest.</p>
+    <p>A dataframe with information about each round</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'>get_aflw_rounds</span>(<span class='fu'><a href='get_aflw_cookie.html'>get_aflw_cookie</a></span>())</div><div class='output co'>#&gt; # A tibble: 23 x 12
+#&gt;    name  id    roundPhase currentRoundId name1 year  season roundId abbreviation
+#&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;   &lt;chr&gt;       
+#&gt;  1 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 1        
+#&gt;  2 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 2        
+#&gt;  3 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 3        
+#&gt;  4 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 4        
+#&gt;  5 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 5        
+#&gt;  6 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 6        
+#&gt;  7 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… Rd 7        
+#&gt;  8 2017… CD_S… SCHEDULED  CD_R201726408  Roun… 2017  09632… CD_R20… GF          
+#&gt;  9 2018… CD_S… SCHEDULED  CD_R201826408  Roun… 2018  c0472… CD_R20… Rd 1        
+#&gt; 10 2018… CD_S… SCHEDULED  CD_R201826408  Roun… 2018  c0472… CD_R20… Rd 2        
+#&gt; # ... with 13 more rows, and 3 more variables: competitionId &lt;chr&gt;,
+#&gt; #   roundNumber &lt;int&gt;, guid &lt;chr&gt;</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
@@ -165,9 +177,9 @@ and find the match of interest.</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

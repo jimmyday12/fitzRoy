@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Return afltables player match stats — scrape_afltables_match • fitzRoy</title>
+<title>Get AFL Stats cookie (internal function) — get_aflw_cookie • fitzRoy</title>
 
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha384-nrOSfDHtoPMzJHjVTdCopGqIqeYETSXhZDFyniQ8ZHcVy08QesyHcnOUpMpqnmWq" crossorigin="anonymous"></script>
@@ -30,9 +30,10 @@
 
 
 
-<meta property="og:title" content="Return afltables player match stats — scrape_afltables_match" />
+<meta property="og:title" content="Get AFL Stats cookie (internal function) — get_aflw_cookie" />
 
-<meta property="og:description" content="scrape_afltables_match returns a character vector containing match URLs for the specified date range" />
+<meta property="og:description" content="Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
+further requests." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -125,49 +126,36 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Return afltables player match stats</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/afltables_player_main.R'><code>R/afltables_player_main.R</code></a></small>
-    <div class="hidden name"><code>scrape_afltables_match.Rd</code></div>
+    <h1>Get AFL Stats cookie (internal function)</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/womens_stats.R'><code>R/womens_stats.R</code></a></small>
+    <div class="hidden name"><code>get_aflw_cookie.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p><code>scrape_afltables_match</code> returns a character vector containing match URLs for the specified date range</p>
+    <p>Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
+further requests.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>scrape_afltables_match</span>(<span class='no'>match_urls</span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>match_urls</th>
-      <td><p>A list of URL's for matches to scrape data from</p></td>
-    </tr>
-    </table>
-    
+    <pre class="usage"><span class='fu'>get_aflw_cookie</span>()</pre>
+        
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>data table of afltables.com match results, with a row per player per match.</p>
-    
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>This function returns the full afltables.com match stats for each player and each game specified in <code>match_urls</code>.
-It is useful to use the helper function <code>get_afltables_urls</code> to return these or simply navigate to afltables.com
-and find the match of interest.</p>
+    <p>token code</p>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='no'>cookie</span> <span class='kw'>&lt;-</span> <span class='fu'>get_aflw_cookie</span>()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-          </ul>
+      
+      <li><a href="#examples">Examples</a></li>
+    </ul>
 
   </div>
 </div>

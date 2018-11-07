@@ -22,6 +22,24 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_urls.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_cookie.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_detailed_data.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_detailed_match_data.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_match_data.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_round_data.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_rounds.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_fixture.html</loc>
   </url>
   <url>
@@ -61,6 +79,6 @@
     <loc>https://jimmyday12.github.io/fitzRoy//articles/readme-vignette.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//articles/vignette-name.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/womens-stats.html</loc>
   </url>
 </urlset>

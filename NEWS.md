@@ -1,5 +1,6 @@
 # fitzRoy 0.1.7
 
+* new feature - Women's Stats. New set of functions for Women's data. Read the vignette [here]() - many thanks to [OscarLane](https://github.com/OscarLane)
 * fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
 * fixed bug with round number for finals [#40](https://github.com/jimmyday12/fitzRoy/issues/40)
 * added docker support, thanks to Matthew Erbs [#13](https://github.com/jimmyday12/fitzRoy/issues/13)

@@ -17,6 +17,11 @@ reference:
       - '`get_score_progression_raw`'
       - '`convert_results`'
       - '`get_squiggle_data`'
+      - '`get_aflw_detailed_data`'
+      - '`get_aflw_detailed_match_data`'
+      - '`get_aflw_match_data`'
+      - '`get_aflw_round_data`'
+      - '`get_aflw_rounds`'
   - title: Data
     desc: Included data 
     contents:
@@ -33,6 +38,7 @@ reference:
       - '`scrape_afltables_match`'
       - '`get_afltables_urls`'
       - '`convert_results`'
+      - '`get_aflw_cookie`'
       
       
       

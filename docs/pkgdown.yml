@@ -3,7 +3,7 @@ pkgdown: 1.1.0
 pkgdown_sha: ~
 articles:
   readme-vignette: readme-vignette.html
-  vignette-name: vignette-name.html
+  womens-stats: womens-stats.html
 urls:
   reference: https://jimmyday12.github.io/fitzRoy//reference
   article: https://jimmyday12.github.io/fitzRoy//articles

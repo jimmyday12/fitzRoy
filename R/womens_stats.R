@@ -7,6 +7,7 @@
 #' @importFrom magrittr %>%
 #'
 #' @examples cookie <- get_aflw_cookie()
+#' @export
 get_aflw_cookie <- function() {
   response <- httr::POST("http://www.afl.com.au/api/cfs/afl/WMCTok")
   httr::content(response)$token
@@ -23,7 +24,9 @@ get_aflw_cookie <- function() {
 #' @return A dataframe with information about each round
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-#' @examples get_aflw_cookie() %>% get_aflw_metadata()
+#' @examples 
+#' get_aflw_rounds(get_aflw_cookie())
+#' @export
 get_aflw_rounds <- function(cookie) {
   years <- 2017:2100
   match_data <- vector(mode = "list")
@@ -59,7 +62,7 @@ get_aflw_rounds <- function(cookie) {
 #' the column `roundId` in the dataframe created by the `get_rounds()` function
 #' to specify matches to fetch.
 #'
-#' @param x a round ID string
+#' @param roundid a round ID string
 #' @param cookie a cookie produced by `get_womens_cookie()`
 #'
 #' @return a dataframe containing match data
@@ -67,6 +70,7 @@ get_aflw_rounds <- function(cookie) {
 #' @importFrom rlang .data
 #'
 #' @examples get_aflw_round_data("CD_R201826401", get_aflw_cookie())
+#' @export
 get_aflw_round_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
@@ -149,6 +153,7 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' @param start_year optional, integer for start year to return match data 
 #' onwards from
 #'
+#' @export
 #' @return a data frame of data for all available AFLW matches
 #' @export
 #' @importFrom magrittr %>%
@@ -176,7 +181,8 @@ get_aflw_match_data <- function(start_year = 2017) {
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-#'
+#' @export
+#' 
 #' @examples get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
 get_aflw_detailed_data <- function(matchids) {
   cookie <- get_aflw_cookie()
@@ -209,6 +215,7 @@ get_aflw_detailed_data <- function(matchids) {
 #' @return Dataframe with detailed match data (wide)
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
+#' @export
 #'
 #' @examples get_aflw_detailed_match_data("CD_M20172640101",
 #' "CD_R201726401", "CD_S2017264", get_aflw_cookie())

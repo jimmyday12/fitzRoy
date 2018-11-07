@@ -17,5 +17,5 @@ Returns data frame for available round data. Includes the rounds played,
 as well as identifiers to make further requests, importantly the roundId.
 }
 \examples{
-get_aflw_cookie() \%>\% get_aflw_metadata()
+get_aflw_rounds(get_aflw_cookie())
 }

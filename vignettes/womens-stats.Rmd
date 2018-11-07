@@ -15,6 +15,10 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+```{r gh-installation, eval = FALSE, echo = TRUE}
+# install.packages("devtools")
+devtools::install_github("jimmyday12/fitzRoy")
+```
 
 ### Authentication
 
@@ -22,7 +26,7 @@ The AFL Stats website requires a cookie to retrieve data through GET requests.
 The `get_womens_cookie()` function retrieves this cookie as a string. It
 requires no arguments.
 
-```{r, message=FALSE}
+```{r libraries, message=FALSE, warning=FALSE}
 library(fitzRoy)
 library(dplyr)
 library(magrittr)
@@ -38,7 +42,7 @@ The `get_rounds` function looks for available data. There is currently only
 getting null responses, as it does for 2019 onwards at the moment, but it should
 be relatively future-proof, given the site API doesn't change.)
 
-```{r}
+```{r get_rounds, message=FALSE, warning=FALSE}
 rounds <- get_aflw_rounds(cookie)
 glimpse(rounds)
 ```
@@ -55,7 +59,7 @@ This could be extended to take a year argument, so that only games in
 specified years are downloaded. There are only two seasons so far in the womens'
 league, however, so we probably do want all the data!
 
-```{r}
+```{r match_stats, message=FALSE, warning=FALSE}
 match_data <- get_aflw_match_data()
 glimpse(match_data)
 ```
@@ -67,15 +71,15 @@ match data shown above. It takes a vector of match IDs as an argument. For
 example, let's say we want detailed stats for the last 10 games in `match_data`
 above. Then we would do:
 
-```{r}
+```{r last_10, message=FALSE, warning=FALSE}
 last10 <- tail(match_data, 10) %>% 
   pull(Match.Id)
 last10
 ```
 
 
-```{r}
-detailed_data <- get_aflw_detailed_data(matchids = last10, cookie)
+```{r detailed_data, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+detailed_data <- get_aflw_detailed_data(matchids = last10)
 detailed_data %>% glimpse
 ```
 

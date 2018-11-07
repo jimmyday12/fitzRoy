@@ -7,9 +7,9 @@
 get_aflw_round_data(roundid, cookie)
 }
 \arguments{
-\item{cookie}{a cookie produced by \code{get_womens_cookie()}}
+\item{roundid}{a round ID string}
 
-\item{x}{a round ID string}
+\item{cookie}{a cookie produced by \code{get_womens_cookie()}}
 }
 \value{
 a dataframe containing match data
