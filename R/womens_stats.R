@@ -70,12 +70,37 @@ get_aflw_rounds <- function(cookie) {
 get_aflw_round_data <- function(roundid, cookie) {
   url_head <- paste0("http://www.afl.com.au/api/cfs/afl/matchItems/round/",
                      roundid)
-  httr::GET(url_head,
+  # Extract round data JSON and flatten into data frame
+  round_data <- httr::GET(url_head,
             httr::add_headers(`X-media-mis-token` = cookie)) %>% 
     httr::content(as = "text", encoding = "UTF-8") %>% 
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$items %>% # Select data from flattened JSON file
-    dplyr::as_data_frame() %>% # Run up to here to see all variables
+    dplyr::as_data_frame()
+  # If rounds have not been uploaded, "score..." columns will not be present yet.
+  # Need to check if these are present, and return NULL if not.
+  round_data_colnames <- colnames(round_data)
+  scores_present <- stringr::str_detect(round_data_colnames, "score.") %>% 
+    any() # TRUE if scores present, FALSE if not.
+  if (scores_present == FALSE) {
+    warning(stringr::str_c("Scores not present for round ", roundid, 
+                           ", returning match information only."))
+    match_info <- round_data %>% 
+      dplyr::select(
+        Match.Id = .data$match.matchId,
+        Round.Id = .data$round.roundId,
+        Competition.Id = .data$round.competitionId,
+        Venue = .data$venue.name,
+        Local.Start.Time = .data$match.venueLocalStartTime,
+        Round.Number = .data$round.roundNumber,
+        Round.Abbreviation = .data$round.abbreviation,
+        Home.Team = .data$match.homeTeam.name,
+        Away.Team = .data$match.awayTeam.name
+      )
+    return(match_info)
+  }
+  # Clean up data
+  round_data %>%
     # There are more variables that could be added to these
     # Rename variables
     dplyr::select(
