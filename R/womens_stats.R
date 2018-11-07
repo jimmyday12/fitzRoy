@@ -76,8 +76,10 @@ get_aflw_round_data <- function(roundid, cookie) {
     httr::content(as = "text", encoding = "UTF-8") %>% 
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$items %>% # Select data from flattened JSON file
-    dplyr::as_data_frame()
-  # If rounds have not been uploaded, "score..." columns will not be present yet.
+    dplyr::as_data_frame() %>% 
+    dplyr::mutate(match.venueLocalStartTime = 
+                    readr::parse_datetime(match.venueLocalStartTime))
+  # If rounds have not been uploaded, "score..." columns will not be present yet
   # Need to check if these are present, and return NULL if not.
   round_data_colnames <- colnames(round_data)
   scores_present <- stringr::str_detect(round_data_colnames, "score.") %>% 
