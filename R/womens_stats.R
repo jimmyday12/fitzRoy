@@ -86,7 +86,7 @@ get_aflw_round_data <- function(roundid, cookie) {
     any() # TRUE if scores present, FALSE if not.
   if (scores_present == FALSE) {
     warning(stringr::str_c("Scores not present for round ", roundid, 
-                           ", returning match information only."))
+                           ", returning match fixture information only."))
     match_info <- round_data %>% 
       dplyr::select(
         Match.Id = .data$match.matchId,
@@ -215,12 +215,19 @@ get_aflw_detailed_data <- function(matchids) {
 #' "CD_R201726401", "CD_S2017264", get_aflw_cookie())
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid, 
                                          cookie) {
-  match_data <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
-            query = list(matchId = matchid,
-                         roundId = roundid,
-                         competitionId = competitionid),
-            httr::add_headers(`X-media-mis-token` = cookie)) %>% 
-    httr::content(as = "text", encoding = "UTF-8") %>% 
+  request_metadata <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
+                         query = list(matchId = matchid,
+                                      roundId = roundid,
+                                      competitionId = competitionid),
+                         httr::add_headers(`X-media-mis-token` = cookie)) %>% 
+    httr::content(as = "text", encoding = "UTF-8")
+  
+  # Check that round info is available on web, if not return error
+  if (stringr::str_detect(request_metadata, "Page Not Found")) {
+    stop(paste0("Invalid match ID (", matchid, "). Have you checked that this ",
+                "game has been played yet?"))
+  }
+  match_data <- request_metadata %>% 
     jsonlite::fromJSON(flatten = TRUE) %>% 
     .$lists %>% 
     dplyr::as_data_frame() %>% 
