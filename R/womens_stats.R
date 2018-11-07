@@ -171,7 +171,6 @@ get_aflw_match_data <- function(start_year = 2017) {
 #'
 #' @param matchids vector of match IDs, like those returned by
 #' `get_aflw_match_data()`
-#' @param cookie 
 #'
 #' @return Dataframe with detailed match data. Each row is a match.
 #' @export

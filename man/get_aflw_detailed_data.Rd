@@ -9,8 +9,6 @@ get_aflw_detailed_data(matchids)
 \arguments{
 \item{matchids}{vector of match IDs, like those returned by
 \code{get_aflw_match_data()}}
-
-\item{cookie}{}
 }
 \value{
 Dataframe with detailed match data. Each row is a match.
