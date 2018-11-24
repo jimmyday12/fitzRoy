@@ -1,6 +1,6 @@
 ---
 title: "Womens' AFL Stats"
-author: "Oscar Lane <lane.oscar@gmail.com>"
+author: "Oscar Lane"
 date: "`r Sys.Date()`"
 output: github_document
 vignette: >
@@ -20,47 +20,27 @@ knitr::opts_chunk$set(
 devtools::install_github("jimmyday12/fitzRoy")
 ```
 
-### Authentication
-
-The AFL Stats website requires a cookie to retrieve data through GET requests.
-The `get_womens_cookie()` function retrieves this cookie as a string. It
-requires no arguments.
+### Match data
 
 ```{r libraries, message=FALSE, warning=FALSE}
 library(fitzRoy)
 library(dplyr)
 library(magrittr)
-cookie <- get_aflw_cookie()
-cookie
 ```
-
-### Round list
-
-The `get_rounds` function looks for available data. There is currently only 
-2017 and 2018 data present, but the function will look for all years up to 2100.
-(This is built as a while loop so it will cut off if it finds that it is
-getting null responses, as it does for 2019 onwards at the moment, but it should
-be relatively future-proof, given the site API doesn't change.)
-
-```{r get_rounds, message=FALSE, warning=FALSE}
-rounds <- get_aflw_rounds(cookie)
-glimpse(rounds)
-```
-
-There are 16 observations, as there have been two seasons with 8 rounds each.
-
-### Match data
 
 We can use the `get_aflw_match_data()` function to retrieve match data for all
-matches. Under the hood, this works by taking the `roundId` in the round list 
-above, and using the internal `get_match_data()` function.
+matches.
 
-This could be extended to take a year argument, so that only games in
-specified years are downloaded. There are only two seasons so far in the womens'
-league, however, so we probably do want all the data!
-
-```{r match_stats, message=FALSE, warning=FALSE}
+```{r fetch_match_stats, message=FALSE, warning=TRUE}
 match_data <- get_aflw_match_data()
+```
+
+Note that we are getting a few warnings: this is to tell us that the fixture has 
+been downloaded for 2019, but no match data is available yet. Note that you will 
+not be able to retrieve detailed stats for these games, so make sure you don't 
+try to request detailed stats for these match IDs.
+
+```{r show_match_stats, message=FALSE, warning=FALSE}
 glimpse(match_data)
 ```
 
@@ -68,18 +48,18 @@ glimpse(match_data)
 
 The `get_aflw_detailed_data()` can be used to return more detailed data than the
 match data shown above. It takes a vector of match IDs as an argument. For
-example, let's say we want detailed stats for the last 10 games in `match_data`
+example, let's say we want detailed stats for the first 10 games in `match_data`
 above. Then we would do:
 
-```{r last_10, message=FALSE, warning=FALSE}
-last10 <- tail(match_data, 10) %>% 
+```{r first_10, message=FALSE, warning=FALSE}
+first10 <- head(match_data, 10) %>% 
   pull(Match.Id)
-last10
+first10
 ```
 
 
-```{r detailed_data, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-detailed_data <- get_aflw_detailed_data(matchids = last10)
+```{r detailed_data, message=FALSE, warning=FALSE}
+detailed_data <- get_aflw_detailed_data(matchids = first10)
 detailed_data %>% glimpse
 ```
 
