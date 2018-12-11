@@ -223,8 +223,14 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::select(-Player)
 
   df <- games_joined %>%
-    dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat)))) %>%
-    dplyr::select(one_of(afldata_cols))
+    dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat))))
+  
+  if (!rlang::has_name(games_joined, "Substitute")) {
+    afldata_cols <- afldata_cols[afldata_cols != "Substitute"]
+  }
+  
+  df <- df %>%
+      dplyr::select(one_of(afldata_cols))
 
   df <- df %>%
     dplyr::mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%

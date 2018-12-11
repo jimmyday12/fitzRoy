@@ -13,9 +13,11 @@
 #' @export
 #'
 #' @examples
-#' # Gets all data
+#
+#' \dontrun{
+# Gets all data
 #' get_afltables_stats()
-#'
+#' }
 #' # Specify a date range
 #' get_afltables_stats("01/01/2018", end_date = "01/04/2018")
 #' @importFrom magrittr %>%
@@ -151,7 +153,7 @@ get_afltables_player_ids <- function(seasons) {
   if (max(seasons) > 2017) {
     urls <- purrr::map_chr(seasons[seasons > 2017], base_url)
     post_2017 <- urls %>%
-      purrr::map(readr::read_csv, col_types = readr::cols()) %>%
+      purrr::map(readr::read_csv, col_types = readr::cols(), guess_max = 10000) %>%
       purrr::map2_dfr(.y = seasons[seasons > 2017], ~mutate(., Season = .y)) %>%
       dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
