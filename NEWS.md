@@ -1,6 +1,7 @@
 # fitzRoy 0.1.9
 * fixed warnings from `get_afltables_stats` [#44](https://github.com/jimmyday12/fitzRoy/issues/44)
-
+* fixed error in Womens Vignette
+* update included `fixture` data to 2019[#50](https://github.com/jimmyday12/fitzRoy/issues/50)
 
 # fitzRoy 0.1.8
 * new feature - Women's Stats. New set of functions for Women's data. Read the vignette [here](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) - many thanks to [OscarLane](https://github.com/OscarLane)

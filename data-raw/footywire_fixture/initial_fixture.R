@@ -1,7 +1,7 @@
 library(fitzRoy)
 
-fixture <- get_fixture()
+fixture <- get_fixture(2019)
 
 # Write data using devtools
-devtools::use_data(fixture, overwrite = TRUE)
+usethis::use_data(fixture, overwrite = TRUE)
 save(fixture, file = "./data-raw//footywire_fixture/fixture.rda")
