@@ -4,6 +4,7 @@ language: R
 warnings_are_errors: false
 sudo: false
 cache: packages
+r_check_args: "--no-vignettes"
 
 r:
 - 3.2
