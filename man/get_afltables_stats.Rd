@@ -23,9 +23,9 @@ This function returns a data frame containing match stats for each game within t
 The data for this function is hosted on github to avoid extensive scraping of historical data from afltables.com. This will be updated regularly.
 }
 \examples{
-# Gets all data
+\dontrun{
 get_afltables_stats()
-
 # Specify a date range
 get_afltables_stats("01/01/2018", end_date = "01/04/2018")
+}
 }
