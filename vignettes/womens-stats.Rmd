@@ -58,10 +58,4 @@ first10
 ```
 
 
-```{r detailed_data, message=FALSE, warning=FALSE}
-detailed_data <- get_aflw_detailed_data(matchids = first10)
-detailed_data %>% glimpse
-```
-
-
 
