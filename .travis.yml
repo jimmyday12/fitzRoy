@@ -4,14 +4,14 @@ language: R
 warnings_are_errors: false
 sudo: false
 cache: packages
-r_check_args: "--no-vignettes"
 
 r:
+- 3.1
 - 3.2
 - 3.3
-- 3.4
+- oldrel
 - release
+- devel
 
 after_success:
   - Rscript -e 'covr::codecov()'
-

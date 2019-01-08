@@ -3,7 +3,7 @@
 fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
 ====================================================================================
 
-[![Build Status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy) [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master) [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) <!--[![packageversion](https://img.shields.io/badge/Package%20version-0.1.9-orange.svg?style=flat-square)](commits/master) --> <!--[![Last-changedate](https://img.shields.io/badge/last%20change-2019--01--09-yellowgreen.svg)](/commits/master) -->
+[![Travis build status](https://travis-ci.org/jimmyday12/FitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/FitzRoy) [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master) [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) <!--[![packageversion](https://img.shields.io/badge/Package%20version-0.1.9-orange.svg?style=flat-square)](commits/master) --> <!--[![Last-changedate](https://img.shields.io/badge/last%20change-2019--01--09-yellowgreen.svg)](/commits/master) -->
 
 Overview
 --------
