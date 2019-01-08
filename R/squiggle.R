@@ -21,13 +21,13 @@
 #' @export
 #'
 #' @examples
-#'
+#' 
 #' # Return a list of the sources, with ID's
 #' sources <- get_squiggle_data("sources")
-#'
+#' 
 #' # Get tips for Round 1, 2018
 #' tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
-#'
+#' 
 #' # Get tips from Squiggle
 #' squiggle <- get_squiggle_data(query = "tips", source = 1)
 get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {

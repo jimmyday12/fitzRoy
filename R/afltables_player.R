@@ -13,9 +13,9 @@
 #' @export
 #'
 #' @examples
-#
+#' #
 #' \dontrun{
-# Gets all data
+#' # Gets all data
 #' get_afltables_stats()
 #' # Specify a date range
 #' get_afltables_stats("01/01/2018", end_date = "01/04/2018")
@@ -105,7 +105,7 @@ get_afltables_urls <- function(start_date,
   Seasons <- format(start_date, "%Y"):format(end_date, "%Y")
 
   html_games <- Seasons %>%
-    map(~paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
+    map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
     map(xml2::read_html)
 
   dates <- html_games %>%
@@ -113,16 +113,16 @@ get_afltables_urls <- function(start_date,
     map(rvest::html_text) %>%
     map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     map(lubridate::dmy) %>%
-    map(~.x > start_date & .x < end_date)
+    map(~ .x > start_date & .x < end_date)
 
   match_ids <- html_games %>%
     map(rvest::html_nodes, "tr+ tr b+ a") %>%
     map(rvest::html_attr, "href") %>%
-    map(~stringr::str_replace(., "..", "https://afltables.com/afl"))
+    map(~ stringr::str_replace(., "..", "https://afltables.com/afl"))
 
   # Return only id's that match
   match_ids <- match_ids %>%
-    purrr::map2(.y = dates, ~magrittr::extract(.x, .y)) %>%
+    purrr::map2(.y = dates, ~ magrittr::extract(.x, .y)) %>%
     purrr::reduce(c)
 
   match_ids[!is.na(match_ids)]
@@ -154,7 +154,7 @@ get_afltables_player_ids <- function(seasons) {
     urls <- purrr::map_chr(seasons[seasons > 2017], base_url)
     post_2017 <- urls %>%
       purrr::map(readr::read_csv, col_types = readr::cols(), guess_max = 10000) %>%
-      purrr::map2_dfr(.y = seasons[seasons > 2017], ~mutate(., Season = .y)) %>%
+      purrr::map2_dfr(.y = seasons[seasons > 2017], ~ mutate(., Season = .y)) %>%
       dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
       dplyr::rename(Team.abb = Team) %>%

@@ -28,7 +28,7 @@ get_progression_season <- function(x) {
   pb <- progress_estimated(length(main.page.match$urls))
 
   dat <- main.page.match$urls %>%
-    purrr::map_df(~{
+    purrr::map_df(~ {
       pb$tick()$print() # update the progress bar (tick())
       get_progression(.x) # do function
     })
@@ -65,7 +65,7 @@ get_progression <- function(x) {
 seasons <- 2008:2017
 
 score_progression_raw <- seasons %>%
-  purrr::map_df(~get_progression_season(.x))
+  purrr::map_df(~ get_progression_season(.x))
 
 # Write data using devtools
 # devtools::use_data(score_progression_raw, overwrite = TRUE)

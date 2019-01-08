@@ -43,10 +43,9 @@ stations$Site <- as.numeric(as.character(stations$Site))
 # stations <- subset(stations, StartYear >= 2014 & EndYear == 2016)
 
 stations <- stations[which(stations$Site %in% c(
-  23090
-  , 94029, 67119
-  , 40764
-  , 31011,
+  23090, 94029,
+  67119,
+  40764, 31011,
   86038,
   23034,
   40913,

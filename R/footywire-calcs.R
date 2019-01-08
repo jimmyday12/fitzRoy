@@ -34,7 +34,7 @@ get_footywire_stats <- function(ids) {
 
   # Loop through data using map
   dat <- ids %>%
-    purrr::map_df(~{
+    purrr::map_df(~ {
       pb$tick()$print() # update the progress bar (tick())
       get_match_data(id = .x) # do function
     })
@@ -73,11 +73,11 @@ update_footywire_stats <- function(check_existing = TRUE) {
   # Get all URL's from 2010 (advanced stats) to current year
 
   fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
-    purrr::map(~paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>% # nolint
+    purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>% # nolint
     purrr::map(xml2::read_html) %>%
-    purrr::map(~rvest::html_nodes(., ".data:nth-child(5) a")) %>%
-    purrr::map(~rvest::html_attr(., "href")) %>%
-    purrr::map(~stringr::str_extract(., "\\d+")) %>%
+    purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
+    purrr::map(~ rvest::html_attr(., "href")) %>%
+    purrr::map(~ stringr::str_extract(., "\\d+")) %>%
     purrr::map_if(is.character, as.numeric) %>%
     purrr::reduce(c)
 

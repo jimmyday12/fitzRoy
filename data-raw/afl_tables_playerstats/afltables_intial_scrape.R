@@ -176,7 +176,7 @@ urls <- get_afltables_urls(maxdate + 1, "01/08/2018")
 df <- scrape_afltables_match(urls)
 
 df <- df %>%
-  mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%
+  mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
   mutate(
     Date = lubridate::ymd(format(Date, "%Y-%m-%d")),
     Local.start.time = as.integer(Local.start.time)

@@ -26,8 +26,8 @@ xml_ref %>%
 RSelenium::rsDriver()
 RSelenium::startServer()
 remDr <- remoteDriver(
-  remoteServerAddr = "localhost"
-  , port = 5556
-  , browserName = "firefox"
+  remoteServerAddr =
+    "localhost", port =
+    5556, browserName = "firefox"
 )
 remDr$open()

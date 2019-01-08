@@ -14,7 +14,7 @@
 #' @examples
 #' \dontrun{
 #' scrape_afltables_match("https://afltables.com/afl/stats/games/2018/071120180602.html")
-#' scrape_afltables_match(get_afltables_urls("01/06/2018, "01/06/2018"))
+#' scrape_afltables_match(get_afltables_urls("01/06/2018", "01/06/2018"))
 #' }
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
@@ -31,7 +31,7 @@ scrape_afltables_match <- function(match_urls) {
   pb <- progress_estimated(length(match_urls))
 
   match_xmls <- match_urls %>%
-    map(~{
+    map(~ {
       pb$tick()$print()
       xml2::read_html(.)
     })
@@ -76,22 +76,22 @@ scrape_afltables_match <- function(match_urls) {
 
   games <- match_xmls %>%
     map(rvest::html_table, fill = TRUE) %>%
-    purrr::map2(.y = notes_ind, ~magrittr::extract(.x, .y)) %>%
-    purrr::modify_depth(1, ~purrr::map(., replace_names))
+    purrr::map2(.y = notes_ind, ~ magrittr::extract(.x, .y)) %>%
+    purrr::modify_depth(1, ~ purrr::map(., replace_names))
 
   home_games <- games %>%
     rvest::pluck(1) %>%
-    map2(.y = home_scores, ~mutate(.x, Playing.for = .y[1]))
+    map2(.y = home_scores, ~ mutate(.x, Playing.for = .y[1]))
 
   away_games <- games %>%
     rvest::pluck(2) %>%
-    map2(.y = away_scores, ~mutate(.x, Playing.for = .y[1]))
+    map2(.y = away_scores, ~ mutate(.x, Playing.for = .y[1]))
 
   games <- home_games %>%
-    map2(.y = away_games, ~bind_rows(.x, .y))
+    map2(.y = away_games, ~ bind_rows(.x, .y))
 
   att_lgl <- details %>%
-    map(~stringr::str_detect(.x[2], "Attendance"))
+    map(~ stringr::str_detect(.x[2], "Attendance"))
 
   att_fn <- function(x) {
     if (x) {
@@ -107,10 +107,10 @@ scrape_afltables_match <- function(match_urls) {
   args <- list(games, details, date_str)
 
   games_df <- args %>%
-    purrr::pmap(~mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
+    purrr::pmap(~ mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
 
   games_df <- games_df %>%
-    map2(.y = details, ~mutate(
+    map2(.y = details, ~ mutate(
       .x,
       Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
       Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
@@ -119,7 +119,7 @@ scrape_afltables_match <- function(match_urls) {
     ))
 
   games_df <- games_df %>%
-    map2(.y = home_scores, ~mutate(
+    map2(.y = home_scores, ~ mutate(
       .x,
       Home.team = .y[1],
       HQ1 = .y[2],
@@ -127,7 +127,7 @@ scrape_afltables_match <- function(match_urls) {
       HQ3 = .y[4],
       HQ4 = .y[5]
     )) %>%
-    map2(.y = away_scores, ~mutate(
+    map2(.y = away_scores, ~ mutate(
       .x,
       Away.team = .y[1],
       AQ1 = .y[2],
@@ -224,16 +224,16 @@ scrape_afltables_match <- function(match_urls) {
 
   df <- games_joined %>%
     dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat))))
-  
+
   if (!rlang::has_name(games_joined, "Substitute")) {
     afldata_cols <- afldata_cols[afldata_cols != "Substitute"]
   }
-  
-  df <- df %>%
-      dplyr::select(one_of(afldata_cols))
 
   df <- df %>%
-    dplyr::mutate_if(is.numeric, ~ifelse(is.na(.), 0, .)) %>%
+    dplyr::select(one_of(afldata_cols))
+
+  df <- df %>%
+    dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
     mutate(Round = as.character(Round))
 
   return(df)
