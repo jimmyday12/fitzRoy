@@ -23,24 +23,25 @@ Depends:
     R (>= 3.1)
 Imports:
     dplyr,
+    httr,
     jsonlite,
     lubridate,
     magrittr,
     purrr,
     readr,
-    rlang,
+    rlang (>= 0.1.2),
     rvest,
     stringr (>= 1.3.0),
     tidyr,
-    xml2,
-    httr,
-    tidyselect
+    tidyselect,
+    xml2
 Suggests: 
     covr,
     ggplot2,
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    roxygen2
 VignetteBuilder: 
     knitr
 ByteCompile: true
