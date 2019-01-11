@@ -42,12 +42,13 @@ dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
   stringr::str_extract("\\d+\\.*\\d+\\.*\\d*")
 ```
 
+<!-- badges: start -->
 # fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
-[![Travis build status](https://travis-ci.org/jimmyday12/FitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/FitzRoy)
+[![Travis build status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
 [![Coverage status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
 [![Project Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-<!--[![packageversion](https://img.shields.io/badge/Package%20version-`r version`-orange.svg?style=flat-square)](commits/master) -->
-<!--[![Last-changedate](https://img.shields.io/badge/last%20change-`r gsub('-', '--', Sys.Date())`-yellowgreen.svg)](/commits/master) -->
+<!-- [![Lifecycle: maturing](http://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
+<!-- badges: end -->
 
 
 ## Overview

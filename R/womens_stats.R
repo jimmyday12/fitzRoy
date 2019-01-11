@@ -157,9 +157,9 @@ get_aflw_round_data <- function(roundid, cookie) {
       Away.Right.Posters = .data$score.awayTeamScoreChart.rightPosters,
       Away.Rushed.Behinds = .data$score.awayTeamScoreChart.rushedBehinds,
       Away.Touched.Behinds = .data$score.awayTeamScoreChart.touchedBehinds
-    ) %>%
+    ) #%>%
     # Parse date/start time
-    dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
+    #dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
 }
 
 #' Get AFLW match data
