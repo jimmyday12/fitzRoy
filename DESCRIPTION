@@ -34,7 +34,8 @@ Imports:
     stringr (>= 1.3.0),
     tidyr,
     tidyselect,
-    xml2
+    xml2,
+    tibble
 Suggests: 
     covr,
     ggplot2,
