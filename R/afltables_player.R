@@ -103,10 +103,20 @@ get_afltables_urls <- function(start_date,
   }
 
   Seasons <- format(start_date, "%Y"):format(end_date, "%Y")
-
+  
+  url_works <- function(url){
+    tryCatch(
+      xml2::read_html(url), 
+      error = function(e){
+        NULL
+      })
+  }
+  
   html_games <- Seasons %>%
     map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
-    map(xml2::read_html)
+    map(url_works)
+    
+  html_games <- Filter(Negate(is.null), html_games)
 
   dates <- html_games %>%
     map(rvest::html_nodes, "table+ table tr:nth-child(1) > td:nth-child(4)") %>%
