@@ -1,9 +1,9 @@
 # fitzRoy 0.1.9
-* `get_fixture()` now handles the cancelled match in round 14, 2015 ([#56](https:://github.com/jimmyday12/fitzRoy/issues/56), [@cfranklin](https://github.com/cfranklin11))
+* `get_fixture()` now handles inconsistent assignment of Wednesday games and a related issue for some Round 1 matches where games were being assigned to the wrong round ([#54](https:://github.com/jimmyday12/fitzRoy/issues/54),
+* `get_fixture()` now handles the cancelled match in round 14, 2015  ([#56](https:://github.com/jimmyday12/fitzRoy/issues/56), [@cfranklin](https://github.com/cfranklin11))
 * `get_aflw_round_data()` now correctly loads data and passes all tests ([#52](https:://github.com/jimmyday12/fitzRoy/issues/52), [#53](https:://github.com/jimmyday12/fitzRoy/issues/53))
 * `get_afltables_stats` no longer includes erroneous warning messages [#44](https://github.com/jimmyday12/fitzRoy/issues/44)
 * updated the included `fixture` data to 2019 [#50](https://github.com/jimmyday12/fitzRoy/issues/50)
-
 # fitzRoy 0.1.8
 * new feature - Women's Stats. New set of functions for Women's data. Read the vignette [here](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) - many thanks to [OscarLane](https://github.com/OscarLane)
 

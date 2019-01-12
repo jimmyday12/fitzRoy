@@ -168,7 +168,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
-    as_data_frame() %>%
+    as_tibble() %>%
     select(V1:V3)
 
   # Update names
@@ -185,11 +185,21 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Date = lubridate::ydm_hm(paste(season, Date)),
       epiweek = lubridate::epiweek(Date),
       w.Day = lubridate::wday(Date),
-      Round = ifelse(between(w.Day, 1, 4), epiweek - 1, epiweek),
+      Round = ifelse(between(w.Day, 1, 3), epiweek - 1, epiweek),
       Round = as.integer(Round - min(Round) + 1)
     ) %>%
     select(Date, Round, Teams, Venue)
-
+  
+  # Special cases where this doesn't work 
+  # 2018 - collingwood/essendon
+  games_df$Round[games_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")] <- 5
+  
+  # 2012-2014: first round causes issue
+  ind <- games_df$Date > lubridate::ymd("2012-01-01") & games_df$Date < lubridate::ymd("2015-01-01")
+  games_df$Round[ind] <- games_df$Round[ind] - 1
+  games_df$Round[games_df$Round == 0] <- 1
+  
+  
   games_df <- games_df %>%
     mutate(diff = Round - lag(Round, default = 0)) %>%
     group_by(Round) %>%

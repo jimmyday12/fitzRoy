@@ -6,7 +6,7 @@ test_that("get_afltables_stats works", {
   expect_error(get_afltables_stats("2018-01-01", "a"))
 })
 
-test_that("replace_teams returns corrected teams", {
+test_that("replace_teams returns correcxted teams", {
   expect_equal(replace_teams("A"), "A")
   expect_equal(replace_teams("Kangaroos"), "North Melbourne")
   expect_equal(replace_teams("WB"), "Footscray")

@@ -30,3 +30,15 @@ test_that("scape_afltables_ works", {
   expect_error(scrape_afltables_match(1))
   expect_error(scrape_afltables_match("a"))
 })
+
+test_that("get_fixture works",{
+  fix <- get_fixture(2012)
+  expect_is(fix, "tbl")
+  expect_equal(fix$Round[1], 1)
+  expect_equal(fix$Round[2], 1)
+  expect_equal(fix$Round[nrow(fix)], 27)
+  
+  expect_error(get_fixture(2012:2013))
+  expect_error(get_fixture("a"))
+  
+})
