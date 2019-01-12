@@ -43,8 +43,7 @@ Suggests:
     rmarkdown,
     testthat,
     roxygen2
-VignetteBuilder: 
-    knitr
+VignetteBuilder: knitr
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true

@@ -1,0 +1,120 @@
+---
+title: "ELO Ratings Example"
+author: "James Day"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+A common example of how one might use `fitzRoy` is for creating a simple [ELO](https://en.wikipedia.org/wiki/Elo_rating_system) rating system. This are common for models that are part of [The Squiggle](https://squiggle.com.au/) and also in US sport. See below for a minimum working example of using `fitzRoy` to get data and [the `elo` package](https://github.com/eheinzen/elo).
+
+## Load packages
+First we need to grab a few packages. If you don't have any of these, you'll first need to install them. Once you've done that once, you 
+
+```{r eval = FALSE}
+library(tidyverse)
+library(elo)
+library(lubridate)
+library(fitzRoy)
+
+```
+
+## Get data
+Our first job is to now get the relevent data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using `fitzRoy`.
+
+```{r}
+# Get data
+results <- fitzRoy::get_match_results()
+fixture <- fitzRoy::get_fixture(2019)
+
+head(results)
+head(fixture)
+```
+
+## Prepare data
+Our next job is do some data preparation before we calculate our ELO ratings. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we'll combine `season` and `Round.Number` into a string. We also need a way to tell it when a new season is starting, so we'll create a logical that indicates if the game is the first game for a team that season. 
+
+
+```{r}
+results <- results %>%
+  mutate(seas_rnd = paste0(Season, ".", Round.Number),
+         First.Game = ifelse(Round.Number == 1, TRUE, FALSE))
+
+head(results)
+
+```
+
+For the `fixture` data, we need to ensure the dates are in the same format as `results` (note - this should probably be done internally in `fitzRoy` - see [#58](https://github.com/jimmyday12/fitzRoy/issues/58)). For now, we can do it manually. 
+
+```{r}
+
+fixture <- fixture %>%
+  filter(Date > max(results$Date)) %>%
+  mutate(Date = ymd(format(Date, "%Y-%m-%d"))) %>%
+  rename(Round.Number = Round)
+```
+
+## Set ELO parameters
+There are a range of things we can do for an ELO model. Here are some basic parameters. I reccomend reading x or x for full details on what these are. 
+
+
+```{r}
+# Simple ELO
+# Set parameters
+HGA <- 30
+carryOver <- 0.5
+B <- 0.03
+k_val <- 20
+```
+
+## Map margin function
+```{r}
+# Create margin function to ensure result is between 0 and 1
+map_margin_to_outcome <- function(margin, B) {
+  1 / (1 + (exp(-B * margin)))
+}
+
+# Run ELO
+elo.data <- elo.run(
+  map_margin_to_outcome(Home.Points - Away.Points, B = B) ~
+  adjust(Home.Team, HGA) +
+    Away.Team +
+    group(seas_rnd) +
+    regress(First.Game, 1500, carryOver),
+  k = k_val,
+  data = results
+)
+
+as.data.frame(elo.data)
+as.matrix(elo.data)
+final.elos(elo.data)
+
+# Do predictions
+fixture <- fixture %>%
+  mutate(Prob = predict(elo.data, newdata = fixture))
+
+head(fixture)
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+
+
+```
