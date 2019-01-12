@@ -42,7 +42,8 @@ Suggests:
     knitr,
     rmarkdown,
     testthat,
-    roxygen2
+    roxygen2,
+    elo
 VignetteBuilder: knitr
 ByteCompile: true
 Encoding: UTF-8

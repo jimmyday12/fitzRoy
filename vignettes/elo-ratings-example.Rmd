@@ -22,7 +22,7 @@ A common example of how one might use `fitzRoy` is for creating a simple [ELO](h
 First we need to grab a few packages. If you don't have any of these, you'll first need to install them. Once you've done that once, you 
 
 ```{r load_packages}
-library(tidyverse)
+library(dplyr)
 library(elo)
 library(lubridate)
 library(fitzRoy)
