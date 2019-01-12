@@ -61,6 +61,9 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/match_results.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/pipe.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/player_stats.html</loc>
   </url>
   <url>
@@ -73,7 +76,13 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/scrape_afltables_match.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/tidyeval.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/update_footywire_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/elo-ratings-example.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/readme-vignette.html</loc>

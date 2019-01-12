@@ -88,4 +88,7 @@ aflw_match_data <- get_aflw_match_data()
 ```
 ---
 
+### ELO models
+A specific use case might be to use `fitzRoy` data as an input into a model. See the [ELO model vignette](https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html) for an example of how this might be done. 
+
 Please note that the 'fitzRoy' project is released with a [Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
