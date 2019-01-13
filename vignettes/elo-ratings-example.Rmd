@@ -16,10 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-A common example of how one might use `fitzRoy` is for creating a simple [ELO](https://en.wikipedia.org/wiki/Elo_rating_system) rating system. This are common for models that are part of [The Squiggle](https://squiggle.com.au/) and also in US sport. See below for a minimum working example of using `fitzRoy` to get data and [the `elo` package](https://github.com/eheinzen/elo).
+A common example of how one might use `fitzRoy` is for creating a simple [ELO](https://en.wikipedia.org/wiki/Elo_rating_system) rating system. These models are common for tippers that are part of [The Squiggle](https://squiggle.com.au/) and also becoming common in other team sports. This vignette shows a minimum working example to get you started on creating an ELO model from scratch, using `fitzRoy` to get data and [the `elo` package](https://github.com/eheinzen/elo) to do the modelling.
 
 ## Load packages
-First we need to grab a few packages. If you don't have any of these, you'll first need to install them. Once you've done that once, you 
+First we need to grab a few packages. If you don't have any of these, you'll need to install them. 
 
 ```{r load_packages}
 library(dplyr)
@@ -42,7 +42,7 @@ head(fixture)
 ```
 
 ## Prepare data
-Our next job is do some data preparation before we calculate our ELO ratings. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we'll combine `season` and `Round.Number` into a string. We also need a way to tell it when a new season is starting, so we'll create a logical that indicates if the game is the first game for a team that season. 
+Before we create our model, some data preparation. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we'll combine `season` and `Round.Number` into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we'll create a logical field that indicates if the game is the first game for a team that season. 
 
 
 ```{r clean_results}
@@ -57,7 +57,6 @@ head(results)
 For the `fixture` data, we need to ensure the dates are in the same format as `results` (note - this should probably be done internally in `fitzRoy` - see [#58](https://github.com/jimmyday12/fitzRoy/issues/58)). For now, we can do it manually. 
 
 ```{r clean_fixture}
-
 fixture <- fixture %>%
   filter(Date > max(results$Date)) %>%
   mutate(Date = ymd(format(Date, "%Y-%m-%d"))) %>%
@@ -65,14 +64,13 @@ fixture <- fixture %>%
 ```
 
 ## Set ELO parameters
-There are a range of things we can do for an ELO model. Here are some basic parameters - you can read a bit more on the [PlusSixOne blog](https://plussixoneblog.com/post/my-elo-rating-system-explained/), which uses a similar method. For further reading, I strongly reccomend checking out [Matter of Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html) or [The Arc](https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/) for great explainers on the types of parameters that can be uses in an ELO model. 
+There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the [PlusSixOne blog](https://plussixoneblog.com/post/my-elo-rating-system-explained/), which uses a similar method. For further reading, I strongly reccomend checking out [Matter of Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html) or [The Arc](https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/) for great explainers on the types of parameters that could be included. 
 
 
 ```{r elo_param}
 # Set parameters
 HGA <- 30 # home ground advantage
 carryOver <- 0.5 # season carry over
-B <- 0.03
 k_val <- 20 # update weighting factor
 ```
 
@@ -82,11 +80,6 @@ The original ELO models in chess use values of 0 for a loss, 1 for a win and 0.5
 We create that as a function and then use that function in our elo model. 
 
 ```{r margin_outcome}
-# Create margin function to ensure result is between 0 and 1
-map_margin_to_outcome <- function(margin, B) {
-  1 / (1 + (exp(-B * margin)))
-}
-
 map_margin_to_outcome <- function(margin, marg.max = 80, marg.min = -80){
   norm <- (margin - marg.min)/(marg.max - marg.min)
   norm %>% pmin(1) %>% pmax(0)
@@ -94,7 +87,7 @@ map_margin_to_outcome <- function(margin, marg.max = 80, marg.min = -80){
 ```
 
 ## Calculate ELO results
-Now we are ready to create our ELO ratings! We can use the `elo.run` function from the `elo` package for this. I won't explain everything but you can read all about it at the package [vignette](https://cran.r-project.org/web/packages/elo/vignettes/elo.html). 
+Now we are ready to create our ELO ratings! We can use the `elo.run` function from the `elo` package for this. I won't explain everything about what is going on here -  you can read all about it at the package [vignette](https://cran.r-project.org/web/packages/elo/vignettes/elo.html) - but in general, we provide a function that indicates what is included in our model, as well as some model parameters. 
 
 ```{r run_elo}
 # Run ELO
@@ -110,31 +103,29 @@ elo.data <- elo.run(
 
 ```
 
-Now we can view our results. The `elo` package provides various ways to do this. Here are a couple.
+Now that is run, we can view our results. The `elo` package provides various ways to do this.
 
-Firstly, viewing the results of each game and the change in ELO. See below for the last few games of 2018.
+Firstly, using `as.data.frame` we can view the predicted and actual result of each game. Also in this table is the change in ELO rating for the home and away side. See below for the last few games of 2018.
 ```{r print_results1}
 as.data.frame(elo.data) %>% tail()
-
-
 ```
 
-We can see how each team's ELO changes on each game. Again - viewing the end of 2018 also shows teams that didn't make the finals have the same ELO as the rounds go on since they aren't playing finals. 
+We can specifically focus on how each team's rating changes over time using `as.matrix`. Again - viewing the end of 2018 also shows teams that didn't make the finals have the same ELO as the rounds go on since they aren't playing finals. 
 
 ```{r print_results2}
 as.matrix(elo.data) %>% tail()
 ```
 
-Lastly, we can check the final ELO ratings of each team at the end of our data (here - up to end of 2018). 
+Lastly, we can check the final ELO ratings of each team at the end of our data using `final.elos` (here - up to end of 2018). 
 
 ```{r print_results3}
 final.elos(elo.data)
 ```
 
-We could keep tweaking our parameters until we are happy. Ideally we'd be using some kind of cost function to optimise these values on like a log likihood, mean absolute margin or something similar. I'll leave that as beyond the scope of this vignette though. 
+We could keep tweaking our parameters until we are happy. Ideally we'd have a training and test set and be using some kind of cost function to optimise these values on like a log likihood, mean absolute margin or something similar. I'll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.
 
 ## Do predictions
-Now we've got our ELO data calculated and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the `prediction` function with our ELO model as an input. The `elo` package takes care of the resut. 
+Now we've got our ELO model and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the `prediction` function with our ELO model as an input. The `elo` package takes care of the resut. 
 
 ```{r predictions}
 fixture <- fixture %>%
@@ -143,4 +134,6 @@ fixture <- fixture %>%
 head(fixture)
 ```
 
-From here - you could turn these probabilities back into a margin through another mapping function. Again - I'll leave that for the reader to decide. Looking forward to seeing all the new models utilising the power of fitzRoy! 
+From here - you could turn these probabilities back into a margin through another mapping function. Again - I'll leave that for the reader to decide. 
+
+Looking forward to seeing all the new models utilising the power of fitzRoy. 

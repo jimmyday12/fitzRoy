@@ -104,29 +104,28 @@
 
     
     
-<p>A common example of how one might use <code>fitzRoy</code> is for creating a simple <a href="https://en.wikipedia.org/wiki/Elo_rating_system">ELO</a> rating system. This are common for models that are part of <a href="https://squiggle.com.au/">The Squiggle</a> and also in US sport. See below for a minimum working example of using <code>fitzRoy</code> to get data and <a href="https://github.com/eheinzen/elo">the <code>elo</code> package</a>.</p>
+<p>A common example of how one might use <code>fitzRoy</code> is for creating a simple <a href="https://en.wikipedia.org/wiki/Elo_rating_system">ELO</a> rating system. These models are common for tippers that are part of <a href="https://squiggle.com.au/">The Squiggle</a> and also becoming common in other team sports. This vignette shows a minimum working example to get you started on creating an ELO model from scratch, using <code>fitzRoy</code> to get data and <a href="https://github.com/eheinzen/elo">the <code>elo</code> package</a> to do the modelling.</p>
 <div id="load-packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load packages</h2>
-<p>First we need to grab a few packages. If you don’t have any of these, you’ll first need to install them. Once you’ve done that once, you</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(tidyverse)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co">#&gt; ── Attaching packages ───────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; ✔ ggplot2 3.1.0     ✔ purrr   0.2.5</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; ✔ tibble  2.0.0     ✔ dplyr   0.7.8</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; ✔ tidyr   0.8.2     ✔ stringr 1.3.1</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt; ✔ readr   1.3.0     ✔ forcats 0.3.0</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; Warning: package 'tibble' was built under R version 3.5.2</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; ── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──</span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt; ✖ dplyr::filter() masks stats::filter()</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt; ✖ dplyr::lag()    masks stats::lag()</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(elo)</a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lubridate)</a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt; Attaching package: 'lubridate'</span></a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; The following object is masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt;     date</span></a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fitzRoy)</a></code></pre></div>
+<p>First we need to grab a few packages. If you don’t have any of these, you’ll need to install them.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt;     filter, lag</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(elo)</a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lubridate)</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; Attaching package: 'lubridate'</span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt; The following object is masked from 'package:base':</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt;     date</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fitzRoy)</a></code></pre></div>
 </div>
 <div id="get-data" class="section level2">
 <h2 class="hasAnchor">
@@ -163,9 +162,9 @@
 <div id="prepare-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prepare-data" class="anchor"></a>Prepare data</h2>
-<p>Our next job is do some data preparation before we calculate our ELO ratings. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we’ll combine <code>season</code> and <code>Round.Number</code> into a string. We also need a way to tell it when a new season is starting, so we’ll create a logical that indicates if the game is the first game for a team that season.</p>
+<p>Before we create our model, some data preparation. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we’ll combine <code>season</code> and <code>Round.Number</code> into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we’ll create a logical field that indicates if the game is the first game for a team that season.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">results &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">seas_rnd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(Season, <span class="st">"."</span>, Round.Number),</a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">seas_rnd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(Season, <span class="st">"."</span>, Round.Number),</a>
 <a class="sourceLine" id="cb3-3" title="3">         <span class="dt">First.Game =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(Round.Number <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</a>
 <a class="sourceLine" id="cb3-4" title="4"></a>
 <a class="sourceLine" id="cb3-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(results)</a>
@@ -183,41 +182,34 @@
 <a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; #   Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;, seas_rnd &lt;chr&gt;,</span></a>
 <a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; #   First.Game &lt;lgl&gt;</span></a></code></pre></div>
 <p>For the <code>fixture</code> data, we need to ensure the dates are in the same format as <code>results</code> (note - this should probably be done internally in <code>fitzRoy</code> - see <a href="https://github.com/jimmyday12/fitzRoy/issues/58">#58</a>). For now, we can do it manually.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"></a>
-<a class="sourceLine" id="cb4-2" title="2">fixture &lt;-<span class="st"> </span>fixture <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/filter">filter</a></span>(Date <span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(results<span class="op">$</span>Date)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Date =</span> <span class="kw"><a href="http://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(Date, <span class="st">"%Y-%m-%d"</span>))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">Round.Number =</span> Round)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">fixture &lt;-<span class="st"> </span>fixture <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(Date <span class="op">&gt;</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">max</a></span>(results<span class="op">$</span>Date)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Date =</span> <span class="kw"><a href="http://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/format">format</a></span>(Date, <span class="st">"%Y-%m-%d"</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">rename</a></span>(<span class="dt">Round.Number =</span> Round)</a></code></pre></div>
 </div>
 <div id="set-elo-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#set-elo-parameters" class="anchor"></a>Set ELO parameters</h2>
-<p>There are a range of things we can do for an ELO model. Here are some basic parameters - you can read a bit more on the <a href="https://plussixoneblog.com/post/my-elo-rating-system-explained/">PlusSixOne blog</a>, which uses a similar method. For further reading, I strongly reccomend checking out <a href="http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html">Matter of Stats</a> or <a href="https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/">The Arc</a> for great explainers on the types of parameters that can be uses in an ELO model.</p>
+<p>There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the <a href="https://plussixoneblog.com/post/my-elo-rating-system-explained/">PlusSixOne blog</a>, which uses a similar method. For further reading, I strongly reccomend checking out <a href="http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html">Matter of Stats</a> or <a href="https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/">The Arc</a> for great explainers on the types of parameters that could be included.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Set parameters</span></a>
 <a class="sourceLine" id="cb5-2" title="2">HGA &lt;-<span class="st"> </span><span class="dv">30</span> <span class="co"># home ground advantage</span></a>
 <a class="sourceLine" id="cb5-3" title="3">carryOver &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="co"># season carry over</span></a>
-<a class="sourceLine" id="cb5-4" title="4">B &lt;-<span class="st"> </span><span class="fl">0.03</span></a>
-<a class="sourceLine" id="cb5-5" title="5">k_val &lt;-<span class="st"> </span><span class="dv">20</span> <span class="co"># update weighting factor</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-4" title="4">k_val &lt;-<span class="st"> </span><span class="dv">20</span> <span class="co"># update weighting factor</span></a></code></pre></div>
 </div>
 <div id="map-margin-function" class="section level2">
 <h2 class="hasAnchor">
 <a href="#map-margin-function" class="anchor"></a>Map margin function</h2>
 <p>The original ELO models in chess use values of 0 for a loss, 1 for a win and 0.5 for a draw. Since we are adapting these for AFL and we want to use the margin rather than a binary outcome, we need to map our margin to a score between 0 and 1. You can do this in many varied and complex ways, but for now, I just normalise everything based on a margin of -80 to 80. Anything outside of this goes to the margins of 0 or 1.</p>
 <p>We create that as a function and then use that function in our elo model.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Create margin function to ensure result is between 0 and 1</span></a>
-<a class="sourceLine" id="cb6-2" title="2">map_margin_to_outcome &lt;-<span class="st"> </span><span class="cf">function</span>(margin, B) {</a>
-<a class="sourceLine" id="cb6-3" title="3">  <span class="dv">1</span> <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Log">exp</a></span>(<span class="op">-</span>B <span class="op">*</span><span class="st"> </span>margin)))</a>
-<a class="sourceLine" id="cb6-4" title="4">}</a>
-<a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6">map_margin_to_outcome &lt;-<span class="st"> </span><span class="cf">function</span>(margin, <span class="dt">marg.max =</span> <span class="dv">80</span>, <span class="dt">marg.min =</span> <span class="dv">-80</span>){</a>
-<a class="sourceLine" id="cb6-7" title="7">  norm &lt;-<span class="st"> </span>(margin <span class="op">-</span><span class="st"> </span>marg.min)<span class="op">/</span>(marg.max <span class="op">-</span><span class="st"> </span>marg.min)</a>
-<a class="sourceLine" id="cb6-8" title="8">  norm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">pmin</a></span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">pmax</a></span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb6-9" title="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">map_margin_to_outcome &lt;-<span class="st"> </span><span class="cf">function</span>(margin, <span class="dt">marg.max =</span> <span class="dv">80</span>, <span class="dt">marg.min =</span> <span class="dv">-80</span>){</a>
+<a class="sourceLine" id="cb6-2" title="2">  norm &lt;-<span class="st"> </span>(margin <span class="op">-</span><span class="st"> </span>marg.min)<span class="op">/</span>(marg.max <span class="op">-</span><span class="st"> </span>marg.min)</a>
+<a class="sourceLine" id="cb6-3" title="3">  norm <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">pmin</a></span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">pmax</a></span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb6-4" title="4">}</a></code></pre></div>
 </div>
 <div id="calculate-elo-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#calculate-elo-results" class="anchor"></a>Calculate ELO results</h2>
-<p>Now we are ready to create our ELO ratings! We can use the <code>elo.run</code> function from the <code>elo</code> package for this. I won’t explain everything but you can read all about it at the package <a href="https://cran.r-project.org/web/packages/elo/vignettes/elo.html">vignette</a>.</p>
+<p>Now we are ready to create our ELO ratings! We can use the <code>elo.run</code> function from the <code>elo</code> package for this. I won’t explain everything about what is going on here - you can read all about it at the package <a href="https://cran.r-project.org/web/packages/elo/vignettes/elo.html">vignette</a> - but in general, we provide a function that indicates what is included in our model, as well as some model parameters.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Run ELO</span></a>
 <a class="sourceLine" id="cb7-2" title="2">elo.data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/elo/topics/elo.run">elo.run</a></span>(</a>
 <a class="sourceLine" id="cb7-3" title="3">  <span class="kw">map_margin_to_outcome</span>(Home.Points <span class="op">-</span><span class="st"> </span>Away.Points) <span class="op">~</span></a>
@@ -228,8 +220,8 @@
 <a class="sourceLine" id="cb7-8" title="8">  <span class="dt">k =</span> k_val,</a>
 <a class="sourceLine" id="cb7-9" title="9">  <span class="dt">data =</span> results</a>
 <a class="sourceLine" id="cb7-10" title="10">)</a></code></pre></div>
-<p>Now we can view our results. The <code>elo</code> package provides various ways to do this. Here are a couple.</p>
-<p>Firstly, viewing the results of each game and the change in ELO. See below for the last few games of 2018.</p>
+<p>Now that is run, we can view our results. The <code>elo</code> package provides various ways to do this.</p>
+<p>Firstly, using <code>as.data.frame</code> we can view the predicted and actual result of each game. Also in this table is the change in ELO rating for the home and away side. See below for the last few games of 2018.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame</a></span>(elo.data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>()</a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt;            team.A      team.B       p.A  wins.A      update    elo.A</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; 15402  West Coast Collingwood 0.5403370 0.60000  1.19325978 1534.675</span></a>
@@ -245,7 +237,7 @@
 <a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 15405 1547.993</span></a>
 <a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 15406 1544.309</span></a>
 <a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; 15407 1538.991</span></a></code></pre></div>
-<p>We can see how each team’s ELO changes on each game. Again - viewing the end of 2018 also shows teams that didn’t make the finals have the same ELO as the rounds go on since they aren’t playing finals.</p>
+<p>We can specifically focus on how each team’s rating changes over time using <code>as.matrix</code>. Again - viewing the end of 2018 also shows teams that didn’t make the finals have the same ELO as the rounds go on since they aren’t playing finals.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(elo.data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>()</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt;         Adelaide Brisbane Lions  Carlton Collingwood Essendon Fitzroy</span></a>
 <a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [2776,] 1498.394       1486.347 1425.744    1535.573 1511.301    1500</span></a>
@@ -275,7 +267,7 @@
 <a class="sourceLine" id="cb9-27" title="27"><span class="co">#&gt; [2779,]       1500   1534.675</span></a>
 <a class="sourceLine" id="cb9-28" title="28"><span class="co">#&gt; [2780,]       1500   1542.566</span></a>
 <a class="sourceLine" id="cb9-29" title="29"><span class="co">#&gt; [2781,]       1500   1542.218</span></a></code></pre></div>
-<p>Lastly, we can check the final ELO ratings of each team at the end of our data (here - up to end of 2018).</p>
+<p>Lastly, we can check the final ELO ratings of each team at the end of our data using <code>final.elos</code> (here - up to end of 2018).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/elo/topics/elo.run.helpers">final.elos</a></span>(elo.data)</a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt;        Adelaide  Brisbane Lions         Carlton     Collingwood </span></a>
 <a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;        1507.172        1483.508        1416.965        1538.991 </span></a>
@@ -287,14 +279,14 @@
 <a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;        1544.309        1511.378        1506.200        1547.993 </span></a>
 <a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt;        St Kilda          Sydney      University      West Coast </span></a>
 <a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;        1452.330        1509.285        1412.936        1542.218</span></a></code></pre></div>
-<p>We could keep tweaking our parameters until we are happy. Ideally we’d be using some kind of cost function to optimise these values on like a log likihood, mean absolute margin or something similar. I’ll leave that as beyond the scope of this vignette though.</p>
+<p>We could keep tweaking our parameters until we are happy. Ideally we’d have a training and test set and be using some kind of cost function to optimise these values on like a log likihood, mean absolute margin or something similar. I’ll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.</p>
 </div>
 <div id="do-predictions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#do-predictions" class="anchor"></a>Do predictions</h2>
-<p>Now we’ve got our ELO data calculated and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the <code>prediction</code> function with our ELO model as an input. The <code>elo</code> package takes care of the resut.</p>
+<p>Now we’ve got our ELO model and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the <code>prediction</code> function with our ELO model as an input. The <code>elo</code> package takes care of the resut.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">fixture &lt;-<span class="st"> </span>fixture <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Prob =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(elo.data, <span class="dt">newdata =</span> fixture))</a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Prob =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(elo.data, <span class="dt">newdata =</span> fixture))</a>
 <a class="sourceLine" id="cb11-3" title="3"></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fixture)</a>
 <a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; # A tibble: 6 x 8</span></a>
@@ -307,7 +299,8 @@
 <a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt; 5 2019-03-23   2019           1            1 Brisbane… West Coa… Gabba</span></a>
 <a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt; 6 2019-03-23   2019           1            1 Footscray Sydney    Marv…</span></a>
 <a class="sourceLine" id="cb11-14" title="14"><span class="co">#&gt; # … with 1 more variable: Prob &lt;dbl&gt;</span></a></code></pre></div>
-<p>From here - you could turn these probabilities back into a margin through another mapping function. Again - I’ll leave that for the reader to decide. Looking forward to seeing all the new models utilising the power of fitzRoy!</p>
+<p>From here - you could turn these probabilities back into a margin through another mapping function. Again - I’ll leave that for the reader to decide.</p>
+<p>Looking forward to seeing all the new models utilising the power of fitzRoy.</p>
 </div>
   </div>
 
