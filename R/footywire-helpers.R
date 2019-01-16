@@ -20,13 +20,12 @@
 convert_results <- function(results) {
 
   # Convert results to wide format
-  results_long <- results %>%
-    gather(variable, value, Home.Team:Away.Points) %>%
-    separate(variable, into = c("Status", "variable")) %>%
-    spread(variable, value) %>%
-    arrange(Game) %>%
-    mutate(Margin = ifelse(Status == "Home", Margin, Margin * -1))
-  return(results_long)
+  results %>%
+    tidyr::gather(.data$variable, .data$value, .data$Home.Team:.data$Away.Points) %>%
+    tidyr::separate(variable, into = c("Status", "variable")) %>%
+    tidyr::spread(.data$variable, .data$value) %>%
+    dplyr::arrange(.data$Game) %>%
+    dplyr::mutate(Margin = ifelse(.data$Status == "Home", .data$Margin, .data$Margin * -1))
 }
 
 
