@@ -61,7 +61,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
     dat <- dplyr::bind_rows(dat, dat_new)
   }
   message("Finished getting afltables data")
-  dplyr::filter(dat, Date > start_date & Date < end_date) %>%
+  dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date) %>%
     dplyr::ungroup()
 }
 
@@ -154,7 +154,7 @@ get_afltables_player_ids <- function(seasons) {
   if (min(seasons) <= 2017) {
     pre_2018 <- pre_urls %>%
       readr::read_csv(col_types = c("dcdc")) %>%
-      mutate(ID = as.integer(ID)) %>%
+      mutate(ID = as.integer(.data$ID)) %>%
       dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
       filter(Season %in% seasons)
@@ -167,7 +167,7 @@ get_afltables_player_ids <- function(seasons) {
       purrr::map2_dfr(.y = seasons[seasons > 2017], ~ mutate(., Season = .y)) %>%
       dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
-      dplyr::rename(Team.abb = Team) %>%
+      dplyr::rename(Team.abb = .data$Team) %>%
       dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
       dplyr::select(!!vars)
   }

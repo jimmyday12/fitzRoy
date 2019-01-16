@@ -21,8 +21,8 @@ convert_results <- function(results) {
 
   # Convert results to wide format
   results %>%
-    tidyr::gather(.data$variable, .data$value, .data$Home.Team:.data$Away.Points) %>%
-    tidyr::separate(variable, into = c("Status", "variable")) %>%
+    tidyr::gather("variable", "value", .data$Home.Team:.data$Away.Points) %>%
+    tidyr::separate(.data$variable, into = c("Status", "variable")) %>%
     tidyr::spread(.data$variable, .data$value) %>%
     dplyr::arrange(.data$Game) %>%
     dplyr::mutate(Margin = ifelse(.data$Status == "Home", .data$Margin, .data$Margin * -1))
@@ -39,6 +39,7 @@ convert_results <- function(results) {
 #' @import dplyr
 #' @importFrom rvest html_nodes
 #' @importFrom rvest html_text
+#' @importFrom rlang .data
 footywire_html <- function(x, id) {
 
   # First get extra information
@@ -76,8 +77,8 @@ footywire_html <- function(x, id) {
     .[[13]] %>%
     rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
-      Team = .data$home_team,
-      Opposition = .data$away_team,
+      Team = home_team,
+      Opposition = away_team,
       Status = "Home"
     )
 
@@ -87,8 +88,8 @@ footywire_html <- function(x, id) {
     .[[17]] %>%
     rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
-      Team = .data$away_team,
-      Opposition = .data$home_team,
+      Team = away_team,
+      Opposition = home_team,
       Status = "Away"
     )
 
@@ -96,11 +97,11 @@ footywire_html <- function(x, id) {
   player_stats <- home_stats %>%
     bind_rows(away_stats) %>%
     mutate(
-      Round = .data$Round,
-      Venue = .data$venue,
-      Season = .data$season,
-      Date = .data$game_date,
-      Match_id = .data$id
+      Round = Round,
+      Venue = venue,
+      Season = season,
+      Date = game_date,
+      Match_id = id
     ) %>%
     dplyr::select(
       .data$Date,
@@ -186,9 +187,9 @@ get_match_data <- function(id) {
         # Tidy Names
         player_stats_table <- player_stats_table %>%
           rename(
-            DE = DE.,
-            TOG = TOG.,
-            One.Percenters = X1.
+            DE = .data$DE.,
+            TOG = .data$TOG.,
+            One.Percenters = .data$X1.
           )
       }
     }

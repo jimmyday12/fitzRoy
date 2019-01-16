@@ -169,26 +169,26 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
     as_tibble() %>%
-    select(V1:V3)
+    select(.data$V1:.data$V3)
 
   # Update names
   names(games_df) <- c("Date", "Teams", "Venue")
 
   # Remove Bye & Match Cancelled
   games_df <- games_df %>%
-    filter(Venue != "BYE" & Venue != "MATCH CANCELLED")
+    filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
   # Work out day and week of each game.
   # Games on Thursday > Wednesday go in same Round
   games_df <- games_df %>%
     mutate(
-      Date = lubridate::ydm_hm(paste(season, Date)),
-      epiweek = lubridate::epiweek(Date),
-      w.Day = lubridate::wday(Date),
-      Round = ifelse(between(w.Day, 1, 3), epiweek - 1, epiweek),
-      Round = as.integer(Round - min(Round) + 1)
+      Date = lubridate::ydm_hm(paste(season, .data$Date)),
+      epiweek = lubridate::epiweek(.data$Date),
+      w.Day = lubridate::wday(.data$Date),
+      Round = ifelse(between(.data$w.Day, 1, 3), .data$epiweek - 1, .data$epiweek),
+      Round = as.integer(.data$Round - min(.data$Round) + 1)
     ) %>%
-    select(Date, Round, Teams, Venue)
+    select(.data$Date, .data$Round, .data$Teams, .data$Venue)
   
   # Special cases where this doesn't work 
   # 2018 - collingwood/essendon
@@ -201,12 +201,12 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   
   
   games_df <- games_df %>%
-    mutate(diff = Round - lag(Round, default = 0)) %>%
-    group_by(Round) %>%
+    mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
+    group_by(.data$Round) %>%
     mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
     ungroup() %>%
-    mutate(Round = ifelse(diff_grp == 2, Round - 1, Round)) %>%
-    select(-diff, -diff_grp)
+    mutate(Round = ifelse(.data$diff_grp == 2, .data$Round - 1, .data$Round)) %>%
+    select(-.data$diff, -.data$diff_grp)
 
   # rle_round <- rle(diff(games_df$Round))
   # srt_ind <- which(diff(games_df$Round) == 2)
@@ -214,8 +214,8 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
   # Fix names
   games_df <- games_df %>%
-    group_by(Date, Round, Venue) %>%
-    separate(Teams,
+    group_by(.data$Date, .data$Round, .data$Venue) %>%
+    separate(.data$Teams,
       into = c("Home.Team", "Away.Team"),
       sep = "\\\nv\\s\\\n"
     ) %>%
@@ -231,7 +231,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   # Fix Teams
   # Uses internal replace teams function
   games_df <- games_df %>%
-    group_by(Season.Game) %>%
+    group_by(.data$Season.Game) %>%
     mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     ungroup()
 
@@ -239,7 +239,8 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
   # Tidy columns
   games_df <- games_df %>%
-    select(Date, Season, Season.Game, Round, Home.Team, Away.Team, Venue)
+    select(.data$Date, .data$Season, .data$Season.Game, .data$Round, 
+           .data$Home.Team, .data$Away.Team, .data$Venue)
 
   return(games_df)
 }
