@@ -76,8 +76,8 @@ footywire_html <- function(x, id) {
     .[[13]] %>%
     rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
-      Team = home_team,
-      Opposition = away_team,
+      Team = .data$home_team,
+      Opposition = .data$away_team,
       Status = "Home"
     )
 
@@ -87,8 +87,8 @@ footywire_html <- function(x, id) {
     .[[17]] %>%
     rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
-      Team = away_team,
-      Opposition = home_team,
+      Team = .data$away_team,
+      Opposition = .data$home_team,
       Status = "Away"
     )
 
@@ -96,21 +96,21 @@ footywire_html <- function(x, id) {
   player_stats <- home_stats %>%
     bind_rows(away_stats) %>%
     mutate(
-      Round = Round,
-      Venue = venue,
-      Season = season,
-      Date = game_date,
-      Match_id = id
+      Round = .data$Round,
+      Venue = .data$venue,
+      Season = .data$season,
+      Date = .data$game_date,
+      Match_id = .data$id
     ) %>%
     dplyr::select(
-      Date,
-      Season,
-      Round,
-      Venue,
-      Player,
-      Team,
-      Opposition,
-      Status,
+      .data$Date,
+      .data$Season,
+      .data$Round,
+      .data$Venue,
+      .data$Player,
+      .data$Team,
+      .data$Opposition,
+      .data$Status,
       everything()
     )
 
