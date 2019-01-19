@@ -14,7 +14,7 @@
 #' @examples
 #' \dontrun{
 #' scrape_afltables_match("https://afltables.com/afl/stats/games/2018/071120180602.html")
-#' scrape_afltables_match(get_afltables_urls("01/06/2018", "01/06/2018"))
+#' scrape_afltables_match(get_afltables_urls("01/06/2018", "01/07/2018"))
 #' }
 #' @importFrom magrittr %>%
 #' @importFrom purrr map
@@ -151,18 +151,18 @@ scrape_afltables_match <- function(match_urls) {
   names(games_df) <- make.names(names(games_df))
 
   # nolint start
-  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = X.)
+  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = .data$X.)
   if ("X1." %in% names(games_df)) {
     games_df <- rename(games_df,
-      One.Percenters = X1.
+      One.Percenters = .data$X1.
     )
   }
-  if ("X.P" %in% names(games_df)) games_df <- rename(games_df, TOG = X.P)
+  if ("X.P" %in% names(games_df)) games_df <- rename(games_df, TOG = .data$X.P)
   # nolint end
 
   # change column types
   games_df <- games_df %>%
-    dplyr::filter(!Player %in% c("Rushed", "Totals", "Opposition"))
+    dplyr::filter(!.data$Player %in% c("Rushed", "Totals", "Opposition"))
 
   games_df <- as.data.frame(
     lapply(games_df, function(x) type.convert(x,
@@ -179,9 +179,9 @@ scrape_afltables_match <- function(match_urls) {
       Date = lubridate::ymd(format(.data$Date, "%Y-%m-%d")),
       Season = as.integer(lubridate::year(.data$Date))
     ) %>%
-    tidyr::separate(Player, into = c("Surname", "First.name"), sep = ",") %>%
+    tidyr::separate(.data$Player, into = c("Surname", "First.name"), sep = ",") %>%
     dplyr::mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
-    tidyr::separate(Umpires,
+    tidyr::separate(.data$Umpires,
       into = c(
         "Umpire.1", "Umpire.2",
         "Umpire.3", "Umpire.4"
@@ -207,8 +207,8 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::mutate_at(vars(contains("HQ")), as.integer) %>%
     dplyr::mutate_at(vars(contains("AQ")), as.integer) %>%
     dplyr::rename(
-      Home.score = HQ4P,
-      Away.score = AQ4P
+      Home.score = .data$HQ4P,
+      Away.score = .data$AQ4P
     )
 
   ids <- get_afltables_player_ids(
@@ -216,11 +216,11 @@ scrape_afltables_match <- function(match_urls) {
   )
 
   games_joined <- games_cleaned %>%
-    mutate(Player = paste(First.name, Surname)) %>%
+    mutate(Player = paste(.data$First.name, .data$Surname)) %>%
     dplyr::left_join(ids,
       by = c("Season", "Player", "Playing.for" = "Team")
     ) %>%
-    dplyr::select(-Player)
+    dplyr::select(-.data$Player)
 
   df <- games_joined %>%
     dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat))))
@@ -234,7 +234,7 @@ scrape_afltables_match <- function(match_urls) {
 
   df <- df %>%
     dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
-    mutate(Round = as.character(Round))
+    mutate(Round = as.character(.data$Round))
 
   return(df)
 }

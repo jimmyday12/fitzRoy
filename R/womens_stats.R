@@ -177,10 +177,13 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' @importFrom rlang .data
 #'
 #' @examples
-#' ## All data
+#' \dontrun{
+#' # All data
 #' get_aflw_match_data()
-#' ## 2018 data onward
+#' 
+#' # 2018 data onward
 #' get_aflw_match_data(start_year = 2018)
+#' }
 get_aflw_match_data <- function(start_year = 2017) {
   cookie <- get_aflw_cookie()
   available_matches <- get_aflw_rounds(cookie) %>%

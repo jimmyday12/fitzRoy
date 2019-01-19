@@ -18,8 +18,11 @@ Retrieves AFLW match data for all available matches. Sources data from
 \url{http://www.afl.com.au/womens/matches/stats}
 }
 \examples{
-## All data
+\dontrun{
+# All data
 get_aflw_match_data()
-## 2018 data onward
+
+# 2018 data onward
 get_aflw_match_data(start_year = 2018)
+}
 }
