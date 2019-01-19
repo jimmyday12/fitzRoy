@@ -274,7 +274,7 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     # Assumption: row 1 is home, row 2 is away. Have tested for correctness.
     dplyr::mutate(home.away = c("Home", "Away")) %>%
     tidyr::gather(
-      .data$stat, .data$value, 
+      "stat", "value", 
       .data$stats.averages.goals:.data$team.teamNickname
     ) %>%
     dplyr::mutate(stat = case_when(
