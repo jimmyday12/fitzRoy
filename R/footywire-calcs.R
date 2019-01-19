@@ -185,17 +185,21 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Date = lubridate::ydm_hm(paste(season, .data$Date)),
       epiweek = lubridate::epiweek(.data$Date),
       w.Day = lubridate::wday(.data$Date),
-      Round = ifelse(between(.data$w.Day, 1, 3), .data$epiweek - 1, .data$epiweek),
+      Round = ifelse(between(.data$w.Day, 1, 3), 
+                     .data$epiweek - 1, 
+                     .data$epiweek),
       Round = as.integer(.data$Round - min(.data$Round) + 1)
     ) %>%
     select(.data$Date, .data$Round, .data$Teams, .data$Venue)
   
   # Special cases where this doesn't work 
-  # 2018 - collingwood/essendon
-  games_df$Round[games_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")] <- 5
+  # 2018 collingwood/essendon
+  ind <- games_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
+  games_df$Round[ind] <- 5
   
   # 2012-2014: first round causes issue
-  ind <- games_df$Date > lubridate::ymd("2012-01-01") & games_df$Date < lubridate::ymd("2015-01-01")
+  ind <- games_df$Date > lubridate::ymd("2012-01-01") & 
+    games_df$Date < lubridate::ymd("2015-01-01")
   games_df$Round[ind] <- games_df$Round[ind] - 1
   games_df$Round[games_df$Round == 0] <- 1
   
@@ -205,12 +209,10 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
     group_by(.data$Round) %>%
     mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
     ungroup() %>%
-    mutate(Round = ifelse(.data$diff_grp == 2, .data$Round - 1, .data$Round)) %>%
+    mutate(Round = ifelse(.data$diff_grp == 2, 
+                          .data$Round - 1, 
+                          .data$Round)) %>%
     select(-.data$diff, -.data$diff_grp)
-
-  # rle_round <- rle(diff(games_df$Round))
-  # srt_ind <- which(diff(games_df$Round) == 2)
-  # end_ind <- rle_round$lengths[which(rle_round$values == 2) + 1] + 1
 
   # Fix names
   games_df <- games_df %>%
@@ -234,8 +236,6 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
     group_by(.data$Season.Game) %>%
     mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     ungroup()
-
-
 
   # Tidy columns
   games_df <- games_df %>%
