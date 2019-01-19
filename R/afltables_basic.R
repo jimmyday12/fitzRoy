@@ -28,11 +28,11 @@ get_match_results <- function() {
 
   # Separate score out into components ----
   match_data <- match_data %>%
-    tidyr::separate(Home.Score,
+    tidyr::separate(.data$Home.Score,
       into = c("Home.Goals", "Home.Behinds", "Home.Points"),
       sep = "\\.", convert = TRUE
     ) %>%
-    tidyr::separate(Away.Score,
+    tidyr::separate(.data$Away.Score,
       into = c("Away.Goals", "Away.Behinds", "Away.Points"),
       sep = "\\.", convert = TRUE
     )
@@ -40,9 +40,9 @@ get_match_results <- function() {
   # Fix columns ----
   match_data <- match_data %>%
     mutate(
-      Margin = Home.Points - Away.Points,
-      Date = lubridate::dmy(Date),
-      Season = lubridate::year(Date)
+      Margin = .data$Home.Points - .data$Away.Points,
+      Date = lubridate::dmy(.data$Date),
+      Season = lubridate::year(.data$Date)
     )
 
   # Find round number ----
@@ -57,20 +57,20 @@ get_match_results <- function() {
 
   # Create finals column
   match_data <- match_data %>%
-    mutate(Round.Type = ifelse(Round %in% finals, "Finals", "Regular"))
+    mutate(Round.Type = ifelse(.data$Round %in% finals, "Finals", "Regular"))
 
   # Temporarily create a combined "QF/EF" value
   match_data <- match_data %>%
     mutate(
-      Round.New = ifelse(stringr::str_detect("QF/EF", Round), "QF/EF", Round),
-      Round.New = factor(Round.New, levels = round_levels)
+      Round.New = ifelse(stringr::str_detect("QF/EF", .data$Round), "QF/EF", .data$Round),
+      Round.New = factor(.data$Round.New, levels = round_levels)
     )
 
   # Add in round counter and remove temp column
   match_data <- match_data %>%
-    group_by(Season) %>%
-    mutate(Round.Number = dense_rank(Round.New)) %>%
-    select(-Round.New) %>%
+    group_by(.data$Season) %>%
+    mutate(Round.Number = dense_rank(.data$Round.New)) %>%
+    select(-.data$Round.New) %>%
     ungroup()
 
 
@@ -78,7 +78,7 @@ get_match_results <- function() {
   # Fix teams ----
   # Replace all teams - uses internal function
   match_data <- match_data %>%
-    group_by(Game) %>%
+    group_by(.data$Game) %>%
     mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     ungroup()
 
