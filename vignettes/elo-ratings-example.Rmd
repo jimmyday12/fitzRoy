@@ -30,7 +30,7 @@ library(fitzRoy)
 ```
 
 ## Get data
-Our first job is to now get the relevent data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using `fitzRoy`.
+Our first job is to now get the relevant data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using `fitzRoy`.
 
 ```{r load_data}
 # Get data
@@ -42,7 +42,7 @@ head(fixture)
 ```
 
 ## Prepare data
-Before we create our model, some data preparation. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we'll combine `season` and `Round.Number` into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we'll create a logical field that indicates if the game is the first game for a team that season. 
+Before we create our model, some data preparation. In the ELO package we are using, we need a way to identify each round as a separate match, so we'll combine `season` and `Round.Number` into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we'll create a logical field that indicates if the game is the first game for a team that season. 
 
 
 ```{r clean_results}
@@ -64,7 +64,7 @@ fixture <- fixture %>%
 ```
 
 ## Set ELO parameters
-There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the [PlusSixOne blog](https://plussixoneblog.com/post/my-elo-rating-system-explained/), which uses a similar method. For further reading, I strongly reccomend checking out [Matter of Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html) or [The Arc](https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/) for great explainers on the types of parameters that could be included. 
+There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the [PlusSixOne blog](https://plussixoneblog.com/post/my-elo-rating-system-explained/), which uses a similar method. For further reading, I strongly recommend checking out [Matter of Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html) or [The Arc](https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/) for great explainers on the types of parameters that could be included. 
 
 
 ```{r elo_param}
@@ -122,10 +122,10 @@ Lastly, we can check the final ELO ratings of each team at the end of our data u
 final.elos(elo.data)
 ```
 
-We could keep tweaking our parameters until we are happy. Ideally we'd have a training and test set and be using some kind of cost function to optimise these values on like a log likihood, mean absolute margin or something similar. I'll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.
+We could keep tweaking our parameters until we are happy. Ideally we'd have a training and test set and be using some kind of cost function to optimise these values on like a log likelihood, mean absolute margin or something similar. I'll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.
 
 ## Do predictions
-Now we've got our ELO model and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the `prediction` function with our ELO model as an input. The `elo` package takes care of the resut. 
+Now we've got our ELO model and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the `prediction` function with our ELO model as an input. The `elo` package takes care of the result. 
 
 ```{r predictions}
 fixture <- fixture %>%

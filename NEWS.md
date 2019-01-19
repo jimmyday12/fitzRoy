@@ -7,11 +7,11 @@
 * added [new vignette](https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html) for doing an ELO model using `fitzRoy` [#43](https://github.com/jimmyday12/fitzRoy/issues/43)
 
 # fitzRoy 0.1.8
-* new feature - Women's Stats. New set of functions for Women's data. Read the vignette [here](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) - many thanks to [OscarLane](https://github.com/OscarLane)
+* new feature - Woman's Stats. New set of functions for Woman's data. Read the vignette [here](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) - many thanks to [OscarLane](https://github.com/OscarLane)
 
 # fitzRoy 0.1.7
 
-* fixed bug for dependancy of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
+* fixed bug for dependency of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
 * fixed bug with round number for finals [#40](https://github.com/jimmyday12/fitzRoy/issues/40)
 * added docker support, thanks to Matthew Erbs [#13](https://github.com/jimmyday12/fitzRoy/issues/13)
 * fixed bug with `get_afltables_stats()` where it was returning a grouped `tibble`. Thanks to [tyluRp](https://github.com/tyluRp) [#38](https://github.com/jimmyday12/fitzRoy/issues/38)
@@ -34,7 +34,7 @@
 
 * new function `get_afltables_stats` returns a data frame containing aflplayer stats for the specified games [#19](https://github.com/jimmyday12/fitzRoy/issues/19)
 * new helper function `get_aflplayer_urls` returns the URLs of games falling within a date range. Useful to pass to `get_aflplayer_data` 
-* BREAKING CHANGE: removed `afldata` from the included data to reduce package size (in preperation for CRAN submission). Please use `update_aflplayer_data` or the helper functions
+* BREAKING CHANGE: removed `afldata` from the included data to reduce package size (in preparation for CRAN submission). Please use `update_aflplayer_data` or the helper functions
 * fixed bug where `get_fixture` returned wrong teams [#23](https://github.com/jimmyday12/fitzRoy/issues/23)
 
 
@@ -52,7 +52,7 @@
 
 # fitzRoy 0.1.1
 
-* Added raw scoring progession data
+* Added raw scoring profession data
 * Added `get_score_procession_raw` function
 
 # fitzRoy 0.1.0.9000
