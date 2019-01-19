@@ -185,33 +185,35 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       Date = lubridate::ydm_hm(paste(season, .data$Date)),
       epiweek = lubridate::epiweek(.data$Date),
       w.Day = lubridate::wday(.data$Date),
-      Round = ifelse(between(.data$w.Day, 1, 3), 
-                     .data$epiweek - 1, 
-                     .data$epiweek),
+      Round = ifelse(between(.data$w.Day, 1, 3),
+        .data$epiweek - 1,
+        .data$epiweek
+      ),
       Round = as.integer(.data$Round - min(.data$Round) + 1)
     ) %>%
     select(.data$Date, .data$Round, .data$Teams, .data$Venue)
-  
-  # Special cases where this doesn't work 
+
+  # Special cases where this doesn't work
   # 2018 collingwood/essendon
   ind <- games_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
   games_df$Round[ind] <- 5
-  
+
   # 2012-2014: first round causes issue
-  ind <- games_df$Date > lubridate::ymd("2012-01-01") & 
+  ind <- games_df$Date > lubridate::ymd("2012-01-01") &
     games_df$Date < lubridate::ymd("2015-01-01")
   games_df$Round[ind] <- games_df$Round[ind] - 1
   games_df$Round[games_df$Round == 0] <- 1
-  
-  
+
+
   games_df <- games_df %>%
     mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
     group_by(.data$Round) %>%
     mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
     ungroup() %>%
-    mutate(Round = ifelse(.data$diff_grp == 2, 
-                          .data$Round - 1, 
-                          .data$Round)) %>%
+    mutate(Round = ifelse(.data$diff_grp == 2,
+      .data$Round - 1,
+      .data$Round
+    )) %>%
     select(-.data$diff, -.data$diff_grp)
 
   # Fix names
@@ -239,8 +241,10 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
   # Tidy columns
   games_df <- games_df %>%
-    select(.data$Date, .data$Season, .data$Season.Game, .data$Round, 
-           .data$Home.Team, .data$Away.Team, .data$Venue)
+    select(
+      .data$Date, .data$Season, .data$Season.Game, .data$Round,
+      .data$Home.Team, .data$Away.Team, .data$Venue
+    )
 
   return(games_df)
 }
