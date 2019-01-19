@@ -138,7 +138,7 @@ scrape_afltables_match <- function(match_urls) {
     purrr::reduce(dplyr::bind_rows)
 
   games_df <- games_df %>%
-    mutate(Date = gsub("\\([^]]*)", "", Date))
+    mutate(Date = gsub("\\([^]]*)", "", .data$Date))
 
   # Remove columns with NA and abbreviations
   games_df <- games_df[, !(names(games_df) %in% "NA")]
@@ -174,10 +174,10 @@ scrape_afltables_match <- function(match_urls) {
 
   games_cleaned <- games_df %>%
     mutate(
-      Date = lubridate::dmy_hm(Date),
-      Local.start.time = as.integer(format(Date, "%H%M")),
-      Date = lubridate::ymd(format(Date, "%Y-%m-%d")),
-      Season = as.integer(lubridate::year(Date))
+      Date = lubridate::dmy_hm(.data$Date),
+      Local.start.time = as.integer(format(.data$Date, "%H%M")),
+      Date = lubridate::ymd(format(.data$Date, "%Y-%m-%d")),
+      Season = as.integer(lubridate::year(.data$Date))
     ) %>%
     tidyr::separate(Player, into = c("Surname", "First.name"), sep = ",") %>%
     dplyr::mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
