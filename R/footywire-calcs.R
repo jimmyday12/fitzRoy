@@ -42,7 +42,7 @@ get_footywire_stats <- function(ids) {
 
   # Rearrange
   dat <- dat %>%
-    arrange(Date, Match_id, desc(Status))
+    arrange(.data$Date, .data$Match_id, desc(.data$Status))
 
   # Finish and return
   message("Finished getting data")

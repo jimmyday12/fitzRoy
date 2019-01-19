@@ -96,7 +96,7 @@ get_aflw_round_data <- function(roundid, cookie) {
     dplyr::as_data_frame() %>%
     dplyr::mutate(
       match.venueLocalStartTime =
-        readr::parse_datetime(match.venueLocalStartTime)
+        readr::parse_datetime(.data$match.venueLocalStartTime)
     )
   # If rounds have not been uploaded, "score..." columns will not be present yet
   # Need to check if these are present, and return NULL if not.
@@ -274,7 +274,7 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     # Assumption: row 1 is home, row 2 is away. Have tested for correctness.
     dplyr::mutate(home.away = c("Home", "Away")) %>%
     tidyr::gather(
-      stat, value,
+      .data$stat, .data$value, 
       .data$stats.averages.goals:.data$team.teamNickname
     ) %>%
     dplyr::mutate(stat = case_when(

@@ -158,7 +158,7 @@ get_afltables_player_ids <- function(seasons) {
       mutate(ID = as.integer(.data$ID)) %>%
       dplyr::select(!!vars) %>%
       dplyr::distinct() %>%
-      filter(Season %in% seasons)
+      filter(.data$Season %in% seasons)
   }
 
   if (max(seasons) > 2017) {
