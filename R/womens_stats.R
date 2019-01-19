@@ -157,9 +157,9 @@ get_aflw_round_data <- function(roundid, cookie) {
       Away.Right.Posters = .data$score.awayTeamScoreChart.rightPosters,
       Away.Rushed.Behinds = .data$score.awayTeamScoreChart.rushedBehinds,
       Away.Touched.Behinds = .data$score.awayTeamScoreChart.touchedBehinds
-    ) #%>%
-    # Parse date/start time
-    #dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
+    ) # %>%
+  # Parse date/start time
+  # dplyr::mutate(Local.Start.Time = readr::parse_datetime(Local.Start.Time))
 }
 
 #' Get AFLW match data
@@ -277,7 +277,7 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     # Assumption: row 1 is home, row 2 is away. Have tested for correctness.
     dplyr::mutate(home.away = c("Home", "Away")) %>%
     tidyr::gather(
-      "stat", "value", 
+      "stat", "value",
       .data$stats.averages.goals:.data$team.teamNickname
     ) %>%
     dplyr::mutate(stat = case_when(

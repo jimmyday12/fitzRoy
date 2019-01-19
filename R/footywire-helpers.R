@@ -25,9 +25,10 @@ convert_results <- function(results) {
     tidyr::separate(.data$variable, into = c("Status", "variable")) %>%
     tidyr::spread(.data$variable, .data$value) %>%
     dplyr::arrange(.data$Game) %>%
-    dplyr::mutate(Margin = ifelse(.data$Status == "Home", 
-                                  .data$Margin, 
-                                  .data$Margin * -1))
+    dplyr::mutate(Margin = ifelse(.data$Status == "Home",
+      .data$Margin,
+      .data$Margin * -1
+    ))
 }
 
 
