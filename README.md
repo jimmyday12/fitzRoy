@@ -1,9 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<!-- badges: start -->
-
 # fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
+
+<!-- badges: start -->
 
 [![Travis build
 status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)

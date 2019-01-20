@@ -6,6 +6,7 @@
 * updated the included `fixture` data to 2019 [#50](https://github.com/jimmyday12/fitzRoy/issues/50)
 * added [new vignette](https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html) for doing an ELO model using `fitzRoy` [#43](https://github.com/jimmyday12/fitzRoy/issues/43)
 * `get_afltables_stats` now returns one name per player. For players where their name changes on afltables.com, we always return the first instance of their spelling [#47](https://github.com/jimmyday12/fitzRoy/issues/47)
+* `get_afltables_stats` now returns consistent finals names for `round`. Full names are abbreviated to be consistent with past data [#45](https://github.com/jimmyday12/fitzRoy/issues/45)
 
 # fitzRoy 0.1.8
 * new feature - Woman's Stats. New set of functions for Woman's data. Read the vignette [here](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) - many thanks to [OscarLane](https://github.com/OscarLane)

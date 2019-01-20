@@ -70,6 +70,14 @@ get_afltables_stats <- function(start_date = "1897-01-01",
       Surname = dplyr::first(.data$Surname)
     ) 
   
+  # fix for finals names being incorrect
+  dat$Round[dat$Round == "Grand Final"] <- "GF"
+  dat$Round[dat$Round == "Elimination Final"] <- "EF"
+  dat$Round[dat$Round == "Preliminary Final"] <- "PF"
+  dat$Round[dat$Round == "Qualifying Final"] <- "QF"
+  dat$Round[dat$Round == "Semi Final"] <- "SF"
+  
+  # return data
   dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date) %>%
     dplyr::ungroup()
 }
