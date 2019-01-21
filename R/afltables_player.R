@@ -61,22 +61,21 @@ get_afltables_stats <- function(start_date = "1897-01-01",
     dat <- dplyr::bind_rows(dat, dat_new)
   }
   message("Finished getting afltables data")
-  
   # Fix for players who's spelling changes on afltables.com
   dat <- dat %>%
     dplyr::group_by(.data$ID) %>%
     dplyr::mutate(
       First.name = dplyr::first(.data$First.name),
       Surname = dplyr::first(.data$Surname)
-    ) 
-  
+    )
+
   # fix for finals names being incorrect
   dat$Round[dat$Round == "Grand Final"] <- "GF"
   dat$Round[dat$Round == "Elimination Final"] <- "EF"
   dat$Round[dat$Round == "Preliminary Final"] <- "PF"
   dat$Round[dat$Round == "Qualifying Final"] <- "QF"
   dat$Round[dat$Round == "Semi Final"] <- "SF"
-  
+
   # return data
   dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date) %>%
     dplyr::ungroup()

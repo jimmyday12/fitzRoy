@@ -62,7 +62,9 @@ get_match_results <- function() {
   # Temporarily create a combined "QF/EF" value
   match_data <- match_data %>%
     mutate(
-      Round.New = ifelse(stringr::str_detect("QF/EF", .data$Round), "QF/EF", .data$Round),
+      Round.New = ifelse(stringr::str_detect("QF/EF", .data$Round),
+                         "QF/EF",
+                         .data$Round),
       Round.New = factor(.data$Round.New, levels = round_levels)
     )
 
