@@ -1,6 +1,8 @@
 context("test-afltables_player.R")
-afltables_data <- get_afltables_stats(start_date = "1897-05-07",
-                                      end_date = Sys.Date())
+afltables_data <- get_afltables_stats(
+  start_date = "1897-05-07",
+  end_date = Sys.Date()
+)
 
 test_that("get_afltables_stats works", {
   expect_type(afltables_data, "list")

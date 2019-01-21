@@ -248,7 +248,8 @@ get_aflw_detailed_data <- function(matchids) {
 #' )
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
                                          cookie) {
-  request_metadata <- httr::GET("http://www.afl.com.au/api/cfs/afl/statsCentre/teams",
+  url <- "http://www.afl.com.au/api/cfs/afl/statsCentre/teams"
+  request_metadata <- httr::GET(url,
     query = list(
       matchId = matchid,
       roundId = roundid,

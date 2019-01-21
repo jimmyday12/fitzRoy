@@ -180,7 +180,8 @@ scrape_afltables_match <- function(match_urls) {
       Season = as.integer(lubridate::year(.data$Date))
     ) %>%
     tidyr::separate(.data$Player,
-                    into = c("Surname", "First.name"), sep = ",") %>%
+      into = c("Surname", "First.name"), sep = ","
+    ) %>%
     dplyr::mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
     tidyr::separate(.data$Umpires,
       into = c(
