@@ -14,9 +14,7 @@
 #' }
 #' @export
 #' @importFrom magrittr %>%
-#' @import dplyr
-#' @importFrom rvest html_nodes
-#' @importFrom rvest html_text
+#' @importFrom rlang .data
 get_footywire_stats <- function(ids) {
   if (missing(ids)) stop("Please provide an ID between 1 and 9999")
   if (!is.numeric(ids)) stop("ID must be numeric between 1 and 9999")
@@ -65,7 +63,7 @@ get_footywire_stats <- function(ids) {
 #' }
 #' @export
 #' @importFrom magrittr %>%
-#' @import dplyr
+#' @importFrom rlang .data
 update_footywire_stats <- function(check_existing = TRUE) {
   message("Getting match ID's...")
 
@@ -141,7 +139,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' }
 #' @export
 #' @importFrom magrittr %>%
-#' @import dplyr
+#' @importFrom rlang .data
 get_fixture <- function(season = lubridate::year(Sys.Date())) {
   if (!is.numeric(season)) {
     stop(paste0(
@@ -181,7 +179,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   # Work out day and week of each game.
   # Games on Thursday > Wednesday go in same Round
   games_df <- games_df %>%
-    mutate(
+    dplyr::mutate(
       Date = lubridate::ydm_hm(paste(season, .data$Date)),
       epiweek = lubridate::epiweek(.data$Date),
       w.Day = lubridate::wday(.data$Date),
@@ -191,7 +189,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       ),
       Round = as.integer(.data$Round - min(.data$Round) + 1)
     ) %>%
-    select(.data$Date, .data$Round, .data$Teams, .data$Venue)
+    dplyr::select(.data$Date, .data$Round, .data$Teams, .data$Venue)
 
   # Special cases where this doesn't work
   # 2018 collingwood/essendon
@@ -206,28 +204,28 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
 
   games_df <- games_df %>%
-    mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    group_by(.data$Round) %>%
-    mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
-    ungroup() %>%
-    mutate(Round = ifelse(.data$diff_grp == 2,
+    dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
+    dplyr::group_by(.data$Round) %>%
+    dplyr::mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(Round = ifelse(.data$diff_grp == 2,
       .data$Round - 1,
       .data$Round
     )) %>%
-    select(-.data$diff, -.data$diff_grp)
+    dplyr::select(-.data$diff, -.data$diff_grp)
 
   # Fix names
   games_df <- games_df %>%
-    group_by(.data$Date, .data$Round, .data$Venue) %>%
-    separate(.data$Teams,
+    dplyr::group_by(.data$Date, .data$Round, .data$Venue) %>%
+    tidyr::separate(.data$Teams,
       into = c("Home.Team", "Away.Team"),
       sep = "\\\nv\\s\\\n"
     ) %>%
-    mutate_at(c("Home.Team", "Away.Team"), stringr::str_remove_all, "[\r\n]")
+    dplyr::mutate_at(c("Home.Team", "Away.Team"), stringr::str_remove_all, "[\r\n]")
 
   # Add season game number
   games_df <- games_df %>%
-    mutate(
+   dplyr::mutate(
       Season.Game = row_number(),
       Season = as.integer(season)
     )
@@ -235,13 +233,13 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   # Fix Teams
   # Uses internal replace teams function
   games_df <- games_df %>%
-    group_by(.data$Season.Game) %>%
-    mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    ungroup()
+    dplyr::group_by(.data$Season.Game) %>%
+    dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
+    dplyr::ungroup()
 
   # Tidy columns
   games_df <- games_df %>%
-    select(
+    dplyr::select(
       .data$Date, .data$Season, .data$Season.Game, .data$Round,
       .data$Home.Team, .data$Away.Team, .data$Venue
     )

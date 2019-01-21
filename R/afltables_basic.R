@@ -13,7 +13,7 @@
 #' }
 #' @export
 #' @importFrom magrittr %>%
-#' @import dplyr
+#' @importFrom rlang .data
 get_match_results <- function() {
 
   # Get data ----
@@ -39,7 +39,7 @@ get_match_results <- function() {
 
   # Fix columns ----
   match_data <- match_data %>%
-    mutate(
+    dplyr::mutate(
       Margin = .data$Home.Points - .data$Away.Points,
       Date = lubridate::dmy(.data$Date),
       Season = lubridate::year(.data$Date)
@@ -57,11 +57,11 @@ get_match_results <- function() {
 
   # Create finals column
   match_data <- match_data %>%
-    mutate(Round.Type = ifelse(.data$Round %in% finals, "Finals", "Regular"))
+    dplyr::mutate(Round.Type = ifelse(.data$Round %in% finals, "Finals", "Regular"))
 
   # Temporarily create a combined "QF/EF" value
   match_data <- match_data %>%
-    mutate(
+    dplyr::mutate(
       Round.New = ifelse(stringr::str_detect("QF/EF", .data$Round),
         "QF/EF",
         .data$Round
@@ -71,19 +71,19 @@ get_match_results <- function() {
 
   # Add in round counter and remove temp column
   match_data <- match_data %>%
-    group_by(.data$Season) %>%
-    mutate(Round.Number = dense_rank(.data$Round.New)) %>%
-    select(-.data$Round.New) %>%
-    ungroup()
+    dplyr::group_by(.data$Season) %>%
+    dplyr::mutate(Round.Number = dense_rank(.data$Round.New)) %>%
+    dplyr::select(-.data$Round.New) %>%
+    dplyr::ungroup()
 
 
 
   # Fix teams ----
   # Replace all teams - uses internal function
   match_data <- match_data %>%
-    group_by(.data$Game) %>%
-    mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    ungroup()
+    dplyr::group_by(.data$Game) %>%
+    dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
+    dplyr::ungroup()
 
 
   # Return data
@@ -96,7 +96,7 @@ get_match_results <- function() {
 #' @export
 replace_teams <- function(team) {
   # Internal function
-  case_when(
+  dplyr::case_when(
     team == "Kangaroos" ~ "North Melbourne",
     team == "NM" ~ "North Melbourne",
     team == "Western Bulldog" ~ "Footscray",

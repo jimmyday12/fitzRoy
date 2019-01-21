@@ -21,7 +21,8 @@
 #' get_afltables_stats("01/01/2018", end_date = "01/04/2018")
 #' }
 #' @importFrom magrittr %>%
-#' @importFrom purrr map
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
 get_afltables_stats <- function(start_date = "1897-01-01",
                                 end_date = Sys.Date()) {
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
@@ -98,7 +99,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
 #' get_afltables_urls("01/01/2018")
 #' get_afltables_urls("01/01/2018", end_date = "01/04/2018")
 #' @importFrom magrittr %>%
-#' @importFrom purrr map
+#' @importFrom rlang .data
 get_afltables_urls <- function(start_date,
                                end_date = Sys.Date()) {
   start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
@@ -130,22 +131,22 @@ get_afltables_urls <- function(start_date,
   }
 
   html_games <- Seasons %>%
-    map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
-    map(url_works)
+    purrr::map(~ paste0("https://afltables.com/afl/seas/", ., ".html")) %>%
+    purrr::map(url_works)
 
   html_games <- Filter(Negate(is.null), html_games)
 
   dates <- html_games %>%
-    map(rvest::html_nodes, "table+ table tr:nth-child(1) > td:nth-child(4)") %>%
-    map(rvest::html_text) %>%
-    map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
-    map(lubridate::dmy) %>%
-    map(~ .x > start_date & .x < end_date)
+    purrr::map(rvest::html_nodes, "table+ table tr:nth-child(1) > td:nth-child(4)") %>%
+    purrr::map(rvest::html_text) %>%
+    purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
+    purrr::map(lubridate::dmy) %>%
+    purrr::map(~ .x > start_date & .x < end_date)
 
   match_ids <- html_games %>%
-    map(rvest::html_nodes, "tr+ tr b+ a") %>%
-    map(rvest::html_attr, "href") %>%
-    map(~ stringr::str_replace(., "..", "https://afltables.com/afl"))
+    purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
+    purrr::map(rvest::html_attr, "href") %>%
+    purrr::map(~ stringr::str_replace(., "..", "https://afltables.com/afl"))
 
   # Return only id's that match
   match_ids <- match_ids %>%

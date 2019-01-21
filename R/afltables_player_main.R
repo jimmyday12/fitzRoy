@@ -17,10 +17,7 @@
 #' scrape_afltables_match(get_afltables_urls("01/06/2018", "01/07/2018"))
 #' }
 #' @importFrom magrittr %>%
-#' @importFrom purrr map
-#' @importFrom purrr map2
-#' @importFrom dplyr mutate
-#' @importFrom utils type.convert
+#' @importFrom rlang .data
 scrape_afltables_match <- function(match_urls) {
 
   # For each game url, download data, extract the stats
@@ -31,7 +28,7 @@ scrape_afltables_match <- function(match_urls) {
   pb <- progress_estimated(length(match_urls))
 
   match_xmls <- match_urls %>%
-    map(~ {
+    purrr::map(~ {
       pb$tick()$print()
       xml2::read_html(.)
     })
@@ -46,22 +43,22 @@ scrape_afltables_match <- function(match_urls) {
   }
 
   details <- match_xmls %>%
-    map(rvest::html_nodes, "br+ table td") %>%
-    map(rvest::html_text)
+    purrr::map(rvest::html_nodes, "br+ table td") %>%
+    purrr::map(rvest::html_text)
 
   home_scores <- match_xmls %>%
-    map(rvest::html_nodes, "br+ table tr:nth-child(2) td") %>%
-    map(rvest::html_text)
+    purrr::map(rvest::html_nodes, "br+ table tr:nth-child(2) td") %>%
+    purrr::map(rvest::html_text)
 
   away_scores <- match_xmls %>%
-    map(rvest::html_nodes, "br+ table tr:nth-child(3) td") %>%
-    map(rvest::html_text)
+    purrr::map(rvest::html_nodes, "br+ table tr:nth-child(3) td") %>%
+    purrr::map(rvest::html_text)
 
   # Check if notes table exists
   notes_tbl <- match_xmls %>%
-    map(rvest::html_nodes, "table:nth-child(10)") %>%
-    map(rvest::html_text) %>%
-    map(purrr::is_empty)
+    purrr::map(rvest::html_nodes, "table:nth-child(10)") %>%
+    purrr::map(rvest::html_text) %>%
+    purrr::map(purrr::is_empty)
 
   notes_fn <- function(x) {
     if (x) {
@@ -72,26 +69,26 @@ scrape_afltables_match <- function(match_urls) {
   }
 
   notes_ind <- notes_tbl %>%
-    map(notes_fn)
+    purrr::map(notes_fn)
 
   games <- match_xmls %>%
-    map(rvest::html_table, fill = TRUE) %>%
+    purrr::map(rvest::html_table, fill = TRUE) %>%
     purrr::map2(.y = notes_ind, ~ magrittr::extract(.x, .y)) %>%
     purrr::modify_depth(1, ~ purrr::map(., replace_names))
 
   home_games <- games %>%
     rvest::pluck(1) %>%
-    map2(.y = home_scores, ~ mutate(.x, Playing.for = .y[1]))
+    purrr::map2(.y = home_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
 
   away_games <- games %>%
     rvest::pluck(2) %>%
-    map2(.y = away_scores, ~ mutate(.x, Playing.for = .y[1]))
+    purrr::map2(.y = away_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
 
   games <- home_games %>%
-    map2(.y = away_games, ~ bind_rows(.x, .y))
+    purrr::map2(.y = away_games, ~ bind_rows(.x, .y))
 
   att_lgl <- details %>%
-    map(~ stringr::str_detect(.x[2], "Attendance"))
+    purrr::map(~ stringr::str_detect(.x[2], "Attendance"))
 
   att_fn <- function(x) {
     if (x) {
@@ -102,15 +99,15 @@ scrape_afltables_match <- function(match_urls) {
   }
 
   date_str <- att_lgl %>%
-    map(att_fn)
+    purrr::map(att_fn)
 
   args <- list(games, details, date_str)
 
   games_df <- args %>%
-    purrr::pmap(~ mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
+    purrr::pmap(~ dplyr::mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
 
   games_df <- games_df %>%
-    map2(.y = details, ~ mutate(
+    purrr::map2(.y = details, ~ dplyr::mutate(
       .x,
       Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
       Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
@@ -119,7 +116,7 @@ scrape_afltables_match <- function(match_urls) {
     ))
 
   games_df <- games_df %>%
-    map2(.y = home_scores, ~ mutate(
+    purrr::map2(.y = home_scores, ~ dplyr::mutate(
       .x,
       Home.team = .y[1],
       HQ1 = .y[2],
@@ -127,7 +124,7 @@ scrape_afltables_match <- function(match_urls) {
       HQ3 = .y[4],
       HQ4 = .y[5]
     )) %>%
-    map2(.y = away_scores, ~ mutate(
+    purrr::map2(.y = away_scores, ~ dplyr::mutate(
       .x,
       Away.team = .y[1],
       AQ1 = .y[2],
@@ -138,7 +135,7 @@ scrape_afltables_match <- function(match_urls) {
     purrr::reduce(dplyr::bind_rows)
 
   games_df <- games_df %>%
-    mutate(Date = gsub("\\([^]]*)", "", .data$Date))
+    dplyr::mutate(Date = gsub("\\([^]]*)", "", .data$Date))
 
   # Remove columns with NA and abbreviations
   games_df <- games_df[, !(names(games_df) %in% "NA")]
@@ -165,7 +162,7 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::filter(!.data$Player %in% c("Rushed", "Totals", "Opposition"))
 
   games_df <- as.data.frame(
-    lapply(games_df, function(x) type.convert(x,
+    lapply(games_df, function(x) utils::type.convert(x,
         na.strings = "NA",
         as.is = TRUE
       )),
@@ -173,7 +170,7 @@ scrape_afltables_match <- function(match_urls) {
   )
 
   games_cleaned <- games_df %>%
-    mutate(
+    dplyr::mutate(
       Date = lubridate::dmy_hm(.data$Date),
       Local.start.time = as.integer(format(.data$Date, "%H%M")),
       Date = lubridate::ymd(format(.data$Date, "%Y-%m-%d")),
@@ -218,7 +215,7 @@ scrape_afltables_match <- function(match_urls) {
   )
 
   games_joined <- games_cleaned %>%
-    mutate(Player = paste(.data$First.name, .data$Surname)) %>%
+    dplyr::mutate(Player = paste(.data$First.name, .data$Surname)) %>%
     dplyr::left_join(ids,
       by = c("Season", "Player", "Playing.for" = "Team")
     ) %>%
@@ -236,7 +233,7 @@ scrape_afltables_match <- function(match_urls) {
 
   df <- df %>%
     dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
-    mutate(Round = as.character(.data$Round))
+    dplyr::mutate(Round = as.character(.data$Round))
 
   return(df)
 }

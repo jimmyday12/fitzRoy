@@ -15,8 +15,7 @@
 #' }
 #' @export
 #' @importFrom magrittr %>%
-#' @import dplyr
-#' @import tidyr
+#' @importFrom rlang .data
 convert_results <- function(results) {
 
   # Convert results to wide format
@@ -39,9 +38,6 @@ convert_results <- function(results) {
 #' @return A data frame with advanced player results
 #'
 #' @importFrom magrittr %>%
-#' @import dplyr
-#' @importFrom rvest html_nodes
-#' @importFrom rvest html_text
 #' @importFrom rlang .data
 footywire_html <- function(x, id) {
 
@@ -98,8 +94,8 @@ footywire_html <- function(x, id) {
 
   ## Add data to ind.table
   player_stats <- home_stats %>%
-    bind_rows(away_stats) %>%
-    mutate(
+    dplyr::bind_rows(away_stats) %>%
+    dplyr::mutate(
       Round = Round,
       Venue = venue,
       Season = season,
