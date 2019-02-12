@@ -10,6 +10,9 @@ source(here::here("data-raw", "player_stats", "scrape_footywire_basic.R"))
 # Match results -----------------------------------------------------------
 source(here::here("data-raw", "afl_tables_match_results", "initial_match_results.R"))
 
+# IDS -----------------------------------------------------------
+
+
 # weather -----------------------------------------------------------------
 # Need to work out how to update this one
 # source(here::here("data-raw", "weather", "BOM Data.R"))

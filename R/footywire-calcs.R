@@ -67,9 +67,8 @@ get_footywire_stats <- function(ids) {
 update_footywire_stats <- function(check_existing = TRUE) {
   message("Getting match ID's...")
 
-
   # Get all URL's from 2010 (advanced stats) to current year
-
+  message("Getting player IDs from footywire.com ...")
   fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
     purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>% # nolint
     purrr::map(xml2::read_html) %>%
@@ -81,39 +80,39 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
   # First, load data from github
   if (check_existing) {
-    ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
+    # ids <- fw_ids[!fw_ids %in% player_stats$Match_id]
 
 
-    if (length(ids) == 0) {
-      message("Data is up to date. Returning original player_stats data")
-      return(player_stats)
+    # if (length(ids) == 0) {
+    #  message("Data is up to date. Returning original player_stats data")
+    #  return(player_stats)
+    # } else {
+
+    # Get new data
+    message("Checking data on https://github.com/jimmyday12/fitzRoy/ ...")
+    # message(paste0("Downloading new data for ", length(ids), " matches..."))
+
+    # message("\nChecking Github")
+    # Check fitzRoy GitHub
+    dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda" # nolint
+
+    load_r_data <- function(fname) {
+      load(fname)
+      get(ls()[ls() != "fname"])
+    }
+
+    dat_git <- load_r_data(url(dat_url))
+
+    # Check what's still missing
+    git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
+
+    if (length(git_ids) == 0) {
+      message("No new matches found - returning data")
+      return(dat_git)
     } else {
-
-      # Get new data
-      message(paste0("Downloading new data for ", length(ids), " matches..."))
-
-      message("\nChecking Github")
-      # Check fitzRoy GitHub
-      dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda" # nolint
-
-      load_r_data <- function(fname) {
-        load(fname)
-        get(ls()[ls() != "fname"])
-      }
-
-      dat_git <- load_r_data(url(dat_url))
-
-      # Check what's still missing
-      git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
-      ids <- ids[ids == git_ids]
-
-      if (length(ids) == 0) {
-        message("Finished getting data")
-        dat_git
-      } else {
-        new_data <- get_footywire_stats(ids)
-        player_stats %>% dplyr::bind_rows(new_data)
-      }
+      message(glue::glue("New data found for {length(git_ids)} matches - downloading from footywire.com...")) # nolint
+      new_data <- get_footywire_stats(ids)
+      player_stats %>% dplyr::bind_rows(new_data)
     }
   } else {
     message("Downloading all data. Warning - this takes a long time")
@@ -123,6 +122,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
     return(dat)
   }
 }
+
 
 #' Get upcoming fixture from footywire.com
 #'
@@ -225,7 +225,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 
   # Add season game number
   games_df <- games_df %>%
-   dplyr::mutate(
+    dplyr::mutate(
       Season.Game = row_number(),
       Season = as.integer(season)
     )
