@@ -111,8 +111,9 @@ update_footywire_stats <- function(check_existing = TRUE) {
       return(dat_git)
     } else {
       message(glue::glue("New data found for {length(git_ids)} matches - downloading from footywire.com...")) # nolint
-      new_data <- get_footywire_stats(ids)
-      player_stats %>% dplyr::bind_rows(new_data)
+      new_data <- get_footywire_stats(git_ids)
+      dat <- player_stats %>% dplyr::bind_rows(new_data)
+      return(dat)
     }
   } else {
     message("Downloading all data. Warning - this takes a long time")

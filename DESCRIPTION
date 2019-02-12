@@ -35,7 +35,8 @@ Imports:
     tidyr,
     tidyselect,
     xml2,
-    tibble
+    tibble,
+    glue
 Suggests: 
     covr,
     ggplot2,

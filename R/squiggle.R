@@ -78,7 +78,7 @@ get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
   df <- as.data.frame(dat[[1]])
   df[, ] <- lapply(df[, ], as.character)
   as.data.frame(
-    lapply(df, function(x) type.convert(x, as.is = TRUE)),
+    lapply(df, function(x) utils::type.convert(x, as.is = TRUE)),
     stringsAsFactors = FALSE
   )
 }
