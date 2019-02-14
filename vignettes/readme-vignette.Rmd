@@ -1,10 +1,10 @@
 ---
-title: "Easily Scrape and Process AFL Data"
+title: "Getting Started"
 author: "James Day"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Getting Started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

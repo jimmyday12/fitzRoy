@@ -4,7 +4,7 @@ author: "James Day"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{ELO Ratings Example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -87,7 +87,7 @@ map_margin_to_outcome <- function(margin, marg.max = 80, marg.min = -80){
 ```
 
 ## Calculate ELO results
-Now we are ready to create our ELO ratings! We can use the `elo.run` function from the `elo` package for this. I won't explain everything about what is going on here -  you can read all about it at the package [vignette](https://cran.r-project.org/web/packages/elo/vignettes/elo.html) - but in general, we provide a function that indicates what is included in our model, as well as some model parameters. 
+Now we are ready to create our ELO ratings! We can use the `elo.run` function from the `elo` package for this. I won't explain everything about what is going on here -  you can read all about it at the package [vignette](https://cran.r-project.org/web/packages/elo/index.html) - but in general, we provide a function that indicates what is included in our model, as well as some model parameters. 
 
 ```{r run_elo}
 # Run ELO
