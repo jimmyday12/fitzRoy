@@ -27,6 +27,10 @@ You can install fitzRoy from github with:
 ```{r gh-installation, eval = FALSE, echo = TRUE}
 # install.packages("devtools")
 devtools::install_github("jimmyday12/fitzRoy")
+
+library(fitzRoy)
+library(dplyr)
+library(ggplot2)
 ```
 
 ## Usage
@@ -43,7 +47,7 @@ You can access the basic afl tables match results data. This includes all matche
 You can access the data directly from the package using `match_results`. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use `get_match_results` directly, as this will give you up to date results.
 
 ```{r results}
-library(fitzRoy)
+
 results <- get_match_results()
 
 tail(results)
@@ -100,9 +104,6 @@ tail(dat)
 We have also included weather data for the 2017 season. This is a work in progress but includes rainfall data from the nearest observation station to each ground. This data is included in the package as `results_weather`.
 
 ```{r weather, message=FALSE, warning=FALSE}
-library(ggplot2)
-library(dplyr)
-
 # Get 2017 weather data
 weather <- fitzRoy::results_weather %>%
   filter(Season == 2017)
