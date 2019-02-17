@@ -222,7 +222,8 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       into = c("Home.Team", "Away.Team"),
       sep = "\\\nv\\s\\\n"
     ) %>%
-    dplyr::mutate_at(c("Home.Team", "Away.Team"), stringr::str_remove_all, "[\r\n]")
+    dplyr::mutate_at(c("Home.Team", "Away.Team"), 
+                     stringr::str_remove_all, "[\r\n]")
 
   # Add season game number
   games_df <- games_df %>%
