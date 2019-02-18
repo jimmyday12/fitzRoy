@@ -1,7 +1,7 @@
 get_ids <- function(ids) {
   dat <- data.frame()
-  
-  check_url <- function(x){
+
+  check_url <- function(x) {
     tryCatch(
       read_html(x),
       error = function(e) NULL
@@ -10,44 +10,44 @@ get_ids <- function(ids) {
 
   default.url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
   urls <- ids[1:2] %>%
-    purrr::map(~paste0(default.url, .x)) 
-  
+    purrr::map(~ paste0(default.url, .x))
+
   good_urls <- urls %>%
-    purrr::map(check_url) %>% 
+    purrr::map(check_url) %>%
     purrr::keep(function(x) !is_null(x))
-  
+
   game_details <- good_urls %>%
     purrr::map(~ html_node(.x, "tr:nth-child(2) .lnorm")) %>%
     purrr::map(html_text)
-  
+
   round <- game_details %>%
-    purrr::map_df(~str_split(.x, ",")[[1]][1] %>% trimws()) %>%
+    purrr::map_df(~ str_split(.x, ",")[[1]][1] %>% trimws()) %>%
     rename(round = V1)
-  
+
   game_date <- game_details %>%
-    #purrr::map(~html_node(.x, ".lnormtop tr:nth-child(3) .lnorm")) %>%
-    #purrr::map(html_text) %>%
-    purrr::map_df(~str_split(.x, ",")[[1]][3] %>% trimws() %>% dmy()) %>%
+    # purrr::map(~html_node(.x, ".lnormtop tr:nth-child(3) .lnorm")) %>%
+    # purrr::map(html_text) %>%
+    purrr::map_df(~ str_split(.x, ",")[[1]][3] %>% trimws() %>% dmy()) %>%
     rename(game_date = V1)
-  
+
   season <- game_date %>%
     purrr::map_dfc(year) %>%
     rename(Season = V1)
-  
+
   # Get home and away team names
   home_team <- good_urls %>%
-    purrr::map(~html_node(.x, "#matchscoretable tr:nth-child(2) a")) %>%
+    purrr::map(~ html_node(.x, "#matchscoretable tr:nth-child(2) a")) %>%
     purrr::map_dfc(html_text) %>%
     rename(home_team = V1)
-  
+
   away_team <- good_urls %>%
-    purrr::map(~html_node(.x, "#matchscoretable tr~ tr+ tr a")) %>%
+    purrr::map(~ html_node(.x, "#matchscoretable tr~ tr+ tr a")) %>%
     purrr::map_dfc(html_text) %>%
     rename(away_team = V1)
-  
+
   x <- list(game_data, round, season, home_team, away_team)
   map_dfc(x, bind_cols)
-  
+
   ind.dat <- data_frame(
     Match_id = ind,
     Exist = TRUE,
@@ -59,12 +59,11 @@ get_ids <- function(ids) {
     Home.Team = home_team,
     Away.Team = away_team
   )
-  
-  #bad_urls <- good_urls %>%
+
+  # bad_urls <- good_urls %>%
   #  purrr::map(isFALSE)
-  
+
   for (i in seq_along(ids)) {
-    
     ind <- ids[i]
 
     # Create URLs

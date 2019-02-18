@@ -137,8 +137,10 @@ get_afltables_urls <- function(start_date,
   html_games <- Filter(Negate(is.null), html_games)
 
   dates <- html_games %>%
-    purrr::map(rvest::html_nodes, 
-               "table+ table tr:nth-child(1) > td:nth-child(4)") %>%
+    purrr::map(
+      rvest::html_nodes,
+      "table+ table tr:nth-child(1) > td:nth-child(4)"
+    ) %>%
     purrr::map(rvest::html_text) %>%
     purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     purrr::map(lubridate::dmy) %>%

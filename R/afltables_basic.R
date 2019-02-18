@@ -57,9 +57,10 @@ get_match_results <- function() {
 
   # Create finals column
   match_data <- match_data %>%
-    dplyr::mutate(Round.Type = ifelse(.data$Round %in% finals, 
-                                      "Finals", 
-                                      "Regular"))
+    dplyr::mutate(Round.Type = ifelse(.data$Round %in% finals,
+      "Finals",
+      "Regular"
+    ))
 
   # Temporarily create a combined "QF/EF" value
   match_data <- match_data %>%
