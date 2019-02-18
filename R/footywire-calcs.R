@@ -149,6 +149,9 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
       season
     ))
   }
+  if (length(season) > 1){
+    stop("`season` must be a single numeric value, not a vector")
+  } 
   if (nchar(season) != 4) {
     stop(paste0(
       "'season' must be in 4-digit year format (e.g. 2018).",
