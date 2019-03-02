@@ -6,22 +6,22 @@
 \title{Results from all AFL Men's matches}
 \format{A data frame with 15200 rows and 16 variables:
 \describe{
-\item{Game}{todo}
-\item{Date}{todo}
-\item{Round}{todo}
-\item{Home.Team}{todo}
-\item{Home.Goals}{todo}
-\item{Home.Behinds}{todo}
-\item{Home.Points}{todo}
-\item{Away.Team}{todo}
-\item{Away.Goals}{todo}
-\item{Away.Behinds}{todo}
-\item{Away.Points}{todo}
-\item{Venue}{todo}
-\item{Margin}{todo}
-\item{Season}{todo}
-\item{Round.Type}{todo}
-\item{Round.Number}{todo}
+\item{Game}{Historical match count}
+\item{Date}{Date of match}
+\item{Round}{Round of season}
+\item{Home.Team}{Home team name}
+\item{Home.Goals}{Home team goals scored}
+\item{Home.Behinds}{Home team behinds scored}
+\item{Home.Points}{Home team points scored}
+\item{Away.Team}{Away team name}
+\item{Away.Goals}{Away team goals scored}
+\item{Away.Behinds}{Away team behinds scored}
+\item{Away.Points}{Away team points scored}
+\item{Venue}{Venue match played out}
+\item{Margin}{Final margin in favour of home team}
+\item{Season}{Season year}
+\item{Round.Type}{Round type; either regular or finals}
+\item{Round.Number}{Round number in numeric format}
 
 }}
 \source{
