@@ -23,6 +23,7 @@ Useful links:
 Authors:
 \itemize{
   \item Robert Nguyen \email{nguyen.n.robert@gmail.com}
+  \item Oscar Lane \email{lane.oscar@gmail.com}
 }
 
 Other contributors:
