@@ -13,7 +13,11 @@ Authors@R:
       person(given = "Matthew",
              family = "Erbs",
              role = "ctb",
-             email = "matthew.erbs@merbla.com"))
+             email = "matthew.erbs@merbla.com"),
+      person(given = "Oscar",
+             family = "Lane",
+             role = "aut",
+             email = "lane.oscar@gmail.com"))
 Description: An easy to use tool for scraping and processing AFL
     data.
 License: GPL-3
