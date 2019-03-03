@@ -20,5 +20,7 @@ the column \code{roundId} in the dataframe created by the \code{get_rounds()} fu
 to specify matches to fetch.
 }
 \examples{
+\dontrun{
 get_aflw_round_data("CD_R201826401", get_aflw_cookie())
+}
 }

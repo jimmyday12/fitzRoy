@@ -26,7 +26,9 @@ get_aflw_cookie <- function() {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @examples
+#' \dontrun{
 #' get_aflw_rounds(get_aflw_cookie())
+#' }
 #' @export
 get_aflw_rounds <- function(cookie) {
   years <- 2017:2100
@@ -78,7 +80,9 @@ get_aflw_rounds <- function(cookie) {
 #' @importFrom rlang .data
 #'
 #' @examples
+#' \dontrun{
 #' get_aflw_round_data("CD_R201826401", get_aflw_cookie())
+#' }
 #' @export
 get_aflw_round_data <- function(roundid, cookie) {
   url_head <- paste0(
@@ -205,7 +209,9 @@ get_aflw_match_data <- function(start_year = 2017) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
+#' }
 get_aflw_detailed_data <- function(matchids) {
   cookie <- get_aflw_cookie()
   # Round and competition IDs can be inferred from match Ids:
@@ -242,10 +248,12 @@ get_aflw_detailed_data <- function(matchids) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' get_aflw_detailed_match_data(
 #'   "CD_M20172640101",
 #'   "CD_R201726401", "CD_S2017264", get_aflw_cookie()
 #' )
+#' }
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
                                          cookie) {
   url <- "http://www.afl.com.au/api/cfs/afl/statsCentre/teams"

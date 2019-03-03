@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -63,7 +63,7 @@
       <a href="articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="articles/readme-vignette.html">Easily Scrape and Process AFL Data</a>
+      <a href="articles/mens-stats.html">Getting started with AFL Men's data</a>
     </li>
     <li>
       <a href="articles/womens-stats.html">Womens' AFL Stats</a>
@@ -97,11 +97,11 @@
     
     
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- badges: start -->
 <div id="fitzroy" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#fitzroy" class="anchor"></a>fitzRoy <img src="reference/figures/fitz_hex.png" align="right" width="120" height="139">
 </h1></div>
+<!-- badges: start -->
 
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
@@ -126,7 +126,7 @@
 <div id="mens-data" class="section level4">
 <h4 class="hasAnchor">
 <a href="#mens-data" class="anchor"></a>Mens data</h4>
-<p>Various data is inclued from both <a href="afltables.com">AFL Tables</a> and <a href="footywire.com">Footy Wire</a>. At the most basic level, you can access match results and the upcoming fixture as below. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/readme-vignette.html">Mens Vignette</a> for further instructions.</p>
+<p>Various data is included from both <a href="afltables.com">AFL Tables</a> and <a href="footywire.com">Footy Wire</a>. At the most basic level, you can access match results and the upcoming fixture as below. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/readme-vignette.html">Mens Vignette</a> for further instructions.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_match_results.html">get_match_results</a></span>()</a>
 <a class="sourceLine" id="cb2-2" title="2">fixture &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_fixture.html">get_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2019</span>)</a></code></pre></div>
 </div>
@@ -135,13 +135,46 @@
 <a href="#afl-womens-data" class="anchor"></a>AFL Womens data</h4>
 <p>From 2019, we are able to provide access to AFL Women’s data. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for details on how to access it.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">aflw_match_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</a></code></pre></div>
-<hr>
 </div>
 </div>
 <div id="elo-models" class="section level3">
 <h3 class="hasAnchor">
 <a href="#elo-models" class="anchor"></a>ELO models</h3>
 <p>A specific use case might be to use <code>fitzRoy</code> data as an input into a model. See the <a href="https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html">ELO model vignette</a> for an example of how this might be done.</p>
+</div>
+</div>
+<div id="docker-support" class="section level2">
+<h2 class="hasAnchor">
+<a href="#docker-support" class="anchor"></a>Docker Support</h2>
+<p>fitzRoy now provides <a href="https://www.docker.com/get-started">Docker</a> support in the form of an image hosted on <a href="https://hub.docker.com/r/jimmyday12/fitzroy/">DockerHub</a>.</p>
+<div id="usage-1" class="section level3">
+<h3 class="hasAnchor">
+<a href="#usage-1" class="anchor"></a>Usage</h3>
+<p>Once you have the images, (e.g. <code>docker pull jimmyday12/fitzroy:latest</code>) run one of the following commands.</p>
+<ul>
+<li>To start <a href="https://www.rstudio.com/">RStudio</a> with Fitzroy ready to use:
+<ul>
+<li>
+<code>docker run -d -p 8787:8787 --name fitzroy jimmyday12/fitzroy:latest</code> and open <a href="http://localhost:8787" class="uri">http://localhost:8787</a>. *(Username: <code>rstudio</code>, Password: <code>rstudio</code>)</li>
+</ul>
+</li>
+<li>To start an R terminal prompt with fitzRoy ready to use:
+<ul>
+<li>
+<code>docker run -it jimmyday12/fitzroy:latest R</code> to start with an R terminal prompt.</li>
+<li>Run <code><a href="https://www.rdocumentation.org/packages/base/topics/quit">quit()</a></code> to exit the container</li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="building-the-image-locally" class="section level3">
+<h3 class="hasAnchor">
+<a href="#building-the-image-locally" class="anchor"></a>Building the image locally</h3>
+<p>To build the Docker image run the following from the root of the repository.</p>
+<ul>
+<li><code>docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .</code></li>
+</ul>
+<hr>
 <p>Please note that the ‘fitzRoy’ project is released with a <a href="CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
 </div>

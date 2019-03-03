@@ -70,7 +70,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -96,7 +96,7 @@
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/readme-vignette.html">Easily Scrape and Process AFL Data</a>
+      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
     </li>
     <li>
       <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
@@ -131,16 +131,24 @@
       <small>Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="fitzroy-0110" class="section level1">
+<h1 class="page-header">
+<a href="#fitzroy-0110" class="anchor"></a>fitzRoy 0.1.10</h1>
+<ul>
+<li>footywire scrapers no longer fail due to footywire.com updating their site (<a href="https://github.com/jimmyday12/fitzRoy/issues/54"><a href='https://github.com/jimmyday12/fitzRoy/issues/61'>#61</a></a>)</li>
+</ul>
+</div>
     <div id="fitzroy-019" class="section level1">
 <h1 class="page-header">
 <a href="#fitzroy-019" class="anchor"></a>fitzRoy 0.1.9</h1>
 <ul>
 <li>
-<code><a href="../reference/get_fixture.html">get_fixture()</a></code> now handles inconsistent assignment of Wednesday games and a related issue for some Round 1 matches where games were being assigned to the wrong round (<a href="https:://github.com/jimmyday12/fitzRoy/issues/54"><a href='https://github.com/jimmyday12/fitzRoy/issues/54'>#54</a></a>,</li>
+<code><a href="../reference/get_fixture.html">get_fixture()</a></code> now handles inconsistent assignment of Wednesday games and a related issue for some Round 1 matches where games were being assigned to the wrong round (<a href="https://github.com/jimmyday12/fitzRoy/issues/54"><a href='https://github.com/jimmyday12/fitzRoy/issues/54'>#54</a></a>
+</li>
 <li>
-<code><a href="../reference/get_fixture.html">get_fixture()</a></code> now handles the cancelled match in round 14, 2015 (<a href="https:://github.com/jimmyday12/fitzRoy/issues/56"><a href='https://github.com/jimmyday12/fitzRoy/issues/56'>#56</a></a>, <a href="https://github.com/cfranklin11">@cfranklin</a>)</li>
+<code><a href="../reference/get_fixture.html">get_fixture()</a></code> now handles the cancelled match in round 14, 2015 (<a href="https://github.com/jimmyday12/fitzRoy/issues/56"><a href='https://github.com/jimmyday12/fitzRoy/issues/56'>#56</a></a>, <a href="https://github.com/cfranklin11">@cfranklin</a>)</li>
 <li>
-<code><a href="../reference/get_aflw_round_data.html">get_aflw_round_data()</a></code> now correctly loads data and passes all tests (<a href="https:://github.com/jimmyday12/fitzRoy/issues/52"><a href='https://github.com/jimmyday12/fitzRoy/issues/52'>#52</a></a>, <a href="https:://github.com/jimmyday12/fitzRoy/issues/53"><a href='https://github.com/jimmyday12/fitzRoy/issues/53'>#53</a></a>)</li>
+<code><a href="../reference/get_aflw_round_data.html">get_aflw_round_data()</a></code> now correctly loads data and passes all tests (<a href="https://github.com/jimmyday12/fitzRoy/issues/52"><a href='https://github.com/jimmyday12/fitzRoy/issues/52'>#52</a></a> <a href="https://github.com/jimmyday12/fitzRoy/issues/53"><a href='https://github.com/jimmyday12/fitzRoy/issues/53'>#53</a></a>)</li>
 <li>
 <code>get_afltables_stats</code> no longer includes erroneous warning messages <a href="https://github.com/jimmyday12/fitzRoy/issues/44"><a href='https://github.com/jimmyday12/fitzRoy/issues/44'>#44</a></a>
 </li>
@@ -148,13 +156,19 @@
 </li>
 <li>added <a href="https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html">new vignette</a> for doing an ELO model using <code>fitzRoy</code> <a href="https://github.com/jimmyday12/fitzRoy/issues/43"><a href='https://github.com/jimmyday12/fitzRoy/issues/43'>#43</a></a>
 </li>
+<li>
+<code>get_afltables_stats</code> now returns one name per player. For players where their name changes on afltables.com, we always return the first instance of their spelling <a href="https://github.com/jimmyday12/fitzRoy/issues/47"><a href='https://github.com/jimmyday12/fitzRoy/issues/47'>#47</a></a>
+</li>
+<li>
+<code>get_afltables_stats</code> now returns consistent finals names for <code>round</code>. Full names are abbreviated to be consistent with past data <a href="https://github.com/jimmyday12/fitzRoy/issues/45"><a href='https://github.com/jimmyday12/fitzRoy/issues/45'>#45</a></a>
+</li>
 </ul>
 </div>
     <div id="fitzroy-018" class="section level1">
 <h1 class="page-header">
 <a href="#fitzroy-018" class="anchor"></a>fitzRoy 0.1.8</h1>
 <ul>
-<li>new feature - Women’s Stats. New set of functions for Women’s data. Read the vignette <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">here</a> - many thanks to <a href="https://github.com/OscarLane">OscarLane</a>
+<li>new feature - Woman’s Stats. New set of functions for Woman’s data. Read the vignette <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">here</a> - many thanks to <a href="https://github.com/OscarLane">OscarLane</a>
 </li>
 </ul>
 </div>
@@ -162,7 +176,7 @@
 <h1 class="page-header">
 <a href="#fitzroy-017" class="anchor"></a>fitzRoy 0.1.7</h1>
 <ul>
-<li>fixed bug for dependancy of <code>stringr</code> package. Now updated to ensure version 1.3.1 or greater <a href="https://github.com/jimmyday12/fitzRoy/issues/33"><a href='https://github.com/jimmyday12/fitzRoy/issues/33'>#33</a></a>
+<li>fixed bug for dependency of <code>stringr</code> package. Now updated to ensure version 1.3.1 or greater <a href="https://github.com/jimmyday12/fitzRoy/issues/33"><a href='https://github.com/jimmyday12/fitzRoy/issues/33'>#33</a></a>
 </li>
 <li>fixed bug with round number for finals <a href="https://github.com/jimmyday12/fitzRoy/issues/40"><a href='https://github.com/jimmyday12/fitzRoy/issues/40'>#40</a></a>
 </li>
@@ -205,7 +219,7 @@
 </li>
 <li>new helper function <code>get_aflplayer_urls</code> returns the URLs of games falling within a date range. Useful to pass to <code>get_aflplayer_data</code>
 </li>
-<li>BREAKING CHANGE: removed <code>afldata</code> from the included data to reduce package size (in preperation for CRAN submission). Please use <code>update_aflplayer_data</code> or the helper functions</li>
+<li>BREAKING CHANGE: removed <code>afldata</code> from the included data to reduce package size (in preparation for CRAN submission). Please use <code>update_aflplayer_data</code> or the helper functions</li>
 <li>fixed bug where <code>get_fixture</code> returned wrong teams <a href="https://github.com/jimmyday12/fitzRoy/issues/23"><a href='https://github.com/jimmyday12/fitzRoy/issues/23'>#23</a></a>
 </li>
 </ul>
@@ -237,7 +251,7 @@
 <h1 class="page-header">
 <a href="#fitzroy-011" class="anchor"></a>fitzRoy 0.1.1</h1>
 <ul>
-<li>Added raw scoring progession data</li>
+<li>Added raw scoring profession data</li>
 <li>Added <code>get_score_procession_raw</code> function</li>
 </ul>
 </div>
@@ -268,6 +282,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
+        <li><a href="#fitzroy-0110">0.1.10</a></li>
         <li><a href="#fitzroy-019">0.1.9</a></li>
         <li><a href="#fitzroy-018">0.1.8</a></li>
         <li><a href="#fitzroy-017">0.1.7</a></li>

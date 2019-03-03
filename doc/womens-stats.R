@@ -4,27 +4,23 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
+## ----gh-installation, eval = FALSE, echo = TRUE--------------------------
+#  # install.packages("devtools")
+#  # devtools::install_github("jimmyday12/fitzRoy")
+
 ## ----libraries, message=FALSE, warning=FALSE-----------------------------
 library(fitzRoy)
 library(dplyr)
 library(magrittr)
-cookie <- get_aflw_cookie()
-cookie
 
-## ----get_rounds, message=FALSE, warning=FALSE----------------------------
-rounds <- get_aflw_rounds(cookie)
-glimpse(rounds)
+## ----fetch_match_stats, eval=FALSE, message=FALSE, warning=TRUE, include=FALSE----
+#  match_data <- get_aflw_match_data()
 
-## ----match_stats, message=FALSE, warning=FALSE---------------------------
-match_data <- get_aflw_match_data()
-glimpse(match_data)
+## ----show_match_stats, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE----
+#  glimpse(match_data)
 
-## ----last_10, message=FALSE, warning=FALSE-------------------------------
-last10 <- tail(match_data, 10) %>% 
-  pull(Match.Id)
-last10
-
-## ----detailed_data, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE----
-#  detailed_data <- get_aflw_detailed_data(matchids = last10)
-#  detailed_data %>% glimpse
+## ----first_10, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE----
+#  first10 <- head(match_data, 10) %>%
+#    pull(Match.Id)
+#  first10
 

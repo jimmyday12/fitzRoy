@@ -3,7 +3,7 @@ pkgdown: 1.3.0
 pkgdown_sha: ~
 articles:
   elo-ratings-example: elo-ratings-example.html
-  readme-vignette: readme-vignette.html
+  mens-stats: mens-stats.html
   womens-stats: womens-stats.html
 urls:
   reference: https://jimmyday12.github.io/fitzRoy//reference

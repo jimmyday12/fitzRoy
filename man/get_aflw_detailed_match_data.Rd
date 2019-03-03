@@ -24,8 +24,10 @@ competition IDs, which are given in the tables produced by
 \code{get_aflw_round_data()}
 }
 \examples{
+\dontrun{
 get_aflw_detailed_match_data(
   "CD_M20172640101",
   "CD_R201726401", "CD_S2017264", get_aflw_cookie()
 )
+}
 }

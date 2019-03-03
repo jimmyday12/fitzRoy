@@ -17,5 +17,7 @@ Dataframe with detailed match data. Each row is a match.
 Get detailed AFLW data
 }
 \examples{
+\dontrun{
 get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
+}
 }

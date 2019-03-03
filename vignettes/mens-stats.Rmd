@@ -1,21 +1,24 @@
 ---
-title: "Getting Started"
-author: "James Day"
+title: "Getting started with AFL Men's data"
+author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Getting Started}
+  %\VignetteIndexEntry{AFLM - getting started}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-<!-- This vignette was automatically created from README.Rmd -->
 
-```{r, echo = FALSE}
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 options(tibble.print_min = 5, tibble.print_max = 5)
 requireNamespace("ggplot2", quietly = TRUE)
 ```
-
-# fitzRoy <img src="../man/figures/fitz_hex.png" align="right" width="120" height="139"/>
+<!-- This vignette was automatically created from README.Rmd -->
 
 ## Overview
 The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
@@ -27,10 +30,6 @@ You can install fitzRoy from github with:
 ```{r gh-installation, eval = FALSE, echo = TRUE}
 # install.packages("devtools")
 devtools::install_github("jimmyday12/fitzRoy")
-
-library(fitzRoy)
-library(dplyr)
-library(ggplot2)
 ```
 
 ## Usage
@@ -47,7 +46,9 @@ You can access the basic afl tables match results data. This includes all matche
 You can access the data directly from the package using `match_results`. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use `get_match_results` directly, as this will give you up to date results.
 
 ```{r results}
-
+library(fitzRoy)
+library(dplyr)
+library(ggplot2)
 results <- get_match_results()
 
 tail(results)
@@ -137,6 +138,4 @@ tips <- get_squiggle_data("tips", round = 1, year = 2018)
 head(tips)
 ```
 ---
-
-
 

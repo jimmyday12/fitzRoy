@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -62,7 +62,7 @@
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/readme-vignette.html">Easily Scrape and Process AFL Data</a>
+      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
     </li>
     <li>
       <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
@@ -95,7 +95,7 @@
       <h1>ELO Ratings Example</h1>
                         <h4 class="author">James Day</h4>
             
-            <h4 class="date">2019-01-13</h4>
+            <h4 class="date">2019-03-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/elo-ratings-example.Rmd"><code>vignettes/elo-ratings-example.Rmd</code></a></small>
       <div class="hidden name"><code>elo-ratings-example.Rmd</code></div>
@@ -130,7 +130,7 @@
 <div id="get-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#get-data" class="anchor"></a>Get data</h2>
-<p>Our first job is to now get the relevent data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using <code>fitzRoy</code>.</p>
+<p>Our first job is to now get the relevant data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using <code>fitzRoy</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Get data</span></a>
 <a class="sourceLine" id="cb2-2" title="2">results &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitzRoy/topics/get_match_results">get_match_results</a></span>()</a>
 <a class="sourceLine" id="cb2-3" title="3">fixture &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitzRoy/topics/get_fixture">get_fixture</a></span>(<span class="dv">2019</span>)</a>
@@ -151,7 +151,7 @@
 <a class="sourceLine" id="cb2-18" title="18"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fixture)</a>
 <a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt;   Date                Season Season.Game Round Home.Team  Away.Team  Venue </span></a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;   &lt;dttm&gt;               &lt;int&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;   &lt;dttm&gt;               &lt;int&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; </span></a>
 <a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; 1 2019-03-21 19:20:00   2019           1     1 Carlton    Richmond   MCG   </span></a>
 <a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; 2 2019-03-22 19:50:00   2019           1     1 Collingwo… Geelong    MCG   </span></a>
 <a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; 3 2019-03-23 13:45:00   2019           1     1 Melbourne  Port Adel… MCG   </span></a>
@@ -162,7 +162,7 @@
 <div id="prepare-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#prepare-data" class="anchor"></a>Prepare data</h2>
-<p>Before we create our model, some data preparation. In the ELO package we are using, we need a way to identiy each round as a seperate match, so we’ll combine <code>season</code> and <code>Round.Number</code> into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we’ll create a logical field that indicates if the game is the first game for a team that season.</p>
+<p>Before we create our model, some data preparation. In the ELO package we are using, we need a way to identify each round as a separate match, so we’ll combine <code>season</code> and <code>Round.Number</code> into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we’ll create a logical field that indicates if the game is the first game for a team that season.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">results &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">seas_rnd =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(Season, <span class="st">"."</span>, Round.Number),</a>
 <a class="sourceLine" id="cb3-3" title="3">         <span class="dt">First.Game =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(Round.Number <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="ot">TRUE</span>, <span class="ot">FALSE</span>))</a>
@@ -190,7 +190,7 @@
 <div id="set-elo-parameters" class="section level2">
 <h2 class="hasAnchor">
 <a href="#set-elo-parameters" class="anchor"></a>Set ELO parameters</h2>
-<p>There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the <a href="https://plussixoneblog.com/post/my-elo-rating-system-explained/">PlusSixOne blog</a>, which uses a similar method. For further reading, I strongly reccomend checking out <a href="http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html">Matter of Stats</a> or <a href="https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/">The Arc</a> for great explainers on the types of parameters that could be included.</p>
+<p>There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the <a href="https://plussixoneblog.com/post/my-elo-rating-system-explained/">PlusSixOne blog</a>, which uses a similar method. For further reading, I strongly recommend checking out <a href="http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html">Matter of Stats</a> or <a href="https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/">The Arc</a> for great explainers on the types of parameters that could be included.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Set parameters</span></a>
 <a class="sourceLine" id="cb5-2" title="2">HGA &lt;-<span class="st"> </span><span class="dv">30</span> <span class="co"># home ground advantage</span></a>
 <a class="sourceLine" id="cb5-3" title="3">carryOver &lt;-<span class="st"> </span><span class="fl">0.5</span> <span class="co"># season carry over</span></a>
@@ -209,7 +209,7 @@
 <div id="calculate-elo-results" class="section level2">
 <h2 class="hasAnchor">
 <a href="#calculate-elo-results" class="anchor"></a>Calculate ELO results</h2>
-<p>Now we are ready to create our ELO ratings! We can use the <code>elo.run</code> function from the <code>elo</code> package for this. I won’t explain everything about what is going on here - you can read all about it at the package <a href="https://cran.r-project.org/web/packages/elo/vignettes/elo.html">vignette</a> - but in general, we provide a function that indicates what is included in our model, as well as some model parameters.</p>
+<p>Now we are ready to create our ELO ratings! We can use the <code>elo.run</code> function from the <code>elo</code> package for this. I won’t explain everything about what is going on here - you can read all about it at the package <a href="https://CRAN.R-project.org/package=elo">vignette</a> - but in general, we provide a function that indicates what is included in our model, as well as some model parameters.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Run ELO</span></a>
 <a class="sourceLine" id="cb7-2" title="2">elo.data &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/elo/topics/elo.run">elo.run</a></span>(</a>
 <a class="sourceLine" id="cb7-3" title="3">  <span class="kw">map_margin_to_outcome</span>(Home.Points <span class="op">-</span><span class="st"> </span>Away.Points) <span class="op">~</span></a>
@@ -279,19 +279,19 @@
 <a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;        1544.309        1511.378        1506.200        1547.993 </span></a>
 <a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt;        St Kilda          Sydney      University      West Coast </span></a>
 <a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;        1452.330        1509.285        1412.936        1542.218</span></a></code></pre></div>
-<p>We could keep tweaking our parameters until we are happy. Ideally we’d have a training and test set and be using some kind of cost function to optimise these values on like a log likihood, mean absolute margin or something similar. I’ll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.</p>
+<p>We could keep tweaking our parameters until we are happy. Ideally we’d have a training and test set and be using some kind of cost function to optimise these values on like a log likelihood, mean absolute margin or something similar. I’ll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.</p>
 </div>
 <div id="do-predictions" class="section level2">
 <h2 class="hasAnchor">
 <a href="#do-predictions" class="anchor"></a>Do predictions</h2>
-<p>Now we’ve got our ELO model and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the <code>prediction</code> function with our ELO model as an input. The <code>elo</code> package takes care of the resut.</p>
+<p>Now we’ve got our ELO model and are happy with our parameters, we can do some predictions! For this, we just need to use our fixture and the <code>prediction</code> function with our ELO model as an input. The <code>elo</code> package takes care of the result.</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">fixture &lt;-<span class="st"> </span>fixture <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">Prob =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/predict">predict</a></span>(elo.data, <span class="dt">newdata =</span> fixture))</a>
 <a class="sourceLine" id="cb11-3" title="3"></a>
 <a class="sourceLine" id="cb11-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fixture)</a>
 <a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; # A tibble: 6 x 8</span></a>
 <a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt;   Date       Season Season.Game Round.Number Home.Team Away.Team Venue</span></a>
-<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt;   &lt;date&gt;      &lt;int&gt;       &lt;int&gt;        &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;</span></a>
+<a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt;   &lt;date&gt;      &lt;int&gt;       &lt;int&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;</span></a>
 <a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt; 1 2019-03-21   2019           1            1 Carlton   Richmond  MCG  </span></a>
 <a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt; 2 2019-03-22   2019           1            1 Collingw… Geelong   MCG  </span></a>
 <a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; 3 2019-03-23   2019           1            1 Melbourne Port Ade… MCG  </span></a>

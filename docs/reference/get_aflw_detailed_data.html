@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.10</span>
       </span>
     </div>
 
@@ -99,7 +99,7 @@
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/readme-vignette.html">Easily Scrape and Process AFL Data</a>
+      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
     </li>
     <li>
       <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
@@ -159,86 +159,9 @@
     
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>get_aflw_detailed_data</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"CD_M20172640101"</span>, <span class='st'>"CD_M20172640102"</span>))</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 2 x 191</span><span>
-#&gt;   Match.Id Round.Id Competition.Id away.stats.aver… away.stats.aver…
-#&gt;   </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>    </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>                     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>            </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'>1</span><span> CD_M201… CD_R201… CD_S2017264                 4.1              3.7
-#&gt; </span><span style='color: #555555;'>2</span><span> CD_M201… CD_R201… CD_S2017264                 2.1              1.9
-#&gt; </span><span style='color: #555555;'># … with 186 more variables: away.stats.averages.clangers </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.clearances.centreClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.clearances.stoppageClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.clearances.totalClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.contestedMarks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.contestedPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.disposalEfficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.disposals </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.dreamTeamPoints </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.freesAgainst </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.freesFor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.goalAccuracy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.goalAssists </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.goalEfficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.goals </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.handballs </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.hitouts </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.inside50s </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.intercepts </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.interchangeCounts.interchangeCap </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.interchangeCounts.interchangeCountQ1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.interchangeCounts.interchangeCountQ2 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.interchangeCounts.interchangeCountQ3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.interchangeCounts.interchangeCountQ4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.interchangeCounts.totalInterchangeCount </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.kicks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.lastUpdated </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.marks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.marksInside50 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.metresGained </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.onePercenters </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.ranking </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.ratingPoints </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.rebound50s </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.scoreInvolvements </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.shotEfficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.shotsAtGoal </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.superGoals </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.averages.tackles </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.tacklesInside50 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.totalPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.turnovers </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.averages.uncontestedPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.behinds </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.bounces </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.clangers </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.clearances.centreClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.clearances.stoppageClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.clearances.totalClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.contestedMarks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.contestedPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.disposalEfficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.disposals </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.dreamTeamPoints </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.freesAgainst </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.freesFor </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.goalAccuracy </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.goalAssists </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.goalEfficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.goals </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.handballs </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.hitouts </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.inside50s </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.intercepts </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.interchangeCounts.interchangeCap </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.interchangeCounts.interchangeCountQ1 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.interchangeCounts.interchangeCountQ2 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.interchangeCounts.interchangeCountQ3 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.interchangeCounts.interchangeCountQ4 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.interchangeCounts.totalInterchangeCount </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.kicks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.lastUpdated </span><span style='color: #555555;font-style: italic;'>&lt;dttm&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.marks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.marksInside50 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.metresGained </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.onePercenters </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.ranking </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.ratingPoints </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.rebound50s </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.scoreInvolvements </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.shotEfficiency </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.shotsAtGoal </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.superGoals </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.tackles </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.stats.totals.tacklesInside50 </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.totalPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.turnovers </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.stats.totals.uncontestedPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, away.team.teamAbbr </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.team.teamId </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, away.team.teamName </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>,
-#&gt; #   away.team.teamNickname </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span style='color: #555555;'>, home.stats.averages.behinds </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   home.stats.averages.bounces </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, home.stats.averages.clangers </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   home.stats.averages.clearances.centreClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   home.stats.averages.clearances.stoppageClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   home.stats.averages.clearances.totalClearances </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   home.stats.averages.contestedMarks </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>,
-#&gt; #   home.stats.averages.contestedPossessions </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span style='color: #555555;'>, …</span><span></div></span></pre>
+    <pre class="examples"><span class='co'># NOT RUN {</span>
+<span class='fu'>get_aflw_detailed_data</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"CD_M20172640101"</span>, <span class='st'>"CD_M20172640102"</span>))
+<span class='co'># }</span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

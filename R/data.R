@@ -47,7 +47,6 @@
 #'   \item{Team}{Team playing for}
 #'   \item{UP}{Uncontensted possessions}
 #'   \item{Venue}{Venue match played at}
-#'   ...
 #' }
 #' @source \url{http://www.footywire.com}
 "player_stats"
