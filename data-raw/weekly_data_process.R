@@ -11,6 +11,7 @@ source(here::here("data-raw", "player_stats", "scrape_footywire_basic.R"))
 source(here::here("data-raw", "afl_tables_match_results", "initial_match_results.R"))
 
 # IDS -----------------------------------------------------------
+source(here::here("data-raw", "Match_ids", "find_ids.R"))
 
 
 # weather -----------------------------------------------------------------
