@@ -48,7 +48,7 @@ data during the season.
 Various data is included from both [AFL Tables](afltables.com) and
 [Footy Wire](footywire.com). At the most basic level, you can access
 match results and the upcoming fixture as below. Read the full [Mens
-Vignette](https://jimmyday12.github.io/fitzRoy/articles/readme-vignette.html)
+Vignette](https://jimmyday12.github.io/fitzRoy/articles/mens-stats.html)
 for further instructions.
 
 ``` r
