@@ -1,5 +1,9 @@
+# fitzRoy 0.1.12
+* Fixed an error with player ID's for 2019 season where new data was breaking an internal function ([#67](https://github.com/jimmyday12/fitzRoy/issues/62))
+
 # fitzRoy 0.1.11
 * Updated `get_aflw_cookie()` to align with change in site API ([#62](https://github.com/jimmyday12/fitzRoy/issues/62))
+
 
 # fitzRoy 0.1.10
 * footywire scrapers no longer fail due to footywire.com updating their site ([#61](https://github.com/jimmyday12/fitzRoy/issues/54))

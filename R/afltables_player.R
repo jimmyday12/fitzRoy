@@ -188,6 +188,9 @@ get_afltables_player_ids <- function(seasons) {
         col_types = readr::cols(),
         guess_max = 10000
       ) %>%
+      purrr::map(~ mutate(., Round = as.character(Round)))
+    
+    post_2017 <- post_2017 %>%
       purrr::map2_dfr(
         .y = seasons[seasons > 2017],
         ~ mutate(., Season = .y)
