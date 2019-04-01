@@ -135,7 +135,7 @@ scrape_afltables_match <- function(match_urls) {
     purrr::reduce(dplyr::bind_rows)
 
   games_df <- games_df %>%
-    dplyr::mutate(Date = gsub("\\([^]]*)", "", .data$Date))
+    dplyr::mutate(Date = gsub("\\([^]]*", "", .data$Date))
 
   # Remove columns with NA and abbreviations
   games_df <- games_df[, !(names(games_df) %in% "NA")]
