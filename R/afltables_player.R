@@ -45,7 +45,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
   message(paste0("Returning data from ", start_date, " to ", end_date))
 
   # nolint start
-  dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/develop/data-raw/afl_tables_playerstats/afldata.rda")
+  dat_url <- url("https://github.com/jimmyday12/fitzRoy/raw/master/data-raw/afl_tables_playerstats/afldata.rda")
   # nolint end
 
   load_r_data <- function(fname) {
@@ -58,8 +58,10 @@ get_afltables_stats <- function(start_date = "1897-01-01",
 
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
+    if(length(urls) != 0){
     dat_new <- scrape_afltables_match(urls)
     dat <- dplyr::bind_rows(dat, dat_new)
+    }
   }
   message("Finished getting afltables data")
   # Fix for players who's spelling changes on afltables.com
