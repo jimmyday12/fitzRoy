@@ -172,7 +172,7 @@ maxdate <- max(afldata$Date)
 # Fix scrape not returning ID's
 
 # get new results
-urls <- get_afltables_urls(maxdate + 1, "01/08/2018")
+urls <- get_afltables_urls(maxdate + 1, Sys.Date())
 df <- scrape_afltables_match(urls)
 
 df <- df %>%
