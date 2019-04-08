@@ -168,6 +168,14 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
     rvest::html_nodes(".data") %>%
     rvest::html_text()
 
+  if (rlang::is_empty(games_text)) {
+    warning(glue::glue(
+"The data for {season} season seems to be empty. 
+Check the following url on footywire
+{url_fixture}"))
+    return(games_df <- tiblle())
+  }
+  
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
     as_tibble() %>%
