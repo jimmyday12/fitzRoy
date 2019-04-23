@@ -1,6 +1,6 @@
 # Weekly Script to update data
+devtools::load_all(".")
 library(here)
-library(fitzRoy)
 library(tidyverse)
 #setwd("~/Documents/R_scripts/fitzRoy")
 
@@ -10,7 +10,7 @@ source(here::here("data-raw", "Match_ids", "find_ids.R"))
 
 # player_stats ------------------------------------------------------------
 source(here::here("data-raw", "player_stats", "scrape_footywire_basic.R"))
-source(here::here("data-raw", "afl_tables_playerstats", "afltables_intial_scrape.R"))
+#source(here::here("data-raw", "afl_tables_playerstats", "afltables_intial_scrape.R"))
 
 # Match results -----------------------------------------------------------
 source(here::here("data-raw", "afl_tables_match_results", "initial_match_results.R"))
