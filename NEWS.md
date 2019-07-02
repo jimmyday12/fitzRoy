@@ -1,3 +1,6 @@
+# fitzRoy 0.1.13
+* Updated Squiggle API to accept new parameters `ladder`, `standings` and `complete`. ([#73](https://github.com/jimmyday12/fitzRoy/issues/73))
+
 # fitzRoy 0.1.12
 * Fixed an error with player ID's for 2019 season where new data was breaking an internal function ([#67](https://github.com/jimmyday12/fitzRoy/issues/67))
 * Fixed an error where Geelong v Melbourne game wasn't getting parsed properly ([#68](https://github.com/jimmyday12/fitzRoy/issues/68))

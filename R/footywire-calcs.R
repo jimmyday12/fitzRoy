@@ -173,7 +173,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 "The data for {season} season seems to be empty. 
 Check the following url on footywire
 {url_fixture}"))
-    return(games_df <- tiblle())
+    return(games_df <- dplyr::tibble() )
   }
   
   # Put this into dataframe format

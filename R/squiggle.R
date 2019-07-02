@@ -13,7 +13,7 @@
 #'
 #' For full instructions, see [api.squiggle.com.au](api.squiggle.com.au)
 #'
-#' @param query A text string. The main query to use with the API.  to one of `sources`, `games` or `tips`.
+#' @param query A text string. The main query to use with the API. Must be one of `sources`, `games`, `tips`, `ladder` or `standings`
 #'
 #' @param ... (optional) An optional argument provided to the [Squiggle API](api.squiggle.com.au). See details for more info.
 #'
@@ -30,14 +30,14 @@
 #' 
 #' # Get tips from Squiggle
 #' squiggle <- get_squiggle_data(query = "tips", source = 1)
-get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
+get_squiggle_data <- function(query = c("sources", "games", "tips", "ladder", "standings"), ...) {
 
   # Ensure query is valid
   query <- match.arg(query)
 
   # Get optional expressions and check that they are valid
   exp <- rlang::enexprs(...)
-  valid <- c("year", "round", "game", "source")
+  valid <- c("year", "round", "game", "source", "complete")
 
   if (!all(names(exp) %in% valid)) {
     rlang::abort(paste0(
@@ -62,17 +62,39 @@ get_squiggle_data <- function(query = c("sources", "games", "tips"), ...) {
   }
 
   message(paste("Getting data from", url))
+  
+  # set user agent
+  ua <- httr::user_agent("https://github.com/jimmyday12/fitzRoy/")
 
-  dat <- tryCatch(
-    jsonlite::fromJSON(url),
-    error = function(e) rlang::abort(paste(
-        "The URL did not work",
-        "Did your query make sense?\n",
-        "Try the following URL in your",
-        "browser:",
-        url
-      ))
-  )
+  resp <- httr::GET(url, ua)
+  httr::warn_for_status(resp)
+  
+  if (httr::status_code(resp) != 200) {
+    rlang::abort(
+      glue::glue(
+"The URL responded with the following status:
+{httr::http_status(resp)$message}
+
+Does your query make sense? Try the following URL in your browser
+{resp$url}"))
+  }
+  
+  if (httr::http_type(resp) != "application/json") {
+    stop("API did not return json", call. = FALSE)
+  }
+  
+  dat <- jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = TRUE)
+
+  #dat <- tryCatch(
+  #  jsonlite::fromJSON(url),
+  #  error = function(e) rlang::abort(paste(
+  #      "The URL did not work",
+  #      "Did your query make sense?\n",
+  #      "Try the following URL in your",
+  #      "browser:",
+  #      url
+  #    ))
+  #)
 
   # Convert the
   df <- as.data.frame(dat[[1]])
