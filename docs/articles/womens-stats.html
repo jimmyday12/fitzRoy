@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13.9000</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
       <h1>Womens’ AFL Stats</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2019-04-03</h4>
+            <h4 class="date">2019-07-03</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -104,21 +104,256 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># devtools::install_github("jimmyday12/fitzRoy")</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="co"># devtools::install_github("jimmyday12/fitzRoy")</span></a></code></pre></div>
 <div id="match-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#match-data" class="anchor"></a>Match data</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fitzRoy)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magrittr)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fitzRoy)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
-<p>Note that we are getting a few warnings: this is to tell us that the fixture has been downloaded for 2019, but no match data is available yet. Note that you will not be able to retrieve detailed stats for these games, so make sure you don’t try to request detailed stats for these match IDs.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</a></code></pre></div>
+<p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="co">#&gt; Observations: 96</span></a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#&gt; Variables: 30</span></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co">#&gt; $ Match.Id             &lt;chr&gt; "CD_M20172640101", "CD_M20172640102", "CD_M…</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co">#&gt; $ Round.Id             &lt;chr&gt; "CD_R201726401", "CD_R201726401", "CD_R2017…</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#&gt; $ Competition.Id       &lt;chr&gt; "CD_S2017264", "CD_S2017264", "CD_S2017264"…</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="co">#&gt; $ Venue                &lt;chr&gt; "Ikon Park", "Thebarton Oval", "VU Whitten …</span></a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="co">#&gt; $ Local.Start.Time     &lt;dttm&gt; 2017-02-03 19:45:00, 2017-02-04 16:35:00, …</span></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co">#&gt; $ Round.Number         &lt;int&gt; 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4…</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#&gt; $ Round.Abbreviation   &lt;chr&gt; "Rd 1", "Rd 1", "Rd 1", "Rd 1", "Rd 2", "Rd…</span></a>
+<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="co">#&gt; $ Weather.Type         &lt;chr&gt; "CLEAR_NIGHT", "RAIN", "RAIN", "RAIN", "CLE…</span></a>
+<a class="sourceLine" id="cb4-12" data-line-number="12"><span class="co">#&gt; $ Weather.Description  &lt;chr&gt; "Clear", "Rain at times", "Partly cloudy", …</span></a>
+<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#&gt; $ Temperature          &lt;dbl&gt; 18, 18, 18, 18, 18, 18, 18, 18, 18, 18, 18,…</span></a>
+<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="co">#&gt; $ Home.Team            &lt;chr&gt; "Carlton", "Adelaide Crows", "Western Bulld…</span></a>
+<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="co">#&gt; $ Home.Goals           &lt;int&gt; 7, 7, 6, 1, 2, 7, 4, 3, 7, 4, 4, 2, 6, 6, 3…</span></a>
+<a class="sourceLine" id="cb4-16" data-line-number="16"><span class="co">#&gt; $ Home.Behinds         &lt;int&gt; 4, 6, 8, 4, 11, 5, 1, 5, 1, 3, 5, 5, 6, 7, …</span></a>
+<a class="sourceLine" id="cb4-17" data-line-number="17"><span class="co">#&gt; $ Home.Points          &lt;int&gt; 46, 48, 44, 10, 23, 47, 25, 23, 43, 27, 29,…</span></a>
+<a class="sourceLine" id="cb4-18" data-line-number="18"><span class="co">#&gt; $ Home.Left.Behinds    &lt;int&gt; 1, 2, 2, 1, 2, 1, 0, 0, 0, 0, 3, 2, 2, 5, 3…</span></a>
+<a class="sourceLine" id="cb4-19" data-line-number="19"><span class="co">#&gt; $ Home.Right.Behinds   &lt;int&gt; 2, 2, 4, 2, 5, 2, 1, 1, 0, 2, 1, 0, 2, 1, 3…</span></a>
+<a class="sourceLine" id="cb4-20" data-line-number="20"><span class="co">#&gt; $ Home.Left.Posters    &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0…</span></a>
+<a class="sourceLine" id="cb4-21" data-line-number="21"><span class="co">#&gt; $ Home.Right.Posters   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0…</span></a>
+<a class="sourceLine" id="cb4-22" data-line-number="22"><span class="co">#&gt; $ Home.Rushed.Behinds  &lt;int&gt; 1, 2, 2, 1, 3, 2, 0, 2, 1, 1, 0, 3, 1, 1, 1…</span></a>
+<a class="sourceLine" id="cb4-23" data-line-number="23"><span class="co">#&gt; $ Home.Touched.Behinds &lt;int&gt; 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0…</span></a>
+<a class="sourceLine" id="cb4-24" data-line-number="24"><span class="co">#&gt; $ Away.Team            &lt;chr&gt; "Collingwood", "GWS Giants", "Fremantle", "…</span></a>
+<a class="sourceLine" id="cb4-25" data-line-number="25"><span class="co">#&gt; $ Away.Goals           &lt;int&gt; 1, 1, 1, 4, 7, 5, 7, 5, 6, 3, 6, 2, 5, 1, 5…</span></a>
+<a class="sourceLine" id="cb4-26" data-line-number="26"><span class="co">#&gt; $ Away.Behinds         &lt;int&gt; 5, 6, 6, 1, 6, 4, 2, 6, 7, 5, 7, 2, 6, 3, 2…</span></a>
+<a class="sourceLine" id="cb4-27" data-line-number="27"><span class="co">#&gt; $ Away.Points          &lt;int&gt; 11, 12, 12, 25, 48, 34, 44, 36, 43, 23, 43,…</span></a>
+<a class="sourceLine" id="cb4-28" data-line-number="28"><span class="co">#&gt; $ Away.Left.Behinds    &lt;int&gt; 0, 1, 2, 1, 2, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0…</span></a>
+<a class="sourceLine" id="cb4-29" data-line-number="29"><span class="co">#&gt; $ Away.Right.Behinds   &lt;int&gt; 3, 4, 3, 0, 2, 3, 1, 3, 3, 3, 5, 1, 1, 1, 2…</span></a>
+<a class="sourceLine" id="cb4-30" data-line-number="30"><span class="co">#&gt; $ Away.Left.Posters    &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1, 2, 1, 0…</span></a>
+<a class="sourceLine" id="cb4-31" data-line-number="31"><span class="co">#&gt; $ Away.Right.Posters   &lt;int&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0…</span></a>
+<a class="sourceLine" id="cb4-32" data-line-number="32"><span class="co">#&gt; $ Away.Rushed.Behinds  &lt;int&gt; 1, 1, 1, 0, 2, 1, 0, 1, 2, 1, 0, 0, 2, 0, 0…</span></a>
+<a class="sourceLine" id="cb4-33" data-line-number="33"><span class="co">#&gt; $ Away.Touched.Behinds &lt;int&gt; 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0…</span></a></code></pre></div>
 </div>
 <div id="detailed-stats" class="section level3">
 <h3 class="hasAnchor">
 <a href="#detailed-stats" class="anchor"></a>Detailed stats</h3>
 <p>The <code><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> can be used to return more detailed data than the match data shown above. It takes a vector of match IDs as an argument. For example, let’s say we want detailed stats for the first 10 games in <code>match_data</code> above. Then we would do:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">first10 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(match_data, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">first10_ids &lt;-<span class="st"> </span>first10<span class="op">$</span>Match.Id</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">first10_ids</a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt;  [1] "CD_M20172640101" "CD_M20172640102" "CD_M20172640103"</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt;  [4] "CD_M20172640104" "CD_M20172640201" "CD_M20172640202"</span></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt;  [7] "CD_M20172640203" "CD_M20172640204" "CD_M20172640301"</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; [10] "CD_M20172640302"</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">detailed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span>(first10_ids)</a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(detailed)</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">#&gt; Observations: 10</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="co">#&gt; Variables: 191</span></a>
+<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="co">#&gt; $ Match.Id                                                    &lt;chr&gt; "CD_…</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="co">#&gt; $ Round.Id                                                    &lt;chr&gt; "CD_…</span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="co">#&gt; $ Competition.Id                                              &lt;chr&gt; "CD_…</span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="co">#&gt; $ away.stats.averages.behinds                                 &lt;dbl&gt; 4.1,…</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="co">#&gt; $ away.stats.averages.bounces                                 &lt;dbl&gt; 3.7,…</span></a>
+<a class="sourceLine" id="cb6-10" data-line-number="10"><span class="co">#&gt; $ away.stats.averages.clangers                                &lt;dbl&gt; 39.7…</span></a>
+<a class="sourceLine" id="cb6-11" data-line-number="11"><span class="co">#&gt; $ away.stats.averages.clearances.centreClearances             &lt;dbl&gt; 4.9,…</span></a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="co">#&gt; $ away.stats.averages.clearances.stoppageClearances           &lt;dbl&gt; 16.9…</span></a>
+<a class="sourceLine" id="cb6-13" data-line-number="13"><span class="co">#&gt; $ away.stats.averages.clearances.totalClearances              &lt;dbl&gt; 21.7…</span></a>
+<a class="sourceLine" id="cb6-14" data-line-number="14"><span class="co">#&gt; $ away.stats.averages.contestedMarks                          &lt;dbl&gt; 6.3,…</span></a>
+<a class="sourceLine" id="cb6-15" data-line-number="15"><span class="co">#&gt; $ away.stats.averages.contestedPossessions                    &lt;dbl&gt; 90.3…</span></a>
+<a class="sourceLine" id="cb6-16" data-line-number="16"><span class="co">#&gt; $ away.stats.averages.disposalEfficiency                      &lt;dbl&gt; 56.6…</span></a>
+<a class="sourceLine" id="cb6-17" data-line-number="17"><span class="co">#&gt; $ away.stats.averages.disposals                               &lt;dbl&gt; 167.…</span></a>
+<a class="sourceLine" id="cb6-18" data-line-number="18"><span class="co">#&gt; $ away.stats.averages.dreamTeamPoints                         &lt;dbl&gt; 843.…</span></a>
+<a class="sourceLine" id="cb6-19" data-line-number="19"><span class="co">#&gt; $ away.stats.averages.freesAgainst                            &lt;dbl&gt; 13.6…</span></a>
+<a class="sourceLine" id="cb6-20" data-line-number="20"><span class="co">#&gt; $ away.stats.averages.freesFor                                &lt;dbl&gt; 15.6…</span></a>
+<a class="sourceLine" id="cb6-21" data-line-number="21"><span class="co">#&gt; $ away.stats.averages.goalAccuracy                            &lt;dbl&gt; 45.7…</span></a>
+<a class="sourceLine" id="cb6-22" data-line-number="22"><span class="co">#&gt; $ away.stats.averages.goalAssists                             &lt;dbl&gt; 2.6,…</span></a>
+<a class="sourceLine" id="cb6-23" data-line-number="23"><span class="co">#&gt; $ away.stats.averages.goalEfficiency                          &lt;dbl&gt; 19.5…</span></a>
+<a class="sourceLine" id="cb6-24" data-line-number="24"><span class="co">#&gt; $ away.stats.averages.goals                                   &lt;dbl&gt; 4.6,…</span></a>
+<a class="sourceLine" id="cb6-25" data-line-number="25"><span class="co">#&gt; $ away.stats.averages.handballs                               &lt;dbl&gt; 47.9…</span></a>
+<a class="sourceLine" id="cb6-26" data-line-number="26"><span class="co">#&gt; $ away.stats.averages.hitouts                                 &lt;dbl&gt; 36.6…</span></a>
+<a class="sourceLine" id="cb6-27" data-line-number="27"><span class="co">#&gt; $ away.stats.averages.inside50s                               &lt;dbl&gt; 23.4…</span></a>
+<a class="sourceLine" id="cb6-28" data-line-number="28"><span class="co">#&gt; $ away.stats.averages.intercepts                              &lt;dbl&gt; 45.3…</span></a>
+<a class="sourceLine" id="cb6-29" data-line-number="29"><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCap        &lt;dbl&gt; 999,…</span></a>
+<a class="sourceLine" id="cb6-30" data-line-number="30"><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ1    &lt;dbl&gt; 16, …</span></a>
+<a class="sourceLine" id="cb6-31" data-line-number="31"><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ2    &lt;dbl&gt; 14, …</span></a>
+<a class="sourceLine" id="cb6-32" data-line-number="32"><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ3    &lt;dbl&gt; 0, 1…</span></a>
+<a class="sourceLine" id="cb6-33" data-line-number="33"><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ4    &lt;dbl&gt; 0, 1…</span></a>
+<a class="sourceLine" id="cb6-34" data-line-number="34"><span class="co">#&gt; $ away.stats.averages.interchangeCounts.totalInterchangeCount &lt;dbl&gt; 30, …</span></a>
+<a class="sourceLine" id="cb6-35" data-line-number="35"><span class="co">#&gt; $ away.stats.averages.kicks                                   &lt;dbl&gt; 119.…</span></a>
+<a class="sourceLine" id="cb6-36" data-line-number="36"><span class="co">#&gt; $ away.stats.averages.lastUpdated                             &lt;dttm&gt; 201…</span></a>
+<a class="sourceLine" id="cb6-37" data-line-number="37"><span class="co">#&gt; $ away.stats.averages.marks                                   &lt;dbl&gt; 39.7…</span></a>
+<a class="sourceLine" id="cb6-38" data-line-number="38"><span class="co">#&gt; $ away.stats.averages.marksInside50                           &lt;dbl&gt; 6.0,…</span></a>
+<a class="sourceLine" id="cb6-39" data-line-number="39"><span class="co">#&gt; $ away.stats.averages.metresGained                            &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-40" data-line-number="40"><span class="co">#&gt; $ away.stats.averages.onePercenters                           &lt;dbl&gt; 21.6…</span></a>
+<a class="sourceLine" id="cb6-41" data-line-number="41"><span class="co">#&gt; $ away.stats.averages.ranking                                 &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-42" data-line-number="42"><span class="co">#&gt; $ away.stats.averages.ratingPoints                            &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-43" data-line-number="43"><span class="co">#&gt; $ away.stats.averages.rebound50s                              &lt;dbl&gt; 18.7…</span></a>
+<a class="sourceLine" id="cb6-44" data-line-number="44"><span class="co">#&gt; $ away.stats.averages.scoreInvolvements                       &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-45" data-line-number="45"><span class="co">#&gt; $ away.stats.averages.shotEfficiency                          &lt;dbl&gt; 42.7…</span></a>
+<a class="sourceLine" id="cb6-46" data-line-number="46"><span class="co">#&gt; $ away.stats.averages.shotsAtGoal                             &lt;dbl&gt; 10.0…</span></a>
+<a class="sourceLine" id="cb6-47" data-line-number="47"><span class="co">#&gt; $ away.stats.averages.superGoals                              &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-48" data-line-number="48"><span class="co">#&gt; $ away.stats.averages.tackles                                 &lt;dbl&gt; 56.6…</span></a>
+<a class="sourceLine" id="cb6-49" data-line-number="49"><span class="co">#&gt; $ away.stats.averages.tacklesInside50                         &lt;dbl&gt; 7.7,…</span></a>
+<a class="sourceLine" id="cb6-50" data-line-number="50"><span class="co">#&gt; $ away.stats.averages.totalPossessions                        &lt;dbl&gt; 168.…</span></a>
+<a class="sourceLine" id="cb6-51" data-line-number="51"><span class="co">#&gt; $ away.stats.averages.turnovers                               &lt;dbl&gt; 47.7…</span></a>
+<a class="sourceLine" id="cb6-52" data-line-number="52"><span class="co">#&gt; $ away.stats.averages.uncontestedPossessions                  &lt;dbl&gt; 78.6…</span></a>
+<a class="sourceLine" id="cb6-53" data-line-number="53"><span class="co">#&gt; $ away.stats.totals.behinds                                   &lt;dbl&gt; 5, 6…</span></a>
+<a class="sourceLine" id="cb6-54" data-line-number="54"><span class="co">#&gt; $ away.stats.totals.bounces                                   &lt;dbl&gt; 3, 0…</span></a>
+<a class="sourceLine" id="cb6-55" data-line-number="55"><span class="co">#&gt; $ away.stats.totals.clangers                                  &lt;dbl&gt; 37, …</span></a>
+<a class="sourceLine" id="cb6-56" data-line-number="56"><span class="co">#&gt; $ away.stats.totals.clearances.centreClearances               &lt;dbl&gt; 4, 7…</span></a>
+<a class="sourceLine" id="cb6-57" data-line-number="57"><span class="co">#&gt; $ away.stats.totals.clearances.stoppageClearances             &lt;dbl&gt; 15, …</span></a>
+<a class="sourceLine" id="cb6-58" data-line-number="58"><span class="co">#&gt; $ away.stats.totals.clearances.totalClearances                &lt;dbl&gt; 19, …</span></a>
+<a class="sourceLine" id="cb6-59" data-line-number="59"><span class="co">#&gt; $ away.stats.totals.contestedMarks                            &lt;dbl&gt; 4, 2…</span></a>
+<a class="sourceLine" id="cb6-60" data-line-number="60"><span class="co">#&gt; $ away.stats.totals.contestedPossessions                      &lt;dbl&gt; 94, …</span></a>
+<a class="sourceLine" id="cb6-61" data-line-number="61"><span class="co">#&gt; $ away.stats.totals.disposalEfficiency                        &lt;dbl&gt; 52.8…</span></a>
+<a class="sourceLine" id="cb6-62" data-line-number="62"><span class="co">#&gt; $ away.stats.totals.disposals                                 &lt;dbl&gt; 163,…</span></a>
+<a class="sourceLine" id="cb6-63" data-line-number="63"><span class="co">#&gt; $ away.stats.totals.dreamTeamPoints                           &lt;dbl&gt; 926,…</span></a>
+<a class="sourceLine" id="cb6-64" data-line-number="64"><span class="co">#&gt; $ away.stats.totals.freesAgainst                              &lt;dbl&gt; 9, 2…</span></a>
+<a class="sourceLine" id="cb6-65" data-line-number="65"><span class="co">#&gt; $ away.stats.totals.freesFor                                  &lt;dbl&gt; 20, …</span></a>
+<a class="sourceLine" id="cb6-66" data-line-number="66"><span class="co">#&gt; $ away.stats.totals.goalAccuracy                              &lt;dbl&gt; 16.7…</span></a>
+<a class="sourceLine" id="cb6-67" data-line-number="67"><span class="co">#&gt; $ away.stats.totals.goalAssists                               &lt;dbl&gt; 0, 1…</span></a>
+<a class="sourceLine" id="cb6-68" data-line-number="68"><span class="co">#&gt; $ away.stats.totals.goalEfficiency                            &lt;dbl&gt; 3.7,…</span></a>
+<a class="sourceLine" id="cb6-69" data-line-number="69"><span class="co">#&gt; $ away.stats.totals.goals                                     &lt;dbl&gt; 1, 1…</span></a>
+<a class="sourceLine" id="cb6-70" data-line-number="70"><span class="co">#&gt; $ away.stats.totals.handballs                                 &lt;dbl&gt; 48, …</span></a>
+<a class="sourceLine" id="cb6-71" data-line-number="71"><span class="co">#&gt; $ away.stats.totals.hitouts                                   &lt;dbl&gt; 28, …</span></a>
+<a class="sourceLine" id="cb6-72" data-line-number="72"><span class="co">#&gt; $ away.stats.totals.inside50s                                 &lt;dbl&gt; 27, …</span></a>
+<a class="sourceLine" id="cb6-73" data-line-number="73"><span class="co">#&gt; $ away.stats.totals.intercepts                                &lt;dbl&gt; 48, …</span></a>
+<a class="sourceLine" id="cb6-74" data-line-number="74"><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCap          &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-75" data-line-number="75"><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ1      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-76" data-line-number="76"><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ2      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-77" data-line-number="77"><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ3      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-78" data-line-number="78"><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ4      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-79" data-line-number="79"><span class="co">#&gt; $ away.stats.totals.interchangeCounts.totalInterchangeCount   &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-80" data-line-number="80"><span class="co">#&gt; $ away.stats.totals.kicks                                     &lt;dbl&gt; 115,…</span></a>
+<a class="sourceLine" id="cb6-81" data-line-number="81"><span class="co">#&gt; $ away.stats.totals.lastUpdated                               &lt;dttm&gt; 201…</span></a>
+<a class="sourceLine" id="cb6-82" data-line-number="82"><span class="co">#&gt; $ away.stats.totals.marks                                     &lt;dbl&gt; 35, …</span></a>
+<a class="sourceLine" id="cb6-83" data-line-number="83"><span class="co">#&gt; $ away.stats.totals.marksInside50                             &lt;dbl&gt; 4, 6…</span></a>
+<a class="sourceLine" id="cb6-84" data-line-number="84"><span class="co">#&gt; $ away.stats.totals.metresGained                              &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-85" data-line-number="85"><span class="co">#&gt; $ away.stats.totals.onePercenters                             &lt;dbl&gt; 23, …</span></a>
+<a class="sourceLine" id="cb6-86" data-line-number="86"><span class="co">#&gt; $ away.stats.totals.ranking                                   &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-87" data-line-number="87"><span class="co">#&gt; $ away.stats.totals.ratingPoints                              &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-88" data-line-number="88"><span class="co">#&gt; $ away.stats.totals.rebound50s                                &lt;dbl&gt; 18, …</span></a>
+<a class="sourceLine" id="cb6-89" data-line-number="89"><span class="co">#&gt; $ away.stats.totals.scoreInvolvements                         &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-90" data-line-number="90"><span class="co">#&gt; $ away.stats.totals.shotEfficiency                            &lt;dbl&gt; 22.2…</span></a>
+<a class="sourceLine" id="cb6-91" data-line-number="91"><span class="co">#&gt; $ away.stats.totals.shotsAtGoal                               &lt;dbl&gt; 6, 1…</span></a>
+<a class="sourceLine" id="cb6-92" data-line-number="92"><span class="co">#&gt; $ away.stats.totals.superGoals                                &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-93" data-line-number="93"><span class="co">#&gt; $ away.stats.totals.tackles                                   &lt;dbl&gt; 87, …</span></a>
+<a class="sourceLine" id="cb6-94" data-line-number="94"><span class="co">#&gt; $ away.stats.totals.tacklesInside50                           &lt;dbl&gt; 8, 9…</span></a>
+<a class="sourceLine" id="cb6-95" data-line-number="95"><span class="co">#&gt; $ away.stats.totals.totalPossessions                          &lt;dbl&gt; 163,…</span></a>
+<a class="sourceLine" id="cb6-96" data-line-number="96"><span class="co">#&gt; $ away.stats.totals.turnovers                                 &lt;dbl&gt; 57, …</span></a>
+<a class="sourceLine" id="cb6-97" data-line-number="97"><span class="co">#&gt; $ away.stats.totals.uncontestedPossessions                    &lt;dbl&gt; 69, …</span></a>
+<a class="sourceLine" id="cb6-98" data-line-number="98"><span class="co">#&gt; $ away.team.teamAbbr                                          &lt;chr&gt; "COL…</span></a>
+<a class="sourceLine" id="cb6-99" data-line-number="99"><span class="co">#&gt; $ away.team.teamId                                            &lt;chr&gt; "CD_…</span></a>
+<a class="sourceLine" id="cb6-100" data-line-number="100"><span class="co">#&gt; $ away.team.teamName                                          &lt;chr&gt; "Col…</span></a>
+<a class="sourceLine" id="cb6-101" data-line-number="101"><span class="co">#&gt; $ away.team.teamNickname                                      &lt;chr&gt; "Mag…</span></a>
+<a class="sourceLine" id="cb6-102" data-line-number="102"><span class="co">#&gt; $ home.stats.averages.behinds                                 &lt;dbl&gt; 2.7,…</span></a>
+<a class="sourceLine" id="cb6-103" data-line-number="103"><span class="co">#&gt; $ home.stats.averages.bounces                                 &lt;dbl&gt; 2.1,…</span></a>
+<a class="sourceLine" id="cb6-104" data-line-number="104"><span class="co">#&gt; $ home.stats.averages.clangers                                &lt;dbl&gt; 38.7…</span></a>
+<a class="sourceLine" id="cb6-105" data-line-number="105"><span class="co">#&gt; $ home.stats.averages.clearances.centreClearances             &lt;dbl&gt; 4.4,…</span></a>
+<a class="sourceLine" id="cb6-106" data-line-number="106"><span class="co">#&gt; $ home.stats.averages.clearances.stoppageClearances           &lt;dbl&gt; 15.7…</span></a>
+<a class="sourceLine" id="cb6-107" data-line-number="107"><span class="co">#&gt; $ home.stats.averages.clearances.totalClearances              &lt;dbl&gt; 20.1…</span></a>
+<a class="sourceLine" id="cb6-108" data-line-number="108"><span class="co">#&gt; $ home.stats.averages.contestedMarks                          &lt;dbl&gt; 7.4,…</span></a>
+<a class="sourceLine" id="cb6-109" data-line-number="109"><span class="co">#&gt; $ home.stats.averages.contestedPossessions                    &lt;dbl&gt; 96.1…</span></a>
+<a class="sourceLine" id="cb6-110" data-line-number="110"><span class="co">#&gt; $ home.stats.averages.disposalEfficiency                      &lt;dbl&gt; 59.6…</span></a>
+<a class="sourceLine" id="cb6-111" data-line-number="111"><span class="co">#&gt; $ home.stats.averages.disposals                               &lt;dbl&gt; 172.…</span></a>
+<a class="sourceLine" id="cb6-112" data-line-number="112"><span class="co">#&gt; $ home.stats.averages.dreamTeamPoints                         &lt;dbl&gt; 784.…</span></a>
+<a class="sourceLine" id="cb6-113" data-line-number="113"><span class="co">#&gt; $ home.stats.averages.freesAgainst                            &lt;dbl&gt; 14.1…</span></a>
+<a class="sourceLine" id="cb6-114" data-line-number="114"><span class="co">#&gt; $ home.stats.averages.freesFor                                &lt;dbl&gt; 11.9…</span></a>
+<a class="sourceLine" id="cb6-115" data-line-number="115"><span class="co">#&gt; $ home.stats.averages.goalAccuracy                            &lt;dbl&gt; 50.6…</span></a>
+<a class="sourceLine" id="cb6-116" data-line-number="116"><span class="co">#&gt; $ home.stats.averages.goalAssists                             &lt;dbl&gt; 3.3,…</span></a>
+<a class="sourceLine" id="cb6-117" data-line-number="117"><span class="co">#&gt; $ home.stats.averages.goalEfficiency                          &lt;dbl&gt; 23.8…</span></a>
+<a class="sourceLine" id="cb6-118" data-line-number="118"><span class="co">#&gt; $ home.stats.averages.goals                                   &lt;dbl&gt; 5.6,…</span></a>
+<a class="sourceLine" id="cb6-119" data-line-number="119"><span class="co">#&gt; $ home.stats.averages.handballs                               &lt;dbl&gt; 60.6…</span></a>
+<a class="sourceLine" id="cb6-120" data-line-number="120"><span class="co">#&gt; $ home.stats.averages.hitouts                                 &lt;dbl&gt; 27.9…</span></a>
+<a class="sourceLine" id="cb6-121" data-line-number="121"><span class="co">#&gt; $ home.stats.averages.inside50s                               &lt;dbl&gt; 23.4…</span></a>
+<a class="sourceLine" id="cb6-122" data-line-number="122"><span class="co">#&gt; $ home.stats.averages.intercepts                              &lt;dbl&gt; 51.0…</span></a>
+<a class="sourceLine" id="cb6-123" data-line-number="123"><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCap        &lt;dbl&gt; 999,…</span></a>
+<a class="sourceLine" id="cb6-124" data-line-number="124"><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ1    &lt;dbl&gt; 4, 0…</span></a>
+<a class="sourceLine" id="cb6-125" data-line-number="125"><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ2    &lt;dbl&gt; 4, 0…</span></a>
+<a class="sourceLine" id="cb6-126" data-line-number="126"><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ3    &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-127" data-line-number="127"><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ4    &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-128" data-line-number="128"><span class="co">#&gt; $ home.stats.averages.interchangeCounts.totalInterchangeCount &lt;dbl&gt; 8, 0…</span></a>
+<a class="sourceLine" id="cb6-129" data-line-number="129"><span class="co">#&gt; $ home.stats.averages.kicks                                   &lt;dbl&gt; 111.…</span></a>
+<a class="sourceLine" id="cb6-130" data-line-number="130"><span class="co">#&gt; $ home.stats.averages.lastUpdated                             &lt;dttm&gt; 201…</span></a>
+<a class="sourceLine" id="cb6-131" data-line-number="131"><span class="co">#&gt; $ home.stats.averages.marks                                   &lt;dbl&gt; 32.7…</span></a>
+<a class="sourceLine" id="cb6-132" data-line-number="132"><span class="co">#&gt; $ home.stats.averages.marksInside50                           &lt;dbl&gt; 6.4,…</span></a>
+<a class="sourceLine" id="cb6-133" data-line-number="133"><span class="co">#&gt; $ home.stats.averages.metresGained                            &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-134" data-line-number="134"><span class="co">#&gt; $ home.stats.averages.onePercenters                           &lt;dbl&gt; 19.7…</span></a>
+<a class="sourceLine" id="cb6-135" data-line-number="135"><span class="co">#&gt; $ home.stats.averages.ranking                                 &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-136" data-line-number="136"><span class="co">#&gt; $ home.stats.averages.ratingPoints                            &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-137" data-line-number="137"><span class="co">#&gt; $ home.stats.averages.rebound50s                              &lt;dbl&gt; 22.0…</span></a>
+<a class="sourceLine" id="cb6-138" data-line-number="138"><span class="co">#&gt; $ home.stats.averages.scoreInvolvements                       &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-139" data-line-number="139"><span class="co">#&gt; $ home.stats.averages.shotEfficiency                          &lt;dbl&gt; 47.0…</span></a>
+<a class="sourceLine" id="cb6-140" data-line-number="140"><span class="co">#&gt; $ home.stats.averages.shotsAtGoal                             &lt;dbl&gt; 11.0…</span></a>
+<a class="sourceLine" id="cb6-141" data-line-number="141"><span class="co">#&gt; $ home.stats.averages.superGoals                              &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-142" data-line-number="142"><span class="co">#&gt; $ home.stats.averages.tackles                                 &lt;dbl&gt; 49.4…</span></a>
+<a class="sourceLine" id="cb6-143" data-line-number="143"><span class="co">#&gt; $ home.stats.averages.tacklesInside50                         &lt;dbl&gt; 8.7,…</span></a>
+<a class="sourceLine" id="cb6-144" data-line-number="144"><span class="co">#&gt; $ home.stats.averages.totalPossessions                        &lt;dbl&gt; 173.…</span></a>
+<a class="sourceLine" id="cb6-145" data-line-number="145"><span class="co">#&gt; $ home.stats.averages.turnovers                               &lt;dbl&gt; 50.0…</span></a>
+<a class="sourceLine" id="cb6-146" data-line-number="146"><span class="co">#&gt; $ home.stats.averages.uncontestedPossessions                  &lt;dbl&gt; 77.3…</span></a>
+<a class="sourceLine" id="cb6-147" data-line-number="147"><span class="co">#&gt; $ home.stats.totals.behinds                                   &lt;dbl&gt; 4, 6…</span></a>
+<a class="sourceLine" id="cb6-148" data-line-number="148"><span class="co">#&gt; $ home.stats.totals.bounces                                   &lt;dbl&gt; 4, 0…</span></a>
+<a class="sourceLine" id="cb6-149" data-line-number="149"><span class="co">#&gt; $ home.stats.totals.clangers                                  &lt;dbl&gt; 44, …</span></a>
+<a class="sourceLine" id="cb6-150" data-line-number="150"><span class="co">#&gt; $ home.stats.totals.clearances.centreClearances               &lt;dbl&gt; 1, 5…</span></a>
+<a class="sourceLine" id="cb6-151" data-line-number="151"><span class="co">#&gt; $ home.stats.totals.clearances.stoppageClearances             &lt;dbl&gt; 16, …</span></a>
+<a class="sourceLine" id="cb6-152" data-line-number="152"><span class="co">#&gt; $ home.stats.totals.clearances.totalClearances                &lt;dbl&gt; 17, …</span></a>
+<a class="sourceLine" id="cb6-153" data-line-number="153"><span class="co">#&gt; $ home.stats.totals.contestedMarks                            &lt;dbl&gt; 7, 5…</span></a>
+<a class="sourceLine" id="cb6-154" data-line-number="154"><span class="co">#&gt; $ home.stats.totals.contestedPossessions                      &lt;dbl&gt; 106,…</span></a>
+<a class="sourceLine" id="cb6-155" data-line-number="155"><span class="co">#&gt; $ home.stats.totals.disposalEfficiency                        &lt;dbl&gt; 60.6…</span></a>
+<a class="sourceLine" id="cb6-156" data-line-number="156"><span class="co">#&gt; $ home.stats.totals.disposals                                 &lt;dbl&gt; 198,…</span></a>
+<a class="sourceLine" id="cb6-157" data-line-number="157"><span class="co">#&gt; $ home.stats.totals.dreamTeamPoints                           &lt;dbl&gt; 847,…</span></a>
+<a class="sourceLine" id="cb6-158" data-line-number="158"><span class="co">#&gt; $ home.stats.totals.freesAgainst                              &lt;dbl&gt; 20, …</span></a>
+<a class="sourceLine" id="cb6-159" data-line-number="159"><span class="co">#&gt; $ home.stats.totals.freesFor                                  &lt;dbl&gt; 9, 2…</span></a>
+<a class="sourceLine" id="cb6-160" data-line-number="160"><span class="co">#&gt; $ home.stats.totals.goalAccuracy                              &lt;dbl&gt; 58.3…</span></a>
+<a class="sourceLine" id="cb6-161" data-line-number="161"><span class="co">#&gt; $ home.stats.totals.goalAssists                               &lt;dbl&gt; 4, 3…</span></a>
+<a class="sourceLine" id="cb6-162" data-line-number="162"><span class="co">#&gt; $ home.stats.totals.goalEfficiency                            &lt;dbl&gt; 28.0…</span></a>
+<a class="sourceLine" id="cb6-163" data-line-number="163"><span class="co">#&gt; $ home.stats.totals.goals                                     &lt;dbl&gt; 7, 7…</span></a>
+<a class="sourceLine" id="cb6-164" data-line-number="164"><span class="co">#&gt; $ home.stats.totals.handballs                                 &lt;dbl&gt; 86, …</span></a>
+<a class="sourceLine" id="cb6-165" data-line-number="165"><span class="co">#&gt; $ home.stats.totals.hitouts                                   &lt;dbl&gt; 30, …</span></a>
+<a class="sourceLine" id="cb6-166" data-line-number="166"><span class="co">#&gt; $ home.stats.totals.inside50s                                 &lt;dbl&gt; 25, …</span></a>
+<a class="sourceLine" id="cb6-167" data-line-number="167"><span class="co">#&gt; $ home.stats.totals.intercepts                                &lt;dbl&gt; 56, …</span></a>
+<a class="sourceLine" id="cb6-168" data-line-number="168"><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCap          &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-169" data-line-number="169"><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ1      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-170" data-line-number="170"><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ2      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-171" data-line-number="171"><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ3      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-172" data-line-number="172"><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ4      &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-173" data-line-number="173"><span class="co">#&gt; $ home.stats.totals.interchangeCounts.totalInterchangeCount   &lt;dbl&gt; 0, 0…</span></a>
+<a class="sourceLine" id="cb6-174" data-line-number="174"><span class="co">#&gt; $ home.stats.totals.kicks                                     &lt;dbl&gt; 112,…</span></a>
+<a class="sourceLine" id="cb6-175" data-line-number="175"><span class="co">#&gt; $ home.stats.totals.lastUpdated                               &lt;dttm&gt; 201…</span></a>
+<a class="sourceLine" id="cb6-176" data-line-number="176"><span class="co">#&gt; $ home.stats.totals.marks                                     &lt;dbl&gt; 26, …</span></a>
+<a class="sourceLine" id="cb6-177" data-line-number="177"><span class="co">#&gt; $ home.stats.totals.marksInside50                             &lt;dbl&gt; 6, 8…</span></a>
+<a class="sourceLine" id="cb6-178" data-line-number="178"><span class="co">#&gt; $ home.stats.totals.metresGained                              &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-179" data-line-number="179"><span class="co">#&gt; $ home.stats.totals.onePercenters                             &lt;dbl&gt; 15, …</span></a>
+<a class="sourceLine" id="cb6-180" data-line-number="180"><span class="co">#&gt; $ home.stats.totals.ranking                                   &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-181" data-line-number="181"><span class="co">#&gt; $ home.stats.totals.ratingPoints                              &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-182" data-line-number="182"><span class="co">#&gt; $ home.stats.totals.rebound50s                                &lt;dbl&gt; 25, …</span></a>
+<a class="sourceLine" id="cb6-183" data-line-number="183"><span class="co">#&gt; $ home.stats.totals.scoreInvolvements                         &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-184" data-line-number="184"><span class="co">#&gt; $ home.stats.totals.shotEfficiency                            &lt;dbl&gt; 48.0…</span></a>
+<a class="sourceLine" id="cb6-185" data-line-number="185"><span class="co">#&gt; $ home.stats.totals.shotsAtGoal                               &lt;dbl&gt; 12, …</span></a>
+<a class="sourceLine" id="cb6-186" data-line-number="186"><span class="co">#&gt; $ home.stats.totals.superGoals                                &lt;dbl&gt; NA, …</span></a>
+<a class="sourceLine" id="cb6-187" data-line-number="187"><span class="co">#&gt; $ home.stats.totals.tackles                                   &lt;dbl&gt; 59, …</span></a>
+<a class="sourceLine" id="cb6-188" data-line-number="188"><span class="co">#&gt; $ home.stats.totals.tacklesInside50                           &lt;dbl&gt; 15, …</span></a>
+<a class="sourceLine" id="cb6-189" data-line-number="189"><span class="co">#&gt; $ home.stats.totals.totalPossessions                          &lt;dbl&gt; 197,…</span></a>
+<a class="sourceLine" id="cb6-190" data-line-number="190"><span class="co">#&gt; $ home.stats.totals.turnovers                                 &lt;dbl&gt; 47, …</span></a>
+<a class="sourceLine" id="cb6-191" data-line-number="191"><span class="co">#&gt; $ home.stats.totals.uncontestedPossessions                    &lt;dbl&gt; 91, …</span></a>
+<a class="sourceLine" id="cb6-192" data-line-number="192"><span class="co">#&gt; $ home.team.teamAbbr                                          &lt;chr&gt; "CAR…</span></a>
+<a class="sourceLine" id="cb6-193" data-line-number="193"><span class="co">#&gt; $ home.team.teamId                                            &lt;chr&gt; "CD_…</span></a>
+<a class="sourceLine" id="cb6-194" data-line-number="194"><span class="co">#&gt; $ home.team.teamName                                          &lt;chr&gt; "Car…</span></a>
+<a class="sourceLine" id="cb6-195" data-line-number="195"><span class="co">#&gt; $ home.team.teamNickname                                      &lt;chr&gt; "Blu…</span></a></code></pre></div>
 </div>
   </div>
 
