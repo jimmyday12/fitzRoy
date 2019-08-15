@@ -25,22 +25,20 @@ knitr::opts_chunk$set(
 ```{r libraries, message=FALSE, warning=FALSE}
 library(fitzRoy)
 library(dplyr)
-library(magrittr)
 ```
 
 We can use the `get_aflw_match_data()` function to retrieve match data for all
 matches.
 
-```{r fetch_match_stats, eval=FALSE, message=FALSE, warning=TRUE, include=FALSE}
+```{r fetch_match_stats, message=FALSE, warning=TRUE,}
 match_data <- get_aflw_match_data()
 ```
 
-Note that we are getting a few warnings: this is to tell us that the fixture has 
-been downloaded for 2019, but no match data is available yet. Note that you will 
-not be able to retrieve detailed stats for these games, so make sure you don't 
-try to request detailed stats for these match IDs.
+Note that there will be warnings if a fixture is available but no match data has
+been added yet. If this is the case, make sure you don't try to request detailed
+match stats for these match IDs. 
 
-```{r show_match_stats, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+```{r show_match_stats, message=FALSE, warning=FALSE}
 glimpse(match_data)
 ```
 
@@ -51,11 +49,14 @@ match data shown above. It takes a vector of match IDs as an argument. For
 example, let's say we want detailed stats for the first 10 games in `match_data`
 above. Then we would do:
 
-```{r first_10, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
-first10 <- head(match_data, 10) %>% 
-  pull(Match.Id)
-first10
+```{r first_10, message=FALSE, warning=FALSE}
+first10 <- head(match_data, 10)
+first10_ids <- first10$Match.Id
+first10_ids
 ```
 
-
+```{r}
+detailed <- get_aflw_detailed_data(first10_ids)
+glimpse(detailed)
+```
 
