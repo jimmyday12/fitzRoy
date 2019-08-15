@@ -40,3 +40,7 @@ test_that("get_fixture filters out unplayed matches ", {
   # NA dates if not filtered out
   expect_equal(sum(is.na(get_fixture(2015)$Date)), 0)
 })
+
+test_that("included data is unique", {
+  expect_false(any(duplicated(names(player_stats))))
+})
