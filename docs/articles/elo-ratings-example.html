@@ -36,7 +36,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13</span>
       </span>
     </div>
 
@@ -95,7 +95,7 @@
       <h1>ELO Ratings Example</h1>
                         <h4 class="author">James Day</h4>
             
-            <h4 class="date">2019-04-03</h4>
+            <h4 class="date">2019-08-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/elo-ratings-example.Rmd"><code>vignettes/elo-ratings-example.Rmd</code></a></small>
       <div class="hidden name"><code>elo-ratings-example.Rmd</code></div>
@@ -110,22 +110,23 @@
 <a href="#load-packages" class="anchor"></a>Load packages</h2>
 <p>First we need to grab a few packages. If you don’t have any of these, you’ll need to install them.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt;     filter, lag</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(elo)</a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lubridate)</a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; Attaching package: 'lubridate'</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt; The following object is masked from 'package:base':</span></a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt;     date</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fitzRoy)</a></code></pre></div>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co">#&gt; Warning: package 'dplyr' was built under R version 3.5.2</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co">#&gt; Attaching package: 'dplyr'</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co">#&gt; The following objects are masked from 'package:stats':</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co">#&gt;     filter, lag</span></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="co">#&gt; The following objects are masked from 'package:base':</span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="co">#&gt;     intersect, setdiff, setequal, union</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(elo)</a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lubridate)</a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="co">#&gt; Attaching package: 'lubridate'</span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co">#&gt; The following object is masked from 'package:base':</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="co">#&gt;     date</span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(fitzRoy)</a></code></pre></div>
 </div>
 <div id="get-data" class="section level2">
 <h2 class="hasAnchor">
@@ -152,7 +153,7 @@
 <a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
 <a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt;   Date                Season Season.Game Round Home.Team  Away.Team  Venue </span></a>
 <a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;   &lt;dttm&gt;               &lt;int&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; 1 2019-03-21 19:20:00   2019           1     1 Carlton    Richmond   MCG   </span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton    Richmond   MCG   </span></a>
 <a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; 2 2019-03-22 19:50:00   2019           1     1 Collingwo… Geelong    MCG   </span></a>
 <a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; 3 2019-03-23 13:45:00   2019           1     1 Melbourne  Port Adel… MCG   </span></a>
 <a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; 4 2019-03-23 16:05:00   2019           1     1 Adelaide   Hawthorn   Adela…</span></a>
@@ -223,62 +224,62 @@
 <p>Now that is run, we can view our results. The <code>elo</code> package provides various ways to do this.</p>
 <p>Firstly, using <code>as.data.frame</code> we can view the predicted and actual result of each game. Also in this table is the change in ELO rating for the home and away side. See below for the last few games of 2018.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/as.data.frame">as.data.frame</a></span>(elo.data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>()</a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt;                team.A         team.B       p.A  wins.A    update    elo.A</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; 15420        Essendon       St Kilda 0.5404676 0.43125 -2.184352 1495.810</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; 15421         Geelong      Melbourne 0.5431066 1.00000  9.137869 1509.218</span></a>
-<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; 15422      West Coast            GWS 0.5398095 0.82500  5.703810 1505.493</span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; 15423 North Melbourne Brisbane Lions 0.5361866 0.37500 -3.223731 1492.226</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 15424        Hawthorn      Footscray 0.5432692 0.38125 -3.240385 1496.878</span></a>
-<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; 15425      Gold Coast      Fremantle 0.5365532 0.51875 -0.356063 1499.583</span></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt;          elo.B</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 15420 1501.997</span></a>
-<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 15421 1490.914</span></a>
-<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 15422 1496.364</span></a>
-<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 15423 1503.485</span></a>
-<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 15424 1503.217</span></a>
-<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; 15425 1504.850</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt;               team.A          team.B       p.A  wins.A       update</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt; 15582 Brisbane Lions      Gold Coast 0.6657875 1.00000   6.68425033</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt; 15583       Essendon       Footscray 0.5549717 0.00000 -11.09943310</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; 15584        Geelong North Melbourne 0.5848073 0.84375   5.17885409</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; 15585       St Kilda       Fremantle 0.5197328 0.51875  -0.01965538</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 15586       Richmond         Carlton 0.5915750 0.67500   1.66849914</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; 15587     West Coast        Adelaide 0.5688973 0.56250  -0.12794602</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt;          elo.A    elo.B</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 15582 1530.720 1427.627</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 15583 1490.689 1504.535</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 15584 1538.386 1498.523</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="co">#&gt; 15585 1471.981 1488.302</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="co">#&gt; 15586 1519.534 1481.838</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="co">#&gt; 15587 1529.206 1511.281</span></a></code></pre></div>
 <p>We can specifically focus on how each team’s rating changes over time using <code>as.matrix</code>. Again - viewing the end of 2018 also shows teams that didn’t make the finals have the same ELO as the rounds go on since they aren’t playing finals.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(elo.data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">tail</a></span>()</a>
 <a class="sourceLine" id="cb9-2" title="2"><span class="co">#&gt;         Adelaide Brisbane Lions  Carlton Collingwood Essendon Fitzroy</span></a>
-<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [2778,] 1507.172       1483.508 1416.965    1534.198 1514.869    1500</span></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; [2779,] 1507.172       1483.508 1416.965    1534.100 1514.869    1500</span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; [2780,] 1507.172       1483.508 1416.965    1538.643 1514.869    1500</span></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; [2781,] 1507.172       1483.508 1416.965    1538.991 1514.869    1500</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; [2782,] 1499.878       1500.522 1499.671    1500.139 1495.989    1500</span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; [2783,] 1504.051       1503.485 1498.703    1506.431 1495.810    1500</span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co">#&gt; [2797,] 1508.327       1512.678 1479.576    1518.468 1506.633    1500</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co">#&gt; [2798,] 1517.526       1519.499 1481.808    1519.544 1506.402    1500</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="co">#&gt; [2799,] 1513.723       1519.784 1482.805    1514.528 1510.206    1500</span></a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co">#&gt; [2800,] 1510.322       1523.482 1486.206    1509.509 1510.311    1500</span></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co">#&gt; [2801,] 1511.153       1524.036 1483.506    1515.349 1501.789    1500</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="co">#&gt; [2802,] 1511.281       1530.720 1481.838    1517.052 1490.689    1500</span></a>
 <a class="sourceLine" id="cb9-9" title="9"><span class="co">#&gt;         Footscray Fremantle  Geelong Gold Coast      GWS Hawthorn</span></a>
-<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; [2778,]  1466.641  1460.093 1537.625   1420.941 1517.090 1524.854</span></a>
-<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; [2779,]  1466.641  1460.093 1537.625   1420.941 1517.187 1522.293</span></a>
-<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; [2780,]  1466.641  1460.093 1537.625   1420.941 1517.187 1522.293</span></a>
-<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt; [2781,]  1466.641  1460.093 1537.625   1420.941 1517.187 1522.293</span></a>
-<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt; [2782,]  1499.953  1508.989 1500.161   1499.879 1504.136 1500.237</span></a>
-<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; [2783,]  1503.217  1504.850 1509.218   1499.583 1496.364 1496.878</span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="co">#&gt; [2797,]  1492.504  1491.863 1539.638   1450.453 1522.541 1492.927</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="co">#&gt; [2798,]  1492.205  1488.880 1540.182   1441.254 1519.439 1495.910</span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="co">#&gt; [2799,]  1488.996  1488.312 1535.076   1440.257 1524.456 1501.016</span></a>
+<a class="sourceLine" id="cb9-13" title="13"><span class="co">#&gt; [2800,]  1493.990  1483.318 1538.171   1440.152 1524.757 1497.318</span></a>
+<a class="sourceLine" id="cb9-14" title="14"><span class="co">#&gt; [2801,]  1493.435  1488.282 1533.207   1434.311 1523.227 1495.561</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="co">#&gt; [2802,]  1504.535  1488.302 1538.386   1427.627 1514.582 1504.206</span></a>
 <a class="sourceLine" id="cb9-16" title="16"><span class="co">#&gt;         Melbourne North Melbourne Port Adelaide Richmond St Kilda   Sydney</span></a>
-<a class="sourceLine" id="cb9-17" title="17"><span class="co">#&gt; [2778,]  1549.640        1511.378      1506.200 1552.536 1452.330 1509.285</span></a>
-<a class="sourceLine" id="cb9-18" title="18"><span class="co">#&gt; [2779,]  1552.201        1511.378      1506.200 1552.536 1452.330 1509.285</span></a>
-<a class="sourceLine" id="cb9-19" title="19"><span class="co">#&gt; [2780,]  1544.309        1511.378      1506.200 1547.993 1452.330 1509.285</span></a>
-<a class="sourceLine" id="cb9-20" title="20"><span class="co">#&gt; [2781,]  1544.309        1511.378      1506.200 1547.993 1452.330 1509.285</span></a>
-<a class="sourceLine" id="cb9-21" title="21"><span class="co">#&gt; [2782,]  1500.105        1490.900      1500.093 1500.193 1499.626 1499.953</span></a>
-<a class="sourceLine" id="cb9-22" title="22"><span class="co">#&gt; [2783,]  1490.914        1492.226      1501.179 1493.734 1501.997 1495.864</span></a>
+<a class="sourceLine" id="cb9-17" title="17"><span class="co">#&gt; [2797,]  1477.110        1506.836      1511.272 1502.023 1468.511 1497.013</span></a>
+<a class="sourceLine" id="cb9-18" title="18"><span class="co">#&gt; [2798,]  1477.409        1507.066      1504.451 1505.125 1467.967 1494.781</span></a>
+<a class="sourceLine" id="cb9-19" title="19"><span class="co">#&gt; [2799,]  1476.162        1506.782      1500.582 1508.995 1471.176 1495.349</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="co">#&gt; [2800,]  1474.506        1501.945      1500.280 1514.014 1472.833 1492.254</span></a>
+<a class="sourceLine" id="cb9-21" title="21"><span class="co">#&gt; [2801,]  1470.654        1503.702      1508.802 1517.865 1472.001 1493.784</span></a>
+<a class="sourceLine" id="cb9-22" title="22"><span class="co">#&gt; [2802,]  1468.952        1498.523      1513.389 1519.534 1471.981 1489.197</span></a>
 <a class="sourceLine" id="cb9-23" title="23"><span class="co">#&gt;         University West Coast</span></a>
-<a class="sourceLine" id="cb9-24" title="24"><span class="co">#&gt; [2778,]       1500   1534.675</span></a>
-<a class="sourceLine" id="cb9-25" title="25"><span class="co">#&gt; [2779,]       1500   1534.675</span></a>
-<a class="sourceLine" id="cb9-26" title="26"><span class="co">#&gt; [2780,]       1500   1542.566</span></a>
-<a class="sourceLine" id="cb9-27" title="27"><span class="co">#&gt; [2781,]       1500   1542.218</span></a>
-<a class="sourceLine" id="cb9-28" title="28"><span class="co">#&gt; [2782,]       1500   1499.579</span></a>
-<a class="sourceLine" id="cb9-29" title="29"><span class="co">#&gt; [2783,]       1500   1505.493</span></a></code></pre></div>
+<a class="sourceLine" id="cb9-24" title="24"><span class="co">#&gt; [2797,]       1500   1521.627</span></a>
+<a class="sourceLine" id="cb9-25" title="25"><span class="co">#&gt; [2798,]       1500   1520.551</span></a>
+<a class="sourceLine" id="cb9-26" title="26"><span class="co">#&gt; [2799,]       1500   1521.798</span></a>
+<a class="sourceLine" id="cb9-27" title="27"><span class="co">#&gt; [2800,]       1500   1526.634</span></a>
+<a class="sourceLine" id="cb9-28" title="28"><span class="co">#&gt; [2801,]       1500   1529.334</span></a>
+<a class="sourceLine" id="cb9-29" title="29"><span class="co">#&gt; [2802,]       1500   1529.206</span></a></code></pre></div>
 <p>Lastly, we can check the final ELO ratings of each team at the end of our data using <code>final.elos</code> (here - up to end of 2018).</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/elo/topics/elo.run.helpers">final.elos</a></span>(elo.data)</a>
 <a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt;        Adelaide  Brisbane Lions         Carlton     Collingwood </span></a>
-<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;        1504.051        1503.485        1498.703        1506.431 </span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt;        1511.281        1530.720        1481.838        1517.052 </span></a>
 <a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt;        Essendon         Fitzroy       Footscray       Fremantle </span></a>
-<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt;        1495.810        1380.902        1503.217        1504.850 </span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt;        1490.689        1380.902        1504.535        1488.302 </span></a>
 <a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt;         Geelong      Gold Coast             GWS        Hawthorn </span></a>
-<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt;        1509.218        1499.583        1496.364        1496.878 </span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt;        1538.386        1427.627        1514.582        1504.206 </span></a>
 <a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt;       Melbourne North Melbourne   Port Adelaide        Richmond </span></a>
-<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;        1490.914        1492.226        1501.179        1493.734 </span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt;        1468.952        1498.523        1513.389        1519.534 </span></a>
 <a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt;        St Kilda          Sydney      University      West Coast </span></a>
-<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;        1501.997        1495.864        1412.936        1505.493</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt;        1471.981        1489.197        1412.936        1529.206</span></a></code></pre></div>
 <p>We could keep tweaking our parameters until we are happy. Ideally we’d have a training and test set and be using some kind of cost function to optimise these values on like a log likelihood, mean absolute margin or something similar. I’ll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.</p>
 </div>
 <div id="do-predictions" class="section level2">
@@ -292,12 +293,12 @@
 <a class="sourceLine" id="cb11-5" title="5"><span class="co">#&gt; # A tibble: 6 x 8</span></a>
 <a class="sourceLine" id="cb11-6" title="6"><span class="co">#&gt;   Date       Season Season.Game Round.Number Home.Team Away.Team Venue</span></a>
 <a class="sourceLine" id="cb11-7" title="7"><span class="co">#&gt;   &lt;date&gt;      &lt;int&gt;       &lt;int&gt;        &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;</span></a>
-<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt; 1 2019-03-31   2019           1            2 North Me… Brisbane… Marv…</span></a>
-<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt; 2 2019-03-31   2019           1            2 Hawthorn  Footscray MCG  </span></a>
-<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; 3 2019-03-31   2019           1            2 Gold Coa… Fremantle Metr…</span></a>
-<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; 4 2019-04-04   2019           1            3 Adelaide  Geelong   Adel…</span></a>
-<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt; 5 2019-04-05   2019           1            3 Melbourne Essendon  MCG  </span></a>
-<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt; 6 2019-04-06   2019           1            3 Carlton   Sydney    Marv…</span></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co">#&gt; 1 2019-08-11   2019           1           21 St Kilda  Fremantle Marv…</span></a>
+<a class="sourceLine" id="cb11-9" title="9"><span class="co">#&gt; 2 2019-08-11   2019           1           21 West Coa… Adelaide  Optu…</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="co">#&gt; 3 2019-08-11   2019           1           21 Richmond  Carlton   MCG  </span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="co">#&gt; 4 2019-08-16   2019           1           22 Melbourne Sydney    MCG  </span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="co">#&gt; 5 2019-08-17   2019           1           22 Carlton   St Kilda  MCG  </span></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="co">#&gt; 6 2019-08-17   2019           1           22 Brisbane… Geelong   Gabba</span></a>
 <a class="sourceLine" id="cb11-14" title="14"><span class="co">#&gt; # … with 1 more variable: Prob &lt;dbl&gt;</span></a></code></pre></div>
 <p>From here - you could turn these probabilities back into a margin through another mapping function. Again - I’ll leave that for the reader to decide.</p>
 <p>Looking forward to seeing all the new models utilising the power of fitzRoy.</p>

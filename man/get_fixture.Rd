@@ -4,10 +4,12 @@
 \alias{get_fixture}
 \title{Get upcoming fixture from footywire.com}
 \usage{
-get_fixture(season = lubridate::year(Sys.Date()))
+get_fixture(season = lubridate::year(Sys.Date()), convert_date = FALSE)
 }
 \arguments{
 \item{season}{Season to return, in yyyy format}
+
+\item{convert_date}{logical, if TRUE, converts date column to date format instead of date time.}
 }
 \value{
 Returns a data frame containing the date, teams and venue of each game

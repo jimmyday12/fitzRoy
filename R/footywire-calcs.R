@@ -132,6 +132,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' The dataframe contains the home and away team as well as venue.
 #'
 #' @param season Season to return, in yyyy format
+#' @param convert_date logical, if TRUE, converts date column to date format instead of date time.
 #' @return Returns a data frame containing the date, teams and venue of each game
 #'
 #' @examples
@@ -141,7 +142,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-get_fixture <- function(season = lubridate::year(Sys.Date())) {
+get_fixture <- function(season = lubridate::year(Sys.Date()), convert_date = FALSE) {
   if (!is.numeric(season)) {
     stop(paste0(
       "'season' must be in 4-digit year format.",
@@ -167,6 +168,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
   games_text <- fixture_xml %>%
     rvest::html_nodes(".data") %>%
     rvest::html_text()
+  
 
   if (rlang::is_empty(games_text)) {
     warning(glue::glue(
@@ -174,7 +176,8 @@ get_fixture <- function(season = lubridate::year(Sys.Date())) {
 Check the following url on footywire
 {url_fixture}"))
 
-    return(games_df <- dplyr::tibble() )
+    games_df <- dplyr::tibble() 
+    return(games_df)
   }
   
   # Put this into dataframe format
@@ -259,6 +262,6 @@ Check the following url on footywire
       .data$Date, .data$Season, .data$Season.Game, .data$Round,
       .data$Home.Team, .data$Away.Team, .data$Venue
     )
-
+  if (convert_date == TRUE) games_df$Date = as.Date(format(games_df$Date, "%Y-%m-%d"))
   return(games_df)
 }
