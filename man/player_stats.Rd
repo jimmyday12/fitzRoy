@@ -4,7 +4,7 @@
 \name{player_stats}
 \alias{player_stats}
 \title{Advanced player match statistics.}
-\format{An object of class \code{data.frame} with 86460 rows and 43 columns.}
+\format{An object of class \code{data.frame} with 86460 rows and 42 columns.}
 \source{
 \url{http://www.footywire.com}
 }
