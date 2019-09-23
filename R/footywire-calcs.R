@@ -218,17 +218,21 @@ Check the following url on footywire
   games_df$Round[ind] <- games_df$Round[ind] - 1
   games_df$Round[games_df$Round == 0] <- 1
 
+  concat_round_groups <- function(Round, data, diff_grp, cumsum) {
+    dplyr::mutate(data, Round = Round, diff_grp = diff_grp, cum_diff = cumsum)
+  }
 
   games_df <- games_df %>%
     dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    dplyr::group_by(.data$Round) %>%
-    dplyr::mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(Round = ifelse(.data$diff_grp == 2,
-      .data$Round - 1,
-      .data$Round
-    )) %>%
-    dplyr::select(-.data$diff, -.data$diff_grp)
+    tidyr::nest(-Round) %>%
+    dplyr::mutate(
+        diff_grp = purrr::map(data, ~ max(.x$diff) - 1),
+        cumsum = purrr::accumulate(diff_grp, sum)
+    ) %>%
+    purrr::pmap(., concat_round_groups) %>%
+    dplyr::bind_rows(.) %>%
+    dplyr::mutate(Round = (.data$Round - .data$cum_diff)) %>%
+    dplyr::select(-.data$diff, -.data$cum_diff)
 
   # Fix names
   games_df <- games_df %>%
