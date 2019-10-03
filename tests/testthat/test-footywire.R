@@ -44,3 +44,12 @@ test_that("get_fixture filters out unplayed matches ", {
 test_that("included data is unique", {
   expect_false(any(duplicated(names(player_stats))))
 })
+
+test_that("round numbers don't increment across bye weeks without matches", {
+  max_round_lag <- get_fixture(2019)$Round %>%
+    unique %>%
+    (function(round) { round - lag(round, default = 0) }) %>%
+    max
+
+  expect_equal(max_round_lag, 1)
+})
