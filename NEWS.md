@@ -1,3 +1,5 @@
+# fitzRoy 0.2.0.9000
+
 # fitzRoy 0.1.13
 * Updated Squiggle API to accept new parameters `ladder`, `standings` and `complete`. ([#73](https://github.com/jimmyday12/fitzRoy/issues/73))
 * Added paramter to `get_fixture` to allow Date to be formatted the same as `get_results` ([#58](https://github.com/jimmyday12/fitzRoy/issues/58))
