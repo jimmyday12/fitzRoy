@@ -5,6 +5,8 @@ follows principles from the tidyverse development world. You can see the
 detailed guidelines for contributing in the the
 [**development contributing guide**](https://rstd.io/tidy-contrib).
 
+The rest of this guide is taken directly from tidyverse with some slight ammendments. 
+
 ### Fixing typos
 
 Small typos or grammatical errors in documentation may be edited directly using
