@@ -19,11 +19,22 @@ test_that("Squiggle API optional arguments work", {
     get_squiggle_data(query = "games", round = 1, year = 2018),
     "list"
   )
-  expect_type(get_squiggle_data(query = "games", year = 2018, complete = 100), "list")
-  expect_type(get_squiggle_data(query = "ladder", year = 2019, round = 9), "list")
-  #expect_type(get_squiggle_data(query = "games", year = 2018, round = 22, complete = !100), "list")
-  expect_type(get_squiggle_data(query = "sources", source = 1), "list")
-  expect_error(get_squiggle_data(query = "sources", round = 1, year = 2018))
-  expect_error(get_squiggle_data(query = "tips", x = "", year = 2018))
+  expect_type(get_squiggle_data(query = "games", 
+                                year = 2018, 
+                                complete = 100), 
+              "list")
+  expect_type(get_squiggle_data(query = "ladder", 
+                                year = 2019, 
+                                round = 9), 
+              "list")
+  expect_type(get_squiggle_data(query = "sources", 
+                                source = 1), 
+              "list")
+  expect_error(get_squiggle_data(query = "sources", 
+                                 round = 1,
+                                 year = 2018))
+  expect_error(get_squiggle_data(query = "tips", 
+                                 x = "", 
+                                 year = 2018))
   
 })

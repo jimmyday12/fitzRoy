@@ -30,7 +30,11 @@
 #' 
 #' # Get tips from Squiggle
 #' squiggle <- get_squiggle_data(query = "tips", source = 1)
-get_squiggle_data <- function(query = c("sources", "games", "tips", "ladder", "standings"), ...) {
+get_squiggle_data <- function(query = c("sources", 
+                                        "games", 
+                                        "tips", 
+                                        "ladder", 
+                                        "standings"), ...) {
 
   # Ensure query is valid
   query <- match.arg(query)

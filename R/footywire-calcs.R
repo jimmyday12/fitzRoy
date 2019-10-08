@@ -142,7 +142,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-get_fixture <- function(season = lubridate::year(Sys.Date()), convert_date = FALSE) {
+get_fixture <- function(season = lubridate::year(Sys.Date()), 
+                        convert_date = FALSE) {
   if (!is.numeric(season)) {
     stop(paste0(
       "'season' must be in 4-digit year format.",
@@ -266,6 +267,8 @@ Check the following url on footywire
       .data$Date, .data$Season, .data$Season.Game, .data$Round,
       .data$Home.Team, .data$Away.Team, .data$Venue
     )
-  if (convert_date == TRUE) games_df$Date = as.Date(format(games_df$Date, "%Y-%m-%d"))
+  if (convert_date == TRUE) {
+    games_df$Date <- as.Date(format(games_df$Date, "%Y-%m-%d"))
+  }
   return(games_df)
 }
