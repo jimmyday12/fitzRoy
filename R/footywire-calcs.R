@@ -142,7 +142,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-get_fixture <- function(season = lubridate::year(Sys.Date()), 
+get_fixture <- function(season = lubridate::year(Sys.Date()),
                         convert_date = FALSE) {
   if (!is.numeric(season)) {
     stop(paste0(
@@ -169,18 +169,19 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
   games_text <- fixture_xml %>%
     rvest::html_nodes(".data") %>%
     rvest::html_text()
-  
+
 
   if (rlang::is_empty(games_text)) {
     warning(glue::glue(
-"The data for {season} season seems to be empty. 
+      "The data for {season} season seems to be empty. 
 Check the following url on footywire
-{url_fixture}"))
+{url_fixture}"
+    ))
 
-    games_df <- dplyr::tibble() 
+    games_df <- dplyr::tibble()
     return(games_df)
   }
-  
+
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
     as_tibble() %>%
@@ -227,8 +228,8 @@ Check the following url on footywire
     dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
     tidyr::nest(-Round) %>%
     dplyr::mutate(
-        diff_grp = purrr::map(data, ~ max(.x$diff) - 1),
-        cumsum = purrr::accumulate(diff_grp, sum)
+      diff_grp = purrr::map(data, ~ max(.x$diff) - 1),
+      cumsum = purrr::accumulate(diff_grp, sum)
     ) %>%
     purrr::pmap(., concat_round_groups) %>%
     dplyr::bind_rows(.) %>%

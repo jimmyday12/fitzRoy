@@ -14,7 +14,7 @@ test_that("get_afltables_stats works", {
 test_that("get_afltables_stats reutrns the right number of rows", {
   afltables_data_2018 <- afltables_data %>%
     dplyr::filter(Season == 2018)
-    expect_equal(sum(afltables_data_2018$Brownlow.Votes), 1188)
+  expect_equal(sum(afltables_data_2018$Brownlow.Votes), 1188)
 })
 
 test_that("get_afltables_stats returns correct values", {

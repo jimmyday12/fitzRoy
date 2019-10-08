@@ -21,20 +21,22 @@
 #' @export
 #'
 #' @examples
-#' 
+#'
 #' # Return a list of the sources, with ID's
 #' sources <- get_squiggle_data("sources")
-#' 
+#'
 #' # Get tips for Round 1, 2018
 #' tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
-#' 
+#'
 #' # Get tips from Squiggle
 #' squiggle <- get_squiggle_data(query = "tips", source = 1)
-get_squiggle_data <- function(query = c("sources", 
-                                        "games", 
-                                        "tips", 
-                                        "ladder", 
-                                        "standings"), ...) {
+get_squiggle_data <- function(query = c(
+                                "sources",
+                                "games",
+                                "tips",
+                                "ladder",
+                                "standings"
+                              ), ...) {
 
   # Ensure query is valid
   query <- match.arg(query)
@@ -66,30 +68,32 @@ get_squiggle_data <- function(query = c("sources",
   }
 
   message(paste("Getting data from", url))
-  
+
   # set user agent
   ua <- httr::user_agent("https://github.com/jimmyday12/fitzRoy/")
 
   resp <- httr::GET(url, ua)
   httr::warn_for_status(resp)
-  
+
   if (httr::status_code(resp) != 200) {
     rlang::abort(
       glue::glue(
-"The URL responded with the following status:
+        "The URL responded with the following status:
 {httr::http_status(resp)$message}
 
 Does your query make sense? Try the following URL in your browser
-{resp$url}"))
+{resp$url}"
+      )
+    )
   }
-  
+
   if (httr::http_type(resp) != "application/json") {
     stop("API did not return json", call. = FALSE)
   }
-  
+
   dat <- jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = TRUE)
 
-  #dat <- tryCatch(
+  # dat <- tryCatch(
   #  jsonlite::fromJSON(url),
   #  error = function(e) rlang::abort(paste(
   #      "The URL did not work",
@@ -98,7 +102,7 @@ Does your query make sense? Try the following URL in your browser
   #      "browser:",
   #      url
   #    ))
-  #)
+  # )
 
   # Convert the
   df <- as.data.frame(dat[[1]])

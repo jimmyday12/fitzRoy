@@ -47,9 +47,11 @@ test_that("included data is unique", {
 
 test_that("round numbers don't increment across bye weeks without matches", {
   max_round_lag <- get_fixture(2019)$Round %>%
-    unique %>%
-    (function(round) { round - lag(round, default = 0) }) %>%
-    max
+    unique() %>%
+    (function(round) {
+      round - lag(round, default = 0)
+    }) %>%
+    max()
 
   expect_equal(max_round_lag, 1)
 })
