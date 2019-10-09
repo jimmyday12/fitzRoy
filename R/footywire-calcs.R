@@ -168,18 +168,18 @@ get_fixture <- function(season = lubridate::year(Sys.Date()), convert_date = FAL
   games_text <- fixture_xml %>%
     rvest::html_nodes(".data") %>%
     rvest::html_text()
-  
+
 
   if (rlang::is_empty(games_text)) {
     warning(glue::glue(
-"The data for {season} season seems to be empty. 
+"The data for {season} season seems to be empty.
 Check the following url on footywire
 {url_fixture}"))
 
-    games_df <- dplyr::tibble() 
+    games_df <- dplyr::tibble()
     return(games_df)
   }
-  
+
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
     as_tibble() %>%
@@ -268,4 +268,196 @@ Check the following url on footywire
     )
   if (convert_date == TRUE) games_df$Date = as.Date(format(games_df$Date, "%Y-%m-%d"))
   return(games_df)
+}
+
+#' Get AFL match betting odds from footywire.com
+#'
+#' \code{get_footywire_betting_odds} returns a data frame containing betting odds and basic match info for Men's AFL matches.
+#'
+#' The data frame contains the home and away team as well as venue.
+#'
+#' @param start_season First season to return, in yyyy format. Earliest season with data available is 2010.
+#' @param end_season Last season to return, in yyyy format
+#' @return Returns a data frame containing betting odds and basic match info
+#'
+#' @examples
+#' \dontrun{
+#' get_footywire_betting_odds(2012, 2018)
+#' }
+#' @export
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
+get_footywire_betting_odds <- function(
+  start_season = '2010', end_season = lubridate::year(Sys.Date())
+) {
+  raw_betting_col_names <- c(
+    "Date",
+    "Venue",
+    "blank_one",
+    "Team",
+    "Score",
+    "Margin",
+    "Win.Odds",
+    "Win.Paid",
+    "Line.Odds",
+    "colon",
+    "redundant_line_paid",
+    "Line.Paid",
+    "blank_two",
+    "blank_three",
+    "Season"
+  )
+
+  rename_home_away_columns <- function(col_name) {
+    paste0(
+      ifelse(grepl("_home$", col_name), "Home.", "Away."),
+      # pivot_wider automatically prepends an '_' when joining column names,
+      # so we have to remove it along with our home/away labels
+      as.character(col_name) %>% stringr::str_remove(., "_home$|_away$")
+    )
+  }
+
+  row_padding <- function(row, max_row_length) {
+    pad_length = max_row_length - length(row)
+
+    if (pad_length == 0) return(list())
+
+    1:pad_length %>% purrr::map(~ NA)
+  }
+
+  normalize_row_length <- function(rows) {
+    max_row_length <- rows %>%
+      purrr::map(length) %>%
+      unlist %>%
+      max
+
+    rows %>% purrr::map(~ c(row_padding(., max_row_length), .))
+  }
+
+  clean_table_row <- function(table_row_html) {
+    table_row_html %>%
+      rvest::html_text(.) %>%
+      stringr::str_split(., "\\n") %>%
+      # str_split returns a list of length 1 that contains the split strings,
+      # resulting in a list of table rows, each with a list of character vectors,
+      # but it's easier to just work with a list of character vectors
+      unlist %>%
+      stringr::str_trim(.)
+  }
+
+  extract_table_rows <- function(page_html, season) {
+    data_table_row_selector <- "form table table table tr"
+
+    table_rows <- page_html %>%
+      rvest::html_nodes(., data_table_row_selector)
+
+    if (length(table_rows) == 0) {
+      warning(paste0("Skipping ", season, ", because it doesn't have any data."))
+
+      return(NULL)
+    }
+
+    table_rows <- table_rows %>%
+      purrr::map(clean_table_row) %>%
+      purrr::keep(~ length(.x) > 1)
+
+    column_label_row <- table_rows[[1]]
+    is_column_label_row <- function(row) {
+      length(row) == length(column_label_row) && all(row == column_label_row)
+    }
+
+    table_rows %>%
+      purrr::discard(is_column_label_row) %>%
+      normalize_row_length(.) %>%
+      purrr::map(~ c(.x, as.character(season)))
+  }
+
+  fetch_betting_odds_page <- function(season) {
+    footywire_betting_url <- "https://www.footywire.com/afl/footy/afl_betting"
+
+    season %>%
+      paste0(footywire_betting_url, "?year=", .) %>%
+      xml2::read_html(.) %>%
+      list(., season)
+  }
+
+  valid_start_season <- max(as.numeric(start_season), 2010)
+
+  if (is.na(valid_start_season)) {
+    stop(paste0(valid_start_season, " couldn't be coerced to a valid year."))
+  }
+
+  if (as.numeric(start_season) < valid_start_season) {
+    warning(
+      paste0(
+        "2010 is the first season for which betting data is available, ",
+        "so starting from 2010 instead of ",
+        start_season
+      )
+    )
+  }
+
+  valid_end_season <- min(
+    as.numeric(end_season),
+    as.numeric(lubridate::year(Sys.Date()))
+  )
+
+  if (is.na(valid_end_season)) {
+    stop(paste0(valid_end_season, " couldn't be coerced to a valid year."))
+  }
+
+  if (as.numeric(end_season) > valid_end_season) {
+    warning(
+      paste0(
+        valid_end_season,
+        " is the last season for which betting data is available, so ending in ",
+        valid_end_season,
+        " instead of ",
+        end_season
+      )
+    )
+  }
+
+  valid_start_season:valid_end_season %>%
+    purrr::map(fetch_betting_odds_page) %>%
+    purrr::map(., ~ do.call(extract_table_rows, .)) %>%
+    unlist %>%
+    matrix(
+      .,
+      ncol = length(raw_betting_col_names),
+      byrow = TRUE,
+      dimnames = list(NULL, raw_betting_col_names)
+    ) %>%
+    as.data.frame(.) %>%
+    dplyr::select(
+      -c("blank_one", "colon", "redundant_line_paid", "blank_two", "blank_three")
+    ) %>%
+    tidyr::fill(c(Date, Venue)) %>%
+    dplyr::mutate(
+      Date = lubridate::dmy(Date),
+      Venue = as.character(Venue),
+      Team = as.character(Team),
+      Score = as.character(Score) %>% as.numeric(.),
+      Margin = as.character(Margin) %>%
+        stringr::str_replace_all(., "\\+", "") %>%
+        as.numeric(.),
+      Win.Odds = as.character(Win.Odds) %>% as.numeric(.),
+      Win.Paid = as.character(Win.Paid) %>% as.numeric(.),
+      Line.Odds = as.character(Line.Odds) %>%
+        stringr::str_replace_all(., "\\+", "") %>%
+        as.numeric(.),
+      Line.Paid = as.character(Line.Paid) %>% as.numeric(.),
+      Season = as.character(Season) %>% as.numeric(.),
+      # Raw betting data has two rows per match: the top team is home
+      # and the bottom is away
+      Home.Away = ifelse(dplyr::row_number() %% 2 == 1, "home", "away")
+    ) %>%
+    tidyr::pivot_wider(
+      .,
+      names_from = c(Home.Away),
+      values_from = c(
+        Team, Score, Margin, Win.Odds, Win.Paid, Line.Odds, Line.Paid
+      )
+    ) %>%
+    dplyr::rename_if(., names(.) %>% grepl("_home$|_away$", .), rename_home_away_columns)
 }
