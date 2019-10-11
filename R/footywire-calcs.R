@@ -125,7 +125,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 }
 
 
-#' Helper function for \code{get_fixture}
+#' Helper function for \code{get_fixture,betting_data}
 #'
 #' Work out round number of each game from day and week.
 #' Games from Thursday through Wednesday go in same Round.
@@ -490,5 +490,7 @@ get_footywire_betting_odds <- function(
         Team, Score, Margin, Win.Odds, Win.Paid, Line.Odds, Line.Paid
       )
     ) %>%
-    dplyr::rename_if(., names(.) %>% grepl("_home$|_away$", .), rename_home_away_columns)
+    dplyr::rename_if(., names(.) %>% grepl("_home$|_away$", .), rename_home_away_columns) %>%
+    calculate_round(.) %>%
+    dplyr::arrange(Date)
 }
