@@ -224,7 +224,7 @@ Check the following url on footywire
 
   games_df <- games_df %>%
     dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    tidyr::nest(-Round) %>%
+    tidyr::nest(data = c(-Round)) %>%
     dplyr::mutate(
         diff_grp = purrr::map(data, ~ max(.x$diff) - 1),
         cumsum = purrr::accumulate(diff_grp, sum)
