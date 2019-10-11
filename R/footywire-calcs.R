@@ -125,6 +125,75 @@ update_footywire_stats <- function(check_existing = TRUE) {
 }
 
 
+#' Helper function for \code{get_fixture}
+#'
+#' Work out round number of each game from day and week.
+#' Games from Thursday through Wednesday go in same Round.
+#'
+#' @param data_frame A data frame with match-level data and a Date column
+#' @importFrom magrittr %>%
+calculate_round <- function(data_frame) {
+  monday <- 1
+  wednesday <- 3
+
+  concat_round_groups <- function(Round, data, diff_grp, cumulative_diff) {
+    dplyr::mutate(
+      data,
+      Round = Round,
+      diff_grp = diff_grp,
+      cumulative_diff = cumulative_diff
+    )
+  }
+
+  remove_bye_round_gaps <- function(gap_df) {
+    gap_df %>%
+      dplyr::mutate(round_diff = Round - lag(Round, default = 0)) %>%
+      tidyr::nest(data = c(-Round)) %>%
+      dplyr::mutate(
+          diff_grp = purrr::map(data, ~ max(.x$round_diff) - 1),
+          cumulative_diff = purrr::accumulate(diff_grp, sum)
+      ) %>%
+      purrr::pmap(., concat_round_groups) %>%
+      dplyr::bind_rows(.) %>%
+      dplyr::mutate(Round = (Round - cumulative_diff)) %>%
+      dplyr::select(-c(round_diff, cumulative_diff, diff_grp))
+  }
+
+  fix_incorrect_rounds <- function(incorrect_df) {
+    round_df <- data.frame(incorrect_df)
+
+    # Special cases where week counting doesn't work: 2018 collingwood/essendon
+    round_five <- 5
+    round_indices_to_fix <- round_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
+    round_df$Round[round_indices_to_fix] <- round_five
+
+    # 2012-2014: first round shifts round numbers for rest of season
+    round_one <- 1
+    round_indices_to_fix <- round_df$Date >= lubridate::ymd("2012-01-01") &
+      round_df$Date <= lubridate::ymd("2014-12-31")
+    round_df$Round[round_indices_to_fix] <- round_df$Round[round_indices_to_fix] - 1
+    round_df$Round[round_df$Round == 0] <- round_one
+
+    round_df
+  }
+
+  round_df <- data_frame %>%
+    dplyr::mutate(
+      week_count = lubridate::epiweek(Date),
+      day_of_week = lubridate::wday(Date),
+      Round = ifelse(
+        between(day_of_week, monday, wednesday),
+        week_count - 1,
+        week_count
+      ),
+      Round = as.integer(Round - min(Round) + 1)
+    ) %>%
+    fix_incorrect_rounds(.) %>%
+    remove_bye_round_gaps(.) %>%
+    dplyr::select(-c(week_count, day_of_week))
+}
+
+
 #' Get upcoming fixture from footywire.com
 #'
 #' \code{get_fixture} returns a dataframe containing upcoming AFL Men's season fixture.
@@ -192,47 +261,9 @@ Check the following url on footywire
   games_df <- games_df %>%
     filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
-  # Work out day and week of each game.
-  # Games on Thursday > Wednesday go in same Round
   games_df <- games_df %>%
-    dplyr::mutate(
-      Date = lubridate::ydm_hm(paste(season, .data$Date)),
-      epiweek = lubridate::epiweek(.data$Date),
-      w.Day = lubridate::wday(.data$Date),
-      Round = ifelse(between(.data$w.Day, 1, 3),
-        .data$epiweek - 1,
-        .data$epiweek
-      ),
-      Round = as.integer(.data$Round - min(.data$Round) + 1)
-    ) %>%
-    dplyr::select(.data$Date, .data$Round, .data$Teams, .data$Venue)
-
-  # Special cases where this doesn't work
-  # 2018 collingwood/essendon
-  ind <- games_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
-  games_df$Round[ind] <- 5
-
-  # 2012-2014: first round causes issue
-  ind <- games_df$Date > lubridate::ymd("2012-01-01") &
-    games_df$Date < lubridate::ymd("2015-01-01")
-  games_df$Round[ind] <- games_df$Round[ind] - 1
-  games_df$Round[games_df$Round == 0] <- 1
-
-  concat_round_groups <- function(Round, data, diff_grp, cumsum) {
-    dplyr::mutate(data, Round = Round, diff_grp = diff_grp, cum_diff = cumsum)
-  }
-
-  games_df <- games_df %>%
-    dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    tidyr::nest(data = c(-Round)) %>%
-    dplyr::mutate(
-        diff_grp = purrr::map(data, ~ max(.x$diff) - 1),
-        cumsum = purrr::accumulate(diff_grp, sum)
-    ) %>%
-    purrr::pmap(., concat_round_groups) %>%
-    dplyr::bind_rows(.) %>%
-    dplyr::mutate(Round = (.data$Round - .data$cum_diff)) %>%
-    dplyr::select(-.data$diff, -.data$cum_diff)
+    dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) %>%
+    calculate_round(.)
 
   # Fix names
   games_df <- games_df %>%
