@@ -13,6 +13,7 @@ reference:
       - '`get_afltables_stats`'
       - '`get_footywire_stats`'
       - '`update_footywire_stats`'
+      - '`get_footywire_betting_odds`'
       - '`get_match_results`'
       - '`get_score_progression_raw`'
       - '`convert_results`'
@@ -33,6 +34,7 @@ reference:
     desc: Internal functions and helpers
     contents:
       - '`footywire_html`'
+      - '`calculate_round`'
       - '`get_match_data`'
       - '`replace_teams`'
       - '`scrape_afltables_match`'
