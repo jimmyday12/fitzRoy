@@ -20,9 +20,9 @@ test_that("get_aflw_rounds returns data frame with correct variables", {
   expect_equal(
     colnames(get_aflw_rounds(get_aflw_cookie())),
     c(
-      "name", "id", "roundPhase", "currentRoundId", "name1",
-      "year", "season", "roundId", "abbreviation", "competitionId",
-      "roundNumber", "guid"
+      "name", "id", "roundPhase", "name1", "year",
+      "season", "roundId", "abbreviation", "competitionId",
+      "roundNumber", "guid", "currentRoundId"
     )
   )
 })

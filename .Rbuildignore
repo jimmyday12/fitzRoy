@@ -15,3 +15,4 @@ create_package.R
 ^data-raw$
 ^\.travis\.yml$
 ^codecov\.yml$
+^cran-comments\.md$

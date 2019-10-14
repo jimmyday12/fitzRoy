@@ -58,9 +58,9 @@ get_afltables_stats <- function(start_date = "1897-01-01",
 
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
-    if(length(urls) != 0){
-    dat_new <- scrape_afltables_match(urls)
-    dat <- dplyr::bind_rows(dat, dat_new)
+    if (length(urls) != 0) {
+      dat_new <- scrape_afltables_match(urls)
+      dat <- dplyr::bind_rows(dat, dat_new)
     }
   }
   message("Finished getting afltables data")
@@ -168,11 +168,10 @@ get_afltables_player_ids <- function(seasons) {
   }
 
   # nolint start
-  pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/develop/data-raw/afl_tables_playerstats/player_ids.csv"
+  pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
   # nolint end
 
   vars <- c("Season", "Player", "ID", "Team")
-
 
   if (min(seasons) <= 2017) {
     pre_2018 <- pre_urls %>%
@@ -191,7 +190,7 @@ get_afltables_player_ids <- function(seasons) {
         guess_max = 10000
       ) %>%
       purrr::map(~ mutate(., Round = as.character(Round)))
-    
+
     post_2017 <- post_2017 %>%
       purrr::map2_dfr(
         .y = seasons[seasons > 2017],

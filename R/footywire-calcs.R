@@ -94,8 +94,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
     # message("\nChecking Github")
     # Check fitzRoy GitHub
-    dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda" # nolint
-
+    dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy-data/master/data-raw/player_stats/player_stats.rda" # nolint
+    #            https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda
     load_r_data <- function(fname) {
       load(fname)
       get(ls()[ls() != "fname"])
@@ -142,7 +142,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-get_fixture <- function(season = lubridate::year(Sys.Date()), convert_date = FALSE) {
+get_fixture <- function(season = lubridate::year(Sys.Date()),
+                        convert_date = FALSE) {
   if (!is.numeric(season)) {
     stop(paste0(
       "'season' must be in 4-digit year format.",
@@ -168,18 +169,19 @@ get_fixture <- function(season = lubridate::year(Sys.Date()), convert_date = FAL
   games_text <- fixture_xml %>%
     rvest::html_nodes(".data") %>%
     rvest::html_text()
-  
+
 
   if (rlang::is_empty(games_text)) {
     warning(glue::glue(
-"The data for {season} season seems to be empty. 
+      "The data for {season} season seems to be empty. 
 Check the following url on footywire
-{url_fixture}"))
+{url_fixture}"
+    ))
 
-    games_df <- dplyr::tibble() 
+    games_df <- dplyr::tibble()
     return(games_df)
   }
-  
+
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
     as_tibble() %>%
@@ -218,17 +220,21 @@ Check the following url on footywire
   games_df$Round[ind] <- games_df$Round[ind] - 1
   games_df$Round[games_df$Round == 0] <- 1
 
+  concat_round_groups <- function(Round, data, diff_grp, cumsum) {
+    dplyr::mutate(data, Round = Round, diff_grp = diff_grp, cum_diff = cumsum)
+  }
 
   games_df <- games_df %>%
     dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    dplyr::group_by(.data$Round) %>%
-    dplyr::mutate(diff_grp = max(diff, na.rm = TRUE)) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(Round = ifelse(.data$diff_grp == 2,
-      .data$Round - 1,
-      .data$Round
-    )) %>%
-    dplyr::select(-.data$diff, -.data$diff_grp)
+    tidyr::nest(-Round) %>%
+    dplyr::mutate(
+      diff_grp = purrr::map(data, ~ max(.x$diff) - 1),
+      cumsum = purrr::accumulate(diff_grp, sum)
+    ) %>%
+    purrr::pmap(., concat_round_groups) %>%
+    dplyr::bind_rows(.) %>%
+    dplyr::mutate(Round = (.data$Round - .data$cum_diff)) %>%
+    dplyr::select(-.data$diff, -.data$cum_diff)
 
   # Fix names
   games_df <- games_df %>%
@@ -262,6 +268,8 @@ Check the following url on footywire
       .data$Date, .data$Season, .data$Season.Game, .data$Round,
       .data$Home.Team, .data$Away.Team, .data$Venue
     )
-  if (convert_date == TRUE) games_df$Date = as.Date(format(games_df$Date, "%Y-%m-%d"))
+  if (convert_date == TRUE) {
+    games_df$Date <- as.Date(format(games_df$Date, "%Y-%m-%d"))
+  }
   return(games_df)
 }

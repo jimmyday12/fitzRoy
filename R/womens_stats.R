@@ -184,7 +184,7 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' \dontrun{
 #' # All data
 #' get_aflw_match_data()
-#' 
+#'
 #' # 2018 data onward
 #' get_aflw_match_data(start_year = 2018)
 #' }

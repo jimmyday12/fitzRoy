@@ -102,19 +102,7 @@ tail(dat)
 
 
 ### Weather
-We have also included weather data for the 2017 season. This is a work in progress but includes rainfall data from the nearest observation station to each ground. This data is included in the package as `results_weather`.
-
-```{r weather, message=FALSE, warning=FALSE}
-# Get 2017 weather data
-weather <- fitzRoy::results_weather %>%
-  filter(Season == 2017)
-
-# Plot total rainfal for each home team
-ggplot2::ggplot(dat = weather, ggplot2::aes(x = Home.Team, y = Rainfall)) +
-  ggplot2::geom_col() + 
-  ggplot2::coord_flip()
-
-```
+Note - as of v0.2.0 this has been removed
 
 
 ### Squiggle Data

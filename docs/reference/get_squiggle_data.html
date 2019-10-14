@@ -73,7 +73,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.12</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.13</span>
       </span>
     </div>
 
@@ -141,14 +141,15 @@
     
     </div>
 
-    <pre class="usage"><span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>), <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>, <span class='st'>"ladder"</span>,
+  <span class='st'>"standings"</span>), <span class='no'>...</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>query</th>
-      <td><p>A text string. The main query to use with the API.  to one of <code>sources</code>, <code>games</code> or <code>tips</code>.</p></td>
+      <td><p>A text string. The main query to use with the API. Must be one of <code>sources</code>, <code>games</code>, <code>tips</code>, <code>ladder</code> or <code>standings</code></p></td>
     </tr>
     <tr>
       <th>...</th>
