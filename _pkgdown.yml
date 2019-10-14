@@ -25,7 +25,7 @@ reference:
   - title: Data
     desc: Included data 
     contents:
-      - '`player_stats`'
+
   - title: Internals
     desc: Internal functions and helpers
     contents:

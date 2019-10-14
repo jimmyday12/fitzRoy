@@ -41,9 +41,9 @@ test_that("get_fixture filters out unplayed matches ", {
   expect_equal(sum(is.na(get_fixture(2015)$Date)), 0)
 })
 
-test_that("included data is unique", {
-  expect_false(any(duplicated(names(player_stats))))
-})
+#test_that("included data is unique", {
+#  expect_false(any(duplicated(names(player_stats))))
+#})
 
 test_that("round numbers don't increment across bye weeks without matches", {
   max_round_lag <- get_fixture(2019)$Round %>%
