@@ -94,8 +94,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
     # message("\nChecking Github")
     # Check fitzRoy GitHub
-    dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/master/data-raw/player_stats/player_stats.rda" # nolint
-
+    dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy-data/master/data-raw/player_stats/player_stats.rda" # nolint
+    #            https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda
     load_r_data <- function(fname) {
       load(fname)
       get(ls()[ls() != "fname"])

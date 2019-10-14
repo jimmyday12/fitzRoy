@@ -168,11 +168,10 @@ get_afltables_player_ids <- function(seasons) {
   }
 
   # nolint start
-  pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzRoy/develop/data-raw/afl_tables_playerstats/player_ids.csv"
+  pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
   # nolint end
 
   vars <- c("Season", "Player", "ID", "Team")
-
 
   if (min(seasons) <= 2017) {
     pre_2018 <- pre_urls %>%
