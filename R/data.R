@@ -51,30 +51,3 @@
 #' @source \url{http://www.footywire.com}
 "player_stats"
 
-
-#' Results from all AFL Men's matches
-#'
-#' A dataset for all AFL Men's matches since 1897
-#'
-#' @format A data frame with 15200 rows and 16 variables:
-#' \describe{
-#'   \item{Game}{Historical match count}
-#'   \item{Date}{Date of match}
-#'   \item{Round}{Round of season}
-#'   \item{Home.Team}{Home team name}
-#'   \item{Home.Goals}{Home team goals scored}
-#'   \item{Home.Behinds}{Home team behinds scored}
-#'   \item{Home.Points}{Home team points scored}
-#'   \item{Away.Team}{Away team name}
-#'   \item{Away.Goals}{Away team goals scored}
-#'   \item{Away.Behinds}{Away team behinds scored}
-#'   \item{Away.Points}{Away team points scored}
-#'   \item{Venue}{Venue match played out}
-#'   \item{Margin}{Final margin in favour of home team}
-#'   \item{Season}{Season year}
-#'   \item{Round.Type}{Round type; either regular or finals}
-#'   \item{Round.Number}{Round number in numeric format}
-#'
-#' }
-#' @source \url{http://www.afltables.com}
-"match_results"
