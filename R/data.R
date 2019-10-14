@@ -94,34 +94,3 @@
 #' }
 #' @source \url{http://www.afltables.com}
 "match_results"
-
-#' Results with weather data.
-#'
-#' A dataset with match results combined with weather data.
-#'
-#' @format A data frame with 15200 rows and 19 variables:
-#' \describe{
-#'   \item{Away.Behinds}{todo}
-#'   \item{Away.Goals}{todo}
-#'   \item{Away.Team}{todo}
-#'   \item{Away.Points}{todo}
-#'   \item{Description}{todo}
-#'   \item{Game}{todo}
-#'   \item{Home.Behinds}{todo}
-#'   \item{Home.Goals}{todo}
-#'   \item{Home.Points}{todo}
-#'   \item{Home.Team}{todo}
-#'   \item{Margin}{todo}
-#'   \item{Rainfall}{todo}
-#'   \item{Round}{todo}
-#'   \item{Round.Number}{todo}
-#'   \item{Round.Type}{todo}
-#'   \item{Season}{todo}
-#'   \item{StationNo}{todo}
-#'   \item{Venue}{todo}
-#'   \item{date}{todo}
-#'
-#'
-#' }
-#' @source \url{http://www.afltables.com}
-"results_weather"

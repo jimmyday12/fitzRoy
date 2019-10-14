@@ -1,4 +1,10 @@
 # fitzRoy 0.2.0.9000
+This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported. 
+
+## Breaking changes
+* Separated out data to be hosted on it's own repo at https://github.com/jimmyday12/fitzroy_data
+* Removal of included weather data and function to return it 
+
 
 # fitzRoy 0.1.13
 * Updated Squiggle API to accept new parameters `ladder`, `standings` and `complete`. ([#73](https://github.com/jimmyday12/fitzRoy/issues/73))
