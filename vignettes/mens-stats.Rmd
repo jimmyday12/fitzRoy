@@ -84,22 +84,32 @@ head(fixture)
 ### Footywire Advanced Player Stats
 Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.
 
-Footywire data from 2010-2017 is included in the package. This will be updated periodically but you will need to update your R package to get access to the latest data.
+*Note - as of v0.2.0, all internal data has been removed from the package. Please use the relevent functions instead.*
 
-```{r footywire}
+The following code no longer works. 
+```{r footywire, eval=FALSE, include=TRUE}
 ## Show the top of player_stats
 head(fitzRoy::player_stats)
 ```
 
 We can also use the `update_footywire_stats` function to get the most up to date data. This will merge data from 2010-current with any new data points. 
 
-```{r update_footywire}
+```{r update_footywire, eval=FALSE, include=TRUE}
 ## Update footywire data
 dat <- update_footywire_stats()
 
-tail(dat)
 ```
 
+Alternatively, we can just return one game if we know it's ID. This can be found by looking at the URL of the match you want. For example, the ID of the 2019 AFL Grand Final is 9927.
+
+https://www.footywire.com/afl/footy/ft_match_statistics?mid=9927
+
+```{r get_footywire_gf, eval=TRUE, include=TRUE}
+## Update footywire data
+dat <- get_footywire_stats(ids = 9927)
+
+head(dat)
+```
 
 ### Weather
 Note - as of v0.2.0 this has been removed
