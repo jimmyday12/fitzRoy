@@ -2,8 +2,17 @@
 This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported. 
 
 ## Breaking changes
+* Removal of included weather data - deprecated
+* Removal of included player data - please use `get_afltables_stats()` or `update_afltables_stats()`
+* Removal of included match data - please use `get_match_results()`
+* Removal of included fixture data - please use `get_fixture()`
+
+## New features
+
+## Bug fixes
+
+## General changes
 * Separated out data to be hosted on it's own repo at https://github.com/jimmyday12/fitzroy_data
-* Removal of included weather data and function to return it 
 
 
 # fitzRoy 0.1.13
