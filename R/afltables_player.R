@@ -14,7 +14,7 @@
 #'
 #' @examples
 #' #
-#' \dontrun{
+#' \donttest{
 #' # Gets all data
 #' get_afltables_stats()
 #' # Specify a date range

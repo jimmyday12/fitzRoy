@@ -58,7 +58,7 @@ get_footywire_stats <- function(ids) {
 #' @return Returns a data frame containing player match stats for each match ID
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' update_footywire_stats()
 #' }
 #' @export
@@ -94,9 +94,9 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
     # message("\nChecking Github")
     # Check fitzRoy GitHub
-    dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda?raw=true"
-    #dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy-data/master/data-raw/player_stats/player_stats.rda" # nolint
-    #dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda"
+    dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda?raw=true" # nolint
+    # dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy-data/master/data-raw/player_stats/player_stats.rda" # nolint
+    # dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda" # nolint
     load_r_data <- function(fname) {
       load(fname)
       get(ls()[ls() != "fname"])
@@ -113,7 +113,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
     } else {
       message(glue::glue("New data found for {length(git_ids)} matches - downloading from footywire.com...")) # nolint
       new_data <- get_footywire_stats(git_ids)
-      #dat <- player_stats %>% dplyr::bind_rows(new_data)
+      # dat <- player_stats %>% dplyr::bind_rows(new_data)
       dat <- new_data
       return(dat)
     }
@@ -223,12 +223,18 @@ Check the following url on footywire
   games_df$Round[games_df$Round == 0] <- 1
 
   concat_round_groups <- function(Round, data_list, diff_grp, cumsum) {
-    dplyr::mutate(data_list, Round = Round, diff_grp = diff_grp, cum_diff = cumsum)
+    dplyr::mutate(data_list, 
+                  Round = Round, 
+                  diff_grp = diff_grp, 
+                  cum_diff = cumsum)
   }
 
   games_df <- games_df %>%
     dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    tidyr::nest(data_list = c(.data$Date, .data$Teams, .data$Venue, .data$diff)) %>%
+    tidyr::nest(data_list = c(.data$Date, 
+                              .data$Teams, 
+                              .data$Venue, 
+                              .data$diff)) %>%
     dplyr::mutate(
       diff_grp = purrr::map(.data$data_list, ~ max(.x$diff) - 1),
       cumsum = purrr::accumulate(.data$diff_grp, sum)

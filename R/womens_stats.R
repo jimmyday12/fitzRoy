@@ -10,7 +10,7 @@
 #' cookie <- get_aflw_cookie()
 #' @export
 get_aflw_cookie <- function() {
-  response <- httr::POST("https://www.afl.com.au/g00/3_c-7x78x78x78.bgm.dpn.bv_/c-7NPSFQIFVT34x24iuuqtx3ax2fx2fx78x78x78.bgm.dpn.bvx2fbqjx2fdgtx2fbgmx2fXNDUplx3fj21d.nbslx3dyis_$/$/$/$/$")
+  response <- httr::POST("https://www.afl.com.au/g00/3_c-7x78x78x78.bgm.dpn.bv_/c-7NPSFQIFVT34x24iuuqtx3ax2fx2fx78x78x78.bgm.dpn.bvx2fbqjx2fdgtx2fbgmx2fXNDUplx3fj21d.nbslx3dyis_$/$/$/$/$") # nolint
   httr::content(response)$token
 }
 
@@ -26,7 +26,7 @@ get_aflw_cookie <- function() {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' get_aflw_rounds(get_aflw_cookie())
 #' }
 #' @export
