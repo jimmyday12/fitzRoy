@@ -152,7 +152,7 @@ calculate_round <- function(data_frame) {
       dplyr::mutate(round_diff = .data$Round - lag(.data$Round, default = 0)) %>%
       tidyr::nest(data = c(-.data$Round)) %>%
       dplyr::mutate(
-          diff_grp = purrr::map(data, ~ max(.x$round_diff) - 1),
+          diff_grp = purrr::map(.data$data, ~ max(.x$round_diff) - 1),
           cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
       ) %>%
       purrr::pmap(., concat_round_groups) %>%
@@ -184,9 +184,9 @@ calculate_round <- function(data_frame) {
       week_count = lubridate::epiweek(.data$Date),
       day_of_week = lubridate::wday(.data$Date),
       Round = ifelse(
-        between(day_of_week, monday, wednesday),
-        week_count - 1,
-        week_count
+        between(.data$day_of_week, monday, wednesday),
+        .data$week_count - 1,
+        .data$week_count
       ),
       Round = as.integer(.data$Round - min(.data$Round) + 1)
     ) %>%
@@ -469,34 +469,35 @@ get_footywire_betting_odds <- function(
     dplyr::select(
       -c("blank_one", "colon", "redundant_line_paid", "blank_two", "blank_three")
     ) %>%
-    tidyr::fill(c(Date, Venue)) %>%
+    tidyr::fill(c(.data$Date, .data$Venue)) %>%
     dplyr::mutate(
-      Date = lubridate::dmy(Date),
-      Venue = as.character(Venue),
-      Team = as.character(Team),
-      Score = as.character(Score) %>% as.numeric(.),
-      Margin = as.character(Margin) %>%
+      Date = lubridate::dmy(.data$Date),
+      Venue = as.character(.data$Venue),
+      Team = as.character(.data$Team),
+      Score = as.character(.data$Score) %>% as.numeric(.),
+      Margin = as.character(.data$Margin) %>%
         stringr::str_replace_all(., "\\+", "") %>%
         as.numeric(.),
-      Win.Odds = as.character(Win.Odds) %>% as.numeric(.),
-      Win.Paid = as.character(Win.Paid) %>% as.numeric(.),
-      Line.Odds = as.character(Line.Odds) %>%
+      Win.Odds = as.character(.data$Win.Odds) %>% as.numeric(.),
+      Win.Paid = as.character(.data$Win.Paid) %>% as.numeric(.),
+      Line.Odds = as.character(.data$Line.Odds) %>%
         stringr::str_replace_all(., "\\+", "") %>%
         as.numeric(.),
-      Line.Paid = as.character(Line.Paid) %>% as.numeric(.),
-      Season = as.character(Season) %>% as.numeric(.),
+      Line.Paid = as.character(.data$Line.Paid) %>% as.numeric(.),
+      Season = as.character(.data$Season) %>% as.numeric(.),
       # Raw betting data has two rows per match: the top team is home
       # and the bottom is away
       Home.Away = ifelse(dplyr::row_number() %% 2 == 1, "home", "away")
     ) %>%
     tidyr::pivot_wider(
       .,
-      names_from = c(Home.Away),
+      names_from = c(.data$Home.Away),
       values_from = c(
-        Team, Score, Margin, Win.Odds, Win.Paid, Line.Odds, Line.Paid
+        .data$Team, .data$Score, .data$Margin, 
+        .data$Win.Odds, .data$Win.Paid, .data$Line.Odds, .data$Line.Paid
       )
     ) %>%
     dplyr::rename_if(., names(.) %>% grepl("_home$|_away$", .), rename_home_away_columns) %>%
     calculate_round(.) %>%
-    dplyr::arrange(Date)
+    dplyr::arrange(.data$Date)
 }
