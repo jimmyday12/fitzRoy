@@ -113,8 +113,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
     } else {
       message(glue::glue("New data found for {length(git_ids)} matches - downloading from footywire.com...")) # nolint
       new_data <- get_footywire_stats(git_ids)
-      # dat <- player_stats %>% dplyr::bind_rows(new_data)
-      dat <- new_data
+      dat <- dat_git %>% dplyr::bind_rows(new_data)
+      # dat <- new_data
       return(dat)
     }
   } else {
