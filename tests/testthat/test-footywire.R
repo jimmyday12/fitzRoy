@@ -34,6 +34,22 @@ test_that("get_fixture works with different inputs ", {
   expect_error(get_fixture("2018-01-01"))
 })
 
+test_that("get_footywire_betting_odds works with different inputs ", {
+  betting_df <- get_footywire_betting_odds(2018, 2019)
+  expect_is(betting_df, "data.frame")
+  expect_is(betting_df$Date[1], "Date")
+
+  betting_df <- get_footywire_betting_odds("2018", "2019")
+  expect_is(betting_df, "data.frame")
+  expect_is(betting_df$Date[1], "Date")
+
+  expect_warning(get_footywire_betting_odds(18, 2010))
+  this_year <- as.numeric(lubridate::year(Sys.Date()))
+  expect_warning(get_footywire_betting_odds(this_year - 1, this_year + 1))
+  expect_error(get_footywire_betting_odds("2018-01-01"))
+  expect_error(get_footywire_betting_odds(2016, "2018-01-01"))
+})
+
 test_that("get_fixture filters out unplayed matches ", {
   # On footywire.com.au/afl/footy/ft_match_list, the 2015 season has two
   # matches marked MATCH CANCELLED along with multiple byes that result in
@@ -46,12 +62,25 @@ test_that("get_fixture filters out unplayed matches ", {
 # })
 
 test_that("round numbers don't increment across bye weeks without matches", {
+<<<<<<< HEAD
   max_round_lag <- get_fixture(2019)$Round %>%
     unique() %>%
     (function(round) {
       round - lag(round, default = 0)
     }) %>%
     max()
+=======
+  calculate_max_round_lag <- function(rounds) {
+    rounds %>%
+    unique %>%
+    (function(round) { round - lag(round, default = 0) }) %>%
+    max
+  }
 
-  expect_equal(max_round_lag, 1)
+  fixture_rounds <- get_fixture(2019)$Round
+  betting_rounds <- get_footywire_betting_odds(2019)$Round
+>>>>>>> 8298b54af7b4feb0cc59f40f0f2bfc626178a1e5
+
+  expect_equal(calculate_max_round_lag(fixture_rounds), 1)
+  expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
