@@ -98,7 +98,6 @@ get_afltables_stats <- function(start_date = "1897-01-01",
 #' @export
 #'
 #' @examples
-#' get_afltables_urls("01/01/2018")
 #' get_afltables_urls("01/01/2018", end_date = "01/04/2018")
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data

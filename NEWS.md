@@ -1,4 +1,4 @@
-# fitzRoy 0.2.0.9000
+# fitzRoy 0.2.0
 This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported. 
 
 ## Breaking changes
