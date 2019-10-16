@@ -8,15 +8,14 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 * Removal of included fixture data - please use `get_fixture()`
 
 ## New features
-
-## Bug fixes
+* Added `get_footywire_betting_odds` function that returns basic match and betting data from www.footywire.com. ([#10](https://github.com/jimmyday12/fitzRoy/issues/10), [@cfranklin11](https://github.com/cfranklin11))
 
 ## General changes
 * Separated out data to be hosted on it's own repo at https://github.com/jimmyday12/fitzroy_data
+* General tidy up in preparation for CRAN submission
 
 
 # fitzRoy 0.1.13
-* Added `get_footywire_betting_odds` function that returns basic match and betting data from www.footywire.com. ([#10](https://github.com/jimmyday12/fitzRoy/issues/10), [@cfranklin11](https://github.com/cfranklin11))
 * Updated Squiggle API to accept new parameters `ladder`, `standings` and `complete`. ([#73](https://github.com/jimmyday12/fitzRoy/issues/73))
 * Added paramter to `get_fixture` to allow Date to be formatted the same as `get_results` ([#58](https://github.com/jimmyday12/fitzRoy/issues/58))
 * Removed duplicate column in `player_data` ([#59](https://github.com/jimmyday12/fitzRoy/issues/59))

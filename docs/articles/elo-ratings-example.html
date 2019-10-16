@@ -134,32 +134,30 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Get data</span></a>
 <a class="sourceLine" id="cb2-2" title="2">results &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitzRoy/topics/get_match_results">get_match_results</a></span>()</a>
 <a class="sourceLine" id="cb2-3" title="3">fixture &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/fitzRoy/topics/get_fixture">get_fixture</a></span>(<span class="dv">2019</span>)</a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; Warning: All elements of `...` must be named.</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; Did you want `data = c(Date, Teams, Venue, diff)`?</span></a>
-<a class="sourceLine" id="cb2-6" title="6"></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(results)</a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; # A tibble: 6 x 16</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 1     1 1897-05-08 R1    Fitzroy            6           13          49</span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; 2     2 1897-05-08 R1    Collingw…          5           11          41</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; 3     3 1897-05-08 R1    Geelong            3            6          24</span></a>
-<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 4     4 1897-05-08 R1    Sydney             3            9          27</span></a>
-<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; 5     5 1897-05-15 R2    Sydney             6            4          40</span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; 6     6 1897-05-15 R2    Essendon           4            6          30</span></a>
-<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; # … with 9 more variables: Away.Team &lt;chr&gt;, Away.Goals &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb2-18" title="18"><span class="co">#&gt; #   Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;,</span></a>
-<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; #   Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></a>
-<a class="sourceLine" id="cb2-20" title="20"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fixture)</a>
-<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
-<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt;   Date                Season Season.Game Round Home.Team  Away.Team  Venue </span></a>
-<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt;   &lt;dttm&gt;               &lt;int&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; </span></a>
-<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton    Richmond   MCG   </span></a>
-<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; 2 2019-03-22 19:50:00   2019           1     1 Collingwo… Geelong    MCG   </span></a>
-<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; 3 2019-03-23 13:45:00   2019           1     1 Melbourne  Port Adel… MCG   </span></a>
-<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; 4 2019-03-23 16:05:00   2019           1     1 Adelaide   Hawthorn   Adela…</span></a>
-<a class="sourceLine" id="cb2-28" title="28"><span class="co">#&gt; 5 2019-03-23 19:20:00   2019           1     1 Brisbane … West Coast Gabba </span></a>
-<a class="sourceLine" id="cb2-29" title="29"><span class="co">#&gt; 6 2019-03-23 19:25:00   2019           1     1 Footscray  Sydney     Marve…</span></a></code></pre></div>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(results)</a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; # A tibble: 6 x 16</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; 1     1 1897-05-08 R1    Fitzroy            6           13          49</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="co">#&gt; 2     2 1897-05-08 R1    Collingw…          5           11          41</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="co">#&gt; 3     3 1897-05-08 R1    Geelong            3            6          24</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="co">#&gt; 4     4 1897-05-08 R1    Sydney             3            9          27</span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="co">#&gt; 5     5 1897-05-15 R2    Sydney             6            4          40</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="co">#&gt; 6     6 1897-05-15 R2    Essendon           4            6          30</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="co">#&gt; # … with 9 more variables: Away.Team &lt;chr&gt;, Away.Goals &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="co">#&gt; #   Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;,</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="co">#&gt; #   Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(fixture)</a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="co">#&gt; # A tibble: 6 x 7</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="co">#&gt;   Date                Season Season.Game Round Home.Team  Away.Team  Venue </span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="co">#&gt;   &lt;dttm&gt;               &lt;int&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;      &lt;chr&gt; </span></a>
+<a class="sourceLine" id="cb2-22" title="22"><span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton    Richmond   MCG   </span></a>
+<a class="sourceLine" id="cb2-23" title="23"><span class="co">#&gt; 2 2019-03-22 19:50:00   2019           1     1 Collingwo… Geelong    MCG   </span></a>
+<a class="sourceLine" id="cb2-24" title="24"><span class="co">#&gt; 3 2019-03-23 13:45:00   2019           1     1 Melbourne  Port Adel… MCG   </span></a>
+<a class="sourceLine" id="cb2-25" title="25"><span class="co">#&gt; 4 2019-03-23 16:05:00   2019           1     1 Adelaide   Hawthorn   Adela…</span></a>
+<a class="sourceLine" id="cb2-26" title="26"><span class="co">#&gt; 5 2019-03-23 19:20:00   2019           1     1 Brisbane … West Coast Gabba </span></a>
+<a class="sourceLine" id="cb2-27" title="27"><span class="co">#&gt; 6 2019-03-23 19:25:00   2019           1     1 Footscray  Sydney     Marve…</span></a></code></pre></div>
 </div>
 <div id="prepare-data" class="section level2">
 <h2 class="hasAnchor">
