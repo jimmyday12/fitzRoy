@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Results with weather data. — results_weather • fitzRoy</title>
+<title>Get AFL match betting odds from footywire.com — get_footywire_betting_odds • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Results with weather data. — results_weather" />
-<meta property="og:description" content="A dataset with match results combined with weather data." />
+<meta property="og:title" content="Get AFL match betting odds from footywire.com — get_footywire_betting_odds" />
+<meta property="og:description" content="get_footywire_betting_odds returns a data frame containing betting odds and basic match info for Men's AFL matches." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -136,53 +136,50 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Results with weather data.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/data.R'><code>R/data.R</code></a></small>
-    <div class="hidden name"><code>results_weather.Rd</code></div>
+    <h1>Get AFL match betting odds from footywire.com</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/footywire-calcs.R'><code>R/footywire-calcs.R</code></a></small>
+    <div class="hidden name"><code>get_footywire_betting_odds.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>A dataset with match results combined with weather data.</p>
+    <p><code>get_footywire_betting_odds</code> returns a data frame containing betting odds and basic match info for Men's AFL matches.</p>
     </div>
 
-    <pre class="usage"><span class='no'>results_weather</span></pre>
+    <pre class="usage"><span class='fu'>get_footywire_betting_odds</span>(<span class='kw'>start_season</span> <span class='kw'>=</span> <span class='st'>"2010"</span>,
+  <span class='kw'>end_season</span> <span class='kw'>=</span> <span class='kw pkg'>lubridate</span><span class='kw ns'>::</span><span class='fu'><a href='http://lubridate.tidyverse.org/reference/year.html'>year</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>()))</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>start_season</th>
+      <td><p>First season to return, in yyyy format. Earliest season with data available is 2010.</p></td>
+    </tr>
+    <tr>
+      <th>end_season</th>
+      <td><p>Last season to return, in yyyy format</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame with 15200 rows and 19 variables:</p><dl class='dl-horizontal'>
-<dt>Away.Behinds</dt><dd><p>todo</p></dd>
-<dt>Away.Goals</dt><dd><p>todo</p></dd>
-<dt>Away.Team</dt><dd><p>todo</p></dd>
-<dt>Away.Points</dt><dd><p>todo</p></dd>
-<dt>Description</dt><dd><p>todo</p></dd>
-<dt>Game</dt><dd><p>todo</p></dd>
-<dt>Home.Behinds</dt><dd><p>todo</p></dd>
-<dt>Home.Goals</dt><dd><p>todo</p></dd>
-<dt>Home.Points</dt><dd><p>todo</p></dd>
-<dt>Home.Team</dt><dd><p>todo</p></dd>
-<dt>Margin</dt><dd><p>todo</p></dd>
-<dt>Rainfall</dt><dd><p>todo</p></dd>
-<dt>Round</dt><dd><p>todo</p></dd>
-<dt>Round.Number</dt><dd><p>todo</p></dd>
-<dt>Round.Type</dt><dd><p>todo</p></dd>
-<dt>Season</dt><dd><p>todo</p></dd>
-<dt>StationNo</dt><dd><p>todo</p></dd>
-<dt>Venue</dt><dd><p>todo</p></dd>
-<dt>date</dt><dd><p>todo</p></dd>
+    <p>Returns a data frame containing betting odds and basic match info</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
+    <p>The data frame contains the home and away team as well as venue.</p>
 
-</dl>
-    <h2 class="hasAnchor" id="source"><a class="anchor" href="#source"></a>Source</h2>
-
-    <p><a href='http://www.afltables.com'>http://www.afltables.com</a></p>
-
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>get_footywire_betting_odds</span>(<span class='fl'>2012</span>, <span class='fl'>2018</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#format">Format</a></li>
-      <li><a href="#source">Source</a></li>
+      <li><a href="#arguments">Arguments</a></li>
+      <li><a href="#value">Value</a></li>
+      <li><a href="#details">Details</a></li>
+      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>
