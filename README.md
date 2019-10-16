@@ -12,6 +12,8 @@ status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)]
 [![Project
 Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 <!-- [![Lifecycle: maturing](http://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
+[![CRAN
+status](https://www.r-pkg.org/badges/version/fitzRoy)](https://CRAN.R-project.org/package=fitzRoy)
 <!-- badges: end -->
 
 ## Overview
@@ -45,9 +47,10 @@ data during the season.
 
 #### Mens data
 
-Various data is included from both [AFL Tables](afltables.com) and
-[Footy Wire](footywire.com). At the most basic level, you can access
-match results and the upcoming fixture as below. Read the full [Mens
+Various data is included from both [AFL Tables](https://afltables.com)
+and [Footy Wire](https://footywire.com). At the most basic level, you
+can access match results and the upcoming fixture as below. Read the
+full [Mens
 Vignette](https://jimmyday12.github.io/fitzRoy/articles/mens-stats.html)
 for further instructions.
 
@@ -88,7 +91,7 @@ run one of the following commands.
   - To start [RStudio](https://www.rstudio.com/) with Fitzroy ready to
     use:
       - `docker run -d -p 8787:8787 --name fitzroy
-        jimmyday12/fitzroy:latest` and open <http://localhost:8787>.
+        jimmyday12/fitzroy:latest` and open `http://localhost:8787`.
         \*(Username: `rstudio`, Password: `rstudio`)
   - To start an R terminal prompt with fitzRoy ready to use:
       - `docker run -it jimmyday12/fitzroy:latest R` to start with an R
@@ -105,6 +108,6 @@ repository.
 
 -----
 
-Please note that the 'fitzRoy' project is released with a
-[Contributor Code of Conduct](.github/CODE_OF_CONDUCT.md).
-By contributing to this project, you agree to abide by its terms.
+Please note that the ‘fitzRoy’ project is released with a [Contributor
+Code of Conduct](.github/CODE_OF_CONDUCT.md). By contributing to this
+project, you agree to abide by its terms.
