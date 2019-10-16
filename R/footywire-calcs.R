@@ -149,16 +149,16 @@ calculate_round <- function(data_frame) {
 
   remove_bye_round_gaps <- function(gap_df) {
     gap_df %>%
-      dplyr::mutate(round_diff = Round - lag(Round, default = 0)) %>%
-      tidyr::nest(data = c(-Round)) %>%
+      dplyr::mutate(round_diff = .data$Round - lag(.data$Round, default = 0)) %>%
+      tidyr::nest(data = c(-.data$Round)) %>%
       dplyr::mutate(
           diff_grp = purrr::map(data, ~ max(.x$round_diff) - 1),
-          cumulative_diff = purrr::accumulate(diff_grp, sum)
+          cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
       ) %>%
       purrr::pmap(., concat_round_groups) %>%
       dplyr::bind_rows(.) %>%
-      dplyr::mutate(Round = (Round - cumulative_diff)) %>%
-      dplyr::select(-c(round_diff, cumulative_diff, diff_grp))
+      dplyr::mutate(Round = (.data$Round - .data$cumulative_diff)) %>%
+      dplyr::select(-c(.data$round_diff, .data$cumulative_diff, .data$diff_grp))
   }
 
   fix_incorrect_rounds <- function(incorrect_df) {
@@ -181,18 +181,18 @@ calculate_round <- function(data_frame) {
 
   round_df <- data_frame %>%
     dplyr::mutate(
-      week_count = lubridate::epiweek(Date),
-      day_of_week = lubridate::wday(Date),
+      week_count = lubridate::epiweek(.data$Date),
+      day_of_week = lubridate::wday(.data$Date),
       Round = ifelse(
         between(day_of_week, monday, wednesday),
         week_count - 1,
         week_count
       ),
-      Round = as.integer(Round - min(Round) + 1)
+      Round = as.integer(.data$Round - min(.data$Round) + 1)
     ) %>%
     fix_incorrect_rounds(.) %>%
     remove_bye_round_gaps(.) %>%
-    dplyr::select(-c(week_count, day_of_week))
+    dplyr::select(-c(.data$week_count, .data$day_of_week))
 }
 
 
