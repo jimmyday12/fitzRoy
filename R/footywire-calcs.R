@@ -152,8 +152,8 @@ calculate_round <- function(data_frame) {
       dplyr::mutate(round_diff = .data$Round - lag(.data$Round, default = 0)) %>%
       tidyr::nest(data = c(-.data$Round)) %>%
       dplyr::mutate(
-          diff_grp = purrr::map(.data$data, ~ max(.x$round_diff) - 1),
-          cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
+        diff_grp = purrr::map(.data$data, ~ max(.x$round_diff) - 1),
+        cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
       ) %>%
       purrr::pmap(., concat_round_groups) %>%
       dplyr::bind_rows(.) %>%
@@ -325,8 +325,7 @@ Check the following url on footywire
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 get_footywire_betting_odds <- function(
-  start_season = '2010', end_season = lubridate::year(Sys.Date())
-) {
+                                       start_season = "2010", end_season = lubridate::year(Sys.Date())) {
   raw_betting_col_names <- c(
     "Date",
     "Venue",
@@ -355,18 +354,20 @@ get_footywire_betting_odds <- function(
   }
 
   row_padding <- function(row, max_row_length) {
-    pad_length = max_row_length - length(row)
+    pad_length <- max_row_length - length(row)
 
-    if (pad_length == 0) return(list())
+    if (pad_length == 0) {
+      return(list())
+    }
 
-    1:pad_length %>% purrr::map(~ NA)
+    1:pad_length %>% purrr::map(~NA)
   }
 
   normalize_row_length <- function(rows) {
     max_row_length <- rows %>%
       purrr::map(length) %>%
-      unlist %>%
-      max
+      unlist() %>%
+      max()
 
     rows %>% purrr::map(~ c(row_padding(., max_row_length), .))
   }
@@ -378,7 +379,7 @@ get_footywire_betting_odds <- function(
       # str_split returns a list of length 1 that contains the split strings,
       # resulting in a list of table rows, each with a list of character vectors,
       # but it's easier to just work with a list of character vectors
-      unlist %>%
+      unlist() %>%
       stringr::str_trim(.)
   }
 
@@ -458,7 +459,7 @@ get_footywire_betting_odds <- function(
   valid_start_season:valid_end_season %>%
     purrr::map(fetch_betting_odds_page) %>%
     purrr::map(., ~ do.call(extract_table_rows, .)) %>%
-    unlist %>%
+    unlist() %>%
     matrix(
       .,
       ncol = length(raw_betting_col_names),
@@ -493,7 +494,7 @@ get_footywire_betting_odds <- function(
       .,
       names_from = c(.data$Home.Away),
       values_from = c(
-        .data$Team, .data$Score, .data$Margin, 
+        .data$Team, .data$Score, .data$Margin,
         .data$Win.Odds, .data$Win.Paid, .data$Line.Odds, .data$Line.Paid
       )
     ) %>%

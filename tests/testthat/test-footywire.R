@@ -64,9 +64,11 @@ test_that("get_fixture filters out unplayed matches ", {
 test_that("round numbers don't increment across bye weeks without matches", {
   calculate_max_round_lag <- function(rounds) {
     rounds %>%
-    unique %>%
-    (function(round) { round - lag(round, default = 0) }) %>%
-    max
+      unique() %>%
+      (function(round) {
+        round - lag(round, default = 0)
+      }) %>%
+      max()
   }
 
   fixture_rounds <- get_fixture(2019)$Round
