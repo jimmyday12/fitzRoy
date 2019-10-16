@@ -24,7 +24,7 @@ The data for this function is hosted on github to avoid extensive scraping of hi
 }
 \examples{
 #
-\dontrun{
+\donttest{
 # Gets all data
 get_afltables_stats()
 # Specify a date range

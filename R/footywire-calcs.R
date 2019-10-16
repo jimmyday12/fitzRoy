@@ -244,11 +244,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
 
   if (rlang::is_empty(games_text)) {
     warning(glue::glue(
-<<<<<<< HEAD
       "The data for {season} season seems to be empty. 
-=======
-"The data for {season} season seems to be empty.
->>>>>>> 8298b54af7b4feb0cc59f40f0f2bfc626178a1e5
 Check the following url on footywire
 {url_fixture}"
     ))
@@ -270,55 +266,8 @@ Check the following url on footywire
     filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
   games_df <- games_df %>%
-<<<<<<< HEAD
-    dplyr::mutate(
-      Date = lubridate::ydm_hm(paste(season, .data$Date)),
-      epiweek = lubridate::epiweek(.data$Date),
-      w.Day = lubridate::wday(.data$Date),
-      Round = ifelse(between(.data$w.Day, 1, 3),
-        .data$epiweek - 1,
-        .data$epiweek
-      ),
-      Round = as.integer(.data$Round - min(.data$Round) + 1)
-    ) %>%
-    dplyr::select(.data$Date, .data$Round, .data$Teams, .data$Venue)
-
-  # Special cases where this doesn't work
-  # 2018 collingwood/essendon
-  ind <- games_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
-  games_df$Round[ind] <- 5
-
-  # 2012-2014: first round causes issue
-  ind <- games_df$Date > lubridate::ymd("2012-01-01") &
-    games_df$Date < lubridate::ymd("2015-01-01")
-  games_df$Round[ind] <- games_df$Round[ind] - 1
-  games_df$Round[games_df$Round == 0] <- 1
-
-  concat_round_groups <- function(Round, data_list, diff_grp, cumsum) {
-    dplyr::mutate(data_list, 
-                  Round = Round, 
-                  diff_grp = diff_grp, 
-                  cum_diff = cumsum)
-  }
-
-  games_df <- games_df %>%
-    dplyr::mutate(diff = .data$Round - lag(.data$Round, default = 0)) %>%
-    tidyr::nest(data_list = c(.data$Date, 
-                              .data$Teams, 
-                              .data$Venue, 
-                              .data$diff)) %>%
-    dplyr::mutate(
-      diff_grp = purrr::map(.data$data_list, ~ max(.x$diff) - 1),
-      cumsum = purrr::accumulate(.data$diff_grp, sum)
-    ) %>%
-    purrr::pmap(., concat_round_groups) %>%
-    dplyr::bind_rows(.) %>%
-    dplyr::mutate(Round = (.data$Round - .data$cum_diff)) %>%
-    dplyr::select(-.data$diff, -.data$cum_diff)
-=======
     dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) %>%
     calculate_round(.)
->>>>>>> 8298b54af7b4feb0cc59f40f0f2bfc626178a1e5
 
   # Fix names
   games_df <- games_df %>%

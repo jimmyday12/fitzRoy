@@ -62,14 +62,6 @@ test_that("get_fixture filters out unplayed matches ", {
 # })
 
 test_that("round numbers don't increment across bye weeks without matches", {
-<<<<<<< HEAD
-  max_round_lag <- get_fixture(2019)$Round %>%
-    unique() %>%
-    (function(round) {
-      round - lag(round, default = 0)
-    }) %>%
-    max()
-=======
   calculate_max_round_lag <- function(rounds) {
     rounds %>%
     unique %>%
@@ -79,8 +71,6 @@ test_that("round numbers don't increment across bye weeks without matches", {
 
   fixture_rounds <- get_fixture(2019)$Round
   betting_rounds <- get_footywire_betting_odds(2019)$Round
->>>>>>> 8298b54af7b4feb0cc59f40f0f2bfc626178a1e5
-
   expect_equal(calculate_max_round_lag(fixture_rounds), 1)
   expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
