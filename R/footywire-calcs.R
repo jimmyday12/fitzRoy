@@ -329,7 +329,9 @@ Check the following url on footywire
 #' @importFrom rlang .data
 get_footywire_betting_odds <- function(
                                        start_season = "2010", 
-                                       end_season = lubridate::year(Sys.Date())) {
+                                       end_season = Sys.Date()) {
+  if (class(Sys.Date()) == "Date") format(end_season, "%Y")
+  
   raw_betting_col_names <- c(
     "Date",
     "Venue",

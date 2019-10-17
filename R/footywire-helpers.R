@@ -125,7 +125,6 @@ footywire_html <- function(x, id) {
 #'
 #' @param id A match id from afltables
 #' @importFrom magrittr %>%
-#' @import dplyr
 #' @importFrom rvest html_nodes
 #' @importFrom rvest html_text
 get_match_data <- function(id) {

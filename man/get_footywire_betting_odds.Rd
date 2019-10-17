@@ -5,7 +5,7 @@
 \title{Get AFL match betting odds from footywire.com}
 \usage{
 get_footywire_betting_odds(start_season = "2010",
-  end_season = lubridate::year(Sys.Date()))
+  end_season = Sys.Date())
 }
 \arguments{
 \item{start_season}{First season to return, in yyyy format. Earliest season with data available is 2010.}
