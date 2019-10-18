@@ -25,7 +25,7 @@ scrape_afltables_match <- function(match_urls) {
   message("Downloading data\n")
 
   # nolint start
-  pb <- progress_estimated(length(match_urls))
+  pb <- dplyr::progress_estimated(length(match_urls))
 
   match_xmls <- match_urls %>%
     purrr::map(~ {
@@ -85,7 +85,7 @@ scrape_afltables_match <- function(match_urls) {
     purrr::map2(.y = away_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
 
   games <- home_games %>%
-    purrr::map2(.y = away_games, ~ bind_rows(.x, .y))
+    purrr::map2(.y = away_games, ~ dplyr::bind_rows(.x, .y))
 
   att_lgl <- details %>%
     purrr::map(~ stringr::str_detect(.x[2], "Attendance"))
@@ -148,13 +148,13 @@ scrape_afltables_match <- function(match_urls) {
   names(games_df) <- make.names(names(games_df))
 
   # nolint start
-  if ("X." %in% names(games_df)) games_df <- rename(games_df, Jumper.No. = .data$X.)
+  if ("X." %in% names(games_df)) games_df <- dplyr::rename(games_df, Jumper.No. = .data$X.)
   if ("X1." %in% names(games_df)) {
-    games_df <- rename(games_df,
+    games_df <- dplyr::rename(games_df,
       One.Percenters = .data$X1.
     )
   }
-  if ("X.P" %in% names(games_df)) games_df <- rename(games_df, TOG = .data$X.P)
+  if ("X.P" %in% names(games_df)) games_df <- dplyr::rename(games_df, TOG = .data$X.P)
   # nolint end
 
   # change column types
@@ -188,7 +188,7 @@ scrape_afltables_match <- function(match_urls) {
       sep = ",", fill = "right"
     ) %>%
     dplyr::mutate_at(
-      vars(starts_with("Umpire")),
+      dplyr::vars(starts_with("Umpire")),
       stringr::str_replace, " \\(.*\\)", ""
     )
 

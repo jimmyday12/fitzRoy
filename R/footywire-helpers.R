@@ -111,7 +111,7 @@ footywire_html <- function(x, id) {
       .data$Team,
       .data$Opposition,
       .data$Status,
-      everything()
+      dplyr::everything()
     )
 
   names(player_stats) <- make.names(names(player_stats))
@@ -146,8 +146,8 @@ get_match_data <- function(id) {
     # Check if Advanced Page exist? If it doesn't, the script breaks
     # since the html tables have different nodes
     advanced_empty <- footywire_basic %>%
-      html_nodes(".notice") %>%
-      html_text() %>%
+      rvest::html_nodes(".notice") %>%
+      rvest::html_text() %>%
       stringr::str_detect("Advanced") %>%
       rlang::is_empty()
 
@@ -178,13 +178,13 @@ get_match_data <- function(id) {
           "Team", "Opposition", "Status", "Match_id"
         )
         player_stats_table <- player_stats_advanced %>%
-          select(-one_of(info_columns)) %>%
-          bind_cols(player_stats_basic) %>%
-          select(one_of(info_columns), everything())
+          dplyr::select(-dplyr::one_of(info_columns)) %>%
+          dplyr::bind_cols(player_stats_basic) %>%
+          dplyr::select(dplyr::one_of(info_columns), dplyr::everything())
 
         # Tidy Names
         player_stats_table <- player_stats_table %>%
-          rename(
+          dplyr::rename(
             DE = .data$DE.,
             TOG = .data$TOG.,
             One.Percenters = .data$X1.

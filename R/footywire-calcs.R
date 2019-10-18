@@ -28,7 +28,7 @@ get_footywire_stats <- function(ids) {
 
   # Create Progress Bar
   # nolint start
-  pb <- progress_estimated(length(ids), min_time = 5)
+  pb <- dplyr::progress_estimated(length(ids), min_time = 5)
 
   # Loop through data using map
   dat <- ids %>%
@@ -40,7 +40,7 @@ get_footywire_stats <- function(ids) {
 
   # Rearrange
   dat <- dat %>%
-    arrange(.data$Date, .data$Match_id, desc(.data$Status))
+    dplyr::arrange(.data$Date, .data$Match_id, desc(.data$Status))
 
   # Finish and return
   message("Finished getting data")
@@ -187,7 +187,7 @@ calculate_round <- function(data_frame) {
       week_count = lubridate::epiweek(.data$Date),
       day_of_week = lubridate::wday(.data$Date),
       Round = ifelse(
-        between(.data$day_of_week, monday, wednesday),
+        dplyr::between(.data$day_of_week, monday, wednesday),
         .data$week_count - 1,
         .data$week_count
       ),
@@ -258,15 +258,15 @@ Check the following url on footywire
 
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
-    as_tibble() %>%
-    select(.data$V1:.data$V3)
+    tibble::as_tibble() %>%
+    dplyr::select(.data$V1:.data$V3)
 
   # Update names
   names(games_df) <- c("Date", "Teams", "Venue")
 
   # Remove Bye & Match Cancelled
   games_df <- games_df %>%
-    filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
+    dplyr::filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
   games_df <- games_df %>%
     dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) %>%

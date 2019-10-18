@@ -75,7 +75,7 @@ get_match_results <- function() {
   # Add in round counter and remove temp column
   match_data <- match_data %>%
     dplyr::group_by(.data$Season) %>%
-    dplyr::mutate(Round.Number = dense_rank(.data$Round.New)) %>%
+    dplyr::mutate(Round.Number = dplyr::dense_rank(.data$Round.New)) %>%
     dplyr::select(-.data$Round.New) %>%
     dplyr::ungroup()
 
