@@ -269,7 +269,9 @@ Check the following url on footywire
     dplyr::filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
   games_df <- games_df %>%
-    dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) %>%
+    dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) 
+  
+  %>%
     calculate_round(.)
 
   # Fix names
@@ -330,7 +332,7 @@ Check the following url on footywire
 get_footywire_betting_odds <- function(
                                        start_season = "2010", 
                                        end_season = Sys.Date()) {
-  if (class(Sys.Date()) == "Date") format(end_season, "%Y")
+  if (class(end_season) == "Date") format(end_season, "%Y")
   
   raw_betting_col_names <- c(
     "Date",

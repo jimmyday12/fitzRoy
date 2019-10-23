@@ -170,15 +170,15 @@ get_afltables_player_ids <- function(seasons) {
   pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
   # nolint end
 
-  vars <- c("Season", "Player", "ID", "Team")
+  col_vars <- c("Season", "Player", "ID", "Team")
 
   if (min(seasons) <= 2017) {
     pre_2018 <- pre_urls %>%
       readr::read_csv(col_types = c("dcdc")) %>%
       mutate(ID = as.integer(.data$ID)) %>%
-      dplyr::select(!!vars) %>%
+      dplyr::select(!!col_vars) %>%
       dplyr::distinct() %>%
-      filter(.data$Season %in% seasons)
+      dplyr::filter(.data$Season %in% seasons)
   }
 
   if (max(seasons) > 2017) {
@@ -188,18 +188,18 @@ get_afltables_player_ids <- function(seasons) {
         col_types = readr::cols(),
         guess_max = 10000
       ) %>%
-      purrr::map(~ mutate(., Round = as.character(Round)))
+      purrr::map(~dplyr::mutate(., Round = as.character(Round)))
 
     post_2017 <- post_2017 %>%
       purrr::map2_dfr(
         .y = seasons[seasons > 2017],
-        ~ mutate(., Season = .y)
+        ~ dplyr::mutate(., Season = .y)
       ) %>%
-      dplyr::select(!!vars) %>%
+      dplyr::select(!!col_vars) %>%
       dplyr::distinct() %>%
       dplyr::rename(Team.abb = .data$Team) %>%
       dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
-      dplyr::select(!!vars)
+      dplyr::select(!!col_vars)
   }
 
   if (max(seasons) <= 2017) {
@@ -207,7 +207,7 @@ get_afltables_player_ids <- function(seasons) {
   } else if (min(seasons) > 2017) {
     return(post_2017)
   } else {
-    id_data <- bind_rows(pre_2018, post_2017)
+    id_data <- dplyr::bind_rows(pre_2018, post_2017)
     return(id_data)
   }
 }

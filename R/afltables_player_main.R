@@ -188,7 +188,7 @@ scrape_afltables_match <- function(match_urls) {
       sep = ",", fill = "right"
     ) %>%
     dplyr::mutate_at(
-      dplyr::vars(starts_with("Umpire")),
+      dplyr::vars(dplyr::starts_with("Umpire")),
       stringr::str_replace, " \\(.*\\)", ""
     )
 
@@ -203,8 +203,8 @@ scrape_afltables_match <- function(match_urls) {
   score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")
   games_cleaned <- games_cleaned %>%
     Reduce(f = sep, x = score_cols) %>%
-    dplyr::mutate_at(vars(contains("HQ")), as.integer) %>%
-    dplyr::mutate_at(vars(contains("AQ")), as.integer) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::contains("HQ")), as.integer) %>%
+    dplyr::mutate_at(dplyr::vars(dplyr::contains("AQ")), as.integer) %>%
     dplyr::rename(
       Home.score = .data$HQ4P,
       Away.score = .data$AQ4P
@@ -229,7 +229,7 @@ scrape_afltables_match <- function(match_urls) {
   }
 
   df <- df %>%
-    dplyr::select(one_of(afldata_cols))
+    dplyr::select(dplyr::one_of(afldata_cols))
 
   df <- df %>%
     dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
