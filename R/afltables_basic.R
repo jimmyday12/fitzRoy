@@ -115,6 +115,23 @@ replace_teams <- function(team) {
     team == "StK" ~ "St Kilda",
     team == "PA" ~ "Port Adelaide",
     team == "WCE" ~ "West Coast",
+    team == "Tigers" ~ "Richmond",
+    team == "Blues" ~ "Carlton",
+    team == "Demons" ~ "Melbourne",
+    team == "Giants" ~ "GWS",
+    team == "GWS Giants" ~ "GWS",
+    team == "Suns" ~ "Gold Coast",
+    team == "Bombers" ~ "Essendon",
+    team == "Swans" ~ "Sydney",
+    team == "Magpies" ~ "Collingwood",
+    team == "Crows" ~ "Adelaide",
+    team == "Bulldogs" ~ "Footscray",
+    team == "Dockers" ~ "Fremantle",
+    team == "Power" ~ "Port Adelaide",
+    team == "Saints" ~ "St Kilda",
+    team == "Eagles" ~ "West Coast",
+    team == "Cats" ~ "Geelong",
+    team == "Hawks" ~ "Hawthorn",
     TRUE ~ team
   )
 }
