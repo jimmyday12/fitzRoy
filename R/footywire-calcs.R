@@ -187,7 +187,7 @@ calculate_round <- function(data_frame) {
       week_count = lubridate::epiweek(.data$Date),
       day_of_week = lubridate::wday(.data$Date),
       Round = ifelse(
-        between(.data$day_of_week, monday, wednesday),
+        dplyr::between(.data$day_of_week, monday, wednesday),
         .data$week_count - 1,
         .data$week_count
       ),
