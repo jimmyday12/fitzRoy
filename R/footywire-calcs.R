@@ -40,7 +40,7 @@ get_footywire_stats <- function(ids) {
 
   # Rearrange
   dat <- dat %>%
-    dplyr::arrange(.data$Date, .data$Match_id, desc(.data$Status))
+    dplyr::arrange(.data$Date, .data$Match_id, dplyr::desc(.data$Status))
 
   # Finish and return
   message("Finished getting data")
@@ -289,7 +289,7 @@ Check the following url on footywire
   # Add season game number
   games_df <- games_df %>%
     dplyr::mutate(
-      Season.Game = row_number(),
+      Season.Game = dplyr::row_number(),
       Season = as.integer(season)
     )
 
