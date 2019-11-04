@@ -289,15 +289,15 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
       "stat", "value",
       .data$stats.averages.goals:.data$team.teamNickname
     ) %>%
-    dplyr::mutate(stat = case_when(
+    dplyr::mutate(stat = dplyr::case_when(
       .data$home.away == "Home" ~ stringr::str_c("home.", .data$stat),
       .data$home.away == "Away" ~ stringr::str_c("away.", .data$stat)
     )) %>%
     dplyr::select(-.data$home.away) %>%
     tidyr::spread(.data$stat, .data$value) %>%
     dplyr::rename_at(
-      dplyr::vars(contains(".lastUpdated")),
-      funs(stringr::str_replace(., "stats", "STATS"))
+      dplyr::vars(dplyr::contains(".lastUpdated")),
+      dplyr::funs(stringr::str_replace(., "stats", "STATS"))
     ) %>%
     dplyr::mutate_at(
       dplyr::vars(tidyselect::contains(".stats", ignore.case = FALSE)),
@@ -305,7 +305,7 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
     ) %>%
     dplyr::rename_at(
       dplyr::vars(tidyselect::contains(".lastUpdated")),
-      funs(stringr::str_replace(., "STATS", "stats"))
+      dplyr::funs(stringr::str_replace(., "STATS", "stats"))
     ) %>%
     dplyr::mutate_at(
       dplyr::vars(tidyselect::contains(".lastUpdated")),

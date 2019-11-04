@@ -36,9 +36,9 @@ test_that("get_afltables_stats returns correct values", {
 
   # finals names are correct
   counts <- afltables_data %>%
-    select(Round) %>%
-    group_by(Round) %>%
-    tally()
+    dplyr::select(Round) %>%
+    dplyr::group_by(Round) %>%
+    dplyr::tally()
   expect_gte(counts$n[counts$Round == "GF"], 4864)
 })
 

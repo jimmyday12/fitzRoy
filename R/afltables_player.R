@@ -175,7 +175,7 @@ get_afltables_player_ids <- function(seasons) {
   if (min(seasons) <= 2017) {
     pre_2018 <- pre_urls %>%
       readr::read_csv(col_types = c("dcdc")) %>%
-      mutate(ID = as.integer(.data$ID)) %>%
+      dplyr::mutate(ID = as.integer(.data$ID)) %>%
       dplyr::select(!!col_vars) %>%
       dplyr::distinct() %>%
       dplyr::filter(.data$Season %in% seasons)

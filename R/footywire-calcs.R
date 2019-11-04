@@ -138,22 +138,24 @@ calculate_round <- function(data_frame) {
   monday <- 1
   wednesday <- 3
 
-  concat_round_groups <- function(Round, data, diff_grp, cumulative_diff) {
-    dplyr::mutate(
-      data,
-      Round = Round,
-      diff_grp = diff_grp,
-      cumulative_diff = cumulative_diff
-    )
-  }
-
   remove_bye_round_gaps <- function(gap_df) {
-    gap_df %>%
+    concat_round_groups <- function(Round, data, diff_grp, cumulative_diff) {
       dplyr::mutate(
-        round_diff = .data$Round - lag(.data$Round, default = 0)) %>%
+        data,
+        Round = Round,
+        diff_grp = diff_grp,
+        cumulative_diff = cumulative_diff
+      )
+    }
+    
+    gap_df$round_diff = gap_df$Round - dplyr::lag(gap_df$Round, default = 0)
+    
+    gap_df %>%
+      #dplyr::mutate(
+      #  round_diff = .data$Round - dplyr::lag(.data$Round, default = 0)) %>%
       tidyr::nest(data = c(-.data$Round)) %>%
       dplyr::mutate(
-        diff_grp = purrr::map(.data$data, ~ max(.x$round_diff) - 1),
+        diff_grp = purrr::map(.data$data, ~ max((max(.x$round_diff) - 1), 0)),
         cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
       ) %>%
       purrr::pmap(., concat_round_groups) %>%
@@ -269,9 +271,7 @@ Check the following url on footywire
     dplyr::filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
   games_df <- games_df %>%
-    dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) 
-  
-  %>%
+    dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) %>%
     calculate_round(.)
 
   # Fix names

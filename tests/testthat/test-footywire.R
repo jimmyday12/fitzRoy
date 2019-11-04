@@ -66,7 +66,7 @@ test_that("round numbers don't increment across bye weeks without matches", {
     rounds %>%
       unique() %>%
       (function(round) {
-        round - lag(round, default = 0)
+        round - dplyr::lag(round, default = 0)
       }) %>%
       max()
   }
