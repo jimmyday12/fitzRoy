@@ -519,5 +519,6 @@ get_footywire_betting_odds <- function(
       rename_home_away_columns
     ) %>%
     calculate_round(.) %>%
+    dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     dplyr::arrange(.data$Date)
 }
