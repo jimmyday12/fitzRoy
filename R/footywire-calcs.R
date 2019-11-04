@@ -147,11 +147,11 @@ calculate_round <- function(data_frame) {
         cumulative_diff = cumulative_diff
       )
     }
-    
-    gap_df$round_diff = gap_df$Round - dplyr::lag(gap_df$Round, default = 0)
-    
+
+    gap_df$round_diff <- gap_df$Round - dplyr::lag(gap_df$Round, default = 0)
+
     gap_df %>%
-      #dplyr::mutate(
+      # dplyr::mutate(
       #  round_diff = .data$Round - dplyr::lag(.data$Round, default = 0)) %>%
       tidyr::nest(data = c(-.data$Round)) %>%
       dplyr::mutate(
@@ -169,7 +169,7 @@ calculate_round <- function(data_frame) {
 
     # Special cases where week counting doesn't work: 2018 collingwood/essendon
     round_five <- 5
-    round_indices_to_fix <- 
+    round_indices_to_fix <-
       round_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
     round_df$Round[round_indices_to_fix] <- round_five
 
@@ -177,7 +177,7 @@ calculate_round <- function(data_frame) {
     round_one <- 1
     round_indices_to_fix <- round_df$Date >= lubridate::ymd("2012-01-01") &
       round_df$Date <= lubridate::ymd("2014-12-31")
-    round_df$Round[round_indices_to_fix] <- 
+    round_df$Round[round_indices_to_fix] <-
       round_df$Round[round_indices_to_fix] - 1
     round_df$Round[round_df$Round == 0] <- round_one
 
@@ -330,10 +330,10 @@ Check the following url on footywire
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 get_footywire_betting_odds <- function(
-                                       start_season = "2010", 
+                                       start_season = "2010",
                                        end_season = Sys.Date()) {
   if (class(end_season) == "Date") format(end_season, "%Y")
-  
+
   raw_betting_col_names <- c(
     "Date",
     "Venue",
@@ -385,7 +385,7 @@ get_footywire_betting_odds <- function(
       rvest::html_text(.) %>%
       stringr::str_split(., "\\n") %>%
       # str_split returns a list of length 1 that contains the split strings,
-      # resulting in a list of table rows, each with a list of character 
+      # resulting in a list of table rows, each with a list of character
       # vectors but it's easier to just work with a list of character vectors
       unlist() %>%
       stringr::str_trim(.)
@@ -398,9 +398,11 @@ get_footywire_betting_odds <- function(
       rvest::html_nodes(., data_table_row_selector)
 
     if (length(table_rows) == 0) {
-      warning(paste0("Skipping ", 
-                     season, ", 
-                     because it doesn't have any data."))
+      warning(paste0(
+        "Skipping ",
+        season, ", 
+                     because it doesn't have any data."
+      ))
 
       return(NULL)
     }
@@ -479,8 +481,10 @@ get_footywire_betting_odds <- function(
     ) %>%
     as.data.frame(.) %>%
     dplyr::select(
-      -c("blank_one", "colon", "redundant_line_paid", 
-         "blank_two", "blank_three")
+      -c(
+        "blank_one", "colon", "redundant_line_paid",
+        "blank_two", "blank_three"
+      )
     ) %>%
     tidyr::fill(c(.data$Date, .data$Venue)) %>%
     dplyr::mutate(
@@ -510,8 +514,10 @@ get_footywire_betting_odds <- function(
         .data$Win.Odds, .data$Win.Paid, .data$Line.Odds, .data$Line.Paid
       )
     ) %>%
-    dplyr::rename_if(., names(.) %>% grepl("_home$|_away$", .), 
-                     rename_home_away_columns) %>%
+    dplyr::rename_if(
+      ., names(.) %>% grepl("_home$|_away$", .),
+      rename_home_away_columns
+    ) %>%
     calculate_round(.) %>%
     dplyr::arrange(.data$Date)
 }
