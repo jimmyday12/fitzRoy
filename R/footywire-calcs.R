@@ -65,6 +65,9 @@ get_footywire_stats <- function(ids) {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 update_footywire_stats <- function(check_existing = TRUE) {
+  if ( !rlang::is_bool(check_existing)) {
+    stop(glue::glue("check_existing should be TRUE or FALSE, not `{class(check_existing)}`")) # nolint
+  }
   message("Getting match ID's...")
 
   # Get all URL's from 2010 (advanced stats) to current year

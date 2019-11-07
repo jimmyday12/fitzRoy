@@ -15,7 +15,6 @@ reference:
       - '`update_footywire_stats`'
       - '`get_footywire_betting_odds`'
       - '`get_match_results`'
-      - '`get_score_progression_raw`'
       - '`convert_results`'
       - '`get_squiggle_data`'
       - '`get_aflw_detailed_data`'
@@ -38,6 +37,7 @@ reference:
       - '`get_afltables_urls`'
       - '`convert_results`'
       - '`get_aflw_cookie`'
+      - '`get_score_progression_raw`'
       
       
       

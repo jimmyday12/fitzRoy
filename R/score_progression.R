@@ -15,7 +15,8 @@ get_score_progression_raw <- function() {
   message(paste(
     "Downloading score progression from Github.",
     "Note this is quite a large file (~8MB)\n",
-    "It is also only up to date to end of 2017"
+    "It is also only up to date to end of 2017",
+    "This will be under development soon"
   ))
 
   # Create URL

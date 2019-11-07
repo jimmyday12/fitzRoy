@@ -95,7 +95,7 @@
       <h1>Womens’ AFL Stats</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2019-10-16</h4>
+            <h4 class="date">2019-11-07</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -120,15 +120,34 @@
 <a class="sourceLine" id="cb3-6" title="6"><span class="co">#&gt; Please use `cols = c(rounds)`</span></a>
 <a class="sourceLine" id="cb3-7" title="7"></a>
 <a class="sourceLine" id="cb3-8" title="8"><span class="co">#&gt; Warning: `cols` is now required.</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; Please use `cols = c(rounds)`</span></a></code></pre></div>
+<a class="sourceLine" id="cb3-9" title="9"><span class="co">#&gt; Please use `cols = c(rounds)`</span></a>
+<a class="sourceLine" id="cb3-10" title="10"></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="co">#&gt; Warning: `cols` is now required.</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="co">#&gt; Please use `cols = c(rounds)`</span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="co">#&gt; CD_R202026401, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-15" title="15"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="co">#&gt; CD_R202026402, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-18" title="18"><span class="co">#&gt; CD_R202026403, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-19" title="19"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-20" title="20"><span class="co">#&gt; CD_R202026404, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-21" title="21"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-22" title="22"><span class="co">#&gt; CD_R202026405, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-23" title="23"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-24" title="24"><span class="co">#&gt; CD_R202026406, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-25" title="25"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-26" title="26"><span class="co">#&gt; CD_R202026407, returning match fixture information only.</span></a>
+<a class="sourceLine" id="cb3-27" title="27"><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></a>
+<a class="sourceLine" id="cb3-28" title="28"><span class="co">#&gt; CD_R202026408, returning match fixture information only.</span></a></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; Observations: 96</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co">#&gt; Observations: 152</span></a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="co">#&gt; Variables: 30</span></a>
 <a class="sourceLine" id="cb4-4" title="4"><span class="co">#&gt; $ Match.Id             &lt;chr&gt; "CD_M20172640101", "CD_M20172640102", "CD_M…</span></a>
 <a class="sourceLine" id="cb4-5" title="5"><span class="co">#&gt; $ Round.Id             &lt;chr&gt; "CD_R201726401", "CD_R201726401", "CD_R2017…</span></a>
 <a class="sourceLine" id="cb4-6" title="6"><span class="co">#&gt; $ Competition.Id       &lt;chr&gt; "CD_S2017264", "CD_S2017264", "CD_S2017264"…</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; $ Venue                &lt;chr&gt; "Ikon Park", "Thebarton Oval", "VU Whitten …</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="co">#&gt; $ Venue                &lt;chr&gt; "Ikon Park", "Thebarton Oval", "Victoria Un…</span></a>
 <a class="sourceLine" id="cb4-8" title="8"><span class="co">#&gt; $ Local.Start.Time     &lt;dttm&gt; 2017-02-03 19:45:00, 2017-02-04 16:35:00, …</span></a>
 <a class="sourceLine" id="cb4-9" title="9"><span class="co">#&gt; $ Round.Number         &lt;int&gt; 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 3, 4, 4, 4…</span></a>
 <a class="sourceLine" id="cb4-10" title="10"><span class="co">#&gt; $ Round.Abbreviation   &lt;chr&gt; "Rd 1", "Rd 1", "Rd 1", "Rd 1", "Rd 2", "Rd…</span></a>

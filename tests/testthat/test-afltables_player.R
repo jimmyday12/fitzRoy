@@ -8,6 +8,7 @@ test_that("get_afltables_stats works", {
   expect_type(afltables_data, "list")
   expect_error(get_afltables_stats("a"))
   expect_error(get_afltables_stats("2018-01-01", "a"))
+  expect_error(get_afltables_stats(end_date = "a"))
   expect_error(get_afltables_stats(""))
 })
 

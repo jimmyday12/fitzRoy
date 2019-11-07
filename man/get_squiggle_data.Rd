@@ -38,6 +38,6 @@ sources <- get_squiggle_data("sources")
 # Get tips for Round 1, 2018
 tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
 
-# Get tips from Squiggle
-squiggle <- get_squiggle_data(query = "tips", source = 1)
+# Get tips from Squiggle 2019
+squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
 }

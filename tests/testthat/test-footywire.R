@@ -76,3 +76,13 @@ test_that("round numbers don't increment across bye weeks without matches", {
   expect_equal(calculate_max_round_lag(fixture_rounds), 1)
   expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
+
+test_that("update_footywire_stats works ", {
+fw_dat <- update_footywire_stats()
+
+expect_type(fw_dat, "list")
+#expect_equal(fw_dat[1,1], "2010-03-25")
+expect_error(update_footywire_stats("a"))
+
+})
+
