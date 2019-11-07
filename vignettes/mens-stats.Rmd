@@ -21,7 +21,7 @@ requireNamespace("ggplot2", quietly = TRUE)
 <!-- This vignette was automatically created from README.Rmd -->
 
 ## Overview
-The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
+The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as [AFLtables](https://afltables.com) and [Footywire](https://www.footywire.com). There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
 
 ## Installation
 
@@ -64,7 +64,7 @@ head(results_long)
 ```
 
 ### AFL Tables player results
-A new function will return all detailed player stats from afltables.com. Primarily, the easiest way to use this is simply to call `get_afltables_stats` with your required `start_date` and `end_date`.
+A new function will return all detailed player stats from [AFLtables](https://afltables.com). Primarily, the easiest way to use this is simply to call `get_afltables_stats` with your required `start_date` and `end_date`.
 
 ```{r afltables_match}
 stats <- get_afltables_stats(start_date = "2000-01-01", end_date = "2018-06-01")
@@ -116,7 +116,7 @@ Note - as of v0.2.0 this has been removed
 
 
 ### Squiggle Data
-You can access data from the [Squiggle API](api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link. 
+You can access data from the [Squiggle API](https://api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link. 
 
 ```{r squiggle1, message=FALSE, warning=FALSE}
 # You can get the sources

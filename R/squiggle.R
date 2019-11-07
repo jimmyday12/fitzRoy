@@ -1,6 +1,6 @@
 #' Access Squiggle data using the squiggle API service.
 #'
-#' Use `get_squiggle_data` to access the [Squiggle](squiggle.com.au) API. See instructions at [api.squiggle.com.au](api.squiggle.com.au).
+#' Use `get_squiggle_data` to access the [Squiggle](https://squiggle.com.au) API. See instructions at [api.squiggle.com.au](https://api.squiggle.com.au).
 #'
 #' The optional arguments to squiggle can be one of the following.
 #'
@@ -11,11 +11,11 @@
 #'   \item source: an integer specifying the ID of the source to return data from, e.g. source = 1
 #' }
 #'
-#' For full instructions, see [api.squiggle.com.au](api.squiggle.com.au)
+#' For full instructions, see [api.squiggle.com.au](https://api.squiggle.com.au)
 #'
 #' @param query A text string. The main query to use with the API. Must be one of `sources`, `games`, `tips`, `ladder` or `standings`
 #'
-#' @param ... (optional) An optional argument provided to the [Squiggle API](api.squiggle.com.au). See details for more info.
+#' @param ... (optional) An optional argument provided to the [Squiggle API](https://api.squiggle.com.au). See details for more info.
 #'
 #' @return A dataframe, with the resultant data that matches the query specified in `query`, as well as any optional filters.
 #' @export

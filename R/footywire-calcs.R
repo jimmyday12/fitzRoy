@@ -3,7 +3,7 @@
 #' \code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
 #'
 #' The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
-#' To find match ID, find the relevant matches on footywire.com
+#' To find match ID, find the relevant matches on https://wwww.footywire.com
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
 #' @return Returns a data frame containing player match stats for each match ID
@@ -24,7 +24,7 @@ get_footywire_stats <- function(ids) {
 
   # Now get data
   # First, only proceed if we've accessed the URL
-  message("Getting data from footywire.com")
+  message("Getting data from https://www.footywire.com")
 
   # Create Progress Bar
   # nolint start
@@ -49,7 +49,7 @@ get_footywire_stats <- function(ids) {
 
 #' Update the included footywire stats data to the specified date.
 #'
-#' \code{update_footywire_stats} returns a dataframe containing player match stats from [footywire](footywire.com)
+#' \code{update_footywire_stats} returns a dataframe containing player match stats from [footywire](https://www.footywire.com)
 #'
 #' The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
 #'
@@ -71,7 +71,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
   message("Getting match ID's...")
 
   # Get all URL's from 2010 (advanced stats) to current year
-  message("Getting player IDs from footywire.com ...")
+  message("Getting player IDs from https://www.footywire.com ...")
   fw_ids <- 2010:as.numeric(format(Sys.Date(), "%Y")) %>%
     purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>% # nolint
     purrr::map(xml2::read_html) %>%
@@ -114,7 +114,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
       message("No new matches found - returning data")
       return(dat_git)
     } else {
-      message(glue::glue("New data found for {length(git_ids)} matches - downloading from footywire.com...")) # nolint
+      message(glue::glue("New data found for {length(git_ids)} matches - downloading from https://www.footywire.com...")) # nolint
       new_data <- get_footywire_stats(git_ids)
       dat <- dat_git %>% dplyr::bind_rows(new_data)
       # dat <- new_data
@@ -204,7 +204,7 @@ calculate_round <- function(data_frame) {
 }
 
 
-#' Get upcoming fixture from footywire.com
+#' Get upcoming fixture from https://www.footywire.com
 #'
 #' \code{get_fixture} returns a dataframe containing upcoming AFL Men's season fixture.
 #'
@@ -315,7 +315,7 @@ Check the following url on footywire
   return(games_df)
 }
 
-#' Get AFL match betting odds from footywire.com
+#' Get AFL match betting odds from https://www.footywire.com
 #'
 #' \code{get_footywire_betting_odds} returns a data frame containing betting odds and basic match info for Men's AFL matches.
 #'

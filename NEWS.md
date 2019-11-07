@@ -84,7 +84,7 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 
 # fitzRoy 0.1.2
 
-* Added `get_squggle_data` function to return data from the [Squiggle API](api.squiggle.com.au)
+* Added `get_squggle_data` function to return data from the [Squiggle API](https://api.squiggle.com.au)
 
 # fitzRoy 0.1.1
 
