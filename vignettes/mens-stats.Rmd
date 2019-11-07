@@ -84,7 +84,7 @@ head(fixture)
 ### Footywire Advanced Player Stats
 Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.
 
-*Note - as of v0.2.0, all internal data has been removed from the package. Please use the relevent functions instead.*
+*Note - as of v0.2.0, all internal data has been removed from the package. Please use the relevant functions instead.*
 
 The following code no longer works. 
 ```{r footywire, eval=FALSE, include=TRUE}

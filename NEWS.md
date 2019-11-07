@@ -17,7 +17,7 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 
 # fitzRoy 0.1.13
 * Updated Squiggle API to accept new parameters `ladder`, `standings` and `complete`. ([#73](https://github.com/jimmyday12/fitzRoy/issues/73))
-* Added paramter to `get_fixture` to allow Date to be formatted the same as `get_results` ([#58](https://github.com/jimmyday12/fitzRoy/issues/58))
+* Added parameter to `get_fixture` to allow Date to be formatted the same as `get_results` ([#58](https://github.com/jimmyday12/fitzRoy/issues/58))
 * Removed duplicate column in `player_data` ([#59](https://github.com/jimmyday12/fitzRoy/issues/59))
 
 # fitzRoy 0.1.12
@@ -34,7 +34,7 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 
 # fitzRoy 0.1.9
 * `get_fixture()` now handles inconsistent assignment of Wednesday games and a related issue for some Round 1 matches where games were being assigned to the wrong round ([#54](https://github.com/jimmyday12/fitzRoy/issues/54)
-* `get_fixture()` now handles the cancelled match in round 14, 2015  ([#56](https://github.com/jimmyday12/fitzRoy/issues/56), [@cfranklin11](https://github.com/cfranklin11))
+* `get_fixture()` now handles the canceled match in round 14, 2015  ([#56](https://github.com/jimmyday12/fitzRoy/issues/56), [@cfranklin11](https://github.com/cfranklin11))
 * `get_aflw_round_data()` now correctly loads data and passes all tests ([#52](https://github.com/jimmyday12/fitzRoy/issues/52) [#53](https://github.com/jimmyday12/fitzRoy/issues/53))
 * `get_afltables_stats` no longer includes erroneous warning messages [#44](https://github.com/jimmyday12/fitzRoy/issues/44)
 * updated the included `fixture` data to 2019 [#50](https://github.com/jimmyday12/fitzRoy/issues/50)
