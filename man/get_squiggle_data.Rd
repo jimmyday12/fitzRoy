@@ -10,13 +10,13 @@ get_squiggle_data(query = c("sources", "games", "tips", "ladder",
 \arguments{
 \item{query}{A text string. The main query to use with the API. Must be one of \code{sources}, \code{games}, \code{tips}, \code{ladder} or \code{standings}}
 
-\item{...}{(optional) An optional argument provided to the \href{api.squiggle.com.au}{Squiggle API}. See details for more info.}
+\item{...}{(optional) An optional argument provided to the \href{https://api.squiggle.com.au}{Squiggle API}. See details for more info.}
 }
 \value{
 A dataframe, with the resultant data that matches the query specified in \code{query}, as well as any optional filters.
 }
 \description{
-Use \code{get_squiggle_data} to access the \href{squiggle.com.au}{Squiggle} API. See instructions at \url{api.squiggle.com.au}.
+Use \code{get_squiggle_data} to access the \href{https://squiggle.com.au}{Squiggle} API. See instructions at \href{https://api.squiggle.com.au}{api.squiggle.com.au}.
 }
 \details{
 The optional arguments to squiggle can be one of the following.
@@ -28,7 +28,7 @@ The optional arguments to squiggle can be one of the following.
 \item source: an integer specifying the ID of the source to return data from, e.g. source = 1
 }
 
-For full instructions, see \url{api.squiggle.com.au}
+For full instructions, see \href{https://api.squiggle.com.au}{api.squiggle.com.au}
 }
 \examples{
 

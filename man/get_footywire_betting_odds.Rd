@@ -2,7 +2,7 @@
 % Please edit documentation in R/footywire-calcs.R
 \name{get_footywire_betting_odds}
 \alias{get_footywire_betting_odds}
-\title{Get AFL match betting odds from footywire.com}
+\title{Get AFL match betting odds from https://www.footywire.com}
 \usage{
 get_footywire_betting_odds(start_season = "2010",
   end_season = Sys.Date())

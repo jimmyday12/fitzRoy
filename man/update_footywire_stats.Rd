@@ -13,7 +13,7 @@ update_footywire_stats(check_existing = TRUE)
 Returns a data frame containing player match stats for each match ID
 }
 \description{
-\code{update_footywire_stats} returns a dataframe containing player match stats from \href{footywire.com}{footywire}
+\code{update_footywire_stats} returns a dataframe containing player match stats from \href{https://www.footywire.com}{footywire}
 }
 \details{
 The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.

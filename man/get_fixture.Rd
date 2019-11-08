@@ -2,7 +2,7 @@
 % Please edit documentation in R/footywire-calcs.R
 \name{get_fixture}
 \alias{get_fixture}
-\title{Get upcoming fixture from footywire.com}
+\title{Get upcoming fixture from https://www.footywire.com}
 \usage{
 get_fixture(season = lubridate::year(Sys.Date()), convert_date = FALSE)
 }
