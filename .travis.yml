@@ -11,7 +11,7 @@ r:
 - 3.3
 - 3.4
 - release
-- develop
+- devel
 
 after_success:
   - Rscript -e 'covr::codecov()'
