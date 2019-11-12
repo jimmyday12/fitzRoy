@@ -8,9 +8,11 @@ The initial submission failed due to an automated test not passing. The specific
   I have been unable to replicate this issue using any of the following. 
   `devtools::check()`
   `devtools::check_win_develop()`
-` rhub::check_for_cran()`
+  `rhub::check_for_cran()`
 
-  All of these pass fine with no errors. I have been advised to resubmit. 
+  All of these pass fine with no errors. I have been advised to resubmit as this may have just been a bug with the automated test server. 
+  
+  There were also some initial NOTES regarding incorrectly formatted URL's that I have fixed in this resubmission. 
 
 ## Test environments
 * local OS X install, R 3.5.3
