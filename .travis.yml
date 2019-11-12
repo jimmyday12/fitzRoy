@@ -5,6 +5,12 @@ warnings_are_errors: false
 sudo: false
 cache: packages
 
+env:
+  - NOT_CRAN=true
+
+r_build_args: '--no-build-vignettes'
+r_check_args: '--as-cran --ignore-vignettes'  
+
 r:
 
 # - 3.2

@@ -1,4 +1,6 @@
 context("test-afltables_player.R")
+testthat::skip_on_cran()
+
 afltables_data <- get_afltables_stats(
   start_date = "1897-05-07",
   end_date = Sys.Date()

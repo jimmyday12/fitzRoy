@@ -1,4 +1,5 @@
 context("test-afltables.R")
+testthat::skip_on_cran()
 
 test_that("get_match_results works", {
   expect_type(get_match_results(), "list")

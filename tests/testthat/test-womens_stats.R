@@ -1,5 +1,7 @@
 context("test-womens_stats")
 
+testthat::skip_on_cran()
+
 skip_if_no_cookie <- function() {
   if (is.null(get_aflw_cookie())) {
     skip("AFLW Cookie not working")

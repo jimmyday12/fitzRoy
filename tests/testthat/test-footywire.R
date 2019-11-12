@@ -1,4 +1,5 @@
 context("testing footywire connections")
+testthat::skip_on_cran()
 
 test_that("get_footywire_stats work with different inputs", {
   expect_type(get_footywire_stats(5000), "list")

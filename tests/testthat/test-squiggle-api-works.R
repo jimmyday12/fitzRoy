@@ -1,4 +1,5 @@
 context("test-squiggle-api-works.R")
+testthat::skip_on_cran()
 
 test_that("Squiggle API queries work", {
   expect_type(get_squiggle_data(), "list")
