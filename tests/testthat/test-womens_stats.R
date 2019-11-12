@@ -1,6 +1,6 @@
 context("test-womens_stats")
 
-testthat::skip_on_cran()
+
 
 skip_if_no_cookie <- function() {
   if (is.null(get_aflw_cookie())) {
@@ -10,6 +10,7 @@ skip_if_no_cookie <- function() {
 
 
 test_that("get_aflw_cookie returns a 32 character string", {
+  testthat::skip_on_cran()
   skip_if_no_cookie()
   expect_type(get_aflw_cookie(), "character")
   expect_equal(nchar(get_aflw_cookie()), 32)
@@ -17,6 +18,7 @@ test_that("get_aflw_cookie returns a 32 character string", {
 })
 
 test_that("get_aflw_rounds returns data frame with correct variables", {
+  testthat::skip_on_cran()
   skip_if_no_cookie()
   expect_type(get_aflw_rounds(get_aflw_cookie()), "list")
   expect_equal(
@@ -30,6 +32,7 @@ test_that("get_aflw_rounds returns data frame with correct variables", {
 })
 
 test_that("get_aflw_round_data returns data frame with correct variables", {
+  testthat::skip_on_cran()
   skip_if_no_cookie()
   expect_type(get_aflw_round_data("CD_R201826401", get_aflw_cookie()), "list")
   expect_equal(
@@ -56,6 +59,7 @@ test_that("get_aflw_round_data returns data frame with correct variables", {
 })
 
 test_that("get_aflw_match_data returns dataframe with correct variables", {
+  testthat::skip_on_cran()
   skip_if_no_cookie()
   expect_type(get_aflw_match_data(), "list")
   expect_equal(
@@ -80,6 +84,7 @@ test_that("get_aflw_match_data returns dataframe with correct variables", {
 })
 
 test_that("get_aflw_detailed_match_data returns dataframe with correct vars", {
+  testthat::skip_on_cran()
   skip_if_no_cookie()
   expect_type(get_aflw_detailed_match_data(
     "CD_M20172640101",
@@ -90,6 +95,7 @@ test_that("get_aflw_detailed_match_data returns dataframe with correct vars", {
 })
 
 test_that("get_afwl_detailed_data returns dataframe", {
+  testthat::skip_on_cran()
   skip_if_no_cookie()
   expect_type(
     get_aflw_detailed_data(c(

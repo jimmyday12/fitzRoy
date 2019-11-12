@@ -1,7 +1,8 @@
 context("testing footywire connections")
-testthat::skip_on_cran()
+
 
 test_that("get_footywire_stats work with different inputs", {
+  testthat::skip_on_cran()
   expect_type(get_footywire_stats(5000), "list")
   expect_error(get_footywire_stats(1))
   expect_error(get_footywire_stats("a"))
@@ -10,6 +11,7 @@ test_that("get_footywire_stats work with different inputs", {
 })
 
 test_that("get_match_data work with different inputs", {
+  testthat::skip_on_cran()
   expect_type(get_match_data(5000), "list")
   expect_error(get_match_data(1))
   expect_error(get_match_data("a"))
@@ -18,6 +20,7 @@ test_that("get_match_data work with different inputs", {
 })
 
 test_that("get_match_data work with different inputs", {
+  testthat::skip_on_cran()
   expect_type(get_match_data(5000), "list")
   expect_error(get_footywire_stats(1))
   expect_error(get_footywire_stats("a"))
@@ -26,6 +29,7 @@ test_that("get_match_data work with different inputs", {
 
 
 test_that("get_fixture works with different inputs ", {
+  testthat::skip_on_cran()
   fixture_df <- get_fixture(2019)
   expect_is(fixture_df, "data.frame")
   expect_is(fixture_df$Date[1], "POSIXt")
@@ -36,6 +40,7 @@ test_that("get_fixture works with different inputs ", {
 })
 
 test_that("get_footywire_betting_odds works with different inputs ", {
+  testthat::skip_on_cran()
   betting_df <- get_footywire_betting_odds(2018, 2019)
   expect_is(betting_df, "data.frame")
   expect_is(betting_df$Date[1], "Date")
@@ -52,6 +57,7 @@ test_that("get_footywire_betting_odds works with different inputs ", {
 })
 
 test_that("get_fixture filters out unplayed matches ", {
+  testthat::skip_on_cran()
   # On footywire.com.au/afl/footy/ft_match_list, the 2015 season has two
   # matches marked MATCH CANCELLED along with multiple byes that result in
   # NA dates if not filtered out
@@ -63,6 +69,7 @@ test_that("get_fixture filters out unplayed matches ", {
 # })
 
 test_that("round numbers don't increment across bye weeks without matches", {
+  testthat::skip_on_cran()
   calculate_max_round_lag <- function(rounds) {
     rounds %>%
       unique() %>%
@@ -79,6 +86,7 @@ test_that("round numbers don't increment across bye weeks without matches", {
 })
 
 test_that("update_footywire_stats works ", {
+  testthat::skip_on_cran()
 fw_dat <- update_footywire_stats()
 
 expect_type(fw_dat, "list")

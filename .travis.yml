@@ -8,8 +8,8 @@ cache: packages
 env:
   - NOT_CRAN=true
 
-r_build_args: '--no-build-vignettes'
-r_check_args: '--as-cran --ignore-vignettes'  
+#r_build_args: '--no-build-vignettes'
+#r_check_args: '--as-cran --ignore-vignettes'  
 
 r:
 
