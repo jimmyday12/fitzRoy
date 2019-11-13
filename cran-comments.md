@@ -8,7 +8,7 @@ Re-submitting in response to email from Uwe Ligges regarding the length testing 
   This is together 21 min, but the overall threshold for a CRAN package is
   10 min check time."
 
-  Most tests required downloading data from an API and so I have included testhtat::skip_on_cran() on all tests that require this to avoid running them on CRAN servers. Testing this locally reduces the test time from ~3mins to 1.7s.
+  Most tests required downloading data from an API or website and so I have included `testhtat::skip_on_cran()` on all tests that require this to avoid running them on CRAN servers. Testing this locally using `rhub::check_for_cran()` reduces the test time from ~3mins to 1.7s.
   
   
 ## Test environments
