@@ -1,19 +1,16 @@
 ## Resubmission
-Re-submitting after a failed initial submission.
+Re-submitting in response to email from Uwe Ligges regarding the length testing run time. Specifically,
 
-The initial submission failed due to an automated test not passing. The specific failure message is below.
-* checking package dependencies ... ERROR
-  Package required but not available: 'readr'
+  "* checking tests ...
+  ** running tests for arch 'i386' ... [10m] OK
+  ** running tests for arch 'x64' ... [11m] OK
 
-  I have been unable to replicate this issue using any of the following. 
-  `devtools::check()`
-  `devtools::check_win_develop()`
-  `rhub::check_for_cran()`
+  This is together 21 min, but the overall threshold for a CRAN package is
+  10 min check time."
 
-  All of these pass fine with no errors. I have been advised to resubmit as this may have just been a bug with the automated test server. 
+  Most tests required downloading data from an API and so I have included testhtat::skip_on_cran() on all tests that require this to avoid running them on CRAN servers. Testing this locally reduces the test time from ~3mins to 1.7s.
   
-  There were also some initial NOTES regarding incorrectly formatted URL's that I have fixed in this resubmission. 
-
+  
 ## Test environments
 * local OS X install, R 3.5.3
 * ubuntu 14.04 (on travis-ci), R 3.5.3
