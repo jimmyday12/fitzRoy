@@ -1,16 +1,9 @@
 ## Resubmission
-Re-submitting in response to email from Uwe Ligges regarding the length testing run time. Specifically,
+Re-submitting in response to email from Jelena Saf regarding single quotes for package names, software names and API names in DESCRIPTION. 
 
-  "* checking tests ...
-  ** running tests for arch 'i386' ... [10m] OK
-  ** running tests for arch 'x64' ... [11m] OK
+I have added single quotes in the DESCRIPTION file for `fitzRoy`, `AFL Tables`, `Footy Wire`, and `The Squiggle`. 
 
-  This is together 21 min, but the overall threshold for a CRAN package is
-  10 min check time."
 
-  Most tests required downloading data from an API or website and so I have included `testhtat::skip_on_cran()` on all tests that require this to avoid running them on CRAN servers. Testing this locally using `rhub::check_for_cran()` reduces the test time from ~3mins to 1.7s.
-  
-  
 ## Test environments
 * local OS X install, R 3.5.3
 * ubuntu 14.04 (on travis-ci), R 3.5.3
