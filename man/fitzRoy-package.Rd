@@ -7,9 +7,9 @@
 \title{fitzRoy: Easily Scrape and Process AFL Data}
 \description{
 An easy package for scraping and processing Australia Rules Football (AFL)
-    data. `fitzRoy` provides a range of functions for accessing publicly available data 
-    from `AFL Tables` <https://afltables.com>, `Footy Wire` <https:///footywire.com> and
-    `The Squiggle` <https://squiggle.com.au>. Further functions allow for easy processing, 
+    data. 'fitzRoy' provides a range of functions for accessing publicly available data 
+    from 'AFL Tables' <https://afltables.com>, 'Footy Wire' <https:///footywire.com> and
+    'The Squiggle' <https://squiggle.com.au>. Further functions allow for easy processing, 
     cleaning and transformation of this data into formats that can be used for analysis.
 }
 \seealso{

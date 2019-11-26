@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+original_options <- options()
 options(tibble.print_min = 5, tibble.print_max = 5)
 requireNamespace("ggplot2", quietly = TRUE)
 ```
@@ -136,4 +137,6 @@ tips <- get_squiggle_data("tips", round = 1, year = 2018)
 head(tips)
 ```
 ---
-
+```{r reset-options, message=FALSE, warning=FALSE, include=FALSE}
+options(original_options)
+```
