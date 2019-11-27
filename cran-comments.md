@@ -1,9 +1,7 @@
 ## Resubmission
-Re-submitting in response to email from Martina Schmirl regarding directional quotes for package names, software names and API names in DESCRIPTION. 
+Re-submitting to fix an incorrect URL in description. Specifically, https///footywire.com has been changed to https://footywire.com. 
 
-I have added changed all backtick quotes with single quotes in the DESCRIPTION file for 'fitzRoy', 'AFL Tables', 'Footy Wire', and 'The Squiggle'.
-
-I have also made sure to reset user options in the vignette `mens-stats.Rmd` as per Martina's comments.  
+All others URL's have also been checked and all tests are passing using `rhub::check_for_cran()` and `devtools::check_win_develop`.
 
 ## Test environments
 * local OS X install, R 3.5.3
