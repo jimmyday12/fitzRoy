@@ -172,8 +172,9 @@ calculate_round <- function(data_frame) {
 
     # Special cases where week counting doesn't work: 2018 collingwood/essendon
     round_five <- 5
+    # Need to use date for filter, because betting data doesn't include time
     round_indices_to_fix <-
-      round_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
+      lubridate::date(round_df$Date) == "2018-04-25"
     round_df$Round[round_indices_to_fix] <- round_five
 
     # 2012-2014: first round shifts round numbers for rest of season

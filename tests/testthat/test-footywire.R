@@ -85,6 +85,14 @@ test_that("round numbers don't increment across bye weeks without matches", {
   expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
 
+test_that("round 5, 2018 is calculated correctly for betting data", {
+  testthat::skip_on_cran()
+  max_matches_per_round <- 9
+  betting_data <- get_footywire_betting_odds(2018, 2018)
+  round_5_data <- betting_data %>% dplry::filter(Round == 5)
+  expect_equal(nrow(round_5_data), 9)
+})
+
 test_that("update_footywire_stats works ", {
   testthat::skip_on_cran()
 fw_dat <- update_footywire_stats()
