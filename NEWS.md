@@ -1,3 +1,5 @@
+# fitzRoy (development version)
+
 # fitzRoy 0.2.0
 This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported. 
 
