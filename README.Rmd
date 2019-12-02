@@ -59,8 +59,13 @@ dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
 The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
 
 ## Installation
+Install the released version of fitzRoy from CRAN:
 
-You can install fitzRoy from github with:
+```{r cran-installation, eval = FALSE}
+install.packages("fitzRoy")
+```
+
+Or install the development version from GitHub with:
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")

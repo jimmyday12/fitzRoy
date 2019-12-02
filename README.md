@@ -26,7 +26,13 @@ functions.
 
 ## Installation
 
-You can install fitzRoy from github with:
+Install the released version of fitzRoy from CRAN:
+
+``` r
+install.packages("fitzRoy")
+```
+
+Or install the development version from GitHub with:
 
 ``` r
 # install.packages("devtools")
