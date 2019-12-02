@@ -12,7 +12,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Easily Scrape and Process AFL Data">
 <meta property="og:description" content="An easy package for scraping and processing Australia Rules Football (AFL)
     data. 'fitzRoy' provides a range of functions for accessing publicly available data 
-    from 'AFL Tables' &lt;https://afltables.com&gt;, 'Footy Wire' &lt;https:///footywire.com&gt; and
+    from 'AFL Tables' &lt;https://afltables.com&gt;, 'Footy Wire' &lt;https://www.footywire.com&gt; and
     'The Squiggle' &lt;https://squiggle.com.au&gt;. Further functions allow for easy processing, 
     cleaning and transformation of this data into formats that can be used for analysis. ">
 <meta name="twitter:card" content="summary">
@@ -40,7 +40,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.0.9000</span>
       </span>
     </div>
 
@@ -114,9 +114,11 @@
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install fitzRoy from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages("devtools")</span></a>
-<a class="sourceLine" id="cb1-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/remote-reexports">install_github</a></span>(<span class="st">"jimmyday12/fitzRoy"</span>)</a></code></pre></div>
+<p>Install the released version of fitzRoy from CRAN:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/install.packages">install.packages</a></span>(<span class="st">"fitzRoy"</span>)</a></code></pre></div>
+<p>Or install the development version from GitHub with:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># install.packages("devtools")</span></a>
+<a class="sourceLine" id="cb2-2" title="2">devtools<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/devtools/topics/remote-reexports">install_github</a></span>(<span class="st">"jimmyday12/fitzRoy"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -130,14 +132,14 @@
 <h4 class="hasAnchor">
 <a href="#mens-data" class="anchor"></a>Mens data</h4>
 <p>Various data is included from both <a href="https://afltables.com">AFL Tables</a> and <a href="https://www.footywire.com">Footy Wire</a>. At the most basic level, you can access match results and the upcoming fixture as below. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/mens-stats.html">Mens Vignette</a> for further instructions.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_match_results.html">get_match_results</a></span>()</a>
-<a class="sourceLine" id="cb2-2" title="2">fixture &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_fixture.html">get_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2019</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_match_results.html">get_match_results</a></span>()</a>
+<a class="sourceLine" id="cb3-2" title="2">fixture &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_fixture.html">get_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2019</span>)</a></code></pre></div>
 </div>
 <div id="afl-womens-data" class="section level4">
 <h4 class="hasAnchor">
 <a href="#afl-womens-data" class="anchor"></a>AFL Womens data</h4>
 <p>From 2019, we are able to provide access to AFL Women’s data. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for details on how to access it.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">aflw_match_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">aflw_match_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</a></code></pre></div>
 </div>
 </div>
 <div id="elo-models" class="section level3">
@@ -188,6 +190,8 @@
     <div class="links">
 <h2>Links</h2>
 <ul class="list-unstyled">
+<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=fitzRoy">https://​cloud.r-project.org/​package=fitzRoy</a>
+</li>
 <li>Browse source code at <br><a href="https://github.com/jimmyday12/fitzRoy">https://​github.com/​jimmyday12/​fitzRoy</a>
 </li>
 <li>Report a bug at <br><a href="https://github.com/jimmyday12/fitzRoy/issues">https://​github.com/​jimmyday12/​fitzRoy/​issues</a>
