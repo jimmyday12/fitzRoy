@@ -85,6 +85,34 @@ test_that("round numbers don't increment across bye weeks without matches", {
   expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
 
+test_that("round 5, 2018 is calculated correctly for betting data", {
+  testthat::skip_on_cran()
+  max_matches_per_round <- 9
+  betting_data <- get_footywire_betting_odds(2018, 2018)
+  round_5_data <- betting_data %>% dplyr::filter(Round == 5)
+  expect_equal(nrow(round_5_data), 9)
+})
+
+test_that("minimum rounds are calculated per season", {
+  testthat::skip_on_cran()
+  # 2014 season starts in week 11, most others start in week 12
+  betting_data <- get_footywire_betting_odds(2014, 2015)
+  betting_data_2015 = betting_data %>%
+    dplyr::filter(lubridate::year(Date) == 2015)
+  expect_equal(min(betting_data_2015$Round), 1)
+})
+
+test_that("round weeks are calculated from wednesday to monday", {
+  testthat::skip_on_cran()
+  betting_data <- get_footywire_betting_odds(2010, 2010)
+  round_1_data = betting_data %>% dplyr::filter(Round == 1)
+
+  # If epiweeks aren't adjusted properly (Sunday to Wednesday), the first round
+  # of 2010 will only have 5 matches due to 3 taking place on Sunday (the start
+  # of a new epiweek)
+  expect_equal(nrow(round_1_data), 8)
+})
+
 test_that("update_footywire_stats works ", {
   testthat::skip_on_cran()
 fw_dat <- update_footywire_stats()

@@ -138,25 +138,20 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @param data_frame A data frame with match-level data and a Date column
 #' @importFrom magrittr %>%
 calculate_round <- function(data_frame) {
-  monday <- 1
-  wednesday <- 3
-
   remove_bye_round_gaps <- function(gap_df) {
-    concat_round_groups <- function(Round, data, diff_grp, cumulative_diff) {
+    concat_round_groups <- function(Round, Season, data, diff_grp, cumulative_diff) {
       dplyr::mutate(
         data,
+        Season = Season,
         Round = Round,
-        diff_grp = diff_grp,
         cumulative_diff = cumulative_diff
       )
     }
 
-    gap_df$round_diff <- gap_df$Round - dplyr::lag(gap_df$Round, default = 0)
-
     gap_df %>%
-      # dplyr::mutate(
-      #  round_diff = .data$Round - dplyr::lag(.data$Round, default = 0)) %>%
-      tidyr::nest(data = c(-.data$Round)) %>%
+      dplyr::mutate(
+        round_diff = .data$Round - dplyr::lag(.data$Round, default = 0)) %>%
+      tidyr::nest(data = -c(.data$Round, .data$Season)) %>%
       dplyr::mutate(
         diff_grp = purrr::map(.data$data, ~ max((max(.x$round_diff) - 1), 0)),
         cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
@@ -164,7 +159,7 @@ calculate_round <- function(data_frame) {
       purrr::pmap(., concat_round_groups) %>%
       dplyr::bind_rows(.) %>%
       dplyr::mutate(Round = (.data$Round - .data$cumulative_diff)) %>%
-      dplyr::select(-c(.data$round_diff, .data$cumulative_diff, .data$diff_grp))
+      dplyr::select(-c(.data$round_diff,.data$cumulative_diff))
   }
 
   fix_incorrect_rounds <- function(incorrect_df) {
@@ -172,8 +167,9 @@ calculate_round <- function(data_frame) {
 
     # Special cases where week counting doesn't work: 2018 collingwood/essendon
     round_five <- 5
+    # Need to use date for filter, because betting data doesn't include time
     round_indices_to_fix <-
-      round_df$Date == lubridate::ymd_hms("2018-04-25 15:20:00")
+      lubridate::date(round_df$Date) == "2018-04-25"
     round_df$Round[round_indices_to_fix] <- round_five
 
     # 2012-2014: first round shifts round numbers for rest of season
@@ -187,20 +183,36 @@ calculate_round <- function(data_frame) {
     round_df
   }
 
+  calculate_round_by_week <- function(roundless_df) {
+    sunday <- 1
+    wednesday <- 4
+
+    round_df <- roundless_df %>%
+      dplyr::mutate(
+        Season = lubridate::year(.data$Date),
+        week_count = lubridate::epiweek(.data$Date),
+        day_of_week = lubridate::wday(.data$Date),
+        Round = ifelse(
+          dplyr::between(.data$day_of_week, sunday, wednesday),
+          .data$week_count - 1,
+          .data$week_count
+        )
+      )
+
+    min_round <- round_df %>%
+      dplyr::group_by(Season) %>%
+      dplyr::summarise(min_round = min(Round))
+
+    round_df %>%
+      dplyr::left_join(., min_round, by = 'Season') %>%
+      dplyr::mutate(Round = as.integer(.data$Round - .data$min_round + 1)) %>%
+      dplyr::select(-c(.data$week_count, .data$day_of_week, .data$min_round))
+  }
+
   round_df <- data_frame %>%
-    dplyr::mutate(
-      week_count = lubridate::epiweek(.data$Date),
-      day_of_week = lubridate::wday(.data$Date),
-      Round = ifelse(
-        dplyr::between(.data$day_of_week, monday, wednesday),
-        .data$week_count - 1,
-        .data$week_count
-      ),
-      Round = as.integer(.data$Round - min(.data$Round) + 1)
-    ) %>%
+    calculate_round_by_week(.) %>%
     fix_incorrect_rounds(.) %>%
-    remove_bye_round_gaps(.) %>%
-    dplyr::select(-c(.data$week_count, .data$day_of_week))
+    remove_bye_round_gaps(.)
 }
 
 
@@ -290,11 +302,7 @@ Check the following url on footywire
     )
 
   # Add season game number
-  games_df <- games_df %>%
-    dplyr::mutate(
-      Season.Game = dplyr::row_number(),
-      Season = as.integer(season)
-    )
+  games_df <- games_df %>% dplyr::mutate(Season.Game = dplyr::row_number())
 
   # Fix Teams
   # Uses internal replace teams function
@@ -335,7 +343,7 @@ Check the following url on footywire
 #' @importFrom rlang .data
 get_footywire_betting_odds <- function(
                                        start_season = "2010",
-                                       end_season = Sys.Date()) {
+                                       end_season = lubridate::year(Sys.Date())) {
   if (class(end_season) == "Date") format(end_season, "%Y")
 
   raw_betting_col_names <- c(
