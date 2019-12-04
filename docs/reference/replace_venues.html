@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get match data (internal function) — get_aflw_round_data • fitzRoy</title>
+<title>Internal function to ensure venue names match between different sources
+and also name changes across time. This gets applied to any web scraper,
+transforming all of them to AFL Tables naming conventions. — replace_venues • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -35,10 +37,12 @@
 
 
 
-<meta property="og:title" content="Get match data (internal function) — get_aflw_round_data" />
-<meta property="og:description" content="For a given round ID, get the data for each match played in that round. Use
-the column roundId in the dataframe created by the get_rounds() function
-to specify matches to fetch." />
+<meta property="og:title" content="Internal function to ensure venue names match between different sources
+and also name changes across time. This gets applied to any web scraper,
+transforming all of them to AFL Tables naming conventions. — replace_venues" />
+<meta property="og:description" content="Internal function to ensure venue names match between different sources
+and also name changes across time. This gets applied to any web scraper,
+transforming all of them to AFL Tables naming conventions." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -138,47 +142,36 @@ to specify matches to fetch." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get match data (internal function)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/womens_stats.R'><code>R/womens_stats.R</code></a></small>
-    <div class="hidden name"><code>get_aflw_round_data.Rd</code></div>
+    <h1>Internal function to ensure venue names match between different sources
+and also name changes across time. This gets applied to any web scraper,
+transforming all of them to AFL Tables naming conventions.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/afltables_basic.R'><code>R/afltables_basic.R</code></a></small>
+    <div class="hidden name"><code>replace_venues.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>For a given round ID, get the data for each match played in that round. Use
-the column <code>roundId</code> in the dataframe created by the <code>get_rounds()</code> function
-to specify matches to fetch.</p>
+    <p>Internal function to ensure venue names match between different sources
+and also name changes across time. This gets applied to any web scraper,
+transforming all of them to AFL Tables naming conventions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_aflw_round_data</span>(<span class='no'>roundid</span>, <span class='no'>cookie</span>)</pre>
+    <pre class="usage"><span class='fu'>replace_venues</span>(<span class='no'>venue</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>roundid</th>
-      <td><p>a round ID string</p></td>
-    </tr>
-    <tr>
-      <th>cookie</th>
-      <td><p>a cookie produced by <code>get_womens_cookie()</code></p></td>
+      <th>venue</th>
+      <td><p>Venue name</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a dataframe containing match data</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_aflw_round_data</span>(<span class='st'>"CD_R201826401"</span>, <span class='fu'><a href='get_aflw_cookie.html'>get_aflw_cookie</a></span>())
-}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
       <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
     </ul>
 
   </div>

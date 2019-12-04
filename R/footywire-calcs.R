@@ -301,6 +301,7 @@ Check the following url on footywire
   games_df <- games_df %>%
     dplyr::group_by(.data$Season.Game) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
+    dplyr::mutate(Venue = replace_venues(Venue)) %>%
     dplyr::ungroup()
 
   # Tidy columns
@@ -523,5 +524,6 @@ get_footywire_betting_odds <- function(
     ) %>%
     calculate_round(.) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
+    dplyr::mutate(Venue = replace_venues(Venue)) %>%
     dplyr::arrange(.data$Date)
 }

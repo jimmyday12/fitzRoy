@@ -33,6 +33,7 @@ reference:
       - '`calculate_round`'
       - '`get_match_data`'
       - '`replace_teams`'
+      - '`replace_venues`'
       - '`scrape_afltables_match`'
       - '`get_afltables_urls`'
       - '`convert_results`'

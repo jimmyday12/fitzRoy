@@ -3,7 +3,9 @@
 language: R
 warnings_are_errors: false
 sudo: false
-cache: packages
+cache:
+  - packages: true
+  - apt: false
 
 env:
   - NOT_CRAN=true
