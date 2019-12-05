@@ -75,7 +75,7 @@ return_ladder <- function(match_results_df=NA, season_round=NA, season=NA) {
     dplyr::mutate(season_points = cumsum(points),
            score_for = cumsum(Score),
            score_against = cumsum(OppScore),
-           percentage = score_for / score_against) %>% ungroup()
+           percentage = score_for / score_against) %>% dplyr::ungroup()
   
   # Round 1 in 2011, Gold Coast had a bye in round 1, so need to fix the NaN for their percentage (R doesn't like 0 / 0)
   df$percentage[is.nan(df$percentage)] <- 0
