@@ -133,7 +133,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' Helper function for \code{get_fixture,betting_data}
 #'
 #' Work out round number of each game from day and week.
-#' Games from Thursday through Wednesday go in same Round.
+#' Games from Wednesday through Tuesday go in same Round.
 #'
 #' @param data_frame A data frame with match-level data and a Date column
 #' @importFrom magrittr %>%
@@ -162,14 +162,15 @@ calculate_round <- function(data_frame) {
       dplyr::select(-c(.data$round_diff,.data$cumulative_diff))
   }
 
+  # Special cases where week counting doesn't work
   fix_incorrect_rounds <- function(incorrect_df) {
     round_df <- data.frame(incorrect_df)
 
-    # Special cases where week counting doesn't work: 2018 collingwood/essendon
+    # 2018 Collingwood/Essendon: Unlike default, this Wednesday match belongs
+    # to previous round (i.e. it's the end of the round, not the beginning)
     round_five <- 5
     # Need to use date for filter, because betting data doesn't include time
-    round_indices_to_fix <-
-      lubridate::date(round_df$Date) == "2018-04-25"
+    round_indices_to_fix <- lubridate::date(round_df$Date) == "2018-04-25"
     round_df$Round[round_indices_to_fix] <- round_five
 
     # 2012-2014: first round shifts round numbers for rest of season
@@ -185,7 +186,7 @@ calculate_round <- function(data_frame) {
 
   calculate_round_by_week <- function(roundless_df) {
     sunday <- 1
-    wednesday <- 4
+    tuesday <- 3
 
     round_df <- roundless_df %>%
       dplyr::mutate(
@@ -193,7 +194,7 @@ calculate_round <- function(data_frame) {
         week_count = lubridate::epiweek(.data$Date),
         day_of_week = lubridate::wday(.data$Date),
         Round = ifelse(
-          dplyr::between(.data$day_of_week, sunday, wednesday),
+          dplyr::between(.data$day_of_week, sunday, tuesday),
           .data$week_count - 1,
           .data$week_count
         )

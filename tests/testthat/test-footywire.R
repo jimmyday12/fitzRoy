@@ -93,6 +93,15 @@ test_that("round 5, 2018 is calculated correctly for betting data", {
   expect_equal(nrow(round_5_data), 9)
 })
 
+test_that("Wednesday matches are at start of round by default", {
+  testthat::skip_on_cran()
+  max_matches_per_round <- 9
+  betting_data <- get_footywire_betting_odds(2019, 2019)
+  # Round 6, 2019 has a Wednesday match
+  round_6_data <- betting_data %>% dplyr::filter(Round == 6)
+  expect_equal(nrow(round_6_data), 9)
+})
+
 test_that("minimum rounds are calculated per season", {
   testthat::skip_on_cran()
   # 2014 season starts in week 11, most others start in week 12
@@ -102,14 +111,14 @@ test_that("minimum rounds are calculated per season", {
   expect_equal(min(betting_data_2015$Round), 1)
 })
 
-test_that("round weeks are calculated from wednesday to monday", {
+test_that("round weeks are calculated from Thursday to Wednesday", {
   testthat::skip_on_cran()
   betting_data <- get_footywire_betting_odds(2010, 2010)
   round_1_data = betting_data %>% dplyr::filter(Round == 1)
 
-  # If epiweeks aren't adjusted properly (Sunday to Wednesday), the first round
-  # of 2010 will only have 5 matches due to 3 taking place on Sunday (the start
-  # of a new epiweek)
+  # If epiweeks aren't adjusted properly (Sunday to Wednesday belong
+  # to previous week), the first round of 2010 will only have 5 matches
+  # due to 3 taking place on Sunday (the start of a new epiweek)
   expect_equal(nrow(round_1_data), 8)
 })
 
