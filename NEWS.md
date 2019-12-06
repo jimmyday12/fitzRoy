@@ -1,5 +1,8 @@
 # fitzRoy 0.2.0.9000
 
+## Features
+* Updated `womens-stats` vignette to prevent it from running chunks if the cookie had failed.
+
 ## Breaking changes
 * Addition of `replace_venues` - changes venue names for all data sources to match AFL Tables ([#15](https://github.com/jimmyday12/fitzRoy/issues/15), [@cfranklin11](https://github.com/cfranklin11))
 
