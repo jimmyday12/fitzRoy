@@ -15,10 +15,6 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
-```{r gh-installation, eval = FALSE, echo = TRUE}
-# install.packages("devtools")
-# devtools::install_github("jimmyday12/fitzRoy")
-```
 
 ### Match data
 
@@ -27,10 +23,26 @@ library(fitzRoy)
 library(dplyr)
 ```
 
+A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won't work. 
+
+```{r cookie, message = FALSE, warning = FALSE}
+cookie <- get_aflw_cookie()
+
+print(cookie)
+```
+Note - if this is `NULL` the rest of this Vignette won't show any outputs but the code will remain! 
+
+```{r cookie_param, include=FALSE}
+if (is.null(cookie)) {
+    eval_param = FALSE
+  }
+
+```
+
 We can use the `get_aflw_match_data()` function to retrieve match data for all
 matches.
 
-```{r fetch_match_stats, message=FALSE, warning=TRUE,}
+```{r fetch_match_stats, message=FALSE, warning=TRUE, eval = eval_param}
 match_data <- get_aflw_match_data()
 ```
 
@@ -38,7 +50,7 @@ Note that there will be warnings if a fixture is available but no match data has
 been added yet. If this is the case, make sure you don't try to request detailed
 match stats for these match IDs. 
 
-```{r show_match_stats, message=FALSE, warning=FALSE}
+```{r show_match_stats, message=FALSE, warning=FALSE, eval = eval_param}
 glimpse(match_data)
 ```
 
@@ -49,13 +61,13 @@ match data shown above. It takes a vector of match IDs as an argument. For
 example, let's say we want detailed stats for the first 10 games in `match_data`
 above. Then we would do:
 
-```{r first_10, message=FALSE, warning=FALSE}
+```{r first_10, message=FALSE, warning=FALSE, eval = eval_param}
 first10 <- head(match_data, 10)
 first10_ids <- first10$Match.Id
 first10_ids
 ```
 
-```{r}
+```{r, eval = eval_param}
 detailed <- get_aflw_detailed_data(first10_ids)
 glimpse(detailed)
 ```
