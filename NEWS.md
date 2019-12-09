@@ -7,7 +7,7 @@
 * Addition of `replace_venues` - changes venue names for all data sources to match AFL Tables ([#15](https://github.com/jimmyday12/fitzRoy/issues/15), [@cfranklin11](https://github.com/cfranklin11))
 
 ## Bug Fixes
-* Fixed incorrect round numbers for fixture and betting data from `footywire.com` ([#93](https://github.com/jimmyday12/fitzRoy/issues/93), [@cfranklin11](https://github.com/cfranklin11))
+* Fixed incorrect round numbers for fixture and betting data from `footywire.com` ([#93](https://github.com/jimmyday12/fitzRoy/issues/93) & [#95](https://github.com/jimmyday12/fitzRoy/issues/95), [@cfranklin11](https://github.com/cfranklin11))
 
 # fitzRoy 0.2.0
 This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported. 
