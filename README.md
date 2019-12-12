@@ -14,6 +14,10 @@ Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostat
 <!-- [![Lifecycle: maturing](http://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
 [![CRAN
 status](https://www.r-pkg.org/badges/version/fitzRoy)](https://CRAN.R-project.org/package=fitzRoy)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
+[![CRAN RStudio total
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
 <!-- badges: end -->
 
 ## Overview
