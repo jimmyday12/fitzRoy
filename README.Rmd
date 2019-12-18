@@ -53,6 +53,7 @@ dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
 [![CRAN status](https://www.r-pkg.org/badges/version/fitzRoy)](https://CRAN.R-project.org/package=fitzRoy)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
 [![CRAN RStudio total downloads](https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
+[![R build status](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy)
 <!-- badges: end -->
 
 

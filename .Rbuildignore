@@ -17,3 +17,6 @@ create_package.R
 ^codecov\.yml$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^\.github/workflows/pr-commands\.yaml$
+^\.github/workflows/pkgdown\.yaml$
+^\.github/workflows/R-CMD-check\.yaml$

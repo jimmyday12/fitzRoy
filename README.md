@@ -18,6 +18,8 @@ status](https://www.r-pkg.org/badges/version/fitzRoy)](https://CRAN.R-project.or
 downloads](https://cranlogs.r-pkg.org/badges/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
 [![CRAN RStudio total
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
+[![R build
+status](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy)
 <!-- badges: end -->
 
 ## Overview
