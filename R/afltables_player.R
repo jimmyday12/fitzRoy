@@ -78,6 +78,10 @@ get_afltables_stats <- function(start_date = "1897-01-01",
   dat$Round[dat$Round == "Preliminary Final"] <- "PF"
   dat$Round[dat$Round == "Qualifying Final"] <- "QF"
   dat$Round[dat$Round == "Semi Final"] <- "SF"
+  
+  # fix for trailing spaces in venues, causing duplicated venue names
+  dat <- dat %>%
+    dplyr::mutate(Venue = stringr::str_squish(.data$Venue))
 
   # return data
   dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date) %>%
