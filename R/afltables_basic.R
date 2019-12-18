@@ -86,7 +86,7 @@ get_match_results <- function() {
   match_data <- match_data %>%
     dplyr::group_by(.data$Game) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    dplyr::mutate(Venue = replace_venues(Venue)) %>%
+    dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
     dplyr::ungroup()
 
 
