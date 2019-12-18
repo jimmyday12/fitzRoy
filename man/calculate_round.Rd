@@ -11,5 +11,5 @@ calculate_round(data_frame)
 }
 \description{
 Work out round number of each game from day and week.
-Games from Thursday through Wednesday go in same Round.
+Games from Wednesday through Tuesday go in same Round.
 }
