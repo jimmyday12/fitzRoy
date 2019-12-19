@@ -5,21 +5,20 @@
 
 <!-- badges: start -->
 
+[![R build
+status](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy)
 [![Travis build
 status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
 [![Coverage
 status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
-[![Project
-Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
-<!-- [![Lifecycle: maturing](http://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
 [![CRAN
 status](https://www.r-pkg.org/badges/version/fitzRoy)](https://CRAN.R-project.org/package=fitzRoy)
+[![Project
+Status](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
 [![CRAN RStudio total
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy)](https://www.r-pkg.org/pkg/fitzRoy)
-[![R build
-status](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy)
 <!-- badges: end -->
 
 ## Overview

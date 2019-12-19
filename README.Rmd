@@ -44,7 +44,6 @@ dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
 
 
 # fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
-
 <!-- badges: start -->
 [![R build status](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy)
 [![Travis build status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
