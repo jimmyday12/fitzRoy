@@ -2,8 +2,8 @@ version: 2
 jobs:
   build:
     branches:
-    only:
-      - master
+      only:
+        master
     working_directory: /workdir
     docker:
       - image: docker:git
