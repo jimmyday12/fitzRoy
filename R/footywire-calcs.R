@@ -201,8 +201,8 @@ calculate_round <- function(data_frame) {
       )
 
     min_round <- round_df %>%
-      dplyr::group_by(Season) %>%
-      dplyr::summarise(min_round = min(Round))
+      dplyr::group_by(.data$Season) %>%
+      dplyr::summarise(min_round = min(.data$Round))
 
     round_df %>%
       dplyr::left_join(., min_round, by = 'Season') %>%
@@ -310,7 +310,7 @@ Check the following url on footywire
   games_df <- games_df %>%
     dplyr::group_by(.data$Season.Game) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    dplyr::mutate(Venue = replace_venues(Venue)) %>%
+    dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
     dplyr::ungroup()
 
   # Tidy columns
@@ -533,6 +533,6 @@ get_footywire_betting_odds <- function(
     ) %>%
     calculate_round(.) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    dplyr::mutate(Venue = replace_venues(Venue)) %>%
+    dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
     dplyr::arrange(.data$Date)
 }
