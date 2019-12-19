@@ -139,27 +139,43 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @importFrom magrittr %>%
 calculate_round <- function(data_frame) {
   remove_bye_round_gaps <- function(gap_df) {
-    concat_round_groups <- function(Round, Season, data, diff_grp, cumulative_diff) {
+    concat_round_groups <- function(Season, data, cumulative_week_lag) {
       dplyr::mutate(
         data,
         Season = Season,
-        Round = Round,
-        cumulative_diff = cumulative_diff
+        cumulative_week_lag = cumulative_week_lag
       )
+    }
+
+    calculate_max_lag <- function(weeks_since_last_match) {
+      # Subtract 1 with a floor of zero, because we expect 0-1 weeks since
+      # last match and don't want to include those round lags when calculating
+      # how much to shift rounds due to bye weeks.
+      max(max(weeks_since_last_match) - 1, 0)
+    }
+
+    calculate_bye_week_lag <- function(season_data_frame) {
+      season_data_frame %>%
+        tidyr::nest(data = -c(.data$Round)) %>%
+        .$data %>%
+        # Expand max lag to have same length as match count.
+        purrr::map(~ rep.int(calculate_max_lag(.x$weeks_since_last_match), nrow(.x))) %>%
+        unlist %>%
+        cumsum
     }
 
     gap_df %>%
       dplyr::mutate(
-        round_diff = .data$Round - dplyr::lag(.data$Round, default = 0)) %>%
-      tidyr::nest(data = -c(.data$Round, .data$Season)) %>%
+        weeks_since_last_match = .data$Round - dplyr::lag(.data$Round, default = 0)
+      ) %>%
+      tidyr::nest(data = -c(.data$Season)) %>%
       dplyr::mutate(
-        diff_grp = purrr::map(.data$data, ~ max((max(.x$round_diff) - 1), 0)),
-        cumulative_diff = purrr::accumulate(.data$diff_grp, sum)
+        cumulative_week_lag = purrr::map(.data$data, calculate_bye_week_lag)
       ) %>%
       purrr::pmap(., concat_round_groups) %>%
       dplyr::bind_rows(.) %>%
-      dplyr::mutate(Round = (.data$Round - .data$cumulative_diff)) %>%
-      dplyr::select(-c(.data$round_diff,.data$cumulative_diff))
+      dplyr::mutate(Round = (.data$Round - .data$cumulative_week_lag)) %>%
+      dplyr::select(-c(.data$weeks_since_last_match, .data$cumulative_week_lag))
   }
 
   # Special cases where week counting doesn't work
