@@ -136,6 +136,30 @@ head(tips)
 tips <- get_squiggle_data("tips", round = 1, year = 2018)
 head(tips)
 ```
+
+
+### Create Ladder
+
+You can recreate the ladder for every round of the home and away season since 1897. You can either pass in a dataframe extracted using `get_match_results` (ideal as `get_match_results` doesn't need to be executed every time `return_ladder` is called): 
+
+```{r ladder1, message=FALSE, warning=FALSE}
+ladder <- return_ladder(match_results_df = results)
+head(ladder)
+```
+
+Or leave the `match_results_df` argument blank (which will execute the `get_match_results()` function internally):
+
+```{r ladder2, message=FALSE, warning=FALSE}
+ladder <- return_ladder()
+head(ladder)
+```
+
+Alternatively, we can also return the ladder for any round, or any season, or a combination of both round and season:
+
+```{r ladder3, message=FALSE, warning=FALSE}
+ladder <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
+head(ladder)
+```
 ---
 ```{r reset-options, message=FALSE, warning=FALSE, include=FALSE}
 options(original_options)
