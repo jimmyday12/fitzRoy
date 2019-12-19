@@ -20,3 +20,4 @@ create_package.R
 ^\.github/workflows/pr-commands\.yaml$
 ^\.github/workflows/pkgdown\.yaml$
 ^\.github/workflows/R-CMD-check\.yaml$
+^\.github/workflows/render-readme\.yaml$
