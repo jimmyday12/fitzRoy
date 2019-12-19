@@ -122,6 +122,15 @@ test_that("round weeks are calculated from Thursday to Wednesday", {
   expect_equal(nrow(round_1_data), 8)
 })
 
+test_that("no season has a Round of 0", {
+  testthat::skip_on_cran()
+  # A bug caused rounds 2017 through 2019 to start at Round 0
+  betting_data <- get_footywire_betting_odds(2016, 2017)
+  round_0_data = betting_data %>% dplyr::filter(Round == 0)
+
+  expect_equal(nrow(round_0_data), 0)
+})
+
 test_that("update_footywire_stats works ", {
   testthat::skip_on_cran()
 fw_dat <- update_footywire_stats()
