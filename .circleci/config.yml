@@ -1,9 +1,6 @@
 version: 2
 jobs:
   build:
-    branches:
-      only:
-        master
     working_directory: /workdir
     docker:
       - image: docker:git
@@ -40,3 +37,14 @@ jobs:
             docker push jimmyday12/fitzroy:rstudio
             docker push jimmyday12/fitzroy:rstudio-${RSTUDIO_VERSION}
             docker logout
+            
+            
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
