@@ -39,23 +39,6 @@ test_that("get_fixture works with different inputs ", {
   expect_error(get_fixture("2018-01-01"))
 })
 
-test_that("get_footywire_betting_odds works with different inputs ", {
-  testthat::skip_on_cran()
-  betting_df <- get_footywire_betting_odds(2018, 2019)
-  expect_is(betting_df, "data.frame")
-  expect_is(betting_df$Date[1], "Date")
-
-  betting_df <- get_footywire_betting_odds("2018", "2019")
-  expect_is(betting_df, "data.frame")
-  expect_is(betting_df$Date[1], "Date")
-
-  expect_warning(get_footywire_betting_odds(18, 2010))
-  this_year <- as.numeric(lubridate::year(Sys.Date()))
-  expect_warning(get_footywire_betting_odds(this_year - 1, this_year + 1))
-  expect_error(get_footywire_betting_odds("2018-01-01"))
-  expect_error(get_footywire_betting_odds(2016, "2018-01-01"))
-})
-
 test_that("get_fixture filters out unplayed matches ", {
   testthat::skip_on_cran()
   # On footywire.com.au/afl/footy/ft_match_list, the 2015 season has two
@@ -85,50 +68,79 @@ test_that("round numbers don't increment across bye weeks without matches", {
   expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
 
-test_that("round 5, 2018 is calculated correctly for betting data", {
+describe("get_footywire_betting_odds", {
   testthat::skip_on_cran()
-  max_matches_per_round <- 9
-  betting_data <- get_footywire_betting_odds(2018, 2018)
-  round_5_data <- betting_data %>% dplyr::filter(Round == 5)
-  expect_equal(nrow(round_5_data), 9)
-})
 
-test_that("Wednesday matches are at start of round by default", {
-  testthat::skip_on_cran()
-  max_matches_per_round <- 9
-  betting_data <- get_footywire_betting_odds(2019, 2019)
-  # Round 6, 2019 has a Wednesday match
-  round_6_data <- betting_data %>% dplyr::filter(Round == 6)
-  expect_equal(nrow(round_6_data), 9)
-})
+  # Many regression tests require fetching multiple seasons,
+  # so it's most efficient to fetch all years with known potential issues
+  full_betting_df <- get_footywire_betting_odds(
+    start_season = 2010, end_season = 2019
+  )
 
-test_that("minimum rounds are calculated per season", {
-  testthat::skip_on_cran()
-  # 2014 season starts in week 11, most others start in week 12
-  betting_data <- get_footywire_betting_odds(2014, 2015)
-  betting_data_2015 = betting_data %>%
-    dplyr::filter(lubridate::year(Date) == 2015)
-  expect_equal(min(betting_data_2015$Round), 1)
-})
+  it("works with different inputs ", {
+    betting_df <- get_footywire_betting_odds(2018, 2019)
+    expect_is(betting_df, "data.frame")
+    expect_is(betting_df$Date[1], "Date")
 
-test_that("round weeks are calculated from Thursday to Wednesday", {
-  testthat::skip_on_cran()
-  betting_data <- get_footywire_betting_odds(2010, 2010)
-  round_1_data = betting_data %>% dplyr::filter(Round == 1)
+    betting_df <- get_footywire_betting_odds("2018", "2019")
+    expect_is(betting_df, "data.frame")
+    expect_is(betting_df$Date[1], "Date")
 
-  # If epiweeks aren't adjusted properly (Sunday to Wednesday belong
-  # to previous week), the first round of 2010 will only have 5 matches
-  # due to 3 taking place on Sunday (the start of a new epiweek)
-  expect_equal(nrow(round_1_data), 8)
-})
+    expect_warning(get_footywire_betting_odds(18, 2010))
+    this_year <- as.numeric(lubridate::year(Sys.Date()))
+    expect_warning(get_footywire_betting_odds(this_year - 1, this_year + 1))
+    expect_error(get_footywire_betting_odds("2018-01-01"))
+    expect_error(get_footywire_betting_odds(2016, "2018-01-01"))
+  })
 
-test_that("no season has a Round of 0", {
-  testthat::skip_on_cran()
-  # A bug caused rounds 2017 through 2019 to start at Round 0
-  betting_data <- get_footywire_betting_odds(2016, 2017)
-  round_0_data = betting_data %>% dplyr::filter(Round == 0)
+  it("starts all seasons at round 1", {
+    # 2014 season starts in week 11, most others start in week 12,
+    # resulting in other seasons starting at Round 2 if not grouped correctly
+    # when calculating minimum round week.
+    min_round_df <- full_betting_df %>%
+      dplyr::group_by(.data$Season) %>%
+      dplyr::summarise(Min.Round = min(.data$Round))
+    ones <- rep.int(1, nrow(min_round_df))
 
-  expect_equal(nrow(round_0_data), 0)
+    expect_true(all(min_round_df$Min.Round == 1))
+  })
+
+  it("has no more than 9 matches per round", {
+    max_match_df <- full_betting_df %>%
+      dplyr::group_by(.data$Season, .data$Round) %>%
+      dplyr::tally(name="Round.Count")
+
+    expect_true(all(max_match_df$Round.Count <= 9))
+  })
+
+  it("doesn't have any duplicate Season/Round/Team combinations", {
+    home_df <- full_betting_df %>% dplyr::mutate(Team = .data$Home.Team)
+    away_df <- full_betting_df %>% dplyr::mutate(Team = .data$Away.Team)
+    combined_df = dplyr::bind_rows(c(home_df, away_df))
+
+    expect_equal(nrow(combined_df), nrow(dplyr::distinct(combined_df)))
+  })
+
+  it("starts rounds on Wednesday by default", {
+    max_matches_per_round <- 9
+    # Round 6, 2019 has a Wednesday match
+    round_6_data <- full_betting_df %>% dplyr::filter(Season == 2019, Round == 6)
+    expect_equal(nrow(round_6_data), 9)
+  })
+
+  it("ends round 5, 2018 on Wednesday", {
+    max_matches_per_round <- 9
+    round_5_data <- full_betting_df %>% dplyr::filter(Season == 2018, Round == 5)
+    expect_equal(nrow(round_5_data), 9)
+  })
+
+  it("ends rounds on Tuesday by default", {
+    # If epiweeks aren't adjusted properly (Sunday to Wednesday belong
+    # to previous week), the first round of 2010 will only have 5 matches
+    # due to 3 taking place on Sunday (the start of a new epiweek)
+    round_1_data = full_betting_df %>% dplyr::filter(Season == 2010, Round == 1)
+    expect_equal(nrow(round_1_data), 8)
+  })
 })
 
 test_that("update_footywire_stats works ", {
