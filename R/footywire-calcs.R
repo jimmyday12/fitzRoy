@@ -160,8 +160,8 @@ calculate_round <- function(data_frame) {
         .$data %>%
         # Expand max lag to have same length as match count.
         purrr::map(~ rep.int(calculate_max_lag(.x$weeks_since_last_match), nrow(.x))) %>%
-        unlist %>%
-        cumsum
+        purrr::accumulate(~ max(.x) + .y) %>%
+        unlist
     }
 
     gap_df %>%
