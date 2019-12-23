@@ -197,6 +197,13 @@ calculate_round <- function(data_frame) {
       round_df$Round[round_indices_to_fix] - 1
     round_df$Round[round_df$Round == 0] <- round_one
 
+    # Round 13, 2010 and Round 18, 2014 each last two weeks, so we need to shift
+    # all subsequent rounds down by one
+    round_indices_to_fix <- (round_df$Round > 13 & round_df$Season == 2010) |
+      (round_df$Round > 18 & round_df$Season == 2014)
+    shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
+    round_df$Round[round_indices_to_fix] <- shifted_rounds
+
     round_df
   }
 
@@ -228,8 +235,8 @@ calculate_round <- function(data_frame) {
 
   round_df <- data_frame %>%
     calculate_round_by_week(.) %>%
-    fix_incorrect_rounds(.) %>%
-    remove_bye_round_gaps(.)
+    remove_bye_round_gaps(.) %>%
+    fix_incorrect_rounds(.)
 }
 
 

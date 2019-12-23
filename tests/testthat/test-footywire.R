@@ -141,6 +141,17 @@ describe("get_footywire_betting_odds", {
     round_1_data = full_betting_df %>% dplyr::filter(Season == 2010, Round == 1)
     expect_equal(nrow(round_1_data), 8)
   })
+
+  it("accounts for 2-week rounds in 2010 and 2014", {
+    round_13_2010 <- full_betting_df %>%
+      dplyr::filter(Round == 13, Season == 2010)
+
+    round_18_2014 <- full_betting_df %>%
+      dplyr::filter(Round == 18, Season == 2014)
+
+    expect_equal(nrow(round_13_2010), 8)
+    expect_equal(nrow(round_18_2014), 9)
+  })
 })
 
 test_that("update_footywire_stats works ", {
