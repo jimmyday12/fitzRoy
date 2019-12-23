@@ -191,10 +191,9 @@ calculate_round <- function(data_frame) {
 
     # 2012-2014: first round shifts round numbers for rest of season
     round_one <- 1
-    round_indices_to_fix <- round_df$Date >= lubridate::ymd("2012-01-01") &
-      round_df$Date <= lubridate::ymd("2014-12-31")
-    round_df$Round[round_indices_to_fix] <-
-      round_df$Round[round_indices_to_fix] - 1
+    round_indices_to_fix <- round_df$Season >= 2012 & round_df$Season <= 2014
+    shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
+    round_df$Round[round_indices_to_fix] <- shifted_rounds
     round_df$Round[round_df$Round == 0] <- round_one
 
     # Round 13, 2010 and Round 18, 2014 each last two weeks, so we need to shift
