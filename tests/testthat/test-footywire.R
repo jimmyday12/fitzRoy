@@ -152,6 +152,18 @@ describe("get_footywire_betting_odds", {
     expect_equal(nrow(round_13_2010), 8)
     expect_equal(nrow(round_18_2014), 9)
   })
+
+  it("labels both Grand Finals in 2010 with the same round", {
+    round_26__2010 <- full_betting_df %>%
+      dplyr::filter(Round == 26, Season == 2010)
+
+    expect_equal(nrow(round_26__2010), 2)
+
+    bonus_rounds <- full_betting_df %>%
+      dplyr::filter(Round > 26, Season == 2010)
+
+    expect_equal(nrow(bonus_rounds), 0)
+  })
 })
 
 test_that("update_footywire_stats works ", {

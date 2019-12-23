@@ -203,6 +203,13 @@ calculate_round <- function(data_frame) {
     shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
     round_df$Round[round_indices_to_fix] <- shifted_rounds
 
+    # The 2010 Grand Final was replayed a week after the initial draw.
+    # AFLTables labels both matches as being in round 26, so we'll do the same
+    # here
+    round_twenty_six <- 26
+    round_indices_to_fix <- round_df$Round >= 26 & round_df$Season == 2010
+    round_df$Round[round_indices_to_fix] <- round_twenty_six
+
     round_df
   }
 
