@@ -10,29 +10,32 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
+eval_param = identical(Sys.getenv("NOT_CRAN"), "true")
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = eval_param
 )
 ```
 
 ### Match data
 
-```{r libraries, message=FALSE, warning=FALSE}
+```{r libraries, message=FALSE, warning=FALSE, eval=eval_param}
 library(fitzRoy)
 library(dplyr)
 ```
 
 A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won't work. 
 
-```{r cookie, message = FALSE, warning = FALSE}
+```{r cookie, message = FALSE, warning = FALSE, eval=eval_param}
 cookie <- get_aflw_cookie()
 
 print(cookie)
 ```
 Note - if this is `NULL` the rest of this Vignette won't show any outputs but the code will remain! 
 
-```{r cookie_param, include=FALSE}
+```{r cookie_param, include=FALSE, eval=eval_param}
 if (is.null(cookie)) {
     eval_param = FALSE
   }
