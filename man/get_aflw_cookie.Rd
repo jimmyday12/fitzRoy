@@ -14,5 +14,7 @@ Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
 further requests.
 }
 \examples{
+\dontrun{
 cookie <- get_aflw_cookie()
+}
 }

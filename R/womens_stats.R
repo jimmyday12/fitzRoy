@@ -7,7 +7,7 @@
 #' @importFrom magrittr %>%
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' cookie <- get_aflw_cookie()
 #' }
 #' @export
