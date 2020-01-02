@@ -4,8 +4,10 @@
 \alias{get_squiggle_data}
 \title{Access Squiggle data using the squiggle API service.}
 \usage{
-get_squiggle_data(query = c("sources", "games", "tips", "ladder",
-  "standings"), ...)
+get_squiggle_data(
+  query = c("sources", "games", "tips", "ladder", "standings"),
+  ...
+)
 }
 \arguments{
 \item{query}{A text string. The main query to use with the API. Must be one of \code{sources}, \code{games}, \code{tips}, \code{ladder} or \code{standings}}

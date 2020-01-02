@@ -1,26 +1,39 @@
 ## ----setup, include = FALSE----------------------------------------------
+eval_param = identical(Sys.getenv("NOT_CRAN"), "true")
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = eval_param
 )
 
-## ----gh-installation, eval = FALSE, echo = TRUE--------------------------
-#  # install.packages("devtools")
-#  # devtools::install_github("jimmyday12/fitzRoy")
-
 ## ----libraries, message=FALSE, warning=FALSE-----------------------------
-library(fitzRoy)
-library(dplyr)
-library(magrittr)
+#  library(fitzRoy)
+#  library(dplyr)
 
-## ----fetch_match_stats, eval=FALSE, message=FALSE, warning=TRUE, include=FALSE----
+## ----cookie, message = FALSE, warning = FALSE----------------------------
+#  cookie <- get_aflw_cookie()
+#  
+#  print(cookie)
+
+## ----cookie_param, include=FALSE-----------------------------------------
+#  if (is.null(cookie)) {
+#      eval_param = FALSE
+#    }
+#  
+
+## ----fetch_match_stats, message=FALSE, warning=TRUE, eval = eval_param----
 #  match_data <- get_aflw_match_data()
 
-## ----show_match_stats, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE----
+## ----show_match_stats, message=FALSE, warning=FALSE, eval = eval_param----
 #  glimpse(match_data)
 
-## ----first_10, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE----
-#  first10 <- head(match_data, 10) %>%
-#    pull(Match.Id)
-#  first10
+## ----first_10, message=FALSE, warning=FALSE, eval = eval_param-----------
+#  first10 <- head(match_data, 10)
+#  first10_ids <- first10$Match.Id
+#  first10_ids
+
+## ---- eval = eval_param--------------------------------------------------
+#  detailed <- get_aflw_detailed_data(first10_ids)
+#  glimpse(detailed)
 

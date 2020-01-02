@@ -601,17 +601,26 @@ body {
 <body>
 
 <h1 id="womens-afl-stats">Womens’ AFL Stats</h1>
-<p>Oscar Lane 2019-03-03</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># install.packages(&quot;devtools&quot;)</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># devtools::install_github(&quot;jimmyday12/fitzRoy&quot;)</span></a></code></pre></div>
+<p>Oscar Lane 2020-01-02</p>
 <h3 id="match-data">Match data</h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(fitzRoy)</a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="kw">library</span>(magrittr)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(fitzRoy)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(dplyr)</a></code></pre></div>
+<p>A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won’t work.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">cookie &lt;-<span class="st"> </span><span class="kw">get_aflw_cookie</span>()</a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw">print</span>(cookie)</a></code></pre></div>
+<p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code>get_aflw_match_data()</code> function to retrieve match data for all matches.</p>
-<p>Note that we are getting a few warnings: this is to tell us that the fixture has been downloaded for 2019, but no match data is available yet. Note that you will not be able to retrieve detailed stats for these games, so make sure you don’t try to request detailed stats for these match IDs.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">match_data &lt;-<span class="st"> </span><span class="kw">get_aflw_match_data</span>()</a></code></pre></div>
+<p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">glimpse</span>(match_data)</a></code></pre></div>
 <h3 id="detailed-stats">Detailed stats</h3>
 <p>The <code>get_aflw_detailed_data()</code> can be used to return more detailed data than the match data shown above. It takes a vector of match IDs as an argument. For example, let’s say we want detailed stats for the first 10 games in <code>match_data</code> above. Then we would do:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">first10 &lt;-<span class="st"> </span><span class="kw">head</span>(match_data, <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb5-2" title="2">first10_ids &lt;-<span class="st"> </span>first10<span class="op">$</span>Match.Id</a>
+<a class="sourceLine" id="cb5-3" title="3">first10_ids</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">detailed &lt;-<span class="st"> </span><span class="kw">get_aflw_detailed_data</span>(first10_ids)</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">glimpse</span>(detailed)</a></code></pre></div>
 
 </body>
 </html>
