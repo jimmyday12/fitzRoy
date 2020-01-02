@@ -191,11 +191,24 @@ calculate_round <- function(data_frame) {
 
     # 2012-2014: first round shifts round numbers for rest of season
     round_one <- 1
-    round_indices_to_fix <- round_df$Date >= lubridate::ymd("2012-01-01") &
-      round_df$Date <= lubridate::ymd("2014-12-31")
-    round_df$Round[round_indices_to_fix] <-
-      round_df$Round[round_indices_to_fix] - 1
+    round_indices_to_fix <- round_df$Season >= 2012 & round_df$Season <= 2014
+    shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
+    round_df$Round[round_indices_to_fix] <- shifted_rounds
     round_df$Round[round_df$Round == 0] <- round_one
+
+    # Round 13, 2010 and Round 18, 2014 each last two weeks, so we need to shift
+    # all subsequent rounds down by one
+    round_indices_to_fix <- (round_df$Round > 13 & round_df$Season == 2010) |
+      (round_df$Round > 18 & round_df$Season == 2014)
+    shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
+    round_df$Round[round_indices_to_fix] <- shifted_rounds
+
+    # The 2010 Grand Final was replayed a week after the initial draw.
+    # AFLTables labels both matches as being in round 26, so we'll do the same
+    # here
+    round_twenty_six <- 26
+    round_indices_to_fix <- round_df$Round >= 26 & round_df$Season == 2010
+    round_df$Round[round_indices_to_fix] <- round_twenty_six
 
     round_df
   }
@@ -228,8 +241,8 @@ calculate_round <- function(data_frame) {
 
   round_df <- data_frame %>%
     calculate_round_by_week(.) %>%
-    fix_incorrect_rounds(.) %>%
-    remove_bye_round_gaps(.)
+    remove_bye_round_gaps(.) %>%
+    fix_incorrect_rounds(.)
 }
 
 

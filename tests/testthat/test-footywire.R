@@ -116,7 +116,7 @@ describe("get_footywire_betting_odds", {
   it("doesn't have any duplicate Season/Round/Team combinations", {
     home_df <- full_betting_df %>% dplyr::mutate(Team = .data$Home.Team)
     away_df <- full_betting_df %>% dplyr::mutate(Team = .data$Away.Team)
-    combined_df = dplyr::bind_rows(c(home_df, away_df))
+    combined_df <- dplyr::bind_rows(c(home_df, away_df))
 
     expect_equal(nrow(combined_df), nrow(dplyr::distinct(combined_df)))
   })
@@ -138,8 +138,31 @@ describe("get_footywire_betting_odds", {
     # If epiweeks aren't adjusted properly (Sunday to Wednesday belong
     # to previous week), the first round of 2010 will only have 5 matches
     # due to 3 taking place on Sunday (the start of a new epiweek)
-    round_1_data = full_betting_df %>% dplyr::filter(Season == 2010, Round == 1)
+    round_1_data <- full_betting_df %>% dplyr::filter(Season == 2010, Round == 1)
     expect_equal(nrow(round_1_data), 8)
+  })
+
+  it("accounts for 2-week rounds in 2010 and 2014", {
+    round_13_2010 <- full_betting_df %>%
+      dplyr::filter(Round == 13, Season == 2010)
+
+    round_18_2014 <- full_betting_df %>%
+      dplyr::filter(Round == 18, Season == 2014)
+
+    expect_equal(nrow(round_13_2010), 8)
+    expect_equal(nrow(round_18_2014), 9)
+  })
+
+  it("labels both Grand Finals in 2010 with the same round", {
+    round_26__2010 <- full_betting_df %>%
+      dplyr::filter(Round == 26, Season == 2010)
+
+    expect_equal(nrow(round_26__2010), 2)
+
+    bonus_rounds <- full_betting_df %>%
+      dplyr::filter(Round > 26, Season == 2010)
+
+    expect_equal(nrow(bonus_rounds), 0)
   })
 })
 
