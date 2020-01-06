@@ -1,12 +1,10 @@
-# fitzRoy 0.2.0.9000
-
-## Features
-* Updated `womens-stats` vignette to prevent it from running chunks if the cookie had failed.
+# fitzRoy 0.3.0
 
 ## Breaking changes
 * Addition of `replace_venues` - changes venue names for all data sources to match AFL Tables ([#15](https://github.com/jimmyday12/fitzRoy/issues/15), [@cfranklin11](https://github.com/cfranklin11))
 
 ## Bug Fixes
+* Updated `womens-stats` vignette to prevent it from running chunks if the cookie had failed.
 * Fixed incorrect round numbers for fixture and betting data from `footywire.com` ([#93](https://github.com/jimmyday12/fitzRoy/issues/93) & [#95](https://github.com/jimmyday12/fitzRoy/issues/95) & [#102](https://github.com/jimmyday12/fitzRoy/issues/102), [@cfranklin11](https://github.com/cfranklin11))
 
 # fitzRoy 0.2.0
