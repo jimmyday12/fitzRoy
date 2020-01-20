@@ -275,68 +275,61 @@
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># You can get the sources</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a>sources &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"sources"</span>)</span>
 <span id="cb9-3"><a href="#cb9-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(sources)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;                                  url                  name id</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; 1      https://live.squiggle.com.au/              Squiggle  1</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; 2           https://thearcfooty.com/               The Arc  2</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; 3          http://figuringfooty.com/        Figuring Footy  3</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 4      http://www.matterofstats.com/       Matter of Stats  4</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 5                                                  Punters  5</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 6 https://footymaths.blogspot.com.au Footy Maths Institute  6</span></span></code></pre></div>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;                    name id                                url</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; 1              Squiggle  1      https://live.squiggle.com.au/</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; 2               The Arc  2           https://thearcfooty.com/</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; 3        Figuring Footy  3          http://figuringfooty.com/</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 4       Matter of Stats  4      http://www.matterofstats.com/</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 5               Punters  5                                   </span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 6 Footy Maths Institute  6 https://footymaths.blogspot.com.au</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Get all tips</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a>tips &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>)</span>
 <span id="cb10-3"><a href="#cb10-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tips)  </span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;                    ateam          source margin correct year</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 1               Richmond        Squiggle   1.00       1 2017</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; 2               Richmond  Figuring Footy     NA       1 2017</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; 3               Richmond Matter of Stats   5.39       0 2017</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; 4       Western Bulldogs Matter of Stats  10.31       1 2017</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; 5       Western Bulldogs        Squiggle  17.00       1 2017</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; 6 Greater Western Sydney        Squiggle   3.00       1 2017</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;                  date gameid sourceid       hteam             updated</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 1 2017-03-23 19:20:00      1        1     Carlton 2017-07-11 13:59:46</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 2 2017-03-23 19:20:00      1        3     Carlton 2017-04-10 12:18:02</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 3 2017-03-23 19:20:00      1        4     Carlton 2017-07-11 13:59:46</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 4 2017-03-24 19:50:00      2        4 Collingwood 2017-07-11 13:59:46</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 5 2017-03-24 19:50:00      2        1 Collingwood 2017-07-11 13:59:46</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 6 2017-03-26 15:20:00      8        1    Adelaide 2017-07-11 13:59:46</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt;           venue ateamid confidence hteamid   err              tip    bits round</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; 1        M.C.G.      14       50.0       3 42.00         Richmond  0.0000     1</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; 2        M.C.G.      14       58.0       3    NA         Richmond  0.2141     1</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; 3        M.C.G.      14       56.7       3 48.39          Carlton -0.2076     1</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; 4        M.C.G.      18       62.7       4  3.69 Western Bulldogs  0.3265     1</span></span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; 5        M.C.G.      18       62.0       4  3.00 Western Bulldogs  0.3103     1</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; 6 Adelaide Oval       9       50.0       1 53.00         Adelaide  0.0000     1</span></span>
-<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt;   hconfidence tipteamid</span></span>
-<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; 1        50.0        14</span></span>
-<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; 2        42.0        14</span></span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; 3        56.7         3</span></span>
-<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; 4        37.3        18</span></span>
-<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt; 5        38.0        18</span></span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; 6        50.0         1</span></span></code></pre></div>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;     err hteamid                date year         venue             updated</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 1 42.00       3 2017-03-23 19:20:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; 2    NA       3 2017-03-23 19:20:00 2017        M.C.G. 2017-04-10 12:18:02</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; 3 48.39       3 2017-03-23 19:20:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; 4  3.69       4 2017-03-24 19:50:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; 5  3.00       4 2017-03-24 19:50:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; 6 53.00       1 2017-03-26 15:20:00 2017 Adelaide Oval 2017-07-11 13:59:46</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;   confidence hconfidence gameid tipteamid          source ateamid round correct</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 1       50.0        50.0      1        14        Squiggle      14     1       1</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 2       58.0        42.0      1        14  Figuring Footy      14     1       1</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 3       56.7        56.7      1         3 Matter of Stats      14     1       0</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 4       62.7        37.3      2        18 Matter of Stats      18     1       1</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 5       62.0        38.0      2        18        Squiggle      18     1       1</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 6       50.0        50.0      8         1        Squiggle       9     1       1</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt;                tip margin       hteam                  ateam sourceid    bits</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; 1         Richmond   1.00     Carlton               Richmond        1  0.0000</span></span>
+<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; 2         Richmond     NA     Carlton               Richmond        3  0.2141</span></span>
+<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; 3          Carlton   5.39     Carlton               Richmond        4 -0.2076</span></span>
+<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; 4 Western Bulldogs  10.31 Collingwood       Western Bulldogs        4  0.3265</span></span>
+<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; 5 Western Bulldogs  17.00 Collingwood       Western Bulldogs        1  0.3103</span></span>
+<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; 6         Adelaide   3.00    Adelaide Greater Western Sydney        1  0.0000</span></span></code></pre></div>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get` just tips from round 1, 2018</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a>tips &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="dt">round =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2018</span>)</span>
 <span id="cb11-3"><a href="#cb11-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tips)</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;      ateam correct margin                source                date year gameid</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; 1 Adelaide       0  11.00              Squiggle 2018-03-23 19:50:00 2018    373</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; 2 Adelaide       0   9.00               The Arc 2018-03-23 19:50:00 2018    373</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; 3 Adelaide       0   9.78       Matter of Stats 2018-03-23 19:50:00 2018    373</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; 4 Adelaide       1     NA               Punters 2018-03-23 19:50:00 2018    373</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; 5 Adelaide       0  21.00 Footy Maths Institute 2018-03-23 19:50:00 2018    373</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; 6 Adelaide       0   8.00            PlusSixOne 2018-03-23 19:50:00 2018    373</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;       venue sourceid    hteam             updated confidence ateamid hteamid</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; 1 Docklands        1 Essendon 2018-03-23 22:54:38      56.00       1       5</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; 2 Docklands        2 Essendon 2018-03-23 22:54:38      59.80       1       5</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; 3 Docklands        4 Essendon 2018-03-23 22:54:38      59.50       1       5</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; 4 Docklands        5 Essendon 2018-03-23 22:54:38      52.08       1       5</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 5 Docklands        6 Essendon 2018-03-23 22:54:38      66.00       1       5</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; 6 Docklands        7 Essendon 2018-03-23 22:54:38      55.16       1       5</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt;     err      tip    bits round hconfidence tipteamid</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; 1 23.00 Adelaide -0.1844     1       44.00         1</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; 2 21.00 Adelaide -0.3147     1       40.20         1</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; 3 21.78 Adelaide -0.3040     1       40.50         1</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; 4    NA Essendon  0.0588     1       52.08         5</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt; 5 33.00 Adelaide -0.5564     1       34.00         1</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; 6 20.00 Adelaide -0.1571     1       44.84         1</span></span></code></pre></div>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;   margin    hteam      tip    ateam    bits sourceid gameid hconfidence</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; 1  11.00 Essendon Adelaide Adelaide -0.1844        1    373       44.00</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; 2   9.00 Essendon Adelaide Adelaide -0.3147        2    373       40.20</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; 3   9.78 Essendon Adelaide Adelaide -0.3040        4    373       40.50</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; 4     NA Essendon Essendon Adelaide  0.0588        5    373       52.08</span></span>
+<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; 5  21.00 Essendon Adelaide Adelaide -0.5564        6    373       34.00</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; 6   8.00 Essendon Adelaide Adelaide -0.1571        7    373       44.84</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;                  source tipteamid ateamid round correct     venue year</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; 1              Squiggle         1       1     1       0 Docklands 2018</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; 2               The Arc         1       1     1       0 Docklands 2018</span></span>
+<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; 3       Matter of Stats         1       1     1       0 Docklands 2018</span></span>
+<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; 4               Punters         5       1     1       1 Docklands 2018</span></span>
+<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 5 Footy Maths Institute         1       1     1       0 Docklands 2018</span></span>
+<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; 6            PlusSixOne         1       1     1       0 Docklands 2018</span></span>
+<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt;               updated confidence   err hteamid                date</span></span>
+<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; 1 2018-03-23 22:54:38      56.00 23.00       5 2018-03-23 19:50:00</span></span>
+<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; 2 2018-03-23 22:54:38      59.80 21.00       5 2018-03-23 19:50:00</span></span>
+<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; 3 2018-03-23 22:54:38      59.50 21.78       5 2018-03-23 19:50:00</span></span>
+<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; 4 2018-03-23 22:54:38      52.08    NA       5 2018-03-23 19:50:00</span></span>
+<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt; 5 2018-03-23 22:54:38      66.00 33.00       5 2018-03-23 19:50:00</span></span>
+<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; 6 2018-03-23 22:54:38      55.16 20.00       5 2018-03-23 19:50:00</span></span></code></pre></div>
 </div>
 <div id="create-ladder" class="section level3">
 <h3 class="hasAnchor">
