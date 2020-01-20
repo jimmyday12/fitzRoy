@@ -106,23 +106,19 @@
 
     
     
-<!-- This vignette was automatically created from README.Rmd -->
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as <a href="https://afltables.com">AFLtables</a> and <a href="https://www.footywire.com">Footywire</a>. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions.</p>
 </div>
-<div id="installation" class="section level2">
+<div id="load-packages" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install fitzRoy from github with:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># install.packages("devtools")</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>devtools<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"jimmyday12/fitzRoy"</span>)</span></code></pre></div>
-</div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
-<p>The <code>fitzRoy</code> package can be used to simply get data from various sources. Some minimal working examples are below.</p>
+<a href="#load-packages" class="anchor"></a>Load packages</h2>
+<p>First we need to grab a few packages. If you don’t have any of these, you’ll need to install them.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(elo)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(lubridate)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(fitzRoy)</span></code></pre></div>
 <div id="getting-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-data" class="anchor"></a>Getting Data</h3>
@@ -133,94 +129,78 @@
 <a href="#afl-tables-match-results" class="anchor"></a>AFL Tables match results</h3>
 <p>You can access the basic afl tables match results data. This includes all matches from 1897-current. It is generally updated on the day after a round finishes.</p>
 <p>You can access the data directly from the package using <code>match_results</code>. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use <code>get_match_results</code> directly, as this will give you up to date results.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(fitzRoy)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; </span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; Attaching package: 'dplyr'</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; The following objects are masked from 'package:stats':</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;     filter, lag</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_match_results.html">get_match_results</a></span>()</span>
-<span id="cb2-13"><a href="#cb2-13"></a></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(results)</span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; # A tibble: 6 x 16</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points Away.Team</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;    </span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; 1 15609 2019-09-07 QF    Richmond          18            4         112 Brisbane…</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; 2 15610 2019-09-13 SF    Geelong           13           10          88 West Coa…</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; 3 15611 2019-09-14 SF    GWS               12           11          83 Brisbane…</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; 4 15612 2019-09-20 PF    Richmond          12           13          85 Geelong  </span></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; 5 15613 2019-09-21 PF    GWS                8            8          56 Collingw…</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; # … with 1 more row, and 8 more variables: Away.Goals &lt;int&gt;,</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; #   Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;,</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt; #   Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>results &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_match_results.html">get_match_results</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(results)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; # A tibble: 6 x 16</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points Away.Team</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;    </span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; 1 15609 2019-09-07 QF    Richmond          18            4         112 Brisbane…</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 2 15610 2019-09-13 SF    Geelong           13           10          88 West Coa…</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 3 15611 2019-09-14 SF    GWS               12           11          83 Brisbane…</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 4 15612 2019-09-20 PF    Richmond          12           13          85 Geelong  </span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 5 15613 2019-09-21 PF    GWS                8            8          56 Collingw…</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; # … with 1 more row, and 8 more variables: Away.Goals &lt;int&gt;,</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; #   Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;,</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; #   Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></span></code></pre></div>
 <p>You can also convert this format into a more analysis friendly “long” format using the helper function <code>convert_results</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>results_long &lt;-<span class="st"> </span><span class="kw"><a href="../reference/convert_results.html">convert_results</a></span>(results)</span>
-<span id="cb3-2"><a href="#cb3-2"></a></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(results_long)</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; # A tibble: 6 x 13</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;    Game Date       Round Venue Margin Season Round.Type Round.Number Status</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 1     1 1897-05-08 R1    Brun…     33   1897 Regular               1 Home  </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 2     1 1897-05-08 R1    Brun…    -33   1897 Regular               1 Away  </span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 3     2 1897-05-08 R1    Vict…     25   1897 Regular               1 Home  </span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 4     2 1897-05-08 R1    Vict…    -25   1897 Regular               1 Away  </span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; 5     3 1897-05-08 R1    Cori…    -23   1897 Regular               1 Home  </span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; # … with 1 more row, and 4 more variables: Behinds &lt;chr&gt;, Goals &lt;chr&gt;,</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; #   Points &lt;chr&gt;, Team &lt;chr&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>results_long &lt;-<span class="st"> </span><span class="kw"><a href="../reference/convert_results.html">convert_results</a></span>(results)</span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(results_long)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; # A tibble: 6 x 13</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;    Game Date       Round Venue Margin Season Round.Type Round.Number Status</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; </span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 1     1 1897-05-08 R1    Brun…     33   1897 Regular               1 Home  </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 2     1 1897-05-08 R1    Brun…    -33   1897 Regular               1 Away  </span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 3     2 1897-05-08 R1    Vict…     25   1897 Regular               1 Home  </span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 4     2 1897-05-08 R1    Vict…    -25   1897 Regular               1 Away  </span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 5     3 1897-05-08 R1    Cori…    -23   1897 Regular               1 Home  </span></span>
+<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; # … with 1 more row, and 4 more variables: Behinds &lt;chr&gt;, Goals &lt;chr&gt;,</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; #   Points &lt;chr&gt;, Team &lt;chr&gt;</span></span></code></pre></div>
 </div>
 <div id="afl-tables-player-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#afl-tables-player-results" class="anchor"></a>AFL Tables player results</h3>
 <p>A new function will return all detailed player stats from <a href="https://afltables.com">AFLtables</a>. Primarily, the easiest way to use this is simply to call <code>get_afltables_stats</code> with your required <code>start_date</code> and <code>end_date</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>stats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_afltables_stats.html">get_afltables_stats</a></span>(<span class="dt">start_date =</span> <span class="st">"2000-01-01"</span>, <span class="dt">end_date =</span> <span class="st">"2018-06-01"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Returning data from 2000-01-01 to 2018-06-01</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Finished getting afltables data</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(stats)</span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; # A tibble: 6 x 59</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt;   Season Round Date       Local.start.time Venue Attendance Home.team  HQ1G</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;                &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;     &lt;int&gt;</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 1   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 2   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 3   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; 4   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; 5   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; # … with 1 more row, and 51 more variables: HQ1B &lt;int&gt;, HQ2G &lt;int&gt;, HQ2B &lt;int&gt;,</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; #   HQ3G &lt;int&gt;, HQ3B &lt;int&gt;, HQ4G &lt;int&gt;, HQ4B &lt;int&gt;, Home.score &lt;int&gt;,</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; #   Away.team &lt;chr&gt;, AQ1G &lt;int&gt;, AQ1B &lt;int&gt;, AQ2G &lt;int&gt;, AQ2B &lt;int&gt;,</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; #   AQ3G &lt;int&gt;, AQ3B &lt;int&gt;, AQ4G &lt;int&gt;, AQ4B &lt;int&gt;, Away.score &lt;int&gt;,</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; #   First.name &lt;chr&gt;, Surname &lt;chr&gt;, ID &lt;dbl&gt;, Jumper.No. &lt;dbl&gt;,</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; #   Playing.for &lt;chr&gt;, Kicks &lt;dbl&gt;, Marks &lt;dbl&gt;, Handballs &lt;dbl&gt;, Goals &lt;dbl&gt;,</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; #   Behinds &lt;dbl&gt;, Hit.Outs &lt;dbl&gt;, Tackles &lt;dbl&gt;, Rebounds &lt;dbl&gt;,</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; #   Inside.50s &lt;dbl&gt;, Clearances &lt;dbl&gt;, Clangers &lt;dbl&gt;, Frees.For &lt;dbl&gt;,</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; #   Frees.Against &lt;dbl&gt;, Brownlow.Votes &lt;dbl&gt;, Contested.Possessions &lt;dbl&gt;,</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; #   Uncontested.Possessions &lt;dbl&gt;, Contested.Marks &lt;dbl&gt;,</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; #   Marks.Inside.50 &lt;dbl&gt;, One.Percenters &lt;dbl&gt;, Bounces &lt;dbl&gt;,</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; #   Goal.Assists &lt;dbl&gt;, Time.on.Ground.. &lt;int&gt;, Substitute &lt;int&gt;,</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; #   Umpire.1 &lt;chr&gt;, Umpire.2 &lt;chr&gt;, Umpire.3 &lt;chr&gt;, Umpire.4 &lt;chr&gt;,</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; #   group_id &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>stats &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_afltables_stats.html">get_afltables_stats</a></span>(<span class="dt">start_date =</span> <span class="st">"2018-01-01"</span>, <span class="dt">end_date =</span> <span class="st">"2018-06-01"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(stats)</span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 6 x 59</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   Season Round Date       Local.start.time Venue Attendance Home.team  HQ1G</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;                &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;     &lt;int&gt;</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; # … with 1 more row, and 51 more variables: HQ1B &lt;int&gt;, HQ2G &lt;int&gt;, HQ2B &lt;int&gt;,</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; #   HQ3G &lt;int&gt;, HQ3B &lt;int&gt;, HQ4G &lt;int&gt;, HQ4B &lt;int&gt;, Home.score &lt;int&gt;,</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; #   Away.team &lt;chr&gt;, AQ1G &lt;int&gt;, AQ1B &lt;int&gt;, AQ2G &lt;int&gt;, AQ2B &lt;int&gt;,</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; #   AQ3G &lt;int&gt;, AQ3B &lt;int&gt;, AQ4G &lt;int&gt;, AQ4B &lt;int&gt;, Away.score &lt;int&gt;,</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; #   First.name &lt;chr&gt;, Surname &lt;chr&gt;, ID &lt;dbl&gt;, Jumper.No. &lt;dbl&gt;,</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; #   Playing.for &lt;chr&gt;, Kicks &lt;dbl&gt;, Marks &lt;dbl&gt;, Handballs &lt;dbl&gt;, Goals &lt;dbl&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   Behinds &lt;dbl&gt;, Hit.Outs &lt;dbl&gt;, Tackles &lt;dbl&gt;, Rebounds &lt;dbl&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   Inside.50s &lt;dbl&gt;, Clearances &lt;dbl&gt;, Clangers &lt;dbl&gt;, Frees.For &lt;dbl&gt;,</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; #   Frees.Against &lt;dbl&gt;, Brownlow.Votes &lt;dbl&gt;, Contested.Possessions &lt;dbl&gt;,</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; #   Uncontested.Possessions &lt;dbl&gt;, Contested.Marks &lt;dbl&gt;,</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; #   Marks.Inside.50 &lt;dbl&gt;, One.Percenters &lt;dbl&gt;, Bounces &lt;dbl&gt;,</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; #   Goal.Assists &lt;dbl&gt;, Time.on.Ground.. &lt;int&gt;, Substitute &lt;int&gt;,</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; #   Umpire.1 &lt;chr&gt;, Umpire.2 &lt;chr&gt;, Umpire.3 &lt;chr&gt;, Umpire.4 &lt;chr&gt;,</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; #   group_id &lt;int&gt;</span></span></code></pre></div>
 </div>
 <div id="fixture" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fixture" class="anchor"></a>Fixture</h3>
 <p>You can access the fixture using <code>get_fixture</code> function. This will download the fixture for the current calendar year by default.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>fixture &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_fixture.html">get_fixture</a></span>()</span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fixture)</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; # A tibble: 6 x 7</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;   Date                Season Season.Game Round Home.Team  Away.Team    Venue    </span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;   &lt;dttm&gt;               &lt;dbl&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;    </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt; 1 2020-03-19 19:25:00   2020           1     1 Richmond   Carlton      M.C.G.   </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt; 2 2020-03-20 19:50:00   2020           1     1 Footscray  Collingwood  Docklands</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt; 3 2020-03-21 13:45:00   2020           1     1 Essendon   Fremantle    Docklands</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt; 4 2020-03-21 16:05:00   2020           1     1 Adelaide   Sydney       Adelaide…</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt; 5 2020-03-21 18:25:00   2020           1     1 Gold Coast Port Adelai… Carrara  </span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt; # … with 1 more row</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>fixture &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_fixture.html">get_fixture</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fixture)</span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt; # A tibble: 6 x 7</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt;   Date                Season Season.Game Round Home.Team    Away.Team   Venue   </span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;   &lt;dttm&gt;               &lt;dbl&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;   </span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton      Richmond    M.C.G.  </span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 2 2019-03-22 19:50:00   2019           1     1 Collingwood  Geelong     M.C.G.  </span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 3 2019-03-23 13:45:00   2019           1     1 Melbourne    Port Adela… M.C.G.  </span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 4 2019-03-23 16:05:00   2019           1     1 Adelaide     Hawthorn    Adelaid…</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 5 2019-03-23 19:20:00   2019           1     1 Brisbane Li… West Coast  Gabba   </span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; # … with 1 more row</span></span></code></pre></div>
 </div>
 <div id="footywire-advanced-player-stats" class="section level3">
 <h3 class="hasAnchor">
@@ -228,40 +208,37 @@
 <p>Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.</p>
 <p><em>Note - as of v0.2.0, all internal data has been removed from the package. Please use the relevant functions instead.</em></p>
 <p>The following code no longer works.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">## Show the top of player_stats</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fitzRoy<span class="op">::</span>player_stats)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co">## Show the top of player_stats</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(fitzRoy<span class="op">::</span>player_stats)</span></code></pre></div>
 <p>We can also use the <code>update_footywire_stats</code> function to get the most up to date data. This will merge data from 2010-current with any new data points.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co">## Update footywire data</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>dat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/update_footywire_stats.html">update_footywire_stats</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co">## Update footywire data</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>dat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/update_footywire_stats.html">update_footywire_stats</a></span>()</span></code></pre></div>
 <p>Alternatively, we can just return one game if we know it’s ID. This can be found by looking at the URL of the match you want. For example, the ID of the 2019 AFL Grand Final is 9927.</p>
 <p><a href="https://www.footywire.com/afl/footy/ft_match_statistics?mid=9927" class="uri">https://www.footywire.com/afl/footy/ft_match_statistics?mid=9927</a></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">## Update footywire data</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>dat &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_footywire_stats.html">get_footywire_stats</a></span>(<span class="dt">ids =</span> <span class="dv">9927</span>)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; Getting data from https://www.footywire.com</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; Finished getting data</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dat)</span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;         Date Season       Round Venue          Player     Team Opposition</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 1 2019-09-28   2019 Grand Final   MCG    Bachar Houli Richmond        GWS</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt; 2 2019-09-28   2019 Grand Final   MCG   Dustin Martin Richmond        GWS</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 3 2019-09-28   2019 Grand Final   MCG    Dion Prestia Richmond        GWS</span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 4 2019-09-28   2019 Grand Final   MCG   Nick Vlastuin Richmond        GWS</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 5 2019-09-28   2019 Grand Final   MCG Marlion Pickett Richmond        GWS</span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 6 2019-09-28   2019 Grand Final   MCG   Shane Edwards Richmond        GWS</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;   Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO CCL SCL SI  MG TO</span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; 1   Home     9927  9 17 20 76.9  0  0   0              5  2   0   1  6 317  2</span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; 2   Home     9927 12 11 19 86.4  1  2   2              2  3   0   3  8 372  5</span></span>
-<span id="cb8-17"><a href="#cb8-17"></a><span class="co">#&gt; 3   Home     9927  7 14 12 54.5  0  1   0              2  0   0   4  3 366  6</span></span>
-<span id="cb8-18"><a href="#cb8-18"></a><span class="co">#&gt; 4   Home     9927  3 18 20 90.9  1  0   0              5  0   0   0  5 570  2</span></span>
-<span id="cb8-19"><a href="#cb8-19"></a><span class="co">#&gt; 5   Home     9927  8 14 14 63.6  0  0   1              0  1   2   1  9 559  5</span></span>
-<span id="cb8-20"><a href="#cb8-20"></a><span class="co">#&gt; 6   Home     9927 11  9 17 81.0  0  1   0              2  0   2   4  6 268  3</span></span>
-<span id="cb8-21"><a href="#cb8-21"></a><span class="co">#&gt;   ITC T5 TOG  K HB  D  M G B T HO GA1 I50 CL CG R50 FF FA  AF  SC</span></span>
-<span id="cb8-22"><a href="#cb8-22"></a><span class="co">#&gt; 1   9  0  96 14 12 26  7 0 0 6  0   0   0  1  1   6  3  0 114 120</span></span>
-<span id="cb8-23"><a href="#cb8-23"></a><span class="co">#&gt; 2   0  1  86 11 11 22  4 4 0 1  0   2   4  3  4   0  2  2  91 137</span></span>
-<span id="cb8-24"><a href="#cb8-24"></a><span class="co">#&gt; 3   1  0  87 19  3 22  1 0 1 3  0   1   2  4  5   1  1  2  74  86</span></span>
-<span id="cb8-25"><a href="#cb8-25"></a><span class="co">#&gt; 4   5  0  89 17  5 22 12 0 0 3  0   0   2  0  1   5  0  1 106 102</span></span>
-<span id="cb8-26"><a href="#cb8-26"></a><span class="co">#&gt; 5   3  0  66 13  9 22  2 1 0 1  0   0   8  3  0   1  0  0  73  96</span></span>
-<span id="cb8-27"><a href="#cb8-27"></a><span class="co">#&gt; 6   4  1  78  9 12 21  2 0 0 6  0   1   5  6  3   3  2  1  80  98</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co">## Update footywire data</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>stats_gf &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_footywire_stats.html">get_footywire_stats</a></span>(<span class="dt">ids =</span> <span class="dv">9927</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(stats_gf)</span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="co">#&gt;         Date Season       Round Venue          Player     Team Opposition</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; 1 2019-09-28   2019 Grand Final   MCG    Bachar Houli Richmond        GWS</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt; 2 2019-09-28   2019 Grand Final   MCG   Dustin Martin Richmond        GWS</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt; 3 2019-09-28   2019 Grand Final   MCG    Dion Prestia Richmond        GWS</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; 4 2019-09-28   2019 Grand Final   MCG   Nick Vlastuin Richmond        GWS</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; 5 2019-09-28   2019 Grand Final   MCG Marlion Pickett Richmond        GWS</span></span>
+<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; 6 2019-09-28   2019 Grand Final   MCG   Shane Edwards Richmond        GWS</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt;   Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO CCL SCL SI  MG TO</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; 1   Home     9927  9 17 20 76.9  0  0   0              5  2   0   1  6 317  2</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; 2   Home     9927 12 11 19 86.4  1  2   2              2  3   0   3  8 372  5</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="co">#&gt; 3   Home     9927  7 14 12 54.5  0  1   0              2  0   0   4  3 366  6</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a><span class="co">#&gt; 4   Home     9927  3 18 20 90.9  1  0   0              5  0   0   0  5 570  2</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a><span class="co">#&gt; 5   Home     9927  8 14 14 63.6  0  0   1              0  1   2   1  9 559  5</span></span>
+<span id="cb12-15"><a href="#cb12-15"></a><span class="co">#&gt; 6   Home     9927 11  9 17 81.0  0  1   0              2  0   2   4  6 268  3</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a><span class="co">#&gt;   ITC T5 TOG  K HB  D  M G B T HO GA1 I50 CL CG R50 FF FA  AF  SC</span></span>
+<span id="cb12-17"><a href="#cb12-17"></a><span class="co">#&gt; 1   9  0  96 14 12 26  7 0 0 6  0   0   0  1  1   6  3  0 114 120</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a><span class="co">#&gt; 2   0  1  86 11 11 22  4 4 0 1  0   2   4  3  4   0  2  2  91 137</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a><span class="co">#&gt; 3   1  0  87 19  3 22  1 0 1 3  0   1   2  4  5   1  1  2  74  86</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a><span class="co">#&gt; 4   5  0  89 17  5 22 12 0 0 3  0   0   2  0  1   5  0  1 106 102</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a><span class="co">#&gt; 5   3  0  66 13  9 22  2 1 0 1  0   0   8  3  0   1  0  0  73  96</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a><span class="co">#&gt; 6   4  1  78  9 12 21  2 0 0 6  0   1   5  6  3   3  2  1  80  98</span></span></code></pre></div>
 </div>
 <div id="weather" class="section level3">
 <h3 class="hasAnchor">
@@ -272,111 +249,101 @@
 <h3 class="hasAnchor">
 <a href="#squiggle-data" class="anchor"></a>Squiggle Data</h3>
 <p>You can access data from the <a href="https://api.squiggle.com.au">Squiggle API</a> where the tips of well known AFL tipping models are collected. See full instructions on the above link.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># You can get the sources</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>sources &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"sources"</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(sources)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt;                                  url id                  name</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt; 1      https://live.squiggle.com.au/  1              Squiggle</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt; 2           https://thearcfooty.com/  2               The Arc</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; 3          http://figuringfooty.com/  3        Figuring Footy</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 4      http://www.matterofstats.com/  4       Matter of Stats</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 5                                     5               Punters</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 6 https://footymaths.blogspot.com.au  6 Footy Maths Institute</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Get all tips</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>tips &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tips)  </span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;   hconfidence gameid          source tipteamid ateamid round correct</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt; 1        50.0      1        Squiggle        14      14     1       1</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; 2        42.0      1  Figuring Footy        14      14     1       1</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; 3        56.7      1 Matter of Stats         3      14     1       0</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; 4        37.3      2 Matter of Stats        18      18     1       1</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; 5        38.0      2        Squiggle        18      18     1       1</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; 6        50.0      8        Squiggle         1       9     1       1</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;                tip margin       hteam                  ateam sourceid    bits</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 1         Richmond   1.00     Carlton               Richmond        1  0.0000</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt; 2         Richmond     NA     Carlton               Richmond        3  0.2141</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt; 3          Carlton   5.39     Carlton               Richmond        4 -0.2076</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 4 Western Bulldogs  10.31 Collingwood       Western Bulldogs        4  0.3265</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 5 Western Bulldogs  17.00 Collingwood       Western Bulldogs        1  0.3103</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 6         Adelaide   3.00    Adelaide Greater Western Sydney        1  0.0000</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt;     err hteamid                date year         venue             updated</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; 1 42.00       3 2017-03-23 19:20:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a><span class="co">#&gt; 2    NA       3 2017-03-23 19:20:00 2017        M.C.G. 2017-04-10 12:18:02</span></span>
-<span id="cb10-21"><a href="#cb10-21"></a><span class="co">#&gt; 3 48.39       3 2017-03-23 19:20:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
-<span id="cb10-22"><a href="#cb10-22"></a><span class="co">#&gt; 4  3.69       4 2017-03-24 19:50:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
-<span id="cb10-23"><a href="#cb10-23"></a><span class="co">#&gt; 5  3.00       4 2017-03-24 19:50:00 2017        M.C.G. 2017-07-11 13:59:46</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a><span class="co">#&gt; 6 53.00       1 2017-03-26 15:20:00 2017 Adelaide Oval 2017-07-11 13:59:46</span></span>
-<span id="cb10-25"><a href="#cb10-25"></a><span class="co">#&gt;   confidence</span></span>
-<span id="cb10-26"><a href="#cb10-26"></a><span class="co">#&gt; 1       50.0</span></span>
-<span id="cb10-27"><a href="#cb10-27"></a><span class="co">#&gt; 2       58.0</span></span>
-<span id="cb10-28"><a href="#cb10-28"></a><span class="co">#&gt; 3       56.7</span></span>
-<span id="cb10-29"><a href="#cb10-29"></a><span class="co">#&gt; 4       62.7</span></span>
-<span id="cb10-30"><a href="#cb10-30"></a><span class="co">#&gt; 5       62.0</span></span>
-<span id="cb10-31"><a href="#cb10-31"></a><span class="co">#&gt; 6       50.0</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Get` just tips from round 1, 2018</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>tips &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="dt">round =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2018</span>)</span>
-<span id="cb11-3"><a href="#cb11-3"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tips)</span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co">#&gt;   confidence             updated year     venue                date hteamid</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a><span class="co">#&gt; 1      56.00 2018-03-23 22:54:38 2018 Docklands 2018-03-23 19:50:00       5</span></span>
-<span id="cb11-6"><a href="#cb11-6"></a><span class="co">#&gt; 2      59.80 2018-03-23 22:54:38 2018 Docklands 2018-03-23 19:50:00       5</span></span>
-<span id="cb11-7"><a href="#cb11-7"></a><span class="co">#&gt; 3      59.50 2018-03-23 22:54:38 2018 Docklands 2018-03-23 19:50:00       5</span></span>
-<span id="cb11-8"><a href="#cb11-8"></a><span class="co">#&gt; 4      52.08 2018-03-23 22:54:38 2018 Docklands 2018-03-23 19:50:00       5</span></span>
-<span id="cb11-9"><a href="#cb11-9"></a><span class="co">#&gt; 5      66.00 2018-03-23 22:54:38 2018 Docklands 2018-03-23 19:50:00       5</span></span>
-<span id="cb11-10"><a href="#cb11-10"></a><span class="co">#&gt; 6      55.16 2018-03-23 22:54:38 2018 Docklands 2018-03-23 19:50:00       5</span></span>
-<span id="cb11-11"><a href="#cb11-11"></a><span class="co">#&gt;     err sourceid    bits    ateam      tip margin    hteam round correct</span></span>
-<span id="cb11-12"><a href="#cb11-12"></a><span class="co">#&gt; 1 23.00        1 -0.1844 Adelaide Adelaide  11.00 Essendon     1       0</span></span>
-<span id="cb11-13"><a href="#cb11-13"></a><span class="co">#&gt; 2 21.00        2 -0.3147 Adelaide Adelaide   9.00 Essendon     1       0</span></span>
-<span id="cb11-14"><a href="#cb11-14"></a><span class="co">#&gt; 3 21.78        4 -0.3040 Adelaide Adelaide   9.78 Essendon     1       0</span></span>
-<span id="cb11-15"><a href="#cb11-15"></a><span class="co">#&gt; 4    NA        5  0.0588 Adelaide Essendon     NA Essendon     1       1</span></span>
-<span id="cb11-16"><a href="#cb11-16"></a><span class="co">#&gt; 5 33.00        6 -0.5564 Adelaide Adelaide  21.00 Essendon     1       0</span></span>
-<span id="cb11-17"><a href="#cb11-17"></a><span class="co">#&gt; 6 20.00        7 -0.1571 Adelaide Adelaide   8.00 Essendon     1       0</span></span>
-<span id="cb11-18"><a href="#cb11-18"></a><span class="co">#&gt;   ateamid tipteamid                source hconfidence gameid</span></span>
-<span id="cb11-19"><a href="#cb11-19"></a><span class="co">#&gt; 1       1         1              Squiggle       44.00    373</span></span>
-<span id="cb11-20"><a href="#cb11-20"></a><span class="co">#&gt; 2       1         1               The Arc       40.20    373</span></span>
-<span id="cb11-21"><a href="#cb11-21"></a><span class="co">#&gt; 3       1         1       Matter of Stats       40.50    373</span></span>
-<span id="cb11-22"><a href="#cb11-22"></a><span class="co">#&gt; 4       1         5               Punters       52.08    373</span></span>
-<span id="cb11-23"><a href="#cb11-23"></a><span class="co">#&gt; 5       1         1 Footy Maths Institute       34.00    373</span></span>
-<span id="cb11-24"><a href="#cb11-24"></a><span class="co">#&gt; 6       1         1            PlusSixOne       44.84    373</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># You can get the sources</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>sources &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"sources"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(sources)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt;                                  url id                  name</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; 1      https://live.squiggle.com.au/  1              Squiggle</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt; 2           https://thearcfooty.com/  2               The Arc</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; 3          http://figuringfooty.com/  3        Figuring Footy</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 4      http://www.matterofstats.com/  4       Matter of Stats</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 5                                     5               Punters</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 6 https://footymaths.blogspot.com.au  6 Footy Maths Institute</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># Get all tips</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>tips &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tips)  </span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co">#&gt;   hteamid   err                date year         venue confidence</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co">#&gt; 1       3 42.00 2017-03-23 19:20:00 2017        M.C.G.       50.0</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="co">#&gt; 2       3    NA 2017-03-23 19:20:00 2017        M.C.G.       58.0</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="co">#&gt; 3       3 48.39 2017-03-23 19:20:00 2017        M.C.G.       56.7</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a><span class="co">#&gt; 4       4  3.69 2017-03-24 19:50:00 2017        M.C.G.       62.7</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="co">#&gt; 5       4  3.00 2017-03-24 19:50:00 2017        M.C.G.       62.0</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="co">#&gt; 6       1 53.00 2017-03-26 15:20:00 2017 Adelaide Oval       50.0</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co">#&gt;               updated tipteamid          source hconfidence gameid correct</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a><span class="co">#&gt; 1 2017-07-11 13:59:46        14        Squiggle        50.0      1       1</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="co">#&gt; 2 2017-04-10 12:18:02        14  Figuring Footy        42.0      1       1</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="co">#&gt; 3 2017-07-11 13:59:46         3 Matter of Stats        56.7      1       0</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="co">#&gt; 4 2017-07-11 13:59:46        18 Matter of Stats        37.3      2       1</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="co">#&gt; 5 2017-07-11 13:59:46        18        Squiggle        38.0      2       1</span></span>
+<span id="cb16-15"><a href="#cb16-15"></a><span class="co">#&gt; 6 2017-07-11 13:59:46         1        Squiggle        50.0      8       1</span></span>
+<span id="cb16-16"><a href="#cb16-16"></a><span class="co">#&gt;   round ateamid                  ateam              tip margin       hteam</span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="co">#&gt; 1     1      14               Richmond         Richmond   1.00     Carlton</span></span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="co">#&gt; 2     1      14               Richmond         Richmond     NA     Carlton</span></span>
+<span id="cb16-19"><a href="#cb16-19"></a><span class="co">#&gt; 3     1      14               Richmond          Carlton   5.39     Carlton</span></span>
+<span id="cb16-20"><a href="#cb16-20"></a><span class="co">#&gt; 4     1      18       Western Bulldogs Western Bulldogs  10.31 Collingwood</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="co">#&gt; 5     1      18       Western Bulldogs Western Bulldogs  17.00 Collingwood</span></span>
+<span id="cb16-22"><a href="#cb16-22"></a><span class="co">#&gt; 6     1       9 Greater Western Sydney         Adelaide   3.00    Adelaide</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a><span class="co">#&gt;   sourceid    bits</span></span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="co">#&gt; 1        1  0.0000</span></span>
+<span id="cb16-25"><a href="#cb16-25"></a><span class="co">#&gt; 2        3  0.2141</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a><span class="co">#&gt; 3        4 -0.2076</span></span>
+<span id="cb16-27"><a href="#cb16-27"></a><span class="co">#&gt; 4        4  0.3265</span></span>
+<span id="cb16-28"><a href="#cb16-28"></a><span class="co">#&gt; 5        1  0.3103</span></span>
+<span id="cb16-29"><a href="#cb16-29"></a><span class="co">#&gt; 6        1  0.0000</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Get` just tips from round 1, 2018</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>tips_round &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="dt">round =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tips_round)</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co">#&gt;                  date hteamid   err confidence             updated year</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co">#&gt; 1 2018-03-23 19:50:00       5 23.00      56.00 2018-03-23 22:54:38 2018</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co">#&gt; 2 2018-03-23 19:50:00       5 21.00      59.80 2018-03-23 22:54:38 2018</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co">#&gt; 3 2018-03-23 19:50:00       5 21.78      59.50 2018-03-23 22:54:38 2018</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co">#&gt; 4 2018-03-23 19:50:00       5    NA      52.08 2018-03-23 22:54:38 2018</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="co">#&gt; 5 2018-03-23 19:50:00       5 33.00      66.00 2018-03-23 22:54:38 2018</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a><span class="co">#&gt; 6 2018-03-23 19:50:00       5 20.00      55.16 2018-03-23 22:54:38 2018</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="co">#&gt;       venue correct round ateamid                source tipteamid hconfidence</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="co">#&gt; 1 Docklands       0     1       1              Squiggle         1       44.00</span></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="co">#&gt; 2 Docklands       0     1       1               The Arc         1       40.20</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a><span class="co">#&gt; 3 Docklands       0     1       1       Matter of Stats         1       40.50</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="co">#&gt; 4 Docklands       1     1       1               Punters         5       52.08</span></span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="co">#&gt; 5 Docklands       0     1       1 Footy Maths Institute         1       34.00</span></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="co">#&gt; 6 Docklands       0     1       1            PlusSixOne         1       44.84</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co">#&gt;   gameid sourceid    bits    ateam      tip margin    hteam</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="co">#&gt; 1    373        1 -0.1844 Adelaide Adelaide  11.00 Essendon</span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co">#&gt; 2    373        2 -0.3147 Adelaide Adelaide   9.00 Essendon</span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="co">#&gt; 3    373        4 -0.3040 Adelaide Adelaide   9.78 Essendon</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="co">#&gt; 4    373        5  0.0588 Adelaide Essendon     NA Essendon</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="co">#&gt; 5    373        6 -0.5564 Adelaide Adelaide  21.00 Essendon</span></span>
+<span id="cb18-22"><a href="#cb18-22"></a><span class="co">#&gt; 6    373        7 -0.1571 Adelaide Adelaide   8.00 Essendon</span></span></code></pre></div>
 </div>
 <div id="create-ladder" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-ladder" class="anchor"></a>Create Ladder</h3>
 <p>You can recreate the ladder for every round of the home and away season since 1897. You can either pass in a dataframe extracted using <code>get_match_results</code> (ideal as <code>get_match_results</code> doesn’t need to be executed every time <code>return_ladder</code> is called):</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>ladder &lt;-<span class="st"> </span><span class="kw"><a href="../reference/return_ladder.html">return_ladder</a></span>(<span class="dt">match_results_df =</span> results)</span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ladder)</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span id="cb12-6"><a href="#cb12-6"></a><span class="co">#&gt; 1   1897 Fitz…            1             4        49            16      3.06 </span></span>
-<span id="cb12-7"><a href="#cb12-7"></a><span class="co">#&gt; 2   1897 Coll…            1             4        41            16      2.56 </span></span>
-<span id="cb12-8"><a href="#cb12-8"></a><span class="co">#&gt; 3   1897 Esse…            1             4        47            24      1.96 </span></span>
-<span id="cb12-9"><a href="#cb12-9"></a><span class="co">#&gt; 4   1897 Melb…            1             4        44            27      1.63 </span></span>
-<span id="cb12-10"><a href="#cb12-10"></a><span class="co">#&gt; 5   1897 Sydn…            1             0        27            44      0.614</span></span>
-<span id="cb12-11"><a href="#cb12-11"></a><span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>ladder &lt;-<span class="st"> </span><span class="kw"><a href="../reference/return_ladder.html">return_ladder</a></span>(<span class="dt">match_results_df =</span> results)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ladder)</span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">#&gt; 1   1897 Fitz…            1             4        49            16      3.06 </span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="co">#&gt; 2   1897 Coll…            1             4        41            16      2.56 </span></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="co">#&gt; 3   1897 Esse…            1             4        47            24      1.96 </span></span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="co">#&gt; 4   1897 Melb…            1             4        44            27      1.63 </span></span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="co">#&gt; 5   1897 Sydn…            1             0        27            44      0.614</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></span></code></pre></div>
 <p>Or leave the <code>match_results_df</code> argument blank (which will execute the <code><a href="../reference/get_match_results.html">get_match_results()</a></code> function internally):</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>ladder &lt;-<span class="st"> </span><span class="kw"><a href="../reference/return_ladder.html">return_ladder</a></span>()</span>
-<span id="cb13-2"><a href="#cb13-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ladder)</span>
-<span id="cb13-3"><a href="#cb13-3"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
-<span id="cb13-4"><a href="#cb13-4"></a><span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span></span>
-<span id="cb13-5"><a href="#cb13-5"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a><span class="co">#&gt; 1   1897 Fitz…            1             4        49            16      3.06 </span></span>
-<span id="cb13-7"><a href="#cb13-7"></a><span class="co">#&gt; 2   1897 Coll…            1             4        41            16      2.56 </span></span>
-<span id="cb13-8"><a href="#cb13-8"></a><span class="co">#&gt; 3   1897 Esse…            1             4        47            24      1.96 </span></span>
-<span id="cb13-9"><a href="#cb13-9"></a><span class="co">#&gt; 4   1897 Melb…            1             4        44            27      1.63 </span></span>
-<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#&gt; 5   1897 Sydn…            1             0        27            44      0.614</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a><span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>ladder &lt;-<span class="st"> </span><span class="kw"><a href="../reference/return_ladder.html">return_ladder</a></span>()</span></code></pre></div>
 <p>Alternatively, we can also return the ladder for any round, or any season, or a combination of both round and season:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>ladder &lt;-<span class="st"> </span><span class="kw"><a href="../reference/return_ladder.html">return_ladder</a></span>(<span class="dt">match_results_df =</span> results, <span class="dt">season_round =</span> <span class="dv">15</span>, <span class="dt">season =</span> <span class="dv">2018</span>)</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ladder)</span>
-<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
-<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
-<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; 1   2018 Rich…           15            44      1358          1004       1.35</span></span>
-<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; 2   2018 Coll…           15            40      1328          1089       1.22</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; 3   2018 West…           15            40      1290          1066       1.21</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; 4   2018 Sydn…           15            40      1215          1006       1.21</span></span>
-<span id="cb14-10"><a href="#cb14-10"></a><span class="co">#&gt; 5   2018 Port…           15            40      1204          1047       1.15</span></span>
-<span id="cb14-11"><a href="#cb14-11"></a><span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>ladder_round &lt;-<span class="st"> </span><span class="kw"><a href="../reference/return_ladder.html">return_ladder</a></span>(<span class="dt">match_results_df =</span> results, <span class="dt">season_round =</span> <span class="dv">15</span>, <span class="dt">season =</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ladder_round)</span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co">#&gt; # A tibble: 6 x 8</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="co">#&gt; 1   2018 Rich…           15            44      1358          1004       1.35</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a><span class="co">#&gt; 2   2018 Coll…           15            40      1328          1089       1.22</span></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="co">#&gt; 3   2018 West…           15            40      1290          1066       1.21</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a><span class="co">#&gt; 4   2018 Sydn…           15            40      1215          1006       1.21</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a><span class="co">#&gt; 5   2018 Port…           15            40      1204          1047       1.15</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a><span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></span></code></pre></div>
 <hr>
 </div>
 </div>
@@ -389,8 +356,7 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
-      <li><a href="#installation">Installation</a></li>
-      <li><a href="#usage">Usage</a></li>
+      <li><a href="#load-packages">Load packages</a></li>
       </ul>
 </div>
       </div>
