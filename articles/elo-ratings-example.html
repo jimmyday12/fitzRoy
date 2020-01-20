@@ -97,7 +97,7 @@
       <h1>ELO Ratings Example</h1>
                         <h4 class="author">James Day</h4>
             
-            <h4 class="date">2020-01-07</h4>
+            <h4 class="date">2020-01-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/elo-ratings-example.Rmd"><code>vignettes/elo-ratings-example.Rmd</code></a></small>
       <div class="hidden name"><code>elo-ratings-example.Rmd</code></div>
@@ -224,13 +224,20 @@
 <p>Now that is run, we can view our results. The <code>elo</code> package provides various ways to do this.</p>
 <p>Firstly, using <code>as.data.frame</code> we can view the predicted and actual result of each game. Also in this table is the change in ELO rating for the home and away side. See below for the last few games of 2018.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span>(elo.data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>()</span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;         team.A         team.B       p.A  wins.A     update    elo.A    elo.B</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; 15609 Richmond Brisbane Lions 0.5360948 0.79375  5.1531041 1527.667 1522.236</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; 15610  Geelong     West Coast 0.5656360 0.62500  1.1872801 1545.196 1526.948</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 15611      GWS Brisbane Lions 0.5395092 0.51875 -0.4151833 1519.332 1522.651</span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 15612 Richmond        Geelong 0.5179394 0.61875  2.0162114 1529.683 1543.180</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 15613      GWS    Collingwood 0.5326803 0.52500 -0.1536069 1519.178 1526.744</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 15614 Richmond            GWS 0.5580287 1.00000  8.8394252 1538.523 1510.339</span></span></code></pre></div>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="co">#&gt;         team.A         team.B       p.A  wins.A   update.A   update.B    elo.A</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; 15609 Richmond Brisbane Lions 0.5360948 0.79375  5.1531041 -5.1531041 1527.667</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt; 15610  Geelong     West Coast 0.5656360 0.62500  1.1872801 -1.1872801 1545.196</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt; 15611      GWS Brisbane Lions 0.5395092 0.51875 -0.4151833  0.4151833 1519.332</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt; 15612 Richmond        Geelong 0.5179394 0.61875  2.0162114 -2.0162114 1529.683</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt; 15613      GWS    Collingwood 0.5326803 0.52500 -0.1536069  0.1536069 1519.178</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt; 15614 Richmond            GWS 0.5580287 1.00000  8.8394252 -8.8394252 1538.523</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;          elo.B</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt; 15609 1522.236</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt; 15610 1526.948</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt; 15611 1522.651</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt; 15612 1543.180</span></span>
+<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt; 15613 1526.744</span></span>
+<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; 15614 1510.339</span></span></code></pre></div>
 <p>We can specifically focus on how each team’s rating changes over time using <code>as.matrix</code>. Again - viewing the end of 2018 also shows teams that didn’t make the finals have the same ELO as the rounds go on since they aren’t playing finals.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(elo.data) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>()</span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="co">#&gt;         Adelaide Brisbane Lions  Carlton Collingwood Essendon Fitzroy Footscray</span></span>
