@@ -2,6 +2,7 @@ context("test-afltables.R")
 
 
 test_that("get_match_results works", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   expect_type(get_match_results(), "list")
@@ -9,6 +10,7 @@ test_that("get_match_results works", {
 })
 
 test_that("get_afltables_urls works", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   expect_type(get_afltables_urls("2018-01-01", "2018-06-01"), "character")
@@ -18,6 +20,7 @@ test_that("get_afltables_urls works", {
 })
 
 test_that("get_afltables_player_ids works", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   expect_type(get_afltables_player_ids(2018), "list")
@@ -29,6 +32,7 @@ test_that("get_afltables_player_ids works", {
 
 
 test_that("scape_afltables_ works", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   url_new <- "https://afltables.com/afl/stats/games/2018/030820180812.html"
@@ -41,6 +45,7 @@ test_that("scape_afltables_ works", {
 })
 
 test_that("get_fixture works", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   fix <- get_fixture(2012)

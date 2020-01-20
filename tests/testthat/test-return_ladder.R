@@ -2,7 +2,9 @@ context("test-return_ladder.R")
 
 
 test_that("get_match_results returns data frame with required variables", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
+  
   match_results_df <- get_match_results()
   required_cols <- c("Round.Number", "Round.Type", "Home.Team", "Home.Points", "Away.Team", "Away.Points", "Season")
   
@@ -11,6 +13,7 @@ test_that("get_match_results returns data frame with required variables", {
 })
 
 test_that("return_ladder works", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
 
   expect_is(return_ladder(), "data.frame")

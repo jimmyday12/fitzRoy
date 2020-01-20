@@ -2,7 +2,9 @@ context("test-squiggle-api-works.R")
 
 
 test_that("Squiggle API queries work", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
+  
   
   expect_type(get_squiggle_data(), "list")
   expect_type(get_squiggle_data("sources"), "list")
@@ -14,6 +16,7 @@ test_that("Squiggle API queries work", {
 })
 
 test_that("Squiggle API optional arguments work", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   expect_type(
