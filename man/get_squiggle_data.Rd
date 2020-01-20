@@ -33,7 +33,7 @@ The optional arguments to squiggle can be one of the following.
 For full instructions, see \href{https://api.squiggle.com.au}{api.squiggle.com.au}
 }
 \examples{
-
+\dontrun{
 # Return a list of the sources, with ID's
 sources <- get_squiggle_data("sources")
 
@@ -42,4 +42,5 @@ tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
 
 # Get tips from Squiggle 2019
 squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
+}
 }

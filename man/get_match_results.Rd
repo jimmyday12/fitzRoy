@@ -17,7 +17,7 @@ The dataframe contains information about the Date, teams involved, scores and ve
 It generally is updated on the day after the last game
 }
 \examples{
-\donttest{
+\dontrun{
 get_match_results()
 }
 }

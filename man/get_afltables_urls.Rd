@@ -22,5 +22,7 @@ This function returns match URLs for the specified date range. This will typical
 to \code{scrape_afltables_match} to return player match results.
 }
 \examples{
+\dontrun{
 get_afltables_urls("01/01/2018", end_date = "01/04/2018")
+}
 }

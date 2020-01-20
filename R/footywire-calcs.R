@@ -58,7 +58,7 @@ get_footywire_stats <- function(ids) {
 #' @return Returns a data frame containing player match stats for each match ID
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' update_footywire_stats()
 #' }
 #' @export

@@ -21,7 +21,7 @@ The dataframe contains both basic and advanced player statistics from each match
 This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.
 }
 \examples{
-\donttest{
+\dontrun{
 update_footywire_stats()
 }
 }

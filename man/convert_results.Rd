@@ -20,7 +20,7 @@ The standard results returned by afltables.com will be in wide format.
 This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis.
 }
 \examples{
-\donttest{
+\dontrun{
 results <- get_match_results()
 convert_results(results)
 }
