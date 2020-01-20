@@ -173,43 +173,11 @@
 Will only allow selecting rounds of the premiership season, not finals.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'>return_ladder</span>()</div><div class='output co'>#&gt; <span style='color: #555555;'># A tibble: 30,358 x 8</span><span>
-#&gt;    Season Team  Round.Number Season.Points Score.For Score.Against Percentage
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Fitz…            1             4        49            16      3.06 
-#&gt; </span><span style='color: #555555;'> 2</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Coll…            1             4        41            16      2.56 
-#&gt; </span><span style='color: #555555;'> 3</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Esse…            1             4        47            24      1.96 
-#&gt; </span><span style='color: #555555;'> 4</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Melb…            1             4        44            27      1.63 
-#&gt; </span><span style='color: #555555;'> 5</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Sydn…            1             0        27            44      0.614
-#&gt; </span><span style='color: #555555;'> 6</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Geel…            1             0        24            47      0.511
-#&gt; </span><span style='color: #555555;'> 7</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 St K…            1             0        16            41      0.390
-#&gt; </span><span style='color: #555555;'> 8</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Carl…            1             0        16            49      0.327
-#&gt; </span><span style='color: #555555;'> 9</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Fitz…            2             8       115            42      2.74 
-#&gt; </span><span style='color: #555555;'>10</span><span>   </span><span style='text-decoration: underline;'>1</span><span>897 Melb…            2             8       108            46      2.35 
-#&gt; </span><span style='color: #555555;'># … with 30,348 more rows, and 1 more variable: Ladder.Position </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'><span class='fu'>return_ladder</span>(<span class='kw'>match_results_df</span><span class='kw'>=</span><span class='no'>get_match_results_df</span>, <span class='kw'>season_round</span><span class='kw'>=</span><span class='fl'>23</span>, <span class='kw'>season</span><span class='kw'>=</span><span class='fl'>1990</span>:<span class='fl'>2019</span>)</div><div class='output co'>#&gt; <span class='error'>Error in withCallingHandlers(expr, warning = function(w) invokeRestart("muffleWarning")): object 'get_match_results_df' not found</span></div><div class='input'><span class='fu'>return_ladder</span>(<span class='kw'>season_round</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>season</span> <span class='kw'>=</span> <span class='fl'>2019</span>)</div><div class='output co'>#&gt; </span><span style='color: #555555;'># A tibble: 18 x 8</span><span>
-#&gt;    Season Team  Round.Number Season.Points Score.For Score.Against Percentage
-#&gt;     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span> </span><span style='color: #555555;font-style: italic;'>&lt;chr&gt;</span><span>        </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>     </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>         </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>      </span><span style='color: #555555;font-style: italic;'>&lt;dbl&gt;</span><span>
-#&gt; </span><span style='color: #555555;'> 1</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Geel…           10            36      </span><span style='text-decoration: underline;'>1</span><span>003           688      1.46 
-#&gt; </span><span style='color: #555555;'> 2</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Coll…           10            32       931           730      1.28 
-#&gt; </span><span style='color: #555555;'> 3</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 GWS             10            28       954           734      1.30 
-#&gt; </span><span style='color: #555555;'> 4</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Rich…           10            28       843           794      1.06 
-#&gt; </span><span style='color: #555555;'> 5</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 West…           10            28       766           754      1.02 
-#&gt; </span><span style='color: #555555;'> 6</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Bris…           10            24       897           870      1.03 
-#&gt; </span><span style='color: #555555;'> 7</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Adel…           10            20       797           713      1.12 
-#&gt; </span><span style='color: #555555;'> 8</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Frem…           10            20       766           700      1.09 
-#&gt; </span><span style='color: #555555;'> 9</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Hawt…           10            20       797           768      1.04 
-#&gt; </span><span style='color: #555555;'>10</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Port…           10            20       815           791      1.03 
-#&gt; </span><span style='color: #555555;'>11</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 St K…           10            20       743           810      0.917
-#&gt; </span><span style='color: #555555;'>12</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Esse…           10            16       768           785      0.978
-#&gt; </span><span style='color: #555555;'>13</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Foot…           10            16       816           868      0.940
-#&gt; </span><span style='color: #555555;'>14</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Nort…           10            12       805           931      0.865
-#&gt; </span><span style='color: #555555;'>15</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Sydn…           10            12       752           880      0.855
-#&gt; </span><span style='color: #555555;'>16</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Melb…           10            12       693           914      0.758
-#&gt; </span><span style='color: #555555;'>17</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Gold…           10            12       617           819      0.753
-#&gt; </span><span style='color: #555555;'>18</span><span>   </span><span style='text-decoration: underline;'>2</span><span>019 Carl…           10             4       705           919      0.767
-#&gt; </span><span style='color: #555555;'># … with 1 more variable: Ladder.Position </span><span style='color: #555555;font-style: italic;'>&lt;int&gt;</span><span></div><div class='input'># }
-</div></span></pre>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>return_ladder</span>()
+<span class='fu'>return_ladder</span>(<span class='kw'>match_results_df</span><span class='kw'>=</span><span class='no'>get_match_results_df</span>, <span class='kw'>season_round</span><span class='kw'>=</span><span class='fl'>23</span>, <span class='kw'>season</span><span class='kw'>=</span><span class='fl'>1990</span>:<span class='fl'>2019</span>)
+<span class='fu'>return_ladder</span>(<span class='kw'>season_round</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>season</span> <span class='kw'>=</span> <span class='fl'>2019</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
