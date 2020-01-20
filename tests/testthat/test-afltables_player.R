@@ -3,7 +3,7 @@ context("test-afltables_player.R")
 if (!testthat:::on_cran()) {
 afltables_data <- get_afltables_stats(
   start_date = "1897-05-07",
-  end_date = Sys.Date())
+  end_date = "2019-01-01")
 }
 
 test_that("get_afltables_stats works", {
@@ -38,7 +38,7 @@ test_that("get_afltables_stats returns correct values", {
   # names are being kept distinct
   n_names <- afltables_summary %>%
     nrow()
-  expect_gte(n_names, 12676)
+  expect_gte(n_names, 12675)
 
   # no duplicate names
   n_unique <- afltables_summary %>%
