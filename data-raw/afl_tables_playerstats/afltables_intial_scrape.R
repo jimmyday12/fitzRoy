@@ -75,7 +75,7 @@ team_abbr <- tibble(
   )
 )
 
-usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
+#usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
 
 # Fix some random games identified by Tony Corke
 old_urls <- c(

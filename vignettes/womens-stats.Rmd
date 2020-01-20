@@ -10,7 +10,9 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-eval_param = identical(Sys.getenv("NOT_CRAN"), "true")
+not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -18,6 +20,9 @@ knitr::opts_chunk$set(
   eval = eval_param
 )
 ```
+
+NOTE - The AFL website for Women's data has been taken down. This page is left for posterity however these functions no longer work. 
+
 
 ### Match data
 

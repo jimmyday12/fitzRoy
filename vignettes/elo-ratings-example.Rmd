@@ -10,13 +10,18 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-eval_param = identical(Sys.getenv("NOT_CRAN"), "true")
+not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   eval = eval_param
 )
+
+results <- fitzRoy:::results
+fixture <- fitzRoy:::fixture
 ```
 
 A common example of how one might use `fitzRoy` is for creating a simple [ELO](https://en.wikipedia.org/wiki/Elo_rating_system) rating system. These models are common for tippers that are part of [The Squiggle](https://squiggle.com.au/) and also becoming common in other team sports. This vignette shows a minimum working example to get you started on creating an ELO model from scratch, using `fitzRoy` to get data and [the `elo` package](https://github.com/eheinzen/elo) to do the modelling.
@@ -24,7 +29,7 @@ A common example of how one might use `fitzRoy` is for creating a simple [ELO](h
 ## Load packages
 First we need to grab a few packages. If you don't have any of these, you'll need to install them. 
 
-```{r load_packages, eval=eval_param}
+```{r load_packages, eval=eval_param, message=FALSE, warning=FALSE}
 library(dplyr)
 library(elo)
 library(lubridate)
@@ -35,12 +40,20 @@ library(fitzRoy)
 ## Get data
 Our first job is to now get the relevant data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using `fitzRoy`.
 
-```{r load_data, eval=eval_param}
+```{r load_data, eval=FALSE, include=TRUE}
 # Get data
 results <- fitzRoy::get_match_results()
 fixture <- fitzRoy::get_fixture(2019)
+```
 
-head(results)
+```{r load_data2, eval=eval_param}
+results <- results %>% filter(Date < "2019-01-01")
+tail(results)
+```
+
+
+```{r load_data3, eval=eval_param}
+fixture <- fixture %>% filter(Date > "2019-01-01")
 head(fixture)
 ```
 
@@ -53,8 +66,6 @@ results <- results %>%
   mutate(seas_rnd = paste0(Season, ".", Round.Number),
          First.Game = ifelse(Round.Number == 1, TRUE, FALSE))
 
-head(results)
-
 ```
 
 For the `fixture` data, we need to ensure the dates are in the same format as `results` (note - this should probably be done internally in `fitzRoy` - see [#58](https://github.com/jimmyday12/fitzRoy/issues/58)). For now, we can do it manually. 
@@ -63,7 +74,9 @@ For the `fixture` data, we need to ensure the dates are in the same format as `r
 fixture <- fixture %>%
   filter(Date > max(results$Date)) %>%
   mutate(Date = ymd(format(Date, "%Y-%m-%d"))) %>%
-  rename(Round.Number = Round)
+  rename(Round.Number = `Round`)
+
+head(fixture)
 ```
 
 ## Set ELO parameters

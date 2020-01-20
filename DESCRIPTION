@@ -56,7 +56,8 @@ Suggests:
     testthat,
     roxygen2,
     elo,
-    spelling
+    spelling,
+    curl
 VignetteBuilder: knitr
 ByteCompile: true
 Encoding: UTF-8
