@@ -9,7 +9,7 @@
 #' @return A data frame with match results where each row is a team-match combination
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' results <- get_match_results()
 #' convert_results(results)
 #' }

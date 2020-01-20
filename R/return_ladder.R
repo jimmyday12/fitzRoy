@@ -11,7 +11,7 @@
 #' @return Returns a data frame containing a line for each team's ladder position at each round of a season
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' return_ladder()
 #' return_ladder(match_results_df=get_match_results_df, season_round=23, season=1990:2019)
 #' return_ladder(season_round = 10, season = 2019)

@@ -8,7 +8,7 @@
 #' @return Returns a data frame containing a line for each match
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' get_match_results()
 #' }
 #' @export

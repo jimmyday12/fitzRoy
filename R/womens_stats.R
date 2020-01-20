@@ -28,7 +28,7 @@ get_aflw_cookie <- function() {
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' get_aflw_rounds(get_aflw_cookie())
 #' }
 #' @export

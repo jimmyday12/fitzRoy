@@ -21,7 +21,7 @@
 #' @export
 #'
 #' @examples
-#'
+#' \dontrun{
 #' # Return a list of the sources, with ID's
 #' sources <- get_squiggle_data("sources")
 #'
@@ -30,6 +30,7 @@
 #'
 #' # Get tips from Squiggle 2019
 #' squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
+#' }
 get_squiggle_data <- function(query = c(
                                 "sources",
                                 "games",
