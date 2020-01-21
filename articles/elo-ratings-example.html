@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.1.9000</span>
       </span>
     </div>
 
@@ -121,8 +121,8 @@
 <a href="#get-data" class="anchor"></a>Get data</h2>
 <p>Our first job is to now get the relevant data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using <code>fitzRoy</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Get data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>results &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/fitzRoy/man/get_match_results.html">get_match_results</a></span>()</span>
-<span id="cb2-3"><a href="#cb2-3"></a>fixture &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/fitzRoy/man/get_fixture.html">get_fixture</a></span>(<span class="dv">2019</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a>results &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://jimmyday12.github.io/fitzRoy//reference/get_match_results.html">get_match_results</a></span>()</span>
+<span id="cb2-3"><a href="#cb2-3"></a>fixture &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://jimmyday12.github.io/fitzRoy//reference/get_fixture.html">get_fixture</a></span>(<span class="dv">2019</span>)</span></code></pre></div>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>results &lt;-<span class="st"> </span>results <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(Date <span class="op">&lt;</span><span class="st"> "2019-01-01"</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(results)</span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; # A tibble: 6 x 16</span></span>
