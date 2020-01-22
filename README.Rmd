@@ -15,6 +15,7 @@ knitr::opts_chunk$set(
 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+if (!requireNamespace("hexSticker", quietly = TRUE)) install.packages("hexSticker")
 library(hexSticker)
 library(tidyverse)
 sticker(
@@ -56,7 +57,7 @@ dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
 
 ## Overview
 
-The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data. Future versions will include basic ELO processing functions. 
+The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data.
 
 ## Installation
 Install the released version of fitzRoy from CRAN:
@@ -123,6 +124,5 @@ To build the Docker image run the following from the root of the repository.
 
 
 ---
-
 
 Please note that the 'fitzRoy' project is released with a [Contributor Code of Conduct](https://jimmyday12.github.io/fitzRoy/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.

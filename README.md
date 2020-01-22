@@ -26,8 +26,7 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy)](https://www.r
 The goal of fitzRoy is to provide a set of functions that allows for
 users to easily get access to AFL data from sources such as
 afltables.com and footywire.com. There are also tools for processing and
-cleaning that data. Future versions will include basic ELO processing
-functions.
+cleaning that data.
 
 ## Installation
 
