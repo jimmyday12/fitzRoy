@@ -95,7 +95,7 @@ support in the form of an image hosted on
 
 ### Usage
 
-Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`)
+Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`)
 run one of the following commands.
 
   - To start [RStudio](https://www.rstudio.com/) with Fitzroy ready to
