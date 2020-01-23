@@ -73,6 +73,8 @@ fixture <- get_fixture(season = 2019)
 #### AFL Womens data 
 From 2019, we are able to provide access to AFL Women's data. Read the full [AFL Womens Vingette](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) for details on how to access it. 
 
+NOTE: The AFL website has taken down the Women's stats pages during the 2019/2020 offseason, so these functions no longer work. This is left for posterity and in the hope that they go back up evenually. 
+
 ```{r aflw, eval=FALSE}
 aflw_match_data <- get_aflw_match_data()
 

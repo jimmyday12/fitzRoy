@@ -76,6 +76,10 @@ full [AFL Womens
 Vingette](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html)
 for details on how to access it.
 
+NOTE: The AFL website has taken down the Women’s stats pages during the
+2019/2020 offseason, so these functions no longer work. This is left for
+posterity and in the hope that they go back up evenually.
+
 ``` r
 aflw_match_data <- get_aflw_match_data()
 ```
@@ -95,7 +99,7 @@ support in the form of an image hosted on
 
 ### Usage
 
-Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`)
+Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`)
 run one of the following commands.
 
   - To start [RStudio](https://www.rstudio.com/) with Fitzroy ready to
