@@ -177,6 +177,18 @@ describe("get_footywire_betting_odds", {
 
     expect_equal(nrow(bonus_rounds), 0)
   })
+
+  it("returns an empty data frame when a future season is requested", {
+    this_year <- as.numeric(lubridate::year(Sys.Date()))
+    next_year <- this_year + 1
+
+    empty_betting_df <- get_footywire_betting_odds(
+      start_season = next_year, end_season = next_year
+    )
+
+    expect_equal(nrow(empty_betting_df), 0)
+    expect_equal(colnames(empty_betting_df), colnames(full_betting_df))
+  })
 })
 
 test_that("update_footywire_stats works ", {
