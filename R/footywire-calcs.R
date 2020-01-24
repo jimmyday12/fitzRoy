@@ -97,15 +97,20 @@ update_footywire_stats <- function(check_existing = TRUE) {
 
     # message("\nChecking Github")
     # Check fitzRoy GitHub
-    dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda?raw=true" # nolint
-    # dat_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy-data/master/data-raw/player_stats/player_stats.rda" # nolint
+    #dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda?raw=true" # nolint
+    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/master/data-raw/player_stats/player_stats.rda" # nolint
     # dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda" # nolint
     load_r_data <- function(fname) {
-      load(fname)
-      get(ls()[ls() != "fname"])
+      tmp <- tempfile(fileext = ".rda")
+      utils::download.file(fname, tmp)
+      
+      load(tmp)
+      unlink(tmp)
+      get(ls()[!ls() %in% c("tmp", "fname")])
+      
     }
 
-    dat_git <- load_r_data(url(dat_url))
+    dat_git <- load_r_data(dat_url2)
 
     # Check what's still missing
     git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
