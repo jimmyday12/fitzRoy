@@ -516,13 +516,24 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  valid_start_season:valid_end_season %>%
+  n_columns <- length(raw_betting_col_names)
+
+  raw_betting_values <- valid_start_season:valid_end_season %>%
     purrr::map(fetch_betting_odds_page) %>%
     purrr::map(., ~ do.call(extract_table_rows, .)) %>%
-    unlist() %>%
+    unlist()
+
+  betting_values <- if (is.null(raw_betting_values)) {
+    # Need two rows-worth of NAs to allow for Home and Away columns after pivoting
+    rep_len(NA, n_columns * 2)
+  } else {
+    raw_betting_values
+  }
+
+  betting_values %>%
     matrix(
       .,
-      ncol = length(raw_betting_col_names),
+      ncol = n_columns,
       byrow = TRUE,
       dimnames = list(NULL, raw_betting_col_names)
     ) %>%
@@ -568,5 +579,6 @@ get_footywire_betting_odds <- function(
     calculate_round(.) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
+    dplyr::filter(!is.na(.data$Date)) %>%
     dplyr::arrange(.data$Date)
 }
