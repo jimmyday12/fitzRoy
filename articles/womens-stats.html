@@ -97,7 +97,7 @@
       <h1>Womens’ AFL Stats</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2020-01-23</h4>
+            <h4 class="date">2020-01-24</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -121,7 +121,7 @@
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://rdrr.io/pkg/dplyr/man/reexports.html">glimpse</a></span>(match_data)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span></code></pre></div>
 </div>
 <div id="detailed-stats" class="section level3">
 <h3 class="hasAnchor">
@@ -131,7 +131,7 @@
 <span id="cb5-2"><a href="#cb5-2"></a>first10_ids &lt;-<span class="st"> </span>first10<span class="op">$</span>Match.Id</span>
 <span id="cb5-3"><a href="#cb5-3"></a>first10_ids</span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>detailed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span>(first10_ids)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw"><a href="https://rdrr.io/pkg/dplyr/man/reexports.html">glimpse</a></span>(detailed)</span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(detailed)</span></code></pre></div>
 </div>
   </div>
 
