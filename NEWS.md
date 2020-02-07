@@ -1,7 +1,10 @@
 # fitzRoy (development version)
 
+* Updated AFLW API URL
+
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to return an empty data frame when only future seasons are requested rather than raising an error ([#112](https://github.com/jimmyday12/fitzRoy/issues/112), [@cfranklin11](https://github.com/cfranklin11))
+
 
 # fitzRoy 0.3.1
 
