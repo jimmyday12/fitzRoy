@@ -12,10 +12,9 @@
 #' }
 #' @export
 get_aflw_cookie <- function() {
-  response <- httr::POST("https://www.afl.com.au/g00/3_c-7x78x78x78.bgm.dpn.bv_/c-7NPSFQIFVT34x24iuuqtx3ax2fx2fx78x78x78.bgm.dpn.bvx2fbqjx2fdgtx2fbgmx2fXNDUplx3fj21d.nbslx3dyis_$/$/$/$/$") # nolint
+  response <- httr::POST("https://api.afl.com.au/cfs/afl/WMCTok") # nolint
   httr::content(response)$token
 }
-
 
 #' Get rounds (internal function)
 #'
@@ -39,7 +38,7 @@ get_aflw_rounds <- function(cookie) {
   i <- 1
   while (continue == TRUE) {
     meta_url <- paste0(
-      "http://www.afl.com.au/api/cfs/afl/season?seasonId=CD_S",
+      "http://api.afl.com.au/cfs/afl/season?seasonId=CD_S",
       years[[i]], "264"
     )
     match_data_json <- httr::GET(
@@ -88,7 +87,7 @@ get_aflw_rounds <- function(cookie) {
 #' @export
 get_aflw_round_data <- function(roundid, cookie) {
   url_head <- paste0(
-    "http://www.afl.com.au/api/cfs/afl/matchItems/round/",
+    "http://api.afl.com.au/cfs/afl/matchItems/round/",
     roundid
   )
   # Extract round data JSON and flatten into data frame
@@ -258,7 +257,7 @@ get_aflw_detailed_data <- function(matchids) {
 #' }
 get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
                                          cookie) {
-  url <- "http://www.afl.com.au/api/cfs/afl/statsCentre/teams"
+  url <- "http://api.afl.com.au/cfs/afl/statsCentre/teams"
   request_metadata <- httr::GET(url,
     query = list(
       matchId = matchid,
