@@ -97,7 +97,7 @@
       <h1>Womens’ AFL Stats</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2020-02-07</h4>
+            <h4 class="date">2020-02-09</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -116,7 +116,7 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "decffe04e3f4518951e4d443e4585e79"</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "e25c699245147cc4442ab19ebb2fe81f"</span></span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span>
@@ -132,21 +132,19 @@
 <span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; Warning: `cols` is now required.</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
 <span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; CD_R202026401, returning match fixture information only.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; CD_R202026402, returning match fixture information only.</span></span>
 <span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; CD_R202026402, returning match fixture information only.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; CD_R202026403, returning match fixture information only.</span></span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; CD_R202026403, returning match fixture information only.</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; CD_R202026404, returning match fixture information only.</span></span>
 <span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; CD_R202026404, returning match fixture information only.</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; CD_R202026405, returning match fixture information only.</span></span>
 <span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; CD_R202026405, returning match fixture information only.</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; CD_R202026406, returning match fixture information only.</span></span>
 <span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; CD_R202026406, returning match fixture information only.</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; CD_R202026407, returning match fixture information only.</span></span>
 <span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; CD_R202026407, returning match fixture information only.</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; CD_R202026408, returning match fixture information only.</span></span></code></pre></div>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; CD_R202026408, returning match fixture information only.</span></span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Observations: 152</span></span>
