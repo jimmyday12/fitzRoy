@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-![Run
-R-CMD-check](https://github.com/jimmyday12/fitzRoy/workflows/Run%20R-CMD-check/badge.svg)
+[![Run
+R-CMD-check](https://github.com/jimmyday12/fitzRoy/workflows/Run%20R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions?query=workflow%3A%22Render+README%22)
 [![Travis build
 status](https://travis-ci.org/jimmyday12/fitzRoy.svg?branch=master)](https://travis-ci.org/jimmyday12/fitzRoy)
 [![Coverage
