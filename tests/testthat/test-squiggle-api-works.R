@@ -50,11 +50,7 @@ test_that("Squiggle API optional arguments work", {
     ),
     "list"
   )
-  expect_error(get_squiggle_data(
-    query = "sources",
-    round = 1,
-    year = 2018
-  ))
+
   expect_error(get_squiggle_data(
     query = "tips",
     x = "",

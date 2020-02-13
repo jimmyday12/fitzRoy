@@ -14,25 +14,20 @@ skip_if_no_cookie <- function() {
 test_that("get_aflw_cookie returns a 32 character string", {
   testthat::skip_on_cran()
   skip_if_no_cookie()
+  cookie <- get_aflw_cookie()
   
-  expect_type(get_aflw_cookie(), "character")
-  expect_equal(nchar(get_aflw_cookie()), 32)
+  expect_type(cookie, "character")
+  expect_equal(nchar(cookie), 32)
   expect_error(get_aflw_cookie("a"))
 })
 
 test_that("get_aflw_rounds returns data frame with correct variables", {
   testthat::skip_on_cran()
   skip_if_no_cookie()
+  aflw_rounds_dat <- get_aflw_rounds(get_aflw_cookie())
   
-  expect_type(get_aflw_rounds(get_aflw_cookie()), "list")
-  expect_equal(
-    colnames(get_aflw_rounds(get_aflw_cookie())),
-    c(
-      "name", "id", "roundPhase", "name1", "year",
-      "season", "roundId", "abbreviation", "competitionId",
-      "roundNumber", "guid", "currentRoundId"
-    )
-  )
+  expect_type(aflw_rounds_dat, "list")
+  expect_gte(nrow(aflw_rounds_dat), 1)
 })
 
 test_that("get_aflw_round_data returns data frame with correct variables", {
