@@ -9,6 +9,9 @@ cache:
 
 env:
   - NOT_CRAN=true
+  
+notifications:
+  slack: fitzroy-rafl:f7fzevoXtmES8g2kGLspLWK1
 
 #r_build_args: '--no-build-vignettes'
 #r_check_args: '--as-cran --ignore-vignettes'  
