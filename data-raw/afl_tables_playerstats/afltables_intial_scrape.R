@@ -12,6 +12,40 @@ afldata <- afldata %>%
     -Height, -Weight, -DOB
   )
 
+
+# Fix finals bad matches
+
+# get bad matches
+bad_finals <- afldata %>%
+  distinct(Season, Round, Date, Venue, Home.team, Home.score, Away.team, Away.score, Attendance) %>%
+  filter(Home.score == Away.score) %>%
+  group_by(Season, Round, Date, Venue, Attendance) %>%
+  mutate(count = n()) %>%
+  filter(count > 1) %>%
+  arrange(Date) %>%
+  select(-Home.score, -Away.score, -count, -Away.team, -Home.team) %>%
+  ungroup() 
+
+# re-scrape these matches
+purrr:map(~get_afltables_urls(lubridate::ymd(.x$Date) - 1, lubridate::ymd(.x$Date) + 1))
+
+get_afltables_urls(lubridate::ymd(bad_finals$Date[1]), lubridate::ymd(bad_finals$Date[1]) + 1)
+
+
+# check that the results are right
+
+
+# filter them out of afldata then put them in
+# filter them out
+afldata_no_finals <- as_tibble(afldata) %>%
+  anti_join(bad_finals)
+
+
+
+
+
+
+
 # Save the names of the columns. Will be used internally by the package
 afldata_cols <- names(afldata)
 
@@ -89,7 +123,8 @@ old_urls <- c(
   "https://afltables.com/afl/stats/games/1907/030519070615.html",
   "https://afltables.com/afl/stats/games/1907/051119070629.html",
   "https://afltables.com/afl/stats/games/1907/040519070720.html",
-  "https://afltables.com/afl/stats/games/1900/030919000623.html"
+  "https://afltables.com/afl/stats/games/1900/030919000623.html",
+
 )
 
 old_urls <- sort(old_urls)
@@ -103,7 +138,8 @@ afldata$group_id <- group_indices(afldata)
 afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
 
 bad_dat <- afldata %>%
-  filter((Season == 1901 & Round == "3" & Home.team == "Essendon") |
+  filter(
+    (Season == 1901 & Round == "3" & Home.team == "Essendon") |
     (Season == 1912 & Round == "5" & Home.team == "Fitzroy") |
     (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") |
     (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") |
@@ -124,6 +160,12 @@ afldata <- afldata %>%
 # Get new data
 old_dat <- scrape_afltables_match(old_urls) %>%
   left_join(bad_dat, by = c("Season", "Round", "Home.team", "Away.team"))
+
+
+
+
+
+
 
 
 # Now let's save to 2018
