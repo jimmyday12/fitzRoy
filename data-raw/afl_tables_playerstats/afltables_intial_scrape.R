@@ -12,6 +12,14 @@ afldata <- afldata %>%
     -Height, -Weight, -DOB
   )
 
+afldata <- afldata %>%
+  group_by(Date, Season, Round, Home.team, Away.team)
+
+afldata$group_id <- group_indices(afldata)
+afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
+
+
+
 
 # Fix finals bad matches
 
@@ -26,6 +34,16 @@ bad_finals <- afldata %>%
   select(-Home.score, -Away.score, -count, -Away.team, -Home.team) %>%
   ungroup() 
 
+# Add match ID
+bad_finals <- afldata %>% 
+  ungroup %>% 
+  select(Season, Round, Date, Venue, Attendance, group_id_num) %>%
+  group_by(group_id_num) %>%
+  filter(row_number() == 1) %>%
+  semi_join(bad_finals) %>%
+  mutate(Date = lubridate::ymd(Date))
+
+
 # re-scrape these matches
 bad_finals_urls <- bad_finals$Date %>%
   purrr::map(~get_afltables_urls(lubridate::ymd(.x) - 1, lubridate::ymd(.x) + 1)) %>%
@@ -34,18 +52,19 @@ bad_finals_urls <- bad_finals$Date %>%
 bad_finals_data <- bad_finals_urls %>%
   fitzRoy::scrape_afltables_match()
 
-# check that the results are right
-
+# add match id and filter our non bad matches (some dates had 2 matches)
+bad_finals_data <- bad_finals_data %>% 
+  left_join(select(bad_finals, Season, Date, Attendance, group_id_num)) %>%
+  filter(!is.na(group_id_num))
 
 # filter them out of afldata then put them in
-# filter them out
-afldata_no_finals <- as_tibble(afldata) %>%
+afldata <- as_tibble(afldata) %>%
+  mutate(Date = lubridate::ymd(Date)) %>%
   anti_join(bad_finals)
 
-
-
-
-
+afldata <- afldata %>%
+  bind_rows(bad_finals_data) %>%
+  arrange()
 
 
 # Save the names of the columns. Will be used internally by the package
@@ -133,11 +152,11 @@ old_urls <- sort(old_urls)
 
 # Add match numbers
 
-afldata <- afldata %>%
-  group_by(Date, Season, Round, Home.team, Away.team)
+#afldata <- afldata %>%
+#  group_by(Date, Season, Round, Home.team, Away.team)
 
-afldata$group_id <- group_indices(afldata)
-afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
+#afldata$group_id <- group_indices(afldata)
+#afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
 
 bad_dat <- afldata %>%
   filter(
