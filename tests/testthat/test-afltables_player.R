@@ -77,3 +77,15 @@ test_that("conver_results works", {
   expect_type(convert_results(get_match_results()), "list")
   expect_error(convert_results("a"))
 })
+
+
+
+test_that("finals drawn matches return the right home/away team", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+
+  
+  ##afltables_data %>%
+  ##  filter(Season == 2010 & Round == "GF" & Home.score == Away.score) %>%
+  ##  distinct(Season, Round, Date, Venue, Home.team, Home.score, Away.team, Away.score, Playing.for) 
+})

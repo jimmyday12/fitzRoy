@@ -27,10 +27,12 @@ bad_finals <- afldata %>%
   ungroup() 
 
 # re-scrape these matches
-purrr:map(~get_afltables_urls(lubridate::ymd(.x$Date) - 1, lubridate::ymd(.x$Date) + 1))
+bad_finals_urls <- bad_finals$Date %>%
+  purrr::map(~get_afltables_urls(lubridate::ymd(.x) - 1, lubridate::ymd(.x) + 1)) %>%
+  purrr::reduce(c)
 
-get_afltables_urls(lubridate::ymd(bad_finals$Date[1]), lubridate::ymd(bad_finals$Date[1]) + 1)
-
+bad_finals_data <- bad_finals_urls %>%
+  fitzRoy::scrape_afltables_match()
 
 # check that the results are right
 

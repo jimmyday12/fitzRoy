@@ -146,15 +146,18 @@ get_afltables_urls <- function(start_date,
   dates <- html_games %>%
     purrr::map(
       rvest::html_nodes,
-      "table+ table tr:nth-child(1) > td:nth-child(4)"
+      #"table+ table tr:nth-child(1) > td:nth-child(4)"
+      "tr:nth-child(1) > td:nth-child(4)"
     ) %>%
     purrr::map(rvest::html_text) %>%
     purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     purrr::map(lubridate::dmy) %>%
+    purrr::map(~ .x[!is.na(.x)]) %>%
     purrr::map(~ .x > start_date & .x < end_date)
 
   match_ids <- html_games %>%
-    purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
+    #purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
+    purrr::map(rvest::html_nodes, "tr:nth-child(2) td:nth-child(4) a") %>%
     purrr::map(rvest::html_attr, "href") %>%
     purrr::map(~ stringr::str_replace(., "..", "https://afltables.com/afl"))
 
