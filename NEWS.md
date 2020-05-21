@@ -4,7 +4,7 @@
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to return an empty data frame when only future seasons are requested rather than raising an error ([#112](https://github.com/jimmyday12/fitzRoy/issues/112), [@cfranklin11](https://github.com/cfranklin11))
-
+* Fixed issue with afltables data that caused issues with home/away team in drawn finals matches [#116](https://github.com/jimmyday12/fitzRoy/issues/116)
 
 # fitzRoy 0.3.1
 

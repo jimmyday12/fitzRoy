@@ -83,9 +83,15 @@ test_that("conver_results works", {
 test_that("finals drawn matches return the right home/away team", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-
   
-  ##afltables_data %>%
-  ##  filter(Season == 2010 & Round == "GF" & Home.score == Away.score) %>%
-  ##  distinct(Season, Round, Date, Venue, Home.team, Home.score, Away.team, Away.score, Playing.for) 
+  bad_finals <- afltables_data %>%
+    dplyr::distinct(Season, Round, Date, Venue, Home.team, Home.score, Away.team, Away.score) %>%
+    dplyr::filter(Home.score == Away.score) %>%
+    dplyr::group_by(Season, Round, Date, Venue) %>%
+    dplyr::mutate(count = dplyr::n()) %>%
+    dplyr::filter(count > 1) %>%
+    dplyr::arrange(Date) 
+  
+  expect_equal(nrow(bad_finals), 0)
+  
 })
