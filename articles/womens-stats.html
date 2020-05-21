@@ -97,7 +97,7 @@
       <h1>Womens’ AFL Stats</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2020-04-14</h4>
+            <h4 class="date">2020-05-21</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -116,7 +116,7 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "31c789f0fc3388a8a0808769cb543017"</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "9d9a95be81bc1b4dbc56e0091ad2d41f"</span></span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span>
@@ -125,16 +125,16 @@
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; The signature and semantics have changed, see `?as_tibble`.</span></span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
 <span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; Warning: `cols` is now required.</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
 <span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
 <span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; Warning: `cols` is now required.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
 <span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
 <span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; Warning: `cols` is now required.</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
 <span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
 <span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; Warning: `cols` is now required.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
 <span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span>
