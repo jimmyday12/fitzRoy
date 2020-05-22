@@ -1,4 +1,4 @@
-# fitzRoy (development version)
+# fitzRoy 0.3.2
 
 * Updated AFLW API URL
 
