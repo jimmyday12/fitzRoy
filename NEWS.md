@@ -1,6 +1,7 @@
 # fitzRoy 0.3.2
 
-* Updated AFLW API URL
+## General changes
+* The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to return an empty data frame when only future seasons are requested rather than raising an error ([#112](https://github.com/jimmyday12/fitzRoy/issues/112), [@cfranklin11](https://github.com/cfranklin11))
