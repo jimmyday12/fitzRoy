@@ -13,5 +13,5 @@
 #' @importFrom here .here
 
 get_afl_colour_palettes <- function(){
-  return(readRDS(here::here("data-raw", "team_colours", "team_colours.rda")))
+  return(readRDS(url("http://www.fryziggafl.net/static/team_colours.rda", "rb")))
 }
