@@ -1,5 +1,8 @@
 # fitzRoy (development version)
 
+* Added AFL stats [@fryzigg](https://github.com/Fryzigg)
+* Added team colours [@fryzigg](https://github.com/Fryzigg)
+
 # fitzRoy 0.3.2
 
 ## General changes
