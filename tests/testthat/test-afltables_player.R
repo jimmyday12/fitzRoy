@@ -33,7 +33,7 @@ test_that("get_afltables_stats returns correct values", {
   afltables_summary <- afltables_data %>%
     dplyr::distinct(ID, First.name, Surname) %>%
     dplyr::group_by(ID) %>%
-    dplyr::mutate(count_names = n())
+    dplyr::mutate(count_names = dplyr::n())
 
   # names are being kept distinct
   n_names <- afltables_summary %>%
