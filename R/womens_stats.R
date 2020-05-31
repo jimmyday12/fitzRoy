@@ -57,8 +57,8 @@ get_aflw_rounds <- function(cookie) {
         jsonlite::fromJSON() %>%
         .$season %>%
         .$competitions %>%
-        dplyr::as_data_frame() %>%
-        tidyr::unnest()
+        dplyr::as_tibble() %>%
+        tidyr::unnest(cols = c("rounds"), names_repair = "universal")
       match_data[[i]] <- x
       i <- i + 1
     }
@@ -98,7 +98,7 @@ get_aflw_round_data <- function(roundid, cookie) {
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE) %>%
     .$items %>% # Select data from flattened JSON file
-    dplyr::as_data_frame() %>%
+    dplyr::as_tibble() %>%
     dplyr::mutate(
       match.venueLocalStartTime =
         readr::parse_datetime(.data$match.venueLocalStartTime)
@@ -278,7 +278,7 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
   match_data <- request_metadata %>%
     jsonlite::fromJSON(flatten = TRUE) %>%
     .$lists %>%
-    dplyr::as_data_frame() %>%
+    dplyr::as_tibble() %>%
     dplyr::mutate(
       Match.Id = matchid,
       Round.Id = roundid,
