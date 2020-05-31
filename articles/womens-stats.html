@@ -97,7 +97,7 @@
       <h1>Womens’ AFL Stats</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2020-05-25</h4>
+            <h4 class="date">2020-05-31</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -116,26 +116,10 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "cc2860b6bf825f6c4769a2ff6b818329"</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "6cd7ce1df4b8902a7e3d74450064a45c"</span></span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Warning: `as_data_frame()` is deprecated as of tibble 2.0.0.</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; Please use `as_tibble()` instead.</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; The signature and semantics have changed, see `?as_tibble`.</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; Warning: `cols` is now required when using unnest().</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; Please use `cols = c(rounds)`</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Rows: 142</span></span>
@@ -182,200 +166,213 @@
 <span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;  [5] "CD_M20172640201" "CD_M20172640202" "CD_M20172640203" "CD_M20172640204"</span></span>
 <span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;  [9] "CD_M20172640301" "CD_M20172640302"</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>detailed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span>(first10_ids)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(detailed)</span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Rows: 10</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; Columns: 191</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; $ Match.Id                                                    &lt;chr&gt; "CD_M2017…</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; $ Round.Id                                                    &lt;chr&gt; "CD_R2017…</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; $ Competition.Id                                              &lt;chr&gt; "CD_S2017…</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; $ away.stats.averages.behinds                                 &lt;dbl&gt; 4.1, 2.1,…</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; $ away.stats.averages.bounces                                 &lt;dbl&gt; 3.7, 1.9,…</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; $ away.stats.averages.clangers                                &lt;dbl&gt; 39.7, 35.…</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; $ away.stats.averages.clearances.centreClearances             &lt;dbl&gt; 4.9, 5.7,…</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; $ away.stats.averages.clearances.stoppageClearances           &lt;dbl&gt; 16.9, 16.…</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; $ away.stats.averages.clearances.totalClearances              &lt;dbl&gt; 21.7, 22.…</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; $ away.stats.averages.contestedMarks                          &lt;dbl&gt; 6.3, 3.0,…</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; $ away.stats.averages.contestedPossessions                    &lt;dbl&gt; 90.3, 85.…</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; $ away.stats.averages.disposalEfficiency                      &lt;dbl&gt; 56.6, 54.…</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; $ away.stats.averages.disposals                               &lt;dbl&gt; 167.6, 15…</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; $ away.stats.averages.dreamTeamPoints                         &lt;dbl&gt; 843.3, 75…</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; $ away.stats.averages.freesAgainst                            &lt;dbl&gt; 13.6, 13.…</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; $ away.stats.averages.freesFor                                &lt;dbl&gt; 15.6, 14.…</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; $ away.stats.averages.goalAccuracy                            &lt;dbl&gt; 45.7, 43.…</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; $ away.stats.averages.goalAssists                             &lt;dbl&gt; 2.6, 2.1,…</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; $ away.stats.averages.goalEfficiency                          &lt;dbl&gt; 19.5, 18.…</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; $ away.stats.averages.goals                                   &lt;dbl&gt; 4.6, 3.3,…</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; $ away.stats.averages.handballs                               &lt;dbl&gt; 47.9, 50.…</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; $ away.stats.averages.hitouts                                 &lt;dbl&gt; 36.6, 28.…</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; $ away.stats.averages.inside50s                               &lt;dbl&gt; 23.4, 18.…</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; $ away.stats.averages.intercepts                              &lt;dbl&gt; 45.3, 42.…</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCap        &lt;dbl&gt; 999, 999,…</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ1    &lt;dbl&gt; 16, 9, 0,…</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ2    &lt;dbl&gt; 14, 21, 2…</span></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ3    &lt;dbl&gt; 0, 13, 4,…</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ4    &lt;dbl&gt; 0, 11, 0,…</span></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.totalInterchangeCount &lt;dbl&gt; 30, 54, 3…</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; $ away.stats.averages.kicks                                   &lt;dbl&gt; 119.7, 10…</span></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt; $ away.stats.averages.lastUpdated                             &lt;dttm&gt; 2017-03-…</span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt; $ away.stats.averages.marks                                   &lt;dbl&gt; 39.7, 29.…</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; $ away.stats.averages.marksInside50                           &lt;dbl&gt; 6.0, 4.4,…</span></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; $ away.stats.averages.metresGained                            &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; $ away.stats.averages.onePercenters                           &lt;dbl&gt; 21.6, 18.…</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt; $ away.stats.averages.ranking                                 &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt; $ away.stats.averages.ratingPoints                            &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt; $ away.stats.averages.rebound50s                              &lt;dbl&gt; 18.7, 22.…</span></span>
-<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt; $ away.stats.averages.scoreInvolvements                       &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt; $ away.stats.averages.shotEfficiency                          &lt;dbl&gt; 42.7, 42.…</span></span>
-<span id="cb6-46"><a href="#cb6-46"></a><span class="co">#&gt; $ away.stats.averages.shotsAtGoal                             &lt;dbl&gt; 10.0, 7.6…</span></span>
-<span id="cb6-47"><a href="#cb6-47"></a><span class="co">#&gt; $ away.stats.averages.superGoals                              &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="co">#&gt; $ away.stats.averages.tackles                                 &lt;dbl&gt; 56.6, 55.…</span></span>
-<span id="cb6-49"><a href="#cb6-49"></a><span class="co">#&gt; $ away.stats.averages.tacklesInside50                         &lt;dbl&gt; 7.7, 5.0,…</span></span>
-<span id="cb6-50"><a href="#cb6-50"></a><span class="co">#&gt; $ away.stats.averages.totalPossessions                        &lt;dbl&gt; 168.9, 15…</span></span>
-<span id="cb6-51"><a href="#cb6-51"></a><span class="co">#&gt; $ away.stats.averages.turnovers                               &lt;dbl&gt; 47.7, 48.…</span></span>
-<span id="cb6-52"><a href="#cb6-52"></a><span class="co">#&gt; $ away.stats.averages.uncontestedPossessions                  &lt;dbl&gt; 78.6, 68.…</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="co">#&gt; $ away.stats.totals.behinds                                   &lt;dbl&gt; 5, 6, 6, …</span></span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="co">#&gt; $ away.stats.totals.bounces                                   &lt;dbl&gt; 3, 0, 4, …</span></span>
-<span id="cb6-55"><a href="#cb6-55"></a><span class="co">#&gt; $ away.stats.totals.clangers                                  &lt;dbl&gt; 37, 45, 3…</span></span>
-<span id="cb6-56"><a href="#cb6-56"></a><span class="co">#&gt; $ away.stats.totals.clearances.centreClearances               &lt;dbl&gt; 4, 7, 3, …</span></span>
-<span id="cb6-57"><a href="#cb6-57"></a><span class="co">#&gt; $ away.stats.totals.clearances.stoppageClearances             &lt;dbl&gt; 15, 13, 1…</span></span>
-<span id="cb6-58"><a href="#cb6-58"></a><span class="co">#&gt; $ away.stats.totals.clearances.totalClearances                &lt;dbl&gt; 19, 20, 1…</span></span>
-<span id="cb6-59"><a href="#cb6-59"></a><span class="co">#&gt; $ away.stats.totals.contestedMarks                            &lt;dbl&gt; 4, 2, 2, …</span></span>
-<span id="cb6-60"><a href="#cb6-60"></a><span class="co">#&gt; $ away.stats.totals.contestedPossessions                      &lt;dbl&gt; 94, 92, 7…</span></span>
-<span id="cb6-61"><a href="#cb6-61"></a><span class="co">#&gt; $ away.stats.totals.disposalEfficiency                        &lt;dbl&gt; 52.8, 46.…</span></span>
-<span id="cb6-62"><a href="#cb6-62"></a><span class="co">#&gt; $ away.stats.totals.disposals                                 &lt;dbl&gt; 163, 165,…</span></span>
-<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#&gt; $ away.stats.totals.dreamTeamPoints                           &lt;dbl&gt; 926, 783,…</span></span>
-<span id="cb6-64"><a href="#cb6-64"></a><span class="co">#&gt; $ away.stats.totals.freesAgainst                              &lt;dbl&gt; 9, 21, 17…</span></span>
-<span id="cb6-65"><a href="#cb6-65"></a><span class="co">#&gt; $ away.stats.totals.freesFor                                  &lt;dbl&gt; 20, 23, 1…</span></span>
-<span id="cb6-66"><a href="#cb6-66"></a><span class="co">#&gt; $ away.stats.totals.goalAccuracy                              &lt;dbl&gt; 16.7, 10.…</span></span>
-<span id="cb6-67"><a href="#cb6-67"></a><span class="co">#&gt; $ away.stats.totals.goalAssists                               &lt;dbl&gt; 0, 1, 1, …</span></span>
-<span id="cb6-68"><a href="#cb6-68"></a><span class="co">#&gt; $ away.stats.totals.goalEfficiency                            &lt;dbl&gt; 3.7, 4.8,…</span></span>
-<span id="cb6-69"><a href="#cb6-69"></a><span class="co">#&gt; $ away.stats.totals.goals                                     &lt;dbl&gt; 1, 1, 1, …</span></span>
-<span id="cb6-70"><a href="#cb6-70"></a><span class="co">#&gt; $ away.stats.totals.handballs                                 &lt;dbl&gt; 48, 52, 5…</span></span>
-<span id="cb6-71"><a href="#cb6-71"></a><span class="co">#&gt; $ away.stats.totals.hitouts                                   &lt;dbl&gt; 28, 9, 14…</span></span>
-<span id="cb6-72"><a href="#cb6-72"></a><span class="co">#&gt; $ away.stats.totals.inside50s                                 &lt;dbl&gt; 27, 21, 1…</span></span>
-<span id="cb6-73"><a href="#cb6-73"></a><span class="co">#&gt; $ away.stats.totals.intercepts                                &lt;dbl&gt; 48, 52, 5…</span></span>
-<span id="cb6-74"><a href="#cb6-74"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCap          &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-75"><a href="#cb6-75"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ1      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-76"><a href="#cb6-76"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ2      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-77"><a href="#cb6-77"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ3      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-78"><a href="#cb6-78"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ4      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-79"><a href="#cb6-79"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.totalInterchangeCount   &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-80"><a href="#cb6-80"></a><span class="co">#&gt; $ away.stats.totals.kicks                                     &lt;dbl&gt; 115, 113,…</span></span>
-<span id="cb6-81"><a href="#cb6-81"></a><span class="co">#&gt; $ away.stats.totals.lastUpdated                               &lt;dttm&gt; 2017-02-…</span></span>
-<span id="cb6-82"><a href="#cb6-82"></a><span class="co">#&gt; $ away.stats.totals.marks                                     &lt;dbl&gt; 35, 37, 3…</span></span>
-<span id="cb6-83"><a href="#cb6-83"></a><span class="co">#&gt; $ away.stats.totals.marksInside50                             &lt;dbl&gt; 4, 6, 3, …</span></span>
-<span id="cb6-84"><a href="#cb6-84"></a><span class="co">#&gt; $ away.stats.totals.metresGained                              &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-85"><a href="#cb6-85"></a><span class="co">#&gt; $ away.stats.totals.onePercenters                             &lt;dbl&gt; 23, 13, 2…</span></span>
-<span id="cb6-86"><a href="#cb6-86"></a><span class="co">#&gt; $ away.stats.totals.ranking                                   &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-87"><a href="#cb6-87"></a><span class="co">#&gt; $ away.stats.totals.ratingPoints                              &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-88"><a href="#cb6-88"></a><span class="co">#&gt; $ away.stats.totals.rebound50s                                &lt;dbl&gt; 18, 15, 2…</span></span>
-<span id="cb6-89"><a href="#cb6-89"></a><span class="co">#&gt; $ away.stats.totals.scoreInvolvements                         &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-90"><a href="#cb6-90"></a><span class="co">#&gt; $ away.stats.totals.shotEfficiency                            &lt;dbl&gt; 22.2, 47.…</span></span>
-<span id="cb6-91"><a href="#cb6-91"></a><span class="co">#&gt; $ away.stats.totals.shotsAtGoal                               &lt;dbl&gt; 6, 10, 8,…</span></span>
-<span id="cb6-92"><a href="#cb6-92"></a><span class="co">#&gt; $ away.stats.totals.superGoals                                &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-93"><a href="#cb6-93"></a><span class="co">#&gt; $ away.stats.totals.tackles                                   &lt;dbl&gt; 87, 62, 4…</span></span>
-<span id="cb6-94"><a href="#cb6-94"></a><span class="co">#&gt; $ away.stats.totals.tacklesInside50                           &lt;dbl&gt; 8, 9, 2, …</span></span>
-<span id="cb6-95"><a href="#cb6-95"></a><span class="co">#&gt; $ away.stats.totals.totalPossessions                          &lt;dbl&gt; 163, 169,…</span></span>
-<span id="cb6-96"><a href="#cb6-96"></a><span class="co">#&gt; $ away.stats.totals.turnovers                                 &lt;dbl&gt; 57, 55, 4…</span></span>
-<span id="cb6-97"><a href="#cb6-97"></a><span class="co">#&gt; $ away.stats.totals.uncontestedPossessions                    &lt;dbl&gt; 69, 77, 7…</span></span>
-<span id="cb6-98"><a href="#cb6-98"></a><span class="co">#&gt; $ away.team.teamAbbr                                          &lt;chr&gt; "COLL", "…</span></span>
-<span id="cb6-99"><a href="#cb6-99"></a><span class="co">#&gt; $ away.team.teamId                                            &lt;chr&gt; "CD_T8097…</span></span>
-<span id="cb6-100"><a href="#cb6-100"></a><span class="co">#&gt; $ away.team.teamName                                          &lt;chr&gt; "Collingw…</span></span>
-<span id="cb6-101"><a href="#cb6-101"></a><span class="co">#&gt; $ away.team.teamNickname                                      &lt;chr&gt; "Magpies"…</span></span>
-<span id="cb6-102"><a href="#cb6-102"></a><span class="co">#&gt; $ home.stats.averages.behinds                                 &lt;dbl&gt; 2.7, 4.8,…</span></span>
-<span id="cb6-103"><a href="#cb6-103"></a><span class="co">#&gt; $ home.stats.averages.bounces                                 &lt;dbl&gt; 2.1, 1.6,…</span></span>
-<span id="cb6-104"><a href="#cb6-104"></a><span class="co">#&gt; $ home.stats.averages.clangers                                &lt;dbl&gt; 38.7, 43.…</span></span>
-<span id="cb6-105"><a href="#cb6-105"></a><span class="co">#&gt; $ home.stats.averages.clearances.centreClearances             &lt;dbl&gt; 4.4, 4.8,…</span></span>
-<span id="cb6-106"><a href="#cb6-106"></a><span class="co">#&gt; $ home.stats.averages.clearances.stoppageClearances           &lt;dbl&gt; 15.7, 15.…</span></span>
-<span id="cb6-107"><a href="#cb6-107"></a><span class="co">#&gt; $ home.stats.averages.clearances.totalClearances              &lt;dbl&gt; 20.1, 19.…</span></span>
-<span id="cb6-108"><a href="#cb6-108"></a><span class="co">#&gt; $ home.stats.averages.contestedMarks                          &lt;dbl&gt; 7.4, 5.8,…</span></span>
-<span id="cb6-109"><a href="#cb6-109"></a><span class="co">#&gt; $ home.stats.averages.contestedPossessions                    &lt;dbl&gt; 96.1, 108…</span></span>
-<span id="cb6-110"><a href="#cb6-110"></a><span class="co">#&gt; $ home.stats.averages.disposalEfficiency                      &lt;dbl&gt; 59.6, 54.…</span></span>
-<span id="cb6-111"><a href="#cb6-111"></a><span class="co">#&gt; $ home.stats.averages.disposals                               &lt;dbl&gt; 172.0, 18…</span></span>
-<span id="cb6-112"><a href="#cb6-112"></a><span class="co">#&gt; $ home.stats.averages.dreamTeamPoints                         &lt;dbl&gt; 784.7, 85…</span></span>
-<span id="cb6-113"><a href="#cb6-113"></a><span class="co">#&gt; $ home.stats.averages.freesAgainst                            &lt;dbl&gt; 14.1, 15.…</span></span>
-<span id="cb6-114"><a href="#cb6-114"></a><span class="co">#&gt; $ home.stats.averages.freesFor                                &lt;dbl&gt; 11.9, 19.…</span></span>
-<span id="cb6-115"><a href="#cb6-115"></a><span class="co">#&gt; $ home.stats.averages.goalAccuracy                            &lt;dbl&gt; 50.6, 36.…</span></span>
-<span id="cb6-116"><a href="#cb6-116"></a><span class="co">#&gt; $ home.stats.averages.goalAssists                             &lt;dbl&gt; 3.3, 2.4,…</span></span>
-<span id="cb6-117"><a href="#cb6-117"></a><span class="co">#&gt; $ home.stats.averages.goalEfficiency                          &lt;dbl&gt; 23.8, 17.…</span></span>
-<span id="cb6-118"><a href="#cb6-118"></a><span class="co">#&gt; $ home.stats.averages.goals                                   &lt;dbl&gt; 5.6, 5.6,…</span></span>
-<span id="cb6-119"><a href="#cb6-119"></a><span class="co">#&gt; $ home.stats.averages.handballs                               &lt;dbl&gt; 60.6, 57.…</span></span>
-<span id="cb6-120"><a href="#cb6-120"></a><span class="co">#&gt; $ home.stats.averages.hitouts                                 &lt;dbl&gt; 27.9, 23.…</span></span>
-<span id="cb6-121"><a href="#cb6-121"></a><span class="co">#&gt; $ home.stats.averages.inside50s                               &lt;dbl&gt; 23.4, 32.…</span></span>
-<span id="cb6-122"><a href="#cb6-122"></a><span class="co">#&gt; $ home.stats.averages.intercepts                              &lt;dbl&gt; 51.0, 57.…</span></span>
-<span id="cb6-123"><a href="#cb6-123"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCap        &lt;dbl&gt; 999, 0, 9…</span></span>
-<span id="cb6-124"><a href="#cb6-124"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ1    &lt;dbl&gt; 4, 0, 8, …</span></span>
-<span id="cb6-125"><a href="#cb6-125"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ2    &lt;dbl&gt; 4, 0, 21,…</span></span>
-<span id="cb6-126"><a href="#cb6-126"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ3    &lt;dbl&gt; 0, 0, 1, …</span></span>
-<span id="cb6-127"><a href="#cb6-127"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ4    &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-128"><a href="#cb6-128"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.totalInterchangeCount &lt;dbl&gt; 8, 0, 30,…</span></span>
-<span id="cb6-129"><a href="#cb6-129"></a><span class="co">#&gt; $ home.stats.averages.kicks                                   &lt;dbl&gt; 111.4, 13…</span></span>
-<span id="cb6-130"><a href="#cb6-130"></a><span class="co">#&gt; $ home.stats.averages.lastUpdated                             &lt;dttm&gt; 2017-03-…</span></span>
-<span id="cb6-131"><a href="#cb6-131"></a><span class="co">#&gt; $ home.stats.averages.marks                                   &lt;dbl&gt; 32.7, 31.…</span></span>
-<span id="cb6-132"><a href="#cb6-132"></a><span class="co">#&gt; $ home.stats.averages.marksInside50                           &lt;dbl&gt; 6.4, 6.9,…</span></span>
-<span id="cb6-133"><a href="#cb6-133"></a><span class="co">#&gt; $ home.stats.averages.metresGained                            &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-134"><a href="#cb6-134"></a><span class="co">#&gt; $ home.stats.averages.onePercenters                           &lt;dbl&gt; 19.7, 20.…</span></span>
-<span id="cb6-135"><a href="#cb6-135"></a><span class="co">#&gt; $ home.stats.averages.ranking                                 &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-136"><a href="#cb6-136"></a><span class="co">#&gt; $ home.stats.averages.ratingPoints                            &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-137"><a href="#cb6-137"></a><span class="co">#&gt; $ home.stats.averages.rebound50s                              &lt;dbl&gt; 22.0, 17.…</span></span>
-<span id="cb6-138"><a href="#cb6-138"></a><span class="co">#&gt; $ home.stats.averages.scoreInvolvements                       &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-139"><a href="#cb6-139"></a><span class="co">#&gt; $ home.stats.averages.shotEfficiency                          &lt;dbl&gt; 47.0, 47.…</span></span>
-<span id="cb6-140"><a href="#cb6-140"></a><span class="co">#&gt; $ home.stats.averages.shotsAtGoal                             &lt;dbl&gt; 11.0, 15.…</span></span>
-<span id="cb6-141"><a href="#cb6-141"></a><span class="co">#&gt; $ home.stats.averages.superGoals                              &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-142"><a href="#cb6-142"></a><span class="co">#&gt; $ home.stats.averages.tackles                                 &lt;dbl&gt; 49.4, 55.…</span></span>
-<span id="cb6-143"><a href="#cb6-143"></a><span class="co">#&gt; $ home.stats.averages.tacklesInside50                         &lt;dbl&gt; 8.7, 11.4…</span></span>
-<span id="cb6-144"><a href="#cb6-144"></a><span class="co">#&gt; $ home.stats.averages.totalPossessions                        &lt;dbl&gt; 173.4, 18…</span></span>
-<span id="cb6-145"><a href="#cb6-145"></a><span class="co">#&gt; $ home.stats.averages.turnovers                               &lt;dbl&gt; 50.0, 55.…</span></span>
-<span id="cb6-146"><a href="#cb6-146"></a><span class="co">#&gt; $ home.stats.averages.uncontestedPossessions                  &lt;dbl&gt; 77.3, 76.…</span></span>
-<span id="cb6-147"><a href="#cb6-147"></a><span class="co">#&gt; $ home.stats.totals.behinds                                   &lt;dbl&gt; 4, 6, 8, …</span></span>
-<span id="cb6-148"><a href="#cb6-148"></a><span class="co">#&gt; $ home.stats.totals.bounces                                   &lt;dbl&gt; 4, 0, 5, …</span></span>
-<span id="cb6-149"><a href="#cb6-149"></a><span class="co">#&gt; $ home.stats.totals.clangers                                  &lt;dbl&gt; 44, 46, 2…</span></span>
-<span id="cb6-150"><a href="#cb6-150"></a><span class="co">#&gt; $ home.stats.totals.clearances.centreClearances               &lt;dbl&gt; 1, 5, 6, …</span></span>
-<span id="cb6-151"><a href="#cb6-151"></a><span class="co">#&gt; $ home.stats.totals.clearances.stoppageClearances             &lt;dbl&gt; 16, 9, 24…</span></span>
-<span id="cb6-152"><a href="#cb6-152"></a><span class="co">#&gt; $ home.stats.totals.clearances.totalClearances                &lt;dbl&gt; 17, 14, 3…</span></span>
-<span id="cb6-153"><a href="#cb6-153"></a><span class="co">#&gt; $ home.stats.totals.contestedMarks                            &lt;dbl&gt; 7, 5, 1, …</span></span>
-<span id="cb6-154"><a href="#cb6-154"></a><span class="co">#&gt; $ home.stats.totals.contestedPossessions                      &lt;dbl&gt; 106, 108,…</span></span>
-<span id="cb6-155"><a href="#cb6-155"></a><span class="co">#&gt; $ home.stats.totals.disposalEfficiency                        &lt;dbl&gt; 60.6, 51.…</span></span>
-<span id="cb6-156"><a href="#cb6-156"></a><span class="co">#&gt; $ home.stats.totals.disposals                                 &lt;dbl&gt; 198, 185,…</span></span>
-<span id="cb6-157"><a href="#cb6-157"></a><span class="co">#&gt; $ home.stats.totals.dreamTeamPoints                           &lt;dbl&gt; 847, 825,…</span></span>
-<span id="cb6-158"><a href="#cb6-158"></a><span class="co">#&gt; $ home.stats.totals.freesAgainst                              &lt;dbl&gt; 20, 23, 1…</span></span>
-<span id="cb6-159"><a href="#cb6-159"></a><span class="co">#&gt; $ home.stats.totals.freesFor                                  &lt;dbl&gt; 9, 21, 17…</span></span>
-<span id="cb6-160"><a href="#cb6-160"></a><span class="co">#&gt; $ home.stats.totals.goalAccuracy                              &lt;dbl&gt; 58.3, 46.…</span></span>
-<span id="cb6-161"><a href="#cb6-161"></a><span class="co">#&gt; $ home.stats.totals.goalAssists                               &lt;dbl&gt; 4, 3, 6, …</span></span>
-<span id="cb6-162"><a href="#cb6-162"></a><span class="co">#&gt; $ home.stats.totals.goalEfficiency                            &lt;dbl&gt; 28.0, 30.…</span></span>
-<span id="cb6-163"><a href="#cb6-163"></a><span class="co">#&gt; $ home.stats.totals.goals                                     &lt;dbl&gt; 7, 7, 6, …</span></span>
-<span id="cb6-164"><a href="#cb6-164"></a><span class="co">#&gt; $ home.stats.totals.handballs                                 &lt;dbl&gt; 86, 66, 8…</span></span>
-<span id="cb6-165"><a href="#cb6-165"></a><span class="co">#&gt; $ home.stats.totals.hitouts                                   &lt;dbl&gt; 30, 23, 3…</span></span>
-<span id="cb6-166"><a href="#cb6-166"></a><span class="co">#&gt; $ home.stats.totals.inside50s                                 &lt;dbl&gt; 25, 23, 2…</span></span>
-<span id="cb6-167"><a href="#cb6-167"></a><span class="co">#&gt; $ home.stats.totals.intercepts                                &lt;dbl&gt; 56, 56, 4…</span></span>
-<span id="cb6-168"><a href="#cb6-168"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCap          &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-169"><a href="#cb6-169"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ1      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-170"><a href="#cb6-170"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ2      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-171"><a href="#cb6-171"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ3      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-172"><a href="#cb6-172"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ4      &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-173"><a href="#cb6-173"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.totalInterchangeCount   &lt;dbl&gt; 0, 0, 0, …</span></span>
-<span id="cb6-174"><a href="#cb6-174"></a><span class="co">#&gt; $ home.stats.totals.kicks                                     &lt;dbl&gt; 112, 119,…</span></span>
-<span id="cb6-175"><a href="#cb6-175"></a><span class="co">#&gt; $ home.stats.totals.lastUpdated                               &lt;dttm&gt; 2017-02-…</span></span>
-<span id="cb6-176"><a href="#cb6-176"></a><span class="co">#&gt; $ home.stats.totals.marks                                     &lt;dbl&gt; 26, 31, 2…</span></span>
-<span id="cb6-177"><a href="#cb6-177"></a><span class="co">#&gt; $ home.stats.totals.marksInside50                             &lt;dbl&gt; 6, 8, 7, …</span></span>
-<span id="cb6-178"><a href="#cb6-178"></a><span class="co">#&gt; $ home.stats.totals.metresGained                              &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-179"><a href="#cb6-179"></a><span class="co">#&gt; $ home.stats.totals.onePercenters                             &lt;dbl&gt; 15, 15, 2…</span></span>
-<span id="cb6-180"><a href="#cb6-180"></a><span class="co">#&gt; $ home.stats.totals.ranking                                   &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-181"><a href="#cb6-181"></a><span class="co">#&gt; $ home.stats.totals.ratingPoints                              &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-182"><a href="#cb6-182"></a><span class="co">#&gt; $ home.stats.totals.rebound50s                                &lt;dbl&gt; 25, 19, 1…</span></span>
-<span id="cb6-183"><a href="#cb6-183"></a><span class="co">#&gt; $ home.stats.totals.scoreInvolvements                         &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-184"><a href="#cb6-184"></a><span class="co">#&gt; $ home.stats.totals.shotEfficiency                            &lt;dbl&gt; 48.0, 65.…</span></span>
-<span id="cb6-185"><a href="#cb6-185"></a><span class="co">#&gt; $ home.stats.totals.shotsAtGoal                               &lt;dbl&gt; 12, 15, 1…</span></span>
-<span id="cb6-186"><a href="#cb6-186"></a><span class="co">#&gt; $ home.stats.totals.superGoals                                &lt;dbl&gt; NA, NA, N…</span></span>
-<span id="cb6-187"><a href="#cb6-187"></a><span class="co">#&gt; $ home.stats.totals.tackles                                   &lt;dbl&gt; 59, 55, 5…</span></span>
-<span id="cb6-188"><a href="#cb6-188"></a><span class="co">#&gt; $ home.stats.totals.tacklesInside50                           &lt;dbl&gt; 15, 9, 13…</span></span>
-<span id="cb6-189"><a href="#cb6-189"></a><span class="co">#&gt; $ home.stats.totals.totalPossessions                          &lt;dbl&gt; 197, 186,…</span></span>
-<span id="cb6-190"><a href="#cb6-190"></a><span class="co">#&gt; $ home.stats.totals.turnovers                                 &lt;dbl&gt; 47, 52, 4…</span></span>
-<span id="cb6-191"><a href="#cb6-191"></a><span class="co">#&gt; $ home.stats.totals.uncontestedPossessions                    &lt;dbl&gt; 91, 78, 9…</span></span>
-<span id="cb6-192"><a href="#cb6-192"></a><span class="co">#&gt; $ home.team.teamAbbr                                          &lt;chr&gt; "CARL", "…</span></span>
-<span id="cb6-193"><a href="#cb6-193"></a><span class="co">#&gt; $ home.team.teamId                                            &lt;chr&gt; "CD_T8096…</span></span>
-<span id="cb6-194"><a href="#cb6-194"></a><span class="co">#&gt; $ home.team.teamName                                          &lt;chr&gt; "Carlton"…</span></span>
-<span id="cb6-195"><a href="#cb6-195"></a><span class="co">#&gt; $ home.team.teamNickname                                      &lt;chr&gt; "Blues", …</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Warning: `funs()` is deprecated as of dplyr 0.8.0.</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Please use a list of either functions or lambdas: </span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt;   # Simple named list: </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt;   list(mean = mean, median = median)</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt;   # Auto named with `tibble::lst()`: </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt;   tibble::lst(mean, median)</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt;   # Using lambdas</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt;   list(~ mean(., trim = .2), ~ median(., na.rm = TRUE))</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(detailed)</span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; Rows: 10</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; Columns: 191</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">#&gt; $ Match.Id                                                    &lt;chr&gt; "CD_M2017…</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">#&gt; $ Round.Id                                                    &lt;chr&gt; "CD_R2017…</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">#&gt; $ Competition.Id                                              &lt;chr&gt; "CD_S2017…</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">#&gt; $ away.stats.averages.behinds                                 &lt;dbl&gt; 4.1, 2.1,…</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">#&gt; $ away.stats.averages.bounces                                 &lt;dbl&gt; 3.7, 1.9,…</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">#&gt; $ away.stats.averages.clangers                                &lt;dbl&gt; 39.7, 35.…</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">#&gt; $ away.stats.averages.clearances.centreClearances             &lt;dbl&gt; 4.9, 5.7,…</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">#&gt; $ away.stats.averages.clearances.stoppageClearances           &lt;dbl&gt; 16.9, 16.…</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">#&gt; $ away.stats.averages.clearances.totalClearances              &lt;dbl&gt; 21.7, 22.…</span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">#&gt; $ away.stats.averages.contestedMarks                          &lt;dbl&gt; 6.3, 3.0,…</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">#&gt; $ away.stats.averages.contestedPossessions                    &lt;dbl&gt; 90.3, 85.…</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">#&gt; $ away.stats.averages.disposalEfficiency                      &lt;dbl&gt; 56.6, 54.…</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">#&gt; $ away.stats.averages.disposals                               &lt;dbl&gt; 167.6, 15…</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">#&gt; $ away.stats.averages.dreamTeamPoints                         &lt;dbl&gt; 843.3, 75…</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">#&gt; $ away.stats.averages.freesAgainst                            &lt;dbl&gt; 13.6, 13.…</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">#&gt; $ away.stats.averages.freesFor                                &lt;dbl&gt; 15.6, 14.…</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">#&gt; $ away.stats.averages.goalAccuracy                            &lt;dbl&gt; 45.7, 43.…</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">#&gt; $ away.stats.averages.goalAssists                             &lt;dbl&gt; 2.6, 2.1,…</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">#&gt; $ away.stats.averages.goalEfficiency                          &lt;dbl&gt; 19.5, 18.…</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">#&gt; $ away.stats.averages.goals                                   &lt;dbl&gt; 4.6, 3.3,…</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">#&gt; $ away.stats.averages.handballs                               &lt;dbl&gt; 47.9, 50.…</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">#&gt; $ away.stats.averages.hitouts                                 &lt;dbl&gt; 36.6, 28.…</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">#&gt; $ away.stats.averages.inside50s                               &lt;dbl&gt; 23.4, 18.…</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">#&gt; $ away.stats.averages.intercepts                              &lt;dbl&gt; 45.3, 42.…</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCap        &lt;dbl&gt; 999, 999,…</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ1    &lt;dbl&gt; 16, 9, 0,…</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ2    &lt;dbl&gt; 14, 21, 2…</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ3    &lt;dbl&gt; 0, 13, 4,…</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.interchangeCountQ4    &lt;dbl&gt; 0, 11, 0,…</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="co">#&gt; $ away.stats.averages.interchangeCounts.totalInterchangeCount &lt;dbl&gt; 30, 54, 3…</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="co">#&gt; $ away.stats.averages.kicks                                   &lt;dbl&gt; 119.7, 10…</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co">#&gt; $ away.stats.averages.lastUpdated                             &lt;dttm&gt; 2017-03-…</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="co">#&gt; $ away.stats.averages.marks                                   &lt;dbl&gt; 39.7, 29.…</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="co">#&gt; $ away.stats.averages.marksInside50                           &lt;dbl&gt; 6.0, 4.4,…</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="co">#&gt; $ away.stats.averages.metresGained                            &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co">#&gt; $ away.stats.averages.onePercenters                           &lt;dbl&gt; 21.6, 18.…</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="co">#&gt; $ away.stats.averages.ranking                                 &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a><span class="co">#&gt; $ away.stats.averages.ratingPoints                            &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="co">#&gt; $ away.stats.averages.rebound50s                              &lt;dbl&gt; 18.7, 22.…</span></span>
+<span id="cb6-57"><a href="#cb6-57"></a><span class="co">#&gt; $ away.stats.averages.scoreInvolvements                       &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-58"><a href="#cb6-58"></a><span class="co">#&gt; $ away.stats.averages.shotEfficiency                          &lt;dbl&gt; 42.7, 42.…</span></span>
+<span id="cb6-59"><a href="#cb6-59"></a><span class="co">#&gt; $ away.stats.averages.shotsAtGoal                             &lt;dbl&gt; 10.0, 7.6…</span></span>
+<span id="cb6-60"><a href="#cb6-60"></a><span class="co">#&gt; $ away.stats.averages.superGoals                              &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-61"><a href="#cb6-61"></a><span class="co">#&gt; $ away.stats.averages.tackles                                 &lt;dbl&gt; 56.6, 55.…</span></span>
+<span id="cb6-62"><a href="#cb6-62"></a><span class="co">#&gt; $ away.stats.averages.tacklesInside50                         &lt;dbl&gt; 7.7, 5.0,…</span></span>
+<span id="cb6-63"><a href="#cb6-63"></a><span class="co">#&gt; $ away.stats.averages.totalPossessions                        &lt;dbl&gt; 168.9, 15…</span></span>
+<span id="cb6-64"><a href="#cb6-64"></a><span class="co">#&gt; $ away.stats.averages.turnovers                               &lt;dbl&gt; 47.7, 48.…</span></span>
+<span id="cb6-65"><a href="#cb6-65"></a><span class="co">#&gt; $ away.stats.averages.uncontestedPossessions                  &lt;dbl&gt; 78.6, 68.…</span></span>
+<span id="cb6-66"><a href="#cb6-66"></a><span class="co">#&gt; $ away.stats.totals.behinds                                   &lt;dbl&gt; 5, 6, 6, …</span></span>
+<span id="cb6-67"><a href="#cb6-67"></a><span class="co">#&gt; $ away.stats.totals.bounces                                   &lt;dbl&gt; 3, 0, 4, …</span></span>
+<span id="cb6-68"><a href="#cb6-68"></a><span class="co">#&gt; $ away.stats.totals.clangers                                  &lt;dbl&gt; 37, 45, 3…</span></span>
+<span id="cb6-69"><a href="#cb6-69"></a><span class="co">#&gt; $ away.stats.totals.clearances.centreClearances               &lt;dbl&gt; 4, 7, 3, …</span></span>
+<span id="cb6-70"><a href="#cb6-70"></a><span class="co">#&gt; $ away.stats.totals.clearances.stoppageClearances             &lt;dbl&gt; 15, 13, 1…</span></span>
+<span id="cb6-71"><a href="#cb6-71"></a><span class="co">#&gt; $ away.stats.totals.clearances.totalClearances                &lt;dbl&gt; 19, 20, 1…</span></span>
+<span id="cb6-72"><a href="#cb6-72"></a><span class="co">#&gt; $ away.stats.totals.contestedMarks                            &lt;dbl&gt; 4, 2, 2, …</span></span>
+<span id="cb6-73"><a href="#cb6-73"></a><span class="co">#&gt; $ away.stats.totals.contestedPossessions                      &lt;dbl&gt; 94, 92, 7…</span></span>
+<span id="cb6-74"><a href="#cb6-74"></a><span class="co">#&gt; $ away.stats.totals.disposalEfficiency                        &lt;dbl&gt; 52.8, 46.…</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a><span class="co">#&gt; $ away.stats.totals.disposals                                 &lt;dbl&gt; 163, 165,…</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a><span class="co">#&gt; $ away.stats.totals.dreamTeamPoints                           &lt;dbl&gt; 926, 783,…</span></span>
+<span id="cb6-77"><a href="#cb6-77"></a><span class="co">#&gt; $ away.stats.totals.freesAgainst                              &lt;dbl&gt; 9, 21, 17…</span></span>
+<span id="cb6-78"><a href="#cb6-78"></a><span class="co">#&gt; $ away.stats.totals.freesFor                                  &lt;dbl&gt; 20, 23, 1…</span></span>
+<span id="cb6-79"><a href="#cb6-79"></a><span class="co">#&gt; $ away.stats.totals.goalAccuracy                              &lt;dbl&gt; 16.7, 10.…</span></span>
+<span id="cb6-80"><a href="#cb6-80"></a><span class="co">#&gt; $ away.stats.totals.goalAssists                               &lt;dbl&gt; 0, 1, 1, …</span></span>
+<span id="cb6-81"><a href="#cb6-81"></a><span class="co">#&gt; $ away.stats.totals.goalEfficiency                            &lt;dbl&gt; 3.7, 4.8,…</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a><span class="co">#&gt; $ away.stats.totals.goals                                     &lt;dbl&gt; 1, 1, 1, …</span></span>
+<span id="cb6-83"><a href="#cb6-83"></a><span class="co">#&gt; $ away.stats.totals.handballs                                 &lt;dbl&gt; 48, 52, 5…</span></span>
+<span id="cb6-84"><a href="#cb6-84"></a><span class="co">#&gt; $ away.stats.totals.hitouts                                   &lt;dbl&gt; 28, 9, 14…</span></span>
+<span id="cb6-85"><a href="#cb6-85"></a><span class="co">#&gt; $ away.stats.totals.inside50s                                 &lt;dbl&gt; 27, 21, 1…</span></span>
+<span id="cb6-86"><a href="#cb6-86"></a><span class="co">#&gt; $ away.stats.totals.intercepts                                &lt;dbl&gt; 48, 52, 5…</span></span>
+<span id="cb6-87"><a href="#cb6-87"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCap          &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-88"><a href="#cb6-88"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ1      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-89"><a href="#cb6-89"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ2      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-90"><a href="#cb6-90"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ3      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-91"><a href="#cb6-91"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.interchangeCountQ4      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-92"><a href="#cb6-92"></a><span class="co">#&gt; $ away.stats.totals.interchangeCounts.totalInterchangeCount   &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-93"><a href="#cb6-93"></a><span class="co">#&gt; $ away.stats.totals.kicks                                     &lt;dbl&gt; 115, 113,…</span></span>
+<span id="cb6-94"><a href="#cb6-94"></a><span class="co">#&gt; $ away.stats.totals.lastUpdated                               &lt;dttm&gt; 2017-02-…</span></span>
+<span id="cb6-95"><a href="#cb6-95"></a><span class="co">#&gt; $ away.stats.totals.marks                                     &lt;dbl&gt; 35, 37, 3…</span></span>
+<span id="cb6-96"><a href="#cb6-96"></a><span class="co">#&gt; $ away.stats.totals.marksInside50                             &lt;dbl&gt; 4, 6, 3, …</span></span>
+<span id="cb6-97"><a href="#cb6-97"></a><span class="co">#&gt; $ away.stats.totals.metresGained                              &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-98"><a href="#cb6-98"></a><span class="co">#&gt; $ away.stats.totals.onePercenters                             &lt;dbl&gt; 23, 13, 2…</span></span>
+<span id="cb6-99"><a href="#cb6-99"></a><span class="co">#&gt; $ away.stats.totals.ranking                                   &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-100"><a href="#cb6-100"></a><span class="co">#&gt; $ away.stats.totals.ratingPoints                              &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-101"><a href="#cb6-101"></a><span class="co">#&gt; $ away.stats.totals.rebound50s                                &lt;dbl&gt; 18, 15, 2…</span></span>
+<span id="cb6-102"><a href="#cb6-102"></a><span class="co">#&gt; $ away.stats.totals.scoreInvolvements                         &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-103"><a href="#cb6-103"></a><span class="co">#&gt; $ away.stats.totals.shotEfficiency                            &lt;dbl&gt; 22.2, 47.…</span></span>
+<span id="cb6-104"><a href="#cb6-104"></a><span class="co">#&gt; $ away.stats.totals.shotsAtGoal                               &lt;dbl&gt; 6, 10, 8,…</span></span>
+<span id="cb6-105"><a href="#cb6-105"></a><span class="co">#&gt; $ away.stats.totals.superGoals                                &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-106"><a href="#cb6-106"></a><span class="co">#&gt; $ away.stats.totals.tackles                                   &lt;dbl&gt; 87, 62, 4…</span></span>
+<span id="cb6-107"><a href="#cb6-107"></a><span class="co">#&gt; $ away.stats.totals.tacklesInside50                           &lt;dbl&gt; 8, 9, 2, …</span></span>
+<span id="cb6-108"><a href="#cb6-108"></a><span class="co">#&gt; $ away.stats.totals.totalPossessions                          &lt;dbl&gt; 163, 169,…</span></span>
+<span id="cb6-109"><a href="#cb6-109"></a><span class="co">#&gt; $ away.stats.totals.turnovers                                 &lt;dbl&gt; 57, 55, 4…</span></span>
+<span id="cb6-110"><a href="#cb6-110"></a><span class="co">#&gt; $ away.stats.totals.uncontestedPossessions                    &lt;dbl&gt; 69, 77, 7…</span></span>
+<span id="cb6-111"><a href="#cb6-111"></a><span class="co">#&gt; $ away.team.teamAbbr                                          &lt;chr&gt; "COLL", "…</span></span>
+<span id="cb6-112"><a href="#cb6-112"></a><span class="co">#&gt; $ away.team.teamId                                            &lt;chr&gt; "CD_T8097…</span></span>
+<span id="cb6-113"><a href="#cb6-113"></a><span class="co">#&gt; $ away.team.teamName                                          &lt;chr&gt; "Collingw…</span></span>
+<span id="cb6-114"><a href="#cb6-114"></a><span class="co">#&gt; $ away.team.teamNickname                                      &lt;chr&gt; "Magpies"…</span></span>
+<span id="cb6-115"><a href="#cb6-115"></a><span class="co">#&gt; $ home.stats.averages.behinds                                 &lt;dbl&gt; 2.7, 4.8,…</span></span>
+<span id="cb6-116"><a href="#cb6-116"></a><span class="co">#&gt; $ home.stats.averages.bounces                                 &lt;dbl&gt; 2.1, 1.6,…</span></span>
+<span id="cb6-117"><a href="#cb6-117"></a><span class="co">#&gt; $ home.stats.averages.clangers                                &lt;dbl&gt; 38.7, 43.…</span></span>
+<span id="cb6-118"><a href="#cb6-118"></a><span class="co">#&gt; $ home.stats.averages.clearances.centreClearances             &lt;dbl&gt; 4.4, 4.8,…</span></span>
+<span id="cb6-119"><a href="#cb6-119"></a><span class="co">#&gt; $ home.stats.averages.clearances.stoppageClearances           &lt;dbl&gt; 15.7, 15.…</span></span>
+<span id="cb6-120"><a href="#cb6-120"></a><span class="co">#&gt; $ home.stats.averages.clearances.totalClearances              &lt;dbl&gt; 20.1, 19.…</span></span>
+<span id="cb6-121"><a href="#cb6-121"></a><span class="co">#&gt; $ home.stats.averages.contestedMarks                          &lt;dbl&gt; 7.4, 5.8,…</span></span>
+<span id="cb6-122"><a href="#cb6-122"></a><span class="co">#&gt; $ home.stats.averages.contestedPossessions                    &lt;dbl&gt; 96.1, 108…</span></span>
+<span id="cb6-123"><a href="#cb6-123"></a><span class="co">#&gt; $ home.stats.averages.disposalEfficiency                      &lt;dbl&gt; 59.6, 54.…</span></span>
+<span id="cb6-124"><a href="#cb6-124"></a><span class="co">#&gt; $ home.stats.averages.disposals                               &lt;dbl&gt; 172.0, 18…</span></span>
+<span id="cb6-125"><a href="#cb6-125"></a><span class="co">#&gt; $ home.stats.averages.dreamTeamPoints                         &lt;dbl&gt; 784.7, 85…</span></span>
+<span id="cb6-126"><a href="#cb6-126"></a><span class="co">#&gt; $ home.stats.averages.freesAgainst                            &lt;dbl&gt; 14.1, 15.…</span></span>
+<span id="cb6-127"><a href="#cb6-127"></a><span class="co">#&gt; $ home.stats.averages.freesFor                                &lt;dbl&gt; 11.9, 19.…</span></span>
+<span id="cb6-128"><a href="#cb6-128"></a><span class="co">#&gt; $ home.stats.averages.goalAccuracy                            &lt;dbl&gt; 50.6, 36.…</span></span>
+<span id="cb6-129"><a href="#cb6-129"></a><span class="co">#&gt; $ home.stats.averages.goalAssists                             &lt;dbl&gt; 3.3, 2.4,…</span></span>
+<span id="cb6-130"><a href="#cb6-130"></a><span class="co">#&gt; $ home.stats.averages.goalEfficiency                          &lt;dbl&gt; 23.8, 17.…</span></span>
+<span id="cb6-131"><a href="#cb6-131"></a><span class="co">#&gt; $ home.stats.averages.goals                                   &lt;dbl&gt; 5.6, 5.6,…</span></span>
+<span id="cb6-132"><a href="#cb6-132"></a><span class="co">#&gt; $ home.stats.averages.handballs                               &lt;dbl&gt; 60.6, 57.…</span></span>
+<span id="cb6-133"><a href="#cb6-133"></a><span class="co">#&gt; $ home.stats.averages.hitouts                                 &lt;dbl&gt; 27.9, 23.…</span></span>
+<span id="cb6-134"><a href="#cb6-134"></a><span class="co">#&gt; $ home.stats.averages.inside50s                               &lt;dbl&gt; 23.4, 32.…</span></span>
+<span id="cb6-135"><a href="#cb6-135"></a><span class="co">#&gt; $ home.stats.averages.intercepts                              &lt;dbl&gt; 51.0, 57.…</span></span>
+<span id="cb6-136"><a href="#cb6-136"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCap        &lt;dbl&gt; 999, 0, 9…</span></span>
+<span id="cb6-137"><a href="#cb6-137"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ1    &lt;dbl&gt; 4, 0, 8, …</span></span>
+<span id="cb6-138"><a href="#cb6-138"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ2    &lt;dbl&gt; 4, 0, 21,…</span></span>
+<span id="cb6-139"><a href="#cb6-139"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ3    &lt;dbl&gt; 0, 0, 1, …</span></span>
+<span id="cb6-140"><a href="#cb6-140"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.interchangeCountQ4    &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-141"><a href="#cb6-141"></a><span class="co">#&gt; $ home.stats.averages.interchangeCounts.totalInterchangeCount &lt;dbl&gt; 8, 0, 30,…</span></span>
+<span id="cb6-142"><a href="#cb6-142"></a><span class="co">#&gt; $ home.stats.averages.kicks                                   &lt;dbl&gt; 111.4, 13…</span></span>
+<span id="cb6-143"><a href="#cb6-143"></a><span class="co">#&gt; $ home.stats.averages.lastUpdated                             &lt;dttm&gt; 2017-03-…</span></span>
+<span id="cb6-144"><a href="#cb6-144"></a><span class="co">#&gt; $ home.stats.averages.marks                                   &lt;dbl&gt; 32.7, 31.…</span></span>
+<span id="cb6-145"><a href="#cb6-145"></a><span class="co">#&gt; $ home.stats.averages.marksInside50                           &lt;dbl&gt; 6.4, 6.9,…</span></span>
+<span id="cb6-146"><a href="#cb6-146"></a><span class="co">#&gt; $ home.stats.averages.metresGained                            &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-147"><a href="#cb6-147"></a><span class="co">#&gt; $ home.stats.averages.onePercenters                           &lt;dbl&gt; 19.7, 20.…</span></span>
+<span id="cb6-148"><a href="#cb6-148"></a><span class="co">#&gt; $ home.stats.averages.ranking                                 &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-149"><a href="#cb6-149"></a><span class="co">#&gt; $ home.stats.averages.ratingPoints                            &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-150"><a href="#cb6-150"></a><span class="co">#&gt; $ home.stats.averages.rebound50s                              &lt;dbl&gt; 22.0, 17.…</span></span>
+<span id="cb6-151"><a href="#cb6-151"></a><span class="co">#&gt; $ home.stats.averages.scoreInvolvements                       &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-152"><a href="#cb6-152"></a><span class="co">#&gt; $ home.stats.averages.shotEfficiency                          &lt;dbl&gt; 47.0, 47.…</span></span>
+<span id="cb6-153"><a href="#cb6-153"></a><span class="co">#&gt; $ home.stats.averages.shotsAtGoal                             &lt;dbl&gt; 11.0, 15.…</span></span>
+<span id="cb6-154"><a href="#cb6-154"></a><span class="co">#&gt; $ home.stats.averages.superGoals                              &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-155"><a href="#cb6-155"></a><span class="co">#&gt; $ home.stats.averages.tackles                                 &lt;dbl&gt; 49.4, 55.…</span></span>
+<span id="cb6-156"><a href="#cb6-156"></a><span class="co">#&gt; $ home.stats.averages.tacklesInside50                         &lt;dbl&gt; 8.7, 11.4…</span></span>
+<span id="cb6-157"><a href="#cb6-157"></a><span class="co">#&gt; $ home.stats.averages.totalPossessions                        &lt;dbl&gt; 173.4, 18…</span></span>
+<span id="cb6-158"><a href="#cb6-158"></a><span class="co">#&gt; $ home.stats.averages.turnovers                               &lt;dbl&gt; 50.0, 55.…</span></span>
+<span id="cb6-159"><a href="#cb6-159"></a><span class="co">#&gt; $ home.stats.averages.uncontestedPossessions                  &lt;dbl&gt; 77.3, 76.…</span></span>
+<span id="cb6-160"><a href="#cb6-160"></a><span class="co">#&gt; $ home.stats.totals.behinds                                   &lt;dbl&gt; 4, 6, 8, …</span></span>
+<span id="cb6-161"><a href="#cb6-161"></a><span class="co">#&gt; $ home.stats.totals.bounces                                   &lt;dbl&gt; 4, 0, 5, …</span></span>
+<span id="cb6-162"><a href="#cb6-162"></a><span class="co">#&gt; $ home.stats.totals.clangers                                  &lt;dbl&gt; 44, 46, 2…</span></span>
+<span id="cb6-163"><a href="#cb6-163"></a><span class="co">#&gt; $ home.stats.totals.clearances.centreClearances               &lt;dbl&gt; 1, 5, 6, …</span></span>
+<span id="cb6-164"><a href="#cb6-164"></a><span class="co">#&gt; $ home.stats.totals.clearances.stoppageClearances             &lt;dbl&gt; 16, 9, 24…</span></span>
+<span id="cb6-165"><a href="#cb6-165"></a><span class="co">#&gt; $ home.stats.totals.clearances.totalClearances                &lt;dbl&gt; 17, 14, 3…</span></span>
+<span id="cb6-166"><a href="#cb6-166"></a><span class="co">#&gt; $ home.stats.totals.contestedMarks                            &lt;dbl&gt; 7, 5, 1, …</span></span>
+<span id="cb6-167"><a href="#cb6-167"></a><span class="co">#&gt; $ home.stats.totals.contestedPossessions                      &lt;dbl&gt; 106, 108,…</span></span>
+<span id="cb6-168"><a href="#cb6-168"></a><span class="co">#&gt; $ home.stats.totals.disposalEfficiency                        &lt;dbl&gt; 60.6, 51.…</span></span>
+<span id="cb6-169"><a href="#cb6-169"></a><span class="co">#&gt; $ home.stats.totals.disposals                                 &lt;dbl&gt; 198, 185,…</span></span>
+<span id="cb6-170"><a href="#cb6-170"></a><span class="co">#&gt; $ home.stats.totals.dreamTeamPoints                           &lt;dbl&gt; 847, 825,…</span></span>
+<span id="cb6-171"><a href="#cb6-171"></a><span class="co">#&gt; $ home.stats.totals.freesAgainst                              &lt;dbl&gt; 20, 23, 1…</span></span>
+<span id="cb6-172"><a href="#cb6-172"></a><span class="co">#&gt; $ home.stats.totals.freesFor                                  &lt;dbl&gt; 9, 21, 17…</span></span>
+<span id="cb6-173"><a href="#cb6-173"></a><span class="co">#&gt; $ home.stats.totals.goalAccuracy                              &lt;dbl&gt; 58.3, 46.…</span></span>
+<span id="cb6-174"><a href="#cb6-174"></a><span class="co">#&gt; $ home.stats.totals.goalAssists                               &lt;dbl&gt; 4, 3, 6, …</span></span>
+<span id="cb6-175"><a href="#cb6-175"></a><span class="co">#&gt; $ home.stats.totals.goalEfficiency                            &lt;dbl&gt; 28.0, 30.…</span></span>
+<span id="cb6-176"><a href="#cb6-176"></a><span class="co">#&gt; $ home.stats.totals.goals                                     &lt;dbl&gt; 7, 7, 6, …</span></span>
+<span id="cb6-177"><a href="#cb6-177"></a><span class="co">#&gt; $ home.stats.totals.handballs                                 &lt;dbl&gt; 86, 66, 8…</span></span>
+<span id="cb6-178"><a href="#cb6-178"></a><span class="co">#&gt; $ home.stats.totals.hitouts                                   &lt;dbl&gt; 30, 23, 3…</span></span>
+<span id="cb6-179"><a href="#cb6-179"></a><span class="co">#&gt; $ home.stats.totals.inside50s                                 &lt;dbl&gt; 25, 23, 2…</span></span>
+<span id="cb6-180"><a href="#cb6-180"></a><span class="co">#&gt; $ home.stats.totals.intercepts                                &lt;dbl&gt; 56, 56, 4…</span></span>
+<span id="cb6-181"><a href="#cb6-181"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCap          &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-182"><a href="#cb6-182"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ1      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-183"><a href="#cb6-183"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ2      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-184"><a href="#cb6-184"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ3      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-185"><a href="#cb6-185"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.interchangeCountQ4      &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-186"><a href="#cb6-186"></a><span class="co">#&gt; $ home.stats.totals.interchangeCounts.totalInterchangeCount   &lt;dbl&gt; 0, 0, 0, …</span></span>
+<span id="cb6-187"><a href="#cb6-187"></a><span class="co">#&gt; $ home.stats.totals.kicks                                     &lt;dbl&gt; 112, 119,…</span></span>
+<span id="cb6-188"><a href="#cb6-188"></a><span class="co">#&gt; $ home.stats.totals.lastUpdated                               &lt;dttm&gt; 2017-02-…</span></span>
+<span id="cb6-189"><a href="#cb6-189"></a><span class="co">#&gt; $ home.stats.totals.marks                                     &lt;dbl&gt; 26, 31, 2…</span></span>
+<span id="cb6-190"><a href="#cb6-190"></a><span class="co">#&gt; $ home.stats.totals.marksInside50                             &lt;dbl&gt; 6, 8, 7, …</span></span>
+<span id="cb6-191"><a href="#cb6-191"></a><span class="co">#&gt; $ home.stats.totals.metresGained                              &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-192"><a href="#cb6-192"></a><span class="co">#&gt; $ home.stats.totals.onePercenters                             &lt;dbl&gt; 15, 15, 2…</span></span>
+<span id="cb6-193"><a href="#cb6-193"></a><span class="co">#&gt; $ home.stats.totals.ranking                                   &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-194"><a href="#cb6-194"></a><span class="co">#&gt; $ home.stats.totals.ratingPoints                              &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-195"><a href="#cb6-195"></a><span class="co">#&gt; $ home.stats.totals.rebound50s                                &lt;dbl&gt; 25, 19, 1…</span></span>
+<span id="cb6-196"><a href="#cb6-196"></a><span class="co">#&gt; $ home.stats.totals.scoreInvolvements                         &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-197"><a href="#cb6-197"></a><span class="co">#&gt; $ home.stats.totals.shotEfficiency                            &lt;dbl&gt; 48.0, 65.…</span></span>
+<span id="cb6-198"><a href="#cb6-198"></a><span class="co">#&gt; $ home.stats.totals.shotsAtGoal                               &lt;dbl&gt; 12, 15, 1…</span></span>
+<span id="cb6-199"><a href="#cb6-199"></a><span class="co">#&gt; $ home.stats.totals.superGoals                                &lt;dbl&gt; NA, NA, N…</span></span>
+<span id="cb6-200"><a href="#cb6-200"></a><span class="co">#&gt; $ home.stats.totals.tackles                                   &lt;dbl&gt; 59, 55, 5…</span></span>
+<span id="cb6-201"><a href="#cb6-201"></a><span class="co">#&gt; $ home.stats.totals.tacklesInside50                           &lt;dbl&gt; 15, 9, 13…</span></span>
+<span id="cb6-202"><a href="#cb6-202"></a><span class="co">#&gt; $ home.stats.totals.totalPossessions                          &lt;dbl&gt; 197, 186,…</span></span>
+<span id="cb6-203"><a href="#cb6-203"></a><span class="co">#&gt; $ home.stats.totals.turnovers                                 &lt;dbl&gt; 47, 52, 4…</span></span>
+<span id="cb6-204"><a href="#cb6-204"></a><span class="co">#&gt; $ home.stats.totals.uncontestedPossessions                    &lt;dbl&gt; 91, 78, 9…</span></span>
+<span id="cb6-205"><a href="#cb6-205"></a><span class="co">#&gt; $ home.team.teamAbbr                                          &lt;chr&gt; "CARL", "…</span></span>
+<span id="cb6-206"><a href="#cb6-206"></a><span class="co">#&gt; $ home.team.teamId                                            &lt;chr&gt; "CD_T8096…</span></span>
+<span id="cb6-207"><a href="#cb6-207"></a><span class="co">#&gt; $ home.team.teamName                                          &lt;chr&gt; "Carlton"…</span></span>
+<span id="cb6-208"><a href="#cb6-208"></a><span class="co">#&gt; $ home.team.teamNickname                                      &lt;chr&gt; "Blues", …</span></span></code></pre></div>
 </div>
   </div>
 
