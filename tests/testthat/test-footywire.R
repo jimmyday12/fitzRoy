@@ -215,7 +215,5 @@ test_that("no duplicate games in footywire data,", {
     dplyr::summarise(count_rows = dplyr::n()) 
   
   expect_lte(max(n_duplicates$count_rows), 1)
-  
-  
 })
 
