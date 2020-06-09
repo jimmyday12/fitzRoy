@@ -10,6 +10,9 @@ on:
 
 name: Run R-CMD-check
 
+env:
+  cache-version: v1
+
 jobs:
   R-CMD-check:
     runs-on: ${{ matrix.config.os }}
@@ -62,6 +65,11 @@ jobs:
           sysreqs=$(Rscript -e "cat(sysreqs::sysreq_commands('DESCRIPTION'))")
           sudo -s eval "$sysreqs"
 
+      # Remove this when the new rmarkdown is released on CRAN
+      - name: "Workaround for rstudio/rmarkdown#1831"
+        if: runner.os == 'Linux' && matrix.config.r < '3.6'
+        run: Rscript -e "remotes::install_github('rstudio/rmarkdown')"
+
       - name: Install dependencies
         run: Rscript -e "library(remotes)" -e "update(readRDS('depends.Rds'))" -e "remotes::install_cran('rcmdcheck')"
 
@@ -74,7 +82,7 @@ jobs:
         with:
           name: ${{ runner.os }}-r${{ matrix.config.r }}-results
           path: check
-
+          
       - name: Test coverage
         if: matrix.config.os == 'macOS-latest' && matrix.config.r == '3.6'
         run: |
