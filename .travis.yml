@@ -18,7 +18,6 @@ notifications:
 
 r:
 
-# - 3.2
 - 3.3
 - 3.4
 - 3.5
@@ -26,6 +25,9 @@ r:
 - 4.0
 - release
 - devel
+
+# workaround for breaking issue with markdown
+r_github_packages: rstudio/rmarkdown
 
 after_success:
   - Rscript -e 'covr::codecov()'
