@@ -16,6 +16,9 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/footywire_html.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afl_colour_palettes.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_stats.html</loc>
   </url>
   <url>
@@ -49,6 +52,9 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_footywire_stats.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_fryzigg_stats.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_match_data.html</loc>
   </url>
   <url>
@@ -74,6 +80,9 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/update_footywire_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/verify_year.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/elo-ratings-example.html</loc>
