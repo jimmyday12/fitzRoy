@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>fitzRoy: Easily Scrape and Process AFL Data — fitzRoy-package • fitzRoy</title>
+<title>Recreate the ladder for every or any given round and/or season — return_ladder • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,8 @@
 
 
 
-<meta property="og:title" content="fitzRoy: Easily Scrape and Process AFL Data — fitzRoy-package" />
-<meta property="og:description" content="An easy package for scraping and processing Australia Rules Football (AFL)
-    data. 'fitzRoy' provides a range of functions for accessing publicly available data 
-    from 'AFL Tables' &amp;lt;https://afltables.com&amp;gt;, 'Footy Wire' &amp;lt;https://www.footywire.com&amp;gt; and
-    'The Squiggle' &amp;lt;https://squiggle.com.au&amp;gt;. Further functions allow for easy processing, 
-    cleaning and transformation of this data into formats that can be used for analysis." />
+<meta property="og:title" content="Recreate the ladder for every or any given round and/or season — return_ladder" />
+<meta property="og:description" content="return_ladder returns a dataframe containing the ladder for either all seasons and rounds since 1987, or individual rounds/seasons" />
 
 
 
@@ -146,31 +142,48 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>fitzRoy: Easily Scrape and Process AFL Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/FitzRoy-package.R'><code>R/FitzRoy-package.R</code></a></small>
-    <div class="hidden name"><code>fitzRoy-package.Rd</code></div>
+    <h1>Recreate the ladder for every or any given round and/or season</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/return_ladder.R'><code>R/return_ladder.R</code></a></small>
+    <div class="hidden name"><code>return_ladder.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An easy package for scraping and processing Australia Rules Football (AFL)
-    data. 'fitzRoy' provides a range of functions for accessing publicly available data 
-    from 'AFL Tables' &lt;https://afltables.com&gt;, 'Footy Wire' &lt;https://www.footywire.com&gt; and
-    'The Squiggle' &lt;https://squiggle.com.au&gt;. Further functions allow for easy processing, 
-    cleaning and transformation of this data into formats that can be used for analysis.</p>
+    <p><code>return_ladder</code> returns a dataframe containing the ladder for either all seasons and rounds since 1987, or individual rounds/seasons</p>
     </div>
 
+    <pre class="usage"><span class='fu'>return_ladder</span>(<span class='kw'>match_results_df</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>season_round</span> <span class='kw'>=</span> <span class='fl'>NA</span>, <span class='kw'>season</span> <span class='kw'>=</span> <span class='fl'>NA</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>match_results_df</th>
+      <td><p>A dataframe that has been returned from get_match_results. If empty <code>get_match_results</code> will execute first</p></td>
+    </tr>
+    <tr>
+      <th>season_round</th>
+      <td><p>An integer of the round or vector of integers for multiple rounds. If empty, all rounds returned</p></td>
+    </tr>
+    <tr>
+      <th>season</th>
+      <td><p>An integer of the season or vector of integers for multiple seasons. If empty, all seasons returned</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://jimmyday12.github.io/fitzRoy/'>https://jimmyday12.github.io/fitzRoy/</a></p></li>
-<li><p><a href='https://github.com/jimmyday12/fitzRoy'>https://github.com/jimmyday12/fitzRoy</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/jimmyday12/fitzRoy/issues'>https://github.com/jimmyday12/fitzRoy/issues</a></p></li>
-</ul>
+    <p>Returns a data frame containing a line for each team's ladder position at each round of a season</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-</div>
+    <p>The dataframe contains information about the Round, Season, Points For/Against, Ladder Position. It can either take in a data frame created using <code>get_match_results</code>, or if <code>match_results_df</code> is unspecified, will extract all games using <code>get_match_results</code>.
+Will only allow selecting rounds of the premiership season, not finals.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='fu'>return_ladder</span>()
+<span class='fu'>return_ladder</span>(<span class='kw'>match_results_df</span><span class='kw'>=</span><span class='no'>get_match_results_df</span>, <span class='kw'>season_round</span><span class='kw'>=</span><span class='fl'>23</span>, <span class='kw'>season</span><span class='kw'>=</span><span class='fl'>1990</span>:<span class='fl'>2019</span>)
+<span class='fu'>return_ladder</span>(<span class='kw'>season_round</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>season</span> <span class='kw'>=</span> <span class='fl'>2019</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

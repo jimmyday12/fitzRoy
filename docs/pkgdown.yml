@@ -1,10 +1,12 @@
-pandoc: 2.7.3
-pkgdown: 1.4.1
+pandoc: '2.5'
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   elo-ratings-example: elo-ratings-example.html
   mens-stats: mens-stats.html
+  using-fryzigg-stats: using-fryzigg-stats.html
   womens-stats: womens-stats.html
+last_built: 2020-06-11T04:26Z
 urls:
   reference: https://jimmyday12.github.io/fitzRoy//reference
   article: https://jimmyday12.github.io/fitzRoy//articles

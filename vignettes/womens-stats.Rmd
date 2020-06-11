@@ -1,5 +1,5 @@
 ---
-title: "Womens' AFL Stats"
+title: "Getting Started with AFL Women's data"
 author: "Oscar Lane"
 date: "`r Sys.Date()`"
 output: github_document

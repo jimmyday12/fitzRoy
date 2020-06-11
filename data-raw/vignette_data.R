@@ -44,7 +44,7 @@ afldata_cols <- names(afldata)
 
 # Function to fix abbreviations
 fix_abbreviations <- function(x) {
-  map_chr(x, ~
+  purrr::map_chr(x, ~
             case_when(
               . == "KI" ~ "Kicks",
               . == "MK" ~ "Marks",
@@ -101,8 +101,10 @@ team_abbr <- tibble(
     "PA", "RI", "SK", "SY", "WB", "WC"
   )
 )
+# Frizigg
+fryzigg <- fitzRoy::get_fryzigg_stats(start = 2019, end = 2019)
 
 usethis::use_data(stat_abbr, team_abbr, afldata_cols,
                   results, fixture, stats, stats_gf, 
-                  ladder, ladder_round, sources, tips, tips_round,
+                  ladder, ladder_round, sources, tips, tips_round, fryzigg,
                   internal = TRUE, overwrite = TRUE)

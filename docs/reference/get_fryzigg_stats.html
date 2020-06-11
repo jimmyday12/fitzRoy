@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>fitzRoy: Easily Scrape and Process AFL Data — fitzRoy-package • fitzRoy</title>
+<title>Return get match stats from fryziggafl.net/api/ — get_fryzigg_stats • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -39,12 +39,8 @@
 
 
 
-<meta property="og:title" content="fitzRoy: Easily Scrape and Process AFL Data — fitzRoy-package" />
-<meta property="og:description" content="An easy package for scraping and processing Australia Rules Football (AFL)
-    data. 'fitzRoy' provides a range of functions for accessing publicly available data 
-    from 'AFL Tables' &amp;lt;https://afltables.com&amp;gt;, 'Footy Wire' &amp;lt;https://www.footywire.com&amp;gt; and
-    'The Squiggle' &amp;lt;https://squiggle.com.au&amp;gt;. Further functions allow for easy processing, 
-    cleaning and transformation of this data into formats that can be used for analysis." />
+<meta property="og:title" content="Return get match stats from fryziggafl.net/api/ — get_fryzigg_stats" />
+<meta property="og:description" content="get_fryzigg_stats returns a data frame containing match stats for each game within the specified date range" />
 
 
 
@@ -146,31 +142,47 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>fitzRoy: Easily Scrape and Process AFL Data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/FitzRoy-package.R'><code>R/FitzRoy-package.R</code></a></small>
-    <div class="hidden name"><code>fitzRoy-package.Rd</code></div>
+    <h1>Return get match stats from fryziggafl.net/api/</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fryziggafl-player_stats.R'><code>R/fryziggafl-player_stats.R</code></a></small>
+    <div class="hidden name"><code>get_fryzigg_stats.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>An easy package for scraping and processing Australia Rules Football (AFL)
-    data. 'fitzRoy' provides a range of functions for accessing publicly available data 
-    from 'AFL Tables' &lt;https://afltables.com&gt;, 'Footy Wire' &lt;https://www.footywire.com&gt; and
-    'The Squiggle' &lt;https://squiggle.com.au&gt;. Further functions allow for easy processing, 
-    cleaning and transformation of this data into formats that can be used for analysis.</p>
+    <p><code>get_fryzigg_stats</code> returns a data frame containing match stats for each game within the specified date range</p>
     </div>
 
+    <pre class="usage"><span class='fu'>get_fryzigg_stats</span>(<span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>1897</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/format.html'>format</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date</a></span>(), <span class='st'>"%Y"</span>)))</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>start</th>
+      <td><p>optional, character string or numeric for start year, in "YYYY"ormat</p></td>
+    </tr>
+    <tr>
+      <th>end</th>
+      <td><p>optional, character string or numeric for end year, in "YYYY"format</p></td>
+    </tr>
+    </table>
 
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <div class='dont-index'><p>Useful links:</p><ul>
-<li><p><a href='https://jimmyday12.github.io/fitzRoy/'>https://jimmyday12.github.io/fitzRoy/</a></p></li>
-<li><p><a href='https://github.com/jimmyday12/fitzRoy'>https://github.com/jimmyday12/fitzRoy</a></p></li>
-<li><p>Report bugs at <a href='https://github.com/jimmyday12/fitzRoy/issues'>https://github.com/jimmyday12/fitzRoy/issues</a></p></li>
-</ul>
+    <p>a data table containing player stats for each game between start and end years</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-</div>
+    <p>This function returns a data frame containing match stats for each game within the specified date range. The data from contains all stats from the fryziggafl api and returns 1 row per player.</p>
+<p>The date for this fucntion is called from an API with data stored in a PostgreSQL database on AWS.
+Updated at the conclusion of every game. A cached version to come.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'>#</span>
+<span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+<span class='co'># Gets all data</span>
+<span class='fu'>get_fryzigg_stats</span>()
+<span class='co'># Specify a date range</span>
+<span class='fu'>get_fryzigg_stats</span>(<span class='kw'>start</span> <span class='kw'>=</span> <span class='fl'>2018</span>, <span class='kw'>end</span> <span class='kw'>=</span> <span class='fl'>2019</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

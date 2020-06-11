@@ -23,6 +23,8 @@ reference:
       - '`get_aflw_round_data`'
       - '`get_aflw_rounds`'
       - '`return_ladder`'
+      - '`get_fryzigg_stats`'
+      - '`get_afl_colour_palettes`'
   - title: Data
     desc: Included data 
     contents:
@@ -40,6 +42,7 @@ reference:
       - '`convert_results`'
       - '`get_aflw_cookie`'
       - '`get_score_progression_raw`'
+      - '`verify_year`'
       
       
       
