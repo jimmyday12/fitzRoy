@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Womens' AFL Stats • fitzRoy</title>
+<title>Getting Started with AFL Women's data • fitzRoy</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Womens' AFL Stats">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with AFL Women's data">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -66,7 +66,10 @@
       <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
+    </li>
+    <li>
+      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
     </li>
   </ul>
 </li>
@@ -94,10 +97,10 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Womens’ AFL Stats</h1>
+      <h1>Getting Started with AFL Women’s data</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2020-06-09</h4>
+            <h4 class="date">2020-06-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -116,7 +119,7 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "78dbbb4411aebbd40314328737b2f0d0"</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "3957cb812793f4678210aa6b6c1ec2a8"</span></span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span></code></pre></div>

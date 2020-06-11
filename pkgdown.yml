@@ -4,6 +4,7 @@ pkgdown_sha: 732fb5b9ccc0ef87a73dfd0772ae661a4039b2a8
 articles:
   elo-ratings-example: elo-ratings-example.html
   mens-stats: mens-stats.html
+  using-fryzigg-stats: using-fryzigg-stats.html
   womens-stats: womens-stats.html
 urls:
   reference: https://jimmyday12.github.io/fitzRoy//reference
