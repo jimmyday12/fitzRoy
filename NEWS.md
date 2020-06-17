@@ -2,6 +2,7 @@
 
 * Added AFL stats [@fryzigg](https://github.com/Fryzigg)
 * Added team colours [@fryzigg](https://github.com/Fryzigg)
+* Added AFLW stats [@fryzigg](https://github.com/Fryzigg)
 
 # fitzRoy 0.3.2
 
