@@ -562,7 +562,10 @@ get_footywire_betting_odds <- function(
       Season = as.character(.data$Season) %>% as.numeric(.),
       # Raw betting data has two rows per match: the top team is home
       # and the bottom is away
-      Home.Away = ifelse(dplyr::row_number() %% 2 == 1, "home", "away")
+      Home.Away = ifelse(dplyr::row_number() %% 2 == 1, "home", "away"),
+      # We need a unique Match.ID to pivot rows correctly, because there are
+      # some duplicate date/venue combinations
+      Match.ID = ceiling(seq(dplyr::row_number()) / 2)
     ) %>%
     tidyr::pivot_wider(
       .,
@@ -572,6 +575,7 @@ get_footywire_betting_odds <- function(
         .data$Win.Odds, .data$Win.Paid, .data$Line.Odds, .data$Line.Paid
       )
     ) %>%
+    dplyr::select(., !c('Match.ID')) %>%
     dplyr::rename_if(
       ., names(.) %>% grepl("_home$|_away$", .),
       rename_home_away_columns
