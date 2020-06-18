@@ -2,6 +2,7 @@
 
 * Added AFL stats [@fryzigg](https://github.com/Fryzigg)
 * Added team colours [@fryzigg](https://github.com/Fryzigg)
+* Added AFLW stats [@fryzigg](https://github.com/Fryzigg)
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to handle duplicate date/venue combination in the 2020 season without raising error ([#123](https://github.com/jimmyday12/fitzRoy/issues/123), [@cfranklin11](https://github.com/cfranklin11))
