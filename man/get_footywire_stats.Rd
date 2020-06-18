@@ -23,4 +23,5 @@ To find match ID, find the relevant matches on https://wwww.footywire.com
 \dontrun{
 get_footywire_stats(ids = 5000:5100)
 }
+
 }

@@ -1,6 +1,6 @@
 #' Return get match stats for all current AFLW matches
 #'
-#' \code{get_aflw_player_stats) returns a data frame containing match stats for each game within the specified date range
+#' \code{get_aflw_player_stats} returns a data frame containing match stats for each game within the specified date range
 #'
 #' This function returns a data frame containing match stats for each game within the specified date range. Returns 1 row per player.
 #'
@@ -23,7 +23,6 @@
 #' }
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-
 get_aflw_player_stats <- function(start = 2017,
                               end = as.numeric(format(Sys.Date(), "%Y"))) {
   start <- verify_year(start)

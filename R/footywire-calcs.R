@@ -6,13 +6,16 @@
 #' To find match ID, find the relevant matches on https://wwww.footywire.com
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
+#' 
 #' @return Returns a data frame containing player match stats for each match ID
-#'
+#' 
+#' @export
+#' 
 #' @examples
 #' \dontrun{
 #' get_footywire_stats(ids = 5000:5100)
 #' }
-#' @export
+#'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 get_footywire_stats <- function(ids) {
