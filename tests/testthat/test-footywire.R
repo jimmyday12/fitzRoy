@@ -91,7 +91,7 @@ describe("get_footywire_betting_odds", {
   # Many regression tests require fetching multiple seasons,
   # so it's most efficient to fetch all years with known potential issues
   full_betting_df <- get_footywire_betting_odds(
-    start_season = 2010, end_season = 2019
+    start_season = 2010, end_season = 2020
   )
 
   it("works with different inputs ", {
