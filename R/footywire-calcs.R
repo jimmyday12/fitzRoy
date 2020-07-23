@@ -218,6 +218,27 @@ calculate_round <- function(data_frame) {
     round_indices_to_fix <- round_df$Round >= 26 & round_df$Season == 2010
     round_df$Round[round_indices_to_fix] <- round_twenty_six
 
+    # 2020, when the AFL went all John Madden on the fixture.
+    # Date ranges for rounds are based on https://www.footywire.com/afl/footy/ft_match_list
+    start_of_round_ten <- lubridate::ymd('2020-08-03')
+    start_of_round_eleven <- lubridate::ymd('2020-08-08')
+    start_of_round_twelve <- lubridate::ymd('2020-08-13')
+
+    round_ten_indices <- round_df$Date >= start_of_round_ten &
+      round_df$Date < start_of_round_eleven
+    round_eleven_indices <- round_df$Date >= start_of_round_eleven &
+      round_df$Date < start_of_round_twelve
+    round_twelve_indices <- round_df$Date >= start_of_round_twelve &
+      round_df$Date < lubridate::ymd('2020-08-18')
+
+    round_ten <- 10
+    round_eleven <- 11
+    round_twelve <- 12
+
+    round_df$Round[round_ten_indices] <- round_ten
+    round_df$Round[round_eleven_indices] <- round_eleven
+    round_df$Round[round_twelve_indices] <- round_twelve
+
     round_df
   }
 
