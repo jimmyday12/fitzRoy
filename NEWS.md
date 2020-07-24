@@ -6,6 +6,7 @@
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to handle duplicate date/venue combination in the 2020 season without raising error ([#123](https://github.com/jimmyday12/fitzRoy/issues/123), [@cfranklin11](https://github.com/cfranklin11))
+* Fixed round calculations for `get_fixture` to handle the compressed 2020 fixture ([#125](https://github.com/jimmyday12/fitzRoy/issues/125), [@cfranklin11](https://github.com/cfranklin11))
 
 # fitzRoy 0.3.2
 
