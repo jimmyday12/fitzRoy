@@ -36,6 +36,7 @@ reference:
       - '`return_ladder`'
       - '`get_fryzigg_stats`'
       - '`get_afl_colour_palettes`'
+      - '`get_footywire_match_results`'
   - title: Data
     desc: Included data 
     contents:

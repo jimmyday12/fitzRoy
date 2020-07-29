@@ -31,7 +31,7 @@ License: GPL-3
 URL: https://jimmyday12.github.io/fitzRoy/, https://github.com/jimmyday12/fitzRoy
 BugReports: https://github.com/jimmyday12/fitzRoy/issues
 Depends:
-    R (>= 3.3)
+    R (>= 3.5)
 Imports:
     dplyr,
     httr,
@@ -47,7 +47,8 @@ Imports:
     tidyselect,
     xml2,
     tibble,
-    glue
+    glue,
+    progress
 Suggests:
     covr,
     ggplot2,
