@@ -192,11 +192,28 @@ get_afltables_player_ids <- function(seasons) {
 
   if (max(seasons) > 2017) {
     urls <- purrr::map_chr(seasons[seasons > 2017], base_url)
+    
+    readUrl <- function(url) {
+      out <- tryCatch(readr::read_csv(url, 
+                                      col_types = readr::cols(),
+                                      guess_max = 10000),
+                      error = function(cond) {
+                        return(data.frame())})    
+      return(out)
+    }
+    
     post_2017 <- urls %>%
-      purrr::map(readr::read_csv,
-        col_types = readr::cols(),
-        guess_max = 10000
-      ) %>%
+      purrr::map(readUrl)
+    
+    post_2017_df <- post_2017 %>% 
+      purrr::flatten_dfr()
+    
+    if (nrow(post_2017_df) < 1) {
+      rlang::abort(glue::glue("Could not find any data for {min(seasons)} to {max(seasons)}"))
+      return(post_2017)
+    }
+    
+    post_2017 <- post_2017 %>%
       purrr::map(~ dplyr::mutate(., Round = as.character(Round)))
 
     post_2017 <- post_2017 %>%
