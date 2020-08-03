@@ -3,7 +3,8 @@
 * Added AFL stats [@fryzigg](https://github.com/Fryzigg)
 * Added team colours [@fryzigg](https://github.com/Fryzigg)
 * Added AFLW stats [@fryzigg](https://github.com/Fryzigg)
-* Added new function `get_footywire_match_results` to return results from recent games, in the case where afltables hasn't updated.
+* Added new function `get_footywire_match_results` to return results from recent games, in the case where afltables hasn't updated
+* Added new function `get_afl_fixture` to return fixture from afl.com.au
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to handle duplicate date/venue combination in the 2020 season without raising error ([#123](https://github.com/jimmyday12/fitzRoy/issues/123), [@cfranklin11](https://github.com/cfranklin11))
