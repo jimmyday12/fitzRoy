@@ -220,26 +220,31 @@ calculate_round <- function(data_frame) {
 
     # 2020, when the AFL went all John Madden on the fixture.
     # Date ranges for rounds are based on https://www.footywire.com/afl/footy/ft_match_list
-    start_of_round_ten <- lubridate::ymd('2020-08-03')
-    start_of_round_eleven <- lubridate::ymd('2020-08-08')
-    start_of_round_twelve <- lubridate::ymd('2020-08-13')
+    assign_2020_round_by_date_range <- function(round_params, next_round_start_date) {
+      round_number <- as.numeric(round_params$round_number)
+      round_start_date <- lubridate::as_date(as.numeric(round_params$round_start_date))
+      data_frame <- round_params$data_frame
 
-    round_ten_indices <- round_df$Date >= start_of_round_ten &
-      round_df$Date < start_of_round_eleven
-    round_eleven_indices <- round_df$Date >= start_of_round_eleven &
-      round_df$Date < start_of_round_twelve
-    round_twelve_indices <- round_df$Date >= start_of_round_twelve &
-      round_df$Date < lubridate::ymd('2020-08-18')
+      round_indices <- data_frame$Date >= round_start_date &
+        data_frame$Date < next_round_start_date
+      data_frame$Round[round_indices] <- round_number
 
-    round_ten <- 10
-    round_eleven <- 11
-    round_twelve <- 12
+      list(
+        round_start_date = next_round_start_date,
+        round_number = (round_number + 1),
+        data_frame = data_frame
+      )
+    }
 
-    round_df$Round[round_ten_indices] <- round_ten
-    round_df$Round[round_eleven_indices] <- round_eleven
-    round_df$Round[round_twelve_indices] <- round_twelve
-
-    round_df
+    list(
+      list(round_start_date = lubridate::ymd("2020-08-03"), round_number = 10, data_frame = round_df),
+      lubridate::ymd("2020-08-08"),
+      lubridate::ymd("2020-08-13"),
+      lubridate::ymd("2020-08-21"),
+      lubridate::ymd("2020-08-25")
+    ) %>%
+      purrr::reduce(., assign_2020_round_by_date_range) %>%
+      .$data_frame
   }
 
   calculate_round_by_week <- function(roundless_df) {

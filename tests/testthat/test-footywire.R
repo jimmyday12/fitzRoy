@@ -84,13 +84,13 @@ test_that("round numbers don't increment across bye weeks without matches", {
   expect_equal(calculate_max_round_lag(betting_rounds), 1)
 })
 
-test_that("2020 season round numbers are correct through round 12", {
+test_that("2020 season round numbers are correct through round 13", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
 
   # We filter for matches through round 12, because we don't want
   # unknown, future data changes to break tests
-  fixture <- get_fixture(2020) %>% dplyr::filter(.data$Round <= 12)
+  fixture <- get_fixture(2020) %>% dplyr::filter(.data$Round <= 13)
 
   n_duplicate_home_teams <- fixture %>%
     dplyr::group_by(Season, Round, Home.Team) %>%
