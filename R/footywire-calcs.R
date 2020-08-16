@@ -241,7 +241,11 @@ calculate_round <- function(data_frame) {
       lubridate::ymd("2020-08-08"),
       lubridate::ymd("2020-08-13"),
       lubridate::ymd("2020-08-21"),
-      lubridate::ymd("2020-08-25")
+      lubridate::ymd("2020-08-25"),
+      lubridate::ymd("2020-08-31"),
+      lubridate::ymd("2020-09-05"),
+      lubridate::ymd("2020-09-10"),
+      lubridate::ymd("2020-09-15")
     ) %>%
       purrr::reduce(., assign_2020_round_by_date_range) %>%
       .$data_frame
