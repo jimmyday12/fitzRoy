@@ -324,10 +324,36 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
   url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season) # nolint
   fixture_xml <- xml2::read_html(url_fixture)
 
+  prepend_rounds_to_match_rows <- function(cumulative_nodes, current_node) {
+    current_column <- mod(cumulative_nodes$current_column, 8)
+    is_round_node <- stringr::str_detect(current_node, stringr::regex("Round \\d+|Final", ignore_case = TRUE))
+
+    if (is_round_node) {
+      current_round <- current_node
+      nodes_to_append <- c(current_node)
+    } else {
+      current_round <- cumulative_nodes$current_round
+
+      if (current_column == 0) {
+        nodes_to_append <- c(current_round, current_node)
+      } else {
+        nodes_to_append <- c(current_node)
+      }
+    }
+
+    return(list(
+      current_round = current_round,
+      current_column = current_column + length(nodes_to_append),
+      nodes = c(cumulative_nodes$nodes, nodes_to_append)
+    ))
+  }
+
   # Get XML and extract text from .data
   games_text <- fixture_xml %>%
-    rvest::html_nodes(".data") %>%
-    rvest::html_text()
+    rvest::html_nodes(".data, .tbtitle") %>%
+    rvest::html_text() %>%
+    purrr::reduce(., prepend_rounds_to_match_rows, .init = list(current_column = 0)) %>%
+    .$nodes
 
 
   if (rlang::is_empty(games_text)) {
@@ -342,12 +368,12 @@ Check the following url on footywire
   }
 
   # Put this into dataframe format
-  games_df <- matrix(games_text, ncol = 7, byrow = TRUE) %>%
+  games_df <- matrix(games_text, ncol = 8, byrow = TRUE) %>%
     tibble::as_tibble() %>%
-    dplyr::select(.data$V1:.data$V3)
+    dplyr::select(.data$V1:.data$V4)
 
   # Update names
-  names(games_df) <- c("Date", "Teams", "Venue")
+  names(games_df) <- c("Round.Name", "Date", "Teams", "Venue")
 
   # Remove Bye & Match Cancelled
   games_df <- games_df %>%
