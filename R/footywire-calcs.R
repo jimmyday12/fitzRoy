@@ -137,6 +137,70 @@ update_footywire_stats <- function(check_existing = TRUE) {
   }
 }
 
+DIGITS <- stringr::regex("round\\s+(\\d+)", ignore_case = TRUE)
+
+parse_round_name <- function(max_regular_round_number) {
+  FINALS_WEEK <- stringr::regex("Finals\\s+Week\\s+(\\d+)", ignore_case = TRUE)
+  QUALIFYING_FINALS <- stringr::regex("qualifying", ignore_case = TRUE)
+  ELIMINATION_FINALS <- stringr::regex("elimination", ignore_case = TRUE)
+  # One bloody week in 2010 uses 'One' instead of '1' on
+  # https://www.footywire.com/afl/footy/afl_betting
+  FINALS_WEEK_ONE <- stringr::regex("Finals\\s+Week\\s+One", ignore_case = TRUE)
+  SEMI_FINALS <- stringr::regex("semi", ignore_case = TRUE)
+  PRELIMINARY_FINALS <- stringr::regex("preliminary", ignore_case = TRUE)
+  GRAND_FINAL <- stringr::regex("grand", ignore_case = TRUE)
+
+
+  return(
+    function(round_name) {
+      round_number <- stringr::str_match(round_name, DIGITS)[[2]]
+
+      if (!is.na(round_number)) {
+        return(round_number)
+      }
+
+      finals_week <- stringr::str_match(round_name, FINALS_WEEK)[[2]]
+
+      if (!is.na(finals_week)) {
+        # Betting data uses the format "YYYY Finals Week N" to label finals rounds
+        # so we can just add N to max round to get the round number
+        return(as.numeric(finals_week) + max_regular_round_number)
+      }
+
+      is_first_finals_week <- !is.na(stringr::str_match(round_name, QUALIFYING_FINALS)) ||
+        !is.na(stringr::str_match(round_name, ELIMINATION_FINALS)) ||
+        !is.na(stringr::str_match(round_name, FINALS_WEEK_ONE))
+
+      if (is_first_finals_week) {
+        return(max_regular_round_number + 1)
+      }
+
+      if (!is.na(stringr::str_match(round_name, SEMI_FINALS))) {
+        return(max_regular_round_number + 2)
+      }
+
+      if (!is.na(stringr::str_match(round_name, PRELIMINARY_FINALS))) {
+        return(max_regular_round_number + 3)
+      }
+
+      if (!is.na(stringr::str_match(round_name, GRAND_FINAL))) {
+        return(max_regular_round_number + 4)
+      }
+    }
+  )
+}
+
+calculate_round_number <- function(round_names) {
+  max_regular_round_number <-  round_names %>%
+    stringr::str_match_all(., DIGITS) %>%
+    unlist(.) %>%
+    as.numeric(.) %>%
+    max(., na.rm = TRUE)
+
+  round_names %>%
+    purrr::map(., parse_round_name(max_regular_round_number)) %>%
+    unlist(.)
+}
 
 #' Helper function for \code{get_fixture,betting_data}
 #'
@@ -325,7 +389,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
   fixture_xml <- xml2::read_html(url_fixture)
 
   prepend_rounds_to_match_rows <- function(cumulative_nodes, current_node) {
-    current_column <- mod(cumulative_nodes$current_column, 8)
+    current_column <- cumulative_nodes$current_column %% 8
     is_round_node <- stringr::str_detect(current_node, stringr::regex("Round \\d+|Final", ignore_case = TRUE))
 
     if (is_round_node) {
@@ -380,8 +444,12 @@ Check the following url on footywire
     dplyr::filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
 
   games_df <- games_df %>%
-    dplyr::mutate(Date = lubridate::ydm_hm(paste(season, .data$Date))) %>%
-    calculate_round(.)
+    dplyr::mutate(
+      Season = season,
+      Date = lubridate::ydm_hm(paste(season, .data$Date)),
+      Round = calculate_round_number(.data$Round.Name) %>% as.numeric(.)
+    ) %>%
+    dplyr::select(., !c('Round.Name'))
 
   # Fix names
   games_df <- games_df %>%
