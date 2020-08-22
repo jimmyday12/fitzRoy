@@ -319,7 +319,7 @@ Check the following url on footywire
     )
 
   # Add season game number
-  games_df <- games_df %>% dplyr::mutate(Season.Game = dplyr::row_number())
+  games_df$Season.Game <- dplyr::row_number(games_df$Date)
 
   # Fix Teams
   # Uses internal replace teams function
