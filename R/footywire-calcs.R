@@ -202,151 +202,6 @@ calculate_round_number <- function(round_names) {
     unlist(.)
 }
 
-#' Helper function for \code{get_fixture,betting_data}
-#'
-#' Work out round number of each game from day and week.
-#' Games from Wednesday through Tuesday go in same Round.
-#'
-#' @param data_frame A data frame with match-level data and a Date column
-#' @importFrom magrittr %>%
-calculate_round <- function(data_frame) {
-  remove_bye_round_gaps <- function(gap_df) {
-    concat_round_groups <- function(Season, data, cumulative_week_lag) {
-      dplyr::mutate(
-        data,
-        Season = Season,
-        cumulative_week_lag = cumulative_week_lag
-      )
-    }
-
-    calculate_max_lag <- function(weeks_since_last_match) {
-      # Subtract 1 with a floor of zero, because we expect 0-1 weeks since
-      # last match and don't want to include those round lags when calculating
-      # how much to shift rounds due to bye weeks.
-      max(max(weeks_since_last_match) - 1, 0)
-    }
-
-    calculate_bye_week_lag <- function(season_data_frame) {
-      season_data_frame %>%
-        tidyr::nest(data = -c(.data$Round)) %>%
-        .$data %>%
-        # Expand max lag to have same length as match count.
-        purrr::map(~ rep.int(calculate_max_lag(.x$weeks_since_last_match), nrow(.x))) %>%
-        purrr::accumulate(~ max(.x) + .y) %>%
-        unlist
-    }
-
-    gap_df %>%
-      dplyr::mutate(
-        weeks_since_last_match = .data$Round - dplyr::lag(.data$Round, default = 0)
-      ) %>%
-      tidyr::nest(data = -c(.data$Season)) %>%
-      dplyr::mutate(
-        cumulative_week_lag = purrr::map(.data$data, calculate_bye_week_lag)
-      ) %>%
-      purrr::pmap(., concat_round_groups) %>%
-      dplyr::bind_rows(.) %>%
-      dplyr::mutate(Round = (.data$Round - .data$cumulative_week_lag)) %>%
-      dplyr::select(-c(.data$weeks_since_last_match, .data$cumulative_week_lag))
-  }
-
-  # Special cases where week counting doesn't work
-  fix_incorrect_rounds <- function(incorrect_df) {
-    round_df <- data.frame(incorrect_df)
-
-    # 2018 Collingwood/Essendon: Unlike default, this Wednesday match belongs
-    # to previous round (i.e. it's the end of the round, not the beginning)
-    round_five <- 5
-    # Need to use date for filter, because betting data doesn't include time
-    round_indices_to_fix <- lubridate::date(round_df$Date) == "2018-04-25"
-    round_df$Round[round_indices_to_fix] <- round_five
-
-    # 2012-2014: first round shifts round numbers for rest of season
-    round_one <- 1
-    round_indices_to_fix <- round_df$Season >= 2012 & round_df$Season <= 2014
-    shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
-    round_df$Round[round_indices_to_fix] <- shifted_rounds
-    round_df$Round[round_df$Round == 0] <- round_one
-
-    # Round 13, 2010 and Round 18, 2014 each last two weeks, so we need to shift
-    # all subsequent rounds down by one
-    round_indices_to_fix <- (round_df$Round > 13 & round_df$Season == 2010) |
-      (round_df$Round > 18 & round_df$Season == 2014)
-    shifted_rounds <- round_df$Round[round_indices_to_fix] - 1
-    round_df$Round[round_indices_to_fix] <- shifted_rounds
-
-    # The 2010 Grand Final was replayed a week after the initial draw.
-    # AFLTables labels both matches as being in round 26, so we'll do the same
-    # here
-    round_twenty_six <- 26
-    round_indices_to_fix <- round_df$Round >= 26 & round_df$Season == 2010
-    round_df$Round[round_indices_to_fix] <- round_twenty_six
-
-    # 2020, when the AFL went all John Madden on the fixture.
-    # Date ranges for rounds are based on https://www.footywire.com/afl/footy/ft_match_list
-    assign_2020_round_by_date_range <- function(round_params, next_round_start_date) {
-      round_number <- as.numeric(round_params$round_number)
-      round_start_date <- lubridate::as_date(as.numeric(round_params$round_start_date))
-      data_frame <- round_params$data_frame
-
-      round_indices <- data_frame$Date >= round_start_date &
-        data_frame$Date < next_round_start_date
-      data_frame$Round[round_indices] <- round_number
-
-      list(
-        round_start_date = next_round_start_date,
-        round_number = (round_number + 1),
-        data_frame = data_frame
-      )
-    }
-
-    list(
-      list(round_start_date = lubridate::ymd("2020-08-03"), round_number = 10, data_frame = round_df),
-      lubridate::ymd("2020-08-08"),
-      lubridate::ymd("2020-08-13"),
-      lubridate::ymd("2020-08-21"),
-      lubridate::ymd("2020-08-25"),
-      lubridate::ymd("2020-08-31"),
-      lubridate::ymd("2020-09-05"),
-      lubridate::ymd("2020-09-10"),
-      lubridate::ymd("2020-09-15")
-    ) %>%
-      purrr::reduce(., assign_2020_round_by_date_range) %>%
-      .$data_frame
-  }
-
-  calculate_round_by_week <- function(roundless_df) {
-    sunday <- 1
-    tuesday <- 3
-
-    round_df <- roundless_df %>%
-      dplyr::mutate(
-        Season = lubridate::year(.data$Date),
-        week_count = lubridate::epiweek(.data$Date),
-        day_of_week = lubridate::wday(.data$Date),
-        Round = ifelse(
-          dplyr::between(.data$day_of_week, sunday, tuesday),
-          .data$week_count - 1,
-          .data$week_count
-        )
-      )
-
-    min_round <- round_df %>%
-      dplyr::group_by(.data$Season) %>%
-      dplyr::summarise(min_round = min(.data$Round))
-
-    round_df %>%
-      dplyr::left_join(., min_round, by = 'Season') %>%
-      dplyr::mutate(Round = as.integer(.data$Round - .data$min_round + 1)) %>%
-      dplyr::select(-c(.data$week_count, .data$day_of_week, .data$min_round))
-  }
-
-  round_df <- data_frame %>%
-    calculate_round_by_week(.) %>%
-    remove_bye_round_gaps(.) %>%
-    fix_incorrect_rounds(.)
-}
-
 
 #' Get upcoming fixture from https://www.footywire.com
 #'
@@ -508,24 +363,6 @@ get_footywire_betting_odds <- function(
                                        end_season = lubridate::year(Sys.Date())) {
   if (class(end_season) == "Date") format(end_season, "%Y")
 
-  raw_betting_col_names <- c(
-    "Date",
-    "Venue",
-    "blank_one",
-    "Team",
-    "Score",
-    "Margin",
-    "Win.Odds",
-    "Win.Paid",
-    "Line.Odds",
-    "colon",
-    "redundant_line_paid",
-    "Line.Paid",
-    "blank_two",
-    "blank_three",
-    "Season"
-  )
-
   rename_home_away_columns <- function(col_name) {
     paste0(
       ifelse(grepl("_home$", col_name), "Home.", "Away."),
@@ -554,7 +391,7 @@ get_footywire_betting_odds <- function(
     rows %>% purrr::map(~ c(row_padding(., max_row_length), .))
   }
 
-  clean_table_row <- function(table_row_html) {
+  extract_text <- function(table_row_html) {
     table_row_html %>%
       rvest::html_text(.) %>%
       stringr::str_split(., "\\n") %>%
@@ -574,7 +411,7 @@ get_footywire_betting_odds <- function(
     if (length(table_rows) == 0) {
       warning(paste0(
         "Skipping ",
-        season, ", 
+        season, ",
                      because it doesn't have any data."
       ))
 
@@ -582,16 +419,32 @@ get_footywire_betting_odds <- function(
     }
 
     table_rows <- table_rows %>%
-      purrr::map(clean_table_row) %>%
-      purrr::keep(~ length(.x) > 1)
+      purrr::map(extract_text)
 
-    column_label_row <- table_rows[[1]]
+    append_rounds_to_match_rows <- function(cumulative_rows, current_row) {
+      ROUND_ROW <- stringr::regex("Round \\d+|Final", ignore_case = TRUE)
+      is_round_node <- all(stringr::str_detect(current_row, ROUND_ROW))
+
+      if (is_round_node) {
+        current_round <- current_row
+        rows <- cumulative_rows$rows
+      } else {
+        current_round <- cumulative_rows$current_round
+        rows <- c(cumulative_rows$rows, list(c(current_row, current_round)))
+      }
+
+      list(current_round = current_round, rows = rows)
+    }
+
+    column_label_row <- table_rows[[2]]
     is_column_label_row <- function(row) {
       length(row) == length(column_label_row) && all(row == column_label_row)
     }
 
     table_rows %>%
-      purrr::discard(is_column_label_row) %>%
+      purrr::discard(., ~ is_column_label_row(.x) || all(.x == "")) %>%
+      purrr::reduce(., append_rounds_to_match_rows, .init = list()) %>%
+      .$rows %>%
       normalize_row_length(.) %>%
       purrr::map(~ c(.x, as.character(season)))
   }
@@ -605,20 +458,68 @@ get_footywire_betting_odds <- function(
       list(., season)
   }
 
-  valid_start_season <- max(as.numeric(start_season), 2010)
-
-  if (is.na(valid_start_season)) {
-    stop(paste0(valid_start_season, " couldn't be coerced to a valid year."))
-  }
-
-  if (as.numeric(start_season) < valid_start_season) {
-    warning(
-      paste0(
-        "2010 is the first season for which betting data is available, ",
-        "so starting from 2010 instead of ",
-        start_season
-      )
+  convert_to_data_frame <- function(raw_season_data) {
+    raw_betting_col_names <- c(
+      "Date",
+      "Venue",
+      "blank_one",
+      "Team",
+      "Score",
+      "Margin",
+      "Win.Odds",
+      "Win.Paid",
+      "Line.Odds",
+      "colon",
+      "redundant_line_paid",
+      "Line.Paid",
+      "blank_two",
+      "blank_three",
+      "Round.Name",
+      "Season"
     )
+
+    n_columns <- length(raw_betting_col_names)
+
+    raw_season_values <- unlist(raw_season_data)
+    season_values <- if (is.null(raw_season_values)) {
+      # Need two rows-worth of NAs to allow for Home and Away columns after pivoting
+      rep_len(NA, n_columns * 2)
+    } else {
+      raw_season_values
+    }
+
+    season_values %>%
+      matrix(
+        .,
+        ncol = n_columns,
+        byrow = TRUE,
+        dimnames = list(NULL, raw_betting_col_names)
+      ) %>%
+      as.data.frame(.) %>%
+      tidyr::fill(c(.data$Date, .data$Venue)) %>%
+      dplyr::mutate(
+        Date = lubridate::dmy(.data$Date),
+        Venue = as.character(.data$Venue),
+        Team = as.character(.data$Team),
+        Score = as.character(.data$Score) %>% as.numeric(.),
+        Margin = as.character(.data$Margin) %>%
+          stringr::str_replace_all(., "\\+", "") %>%
+          as.numeric(.),
+        Win.Odds = as.character(.data$Win.Odds) %>% as.numeric(.),
+        Win.Paid = as.character(.data$Win.Paid) %>% as.numeric(.),
+        Line.Odds = as.character(.data$Line.Odds) %>%
+          stringr::str_replace_all(., "\\+", "") %>%
+          as.numeric(.),
+        Line.Paid = as.character(.data$Line.Paid) %>% as.numeric(.),
+        Round = calculate_round_number(.data$Round.Name) %>% as.numeric(.),
+        Season = as.character(.data$Season) %>% as.numeric(.),
+        # Raw betting data has two rows per match: the top team is home
+        # and the bottom is away
+        Home.Away = ifelse(dplyr::row_number() %% 2 == 1, "home", "away"),
+        # We need a unique Match.ID to pivot rows correctly, because there are
+        # some duplicate date/venue combinations
+        Match.ID = ceiling(seq(dplyr::row_number()) / 2)
+      )
   }
 
   valid_end_season <- min(
@@ -634,7 +535,7 @@ get_footywire_betting_odds <- function(
     warning(
       paste0(
         valid_end_season,
-        " is the last season for which betting data is available, 
+        " is the last season for which betting data is available,
         so ending in ",
         valid_end_season,
         " instead of ",
@@ -643,56 +544,35 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  n_columns <- length(raw_betting_col_names)
+  valid_start_season <- max(as.numeric(start_season), 2010)
+  valid_start_season <- min(valid_start_season, valid_end_season)
 
-  raw_betting_values <- valid_start_season:valid_end_season %>%
-    purrr::map(fetch_betting_odds_page) %>%
-    purrr::map(., ~ do.call(extract_table_rows, .)) %>%
-    unlist()
-
-  betting_values <- if (is.null(raw_betting_values)) {
-    # Need two rows-worth of NAs to allow for Home and Away columns after pivoting
-    rep_len(NA, n_columns * 2)
-  } else {
-    raw_betting_values
+  if (is.na(valid_start_season)) {
+    stop(paste0(valid_start_season, " couldn't be coerced to a valid year."))
   }
 
-  betting_values %>%
-    matrix(
-      .,
-      ncol = n_columns,
-      byrow = TRUE,
-      dimnames = list(NULL, raw_betting_col_names)
-    ) %>%
-    as.data.frame(.) %>%
+  if (as.numeric(start_season) < valid_start_season) {
+    warning(
+      paste0(
+        "2010 is the first season for which betting data is available, ",
+        "so starting from 2010 instead of ",
+        start_season
+      )
+    )
+  }
+
+  betting_dfs <- valid_start_season:valid_end_season %>%
+    purrr::map(fetch_betting_odds_page) %>%
+    purrr::map(., ~ do.call(extract_table_rows, .)) %>%
+    purrr::map(convert_to_data_frame)
+
+  betting_dfs %>%
+    dplyr::bind_rows(.) %>%
     dplyr::select(
       -c(
         "blank_one", "colon", "redundant_line_paid",
-        "blank_two", "blank_three"
+        "blank_two", "blank_three", "Round.Name"
       )
-    ) %>%
-    tidyr::fill(c(.data$Date, .data$Venue)) %>%
-    dplyr::mutate(
-      Date = lubridate::dmy(.data$Date),
-      Venue = as.character(.data$Venue),
-      Team = as.character(.data$Team),
-      Score = as.character(.data$Score) %>% as.numeric(.),
-      Margin = as.character(.data$Margin) %>%
-        stringr::str_replace_all(., "\\+", "") %>%
-        as.numeric(.),
-      Win.Odds = as.character(.data$Win.Odds) %>% as.numeric(.),
-      Win.Paid = as.character(.data$Win.Paid) %>% as.numeric(.),
-      Line.Odds = as.character(.data$Line.Odds) %>%
-        stringr::str_replace_all(., "\\+", "") %>%
-        as.numeric(.),
-      Line.Paid = as.character(.data$Line.Paid) %>% as.numeric(.),
-      Season = as.character(.data$Season) %>% as.numeric(.),
-      # Raw betting data has two rows per match: the top team is home
-      # and the bottom is away
-      Home.Away = ifelse(dplyr::row_number() %% 2 == 1, "home", "away"),
-      # We need a unique Match.ID to pivot rows correctly, because there are
-      # some duplicate date/venue combinations
-      Match.ID = ceiling(seq(dplyr::row_number()) / 2)
     ) %>%
     tidyr::pivot_wider(
       .,
@@ -707,7 +587,6 @@ get_footywire_betting_odds <- function(
       ., names(.) %>% grepl("_home$|_away$", .),
       rename_home_away_columns
     ) %>%
-    calculate_round(.) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
     dplyr::filter(!is.na(.data$Date)) %>%
