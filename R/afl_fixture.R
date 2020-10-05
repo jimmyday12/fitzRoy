@@ -43,51 +43,7 @@ get_afl_fixture <- function(season = NULL, round = NULL, comp = "AFLM") {
 
 
 
-#' Find Comp ID
-#'
-#' Returns the ID for the season
-#'
-#' @param season Season, in YYYY format.
-#'
-#' @noRd
-find_comp_id <- function(comp){
- dplyr::case_when(
-   comp == "AFLM" ~ "1",
-   comp == "AFLW" ~ "2",
-   TRUE ~ ""
- ) 
-}
-  
-  
-#' Find Season ID
-#'
-#' Returns the ID for the season
-#'
-#' @param season Season, in YYYY format.
-#'
-#' @noRd
-find_season_id <- function(season){
-  if (season < 2012) rlang::abort("Season must be after 2012")
-  if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
-                                                Your season is only {nchar(season)} digits"))
-  
-    
-  compSeasons_url <- "https://aflapi.afl.com.au/afl/v2/competitions/1/compseasons"
-  comp_dat <- httr::GET(compSeasons_url)
-  
-  comp_cont <- httr::content(comp_dat)
-  comp_ids <- comp_cont$compSeasons %>% 
-    purrr::map_dfr(c) %>%
-    dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", name)))
-  
-  id <- comp_ids$id[comp_ids$season == season]
-  if (length(id) < 1) {
-    rlang::warn("Could not find a matching ID to season \"{season}\"")
-    return(NULL)
-  }
-  return(id)
-  
-}
+
 
 
 
