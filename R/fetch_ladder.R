@@ -47,13 +47,10 @@ fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM", 
 fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   
   if (is.null(season)) season <- Sys.Date() %>% format("%Y") %>% as.numeric()
-  if (season < 2012) rlang::abort("Season must be after 2012")
   if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
                                                 Your season is only {nchar(season)} digits"))
   
   if (is.null(round)) round <- ""
-  if (!comp %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\"
-                                                 You supplied {comp}"))
   
   #comp_id <- find_comp_id(comp)
   seas_id <- find_season_id(season, comp)
@@ -80,5 +77,5 @@ fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM") 
            round_number = cont$round$roundNumber) %>%
     dplyr::select(season, season_name, round_name, round_number, last_updated, dplyr::everything())
   
-  return(ladder_df)
+  dplyr::as_tibble(ladder_df)
 }

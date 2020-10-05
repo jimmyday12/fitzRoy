@@ -6,7 +6,8 @@
 #'
 #' @noRd
 find_comp_id <- function(comp){
-
+  if (!comp %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\"
+                                                 You supplied {comp}"))
   api_url <- paste0("https://aflapi.afl.com.au/afl/v2/competitions/")
   
   comps_dat <- httr::GET(api_url)
@@ -47,11 +48,10 @@ get_afl_cookie <- function() {
 #'
 #' @noRd
 find_season_id <- function(season, comp = "AFLM"){
-  if (season < 2012) rlang::abort("Season must be after 2012")
   if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
                                                 Your season is only {nchar(season)} digits"))
   
-  comp_id <- fitzRoy:::find_comp_id(comp)
+  comp_id <- find_comp_id(comp)
   
   compSeasons_url <- paste0("https://aflapi.afl.com.au/afl/v2/competitions/",
                             comp_id,
@@ -66,11 +66,10 @@ find_season_id <- function(season, comp = "AFLM"){
   
   id <- comp_ids$id[comp_ids$season == season]
   if (length(id) < 1) {
-    rlang::warn("Could not find a matching ID to season \"{season}\"")
+    rlang::warn(glue::glue("Could not find a matching ID to season \"{season}\". Data only available from 2012 onwards"))
     return(NULL)
   }
   return(id)
-  
 }
 
 #' Find Season ID
@@ -82,15 +81,12 @@ find_season_id <- function(season, comp = "AFLM"){
 #' @noRd
 find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = "AFLM"){
   if (!is.null(season)) {
-    if(season < 2012) rlang::abort("Season must be after 2012")
     if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
                                                 Your season is only {nchar(season)} digits"))
   }
   
-  if (is.null(season_id)) {
-    season_id <- fitzRoy:::find_season_id(season, comp)
-  }
-  
+  if (is.null(season_id)) season_id <- find_season_id(season, comp)
+
   round_url <- paste0("https://aflapi.afl.com.au/afl/v2/compseasons/",
                       season_id,
                       "/rounds")
@@ -107,7 +103,7 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = 
   id <- df$id[df$roundNumber == round_number]
 
   if (length(id) < 1) {
-    rlang::warn("Could not find a matching ID to Round {round_number}, {season}")
+    rlang::warn(glue::glue("Could not find a matching ID to Round {round_number}, {season}"))
     return(NULL)
   }
   return(id)
