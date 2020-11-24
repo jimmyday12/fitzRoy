@@ -4,12 +4,12 @@
 \alias{get_afl_fixture}
 \title{Get AFL fixture}
 \usage{
-get_afl_fixture(season = NULL, round = NULL, comp = "AFLM")
+get_afl_fixture(season = NULL, round_number = NULL, comp = "AFLM")
 }
 \arguments{
 \item{season}{season in YYYY format}
 
-\item{round}{round number}
+\item{round_number}{round number}
 
 \item{comp}{One of "AFLM" or "AFLW"}
 }

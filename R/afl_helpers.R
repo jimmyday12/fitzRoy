@@ -62,7 +62,7 @@ find_season_id <- function(season, comp = "AFLM"){
   comp_cont <- httr::content(comp_dat)
   comp_ids <- comp_cont$compSeasons %>% 
     purrr::map_dfr(c) %>%
-    dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", name)))
+    dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", .data$name)))
   
   id <- comp_ids$id[comp_ids$season == season]
   if (length(id) < 1) {

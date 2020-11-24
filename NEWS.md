@@ -6,9 +6,9 @@
 * Added new function `get_footywire_match_results` to return results from recent games, in the case where afltables hasn't updated
 * Added new function `get_afl_fixture` to return fixture from afl.com.au
 * Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) [@cfranklin11](https://github.com/cfranklin11)
-* Added new function `fetch_afl_ladder` to return data function from AFL.com.au 
+* Added new function `fetch_ladder_afl` to return data function from AFL.com.au 
 * Added new `fetch_ladder` generic function to return ladder data
-
+* Fixed a bug with `get_afl_fixture` that was returning the wrong season if season was before 2012
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to handle duplicate date/venue combination in the 2020 season without raising error ([#123](https://github.com/jimmyday12/fitzRoy/issues/123), [@cfranklin11](https://github.com/cfranklin11))
