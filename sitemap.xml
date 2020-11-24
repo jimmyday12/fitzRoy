@@ -7,7 +7,10 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/convert_results.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_afl_ladder.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_ladder.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_ladder_afl.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fitzRoy-package.html</loc>

@@ -156,8 +156,9 @@
 <li>Added new function <code>get_afl_fixture</code> to return fixture from afl.com.au</li>
 <li>Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) <a href="https://github.com/cfranklin11">@cfranklin11</a>
 </li>
-<li>Added new function <code>fetch_afl_ladder</code> to return data function from AFL.com.au</li>
+<li>Added new function <code>fetch_ladder_afl</code> to return data function from AFL.com.au</li>
 <li>Added new <code>fetch_ladder</code> generic function to return ladder data</li>
+<li>Fixed a bug with <code>get_afl_fixture</code> that was returning the wrong season if season was before 2012</li>
 </ul>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">

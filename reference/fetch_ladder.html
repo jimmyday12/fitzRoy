@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get AFL fixture — get_afl_fixture • fitzRoy</title>
+<title>Fetch ladder — fetch_ladder • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Get AFL fixture — get_afl_fixture" />
-<meta property="og:description" content="Returns the Fixture for the relevent Season and Round from the AFL.com.au website." />
+<meta property="og:title" content="Fetch ladder — fetch_ladder" />
+<meta property="og:description" content="Returns the Ladder for the relevant Season and Round from the AFL.com.au website." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -139,16 +139,16 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get AFL fixture</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/afl_fixture.R'><code>R/afl_fixture.R</code></a></small>
-    <div class="hidden name"><code>get_afl_fixture.Rd</code></div>
+    <h1>Fetch ladder</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fetch_ladder.R'><code>R/fetch_ladder.R</code></a></small>
+    <div class="hidden name"><code>fetch_ladder.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Returns the Fixture for the relevent Season and Round from the AFL.com.au website.</p>
+    <p>Returns the Ladder for the relevant Season and Round from the AFL.com.au website.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_afl_fixture</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>)</pre>
+    <pre class="usage"><span class='fu'>fetch_ladder</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -165,6 +165,10 @@
       <th>comp</th>
       <td><p>One of "AFLM" or "AFLW"</p></td>
     </tr>
+    <tr>
+      <th>source</th>
+      <td><p>One of "AFL" (default), "Footywire", "AFLTables"</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -173,7 +177,7 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>get_afl_fixture</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>get_ladder</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
