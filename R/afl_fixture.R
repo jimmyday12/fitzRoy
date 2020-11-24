@@ -3,7 +3,7 @@
 #' Returns the Fixture for the relevent Season and Round from the AFL.com.au website.
 #'
 #' @param season season in YYYY format
-#' @param round round number
+#' @param round_number round number
 #' @param comp One of "AFLM" or "AFLW"
 #'
 #' @return returns a dataframe with the fixture that matches season, round.
@@ -36,5 +36,10 @@ get_afl_fixture <- function(season = NULL, round_number = NULL, comp = "AFLM") {
     httr::content(as = "text") %>% 
     jsonlite::fromJSON(flatten = TRUE)
 
-  dplyr::as_tibble(cont$matches)
+  df <- dplyr::as_tibble(cont$matches) %>%
+    dplyr::mutate(compSeason.year = as.numeric(gsub("([0-9]+).*$", "\\1", .data$compSeason.name)))
+  
+  df %>%
+    dplyr::filter(.data$compSeason.year == season)
+  
 }

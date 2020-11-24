@@ -3,7 +3,7 @@
 #' Returns the Ladder for the relevant Season and Round from the AFL.com.au website.
 #'
 #' @param season season in YYYY format
-#' @param round round number
+#' @param round_number round number
 #' @param comp One of "AFLM" or "AFLW"
 #' @param source One of "AFL" (default), "Footywire", "AFLTables"
 #'
@@ -14,7 +14,7 @@
 #' \dontrun{
 #' get_ladder(2020, round = 1)
 #' }
-fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM", source = "AFL") {
+fetch_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM", source = "AFL") {
   
   if (is.null(season)) season <- Sys.Date() %>% format("%Y") %>% as.numeric()
   if (season < 2012) rlang::abort("Season must be after 2012")
@@ -25,7 +25,7 @@ fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM", 
   if (!comp %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\"
                                                  You supplied {comp}"))
   
-  if (source == "AFL") return(fetch_afl_ladder(season, round_number, comp))
+  if (source == "AFL") return(fetch_ladder_afl(season, round_number, comp))
 
 }
 
@@ -34,7 +34,7 @@ fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM", 
 #' Returns the Ladder for the relevant Season and Round from the AFL.com.au website.
 #'
 #' @param season season in YYYY format
-#' @param round round number
+#' @param round_number round number
 #' @param comp One of "AFLM" or "AFLW"
 #'
 #' @return returns a dataframe with the fixture that matches season, round.
@@ -44,7 +44,7 @@ fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM", 
 #' \dontrun{
 #' get_afl_ladder(2020, round = 1)
 #' }
-fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM") {
+fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   
   if (is.null(season)) season <- Sys.Date() %>% format("%Y") %>% as.numeric()
   if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
@@ -75,7 +75,9 @@ fetch_afl_ladder <- function(season = NULL, round_number = NULL, comp = "AFLM") 
            last_updated = cont$lastUpdated,
            round_name = cont$round$name,
            round_number = cont$round$roundNumber) %>%
-    dplyr::select(season, season_name, round_name, round_number, last_updated, dplyr::everything())
+    dplyr::select(.data$season, .data$season_name, .data$round_name, 
+                  .data$round_number, .data$last_updated, 
+                  dplyr::everything())
   
   dplyr::as_tibble(ladder_df)
 }
