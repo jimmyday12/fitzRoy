@@ -8,6 +8,7 @@
 find_comp_id <- function(comp){
   if (!comp %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\"
                                                  You supplied {comp}"))
+  
   api_url <- paste0("https://aflapi.afl.com.au/afl/v2/competitions/")
   
   comps_dat <- httr::GET(api_url)
@@ -59,14 +60,17 @@ find_season_id <- function(season, comp = "AFLM"){
   
   comp_dat <- httr::GET(compSeasons_url)
   
-  comp_cont <- httr::content(comp_dat)
-  comp_ids <- comp_cont$compSeasons %>% 
-    purrr::map_dfr(c) %>%
+  comp_cont <- comp_dat %>%
+    httr::content(as = "text") %>%
+    jsonlite::fromJSON(flatten = TRUE)
+  
+  comp_ids <- comp_cont$compSeasons %>%
     dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", .data$name)))
   
   id <- comp_ids$id[comp_ids$season == season]
+  
   if (length(id) < 1) {
-    rlang::warn(glue::glue("Could not find a matching ID to season \"{season}\". Data only available from 2012 onwards"))
+    rlang::warn(glue::glue("Could not find a matching ID to the {comp} for {season}"))
     return(NULL)
   }
   return(id)
