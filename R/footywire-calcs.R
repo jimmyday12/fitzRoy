@@ -105,7 +105,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
     # dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda" # nolint
     load_r_data <- function(fname) {
       tmp <- tempfile(fileext = ".rda")
-      utils::download.file(fname, tmp)
+      utils::download.file(fname, tmp, quiet = TRUE)
       
       load(tmp)
       unlink(tmp)
