@@ -402,6 +402,14 @@ get_footywire_betting_odds <- function(
       stringr::str_trim(.)
   }
 
+  fetch_valid_seasons <- function(){
+    page <- fetch_betting_odds_page(2010)
+    years <- page[[1]] %>% 
+            rvest::html_nodes("option") %>%
+      rvest::html_text() %>%
+      as.numeric()
+  }
+  
   extract_table_rows <- function(page_html, season) {
     data_table_row_selector <- "form table table table tr"
 
@@ -561,7 +569,11 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  betting_dfs <- valid_start_season:valid_end_season %>%
+  valid_seasons <- fetch_valid_seasons()
+  season_range <- valid_start_season:valid_end_season
+  season_range <- season_range[season_range %in% valid_seasons]
+  
+  betting_dfs <- season_range %>%
     purrr::map(fetch_betting_odds_page) %>%
     purrr::map(., ~ do.call(extract_table_rows, .)) %>%
     purrr::map(convert_to_data_frame)
