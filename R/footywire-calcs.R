@@ -530,9 +530,10 @@ get_footywire_betting_odds <- function(
       )
   }
 
+  valid_seasons <- fetch_valid_seasons()
   valid_end_season <- min(
     as.numeric(end_season),
-    as.numeric(lubridate::year(Sys.Date()))
+    max(valid_seasons)
   )
 
   if (is.na(valid_end_season)) {
@@ -552,7 +553,7 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  valid_start_season <- max(as.numeric(start_season), 2010)
+  valid_start_season <- max(as.numeric(start_season), min(valid_seasons))
   valid_start_season <- min(valid_start_season, valid_end_season)
 
   if (is.na(valid_start_season)) {
@@ -569,9 +570,14 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  valid_seasons <- fetch_valid_seasons()
+  
   season_range <- valid_start_season:valid_end_season
   season_range <- season_range[season_range %in% valid_seasons]
+  
+  if(length(season_range) < 1) {
+    rlang::warn("No valid seasons found")
+    return(NA)
+  }
   
   betting_dfs <- season_range %>%
     purrr::map(fetch_betting_odds_page) %>%

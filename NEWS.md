@@ -9,6 +9,7 @@
 * Added new function `fetch_ladder_afl` to return data function from AFL.com.au 
 * Added new `fetch_ladder` generic function to return ladder data
 * Fixed a bug with `get_afl_fixture` that was returning the wrong season if season was before 2012
+* Removes all instances of `rvest::pluck` in preparation for it being depreciated in rvest 1.0.0 [see changelog](https://rvest.tidyverse.org/news/index.html), [@hadley](https://github.com/hadley)
 
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to handle duplicate date/venue combination in the 2020 season without raising error ([#123](https://github.com/jimmyday12/fitzRoy/issues/123), [@cfranklin11](https://github.com/cfranklin11))
