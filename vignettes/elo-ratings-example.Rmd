@@ -80,7 +80,7 @@ head(fixture)
 ```
 
 ## Set ELO parameters
-There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the [PlusSixOne blog](https://plussixoneblog.com/post/my-elo-rating-system-explained/), which uses a similar method. For further reading, I strongly recommend checking out [Matter of Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html) or [The Arc](https://thearcfooty.com/2016/12/29/introducing-the-arcs-ratings-system/) for great explainers on the types of parameters that could be included. 
+There are a range of parameters that we can tweak and include in ELO model. Here we set some basic parameters - you can read a bit more on the [PlusSixOne blog](https://plussixoneblog.com/post/my-elo-rating-system-explained/), which uses a similar method. For further reading, I strongly recommend checking out [Matter of Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-own-team-rating-system.html) for a great explainer on the types of parameters that could be included. 
 
 
 ```{r elo_param, eval=eval_param}

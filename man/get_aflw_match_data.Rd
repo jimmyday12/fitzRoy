@@ -15,7 +15,7 @@ a data frame of data for all available AFLW matches
 }
 \description{
 Retrieves AFLW match data for all available matches. Sources data from
-\url{http://www.afl.com.au/womens/matches/stats}
+\url{https://womens.afl/}
 }
 \examples{
 \dontrun{
