@@ -1,4 +1,4 @@
-# fitzRoy 0.3.2
+# fitzRoy 0.3.3
 
 ## Breaking changes
 * Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) [@cfranklin11](https://github.com/cfranklin11)
