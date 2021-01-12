@@ -4,7 +4,7 @@ author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{AFLM - getting started}
+  %\VignetteIndexEntry{Getting started with AFL Men's data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

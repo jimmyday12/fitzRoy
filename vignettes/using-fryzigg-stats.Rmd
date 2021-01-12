@@ -2,7 +2,7 @@
 title: "Using Fryzigg Stats"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{using-fryzigg-stats}
+  %\VignetteIndexEntry{Using Fryzigg Stats}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

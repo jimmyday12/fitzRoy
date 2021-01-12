@@ -69,7 +69,7 @@
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
+      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
     </li>
   </ul>
 </li>
@@ -94,13 +94,14 @@
 
       
 
-      </header><div class="row">
+      </header><script src="mens-stats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="mens-stats_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="mens-stats_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Getting started with AFL Men’s data</h1>
                         <h4 class="author">Vignette Author</h4>
             
-            <h4 class="date">2020-06-11</h4>
+            <h4 class="date">2021-01-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/mens-stats.Rmd"><code>vignettes/mens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>mens-stats.Rmd</code></div>
@@ -118,10 +119,11 @@
 <h2 class="hasAnchor">
 <a href="#load-packages" class="anchor"></a>Load packages</h2>
 <p>First we need to grab a few packages. If you don’t have any of these, you’ll need to install them.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">elo</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">lubridate</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">fitzRoy</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eheinzen/elo">elo</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy</a></span><span class="op">)</span></code></pre></div>
 <div id="getting-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-data" class="anchor"></a>Getting Data</h3>
@@ -132,78 +134,33 @@
 <a href="#afl-tables-match-results" class="anchor"></a>AFL Tables match results</h3>
 <p>You can access the basic afl tables match results data. This includes all matches from 1897-current. It is generally updated on the day after a round finishes.</p>
 <p>You can access the data directly from the package using <code>match_results</code>. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use <code>get_match_results</code> directly, as this will give you up to date results.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">results</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_match_results.html">get_match_results</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">results</span>)
-<span class="co">#&gt; # A tibble: 6 x 16</span>
-<span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points Away.Team</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 15618 2020-03-21 R1    Adelaide          11            5          71 Sydney   </span>
-<span class="co">#&gt; 2 15619 2020-03-21 R1    GWS               17            3         105 Geelong  </span>
-<span class="co">#&gt; 3 15620 2020-03-21 R1    Gold Coa…          4            5          29 Port Ade…</span>
-<span class="co">#&gt; 4 15621 2020-03-22 R1    North Me…          8            8          56 St Kilda </span>
-<span class="co">#&gt; 5 15622 2020-03-22 R1    Hawthorn          14            6          90 Brisbane…</span>
-<span class="co">#&gt; # … with 1 more row, and 8 more variables: Away.Goals &lt;int&gt;,</span>
-<span class="co">#&gt; #   Away.Behinds &lt;int&gt;, Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;,</span>
-<span class="co">#&gt; #   Season &lt;dbl&gt;, Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_match_results.html">get_match_results</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <p>You can also convert this format into a more analysis friendly “long” format using the helper function <code>convert_results</code>.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">results_long</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/convert_results.html">convert_results</a></span>(<span class="no">results</span>)
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results_long</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/convert_results.html">convert_results</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">results_long</span>)
-<span class="co">#&gt; # A tibble: 6 x 13</span>
-<span class="co">#&gt;    Game Date       Round Venue Margin Season Round.Type Round.Number Status</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; </span>
-<span class="co">#&gt; 1     1 1897-05-08 R1    Brun…     33   1897 Regular               1 Home  </span>
-<span class="co">#&gt; 2     1 1897-05-08 R1    Brun…    -33   1897 Regular               1 Away  </span>
-<span class="co">#&gt; 3     2 1897-05-08 R1    Vict…     25   1897 Regular               1 Home  </span>
-<span class="co">#&gt; 4     2 1897-05-08 R1    Vict…    -25   1897 Regular               1 Away  </span>
-<span class="co">#&gt; 5     3 1897-05-08 R1    Cori…    -23   1897 Regular               1 Home  </span>
-<span class="co">#&gt; # … with 1 more row, and 4 more variables: Behinds &lt;chr&gt;, Goals &lt;chr&gt;,</span>
-<span class="co">#&gt; #   Points &lt;chr&gt;, Team &lt;chr&gt;</span></pre></body></html></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">results_long</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="afl-tables-player-results" class="section level3">
 <h3 class="hasAnchor">
 <a href="#afl-tables-player-results" class="anchor"></a>AFL Tables player results</h3>
 <p>A new function will return all detailed player stats from <a href="https://afltables.com">AFLtables</a>. Primarily, the easiest way to use this is simply to call <code>get_afltables_stats</code> with your required <code>start_date</code> and <code>end_date</code>.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">stats</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_afltables_stats.html">get_afltables_stats</a></span>(<span class="kw">start_date</span> <span class="kw">=</span> <span class="st">"2018-01-01"</span>, <span class="kw">end_date</span> <span class="kw">=</span> <span class="st">"2018-06-01"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span>(<span class="no">stats</span>)
-<span class="co">#&gt; # A tibble: 6 x 59</span>
-<span class="co">#&gt;   Season Round Date       Local.start.time Venue Attendance Home.team  HQ1G</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;date&gt;                &lt;int&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;</span>
-<span class="co">#&gt; 1   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span>
-<span class="co">#&gt; 2   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span>
-<span class="co">#&gt; 3   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span>
-<span class="co">#&gt; 4   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span>
-<span class="co">#&gt; 5   2018 10    2018-05-27             1440 Pert…      37575 Fremantle     3</span>
-<span class="co">#&gt; # … with 1 more row, and 51 more variables: HQ1B &lt;int&gt;, HQ2G &lt;int&gt;, HQ2B &lt;int&gt;,</span>
-<span class="co">#&gt; #   HQ3G &lt;int&gt;, HQ3B &lt;int&gt;, HQ4G &lt;int&gt;, HQ4B &lt;int&gt;, Home.score &lt;int&gt;,</span>
-<span class="co">#&gt; #   Away.team &lt;chr&gt;, AQ1G &lt;int&gt;, AQ1B &lt;int&gt;, AQ2G &lt;int&gt;, AQ2B &lt;int&gt;,</span>
-<span class="co">#&gt; #   AQ3G &lt;int&gt;, AQ3B &lt;int&gt;, AQ4G &lt;int&gt;, AQ4B &lt;int&gt;, Away.score &lt;int&gt;,</span>
-<span class="co">#&gt; #   First.name &lt;chr&gt;, Surname &lt;chr&gt;, ID &lt;dbl&gt;, Jumper.No. &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Playing.for &lt;chr&gt;, Kicks &lt;dbl&gt;, Marks &lt;dbl&gt;, Handballs &lt;dbl&gt;, Goals &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Behinds &lt;dbl&gt;, Hit.Outs &lt;dbl&gt;, Tackles &lt;dbl&gt;, Rebounds &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Inside.50s &lt;dbl&gt;, Clearances &lt;dbl&gt;, Clangers &lt;dbl&gt;, Frees.For &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Frees.Against &lt;dbl&gt;, Brownlow.Votes &lt;dbl&gt;, Contested.Possessions &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Uncontested.Possessions &lt;dbl&gt;, Contested.Marks &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Marks.Inside.50 &lt;dbl&gt;, One.Percenters &lt;dbl&gt;, Bounces &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Goal.Assists &lt;dbl&gt;, Time.on.Ground.. &lt;dbl&gt;, Substitute &lt;int&gt;,</span>
-<span class="co">#&gt; #   Umpire.1 &lt;chr&gt;, Umpire.2 &lt;chr&gt;, Umpire.3 &lt;chr&gt;, Umpire.4 &lt;chr&gt;,</span>
-<span class="co">#&gt; #   group_id &lt;int&gt;</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_afltables_stats.html">get_afltables_stats</a></span><span class="op">(</span>start_date <span class="op">=</span> <span class="st">"2018-01-01"</span>, end_date <span class="op">=</span> <span class="st">"2018-06-01"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">stats</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="fixture" class="section level3">
 <h3 class="hasAnchor">
 <a href="#fixture" class="anchor"></a>Fixture</h3>
 <p>You can access the fixture using <code>get_fixture</code> function. This will download the fixture for the current calendar year by default.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">fixture</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_fixture.html">get_fixture</a></span>()</pre></body></html></div>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">fixture</span>)
-<span class="co">#&gt; # A tibble: 6 x 7</span>
-<span class="co">#&gt;   Date                Season Season.Game Round Home.Team    Away.Team   Venue   </span>
-<span class="co">#&gt;   &lt;dttm&gt;               &lt;dbl&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;   </span>
-<span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton      Richmond    M.C.G.  </span>
-<span class="co">#&gt; 2 2019-03-22 19:50:00   2019           1     1 Collingwood  Geelong     M.C.G.  </span>
-<span class="co">#&gt; 3 2019-03-23 13:45:00   2019           1     1 Melbourne    Port Adela… M.C.G.  </span>
-<span class="co">#&gt; 4 2019-03-23 16:05:00   2019           1     1 Adelaide     Hawthorn    Adelaid…</span>
-<span class="co">#&gt; 5 2019-03-23 19:20:00   2019           1     1 Brisbane Li… West Coast  Gabba   </span>
-<span class="co">#&gt; # … with 1 more row</span></pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_fixture.html">get_fixture</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="footywire-advanced-player-stats" class="section level3">
 <h3 class="hasAnchor">
@@ -211,37 +168,20 @@
 <p>Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.</p>
 <p><em>Note - as of v0.2.0, all internal data has been removed from the package. Please use the relevant functions instead.</em></p>
 <p>The following code no longer works.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co">## Show the top of player_stats</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="kw pkg">fitzRoy</span><span class="kw ns">::</span><span class="no">player_stats</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Show the top of player_stats</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fu">fitzRoy</span><span class="fu">::</span><span class="va">player_stats</span><span class="op">)</span></code></pre></div>
 <p>We can also use the <code>update_footywire_stats</code> function to get the most up to date data. This will merge data from 2010-current with any new data points.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co">## Update footywire data</span>
-<span class="no">dat</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/update_footywire_stats.html">update_footywire_stats</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Update footywire data</span>
+<span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/update_footywire_stats.html">update_footywire_stats</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, we can just return one game if we know it’s ID. This can be found by looking at the URL of the match you want. For example, the ID of the 2019 AFL Grand Final is 9927.</p>
 <p><a href="https://www.footywire.com/afl/footy/ft_match_statistics?mid=9927" class="uri">https://www.footywire.com/afl/footy/ft_match_statistics?mid=9927</a></p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="co">## Update footywire data</span>
-<span class="no">stats_gf</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_footywire_stats.html">get_footywire_stats</a></span>(<span class="kw">ids</span> <span class="kw">=</span> <span class="fl">9927</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">stats_gf</span>)
-<span class="co">#&gt;         Date Season       Round Venue          Player     Team Opposition</span>
-<span class="co">#&gt; 1 2019-09-28   2019 Grand Final   MCG    Bachar Houli Richmond        GWS</span>
-<span class="co">#&gt; 2 2019-09-28   2019 Grand Final   MCG   Dustin Martin Richmond        GWS</span>
-<span class="co">#&gt; 3 2019-09-28   2019 Grand Final   MCG    Dion Prestia Richmond        GWS</span>
-<span class="co">#&gt; 4 2019-09-28   2019 Grand Final   MCG   Nick Vlastuin Richmond        GWS</span>
-<span class="co">#&gt; 5 2019-09-28   2019 Grand Final   MCG Marlion Pickett Richmond        GWS</span>
-<span class="co">#&gt; 6 2019-09-28   2019 Grand Final   MCG   Shane Edwards Richmond        GWS</span>
-<span class="co">#&gt;   Status Match_id CP UP ED   DE CM GA MI5 One.Percenters BO CCL SCL SI  MG TO</span>
-<span class="co">#&gt; 1   Home     9927  9 17 20 76.9  0  0   0              5  2   0   1  6 317  2</span>
-<span class="co">#&gt; 2   Home     9927 12 11 19 86.4  1  2   2              2  3   0   3  8 372  5</span>
-<span class="co">#&gt; 3   Home     9927  7 14 12 54.5  0  1   0              2  0   0   4  3 366  6</span>
-<span class="co">#&gt; 4   Home     9927  3 18 20 90.9  1  0   0              5  0   0   0  5 570  2</span>
-<span class="co">#&gt; 5   Home     9927  8 14 14 63.6  0  0   1              0  1   2   1  9 559  5</span>
-<span class="co">#&gt; 6   Home     9927 11  9 17 81.0  0  1   0              2  0   2   4  6 268  3</span>
-<span class="co">#&gt;   ITC T5 TOG  K HB  D  M G B T HO GA1 I50 CL CG R50 FF FA  AF  SC</span>
-<span class="co">#&gt; 1   9  0  96 14 12 26  7 0 0 6  0   0   0  1  1   6  3  0 114 120</span>
-<span class="co">#&gt; 2   0  1  86 11 11 22  4 4 0 1  0   2   4  3  4   0  2  2  91 137</span>
-<span class="co">#&gt; 3   1  0  87 19  3 22  1 0 1 3  0   1   2  4  5   1  1  2  74  86</span>
-<span class="co">#&gt; 4   5  0  89 17  5 22 12 0 0 3  0   0   2  0  1   5  0  1 106 102</span>
-<span class="co">#&gt; 5   3  0  66 13  9 22  2 1 0 1  0   0   8  3  0   1  0  0  73  96</span>
-<span class="co">#&gt; 6   4  1  78  9 12 21  2 0 0 6  0   1   5  6  3   3  2  1  80  98</span></pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## Update footywire data</span>
+<span class="va">stats_gf</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_footywire_stats.html">get_footywire_stats</a></span><span class="op">(</span>ids <span class="op">=</span> <span class="fl">9927</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">stats_gf</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="weather" class="section level3">
 <h3 class="hasAnchor">
@@ -252,101 +192,38 @@
 <h3 class="hasAnchor">
 <a href="#squiggle-data" class="anchor"></a>Squiggle Data</h3>
 <p>You can access data from the <a href="https://api.squiggle.com.au">Squiggle API</a> where the tips of well known AFL tipping models are collected. See full instructions on the above link.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># You can get the sources</span>
-<span class="no">sources</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"sources"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">sources</span>)
-<span class="co">#&gt;                    name id                                url</span>
-<span class="co">#&gt; 1              Squiggle  1      https://live.squiggle.com.au/</span>
-<span class="co">#&gt; 2               The Arc  2           https://thearcfooty.com/</span>
-<span class="co">#&gt; 3        Figuring Footy  3          http://figuringfooty.com/</span>
-<span class="co">#&gt; 4       Matter of Stats  4      http://www.matterofstats.com/</span>
-<span class="co">#&gt; 5               Punters  5                                   </span>
-<span class="co">#&gt; 6 Footy Maths Institute  6 https://footymaths.blogspot.com.au</span>
-<span class="co">#&gt;                                                          icon</span>
-<span class="co">#&gt; 1                   /wp-content/uploads/2017/02/logo7-250.png</span>
-<span class="co">#&gt; 2        /wp-content/themes/squiggle/assets/images/TheArc.jpg</span>
-<span class="co">#&gt; 3 /wp-content/themes/squiggle/assets/images/FiguringFooty.gif</span>
-<span class="co">#&gt; 4           /wp-content/themes/squiggle/assets/images/MoS.png</span>
-<span class="co">#&gt; 5                                                            </span>
-<span class="co">#&gt; 6           /wp-content/themes/squiggle/assets/images/FMI.png</span></pre></body></html></div>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="co"># Get all tips</span>
-<span class="no">tips</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tips</span>)
-<span class="co">#&gt;   ateamid          source         venue confidence              tip correct</span>
-<span class="co">#&gt; 1      14        Squiggle        M.C.G.       50.0         Richmond       1</span>
-<span class="co">#&gt; 2      14  Figuring Footy        M.C.G.       58.0         Richmond       1</span>
-<span class="co">#&gt; 3      14 Matter of Stats        M.C.G.       56.7          Carlton       0</span>
-<span class="co">#&gt; 4      18 Matter of Stats        M.C.G.       62.7 Western Bulldogs       1</span>
-<span class="co">#&gt; 5      18        Squiggle        M.C.G.       62.0 Western Bulldogs       1</span>
-<span class="co">#&gt; 6       9        Squiggle Adelaide Oval       50.0         Adelaide       1</span>
-<span class="co">#&gt;     err hconfidence                  ateam       hteam round sourceid margin</span>
-<span class="co">#&gt; 1 42.00        50.0               Richmond     Carlton     1        1   1.00</span>
-<span class="co">#&gt; 2    NA        42.0               Richmond     Carlton     1        3     NA</span>
-<span class="co">#&gt; 3 48.39        56.7               Richmond     Carlton     1        4   5.39</span>
-<span class="co">#&gt; 4  3.69        37.3       Western Bulldogs Collingwood     1        4  10.31</span>
-<span class="co">#&gt; 5  3.00        38.0       Western Bulldogs Collingwood     1        1  17.00</span>
-<span class="co">#&gt; 6 53.00        50.0 Greater Western Sydney    Adelaide     1        1   3.00</span>
-<span class="co">#&gt;               updated    bits                date hteamid year tipteamid gameid</span>
-<span class="co">#&gt; 1 2017-07-11 13:59:46  0.0000 2017-03-23 19:20:00       3 2017        14      1</span>
-<span class="co">#&gt; 2 2017-04-10 12:18:02  0.2141 2017-03-23 19:20:00       3 2017        14      1</span>
-<span class="co">#&gt; 3 2017-07-11 13:59:46 -0.2076 2017-03-23 19:20:00       3 2017         3      1</span>
-<span class="co">#&gt; 4 2017-07-11 13:59:46  0.3265 2017-03-24 19:50:00       4 2017        18      2</span>
-<span class="co">#&gt; 5 2017-07-11 13:59:46  0.3103 2017-03-24 19:50:00       4 2017        18      2</span>
-<span class="co">#&gt; 6 2017-07-11 13:59:46  0.0000 2017-03-26 15:20:00       1 2017         1      8</span></pre></body></html></div>
-<div class="sourceCode" id="cb17"><html><body><pre class="r"><span class="co"># Get` just tips from round 1, 2018</span>
-<span class="no">tips_round</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="kw">round</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">year</span> <span class="kw">=</span> <span class="fl">2018</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tips_round</span>)
-<span class="co">#&gt;        tip correct                source ateamid     venue confidence sourceid</span>
-<span class="co">#&gt; 1 Adelaide       0              Squiggle       1 Docklands      56.00        1</span>
-<span class="co">#&gt; 2 Adelaide       0               The Arc       1 Docklands      59.80        2</span>
-<span class="co">#&gt; 3 Adelaide       0       Matter of Stats       1 Docklands      59.50        4</span>
-<span class="co">#&gt; 4 Essendon       1               Punters       1 Docklands      52.08        5</span>
-<span class="co">#&gt; 5 Adelaide       0 Footy Maths Institute       1 Docklands      66.00        6</span>
-<span class="co">#&gt; 6 Adelaide       0            PlusSixOne       1 Docklands      55.16        7</span>
-<span class="co">#&gt;   hconfidence   err    ateam round    hteam    bits                date margin</span>
-<span class="co">#&gt; 1       44.00 23.00 Adelaide     1 Essendon -0.1844 2018-03-23 19:50:00  11.00</span>
-<span class="co">#&gt; 2       40.20 21.00 Adelaide     1 Essendon -0.3147 2018-03-23 19:50:00   9.00</span>
-<span class="co">#&gt; 3       40.50 21.78 Adelaide     1 Essendon -0.3040 2018-03-23 19:50:00   9.78</span>
-<span class="co">#&gt; 4       52.08    NA Adelaide     1 Essendon  0.0588 2018-03-23 19:50:00     NA</span>
-<span class="co">#&gt; 5       34.00 33.00 Adelaide     1 Essendon -0.5564 2018-03-23 19:50:00  21.00</span>
-<span class="co">#&gt; 6       44.84 20.00 Adelaide     1 Essendon -0.1571 2018-03-23 19:50:00   8.00</span>
-<span class="co">#&gt;               updated tipteamid gameid hteamid year</span>
-<span class="co">#&gt; 1 2018-03-23 22:54:38         1    373       5 2018</span>
-<span class="co">#&gt; 2 2018-03-23 22:54:38         1    373       5 2018</span>
-<span class="co">#&gt; 3 2018-03-23 22:54:38         1    373       5 2018</span>
-<span class="co">#&gt; 4 2018-03-23 22:54:38         5    373       5 2018</span>
-<span class="co">#&gt; 5 2018-03-23 22:54:38         1    373       5 2018</span>
-<span class="co">#&gt; 6 2018-03-23 22:54:38         1    373       5 2018</span></pre></body></html></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># You can get the sources</span>
+<span class="va">sources</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span><span class="op">(</span><span class="st">"sources"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">sources</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get all tips</span>
+<span class="va">tips</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tips</span><span class="op">)</span>  </code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get` just tips from round 1, 2018</span>
+<span class="va">tips_round</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_squiggle_data.html">get_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span>, round <span class="op">=</span> <span class="fl">1</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">tips_round</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="create-ladder" class="section level3">
 <h3 class="hasAnchor">
 <a href="#create-ladder" class="anchor"></a>Create Ladder</h3>
 <p>You can recreate the ladder for every round of the home and away season since 1897. You can either pass in a dataframe extracted using <code>get_match_results</code> (ideal as <code>get_match_results</code> doesn’t need to be executed every time <code>return_ladder</code> is called):</p>
-<div class="sourceCode" id="cb19"><html><body><pre class="r"><span class="no">ladder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/return_ladder.html">return_ladder</a></span>(<span class="kw">match_results_df</span> <span class="kw">=</span> <span class="no">results</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ladder</span>)
-<span class="co">#&gt; # A tibble: 6 x 8</span>
-<span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1   1897 Fitz…            1             4        49            16      3.06 </span>
-<span class="co">#&gt; 2   1897 Coll…            1             4        41            16      2.56 </span>
-<span class="co">#&gt; 3   1897 Esse…            1             4        47            24      1.96 </span>
-<span class="co">#&gt; 4   1897 Melb…            1             4        44            27      1.63 </span>
-<span class="co">#&gt; 5   1897 Sydn…            1             0        27            44      0.614</span>
-<span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></pre></body></html></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ladder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/return_ladder.html">return_ladder</a></span><span class="op">(</span>match_results_df <span class="op">=</span> <span class="va">results</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ladder</span><span class="op">)</span></code></pre></div>
 <p>Or leave the <code>match_results_df</code> argument blank (which will execute the <code><a href="../reference/get_match_results.html">get_match_results()</a></code> function internally):</p>
-<div class="sourceCode" id="cb21"><html><body><pre class="r"><span class="no">ladder</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/return_ladder.html">return_ladder</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ladder</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/return_ladder.html">return_ladder</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Alternatively, we can also return the ladder for any round, or any season, or a combination of both round and season:</p>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="no">ladder_round</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/return_ladder.html">return_ladder</a></span>(<span class="kw">match_results_df</span> <span class="kw">=</span> <span class="no">results</span>, <span class="kw">season_round</span> <span class="kw">=</span> <span class="fl">15</span>, <span class="kw">season</span> <span class="kw">=</span> <span class="fl">2018</span>)</pre></body></html></div>
-<div class="sourceCode" id="cb23"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ladder_round</span>)
-<span class="co">#&gt; # A tibble: 6 x 8</span>
-<span class="co">#&gt;   Season Team  Round.Number Season.Points Score.For Score.Against Percentage</span>
-<span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;        &lt;int&gt;         &lt;dbl&gt;     &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;</span>
-<span class="co">#&gt; 1   2018 Rich…           15            44      1358          1004       1.35</span>
-<span class="co">#&gt; 2   2018 Coll…           15            40      1328          1089       1.22</span>
-<span class="co">#&gt; 3   2018 West…           15            40      1290          1066       1.21</span>
-<span class="co">#&gt; 4   2018 Sydn…           15            40      1215          1006       1.21</span>
-<span class="co">#&gt; 5   2018 Port…           15            40      1204          1047       1.15</span>
-<span class="co">#&gt; # … with 1 more row, and 1 more variable: Ladder.Position &lt;int&gt;</span></pre></body></html></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ladder_round</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/return_ladder.html">return_ladder</a></span><span class="op">(</span>match_results_df <span class="op">=</span> <span class="va">results</span>, season_round <span class="op">=</span> <span class="fl">15</span>, season <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">ladder_round</span><span class="op">)</span></code></pre></div>
 <hr>
 </div>
 </div>
@@ -367,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

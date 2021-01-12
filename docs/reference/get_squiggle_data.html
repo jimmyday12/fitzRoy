@@ -114,7 +114,7 @@
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
+      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
     </li>
   </ul>
 </li>
@@ -151,10 +151,10 @@
     <p>Use <code>get_squiggle_data</code> to access the <a href='https://squiggle.com.au'>Squiggle</a> API. See instructions at <a href='https://api.squiggle.com.au'>api.squiggle.com.au</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_squiggle_data</span>(
-  <span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>, <span class='st'>"ladder"</span>, <span class='st'>"standings"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>get_squiggle_data</span><span class='op'>(</span>
+  query <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>, <span class='st'>"ladder"</span>, <span class='st'>"standings"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,16 +185,17 @@
 <p>For full instructions, see <a href='https://api.squiggle.com.au'>api.squiggle.com.au</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
 <span class='co'># Return a list of the sources, with ID's</span>
-<span class='no'>sources</span> <span class='kw'>&lt;-</span> <span class='fu'>get_squiggle_data</span>(<span class='st'>"sources"</span>)
+<span class='va'>sources</span> <span class='op'>&lt;-</span> <span class='fu'>get_squiggle_data</span><span class='op'>(</span><span class='st'>"sources"</span><span class='op'>)</span>
 
 <span class='co'># Get tips for Round 1, 2018</span>
-<span class='no'>tips</span> <span class='kw'>&lt;-</span> <span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"tips"</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
+<span class='va'>tips</span> <span class='op'>&lt;-</span> <span class='fu'>get_squiggle_data</span><span class='op'>(</span>query <span class='op'>=</span> <span class='st'>"tips"</span>, round <span class='op'>=</span> <span class='fl'>1</span>, year <span class='op'>=</span> <span class='fl'>2018</span><span class='op'>)</span>
 
 <span class='co'># Get tips from Squiggle 2019</span>
-<span class='no'>squiggle</span> <span class='kw'>&lt;-</span> <span class='fu'>get_squiggle_data</span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"tips"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2019</span>)
-}</div></pre>
+<span class='va'>squiggle</span> <span class='op'>&lt;-</span> <span class='fu'>get_squiggle_data</span><span class='op'>(</span>query <span class='op'>=</span> <span class='st'>"tips"</span>, source <span class='op'>=</span> <span class='fl'>1</span>, year <span class='op'>=</span> <span class='fl'>2019</span><span class='op'>)</span>
+<span class='op'>}</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -210,7 +211,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

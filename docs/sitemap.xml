@@ -4,10 +4,13 @@
     <loc>https://jimmyday12.github.io/fitzRoy//index.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/calculate_round.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/convert_results.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/convert_results.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_ladder.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_ladder_afl.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fitzRoy-package.html</loc>
@@ -17,6 +20,12 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afl_colour_palettes.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afl_cookie.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afl_fixture.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_stats.html</loc>
@@ -37,6 +46,9 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_match_data.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_player_stats.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_round_data.html</loc>
   </url>
   <url>
@@ -47,6 +59,9 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_footywire_betting_odds.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_footywire_match_results.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_footywire_stats.html</loc>

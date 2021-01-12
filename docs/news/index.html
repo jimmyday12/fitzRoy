@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Changelog • fitzRoy</title>
+<title>News • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Changelog" />
+<meta property="og:title" content="News" />
 
 
 
@@ -68,7 +68,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-news">
+    <div class="container template-news-index">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -113,7 +113,7 @@
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Womens' AFL Stats</a>
+      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
     </li>
   </ul>
 </li>
@@ -139,303 +139,19 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-      <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <h1>Release notes</h1>
     </div>
-
-    <div id="fitzroy-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added AFL stats <a href="https://github.com/Fryzigg">@fryzigg</a>
-</li>
-<li>Added team colours <a href="https://github.com/Fryzigg">@fryzigg</a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-032" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.2">
-<a href="#fitzroy-032" class="anchor"></a>fitzRoy 0.3.2<small> 2020-05-23 </small>
-</h1>
-<div id="general-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-changes" class="anchor"></a>General changes</h2>
-<ul>
-<li>The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.</li>
-</ul>
-</div>
-<div id="bug-fixes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
-<ul>
-<li>Fixed <code>get_footywire_betting_odds</code> to return an empty data frame when only future seasons are requested rather than raising an error (<a href="https://github.com/jimmyday12/fitzRoy/issues/112"><a href='https://github.com/jimmyday12/fitzRoy/issues/112'>#112</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
-<li>Fixed issue with afltables data that caused issues with home/away team in drawn finals matches <a href="https://github.com/jimmyday12/fitzRoy/issues/116"><a href='https://github.com/jimmyday12/fitzRoy/issues/116'>#116</a></a>
-</li>
-<li>Fixed issue with duplate rows in footywire data <a href="https://github.com/jimmyday12/fitzRoy/issues/115"><a href='https://github.com/jimmyday12/fitzRoy/issues/115'>#115</a></a>
-</li>
-</ul>
-</div>
-</div>
-    <div id="fitzroy-031" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.1">
-<a href="#fitzroy-031" class="anchor"></a>fitzRoy 0.3.1<small> 2020-01-21 </small>
-</h1>
-<ul>
-<li>Updating vignettes to use internal data rather than downloading from the internet</li>
-</ul>
-</div>
-    <div id="fitzroy-030" class="section level1">
-<h1 class="page-header" data-toc-text="0.3.0">
-<a href="#fitzroy-030" class="anchor"></a>fitzRoy 0.3.0<small> 2020-01-08 </small>
-</h1>
-<div id="breaking-changes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
-<ul>
-<li>Addition of <code>replace_venues</code> - changes venue names for all data sources to match AFL Tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/15"><a href='https://github.com/jimmyday12/fitzRoy/issues/15'>#15</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
-</ul>
-</div>
-<div id="bug-fixes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
-<ul>
-<li>Updated <code>womens-stats</code> vignette to prevent it from running chunks if the cookie had failed.</li>
-<li>Fixed incorrect round numbers for fixture and betting data from <code>footywire.com</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/93"><a href='https://github.com/jimmyday12/fitzRoy/issues/93'>#93</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/95"><a href='https://github.com/jimmyday12/fitzRoy/issues/95'>#95</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/102"><a href='https://github.com/jimmyday12/fitzRoy/issues/102'>#102</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/104"><a href='https://github.com/jimmyday12/fitzRoy/issues/104'>#104</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/106"><a href='https://github.com/jimmyday12/fitzRoy/issues/106'>#106</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
-</ul>
-</div>
-</div>
-    <div id="fitzroy-020" class="section level1">
-<h1 class="page-header" data-toc-text="0.2.0">
-<a href="#fitzroy-020" class="anchor"></a>fitzRoy 0.2.0<small> 2019-11-30 </small>
-</h1>
-<p>This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported.</p>
-<div id="breaking-changes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
-<ul>
-<li>Removal of included weather data - deprecated</li>
-<li>Removal of included player data - please use <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> or <code>update_afltables_stats()</code>
-</li>
-<li>Removal of included match data - please use <code><a href="../reference/get_match_results.html">get_match_results()</a></code>
-</li>
-<li>Removal of included fixture data - please use <code><a href="../reference/get_fixture.html">get_fixture()</a></code>
-</li>
-</ul>
-</div>
-<div id="new-features" class="section level2">
-<h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
-<ul>
-<li>Added <code>get_footywire_betting_odds</code> function that returns basic match and betting data from www.footywire.com. (<a href="https://github.com/jimmyday12/fitzRoy/issues/10"><a href='https://github.com/jimmyday12/fitzRoy/issues/10'>#10</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
-</ul>
-</div>
-<div id="general-changes-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#general-changes-1" class="anchor"></a>General changes</h2>
-<ul>
-<li>Separated out data to be hosted on it’s own repo at <a href="https://github.com/jimmyday12/fitzroy_data" class="uri">https://github.com/jimmyday12/fitzroy_data</a>
-</li>
-<li>General tidy up in preparation for CRAN submission</li>
-</ul>
-</div>
-</div>
-    <div id="fitzroy-0113" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.13">
-<a href="#fitzroy-0113" class="anchor"></a>fitzRoy 0.1.13<small> Unreleased </small>
-</h1>
-<ul>
-<li>Updated Squiggle API to accept new parameters <code>ladder</code>, <code>standings</code> and <code>complete</code>. (<a href="https://github.com/jimmyday12/fitzRoy/issues/73"><a href='https://github.com/jimmyday12/fitzRoy/issues/73'>#73</a></a>)</li>
-<li>Added parameter to <code>get_fixture</code> to allow Date to be formatted the same as <code>get_results</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/58"><a href='https://github.com/jimmyday12/fitzRoy/issues/58'>#58</a></a>)</li>
-<li>Removed duplicate column in <code>player_data</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/59"><a href='https://github.com/jimmyday12/fitzRoy/issues/59'>#59</a></a>)</li>
-</ul>
-</div>
-    <div id="fitzroy-0112" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.12">
-<a href="#fitzroy-0112" class="anchor"></a>fitzRoy 0.1.12<small> Unreleased </small>
-</h1>
-<ul>
-<li>Fixed an error with player ID’s for 2019 season where new data was breaking an internal function (<a href="https://github.com/jimmyday12/fitzRoy/issues/67"><a href='https://github.com/jimmyday12/fitzRoy/issues/67'>#67</a></a>)</li>
-<li>Fixed an error where Geelong v Melbourne game wasn’t getting parsed properly (<a href="https://github.com/jimmyday12/fitzRoy/issues/68"><a href='https://github.com/jimmyday12/fitzRoy/issues/68'>#68</a></a>)</li>
-<li>Fixed an error with data on github not being up to date (<a href="https://github.com/jimmyday12/fitzRoy/issues/69"><a href='https://github.com/jimmyday12/fitzRoy/issues/69'>#69</a></a>)</li>
-</ul>
-</div>
-    <div id="fitzroy-0111" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.11">
-<a href="#fitzroy-0111" class="anchor"></a>fitzRoy 0.1.11<small> Unreleased </small>
-</h1>
-<ul>
-<li>Updated <code><a href="../reference/get_aflw_cookie.html">get_aflw_cookie()</a></code> to align with change in site API (<a href="https://github.com/jimmyday12/fitzRoy/issues/62"><a href='https://github.com/jimmyday12/fitzRoy/issues/62'>#62</a></a>)</li>
-</ul>
-</div>
-    <div id="fitzroy-0110" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.10">
-<a href="#fitzroy-0110" class="anchor"></a>fitzRoy 0.1.10<small> Unreleased </small>
-</h1>
-<ul>
-<li>footywire scrapers no longer fail due to footywire.com updating their site (<a href="https://github.com/jimmyday12/fitzRoy/issues/61"><a href='https://github.com/jimmyday12/fitzRoy/issues/61'>#61</a></a>)</li>
-</ul>
-</div>
-    <div id="fitzroy-019" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.9">
-<a href="#fitzroy-019" class="anchor"></a>fitzRoy 0.1.9<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<code><a href="../reference/get_fixture.html">get_fixture()</a></code> now handles inconsistent assignment of Wednesday games and a related issue for some Round 1 matches where games were being assigned to the wrong round (<a href="https://github.com/jimmyday12/fitzRoy/issues/54"><a href='https://github.com/jimmyday12/fitzRoy/issues/54'>#54</a></a>
-</li>
-<li>
-<code><a href="../reference/get_fixture.html">get_fixture()</a></code> now handles the canceled match in round 14, 2015 (<a href="https://github.com/jimmyday12/fitzRoy/issues/56"><a href='https://github.com/jimmyday12/fitzRoy/issues/56'>#56</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
-<li>
-<code><a href="../reference/get_aflw_round_data.html">get_aflw_round_data()</a></code> now correctly loads data and passes all tests (<a href="https://github.com/jimmyday12/fitzRoy/issues/52"><a href='https://github.com/jimmyday12/fitzRoy/issues/52'>#52</a></a> <a href="https://github.com/jimmyday12/fitzRoy/issues/53"><a href='https://github.com/jimmyday12/fitzRoy/issues/53'>#53</a></a>)</li>
-<li>
-<code>get_afltables_stats</code> no longer includes erroneous warning messages <a href="https://github.com/jimmyday12/fitzRoy/issues/44"><a href='https://github.com/jimmyday12/fitzRoy/issues/44'>#44</a></a>
-</li>
-<li>updated the included <code>fixture</code> data to 2019 <a href="https://github.com/jimmyday12/fitzRoy/issues/50"><a href='https://github.com/jimmyday12/fitzRoy/issues/50'>#50</a></a>
-</li>
-<li>added <a href="https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html">new vignette</a> for doing an ELO model using <code>fitzRoy</code> <a href="https://github.com/jimmyday12/fitzRoy/issues/43"><a href='https://github.com/jimmyday12/fitzRoy/issues/43'>#43</a></a>
-</li>
-<li>
-<code>get_afltables_stats</code> now returns one name per player. For players where their name changes on afltables.com, we always return the first instance of their spelling <a href="https://github.com/jimmyday12/fitzRoy/issues/47"><a href='https://github.com/jimmyday12/fitzRoy/issues/47'>#47</a></a>
-</li>
-<li>
-<code>get_afltables_stats</code> now returns consistent finals names for <code>round</code>. Full names are abbreviated to be consistent with past data <a href="https://github.com/jimmyday12/fitzRoy/issues/45"><a href='https://github.com/jimmyday12/fitzRoy/issues/45'>#45</a></a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-018" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.8">
-<a href="#fitzroy-018" class="anchor"></a>fitzRoy 0.1.8<small> Unreleased </small>
-</h1>
-<ul>
-<li>new feature - Woman’s Stats. New set of functions for Woman’s data. Read the vignette <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">here</a> - many thanks to <a href="https://github.com/OscarLane">OscarLane</a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-017" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.7">
-<a href="#fitzroy-017" class="anchor"></a>fitzRoy 0.1.7<small> Unreleased </small>
-</h1>
-<ul>
-<li>fixed bug for dependency of <code>stringr</code> package. Now updated to ensure version 1.3.1 or greater <a href="https://github.com/jimmyday12/fitzRoy/issues/33"><a href='https://github.com/jimmyday12/fitzRoy/issues/33'>#33</a></a>
-</li>
-<li>fixed bug with round number for finals <a href="https://github.com/jimmyday12/fitzRoy/issues/40"><a href='https://github.com/jimmyday12/fitzRoy/issues/40'>#40</a></a>
-</li>
-<li>added docker support, thanks to Matthew Erbs <a href="https://github.com/jimmyday12/fitzRoy/issues/13"><a href='https://github.com/jimmyday12/fitzRoy/issues/13'>#13</a></a>
-</li>
-<li>fixed bug with <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> where it was returning a grouped <code>tibble</code>. Thanks to <a href="https://github.com/tyluRp">tyluRp</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/38"><a href='https://github.com/jimmyday12/fitzRoy/issues/38'>#38</a></a>
-</li>
-<li>added a basic vignette. Thanks to <a href="https://github.com/Lingtax">@Lingtax</a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-016" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.6">
-<a href="#fitzroy-016" class="anchor"></a>fitzRoy 0.1.6<small> Unreleased </small>
-</h1>
-<ul>
-<li>fixed bug data was missing for Adelaide <a href="https://github.com/jimmyday12/fitzRoy/issues/27"><a href='https://github.com/jimmyday12/fitzRoy/issues/27'>#27</a></a>
-</li>
-<li>fixed bug where 2017 elimination final was parsing incorrectly due to extra time <a href="https://github.com/jimmyday12/fitzRoy/issues/28"><a href='https://github.com/jimmyday12/fitzRoy/issues/28'>#28</a></a>
-</li>
-<li>fixed bug where the default <code>start_date</code> missed Round 1, 1987 <a href="https://github.com/jimmyday12/fitzRoy/issues/29"><a href='https://github.com/jimmyday12/fitzRoy/issues/29'>#29</a></a>
-</li>
-<li>fixed bug where certain games from 2018 that had ‘notes’ were being parsed incorrectly <a href="https://github.com/jimmyday12/fitzRoy/issues/30"><a href='https://github.com/jimmyday12/fitzRoy/issues/30'>#30</a></a>
-</li>
-<li>fixed bug where certain games from early 1900 were missing. Thanks to <a href="https://twitter.com/MatterOfStats">Tony</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/31"><a href='https://github.com/jimmyday12/fitzRoy/issues/31'>#31</a></a>
-</li>
-<li>fixed bug with <code>get_afltables_player_ids</code> where it was returning 0 for all players <a href="https://github.com/jimmyday12/fitzRoy/issues/34"><a href='https://github.com/jimmyday12/fitzRoy/issues/34'>#34</a></a>
-</li>
-<li>fixed bug with <code>get_afltables_player_ids</code> where it was returning 0 for GWS and Bulldogs players</li>
-<li>fixed bug with <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> where it was returning a grouped <code>tibble</code>. Thanks to <a href="https://github.com/tyluRp">tyluRp</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/38"><a href='https://github.com/jimmyday12/fitzRoy/issues/38'>#38</a></a>
-</li>
-<li>added a basic vignette. Thanks to <a href="https://github.com/Lingtax">@Lingtax</a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-015" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.5">
-<a href="#fitzroy-015" class="anchor"></a>fitzRoy 0.1.5<small> Unreleased </small>
-</h1>
-<ul>
-<li>new function <code>get_afltables_stats</code> returns a data frame containing aflplayer stats for the specified games <a href="https://github.com/jimmyday12/fitzRoy/issues/19"><a href='https://github.com/jimmyday12/fitzRoy/issues/19'>#19</a></a>
-</li>
-<li>new helper function <code>get_aflplayer_urls</code> returns the URLs of games falling within a date range. Useful to pass to <code>get_aflplayer_data</code>
-</li>
-<li>BREAKING CHANGE: removed <code>afldata</code> from the included data to reduce package size (in preparation for CRAN submission). Please use <code>update_aflplayer_data</code> or the helper functions</li>
-<li>fixed bug where <code>get_fixture</code> returned wrong teams <a href="https://github.com/jimmyday12/fitzRoy/issues/23"><a href='https://github.com/jimmyday12/fitzRoy/issues/23'>#23</a></a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-014" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.4">
-<a href="#fitzroy-014" class="anchor"></a>fitzRoy 0.1.4<small> Unreleased </small>
-</h1>
-<ul>
-<li>
-<code>update_footywire</code> now more efficiently searches through missing match_ids</li>
-</ul>
-</div>
-    <div id="fitzroy-013" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.3">
-<a href="#fitzroy-013" class="anchor"></a>fitzRoy 0.1.3<small> Unreleased </small>
-</h1>
-<ul>
-<li>Fixed bug where Fixture returned NA due to Bye rounds</li>
-</ul>
-</div>
-    <div id="fitzroy-012" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.2">
-<a href="#fitzroy-012" class="anchor"></a>fitzRoy 0.1.2<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added <code>get_squggle_data</code> function to return data from the <a href="https://api.squiggle.com.au">Squiggle API</a>
-</li>
-</ul>
-</div>
-    <div id="fitzroy-011" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.1">
-<a href="#fitzroy-011" class="anchor"></a>fitzRoy 0.1.1<small> Unreleased </small>
-</h1>
-<ul>
-<li>Added raw scoring profession data</li>
-<li>Added <code>get_score_procession_raw</code> function</li>
-</ul>
-</div>
-    <div id="fitzroy-0109000" class="section level1">
-<h1 class="page-header" data-toc-text="0.1.0.9000">
-<a href="#fitzroy-0109000" class="anchor"></a>fitzRoy 0.1.0.9000<small> Unreleased </small>
-</h1>
-<p>Initial release of FitzRoy package.</p>
-<ul>
-<li>Added historical data for footywire.com</li>
-<li>Added historical data for afltable.com</li>
-<li>Added function to get advanced player stats</li>
-<li>Added function to get fixture data</li>
-<li>Added function to get results data</li>
-<li>Added 2017 weather data</li>
-</ul>
-</div>
-    <div id="fitzroy-0009000" class="section level1">
-<h1 class="page-header" data-toc-text="0.0.0.9000">
-<a href="#fitzroy-0009000" class="anchor"></a>fitzRoy 0.0.0.9000<small> Unreleased </small>
-</h1>
-<ul>
-<li>Created package</li>
-<li>Added a <code>NEWS.md</code> file to track changes to the package.</li>
-</ul>
-</div>
+    <ul>
+    <li><a href="news-0.3.html">Version 0.3</a></li>
+    <li><a href="news-0.2.html">Version 0.2</a></li>
+    <li><a href="news-0.1.html">Version 0.1</a></li>
+    <li><a href="news-dev.html">Version dev</a></li>
+    </ul>
   </div>
-
-  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
-    <nav id="toc" data-toggle="toc" class="sticky-top">
-      <h2 data-toc-skip>Contents</h2>
-    </nav>
-  </div>
-
 </div>
+
 
 
       <footer>
@@ -444,7 +160,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
