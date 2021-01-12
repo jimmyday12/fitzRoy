@@ -141,10 +141,21 @@
       <small>Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="fitzroy-development-version" class="section level1">
+    <div id="fitzroy-032" class="section level1">
 <h1 class="page-header">
-<a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
+<a href="#fitzroy-032" class="anchor"></a>fitzRoy 0.3.2<small> 2020-05-23 </small>
 </h1>
+<div id="breaking-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<ul>
+<li>Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) <a href="https://github.com/cfranklin11">@cfranklin11</a>
+</li>
+</ul>
+</div>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
 <li>Added AFL stats <a href="https://github.com/Fryzigg">@fryzigg</a>
 </li>
@@ -154,26 +165,25 @@
 </li>
 <li>Added new function <code>get_footywire_match_results</code> to return results from recent games, in the case where afltables hasn’t updated</li>
 <li>Added new function <code>get_afl_fixture</code> to return fixture from afl.com.au</li>
-<li>Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) <a href="https://github.com/cfranklin11">@cfranklin11</a>
-</li>
 <li>Added new function <code>fetch_ladder_afl</code> to return data function from AFL.com.au</li>
 <li>Added new <code>fetch_ladder</code> generic function to return ladder data</li>
+</ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
 <li>Fixed a bug with <code>get_afl_fixture</code> that was returning the wrong season if season was before 2012</li>
 <li>Removes all instances of <code><a href="https://rvest.tidyverse.org/reference/pluck.html">rvest::pluck</a></code> in preparation for it being depreciated in rvest 1.0.0 <a href="https://rvest.tidyverse.org/news/index.html">see changelog</a>, <a href="https://github.com/hadley">@hadley</a>
 </li>
-</ul>
-<div id="bug-fixes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
-<ul>
 <li>Fixed <code>get_footywire_betting_odds</code> to handle duplicate date/venue combination in the 2020 season without raising error (<a href="https://github.com/jimmyday12/fitzRoy/issues/123"><a href='https://github.com/jimmyday12/fitzRoy/issues/123'>#123</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 <li>Fixed round calculations for <code>get_fixture</code> to handle the compressed 2020 fixture (<a href="https://github.com/jimmyday12/fitzRoy/issues/125"><a href='https://github.com/jimmyday12/fitzRoy/issues/125'>#125</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/128"><a href='https://github.com/jimmyday12/fitzRoy/issues/128'>#128</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/132"><a href='https://github.com/jimmyday12/fitzRoy/issues/132'>#132</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>
 </div>
 </div>
-    <div id="fitzroy-032" class="section level1">
+    <div id="fitzroy-032-1" class="section level1">
 <h1 class="page-header">
-<a href="#fitzroy-032" class="anchor"></a>fitzRoy 0.3.2<small> 2020-05-23 </small>
+<a href="#fitzroy-032-1" class="anchor"></a>fitzRoy 0.3.2<small> 2020-05-23 </small>
 </h1>
 <div id="general-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -182,9 +192,9 @@
 <li>The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Fixed <code>get_footywire_betting_odds</code> to return an empty data frame when only future seasons are requested rather than raising an error (<a href="https://github.com/jimmyday12/fitzRoy/issues/112"><a href='https://github.com/jimmyday12/fitzRoy/issues/112'>#112</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 <li>Fixed issue with afltables data that caused issues with home/away team in drawn finals matches <a href="https://github.com/jimmyday12/fitzRoy/issues/116"><a href='https://github.com/jimmyday12/fitzRoy/issues/116'>#116</a></a>
@@ -206,16 +216,16 @@
 <h1 class="page-header">
 <a href="#fitzroy-030" class="anchor"></a>fitzRoy 0.3.0<small> 2020-01-08 </small>
 </h1>
-<div id="breaking-changes" class="section level2">
+<div id="breaking-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Addition of <code>replace_venues</code> - changes venue names for all data sources to match AFL Tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/15"><a href='https://github.com/jimmyday12/fitzRoy/issues/15'>#15</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Updated <code>womens-stats</code> vignette to prevent it from running chunks if the cookie had failed.</li>
 <li>Fixed incorrect round numbers for fixture and betting data from <code>footywire.com</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/93"><a href='https://github.com/jimmyday12/fitzRoy/issues/93'>#93</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/95"><a href='https://github.com/jimmyday12/fitzRoy/issues/95'>#95</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/102"><a href='https://github.com/jimmyday12/fitzRoy/issues/102'>#102</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/104"><a href='https://github.com/jimmyday12/fitzRoy/issues/104'>#104</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/106"><a href='https://github.com/jimmyday12/fitzRoy/issues/106'>#106</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
@@ -227,9 +237,9 @@
 <a href="#fitzroy-020" class="anchor"></a>fitzRoy 0.2.0<small> 2019-11-30 </small>
 </h1>
 <p>This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported.</p>
-<div id="breaking-changes-1" class="section level2">
+<div id="breaking-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#breaking-changes-1" class="anchor"></a>Breaking changes</h2>
+<a href="#breaking-changes-2" class="anchor"></a>Breaking changes</h2>
 <ul>
 <li>Removal of included weather data - deprecated</li>
 <li>Removal of included player data - please use <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> or <code>update_afltables_stats()</code>
@@ -240,9 +250,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>get_footywire_betting_odds</code> function that returns basic match and betting data from www.footywire.com. (<a href="https://github.com/jimmyday12/fitzRoy/issues/10"><a href='https://github.com/jimmyday12/fitzRoy/issues/10'>#10</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>
@@ -448,8 +458,8 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#fitzroy-development-version">development version</a></li>
         <li><a href="#fitzroy-032">0.3.2</a></li>
+        <li><a href="#fitzroy-032-1">0.3.2</a></li>
         <li><a href="#fitzroy-031">0.3.1</a></li>
         <li><a href="#fitzroy-030">0.3.0</a></li>
         <li><a href="#fitzroy-020">0.2.0</a></li>
