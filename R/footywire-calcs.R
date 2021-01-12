@@ -105,7 +105,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
     # dat_url <- "https://github.com/jimmyday12/fitzroy_data/blob/master/data-raw/player_stats/player_stats.rda" # nolint
     load_r_data <- function(fname) {
       tmp <- tempfile(fileext = ".rda")
-      utils::download.file(fname, tmp)
+      utils::download.file(fname, tmp, quiet = TRUE)
       
       load(tmp)
       unlink(tmp)
@@ -402,6 +402,14 @@ get_footywire_betting_odds <- function(
       stringr::str_trim(.)
   }
 
+  fetch_valid_seasons <- function(){
+    page <- fetch_betting_odds_page(2010)
+    years <- page[[1]] %>% 
+            rvest::html_nodes("option") %>%
+      rvest::html_text() %>%
+      as.numeric()
+  }
+  
   extract_table_rows <- function(page_html, season) {
     data_table_row_selector <- "form table table table tr"
 
@@ -522,9 +530,10 @@ get_footywire_betting_odds <- function(
       )
   }
 
+  valid_seasons <- fetch_valid_seasons()
   valid_end_season <- min(
     as.numeric(end_season),
-    as.numeric(lubridate::year(Sys.Date()))
+    max(valid_seasons)
   )
 
   if (is.na(valid_end_season)) {
@@ -544,7 +553,7 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  valid_start_season <- max(as.numeric(start_season), 2010)
+  valid_start_season <- max(as.numeric(start_season), min(valid_seasons))
   valid_start_season <- min(valid_start_season, valid_end_season)
 
   if (is.na(valid_start_season)) {
@@ -561,7 +570,16 @@ get_footywire_betting_odds <- function(
     )
   }
 
-  betting_dfs <- valid_start_season:valid_end_season %>%
+  
+  season_range <- valid_start_season:valid_end_season
+  season_range <- season_range[season_range %in% valid_seasons]
+  
+  if(length(season_range) < 1) {
+    rlang::warn("No valid seasons found")
+    return(NA)
+  }
+  
+  betting_dfs <- season_range %>%
     purrr::map(fetch_betting_odds_page) %>%
     purrr::map(., ~ do.call(extract_table_rows, .)) %>%
     purrr::map(convert_to_data_frame)

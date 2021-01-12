@@ -16,7 +16,7 @@
 #' @importFrom rlang .data
 
 verify_year <- function(year){
-  year <- as.numeric(year)
+  year <- suppressWarnings(as.numeric(year))
   if (is.na(year)){stop(paste("Not a year."))}
   else if (year >= 1897 & year <= as.numeric(format(Sys.Date(), "%Y"))){
     return(year)

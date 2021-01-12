@@ -25,7 +25,7 @@
 #' @importFrom rlang .data
 get_afltables_stats <- function(start_date = "1897-01-01",
                                 end_date = Sys.Date()) {
-  start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"))
+  start_date <- lubridate::parse_date_time(start_date, c("dmy", "ymd"), quiet = TRUE)
   if (is.na(start_date)) {
     stop(paste(
       "Date format not recognised",
@@ -33,7 +33,7 @@ get_afltables_stats <- function(start_date = "1897-01-01",
     ))
   }
 
-  end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"))
+  end_date <- lubridate::parse_date_time(end_date, c("dmy", "ymd"), quiet = TRUE)
 
   if (is.na(end_date)) {
     stop(paste(

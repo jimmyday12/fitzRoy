@@ -73,15 +73,15 @@ scrape_afltables_match <- function(match_urls) {
 
   games <- match_xmls %>%
     purrr::map(rvest::html_table, fill = TRUE) %>%
-    purrr::map2(.y = notes_ind, ~ magrittr::extract(.x, .y)) %>%
+    purrr::map2(.y = notes_ind, ~ .x[.y]) %>%
     purrr::modify_depth(1, ~ purrr::map(., replace_names))
 
   home_games <- games %>%
-    rvest::pluck(1) %>%
+    purrr::map(1) %>%
     purrr::map2(.y = home_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
 
   away_games <- games %>%
-    rvest::pluck(2) %>%
+    purrr::map(2) %>%
     purrr::map2(.y = away_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
 
   games <- home_games %>%
@@ -159,15 +159,8 @@ scrape_afltables_match <- function(match_urls) {
 
   # change column types
   games_df <- games_df %>%
-    dplyr::filter(!.data$Player %in% c("Rushed", "Totals", "Opposition"))
-
-  games_df <- as.data.frame(
-    lapply(games_df, function(x) utils::type.convert(x,
-        na.strings = "NA",
-        as.is = TRUE
-      )),
-    stringsAsFactors = FALSE
-  )
+    dplyr::filter(!.data$Player %in% c("Rushed", "Totals", "Opposition")) %>% 
+    utils::type.convert(na.strings = "NA", as.is = TRUE)
 
   games_cleaned <- games_df %>%
     dplyr::mutate(
