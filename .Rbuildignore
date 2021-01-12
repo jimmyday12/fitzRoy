@@ -21,3 +21,5 @@ create_package.R
 ^\.github/workflows/R-CMD-check\.yaml$
 ^\.github/workflows/render-readme\.yaml$
 ^revdep$
+^README.md$
+^NEWS.md$
