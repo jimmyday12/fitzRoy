@@ -45,7 +45,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -80,7 +80,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/jimmyday12/fitzRoy">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -94,14 +94,13 @@
 
       
 
-      </header><script src="womens-stats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="womens-stats_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="womens-stats_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="womens-stats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>Getting Started with AFL Women’s data</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2020-11-24</h4>
+            <h4 class="date">2021-01-12</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -120,13 +119,31 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "5595b70c07b01ce774d81535041ce525"</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "442ed5f29d714d8af4b63cacfd1edc50"</span></span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; CD_R202126401, returning match fixture information only.</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; CD_R202126402, returning match fixture information only.</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; CD_R202126403, returning match fixture information only.</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; CD_R202126404, returning match fixture information only.</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; CD_R202126405, returning match fixture information only.</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; CD_R202126406, returning match fixture information only.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; CD_R202126407, returning match fixture information only.</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; CD_R202126408, returning match fixture information only.</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; CD_R202126409, returning match fixture information only.</span></span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Rows: 142</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Rows: 205</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Columns: 30</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; $ Match.Id             &lt;chr&gt; "CD_M20172640101", "CD_M20172640102", "CD_M20172…</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; $ Round.Id             &lt;chr&gt; "CD_R201726401", "CD_R201726401", "CD_R201726401…</span></span>
