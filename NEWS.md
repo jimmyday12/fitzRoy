@@ -1,16 +1,20 @@
-# fitzRoy (development version)
+# fitzRoy 0.3.3
 
+## Breaking changes
+* Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) [@cfranklin11](https://github.com/cfranklin11)
+
+## New features
 * Added AFL stats [@fryzigg](https://github.com/Fryzigg)
 * Added team colours [@fryzigg](https://github.com/Fryzigg)
 * Added AFLW stats [@fryzigg](https://github.com/Fryzigg)
 * Added new function `get_footywire_match_results` to return results from recent games, in the case where afltables hasn't updated
 * Added new function `get_afl_fixture` to return fixture from afl.com.au
-* Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) [@cfranklin11](https://github.com/cfranklin11)
 * Added new function `fetch_ladder_afl` to return data function from AFL.com.au 
 * Added new `fetch_ladder` generic function to return ladder data
-* Fixed a bug with `get_afl_fixture` that was returning the wrong season if season was before 2012
 
-## Bug Fixes
+## Minor improvements and fixes
+* Fixed a bug with `get_afl_fixture` that was returning the wrong season if season was before 2012
+* Removes all instances of `rvest::pluck` in preparation for it being depreciated in rvest 1.0.0 [see changelog](https://rvest.tidyverse.org/news/index.html), [@hadley](https://github.com/hadley)
 * Fixed `get_footywire_betting_odds` to handle duplicate date/venue combination in the 2020 season without raising error ([#123](https://github.com/jimmyday12/fitzRoy/issues/123), [@cfranklin11](https://github.com/cfranklin11))
 * Fixed round calculations for `get_fixture` to handle the compressed 2020 fixture ([#125](https://github.com/jimmyday12/fitzRoy/issues/125), [#128](https://github.com/jimmyday12/fitzRoy/issues/128), [#132](https://github.com/jimmyday12/fitzRoy/issues/132), [@cfranklin11](https://github.com/cfranklin11))
 

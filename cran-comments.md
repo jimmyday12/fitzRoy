@@ -10,4 +10,4 @@
 * This is a new release.
 
 ## Downstream Dependancies
-I have checked downstream dependancies of `fitzRoy` using `revdepcheck::revdep_check()` and found no problems (https://github.com/jimmyday12/fitzRoy/blob/master/revdep/README.md)
+I have checked downstream dependancies of `fitzRoy` using `revdepcheck::revdep_check()` and found no problems (https://github.com/jimmyday12/fitzRoy/blob/master/revdep/cran.md)

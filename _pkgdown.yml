@@ -37,6 +37,11 @@ reference:
       - '`get_fryzigg_stats`'
       - '`get_afl_colour_palettes`'
       - '`get_footywire_match_results`'
+      - '`fetch_ladder`'
+      - '`fetch_ladder_afl`'
+      - '`get_afl_fixture`'
+      - '`get_aflw_player_stats`'
+      
   - title: Data
     desc: Included data 
     contents:
@@ -45,7 +50,6 @@ reference:
     desc: Internal functions and helpers
     contents:
       - '`footywire_html`'
-      - '`calculate_round`'
       - '`get_match_data`'
       - '`replace_teams`'
       - '`replace_venues`'
@@ -55,6 +59,7 @@ reference:
       - '`get_aflw_cookie`'
       - '`get_score_progression_raw`'
       - '`verify_year`'
+      - '`get_afl_cookie`'
       
       
       

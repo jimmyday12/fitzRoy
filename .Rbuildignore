@@ -13,7 +13,6 @@
 ^docs$
 create_package.R
 ^data-raw$
-^\.travis\.yml$
 ^codecov\.yml$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
@@ -22,3 +21,6 @@ create_package.R
 ^\.github/workflows/R-CMD-check\.yaml$
 ^\.github/workflows/render-readme\.yaml$
 ^revdep$
+^README.md$
+^NEWS.md$
+^pkgdown$
