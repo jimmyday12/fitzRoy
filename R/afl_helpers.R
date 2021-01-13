@@ -49,8 +49,9 @@ get_afl_cookie <- function() {
 #'
 #' @noRd
 find_season_id <- function(season, comp = "AFLM"){
-  if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
-                                                Your season is only {nchar(season)} digits"))
+  # check inputs
+  season <- check_season(season)
+  check_comp(comp)
   
   comp_id <- find_comp_id(comp)
   
@@ -84,10 +85,10 @@ find_season_id <- function(season, comp = "AFLM"){
 #'
 #' @noRd
 find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = "AFLM"){
-  if (!is.null(season)) {
-    if (nchar(season) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
-                                                Your season is only {nchar(season)} digits"))
-  }
+  
+  # check inputs
+  season <- check_season(season)
+  check_comp(comp)
   
   if (is.null(season_id)) season_id <- find_season_id(season, comp)
 
