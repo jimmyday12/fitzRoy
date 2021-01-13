@@ -4,16 +4,24 @@
 \alias{fetch_ladder}
 \title{Fetch ladder}
 \usage{
-fetch_ladder(season = NULL, round_number = NULL, comp = "AFLM", source = "AFL")
+fetch_ladder(
+  season = NULL,
+  round_number = NULL,
+  comp = "AFLM",
+  source = "AFL",
+  ...
+)
 }
 \arguments{
-\item{season}{season in YYYY format}
+\item{season}{season in YYYY format, defaults to NULL which returns the year corresponding the \code{Sys.Date()}}
 
-\item{round_number}{round number}
+\item{round_number}{round number, defaults to NULL which returns all rounds}
 
-\item{comp}{One of "AFLM" or "AFLW"}
+\item{comp}{One of "AFLM" (default) or "AFLW"}
 
-\item{source}{One of "AFL" (default), "Footywire", "AFLTables"}
+\item{source}{One of "AFL" (default), "footywire", "afltables"}
+
+\item{...}{Optional paramters passed onto various functions depending on source}
 }
 \value{
 returns a dataframe with the fixture that matches season, round.
@@ -23,6 +31,6 @@ Returns the Ladder for the relevant Season and Round from the AFL.com.au website
 }
 \examples{
 \dontrun{
-get_ladder(2020, round = 1)
+fetch_ladder(2020, round = 1)
 }
 }

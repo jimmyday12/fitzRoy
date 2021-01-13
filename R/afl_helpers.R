@@ -108,8 +108,7 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = 
   id <- df$id[df$roundNumber == round_number]
 
   if (length(id) < 1) {
-    rlang::warn(glue::glue("Could not find a matching ID to Round {round_number}, {season}"))
-    return(NULL)
+    rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au/ladder\"?"))
   }
   return(id)
   

@@ -20,6 +20,17 @@
 #' @importFrom magrittr %>%
 return_ladder <- function(match_results_df=NA, season_round=NA, season=NA) {
   
+  .Deprecated("fetch_ladder")
+  if (is.na(season_round)) season_round <- NULL
+  if (is.na(season)) season <- NULL
+  if (is.na(match_results_df)) match_results_df <- NULL
+  return(fetch_ladder(
+    season = season, 
+    round_number = season_round,
+    source = "afltables",
+    match_results_df = match_results_df)
+    )
+  
   suppressWarnings(if(is.na(match_results_df)) {
     match_results_df <- get_match_results()
   })

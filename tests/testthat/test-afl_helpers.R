@@ -36,8 +36,7 @@ test_that("find round ID functions work", {
   expect_equal(find_round_id(10, season_id = 20), 436)
   expect_equal(find_round_id(1, 2020, comp = "AFLW"), 288)
   
-  expect_null(suppressWarnings(find_round_id(1, 2010)))
-  expect_warning(find_round_id(1, 2010))
+  expect_error(suppressWarnings(find_round_id(1, 2010)))
   
   expect_error(find_round_id(season = 2020))
   expect_error(find_round_id(1, season = 20))

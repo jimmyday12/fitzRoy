@@ -1,6 +1,7 @@
 # fitzRoy (development version)
 
 * Added new function `fetch_fixture` and associated helper functions `fetch_fixture_afl` and `fetch_fixture_footywire`
+* Added new function `fetch_ladder` and associated helper functions `fetch_ladder_afl` and `fetch_ladder_afltables`
 
 # fitzRoy 0.3.3
 

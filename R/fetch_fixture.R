@@ -182,7 +182,7 @@ Check the following url on footywire
   # Filter round
   if (!is.null(round_number)) {
   games_df <- games_df %>%
-    dplyr::filter(Round == round_number)
+    dplyr::filter(.data$Round == round_number)
   }
     
   # Fix names
