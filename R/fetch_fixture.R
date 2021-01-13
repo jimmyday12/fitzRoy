@@ -6,7 +6,8 @@
 #' @param round_number round number, defaults to NULL which returns all rounds
 #' @param comp One of "AFLM" (default) or "AFLW"
 #' @param source One of "AFL" (default), "footywire", "afltables"
-#'
+#' @param ... Optional paramters passed onto various functions depending on source
+#' 
 #' @return returns a dataframe with the fixture that matches season, round.
 #' @export
 #'

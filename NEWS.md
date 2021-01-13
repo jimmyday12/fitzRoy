@@ -1,5 +1,7 @@
 # fitzRoy (development version)
 
+* Added new function `fetch_fixture` and associated helper functions `fetch_fixture_afl` and `fetch_fixture_footywire`
+
 # fitzRoy 0.3.3
 
 ## Breaking changes
