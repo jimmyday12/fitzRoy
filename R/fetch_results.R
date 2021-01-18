@@ -30,11 +30,8 @@ fetch_results <- function(season = NULL,
                              round_number = round_number, 
                              comp = comp))
   }
-  if (source == "footywire") {
-    #return(fetch_results_footywire(season = season,
-    #                               round_number = round_number,
-    #                               ...))
-  }
+
+  
   
   if (source == "afltables") {
     if (comp == "AFLW") {
@@ -42,7 +39,19 @@ fetch_results <- function(season = NULL,
       return(NULL)
     } else {
     return(fetch_results_afltables(season = season,
-                                   round_number = round_number))
+                                   round_number = round_number,
+                                   ...))
+    }
+  }
+  
+  if (source == "footywire") {
+    if (comp == "AFLW") {
+      rlang::warn("AFLW results not available for footywire.com")
+      return(NULL)
+    } else {
+      return(fetch_results_footywire(season = season,
+                                     round_number = round_number,
+                                     ...))
     }
   } 
 }
@@ -182,3 +191,59 @@ fetch_results_afltables <- function(season = NULL,
   # Return data
   return(match_data)
 }
+
+
+#' Fetch Footywire Match REsults
+#' 
+#' Returns the results of matches played in a particular season. You can limit how many results you return with the `last_n_results` parameter. 
+#' 
+#' For example - you might just want to return the results from last round so you'd set `last_n_results = 9`.
+#' 
+#' If you want to return a large amount of results, it is more efficient to use `get_match_results()` however this can sometimes take some time to update the latest rounds results.
+#' 
+#' @param season season to return results for
+#' @param round_number = NULL, not used
+#' @param last_n_matches number of matches to return, starting from the most recent
+#'
+#' @return Returns a data frame of match results from the year and number of results
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#' fetch_results_footywire(2020, last_n_matches = 5)
+#' }
+fetch_results_footywire <- function(season = NULL, 
+                                    round_number = NULL, 
+                                    last_n_matches = NULL) {
+  season <- check_season(season)
+  
+  if (season < 1965) {
+    rlang::abort(glue::glue("Season must be greater than 1965. 
+                 You provided \"{season}\""))
+  }
+  
+  cli::cli_process_start("Downloading {last_n_matches} match{?es} from Footywire")
+  
+  pb <- progress::progress_bar$new(
+    format = "  Downloading [:bar] :percent in :elapsed",
+    clear = FALSE, total = last_n_matches, width = 60)
+  
+  pb$tick(0)
+  
+  ids <- fetch_footywire_match_ids(season)
+  n_ids <- length(ids)
+  if (is.null(last_n_matches)) last_n_matches <- n_ids
+  ids <- ids[(n_ids - last_n_matches + 1):n_ids]
+  
+  # get data for ids
+
+  dat <- ids %>%
+    purrr::map_dfr(~{pb$tick(); extract_match_data(.x)})
+  
+  cli::cli_process_done()
+
+  return(dat)
+}
+
+
+

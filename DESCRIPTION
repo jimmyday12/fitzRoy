@@ -48,7 +48,8 @@ Imports:
     xml2,
     tibble,
     glue,
-    progress
+    progress,
+    cli
 Suggests:
     covr,
     ggplot2,
