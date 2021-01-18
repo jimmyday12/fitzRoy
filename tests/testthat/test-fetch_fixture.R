@@ -45,6 +45,26 @@ test_that("fetch_fixture_footywire works for various inputs", {
   
 })
 
+test_that("fetch_fixture_squiggle returns data frame with required variables", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  yr <- Sys.Date() %>% format("%Y") %>% as.numeric()
+  
+  expect_s3_class(fetch_fixture_squiggle(), "tbl")
+  
+  # change year
+  expect_s3_class(fetch_fixture_squiggle(yr - 2, 1), "tbl")
+  expect_equal(nrow(fetch_fixture_squiggle(yr + 2, 1)), 0)
+  
+  # change round number
+  expect_s3_class(fetch_fixture_squiggle(yr - 1, 10), "tbl")
+  expect_s3_class(fetch_fixture_squiggle(yr - 1, 20), "tbl")
+  expect_s3_class(fetch_fixture_squiggle(yr - 1), "tbl")
+  
+})
+
+
 test_that("fetch_fixture works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()

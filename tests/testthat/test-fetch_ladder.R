@@ -41,16 +41,19 @@ test_that("fetch_ladder_squiggle returns data frame with required variables", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
   
-  expect_s3_class(fetch_ladder_squiggle(2020, 1), "tbl")
+  yr <- Sys.Date() %>% format("%Y") %>% as.numeric()
+  
+  expect_s3_class(fetch_ladder_squiggle(), "tbl")
   
   # change year
-  expect_s3_class(fetch_ladder_squiggle(2017, 1), "tbl")
+  expect_s3_class(fetch_ladder_squiggle(yr - 2, 1), "tbl")
+  expect_equal(nrow(fetch_ladder_squiggle(yr + 2, 1)), 0)
   
   # change round number
-  expect_s3_class(fetch_ladder_squiggle(2020, 10), "tbl")
-  expect_s3_class(fetch_ladder_squiggle(2015, 20), "tbl")
-  expect_s3_class(fetch_ladder_squiggle(2018), "tbl")
-
+  expect_s3_class(fetch_ladder_squiggle(yr - 1, 10), "tbl")
+  expect_s3_class(fetch_ladder_squiggle(yr - 1, 20), "tbl")
+  expect_s3_class(fetch_ladder_squiggle(yr - 1), "tbl")
+  
 })
   
 

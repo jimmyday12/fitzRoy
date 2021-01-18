@@ -246,4 +246,47 @@ fetch_results_footywire <- function(season = NULL,
 }
 
 
+#' Get Squiggle Results
+#' 
+#' Returns the Results for the relevant Season and Round from the squiggle.com API.
+#' 
+#' This is essentially a wrapper for `fetch_squiggle_data`.
+#' 
+#' Data returned will contain only completed matches. Use `fetch_fixture_squiggle` to return non completed matches.
+#'
+#' @param season season in YYYY format
+#' @param round_number round number
+#'
+#' @return returns a dataframe with the fixture that matches season, round.
+#' @export
+#'
+#' @examples 
+#' \dontrun{
+#' fetch_results_squiggle(2020, round = 1)
+#' }
+fetch_results_squiggle <- function(season = NULL, 
+                                   round_number = NULL) {
+  
+  # check inputs
+  season <- check_season(season)
+  
+  if (is.null(round_number)) {
+    
+    cli::cli_alert_info("No round specified - returning results for all rounds in {.val {season}}")
+    #rlang::inform(
+    #  glue::glue("No round specified - returning all rounds in {season}"))
+    dat <- fetch_squiggle_data(query = "games", 
+                               year = season,
+                               complete = 100)
+  } else {
+    dat <- fetch_squiggle_data(query = "games", 
+                               year = season, 
+                               round = round_number, 
+                               complete = 100)
+  }
+  
+  return(dat)
+  
+}
+
 
