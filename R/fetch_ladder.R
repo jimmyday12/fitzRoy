@@ -245,3 +245,38 @@ fetch_ladder_afltables <- function(season = NULL,
 }
 
 
+
+#' Get Squiggle ladder
+#' 
+#' Returns the Ladder for the relevant Season and Round from the squiggle.com API.
+#'
+#' @param season season in YYYY format
+#' @param round_number round number
+#'
+#' @return returns a dataframe with the fixture that matches season, round.
+#' @export
+#'
+#' @examples 
+#' \dontrun{
+#' fetch_ladder_squiggle(2020, round = 1)
+#' }
+fetch_ladder_squiggle <- function(season = NULL, 
+                                  round_number = NULL) {
+  
+  # check inputs
+  season <- check_season(season)
+  
+  if (is.null(round_number)) {
+    rlang::inform(
+      glue::glue("No round specified - returning latest round in {season}"))
+    dat <- fetch_squiggle_data(query = "standings", 
+                               year = season)
+  } else {
+    dat <- fetch_squiggle_data(query = "standings", 
+                               year = season, 
+                               round = round_number)
+  }
+  
+  return(dat)
+
+}

@@ -36,5 +36,21 @@ test_that("get_match_results returns data frame with required variables", {
     
     
   })
+
+test_that("fetch_ladder_squiggle returns data frame with required variables", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  expect_s3_class(fetch_ladder_squiggle(2020, 1), "tbl")
+  
+  # change year
+  expect_s3_class(fetch_ladder_squiggle(2017, 1), "tbl")
+  
+  # change round number
+  expect_s3_class(fetch_ladder_squiggle(2020, 10), "tbl")
+  expect_s3_class(fetch_ladder_squiggle(2015, 20), "tbl")
+  expect_s3_class(fetch_ladder_squiggle(2018), "tbl")
+
+})
   
 
