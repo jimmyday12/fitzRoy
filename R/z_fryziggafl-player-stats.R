@@ -26,14 +26,8 @@
 
 get_fryzigg_stats <- function(start = 1897,
                               end = as.numeric(format(Sys.Date(), "%Y"))) {
-  start <- verify_year(start)
-  end <- verify_year(end)
-
-  message(paste("Returning cached data from", start, "to", end, "\n ", "This may take some time."))
-
-  dat_url <- url("http://www.fryziggafl.net/static/fryziggafl.rds", "rb")
-  stats_df <- readRDS(dat_url)
-  stats_df <- subset(stats_df, format(as.Date(stats_df$match_date),"%Y") >= start &
-    format(as.Date(stats_df$match_date),"%Y") <= end)
-  return(stats_df)
+  
+  .Deprecated("fetch_player_stats_fryzigg")
+  seasons <- start:end
+  return(fetch_player_stats_fryzigg(seasons))
 }

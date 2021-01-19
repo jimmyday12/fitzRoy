@@ -83,3 +83,47 @@ verify_year <- function(year){
     stop(paste("Not a valid year within available range."))
   }
 }
+
+#' Returns start and end dates given a season range
+#'
+#'
+#' @param season Season in numeric format YYYY
+#'
+#' @noRd
+return_start_end_dates <- function(season) {
+  
+  season_checked <- season %>% purrr::map_int(check_season)
+  
+  if (is.null(season)){
+    start_date <- lubridate::ymd("1897-01-01", quiet = TRUE)
+    end_date = lubridate::parse_date_time(Sys.Date(), c("dmy", "ymd"), quiet = TRUE)
+  } else {
+    start_date <- lubridate::parse_date_time(
+      paste0(min(season_checked), "-01-01"), c("ymd"), quiet = TRUE)
+    
+    end_date <- lubridate::parse_date_time(
+      paste0(max(season_checked), "-12-31"), c("ymd"), quiet = TRUE)
+    
+  }
+  
+  if (end_date > Sys.Date()) {
+    end_date <- lubridate::parse_date_time(Sys.Date(), c("dmy", "ymd"), quiet = TRUE)
+  }
+  
+  if (is.na(start_date)) {
+    stop(paste(
+      "Date format not recognised",
+      "Check that start_date is in dmy or ymd format"
+    ))
+  }
+  
+  if (is.na(end_date)) {
+    stop(paste(
+      "Date format not recognised",
+      "Check that end_date is in dmy or ymd format"
+    ))
+  }
+  
+  return(list(start_date = start_date,
+              end_date = end_date))
+}

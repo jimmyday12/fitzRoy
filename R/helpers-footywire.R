@@ -370,3 +370,46 @@ calculate_round_number <- function(round_names) {
     purrr::map(., parse_round_name(max_regular_round_number)) %>%
     unlist(.)
 }
+
+#' Scrape footywire player statistics.
+#'
+#' \code{fetch_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
+#'
+#' The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
+#' To find match ID, find the relevant matches on https://wwww.footywire.com
+#'
+#' @param ids A vector containing match id's to return. Can be a single value or vector of values.
+#' 
+#'
+#' @noRd
+fetch_footywire_stats <- function(ids) {
+  if (missing(ids)) stop("Please provide an ID between 1 and 9999")
+  if (!is.numeric(ids)) stop("ID must be numeric between 1 and 9999")
+  
+  # Initialise dataframe
+  dat <- as.data.frame(matrix(ncol = 42, nrow = 44))
+  
+  # Now get data
+  # First, only proceed if we've accessed the URL
+  message("Getting data from https://www.footywire.com")
+  
+  # Create Progress Bar
+  # nolint start
+  pb <- dplyr::progress_estimated(length(ids), min_time = 5)
+  
+  # Loop through data using map
+  dat <- ids %>%
+    purrr::map_df(~ {
+      pb$tick()$print() # update the progress bar (tick())
+      get_match_data(id = .x) # do function
+    })
+  # nolint end
+  
+  # Rearrange
+  dat <- dat %>%
+    dplyr::arrange(.data$Date, .data$Match_id, dplyr::desc(.data$Status))
+  
+  # Finish and return
+  message("Finished getting data")
+  return(dat)
+}
