@@ -42,6 +42,10 @@ fetch_ladder <- function(season = NULL,
                             ...))
   }
 
+  if (source == "squiggle") {
+    return(fetch_ladder_squiggle(season = season, 
+                                  round_number = round_number))
+  }
 }
 
 #' Get AFL ladder

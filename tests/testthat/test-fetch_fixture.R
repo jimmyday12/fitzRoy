@@ -69,18 +69,9 @@ test_that("fetch_fixture works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
   
-  # Test some various inputs
-  expect_s3_class(fetch_fixture(2020, round = 1), "data.frame")
-  expect_error(fetch_fixture(20))
-  expect_warning(fetch_fixture(2000))
+  # Test each source works
+  expect_s3_class(fetch_fixture(2020, round = 1, source = "squiggle"), "data.frame")
   expect_s3_class(fetch_fixture(2020, round = 1, source = "footywire"), "data.frame")
+  expect_warning(fetch_fixture(2020, round = 1, source = "afltables"))
   
 })
-
-test_that("get_fixture returns deprecated warning", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-  
-  expect_warning(get_afl_fixture(2020), regexp = "deprecated")
-})
-

@@ -53,7 +53,17 @@ fetch_results <- function(season = NULL,
                                      round_number = round_number,
                                      ...))
     }
-  } 
+  }
+  
+  if (source == "squiggle") {
+    if (comp == "AFLW") {
+      rlang::warn("AFLW results not available for squiggle.com")
+      return(NULL)
+    } else {
+    return(fetch_fixture_squiggle(season = season,
+                                  round_number = round_number))
+      }
+    }
 }
 
 #' Fetch AFL.com results

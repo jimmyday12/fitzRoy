@@ -59,5 +59,16 @@ test_that("fetch_ladder_squiggle returns data frame with required variables", {
   expect_s3_class(fetch_ladder_squiggle(yr - 1), "tbl")
   
 })
+
+test_that("fetch_ladder works", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  # Test each source works
+  expect_s3_class(fetch_ladder(2020, round = 1, source = "squiggle"), "tbl")
+  expect_s3_class(fetch_ladder(2020, round = 1, source = "afltables"), "tbl")
+  expect_warning(fetch_ladder(2020, round = 1, source = "footywire"))
+  
+})
   
 

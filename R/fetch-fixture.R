@@ -30,6 +30,7 @@ fetch_fixture <- function(season = NULL,
                              round_number = round_number, 
                              comp = comp))
   }
+  
   if (source == "footywire") {
     return(fetch_fixture_footywire(season = season,
                                    round_number = round_number,
@@ -39,6 +40,11 @@ fetch_fixture <- function(season = NULL,
   if (source == "afltables") {
     rlang::warn("afltables.com does not have any fixture data")
     return(NULL)
+  }
+  
+  if (source == "squiggle") {
+    return(fetch_fixture_squiggle(season = season,
+                                   round_number = round_number))
   }
   
 }

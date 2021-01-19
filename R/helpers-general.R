@@ -34,8 +34,19 @@ check_comp <- function(x) {
 #'
 #' @noRd
 check_source <- function(x) {
-  if (!x %in% c("AFL", "footywire", "afltables")) rlang::abort(glue::glue("Source should be either \"AFL\", \"footywire\" or \"afltables\". You supplied {x}"))
+  #if (!x %in% c("AFL", "footywire", "afltables", "squiggle", "fryzigg")) rlang::abort(glue::glue("Source should be either \"AFL\", \"footywire\" or \"afltables\". You supplied {x}"))
   
+  valid <- c("AFL", 
+             "footywire", 
+             "afltables", 
+             "squiggle", 
+             "fryzigg")
+  
+  if (!x %in% valid) {
+    rlang::abort(glue::glue(
+      "Provided paramters must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
+    You provided the following: {x}"))
+  }
 }
 
 #' Check Comp Source
