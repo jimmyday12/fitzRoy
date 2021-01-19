@@ -1,7 +1,17 @@
 # fitzRoy (development version)
 
-* Added new function `fetch_fixture` and associated helper functions `fetch_fixture_afl` and `fetch_fixture_footywire`
-* Added new function `fetch_ladder` and associated helper functions `fetch_ladder_afl` and `fetch_ladder_afltables`
+* Added new function `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle`
+* Added new function `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables`
+* Added new function `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables`
+* Deprecated `get_footywire_match_results` - use `fetch_results_footywire`
+* Deprecated `get_match_results` - use `fetch_results_afltables`
+* Deprecated `get_afl_fixture` - use `fetch_fixture_afl`
+* Deprecated `get_fixture` - use `fetch_fixture_footywire`
+* Deprecated `return_ladder` - use `fetch_ladder_afltables`
+* Deprecated `get_footywire_betting_odds` - use `fetch_betting_odds_footywire`
+* Deprecated `get_score_progression_raw` - no replacement
+* Deprecated `get_footywire_match_ids` - use `fetch_footywire_match_ids`
+
 
 # fitzRoy 0.3.3
 

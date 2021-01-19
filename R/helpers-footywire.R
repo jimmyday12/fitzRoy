@@ -293,3 +293,80 @@ extract_footywire_match_details <- function(xml){
        venue = venue)
 }
 
+
+#' Parse round name
+#'
+#' Helper function to parse round name from footywire
+#'
+#' @param max_regular_round_number Max round regular round number for season
+#'
+#' @noRd
+parse_round_name <- function(max_regular_round_number) {
+  FINALS_WEEK <- stringr::regex("Finals\\s+Week\\s+(\\d+)", ignore_case = TRUE)
+  QUALIFYING_FINALS <- stringr::regex("qualifying", ignore_case = TRUE)
+  ELIMINATION_FINALS <- stringr::regex("elimination", ignore_case = TRUE)
+  # One bloody week in 2010 uses 'One' instead of '1' on
+  # https://www.footywire.com/afl/footy/afl_betting
+  FINALS_WEEK_ONE <- stringr::regex("Finals\\s+Week\\s+One", ignore_case = TRUE)
+  SEMI_FINALS <- stringr::regex("semi", ignore_case = TRUE)
+  PRELIMINARY_FINALS <- stringr::regex("preliminary", ignore_case = TRUE)
+  GRAND_FINAL <- stringr::regex("grand", ignore_case = TRUE)
+  
+  
+  return(
+    function(round_name) {
+      round_number <- stringr::str_match(round_name, DIGITS)[[2]]
+      
+      if (!is.na(round_number)) {
+        return(round_number)
+      }
+      
+      finals_week <- stringr::str_match(round_name, FINALS_WEEK)[[2]]
+      
+      if (!is.na(finals_week)) {
+        # Betting data uses the format "YYYY Finals Week N" to label finals rounds
+        # so we can just add N to max round to get the round number
+        return(as.numeric(finals_week) + max_regular_round_number)
+      }
+      
+      is_first_finals_week <- !is.na(stringr::str_match(round_name, QUALIFYING_FINALS)) ||
+        !is.na(stringr::str_match(round_name, ELIMINATION_FINALS)) ||
+        !is.na(stringr::str_match(round_name, FINALS_WEEK_ONE))
+      
+      if (is_first_finals_week) {
+        return(max_regular_round_number + 1)
+      }
+      
+      if (!is.na(stringr::str_match(round_name, SEMI_FINALS))) {
+        return(max_regular_round_number + 2)
+      }
+      
+      if (!is.na(stringr::str_match(round_name, PRELIMINARY_FINALS))) {
+        return(max_regular_round_number + 3)
+      }
+      
+      if (!is.na(stringr::str_match(round_name, GRAND_FINAL))) {
+        return(max_regular_round_number + 4)
+      }
+    }
+  )
+}
+
+#' Calculate round number for footywire data
+#'
+#' Helper function to parse round number from footywire
+#'
+#' @param round_names Names of rounds
+#'
+#' @noRd
+calculate_round_number <- function(round_names) {
+  max_regular_round_number <-  round_names %>%
+    stringr::str_match_all(., DIGITS) %>%
+    unlist(.) %>%
+    as.numeric(.) %>%
+    max(., na.rm = TRUE)
+  
+  round_names %>%
+    purrr::map(., parse_round_name(max_regular_round_number)) %>%
+    unlist(.)
+}
