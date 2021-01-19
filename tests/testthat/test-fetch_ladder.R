@@ -24,15 +24,18 @@ test_that("get_match_results returns data frame with required variables", {
     testthat::skip_if_offline()
     testthat::skip_on_cran()
     
-    res_df <- get_match_results()
-    expect_s3_class(fetch_ladder_afltables(2020, 1, match_results_df = res_df), "tbl")
+    yr <- Sys.Date() %>% format("%Y") %>% as.numeric()
+    
+    res_df <- fetch_results_afltables(yr - 1)
+    expect_s3_class(fetch_ladder_afltables(yr - 1, 1, match_results_df = res_df), "tbl")
     
     # change year
-    expect_s3_class(fetch_ladder_afltables(2018, 1, match_results_df = res_df), "tbl")
+    res_df_older <- fetch_results_afltables(yr - 2)
+    expect_s3_class(fetch_ladder_afltables(yr - 2, 1, match_results_df = res_df_older), "tbl")
     
     # change round number
-    expect_s3_class(fetch_ladder_afltables(2020, 2, match_results_df = res_df), "tbl")
-    expect_error(fetch_ladder_afltables(2020, 50, match_results_df = res_df))
+    expect_s3_class(fetch_ladder_afltables(yr - 1, 2, match_results_df = res_df), "tbl")
+    expect_error(fetch_ladder_afltables(yr - 1, 50, match_results_df = res_df))
     
     
   })
@@ -47,7 +50,8 @@ test_that("fetch_ladder_squiggle returns data frame with required variables", {
   
   # change year
   expect_s3_class(fetch_ladder_squiggle(yr - 2, 1), "tbl")
-  expect_equal(nrow(fetch_ladder_squiggle(yr + 2, 1)), 0)
+  expect_s3_class(fetch_ladder_squiggle(yr + 1, 1), "tbl")
+  
   
   # change round number
   expect_s3_class(fetch_ladder_squiggle(yr - 1, 10), "tbl")
