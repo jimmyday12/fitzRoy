@@ -90,6 +90,7 @@ get_aflw_round_data <- function(roundid, cookie) {
     "http://api.afl.com.au/cfs/afl/matchItems/round/",
     roundid
   )
+  
   # Extract round data JSON and flatten into data frame
   round_data <- httr::GET(
     url_head,
@@ -98,7 +99,11 @@ get_aflw_round_data <- function(roundid, cookie) {
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE) %>%
     .$items %>% # Select data from flattened JSON file
-    dplyr::as_tibble() %>%
+    dplyr::as_tibble()
+  
+  if (nrow(round_data) == 0) return(round_data)
+    
+  round_data <- round_data %>%
     dplyr::mutate(
       match.venueLocalStartTime =
         readr::parse_datetime(.data$match.venueLocalStartTime)
