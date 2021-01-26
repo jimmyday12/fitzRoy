@@ -4,7 +4,8 @@
 #' Checks the season for various things
 #'
 #' @param x Season in Year format
-#'
+#' 
+#' @keywords internal
 #' @noRd
 check_season <- function(x) {
   
@@ -19,7 +20,8 @@ check_season <- function(x) {
 #' Checks the comp for various things
 #'
 #' @param x Comp name
-#'
+#' 
+#' @keywords internal
 #' @noRd
 check_comp <- function(x) {
   if (!x %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\". You supplied {x}"))
@@ -31,7 +33,8 @@ check_comp <- function(x) {
 #' Checks the source for various things
 #'
 #' @param x Source name
-#'
+#' 
+#' @keywords internal
 #' @noRd
 check_source <- function(x) {
   #if (!x %in% c("AFL", "footywire", "afltables", "squiggle", "fryzigg")) rlang::abort(glue::glue("Source should be either \"AFL\", \"footywire\" or \"afltables\". You supplied {x}"))
@@ -55,7 +58,8 @@ check_source <- function(x) {
 #'
 #' @param comp Comp name
 #' @param source Source name
-#'
+#' 
+#' @keywords internal
 #' @noRd
 check_comp_source <- function(comp, source) {
   check_comp(comp)
@@ -71,7 +75,8 @@ check_comp_source <- function(comp, source) {
 #' Verifies year
 #'
 #' @param year Year in numeric format YYYY
-#'
+#' 
+#' @keywords internal
 #' @noRd
 verify_year <- function(year){
   year <- suppressWarnings(as.numeric(year))
@@ -88,7 +93,8 @@ verify_year <- function(year){
 #'
 #'
 #' @param season Season in numeric format YYYY
-#'
+#' 
+#' @keywords internal
 #' @noRd
 return_start_end_dates <- function(season) {
   

@@ -8,16 +8,8 @@
 #' and find the match of interest.
 #'
 #' @param match_urls A list of URL's for matches to scrape data from
-#' @return data table of afltables.com match results, with a row per player per match.
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' scrape_afltables_match("https://afltables.com/afl/stats/games/2018/071120180602.html")
-#' scrape_afltables_match(get_afltables_urls("01/06/2018", "01/07/2018"))
-#' }
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' @keywords internal
+#' @noRd
 scrape_afltables_match <- function(match_urls) {
   
   # For each game url, download data, extract the stats
@@ -37,7 +29,7 @@ scrape_afltables_match <- function(match_urls) {
   cli::cli_process_done()
   cli::cli_process_start("Processing XMLS")
 
-  
+
   replace_names <- function(x) {
     names(x) <- x[1, ]
     x[-1, ]
@@ -245,7 +237,8 @@ scrape_afltables_match <- function(match_urls) {
 #'
 #' @param start_date character string for start date return to URLs from, in "dmy" or "ymd" format
 #' @param end_date optional, character string for end date to return URLS, in "dmy" or "ymd" format
-#'
+#' 
+#' @keywords internal
 #' @noRd
 get_afltables_urls <- function(start_date,
                                end_date = Sys.Date()) {
@@ -315,6 +308,8 @@ get_afltables_urls <- function(start_date,
 #'
 #' @param seasons Seasons to return ids for
 #'
+#' 
+#' @keywords internal
 #' @noRd
 get_afltables_player_ids <- function(seasons) {
   base_url <- function(x) {

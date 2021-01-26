@@ -6,16 +6,9 @@
 #' This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis.
 #'
 #' @param results A dataframe that has been returned from get_match_results
-#' @return A data frame with match results where each row is a team-match combination
-#'
-#' @examples
-#' \dontrun{
-#' results <- get_match_results()
-#' convert_results(results)
-#' }
-#' @export
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' 
+#' @keywords internal
+#' @noRd
 convert_results <- function(results) {
 
   # Convert results to wide format
@@ -35,10 +28,9 @@ convert_results <- function(results) {
 #'
 #' @param x URL of the match
 #' @param id Match ID number
-#' @return A data frame with advanced player results
-#'
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
+#' 
+#' @keywords internal
+#' @noRd
 footywire_html <- function(x, id) {
 
   # First get extra information
@@ -124,9 +116,9 @@ footywire_html <- function(x, id) {
 #' Helper function for \code{get_footywire_stats}
 #'
 #' @param id A match id from afltables
-#' @importFrom magrittr %>%
-#' @importFrom rvest html_nodes
-#' @importFrom rvest html_text
+#' 
+#' @keywords internal
+#' @noRd
 get_match_data <- function(id) {
 
   # Create URL
@@ -200,7 +192,8 @@ get_match_data <- function(id) {
 #' Returns available match idds for a given season
 #'
 #' @param season A numeric value for season year
-#'
+#' 
+#' @keywords internal
 #' @noRd
 fetch_footywire_match_ids <- function(season){
   
@@ -216,7 +209,8 @@ fetch_footywire_match_ids <- function(season){
 #' Extracts match data from footywire given a valid match ID.
 #'
 #' @param match_id An XML file returned from `xml2::read_html`
-#'
+#' 
+#' @keywords internal
 #' @noRd
 extract_match_data <- function(match_id) {
   #pb$tick()
@@ -233,7 +227,8 @@ extract_match_data <- function(match_id) {
 #' Returns match results table from an XML file.
 #'
 #' @param xml An XML file returned from `xml2::read_html`
-#'
+#' 
+#' @keywords internal
 #' @noRd
 extract_footywire_match_table <- function(xml){
   tbl <- xml %>%
@@ -273,7 +268,8 @@ extract_footywire_match_table <- function(xml){
 #' Returns match details such as round, venue, date from an XML file.
 #'
 #' @param xml An XML file returned from `xml2::read_html`
-#'
+#' 
+#' @keywords internal
 #' @noRd
 extract_footywire_match_details <- function(xml){
   details <- xml %>%
@@ -299,7 +295,8 @@ extract_footywire_match_details <- function(xml){
 #' Helper function to parse round name from footywire
 #'
 #' @param max_regular_round_number Max round regular round number for season
-#'
+#' 
+#' @keywords internal
 #' @noRd
 parse_round_name <- function(max_regular_round_number) {
   FINALS_WEEK <- stringr::regex("Finals\\s+Week\\s+(\\d+)", ignore_case = TRUE)
@@ -357,7 +354,8 @@ parse_round_name <- function(max_regular_round_number) {
 #' Helper function to parse round number from footywire
 #'
 #' @param round_names Names of rounds
-#'
+#' 
+#' @keywords internal
 #' @noRd
 calculate_round_number <- function(round_names) {
   max_regular_round_number <-  round_names %>%
@@ -380,7 +378,8 @@ calculate_round_number <- function(round_names) {
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
 #' 
-#'
+#' 
+#' @keywords internal
 #' @noRd
 fetch_footywire_stats <- function(ids) {
   if (missing(ids)) stop("Please provide an ID between 1 and 9999")
