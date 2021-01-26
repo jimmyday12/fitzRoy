@@ -2,7 +2,10 @@
 % Please edit documentation in R/fetch-ladder.R
 \name{fetch_ladder}
 \alias{fetch_ladder}
-\title{Fetch ladder}
+\alias{fetch_ladder_afl}
+\alias{fetch_ladder_afltables}
+\alias{fetch_ladder_squiggle}
+\title{Fetch Ladder}
 \usage{
 fetch_ladder(
   season = NULL,
@@ -11,26 +14,74 @@ fetch_ladder(
   source = "AFL",
   ...
 )
+
+fetch_ladder_afl(season = NULL, round_number = NULL, comp = "AFLM")
+
+fetch_ladder_afltables(
+  season = NULL,
+  round_number = NULL,
+  match_results_df = NULL
+)
+
+fetch_ladder_squiggle(season = NULL, round_number = NULL)
 }
 \arguments{
-\item{season}{season in YYYY format, defaults to NULL which returns the year corresponding the \code{Sys.Date()}}
+\item{season}{Season in YYYY format, defaults to NULL which returns the year
+corresponding the \code{Sys.Date()}}
 
-\item{round_number}{round number, defaults to NULL which returns all rounds}
+\item{round_number}{Round number, defaults to NULL which returns all rounds}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
-\item{source}{One of "AFL" (default), "footywire", "afltables"}
+\item{source}{One of "AFL" (default), "footywire", "afltables", "squiggle"}
 
-\item{...}{Optional paramters passed onto various functions depending on source}
+\item{...}{Optional parameters passed onto various functions depending on source.}
 }
 \value{
-returns a dataframe with the fixture that matches season, round.
+A Tibble with the ladder from the relevant \code{season} and \code{round}.
 }
 \description{
-Returns the Ladder for the relevant Season and Round from the AFL.com.au website.
+\code{fetch_ladder} returns the Ladder for a given AFL Round. Internally, it calls
+a corresponding \verb{fetch_ladder_*} function that depends on the source given.
+By default the source used will be the official AFL website.
+
+\code{\link[=fetch_ladder_afl]{fetch_ladder_afl()}}, \code{\link[=fetch_ladder_afltables]{fetch_ladder_afltables()}}, \code{\link[=fetch_ladder_squiggle]{fetch_ladder_squiggle()}}
+can be called directly and return data from AFL website, AFL Tables and
+Squiggle, respectively.
 }
 \examples{
 \dontrun{
+# Return data from AFL Website
 fetch_ladder(2020, round = 1)
+
+# This is equivalent to
+fetch_ladder(2020, round = 1, source = "AFL")
+fetch_ladder_afl(2020, round = 1)
+
+# Return AFLW data
+fetch_ladder(2020, round = 1, comp = "AFLW", source = "AFL")
+fetch_ladder_afl(2020, round = 1, comp = "AFLW")
+
+# Not all sources have AFLW data and will return a warning
+fetch_ladder(2020, round = 1, comp = "AFLW", source = "afltables")
+fetch_ladder(2020, round = 1, comp = "AFLW", source = "squiggle")
+
+# Different sources
+fetch_ladder(2015, round = 5, source = "afltables")
+fetch_ladder(2015, round = 5, source = "squiggle")
+
+# Directly call functions for each source
+fetch_ladder_afl(2018, round = 9)
+fetch_ladder_afltables(2018, round = 9)
+fetch_ladder_squiggle(2018, round = 9)
+}
+
+}
+\seealso{
+\itemize{
+\item \link{fetch_ladder_afl} for official AFL data.
+\item \link{fetch_ladder_afltables} for AFL Tables data.
+\item \link{fetch_ladder_squiggle} for Squiggle data.
 }
 }
+\concept{fetch ladder functions}

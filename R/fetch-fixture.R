@@ -1,20 +1,51 @@
 #' Fetch Fixture
 #' 
-#' Returns the Fixture for the relevant Season and optionally Round from various sources.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
-#' @param comp One of "AFLM" (default) or "AFLW"
-#' @param source One of "AFL" (default), "footywire", "afltables"
-#' @param ... Optional paramters passed onto various functions depending on source
+#' @description 
+#' `fetch_fixture` returns the Fixture for a given AFL Round. Internally, it calls 
+#' a corresponding `fetch_fixture_*` function that depends on the source given. 
+#' By default the source used will be the official AFL website. 
 #' 
-#' @return returns a dataframe with the fixture that matches season, round.
+#' [fetch_fixture_afl()], [fetch_fixture_footywire()], [fetch_fixture_squiggle()] 
+#' can be called directly and return data from AFL website, AFL Tables and 
+#' Squiggle, respectively. 
+#' 
+#' @inheritParams fetch_ladder
+#' @return 
+#' A Tibble with the fixture from the relevant `season` and `round`.
 #' @export
-#'
-#' @examples 
+#' 
+#' @examples
 #' \dontrun{
-#' fetch_fixture(2020, round = 1)
+#' # Return data for whole season from AFL Website
+#' fetch_fixture(2020)
+#' 
+#' # This is equivalent to
+#' fetch_fixture(2020, source = "AFL")
+#' fetch_fixture_afl(2020)
+#' 
+#' # Return AFLW data
+#' fetch_fixture(2020, comp = "AFLW", source = "AFL")
+#' fetch_fixture_afl(2020, comp = "AFLW")
+#' 
+#' # Not all sources have AFLW data and will return a warning
+#' fetch_fixture(2020, comp = "AFLW", source = "footywire")
+#' fetch_fixture(2020, comp = "AFLW", source = "squiggle")
+#' 
+#' # Different sources
+#' fetch_fixture(2015, round = 5, source = "footywire")
+#' fetch_fixture(2015, round = 5, source = "squiggle")
+#' 
+#' # Directly call functions for each source
+#' fetch_fixture_afl(2018, round = 9)
+#' fetch_fixture_footywire(2018, round = 9)
+#' fetch_fixture_squiggle(2018, round = 9)
 #' }
+#' 
+#' @family fetch fixture functions
+#' @seealso 
+#' * [fetch_fixture_afl] for official AFL data.
+#' * [fetch_fixture_afltables] for AFL Tables data.
+#' * [fetch_fixture_squiggle] for Squiggle data.
 fetch_fixture <- function(season = NULL, 
                          round_number = NULL, 
                          comp = "AFLM", 
@@ -50,21 +81,8 @@ fetch_fixture <- function(season = NULL,
 }
 
 
-#' Fetch AFL.com fixture
-#' 
-#' Returns the Fixture for the relevant Season and Round from the AFL.com.au website.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
-#' @param comp One of "AFLM" (default) or "AFLW"
-#'
-#' @return returns a dataframe with the fixture that matches season, round.
+#' @rdname fetch_fixture
 #' @export
-#'
-#' @examples 
-#' \dontrun{
-#' fetch_afl_fixture(2020, round = 1)
-#' }
 fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   
   season <- check_season(season)
@@ -95,27 +113,10 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
 }
 
 
-#' Get upcoming fixture from https://www.footywire.com
-#'
-#' \code{get_fixture} returns a dataframe containing upcoming AFL Men's season fixture.
-#'
-#' The dataframe contains the home and away team as well as venue.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
 #' @param convert_date logical, if TRUE, converts date column to date format instead of date time.
-#' @return Returns a data frame containing the date, teams and venue of each game
-#'
-#' @examples
-#' \dontrun{
-#' get_fixture(2018)
-#' }
+#' @rdname fetch_fixture
 #' @export
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
-fetch_fixture_footywire <- function(season = NULL, 
-                                    round_number = NULL, 
-                                    convert_date = FALSE) {
+fetch_fixture_footywire <- function(season = NULL, round_number = NULL, convert_date = FALSE) {
   
   season <- check_season(season)
   # create url
@@ -229,26 +230,9 @@ Check the following url on footywire
 
 
 
-#' Get Squiggle Fixture
-#' 
-#' Returns the Fixture for the relevant Season and Round from the squiggle.com API.
-#' 
-#' This is essentially a wrapper for `fetch_squiggle_data`.
-#' 
-#' Data returned will contain results of the match if it is complete.
-#'
-#' @param season season in YYYY format
-#' @param round_number round number
-#'
-#' @return returns a dataframe with the fixture that matches season, round.
+#' @rdname fetch_fixture
 #' @export
-#'
-#' @examples 
-#' \dontrun{
-#' fetch_fixture_squiggle(2020, round = 1)
-#' }
-fetch_fixture_squiggle <- function(season = NULL, 
-                                  round_number = NULL) {
+fetch_fixture_squiggle <- function(season = NULL, round_number = NULL) {
   
   # check inputs
   season <- check_season(season)

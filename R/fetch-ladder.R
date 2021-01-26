@@ -1,20 +1,60 @@
-#' Fetch ladder
+#' Fetch Ladder
 #' 
-#' Returns the Ladder for the relevant Season and Round from the AFL.com.au website.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
+#' @description 
+#' `fetch_ladder` returns the Ladder for a given AFL Round. Internally, it calls 
+#' a corresponding `fetch_ladder_*` function that depends on the source given. 
+#' By default the source used will be the official AFL website. 
+#' 
+#' [fetch_ladder_afl()], [fetch_ladder_afltables()], [fetch_ladder_squiggle()] 
+#' can be called directly and return data from AFL website, AFL Tables and 
+#' Squiggle, respectively. 
+#' 
+#' @param season Season in YYYY format, defaults to NULL which returns the year 
+#'  corresponding the `Sys.Date()`
+#' @param round_number Round number, defaults to NULL which returns all rounds
 #' @param comp One of "AFLM" (default) or "AFLW"
-#' @param source One of "AFL" (default), "footywire", "afltables"
-#' @param ... Optional paramters passed onto various functions depending on source
+#' @param source One of "AFL" (default), "footywire", "afltables", "squiggle"
+#' @param ... Optional parameters passed onto various functions depending on source.
 #'
-#' @return returns a dataframe with the fixture that matches season, round.
+#' @return 
+#' A Tibble with the ladder from the relevant `season` and `round`.
 #' @export
-#'
-#' @examples 
+#' 
+#' @examples
 #' \dontrun{
+#' # Return data from AFL Website
 #' fetch_ladder(2020, round = 1)
+#' 
+#' # This is equivalent to
+#' fetch_ladder(2020, round = 1, source = "AFL")
+#' fetch_ladder_afl(2020, round = 1)
+#' 
+#' # Return AFLW data
+#' fetch_ladder(2020, round = 1, comp = "AFLW", source = "AFL")
+#' fetch_ladder_afl(2020, round = 1, comp = "AFLW")
+#' 
+#' # Not all sources have AFLW data and will return a warning
+#' fetch_ladder(2020, round = 1, comp = "AFLW", source = "afltables")
+#' fetch_ladder(2020, round = 1, comp = "AFLW", source = "squiggle")
+#' 
+#' # Different sources
+#' fetch_ladder(2015, round = 5, source = "afltables")
+#' fetch_ladder(2015, round = 5, source = "squiggle")
+#' 
+#' # Directly call functions for each source
+#' fetch_ladder_afl(2018, round = 9)
+#' fetch_ladder_afltables(2018, round = 9)
+#' fetch_ladder_squiggle(2018, round = 9)
 #' }
+#' 
+#' @family fetch ladder functions
+#' @seealso 
+#' * [fetch_ladder_afl] for official AFL data.
+#' * [fetch_ladder_afltables] for AFL Tables data.
+#' * [fetch_ladder_squiggle] for Squiggle data.
+#' 
+#' @importFrom magrittr %>%
+#' @importFrom rlang .data
 fetch_ladder <- function(season = NULL, 
                          round_number = NULL, 
                          comp = "AFLM", 
@@ -48,21 +88,8 @@ fetch_ladder <- function(season = NULL,
   }
 }
 
-#' Get AFL ladder
-#' 
-#' Returns the Ladder for the relevant Season and Round from the AFL.com.au website.
-#'
-#' @param season season in YYYY format
-#' @param round_number round number
-#' @param comp One of "AFLM" or "AFLW"
-#'
-#' @return returns a dataframe with the fixture that matches season, round.
+#' @rdname fetch_ladder
 #' @export
-#'
-#' @examples 
-#' \dontrun{
-#' get_afl_ladder(2020, round = 1)
-#' }
 fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   
   # check inputs
@@ -111,33 +138,13 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   dplyr::as_tibble(ladder_df)
 }
 
-#' Recreate the ladder for every or any given round and/or season from the afltables.com websit
-#'
-#' \code{fetch_ladder_afltables} returns a dataframe containing the ladder for either all seasons and rounds since 1987, or individual rounds/seasons
-#'
-#' The dataframe contains information about the Round, Season, Points For/Against, Ladder Position. It can either take in a data frame created using \code{get_match_results}, or if \code{match_results_df} is unspecified, will extract all games using \code{get_match_results}.
-#' Will only allow selecting rounds of the premiership season, not finals.
-#'
-#' @param round_number An integer of the round or vector of integers for multiple rounds. If empty, all rounds returned
-#' @param season An integer of the season or vector of integers for multiple seasons. If empty, all seasons returned
-#' @param match_results_df A dataframe that has been returned from get_match_results. If empty \code{get_match_results} will execute first
-#' @return Returns a data frame containing a line for each team's ladder position at each round of a season
-#'
-#' @examples
-#' \dontrun{
-#' fetch_ladder_afltables()
-#' fetch_ladder_afltables(match_results_df=get_match_results_df, round_number=23, season=1990:2019)
-#' fetch_ladder_afltables(round_number = 10, season = 2019)
-#' }
+#' @rdname fetch_ladder
 #' @export
-#' @importFrom magrittr %>%
-fetch_ladder_afltables <- function(season = NULL,
-                                   round_number = NULL,
-                                   match_results_df = NULL) {
+fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_results_df = NULL) {
   
   
   suppressWarnings(if(is.null(match_results_df)) {
-    match_results_df <- get_match_results()
+    match_results_df <- fetch_results_afltables(season, round_number)
   })
   
   # first some cleaning up
@@ -250,22 +257,8 @@ fetch_ladder_afltables <- function(season = NULL,
 
 
 
-#' Get Squiggle ladder
-#' 
-#' Returns the Ladder for the relevant Season and Round from the squiggle.com API.
-#' 
-#' This is essetnially a wrapper for `fetch_squiggle_data`.
-#'
-#' @param season season in YYYY format
-#' @param round_number round number
-#'
-#' @return returns a dataframe with the fixture that matches season, round.
+#' @rdname fetch_ladder
 #' @export
-#'
-#' @examples 
-#' \dontrun{
-#' fetch_ladder_squiggle(2020, round = 1)
-#' }
 fetch_ladder_squiggle <- function(season = NULL, 
                                   round_number = NULL) {
   

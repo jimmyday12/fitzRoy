@@ -1,20 +1,45 @@
 #' Fetch Player Stats
 #' 
-#' Returns the Player for the relevant Season and optionally Round from various sources.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
-#' @param comp One of "AFLM" (default) or "AFLW"
-#' @param source One of "AFL" (default), "footywire", "afltables"
-#' @param ... Optional paramters passed onto various functions depending on source
+#' @description 
+#' `fetch_player_stats` returns the Individual Player Statistics for AFL games. Internally, it calls 
+#' a corresponding `fetch_player_stats_*` function that depends on the source given. 
+#' By default the source used will be the official AFL website. 
 #' 
-#' @return returns a dataframe with the playerer that matches season, round.
+#' [fetch_player_stats_afl()], [fetch_player_stats_footywire()], [fetch_player_stats_squiggle()] 
+#' can be called directly and return data from AFL website, AFL Tables and 
+#' Squiggle, respectively. 
+#' 
+#' @inheritParams fetch_ladder
+#' @return 
+#' A Tibble with the player stats from the relevant `season` and `round`.
 #' @export
-#'
-#' @examples 
+#' 
+#' @examples
 #' \dontrun{
-#' fetch_player_stats(2020, round = 1)
+#' # Return data for whole season from footywire
+#' fetch_player_stats(source = "footywire")
+#' 
+#' # This is equivalent to
+#' fetch_player_stats_footywire()
+#' 
+#' # Currently there is no AFLW data and will return a warning
+#' fetch_player_stats(2020, comp = "AFLW", source = "footywire")
+#' 
+#' # Different sources
+#' fetch_player_stats(2015, round = 5, source = "footywire")
+#' fetch_player_stats(2015, round = 5, source = "fryzigg")
+#' 
+#' # Directly call functions for each source
+#' fetch_player_stats_afltables(2020)
+#' fetch_fixture_fryzigg(2020)
+#' fetch_player_stats_footywire(2020)
 #' }
+#' 
+#' @family fetch fixture functions
+#' @seealso 
+#' * [fetch_player_stats_footywire] for Footywire data.
+#' * [fetch_player_stats_afltables] for AFL Tables data.
+#' * [fetch_player_stats_fryzigg] for Fryzigg data.
 fetch_player_stats <- function(season = NULL, 
                           round_number = NULL, 
                           comp = "AFLM", 
@@ -26,7 +51,7 @@ fetch_player_stats <- function(season = NULL,
   check_comp_source(comp, source)
   
   if (source == "AFL") {
-    
+    cli::cli_alert_warning("No player stats available for AFL website. Use `source` parameter to call one of \"footywire\", \"afltables\" or \"fryzigg\"" )
     return(NULL)
   }
   
@@ -55,33 +80,9 @@ fetch_player_stats <- function(season = NULL,
 
 
 
-#' Return afltables match stats
-#'
-#' \code{get_afltables_stats} returns a data frame containing match stats for each game within the specified date range
-#'
-#' This function returns a data frame containing match stats for each game within the specified date range. The data from contains all stats on afltables match pages and returns 1 row per player.
-#'
-#' The data for this function is hosted on github to avoid extensive scraping of historical data from afltables.com. This will be updated regularly.
-#'
-#' @param start_date character string for start date return to URLs from, in "dmy" or "ymd" format
-#' @param end_date optional, character string for end date to return URLS, in "dmy" or "ymd" format
-#'
-#' @return a data table containing player stats for each game between start date and end date
+#' @rdname fetch_player_stats
 #' @export
-#'
-#' @examples
-#' #
-#' \dontrun{
-#' # Gets all data
-#' get_afltables_stats()
-#' # Specify a date range
-#' get_afltables_stats("01/01/2018", end_date = "01/04/2018")
-#' }
-#' @importFrom magrittr %>%
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
-fetch_player_stats_afltables <- function(season = NULL, 
-                                         round_number = NULL) {
+fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
   
   if (!is.null(round_number)){
     cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_afltables}.Returning data for all rounds in specified seasons")
@@ -139,34 +140,9 @@ fetch_player_stats_afltables <- function(season = NULL,
 }
 
 
-#' Return match stats from fryziggafl.net/api/
-#'
-#' \code{fetch_player_stats_fryzigg} returns a data frame containing match stats for each game within the specified date range
-#'
-#' This function returns a data frame containing match stats for each game within the specified date range. The data from contains all stats from the fryziggafl api and returns 1 row per player.
-#'
-#' The date for this fucntion is called from an API with data stored in a PostgreSQL database on AWS.
-#' Updated at the conclusion of every game. A cached version to come.
-#'
-#' @param start optional, character string or numeric for start year, in "YYYY"ormat
-#' @param end optional, character string or numeric for end year, in "YYYY"format
-#'
-#' @return a data table containing player stats for each game between start and end years
+#' @rdname fetch_player_stats
 #' @export
-#'
-#' @examples
-#' #
-#' \dontrun{
-#' # Gets all data
-#' fetch_player_stats_fryzigg()
-#' # Specify a date range
-#' fetch_player_stats_fryzigg(start = 2018, end = 2019)
-#' }
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
-
-fetch_player_stats_fryzigg <- function(season = NULL,
-                                       round_number = NULL) {
+fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL) {
   
   if (!is.null(round_number)){
     cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_afltables}.Returning data for all rounds in specified seasons")
@@ -188,26 +164,9 @@ fetch_player_stats_fryzigg <- function(season = NULL,
   return(stats_df)
 }
 
-#' Update the included footywire stats data to the specified date.
-#'
-#' \code{update_footywire_stats} returns a dataframe containing player match stats from [footywire](https://www.footywire.com)
-#'
-#' The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
-#'
-#' This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.
-#' @param check_existing A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time.
-#' @return Returns a data frame containing player match stats for each match ID
-#'
-#' @examples
-#' \dontrun{
-#' update_footywire_stats()
-#' }
+#' @rdname fetch_player_stats
 #' @export
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
-fetch_player_stats_footywire <- function(season = NULL,
-                                  round_number = NULL,
-                                  check_existing = TRUE) {
+fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, check_existing = TRUE) {
   
   if ( !rlang::is_bool(check_existing)) {
     stop(glue::glue("check_existing should be TRUE or FALSE, not `{class(check_existing)}`")) # nolint

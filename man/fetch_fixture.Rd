@@ -2,6 +2,9 @@
 % Please edit documentation in R/fetch-fixture.R
 \name{fetch_fixture}
 \alias{fetch_fixture}
+\alias{fetch_fixture_afl}
+\alias{fetch_fixture_footywire}
+\alias{fetch_fixture_squiggle}
 \title{Fetch Fixture}
 \usage{
 fetch_fixture(
@@ -11,26 +14,79 @@ fetch_fixture(
   source = "AFL",
   ...
 )
+
+fetch_fixture_afl(season = NULL, round_number = NULL, comp = "AFLM")
+
+fetch_fixture_footywire(
+  season = NULL,
+  round_number = NULL,
+  convert_date = FALSE
+)
+
+fetch_fixture_squiggle(season = NULL, round_number = NULL)
 }
 \arguments{
-\item{season}{season in YYYY format, defaults to NULL which returns the year corresponding the \code{Sys.Date()}}
+\item{season}{Season in YYYY format, defaults to NULL which returns the year
+corresponding the \code{Sys.Date()}}
 
-\item{round_number}{round number, defaults to NULL which returns all rounds}
+\item{round_number}{Round number, defaults to NULL which returns all rounds}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
-\item{source}{One of "AFL" (default), "footywire", "afltables"}
+\item{source}{One of "AFL" (default), "footywire", "afltables", "squiggle"}
 
-\item{...}{Optional paramters passed onto various functions depending on source}
+\item{...}{Optional parameters passed onto various functions depending on source.}
+
+\item{convert_date}{logical, if TRUE, converts date column to date format instead of date time.}
 }
 \value{
-returns a dataframe with the fixture that matches season, round.
+A Tibble with the fixture from the relevant \code{season} and \code{round}.
 }
 \description{
-Returns the Fixture for the relevant Season and optionally Round from various sources.
+\code{fetch_fixture} returns the Fixture for a given AFL Round. Internally, it calls
+a corresponding \verb{fetch_fixture_*} function that depends on the source given.
+By default the source used will be the official AFL website.
+
+\code{\link[=fetch_fixture_afl]{fetch_fixture_afl()}}, \code{\link[=fetch_fixture_footywire]{fetch_fixture_footywire()}}, \code{\link[=fetch_fixture_squiggle]{fetch_fixture_squiggle()}}
+can be called directly and return data from AFL website, AFL Tables and
+Squiggle, respectively.
 }
 \examples{
 \dontrun{
-fetch_fixture(2020, round = 1)
+# Return data for whole season from AFL Website
+fetch_fixture(2020)
+
+# This is equivalent to
+fetch_fixture(2020, source = "AFL")
+fetch_fixture_afl(2020)
+
+# Return AFLW data
+fetch_fixture(2020, comp = "AFLW", source = "AFL")
+fetch_fixture_afl(2020, comp = "AFLW")
+
+# Not all sources have AFLW data and will return a warning
+fetch_fixture(2020, comp = "AFLW", source = "footywire")
+fetch_fixture(2020, comp = "AFLW", source = "squiggle")
+
+# Different sources
+fetch_fixture(2015, round = 5, source = "footywire")
+fetch_fixture(2015, round = 5, source = "squiggle")
+
+# Directly call functions for each source
+fetch_fixture_afl(2018, round = 9)
+fetch_fixture_footywire(2018, round = 9)
+fetch_fixture_squiggle(2018, round = 9)
 }
+
 }
+\seealso{
+\itemize{
+\item \link{fetch_fixture_afl} for official AFL data.
+\item \link{fetch_fixture_afltables} for AFL Tables data.
+\item \link{fetch_fixture_squiggle} for Squiggle data.
+}
+
+Other fetch fixture functions: 
+\code{\link{fetch_player_stats}()}
+}
+\concept{fetch fixture functions}

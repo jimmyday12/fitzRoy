@@ -413,3 +413,6 @@ fetch_footywire_stats <- function(ids) {
   message("Finished getting data")
   return(dat)
 }
+
+DIGITS <- stringr::regex("round\\s+(\\d+)", ignore_case = TRUE)
+

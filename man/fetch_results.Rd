@@ -2,6 +2,10 @@
 % Please edit documentation in R/fetch-results.R
 \name{fetch_results}
 \alias{fetch_results}
+\alias{fetch_results_afl}
+\alias{fetch_results_afltables}
+\alias{fetch_results_footywire}
+\alias{fetch_results_squiggle}
 \title{Fetch Results}
 \usage{
 fetch_results(
@@ -11,26 +15,82 @@ fetch_results(
   source = "AFL",
   ...
 )
+
+fetch_results_afl(season = NULL, round_number = NULL, comp = "AFLM")
+
+fetch_results_afltables(season = NULL, round_number = NULL)
+
+fetch_results_footywire(
+  season = NULL,
+  round_number = NULL,
+  last_n_matches = NULL
+)
+
+fetch_results_squiggle(season = NULL, round_number = NULL)
 }
 \arguments{
-\item{season}{season in YYYY format, defaults to NULL which returns the year corresponding the \code{Sys.Date()}}
+\item{season}{Season in YYYY format, defaults to NULL which returns the year
+corresponding the \code{Sys.Date()}}
 
-\item{round_number}{round number, defaults to NULL which returns all rounds}
+\item{round_number}{Round number, defaults to NULL which returns all rounds}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
-\item{source}{One of "AFL" (default), "footywire", "afltables"}
+\item{source}{One of "AFL" (default), "footywire", "afltables", "squiggle"}
 
-\item{...}{Optional paramters passed onto various functions depending on source}
+\item{...}{Optional parameters passed onto various functions depending on source.}
+
+\item{last_n_matches}{number of matches to return, starting from the most recent}
 }
 \value{
-returns a dataframe with the results that matches season, round.
+A Tibble with the results from the relevant \code{season} and \code{round}.
 }
 \description{
-Returns the Results for the relevant Season and optionally Round from various sources.
+\code{fetch_results} returns the results for a given AFL Round. Internally, it calls
+a corresponding \verb{fetch_results_*} function that depends on the source given.
+By default the source used will be the official AFL website.
+
+\code{\link[=fetch_results_afl]{fetch_results_afl()}}, \code{\link[=fetch_results_afltables]{fetch_results_afltables()}}, \code{\link[=fetch_results_footywire]{fetch_results_footywire()}}, \code{\link[=fetch_results_squiggle]{fetch_results_squiggle()}}
+can be called directly and return data from AFL website, AFL Tables, Footywire and
+Squiggle, respectively.
 }
 \examples{
 \dontrun{
-fetch_results(2020, round = 1)
+# Return data for whole season from AFL Website
+fetch_results(2020)
+
+# This is equivalent to
+fetch_results(2020, source = "AFL")
+fetch_results_afl(2020)
+
+# Return AFLW data
+fetch_results(2020, comp = "AFLW", source = "AFL")
+fetch_results_afl(2020, comp = "AFLW")
+
+# Not all sources have AFLW data and will return a warning
+fetch_results(2020, comp = "AFLW", source = "footywire")
+fetch_results(2020, comp = "AFLW", source = "afltables")
+fetch_results(2020, comp = "AFLW", source = "squiggle")
+
+# Different sources
+fetch_results(2015, round = 5, source = "footywire")
+fetch_results(2015, round = 5, source = "afltables")
+fetch_results(2015, round = 5, source = "squiggle")
+
+# Directly call functions for each source
+fetch_results_afl(2018, round = 9)
+fetch_results_footywire(2018, round = 9)
+fetch_results_afltables(2018, round = 9)
+fetch_results_squiggle(2018, round = 9)
+}
+
+}
+\seealso{
+\itemize{
+\item \link{fetch_results_afl} for official AFL data.
+\item \link{fetch_results_afltables} for AFL Tables data.
+\item \link{fetch_results_footywire} for Footywire data.
+\item \link{fetch_results_squiggle} for Squiggle data.
 }
 }
+\concept{fetch results functions}

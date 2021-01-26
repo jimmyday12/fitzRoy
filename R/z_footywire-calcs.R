@@ -42,6 +42,7 @@ get_footywire_stats <- function(ids) {
 #' @importFrom rlang .data
 update_footywire_stats <- function(check_existing = TRUE) {
   .Deprecated("fetch_player_stats_footywire")
+  if (!is.logical(check_existing)) rlang::abort("check_existing should be logical")
   season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
   fetch_player_stats_footywire(season = season)
 }

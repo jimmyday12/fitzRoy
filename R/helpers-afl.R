@@ -3,7 +3,7 @@
 #' Returns the ID for the comp
 #'
 #' @param comp One of "AFLM" or "AFLW"
-#'
+#' @keywords internal
 #' @noRd
 find_comp_id <- function(comp){
   if (!comp %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\"
@@ -46,7 +46,7 @@ get_afl_cookie <- function() {
 #' Returns the ID for the season
 #'
 #' @param season Season, in YYYY format.
-#'
+#' @keywords internal
 #' @noRd
 find_season_id <- function(season, comp = "AFLM"){
   # check inputs
@@ -82,7 +82,7 @@ find_season_id <- function(season, comp = "AFLM"){
 #' Returns the ID for the season
 #'
 #' @param season Season, in YYYY format.
-#'
+#' @keywords internal
 #' @noRd
 find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = "AFLM"){
   

@@ -1,20 +1,55 @@
 #' Fetch Results
 #' 
-#' Returns the Results for the relevant Season and optionally Round from various sources.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
-#' @param comp One of "AFLM" (default) or "AFLW"
-#' @param source One of "AFL" (default), "footywire", "afltables"
-#' @param ... Optional paramters passed onto various functions depending on source
+#' @description 
+#' `fetch_results` returns the results for a given AFL Round. Internally, it calls 
+#' a corresponding `fetch_results_*` function that depends on the source given. 
+#' By default the source used will be the official AFL website. 
 #' 
-#' @return returns a dataframe with the results that matches season, round.
+#' [fetch_results_afl()], [fetch_results_afltables()], [fetch_results_footywire()], [fetch_results_squiggle()] 
+#' can be called directly and return data from AFL website, AFL Tables, Footywire and 
+#' Squiggle, respectively. 
+#' 
+#' @inheritParams fetch_ladder
+#' @return 
+#' A Tibble with the results from the relevant `season` and `round`.
 #' @export
-#'
-#' @examples 
+#' 
+#' @examples
 #' \dontrun{
-#' fetch_results(2020, round = 1)
+#' # Return data for whole season from AFL Website
+#' fetch_results(2020)
+#' 
+#' # This is equivalent to
+#' fetch_results(2020, source = "AFL")
+#' fetch_results_afl(2020)
+#' 
+#' # Return AFLW data
+#' fetch_results(2020, comp = "AFLW", source = "AFL")
+#' fetch_results_afl(2020, comp = "AFLW")
+#' 
+#' # Not all sources have AFLW data and will return a warning
+#' fetch_results(2020, comp = "AFLW", source = "footywire")
+#' fetch_results(2020, comp = "AFLW", source = "afltables")
+#' fetch_results(2020, comp = "AFLW", source = "squiggle")
+#' 
+#' # Different sources
+#' fetch_results(2015, round = 5, source = "footywire")
+#' fetch_results(2015, round = 5, source = "afltables")
+#' fetch_results(2015, round = 5, source = "squiggle")
+#' 
+#' # Directly call functions for each source
+#' fetch_results_afl(2018, round = 9)
+#' fetch_results_footywire(2018, round = 9)
+#' fetch_results_afltables(2018, round = 9)
+#' fetch_results_squiggle(2018, round = 9)
 #' }
+#' 
+#' @family fetch results functions
+#' @seealso 
+#' * [fetch_results_afl] for official AFL data.
+#' * [fetch_results_afltables] for AFL Tables data.
+#' * [fetch_results_footywire] for Footywire data.
+#' * [fetch_results_squiggle] for Squiggle data.
 fetch_results <- function(season = NULL, 
                           round_number = NULL, 
                           comp = "AFLM", 
@@ -66,24 +101,9 @@ fetch_results <- function(season = NULL,
     }
 }
 
-#' Fetch AFL.com results
-#' 
-#' Returns the Results for the relevant Season and Round from the AFL.com.au website.
-#'
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
-#' @param comp One of "AFLM" (default) or "AFLW"
-#'
-#' @return returns a dataframe with the results that matches season, round.
+#' @rdname fetch_results
 #' @export
-#'
-#' @examples 
-#' \dontrun{
-#' fetch_results_afl(2020, round = 1)
-#' }
-fetch_results_afl <- function(season = NULL, 
-                              round_number = NULL, 
-                              comp = "AFLM") {
+fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   
   fetch_fixture_afl(season = season,
                     round_number = round_number,
@@ -93,27 +113,9 @@ fetch_results_afl <- function(season = NULL,
 
 
 
-#' Fetch match results from afltables.com
-#'
-#' \code{fetch_results_afltables} returns a dataframe containing all match results from 1897-current
-#'
-#' The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access.
-#' It generally is updated on the day after the last game
-#' 
-#' @param season season in YYYY format, defaults to NULL which returns the year corresponding the `Sys.Date()`
-#' @param round_number round number, defaults to NULL which returns all rounds
-#' 
-#' @return Returns a data frame containing a line for each match
-#'
-#' @examples
-#' \dontrun{
-#' fetch_results_afltables()
-#' }
+#' @rdname fetch_results
 #' @export
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
-fetch_results_afltables <- function(season = NULL,
-                                    round_number = NULL) {
+fetch_results_afltables <- function(season = NULL, round_number = NULL) {
   
   season <- check_season(season)
   # Get data ----
@@ -203,28 +205,10 @@ fetch_results_afltables <- function(season = NULL,
 }
 
 
-#' Fetch Footywire Match REsults
-#' 
-#' Returns the results of matches played in a particular season. You can limit how many results you return with the `last_n_results` parameter. 
-#' 
-#' For example - you might just want to return the results from last round so you'd set `last_n_results = 9`.
-#' 
-#' If you want to return a large amount of results, it is more efficient to use `get_match_results()` however this can sometimes take some time to update the latest rounds results.
-#' 
-#' @param season season to return results for
-#' @param round_number = NULL, not used
 #' @param last_n_matches number of matches to return, starting from the most recent
-#'
-#' @return Returns a data frame of match results from the year and number of results
+#' @rdname fetch_results
 #' @export
-#'
-#' @examples
-#' \dontrun{
-#' fetch_results_footywire(2020, last_n_matches = 5)
-#' }
-fetch_results_footywire <- function(season = NULL, 
-                                    round_number = NULL, 
-                                    last_n_matches = NULL) {
+fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_matches = NULL) {
   season <- check_season(season)
   
   if (season < 1965) {
@@ -256,26 +240,9 @@ fetch_results_footywire <- function(season = NULL,
 }
 
 
-#' Get Squiggle Results
-#' 
-#' Returns the Results for the relevant Season and Round from the squiggle.com API.
-#' 
-#' This is essentially a wrapper for `fetch_squiggle_data`.
-#' 
-#' Data returned will contain only completed matches. Use `fetch_fixture_squiggle` to return non completed matches.
-#'
-#' @param season season in YYYY format
-#' @param round_number round number
-#'
-#' @return returns a dataframe with the fixture that matches season, round.
+#' @rdname fetch_results
 #' @export
-#'
-#' @examples 
-#' \dontrun{
-#' fetch_results_squiggle(2020, round = 1)
-#' }
-fetch_results_squiggle <- function(season = NULL, 
-                                   round_number = NULL) {
+fetch_results_squiggle <- function(season = NULL, round_number = NULL) {
   
   # check inputs
   season <- check_season(season)
