@@ -164,6 +164,7 @@ fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL) {
   return(stats_df)
 }
 
+#' @param check_existing logical, should we check existing data. This will likely be removed in future version as it takes a long time to re-scrape data
 #' @rdname fetch_player_stats
 #' @export
 fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, check_existing = TRUE) {
