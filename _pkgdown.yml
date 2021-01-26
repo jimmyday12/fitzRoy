@@ -14,11 +14,43 @@ template:
     ganalytics: UA-77406420-2
     
 news:
-  one_page: false
+  one_page: true
 
 reference:
   - title: Main Functions
-    desc: Functions used to download and process data
+    desc: Functions used to fetch data
+    contents:
+    - '`fetch_ladder`'
+    - '`fetch_results`'
+    - '`fetch_fixture`'
+    - '`fetch_player_stats`'
+  - title: Ladder Functions
+    desc: Functions used to fetch ladder data
+    contents:  
+    - '`fetch_ladder_afl`'
+    - '`fetch_ladder_afltables`'
+    - '`fetch_ladder_squiggle`'
+  - title: Results Functions
+    desc: Functions used to fetch results data
+    contents:  
+    - '`fetch_results_afl`'
+    - '`fetch_results_afltables`'
+    - '`fetch_results_footywire`'
+    - '`fetch_results_squiggle`'
+  - title: Fixture Functions
+    desc: Functions used to fetch fixture data
+    contents:  
+    - '`fetch_fixture_afl`'
+    - '`fetch_fixture_footywire`'
+    - '`fetch_fixture_squiggle`'
+  - title: Player Stats Functions
+    desc: Functions used to fetch player stats data
+    contents:  
+    - '`fetch_player_stats_afltables`'
+    - '`fetch_player_stats_footywire`'
+    - '`fetch_player_stats_fryzigg`'
+  - title: Main Functions
+    desc: Most of these are going to be deprecated in favour of the above.
     contents:
       - '`get_fixture`'
       - '`get_afltables_stats`'
@@ -26,7 +58,6 @@ reference:
       - '`update_footywire_stats`'
       - '`get_footywire_betting_odds`'
       - '`get_match_results`'
-      - '`convert_results`'
       - '`get_squiggle_data`'
       - '`get_aflw_detailed_data`'
       - '`get_aflw_detailed_match_data`'
@@ -41,6 +72,8 @@ reference:
       - '`fetch_ladder_afl`'
       - '`get_afl_fixture`'
       - '`get_aflw_player_stats`'
+      - '`fetch_betting_odds_footywire`'
+      - '`fetch_squiggle_data`'
       
   - title: Data
     desc: Included data 
@@ -49,16 +82,10 @@ reference:
   - title: Internals
     desc: Internal functions and helpers
     contents:
-      - '`footywire_html`'
-      - '`get_match_data`'
       - '`replace_teams`'
       - '`replace_venues`'
-      - '`scrape_afltables_match`'
-      - '`get_afltables_urls`'
-      - '`convert_results`'
       - '`get_aflw_cookie`'
       - '`get_score_progression_raw`'
-      - '`verify_year`'
       - '`get_afl_cookie`'
       
       
