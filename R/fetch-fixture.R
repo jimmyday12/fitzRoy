@@ -44,7 +44,7 @@
 #' @family fetch fixture functions
 #' @seealso 
 #' * [fetch_fixture_afl] for official AFL data.
-#' * [fetch_fixture_afltables] for AFL Tables data.
+#' * [fetch_fixture_footywire] for AFL Tables data.
 #' * [fetch_fixture_squiggle] for Squiggle data.
 fetch_fixture <- function(season = NULL, 
                          round_number = NULL, 

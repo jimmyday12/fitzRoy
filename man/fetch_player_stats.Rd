@@ -36,6 +36,8 @@ corresponding the \code{Sys.Date()}}
 \item{source}{One of "AFL" (default), "footywire", "afltables", "squiggle"}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
+
+\item{check_existing}{logical, should we check existing data. This will likely be removed in future version as it takes a long time to re-scrape data}
 }
 \value{
 A Tibble with the player stats from the relevant \code{season} and \code{round}.
@@ -45,7 +47,7 @@ A Tibble with the player stats from the relevant \code{season} and \code{round}.
 a corresponding \verb{fetch_player_stats_*} function that depends on the source given.
 By default the source used will be the official AFL website.
 
-\code{\link[=fetch_player_stats_afl]{fetch_player_stats_afl()}}, \code{\link[=fetch_player_stats_footywire]{fetch_player_stats_footywire()}}, \code{\link[=fetch_player_stats_squiggle]{fetch_player_stats_squiggle()}}
+\code{\link[=fetch_player_stats_footywire]{fetch_player_stats_footywire()}}, \code{\link[=fetch_player_stats_afltables]{fetch_player_stats_afltables()}}, \code{\link[=fetch_player_stats_fryzigg]{fetch_player_stats_fryzigg()}}
 can be called directly and return data from AFL website, AFL Tables and
 Squiggle, respectively.
 }

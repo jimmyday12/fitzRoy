@@ -5,7 +5,7 @@
 #' a corresponding `fetch_player_stats_*` function that depends on the source given. 
 #' By default the source used will be the official AFL website. 
 #' 
-#' [fetch_player_stats_afl()], [fetch_player_stats_footywire()], [fetch_player_stats_squiggle()] 
+#' [fetch_player_stats_footywire()], [fetch_player_stats_afltables()], [fetch_player_stats_fryzigg()] 
 #' can be called directly and return data from AFL website, AFL Tables and 
 #' Squiggle, respectively. 
 #' 
@@ -226,7 +226,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
       
       new_data <- fetch_footywire_stats(git_ids)
       dat <- dat_git %>% dplyr::bind_rows(new_data)
-      cli::cli_process_end(ids)
+      cli::cli_process_done(id3)
       
       return(dat)
     }

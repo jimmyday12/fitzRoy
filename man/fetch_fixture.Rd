@@ -82,7 +82,7 @@ fetch_fixture_squiggle(2018, round = 9)
 \seealso{
 \itemize{
 \item \link{fetch_fixture_afl} for official AFL data.
-\item \link{fetch_fixture_afltables} for AFL Tables data.
+\item \link{fetch_fixture_footywire} for AFL Tables data.
 \item \link{fetch_fixture_squiggle} for Squiggle data.
 }
 
