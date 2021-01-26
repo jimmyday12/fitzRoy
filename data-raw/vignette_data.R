@@ -1,4 +1,4 @@
-# This script gets data that is going to be used by the Vignettes. Add data to here where required. 
+# This script gets data that is going to be used by the Vignettes. Add data to here where required.
 
 
 # elo-ratings script to get data for vignette
@@ -13,9 +13,9 @@ results <- fitzRoy::get_match_results()
 fixture <- fitzRoy::get_fixture(2019)
 
 # mens-stats
-#results <- get_match_results()
+# results <- get_match_results()
 stats <- get_afltables_stats(start_date = "2018-01-01", end_date = "2018-06-01")
-#fixture <- get_fixture()
+# fixture <- get_fixture()
 stats_gf <- get_footywire_stats(ids = 9927)
 ladder <- return_ladder(match_results_df = results)
 ladder_round <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
@@ -45,32 +45,32 @@ afldata_cols <- names(afldata)
 # Function to fix abbreviations
 fix_abbreviations <- function(x) {
   purrr::map_chr(x, ~
-            case_when(
-              . == "KI" ~ "Kicks",
-              . == "MK" ~ "Marks",
-              . == "HB" ~ "Handballs",
-              . == "GL" ~ "Goals",
-              . == "BH" ~ "Behinds",
-              . == "HO" ~ "Hit.Outs",
-              . == "TK" ~ "Tackles",
-              . == "RB" ~ "Rebounds",
-              . == "IF" ~ "Inside.50s",
-              . == "CL" ~ "Clearances",
-              . == "CG" ~ "Clangers",
-              . == "FF" ~ "Frees.For",
-              . == "FA" ~ "Frees.Against",
-              . == "BR" ~ "Brownlow.Votes",
-              . == "CP" ~ "Contested.Possessions",
-              . == "UP" ~ "Uncontested.Possessions",
-              . == "CM" ~ "Contested.Marks",
-              . == "MI" ~ "Marks.Inside.50",
-              . == "One.Percenters" ~ "One.Percenters",
-              . == "BO" ~ "Bounces",
-              . == "GA" ~ "Goal.Assists",
-              . == "TOG" ~ "Time.on.Ground..",
-              . == "Jumper" ~ "Jumper.No",
-              TRUE ~ ""
-            ))
+  case_when(
+    . == "KI" ~ "Kicks",
+    . == "MK" ~ "Marks",
+    . == "HB" ~ "Handballs",
+    . == "GL" ~ "Goals",
+    . == "BH" ~ "Behinds",
+    . == "HO" ~ "Hit.Outs",
+    . == "TK" ~ "Tackles",
+    . == "RB" ~ "Rebounds",
+    . == "IF" ~ "Inside.50s",
+    . == "CL" ~ "Clearances",
+    . == "CG" ~ "Clangers",
+    . == "FF" ~ "Frees.For",
+    . == "FA" ~ "Frees.Against",
+    . == "BR" ~ "Brownlow.Votes",
+    . == "CP" ~ "Contested.Possessions",
+    . == "UP" ~ "Uncontested.Possessions",
+    . == "CM" ~ "Contested.Marks",
+    . == "MI" ~ "Marks.Inside.50",
+    . == "One.Percenters" ~ "One.Percenters",
+    . == "BO" ~ "Bounces",
+    . == "GA" ~ "Goal.Assists",
+    . == "TOG" ~ "Time.on.Ground..",
+    . == "Jumper" ~ "Jumper.No",
+    TRUE ~ ""
+  ))
 }
 
 
@@ -105,6 +105,7 @@ team_abbr <- tibble(
 fryzigg <- fitzRoy::get_fryzigg_stats(start = 2019, end = 2019)
 
 usethis::use_data(stat_abbr, team_abbr, afldata_cols,
-                  results, fixture, stats, stats_gf, 
-                  ladder, ladder_round, sources, tips, tips_round, fryzigg,
-                  internal = TRUE, overwrite = TRUE)
+  results, fixture, stats, stats_gf,
+  ladder, ladder_round, sources, tips, tips_round, fryzigg,
+  internal = TRUE, overwrite = TRUE
+)

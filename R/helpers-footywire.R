@@ -6,7 +6,7 @@
 #' This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis.
 #'
 #' @param results A dataframe that has been returned from get_match_results
-#' 
+#'
 #' @keywords internal
 #' @noRd
 convert_results <- function(results) {
@@ -28,7 +28,7 @@ convert_results <- function(results) {
 #'
 #' @param x URL of the match
 #' @param id Match ID number
-#' 
+#'
 #' @keywords internal
 #' @noRd
 footywire_html <- function(x, id) {
@@ -116,7 +116,7 @@ footywire_html <- function(x, id) {
 #' Helper function for \code{get_footywire_stats}
 #'
 #' @param id A match id from afltables
-#' 
+#'
 #' @keywords internal
 #' @noRd
 get_match_data <- function(id) {
@@ -192,15 +192,14 @@ get_match_data <- function(id) {
 #' Returns available match idds for a given season
 #'
 #' @param season A numeric value for season year
-#' 
+#'
 #' @keywords internal
 #' @noRd
-fetch_footywire_match_ids <- function(season){
-  
+fetch_footywire_match_ids <- function(season) {
   paste0("https://www.footywire.com/afl/footy/ft_match_list?", season) %>%
     xml2::read_html() %>%
     rvest::html_nodes(".data:nth-child(5) a") %>%
-    rvest::html_attr('href') %>%
+    rvest::html_attr("href") %>%
     stringr::str_extract("[0-9]+")
 }
 
@@ -209,16 +208,15 @@ fetch_footywire_match_ids <- function(season){
 #' Extracts match data from footywire given a valid match ID.
 #'
 #' @param match_id An XML file returned from `xml2::read_html`
-#' 
+#'
 #' @keywords internal
 #' @noRd
 extract_match_data <- function(match_id) {
-  #pb$tick()
+  # pb$tick()
   match_url <- paste0("https://www.footywire.com/afl/footy/ft_match_statistics?mid=", match_id)
-  
+
   xml <- xml2::read_html(match_url)
   extract_footywire_match_table(xml)
-  
 }
 
 
@@ -227,38 +225,46 @@ extract_match_data <- function(match_id) {
 #' Returns match results table from an XML file.
 #'
 #' @param xml An XML file returned from `xml2::read_html`
-#' 
+#'
 #' @keywords internal
 #' @noRd
-extract_footywire_match_table <- function(xml){
+extract_footywire_match_table <- function(xml) {
   tbl <- xml %>%
     rvest::html_nodes("#matchscoretable") %>%
     rvest::html_table() %>%
     .[[1]]
-  
+
   tbl <- tbl %>%
     dplyr::rename(Points = .data$Final) %>%
     dplyr::select(.data$Team, .data$Points) %>%
     dplyr::mutate(Status = c("Home", "Away")) %>%
-    tidyr::pivot_wider(names_from = .data$Status, 
-                       values_from = c(.data$Team, .data$Points),
-                       names_sep = ".") %>%
-    dplyr::rename(Home.Team = .data$Team.Home,
-                  Away.Team = .data$Team.Away, 
-                  Home.Points = .data$Points.Home,
-                  Away.Points = .data$Points.Away)
-  
+    tidyr::pivot_wider(
+      names_from = .data$Status,
+      values_from = c(.data$Team, .data$Points),
+      names_sep = "."
+    ) %>%
+    dplyr::rename(
+      Home.Team = .data$Team.Home,
+      Away.Team = .data$Team.Away,
+      Home.Points = .data$Points.Home,
+      Away.Points = .data$Points.Away
+    )
+
   match_details <- extract_footywire_match_details(xml)
-  
+
   tbl <- tbl %>%
-    dplyr::mutate(Date = match_details$date,
-                  Time = match_details$time,
-                  Round = match_details$round,
-                  Venue = match_details$venue) %>%
-    dplyr::select(.data$Date, .data$Time, .data$Round, .data$Venue, 
-                  .data$Home.Team, .data$Away.Team, 
-                  .data$Home.Points, .data$Away.Points)
-  
+    dplyr::mutate(
+      Date = match_details$date,
+      Time = match_details$time,
+      Round = match_details$round,
+      Venue = match_details$venue
+    ) %>%
+    dplyr::select(
+      .data$Date, .data$Time, .data$Round, .data$Venue,
+      .data$Home.Team, .data$Away.Team,
+      .data$Home.Points, .data$Away.Points
+    )
+
   return(tbl)
 }
 
@@ -268,25 +274,27 @@ extract_footywire_match_table <- function(xml){
 #' Returns match details such as round, venue, date from an XML file.
 #'
 #' @param xml An XML file returned from `xml2::read_html`
-#' 
+#'
 #' @keywords internal
 #' @noRd
-extract_footywire_match_details <- function(xml){
+extract_footywire_match_details <- function(xml) {
   details <- xml %>%
     rvest::html_nodes(".lnorm") %>%
-    rvest::html_text() 
-  
-  date_time <- lubridate::dmy_hm(details[[2]]) 
+    rvest::html_text()
+
+  date_time <- lubridate::dmy_hm(details[[2]])
   date <- date_time %>% as.Date()
   time <- date_time %>% strftime(format = "%H:%M", tz = "UTC")
-  
+
   round <- stringr::str_split(details[[1]], ",")[[1]][1]
   venue <- stringr::str_split(details[[1]], ",")[[1]][2]
-  
-  list(date = date,
-       time = time,
-       round = round,
-       venue = venue)
+
+  list(
+    date = date,
+    time = time,
+    round = round,
+    venue = venue
+  )
 }
 
 
@@ -295,7 +303,7 @@ extract_footywire_match_details <- function(xml){
 #' Helper function to parse round name from footywire
 #'
 #' @param max_regular_round_number Max round regular round number for season
-#' 
+#'
 #' @keywords internal
 #' @noRd
 parse_round_name <- function(max_regular_round_number) {
@@ -308,40 +316,40 @@ parse_round_name <- function(max_regular_round_number) {
   SEMI_FINALS <- stringr::regex("semi", ignore_case = TRUE)
   PRELIMINARY_FINALS <- stringr::regex("preliminary", ignore_case = TRUE)
   GRAND_FINAL <- stringr::regex("grand", ignore_case = TRUE)
-  
-  
+
+
   return(
     function(round_name) {
       round_number <- stringr::str_match(round_name, DIGITS)[[2]]
-      
+
       if (!is.na(round_number)) {
         return(round_number)
       }
-      
+
       finals_week <- stringr::str_match(round_name, FINALS_WEEK)[[2]]
-      
+
       if (!is.na(finals_week)) {
         # Betting data uses the format "YYYY Finals Week N" to label finals rounds
         # so we can just add N to max round to get the round number
         return(as.numeric(finals_week) + max_regular_round_number)
       }
-      
+
       is_first_finals_week <- !is.na(stringr::str_match(round_name, QUALIFYING_FINALS)) ||
         !is.na(stringr::str_match(round_name, ELIMINATION_FINALS)) ||
         !is.na(stringr::str_match(round_name, FINALS_WEEK_ONE))
-      
+
       if (is_first_finals_week) {
         return(max_regular_round_number + 1)
       }
-      
+
       if (!is.na(stringr::str_match(round_name, SEMI_FINALS))) {
         return(max_regular_round_number + 2)
       }
-      
+
       if (!is.na(stringr::str_match(round_name, PRELIMINARY_FINALS))) {
         return(max_regular_round_number + 3)
       }
-      
+
       if (!is.na(stringr::str_match(round_name, GRAND_FINAL))) {
         return(max_regular_round_number + 4)
       }
@@ -354,16 +362,16 @@ parse_round_name <- function(max_regular_round_number) {
 #' Helper function to parse round number from footywire
 #'
 #' @param round_names Names of rounds
-#' 
+#'
 #' @keywords internal
 #' @noRd
 calculate_round_number <- function(round_names) {
-  max_regular_round_number <-  round_names %>%
+  max_regular_round_number <- round_names %>%
     stringr::str_match_all(., DIGITS) %>%
     unlist(.) %>%
     as.numeric(.) %>%
     max(., na.rm = TRUE)
-  
+
   round_names %>%
     purrr::map(., parse_round_name(max_regular_round_number)) %>%
     unlist(.)
@@ -377,25 +385,25 @@ calculate_round_number <- function(round_names) {
 #' To find match ID, find the relevant matches on https://wwww.footywire.com
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
-#' 
-#' 
+#'
+#'
 #' @keywords internal
 #' @noRd
 fetch_footywire_stats <- function(ids) {
   if (missing(ids)) stop("Please provide an ID between 1 and 9999")
   if (!is.numeric(ids)) stop("ID must be numeric between 1 and 9999")
-  
+
   # Initialise dataframe
   dat <- as.data.frame(matrix(ncol = 42, nrow = 44))
-  
+
   # Now get data
   # First, only proceed if we've accessed the URL
   message("Getting data from https://www.footywire.com")
-  
+
   # Create Progress Bar
   # nolint start
   pb <- dplyr::progress_estimated(length(ids), min_time = 5)
-  
+
   # Loop through data using map
   dat <- ids %>%
     purrr::map_df(~ {
@@ -403,15 +411,14 @@ fetch_footywire_stats <- function(ids) {
       get_match_data(id = .x) # do function
     })
   # nolint end
-  
+
   # Rearrange
   dat <- dat %>%
     dplyr::arrange(.data$Date, .data$Match_id, dplyr::desc(.data$Status))
-  
+
   # Finish and return
   message("Finished getting data")
   return(dat)
 }
 
 DIGITS <- stringr::regex("round\\s+(\\d+)", ignore_case = TRUE)
-

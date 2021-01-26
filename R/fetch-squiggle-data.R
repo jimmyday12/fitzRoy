@@ -31,31 +31,35 @@
 #' # Get tips from Squiggle 2019
 #' squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
 #' }
-fetch_squiggle_data <- function(query = c("teams",
-                                        "sources",
-                                        "games",
-                                        "tips",
-                                        "ladder",
-                                        "standings", 
-                                        "virtual",
-                                        "pav"
-                              ), ...) {
+fetch_squiggle_data <- function(query = c(
+                                  "teams",
+                                  "sources",
+                                  "games",
+                                  "tips",
+                                  "ladder",
+                                  "standings",
+                                  "virtual",
+                                  "pav"
+                                ), ...) {
 
   # Ensure query is valid
   query <- match.arg(query)
 
   # Get optional expressions and check that they are valid
-  #exp <- rlang::enexprs(...)
+  # exp <- rlang::enexprs(...)
   exp <- list(...)
-  
-  valid <- c("year", "round", "game", 
-             "source", "complete", "team", 
-             "firstname", "surname", "match")
+
+  valid <- c(
+    "year", "round", "game",
+    "source", "complete", "team",
+    "firstname", "surname", "match"
+  )
 
   if (!all(names(exp) %in% valid)) {
     rlang::abort(glue::glue(
-    "Provided paramters must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
-    You provided the following: {toString(names(exp)}"))
+      "Provided paramters must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
+    You provided the following: {toString(names(exp)}"
+    ))
   }
 
   url <- "https://api.squiggle.com.au/?" %>%
@@ -143,17 +147,16 @@ Does your query make sense? Try the following URL in your browser
 #' # Get tips from Squiggle 2019
 #' squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
 #' }
-get_squiggle_data <- function(query = c("teams",
-                                        "sources",
-                                        "games",
-                                        "tips",
-                                        "ladder",
-                                        "standings", 
-                                        "virtual",
-                                        "pav"
-), ...) {
-  
+get_squiggle_data <- function(query = c(
+                                "teams",
+                                "sources",
+                                "games",
+                                "tips",
+                                "ladder",
+                                "standings",
+                                "virtual",
+                                "pav"
+                              ), ...) {
   .Deprecated("fetch_squiggle_data")
   fetch_squiggle_data(query = query, ...)
 }
-

@@ -13,24 +13,20 @@
 #' @examples
 #' \dontrun{
 #' return_ladder()
-#' return_ladder(match_results_df=get_match_results_df, season_round=23, season=1990:2019)
+#' return_ladder(match_results_df = get_match_results_df, season_round = 23, season = 1990:2019)
 #' return_ladder(season_round = 10, season = 2019)
 #' }
 #' @export
 #' @importFrom magrittr %>%
-return_ladder <- function(match_results_df=NA, season_round=NA, season=NA) {
-  
+return_ladder <- function(match_results_df = NA, season_round = NA, season = NA) {
   .Deprecated("fetch_ladder_afltables")
   if (is.na(season_round)) season_round <- NULL
   if (is.na(season)) season <- NULL
   if (is.na(match_results_df)) match_results_df <- NULL
   return(fetch_ladder(
-    season = season, 
+    season = season,
     round_number = season_round,
     source = "afltables",
-    match_results_df = match_results_df)
-    )
-  
-
+    match_results_df = match_results_df
+  ))
 }
-

@@ -25,11 +25,8 @@
 #' @importFrom rlang .data
 get_afltables_stats <- function(start_date = "1897-01-01",
                                 end_date = Sys.Date()) {
-  
   .Deprecated("fetch_player_stats_afltables")
-  
+
   seasons <- lubridate::year(start_date):lubridate::year(end_date)
   fetch_player_stats_afltables(season = seasons)
-  
 }
-

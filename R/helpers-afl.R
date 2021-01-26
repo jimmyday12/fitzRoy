@@ -5,20 +5,20 @@
 #' @param comp One of "AFLM" or "AFLW"
 #' @keywords internal
 #' @noRd
-find_comp_id <- function(comp){
+find_comp_id <- function(comp) {
   if (!comp %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\"
                                                  You supplied {comp}"))
-  
+
   api_url <- paste0("https://aflapi.afl.com.au/afl/v2/competitions/")
-  
+
   comps_dat <- httr::GET(api_url)
-  
+
   comps_cont <- comps_dat %>%
     httr::content(as = "text") %>%
     jsonlite::fromJSON(flatten = TRUE)
-  
+
   if (comp == "AFLM") comp <- "AFL"
-  
+
   ids <- comps_cont$competitions$id[comps_cont$competitions$code == comp]
   min(ids, na.rm = TRUE)
 }
@@ -48,28 +48,30 @@ get_afl_cookie <- function() {
 #' @param season Season, in YYYY format.
 #' @keywords internal
 #' @noRd
-find_season_id <- function(season, comp = "AFLM"){
+find_season_id <- function(season, comp = "AFLM") {
   # check inputs
   season <- check_season(season)
   check_comp(comp)
-  
+
   comp_id <- find_comp_id(comp)
-  
-  compSeasons_url <- paste0("https://aflapi.afl.com.au/afl/v2/competitions/",
-                            comp_id,
-                            "/compseasons")
-  
+
+  compSeasons_url <- paste0(
+    "https://aflapi.afl.com.au/afl/v2/competitions/",
+    comp_id,
+    "/compseasons"
+  )
+
   comp_dat <- httr::GET(compSeasons_url)
-  
+
   comp_cont <- comp_dat %>%
     httr::content(as = "text") %>%
     jsonlite::fromJSON(flatten = TRUE)
-  
+
   comp_ids <- comp_cont$compSeasons %>%
     dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", .data$name)))
-  
+
   id <- comp_ids$id[comp_ids$season == season]
-  
+
   if (length(id) < 1) {
     rlang::warn(glue::glue("Could not find a matching ID to the {comp} for {season}"))
     return(NULL)
@@ -84,32 +86,34 @@ find_season_id <- function(season, comp = "AFLM"){
 #' @param season Season, in YYYY format.
 #' @keywords internal
 #' @noRd
-find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = "AFLM"){
-  
+find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = "AFLM") {
+
   # check inputs
   season <- check_season(season)
   check_comp(comp)
-  
+
   if (is.null(season_id)) season_id <- find_season_id(season, comp)
 
-  round_url <- paste0("https://aflapi.afl.com.au/afl/v2/compseasons/",
-                      season_id,
-                      "/rounds")
-  
+  round_url <- paste0(
+    "https://aflapi.afl.com.au/afl/v2/compseasons/",
+    season_id,
+    "/rounds"
+  )
+
   round_dat <- httr::GET(round_url,
-                         query = list(pageSize = 30))
-  
+    query = list(pageSize = 30)
+  )
+
   round_cont <- round_dat %>%
     httr::content(as = "text") %>%
     jsonlite::fromJSON(flatten = TRUE)
-  
+
   df <- round_cont$rounds
-  
+
   id <- df$id[df$roundNumber == round_number]
 
   if (length(id) < 1) {
     rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au/ladder\"?"))
   }
   return(id)
-  
 }

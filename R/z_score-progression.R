@@ -14,5 +14,4 @@
 get_score_progression_raw <- function() {
   .Deprecated()
   return(NULL)
-  
 }

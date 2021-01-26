@@ -5,13 +5,13 @@
 #' The data for this function is hosted on github.
 #'
 #' @return a data table containing team long name, team abbreviation, and colours
-#' 
+#'
 #' @examples
 #' \dontrun{
 #' # Gets all data
 #' get_afl_colour_palettes()
 #' }
-
-get_afl_colour_palettes <- function(){
+#'
+get_afl_colour_palettes <- function() {
   return(readRDS(url("http://www.fryziggafl.net/static/team_colours.rda", "rb")))
 }

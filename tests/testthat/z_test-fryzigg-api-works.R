@@ -1,9 +1,10 @@
 context("test-fryzigg-api-works.R")
 
 if (!testthat:::on_cran()) {
-fryzigg_data <- get_fryzigg_stats(
-  start = 1897,
-  end = 2020)
+  fryzigg_data <- get_fryzigg_stats(
+    start = 1897,
+    end = 2020
+  )
 }
 
 test_that("get_fryzigg_stats works", {

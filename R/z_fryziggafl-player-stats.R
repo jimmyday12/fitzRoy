@@ -26,7 +26,6 @@
 
 get_fryzigg_stats <- function(start = 1897,
                               end = as.numeric(format(Sys.Date(), "%Y"))) {
-  
   .Deprecated("fetch_player_stats_fryzigg")
   seasons <- start:end
   return(fetch_player_stats_fryzigg(seasons))

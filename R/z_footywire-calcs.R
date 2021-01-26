@@ -6,11 +6,11 @@
 #' To find match ID, find the relevant matches on https://wwww.footywire.com
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
-#' 
+#'
 #' @return Returns a data frame containing player match stats for each match ID
-#' 
+#'
 #' @export
-#' 
+#'
 #' @examples
 #' \dontrun{
 #' get_footywire_stats(ids = 5000:5100)
@@ -69,9 +69,11 @@ update_footywire_stats <- function(check_existing = TRUE) {
 get_fixture <- function(season = lubridate::year(Sys.Date()),
                         convert_date = FALSE) {
   .Deprecated("fetch_fixture_footywire")
-  fetch_fixture(season = season, 
-                source = "footywire",
-                convert_date = convert_date)
+  fetch_fixture(
+    season = season,
+    source = "footywire",
+    convert_date = convert_date
+  )
 }
 
 #' Get AFL match betting odds from https://www.footywire.com
@@ -96,7 +98,9 @@ get_footywire_betting_odds <- function(
                                        end_season = lubridate::year(Sys.Date())) {
   .Deprecated("fetch_betting_odds_footywire")
   return(
-    fetch_betting_odds_footywire(start_season = start_season, 
-                               end_season = end_season)
+    fetch_betting_odds_footywire(
+      start_season = start_season,
+      end_season = end_season
     )
+  )
 }

@@ -13,10 +13,8 @@
 #' }
 #' @export
 get_match_results <- function() {
-
   .Deprecated("fetch_results_afltables")
   fetch_results_afltables()
-
 }
 
 #

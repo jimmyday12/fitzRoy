@@ -32,11 +32,11 @@ bad_finals <- afldata %>%
   filter(count > 1) %>%
   arrange(Date) %>%
   select(-Home.score, -Away.score, -count, -Away.team, -Home.team) %>%
-  ungroup() 
+  ungroup()
 
 # Add match ID
-bad_finals <- afldata %>% 
-  ungroup %>% 
+bad_finals <- afldata %>%
+  ungroup() %>%
   select(Season, Round, Date, Venue, Attendance, group_id_num) %>%
   group_by(group_id_num) %>%
   filter(row_number() == 1) %>%
@@ -46,14 +46,14 @@ bad_finals <- afldata %>%
 
 # re-scrape these matches
 bad_finals_urls <- bad_finals$Date %>%
-  purrr::map(~get_afltables_urls(lubridate::ymd(.x) - 1, lubridate::ymd(.x) + 1)) %>%
+  purrr::map(~ get_afltables_urls(lubridate::ymd(.x) - 1, lubridate::ymd(.x) + 1)) %>%
   purrr::reduce(c)
 
 bad_finals_data <- bad_finals_urls %>%
   fitzRoy::scrape_afltables_match()
 
 # add match id and filter our non bad matches (some dates had 2 matches)
-bad_finals_data <- bad_finals_data %>% 
+bad_finals_data <- bad_finals_data %>%
   left_join(select(bad_finals, Season, Date, Attendance, group_id_num)) %>%
   filter(!is.na(group_id_num))
 
@@ -130,7 +130,7 @@ team_abbr <- tibble(
   )
 )
 
-#usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
+# usethis::use_data(stat_abbr, team_abbr, afldata_cols, internal = TRUE, overwrite = TRUE)
 
 # Fix some random games identified by Tony Corke
 old_urls <- c(
@@ -145,26 +145,26 @@ old_urls <- c(
   "https://afltables.com/afl/stats/games/1907/051119070629.html",
   "https://afltables.com/afl/stats/games/1907/040519070720.html",
   "https://afltables.com/afl/stats/games/1900/030919000623.html",
-
 )
 
 old_urls <- sort(old_urls)
 
 # Add match numbers
 
-#afldata <- afldata %>%
+# afldata <- afldata %>%
 #  group_by(Date, Season, Round, Home.team, Away.team)
 
-#afldata$group_id <- group_indices(afldata)
-#afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
+# afldata$group_id <- group_indices(afldata)
+# afldata$group_id_num <- match(afldata$group_id, unique(afldata$group_id))
 
 bad_dat <- afldata %>%
   filter(
     (Season == 1901 & Round == "3" & Home.team == "Essendon") |
-    (Season == 1912 & Round == "5" & Home.team == "Fitzroy") |
-    (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") |
-    (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") |
-    (Season == 1900 & Round == "8" & Home.team == "Geelong")) %>%
+      (Season == 1912 & Round == "5" & Home.team == "Fitzroy") |
+      (Season == 1907 & Round %in% c("1", "5", "9") & Home.team == "Essendon") |
+      (Season == 1907 & Round %in% c("2", "3", "6", "7", "12") & Away.team == "Essendon") |
+      (Season == 1900 & Round == "8" & Home.team == "Geelong")
+  ) %>%
   ungroup() %>%
   select(Season, Round, Home.team, Away.team, group_id_num) %>%
   distinct()

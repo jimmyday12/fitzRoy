@@ -8,7 +8,7 @@ if (!testthat:::on_cran()) {
 test_that("get_footywire_stats work with different inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_type(get_footywire_stats(5000), "list")
   expect_error(get_footywire_stats(1))
   expect_error(get_footywire_stats("a"))
@@ -19,7 +19,7 @@ test_that("get_footywire_stats work with different inputs", {
 test_that("get_match_data work with different inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_type(get_match_data(5000), "list")
   expect_error(get_match_data(1))
   expect_error(get_match_data("a"))
@@ -30,7 +30,7 @@ test_that("get_match_data work with different inputs", {
 test_that("get_match_data work with different inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_type(get_match_data(5000), "list")
   expect_error(get_footywire_stats(1))
   expect_error(get_footywire_stats("a"))
@@ -41,7 +41,7 @@ test_that("get_match_data work with different inputs", {
 test_that("get_fixture works with different inputs ", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   fixture_df <- get_fixture(2019)
   expect_is(fixture_df, "data.frame")
   expect_is(fixture_df$Date[1], "POSIXt")
@@ -54,7 +54,7 @@ test_that("get_fixture works with different inputs ", {
 test_that("get_fixture filters out unplayed matches ", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # On footywire.com.au/afl/footy/ft_match_list, the 2015 season has two
   # matches marked MATCH CANCELLED along with multiple byes that result in
   # NA dates if not filtered out
@@ -68,7 +68,7 @@ test_that("get_fixture filters out unplayed matches ", {
 test_that("round numbers don't increment across bye weeks without matches", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   calculate_max_round_lag <- function(rounds) {
     rounds %>%
       unique() %>%
@@ -95,12 +95,12 @@ test_that("2020 season round numbers are correct through round 13", {
   n_duplicate_home_teams <- fixture %>%
     dplyr::group_by(Season, Round, Home.Team) %>%
     dplyr::filter(dplyr::n() > 1) %>%
-    nrow
+    nrow()
 
   n_duplicate_away_teams <- fixture %>%
     dplyr::group_by(Season, Round, Home.Team) %>%
     dplyr::filter(dplyr::n() > 1) %>%
-    nrow
+    nrow()
 
   expect_equal(n_duplicate_home_teams, n_duplicate_away_teams, 0)
 })
@@ -146,17 +146,17 @@ describe("get_footywire_betting_odds", {
   it("has no more than 9 matches per round", {
     max_match_df <- full_betting_df %>%
       dplyr::group_by(.data$Season, .data$Round) %>%
-      dplyr::tally(name="Round.Count")
+      dplyr::tally(name = "Round.Count")
 
     expect_true(all(max_match_df$Round.Count <= 9))
   })
 
   it("doesn't have any duplicate Season/Round/Team combinations", {
-    #home_df <- full_betting_df %>% dplyr::mutate(Team = .data$Home.Team)
-    #away_df <- full_betting_df %>% dplyr::mutate(Team = .data$Away.Team)
-    #combined_df <- dplyr::bind_rows(c(home_df, away_df))
+    # home_df <- full_betting_df %>% dplyr::mutate(Team = .data$Home.Team)
+    # away_df <- full_betting_df %>% dplyr::mutate(Team = .data$Away.Team)
+    # combined_df <- dplyr::bind_rows(c(home_df, away_df))
 
-    #expect_equal(nrow(combined_df), nrow(dplyr::distinct(combined_df)))
+    # expect_equal(nrow(combined_df), nrow(dplyr::distinct(combined_df)))
     # removing this test for now - it's failing on github but I can't reproduce locally for some reason
   })
 
@@ -212,7 +212,7 @@ describe("get_footywire_betting_odds", {
       start_season = next_year, end_season = next_year
     )
 
-    #expect_equal(nrow(empty_betting_df), 0)
+    # expect_equal(nrow(empty_betting_df), 0)
     expect_equal(colnames(empty_betting_df), colnames(full_betting_df))
   })
 })
@@ -221,21 +221,19 @@ test_that("update_footywire_stats works ", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
 
-expect_type(fw_dat, "list")
-#expect_equal(fw_dat[1,1], "2010-03-25")
-expect_error(update_footywire_stats("a"))
-
+  expect_type(fw_dat, "list")
+  # expect_equal(fw_dat[1,1], "2010-03-25")
+  expect_error(update_footywire_stats("a"))
 })
 
 test_that("no duplicate games in footywire data,", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   n_duplicates <- fw_dat %>%
     dplyr::ungroup() %>%
     dplyr::group_by(Date, Season, Round, Team, Player) %>%
-    dplyr::summarise(count_rows = dplyr::n()) 
-  
+    dplyr::summarise(count_rows = dplyr::n())
+
   expect_lte(max(n_duplicates$count_rows), 1)
 })
-
