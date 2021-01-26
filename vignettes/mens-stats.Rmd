@@ -71,9 +71,9 @@ tail(results)
 You can also convert this format into a more analysis friendly "long" format using the helper function `convert_results`. 
 
 ```{r convert, eval=eval_param}
-results_long <- convert_results(results)
+#results_long <- convert_results(results)
 
-head(results_long)
+#head(results_long)
 ```
 
 ### AFL Tables player results
