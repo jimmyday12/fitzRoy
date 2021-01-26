@@ -138,6 +138,7 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   dplyr::as_tibble(ladder_df)
 }
 
+#' @param match_results_df (optional) A dataframe from [fetch_results_afltables()], provide this to prevent having to download results again.
 #' @rdname fetch_ladder
 #' @export
 fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_results_df = NULL) {

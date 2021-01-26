@@ -36,6 +36,8 @@ corresponding the \code{Sys.Date()}}
 \item{source}{One of "AFL" (default), "footywire", "afltables", "squiggle"}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
+
+\item{match_results_df}{(optional) A dataframe from \code{\link[=fetch_results_afltables]{fetch_results_afltables()}}, provide this to prevent having to download results again.}
 }
 \value{
 A Tibble with the ladder from the relevant \code{season} and \code{round}.
