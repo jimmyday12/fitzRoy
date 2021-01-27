@@ -85,3 +85,20 @@ test_that("fetch_player_stats works", {
   expect_error(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLW"))
 
 })
+
+## Legacy Tests - remove eventually ------------------
+
+test_that("get_fryzigg_stats works", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+
+  
+  expect_warning(fryzigg_data <- get_fryzigg_stats(start = 1897,end = 2020))
+  expect_type(fryzigg_data, "list")
+  expect_error(supressWarnings(get_fryzigg_stats("a")))
+  expect_error(supressWarnings(get_fryzigg_stats("2018", "a")))
+  expect_error(supressWarnings(get_fryzigg_stats(end = "a")))
+  expect_error(supressWarnings(get_fryzigg_stats("")))
+})
+
+
