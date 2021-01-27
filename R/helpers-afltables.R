@@ -76,3 +76,28 @@ replace_venues <- function(venue) {
     TRUE ~ venue
   )
 }
+
+#' Convert AFL Men's results into long format
+#'
+#' \code{convert_results} returns a dataframe containing the results in long format.
+#'
+#' The standard results returned by afltables.com will be in wide format.
+#' This is useful for game based analysis but less so for team based ones. This function converts the data into long format for easier analysis.
+#'
+#' @param results A dataframe that has been returned from get_match_results
+#'
+#' @keywords internal
+#' @noRd
+convert_results <- function(results) {
+  
+  # Convert results to wide format
+  results %>%
+    tidyr::gather("variable", "value", .data$Home.Team:.data$Away.Points) %>%
+    tidyr::separate(.data$variable, into = c("Status", "variable")) %>%
+    tidyr::spread(.data$variable, .data$value) %>%
+    dplyr::arrange(.data$Game) %>%
+    dplyr::mutate(Margin = ifelse(.data$Status == "Home",
+                                  .data$Margin,
+                                  .data$Margin * -1
+    ))
+}

@@ -23,3 +23,6 @@ test_that("get_footywire_stats work with different inputs", {
   expect_error(get_footywire_stats())
   expect_error(get_footywire_stats(1:2))
 })
+
+
+
