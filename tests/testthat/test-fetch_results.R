@@ -92,3 +92,19 @@ test_that("old results functions returns deprecated warning", {
   expect_warning(get_match_results(), regexp = "deprecated")
   expect_warning(get_footywire_match_results(2020, 1), regexp = "deprecated")
 })
+
+
+## Legacy Tests - remove eventually -----------------
+
+test_that("get_match_results works", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  expect_warning(dat <- get_match_results())
+  expect_type(dat, "list")
+  expect_error(get_match_results("a"))
+})
+
+
+
+

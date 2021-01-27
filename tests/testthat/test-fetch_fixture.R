@@ -68,7 +68,23 @@ test_that("fetch_fixture works", {
   testthat::skip_on_cran()
 
   # Test each source works
-  expect_s3_class(fetch_fixture(2020, round = 1, source = "squiggle"), "data.frame")
-  expect_s3_class(fetch_fixture(2020, round = 1, source = "footywire"), "data.frame")
+  expect_s3_class(fetch_fixture(2020, round = 1, source = "squiggle"), "tbl")
+  expect_s3_class(fetch_fixture(2020, round = 1, source = "footywire"), "tbl")
   expect_warning(fetch_fixture(2020, round = 1, source = "afltables"))
+})
+
+
+## Legacy tests - should remove eventually
+test_that("get_fixture works", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  expect_warning(fix <- get_fixture(2012))
+  expect_is(fix, "tbl")
+  expect_equal(fix$Round[1], 1)
+  expect_equal(fix$Round[2], 1)
+  expect_equal(fix$Round[nrow(fix)], 27)
+  
+  expect_error(supressWarnings(get_fixture(2012:2013)))
+  expect_error(supressWarnings(get_fixture("a")))
 })
