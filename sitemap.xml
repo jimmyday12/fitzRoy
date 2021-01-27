@@ -4,19 +4,25 @@
     <loc>https://jimmyday12.github.io/fitzRoy//index.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/convert_results.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_betting_odds_footywire.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_fixture.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_ladder.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_ladder_afl.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_player_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_results.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_squiggle_data.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fitzRoy-package.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/footywire_html.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afl_colour_palettes.html</loc>
@@ -29,9 +35,6 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_afltables_urls.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_aflw_cookie.html</loc>
@@ -70,9 +73,6 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_fryzigg_stats.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/get_match_data.html</loc>
-  </url>
-  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/get_match_results.html</loc>
   </url>
   <url>
@@ -91,22 +91,28 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/return_ladder.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/scrape_afltables_match.html</loc>
-  </url>
-  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/update_footywire_stats.html</loc>
   </url>
   <url>
-    <loc>https://jimmyday12.github.io/fitzRoy//reference/verify_year.html</loc>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/docker-support.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/elo-ratings-example.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/fitzRoy.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/main-fetch-functions.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/mens-stats.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/using-fryzigg-stats.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/using-squiggle-api.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/womens-stats.html</loc>

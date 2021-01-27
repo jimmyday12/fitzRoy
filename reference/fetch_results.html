@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Fetch Ladder — fetch_ladder • fitzRoy</title>
+<title>Fetch Results — fetch_results • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -35,12 +35,12 @@
 
 
 
-<meta property="og:title" content="Fetch Ladder — fetch_ladder" />
-<meta property="og:description" content="fetch_ladder returns the Ladder for a given AFL Round. Internally, it calls
-a corresponding fetch_ladder_* function that depends on the source given.
+<meta property="og:title" content="Fetch Results — fetch_results" />
+<meta property="og:description" content="fetch_results returns the results for a given AFL Round. Internally, it calls
+a corresponding fetch_results_* function that depends on the source given.
 By default the source used will be the official AFL website.
-fetch_ladder_afl(), fetch_ladder_afltables(), fetch_ladder_squiggle()
-can be called directly and return data from AFL website, AFL Tables and
+fetch_results_afl(), fetch_results_afltables(), fetch_results_footywire(), fetch_results_squiggle()
+can be called directly and return data from AFL website, AFL Tables, Footywire and
 Squiggle, respectively." />
 <meta name="twitter:card" content="summary" />
 
@@ -156,21 +156,21 @@ Squiggle, respectively." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Fetch Ladder</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fetch-ladder.R'><code>R/fetch-ladder.R</code></a></small>
-    <div class="hidden name"><code>fetch_ladder.Rd</code></div>
+    <h1>Fetch Results</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fetch-results.R'><code>R/fetch-results.R</code></a></small>
+    <div class="hidden name"><code>fetch_results.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>fetch_ladder</code> returns the Ladder for a given AFL Round. Internally, it calls
-a corresponding <code>fetch_ladder_*</code> function that depends on the source given.
+    <p><code>fetch_results</code> returns the results for a given AFL Round. Internally, it calls
+a corresponding <code>fetch_results_*</code> function that depends on the source given.
 By default the source used will be the official AFL website.</p>
-<p><code>fetch_ladder_afl()</code>, <code>fetch_ladder_afltables()</code>, <code>fetch_ladder_squiggle()</code>
-can be called directly and return data from AFL website, AFL Tables and
+<p><code>fetch_results_afl()</code>, <code>fetch_results_afltables()</code>, <code>fetch_results_footywire()</code>, <code>fetch_results_squiggle()</code>
+can be called directly and return data from AFL website, AFL Tables, Footywire and
 Squiggle, respectively.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>fetch_ladder</span>(
+    <pre class="usage"><span class='fu'>fetch_results</span>(
   <span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>,
@@ -178,15 +178,17 @@ Squiggle, respectively.</p>
   <span class='no'>...</span>
 )
 
-<span class='fu'>fetch_ladder_afl</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>)
+<span class='fu'>fetch_results_afl</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>)
 
-<span class='fu'>fetch_ladder_afltables</span>(
+<span class='fu'>fetch_results_afltables</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)
+
+<span class='fu'>fetch_results_footywire</span>(
   <span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
   <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>match_results_df</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>last_n_matches</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )
 
-<span class='fu'>fetch_ladder_squiggle</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+<span class='fu'>fetch_results_squiggle</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -213,49 +215,53 @@ corresponding the <code><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date(
       <td><p>Optional parameters passed onto various functions depending on source.</p></td>
     </tr>
     <tr>
-      <th>match_results_df</th>
-      <td><p>(optional) A dataframe from <code><a href='fetch_results.html'>fetch_results_afltables()</a></code>, provide this to prevent having to download results again.</p></td>
+      <th>last_n_matches</th>
+      <td><p>number of matches to return, starting from the most recent</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A Tibble with the ladder from the relevant <code>season</code> and <code>round</code>.</p>
+    <p>A Tibble with the results from the relevant <code>season</code> and <code>round</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'>
 <ul>
-<li><p>fetch_ladder_afl for official AFL data.</p></li>
-<li><p>fetch_ladder_afltables for AFL Tables data.</p></li>
-<li><p>fetch_ladder_squiggle for Squiggle data.</p></li>
+<li><p>fetch_results_afl for official AFL data.</p></li>
+<li><p>fetch_results_afltables for AFL Tables data.</p></li>
+<li><p>fetch_results_footywire for Footywire data.</p></li>
+<li><p>fetch_results_squiggle for Squiggle data.</p></li>
 </ul>
 </div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Return data from AFL Website</span>
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='co'># Return data for whole season from AFL Website</span>
+<span class='fu'>fetch_results</span>(<span class='fl'>2020</span>)
 
 <span class='co'># This is equivalent to</span>
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)
-<span class='fu'>fetch_ladder_afl</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2020</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)
+<span class='fu'>fetch_results_afl</span>(<span class='fl'>2020</span>)
 
 <span class='co'># Return AFLW data</span>
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)
-<span class='fu'>fetch_ladder_afl</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)
+<span class='fu'>fetch_results_afl</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>)
 
 <span class='co'># Not all sources have AFLW data and will return a warning</span>
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"afltables"</span>)
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2020</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"squiggle"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"footywire"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"afltables"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"squiggle"</span>)
 
 <span class='co'># Different sources</span>
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2015</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"afltables"</span>)
-<span class='fu'>fetch_ladder</span>(<span class='fl'>2015</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"squiggle"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2015</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"footywire"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2015</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"afltables"</span>)
+<span class='fu'>fetch_results</span>(<span class='fl'>2015</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>5</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"squiggle"</span>)
 
 <span class='co'># Directly call functions for each source</span>
-<span class='fu'>fetch_ladder_afl</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
-<span class='fu'>fetch_ladder_afltables</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
-<span class='fu'>fetch_ladder_squiggle</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
+<span class='fu'>fetch_results_afl</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
+<span class='fu'>fetch_results_footywire</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
+<span class='fu'>fetch_results_afltables</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
+<span class='fu'>fetch_results_squiggle</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

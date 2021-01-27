@@ -90,6 +90,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/fitzRoy.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -100,16 +103,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/docker-support.html">Docker Support</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
+      <a href="../articles/mens-stats.html">AFL Mens Example</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li>
+      <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
+    </li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
   </ul>
 </li>
@@ -151,8 +163,159 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-main-functions" class="hasAnchor"><a href="#section-main-functions" class="anchor"></a>Main Functions</h2>
-          <p class="section-desc"><p>Functions used to download and process data</p></p>
+          <h2 id="section-main-fetch-functions" class="hasAnchor"><a href="#section-main-fetch-functions" class="anchor"></a>Main Fetch Functions</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="fetch_ladder.html">fetch_ladder()</a></code> <code><a href="fetch_ladder.html">fetch_ladder_afl()</a></code> <code><a href="fetch_ladder.html">fetch_ladder_afltables()</a></code> <code><a href="fetch_ladder.html">fetch_ladder_squiggle()</a></code> </p>
+        </td>
+        <td><p>Fetch Ladder</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fetch_results.html">fetch_results()</a></code> <code><a href="fetch_results.html">fetch_results_afl()</a></code> <code><a href="fetch_results.html">fetch_results_afltables()</a></code> <code><a href="fetch_results.html">fetch_results_footywire()</a></code> <code><a href="fetch_results.html">fetch_results_squiggle()</a></code> </p>
+        </td>
+        <td><p>Fetch Results</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fetch_fixture.html">fetch_fixture()</a></code> <code><a href="fetch_fixture.html">fetch_fixture_afl()</a></code> <code><a href="fetch_fixture.html">fetch_fixture_footywire()</a></code> <code><a href="fetch_fixture.html">fetch_fixture_squiggle()</a></code> </p>
+        </td>
+        <td><p>Fetch Fixture</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fetch_player_stats.html">fetch_player_stats()</a></code> <code><a href="fetch_player_stats.html">fetch_player_stats_afltables()</a></code> <code><a href="fetch_player_stats.html">fetch_player_stats_fryzigg()</a></code> <code><a href="fetch_player_stats.html">fetch_player_stats_footywire()</a></code> </p>
+        </td>
+        <td><p>Fetch Player Stats</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-aflw-data" class="hasAnchor"><a href="#section-aflw-data" class="anchor"></a>AFLW Data</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> </p>
+        </td>
+        <td><p>Get detailed AFLW data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_detailed_match_data.html">get_aflw_detailed_match_data()</a></code> </p>
+        </td>
+        <td><p>Get detailed womens match data (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_match_data.html">get_aflw_match_data()</a></code> </p>
+        </td>
+        <td><p>Get AFLW match data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_round_data.html">get_aflw_round_data()</a></code> </p>
+        </td>
+        <td><p>Get match data (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_rounds.html">get_aflw_rounds()</a></code> </p>
+        </td>
+        <td><p>Get rounds (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_player_stats.html">get_aflw_player_stats()</a></code> </p>
+        </td>
+        <td><p>Return get match stats for all current AFLW matches</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-other" class="hasAnchor"><a href="#section-other" class="anchor"></a>Other</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="fetch_squiggle_data.html">fetch_squiggle_data()</a></code> </p>
+        </td>
+        <td><p>Access Squiggle data using the squiggle API service.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_fryzigg_stats.html">get_fryzigg_stats()</a></code> </p>
+        </td>
+        <td><p>Return get match stats from fryziggafl.net/api/</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fetch_betting_odds_footywire.html">fetch_betting_odds_footywire()</a></code> </p>
+        </td>
+        <td><p>Fetch AFL match betting odds from https://www.footywire.com</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_afl_colour_palettes.html">get_afl_colour_palettes()</a></code> </p>
+        </td>
+        <td><p>Returns a table with the colour palattes for all teams</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      <tr>
+        
+        <td>
+          <p><code><a href="replace_teams.html">replace_teams()</a></code> </p>
+        </td>
+        <td><p>Internal function to ensure names match between different sources and also name changes.
+This gets applied to any web scraper</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="replace_venues.html">replace_venues()</a></code> </p>
+        </td>
+        <td><p>Internal function to ensure venue names match between different sources
+and also name changes across time. This gets applied to any web scraper,
+transforming all of them to AFL Tables naming conventions.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_cookie.html">get_aflw_cookie()</a></code> </p>
+        </td>
+        <td><p>Get AFL Stats cookie (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_afl_cookie.html">get_afl_cookie()</a></code> </p>
+        </td>
+        <td><p>Get AFL Stats cookie (internal function)</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-experimental" class="hasAnchor"><a href="#section-experimental" class="anchor"></a>Experimental</h2>
+          <p class="section-desc"><p>Experimental functions are a testing ground for new approaches that we believe to be worthy of greater exposure. There is no guarantee that these functions will stay around in the future, so please reach out if you find them useful.</p></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-superseded" class="hasAnchor"><a href="#section-superseded" class="anchor"></a>Superseded</h2>
+          <p class="section-desc"><p>Superseded functions have been replaced by new approaches that we believe to be superior, but we don’t want to force you to change until you’re ready, so the existing functions will stay around for several years.</p></p>
         </th>
       </tr>
       <tr>
@@ -194,48 +357,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="convert_results.html">convert_results()</a></code> </p>
-        </td>
-        <td><p>Convert AFL Men's results into long format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_squiggle_data.html">get_squiggle_data()</a></code> </p>
-        </td>
-        <td><p>Access Squiggle data using the squiggle API service.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> </p>
-        </td>
-        <td><p>Get detailed AFLW data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_detailed_match_data.html">get_aflw_detailed_match_data()</a></code> </p>
-        </td>
-        <td><p>Get detailed womens match data (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_match_data.html">get_aflw_match_data()</a></code> </p>
-        </td>
-        <td><p>Get AFLW match data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_round_data.html">get_aflw_round_data()</a></code> </p>
-        </td>
-        <td><p>Get match data (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_rounds.html">get_aflw_rounds()</a></code> </p>
-        </td>
-        <td><p>Get rounds (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="return_ladder.html">return_ladder()</a></code> </p>
         </td>
         <td><p>Recreate the ladder for every or any given round and/or season</p></td>
@@ -248,9 +369,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="get_afl_colour_palettes.html">get_afl_colour_palettes()</a></code> </p>
+          <p><code><a href="get_afl_fixture.html">get_afl_fixture()</a></code> </p>
         </td>
-        <td><p>Returns a table with the colour palattes for all teams</p></td>
+        <td><p>Get AFL fixture</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_squiggle_data.html">get_squiggle_data()</a></code> </p>
+        </td>
+        <td><p>Access Squiggle data using the squiggle API service.</p></td>
       </tr><tr>
         
         <td>
@@ -260,112 +387,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="fetch_ladder.html">fetch_ladder()</a></code> </p>
-        </td>
-        <td><p>Fetch ladder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="fetch_ladder_afl.html">fetch_ladder_afl()</a></code> </p>
-        </td>
-        <td><p>Get AFL ladder</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_afl_fixture.html">get_afl_fixture()</a></code> </p>
-        </td>
-        <td><p>Get AFL fixture</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_player_stats.html">get_aflw_player_stats()</a></code> </p>
-        </td>
-        <td><p>Return get match stats for all current AFLW matches</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-data" class="hasAnchor"><a href="#section-data" class="anchor"></a>Data</h2>
-          <p class="section-desc"><p>Included data</p></p>
-        </th>
-      </tr>
-      
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
-          <p class="section-desc"><p>Internal functions and helpers</p></p>
-        </th>
-      </tr>
-      <tr>
-        
-        <td>
-          <p><code><a href="footywire_html.html">footywire_html()</a></code> </p>
-        </td>
-        <td><p>Helper function for <code>get_footywire_stats</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_match_data.html">get_match_data()</a></code> </p>
-        </td>
-        <td><p>Helper function for <code>get_footywire_stats</code></p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="replace_teams.html">replace_teams()</a></code> </p>
-        </td>
-        <td><p>Internal function to ensure names match between different sources and also name changes.
-This gets applied to any web scraper</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="replace_venues.html">replace_venues()</a></code> </p>
-        </td>
-        <td><p>Internal function to ensure venue names match between different sources
-and also name changes across time. This gets applied to any web scraper,
-transforming all of them to AFL Tables naming conventions.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="scrape_afltables_match.html">scrape_afltables_match()</a></code> </p>
-        </td>
-        <td><p>Return afltables player match stats</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_afltables_urls.html">get_afltables_urls()</a></code> </p>
-        </td>
-        <td><p>Return match URLs for specified dates</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="convert_results.html">convert_results()</a></code> </p>
-        </td>
-        <td><p>Convert AFL Men's results into long format</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_cookie.html">get_aflw_cookie()</a></code> </p>
-        </td>
-        <td><p>Get AFL Stats cookie (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="get_score_progression_raw.html">get_score_progression_raw()</a></code> </p>
         </td>
         <td><p>Get raw score progression data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="verify_year.html">verify_year()</a></code> </p>
-        </td>
-        <td><p>Returns year as numeric after verifying the validity of the year.</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_afl_cookie.html">get_afl_cookie()</a></code> </p>
-        </td>
-        <td><p>Get AFL Stats cookie (internal function)</p></td>
       </tr>
     </tbody>
     </table>
@@ -374,9 +398,12 @@ transforming all of them to AFL Tables naming conventions.</p></td>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#section-main-functions">Main Functions</a></li>
-      <li><a href="#section-data">Data</a></li>
+      <li><a href="#section-main-fetch-functions">Main Fetch Functions</a></li>
+      <li><a href="#section-aflw-data">AFLW Data</a></li>
+      <li><a href="#section-other">Other</a></li>
       <li><a href="#section-internals">Internals</a></li>
+      <li><a href="#section-experimental">Experimental</a></li>
+      <li><a href="#section-superseded">Superseded</a></li>
     </ul>
   </div>
 </div>

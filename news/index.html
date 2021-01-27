@@ -90,6 +90,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/fitzRoy.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -100,16 +103,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/docker-support.html">Docker Support</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
+      <a href="../articles/mens-stats.html">AFL Mens Example</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li>
+      <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
+    </li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
   </ul>
 </li>
@@ -145,6 +157,51 @@
 <h1 class="page-header">
 <a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
 </h1>
+<div id="major-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#major-changes" class="anchor"></a>Major Changes</h2>
+<ul>
+<li>Added a new group of <code>fetch_*</code> functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour</li>
+<li>
+<code>fetch_fixture</code> and associated helper functions <code>fetch_fixture_afl</code>, <code>fetch_fixture_footywire</code> and <code>fetch_fixture_squiggle</code> will return the fixture for a particular season and round</li>
+<li>
+<code>fetch_results</code> and associated helper functions <code>fetch_results_afl</code>, <code>fetch_results_footywire</code>, <code>fetch_results_sqiggle</code> and <code>fetch_results_afltables</code> will return the results for a particular season and round</li>
+<li>
+<code>fetch_ladder</code> and associated helper functions <code>fetch_ladder_afl</code>, <code>fetch_ladder_sqiggle</code> and <code>fetch_ladder_afltables</code> will return the ladder for a particular season and round.</li>
+<li>
+<code>fetch_player_stats</code> and associated helper functions <code>fetch_player_stats_footywire</code>, <code>fetch_player_stats_afltables</code> and <code>fetch_player_stats_fryzigg</code> will return the match stats for a particular season and round.</li>
+</ul>
+</div>
+<div id="deprecated-functions" class="section level2">
+<h2 class="hasAnchor">
+<a href="#deprecated-functions" class="anchor"></a>Deprecated Functions</h2>
+<p>The following functions have been soft deprecated in favour of the above <code>fetch_*</code> functions. In most cases, calling a <code>fetch_*</code> function will be the same as calling the original deprecated function</p>
+<ul>
+<li>Deprecated <code>get_afl_fixture</code> - use <code>fetch_fixture_afl</code>
+</li>
+<li>Deprecated <code>get_fixture</code> - use <code>fetch_fixture_footywire</code>
+</li>
+<li>Deprecated <code>get_match_results</code> - use <code>fetch_results_afltables</code>
+</li>
+<li>Deprecated <code>get_footywire_match_results</code> - use <code>fetch_results_footywire</code>
+</li>
+<li>Deprecated <code>return_ladder</code> - use <code>fetch_ladder_afltables</code>
+</li>
+<li>Deprecated <code>get_footywire_stats</code> - use <code>fetch_footywire_stats</code>
+</li>
+<li>Deprecated <code>get_fryzigg_stats</code> - use <code>fetch_player_stats_fryzigg</code>
+</li>
+<li>Deprecated <code>get_afltables_stats</code> - use <code>fetch_player_stats_afltables</code>
+</li>
+<li>Deprecated <code>update_footywire_stats</code> - use <code>fetch_player_stats_footywire</code>
+</li>
+<li>Deprecated <code>get_footywire_betting_odds</code> - use <code>fetch_betting_odds_footywire</code>
+</li>
+<li>Deprecated <code>get_score_progression_raw</code> - no replacement</li>
+<li>Deprecated <code>get_footywire_match_ids</code> - use <code>fetch_footywire_match_ids</code>
+</li>
+</ul>
+</div>
 </div>
     <div id="fitzroy-033" class="section level1">
 <h1 class="page-header">

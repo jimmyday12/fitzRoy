@@ -50,6 +50,9 @@
   </a>
 </li>
 <li>
+  <a href="articles/fitzRoy.html">Get started</a>
+</li>
+<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -60,16 +63,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="articles/docker-support.html">Docker Support</a>
+    </li>
+    <li>
       <a href="articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="articles/mens-stats.html">Getting started with AFL Men's data</a>
+      <a href="articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
+      <a href="articles/mens-stats.html">AFL Mens Example</a>
     </li>
     <li>
-      <a href="articles/womens-stats.html">Getting Started with AFL Women's data</a>
+      <a href="articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li>
+      <a href="articles/using-squiggle-api.html">Using the Squiggle API</a>
+    </li>
+    <li>
+      <a href="articles/womens-stats.html">AFL Womens Example</a>
     </li>
   </ul>
 </li>
@@ -105,7 +117,7 @@
 <div id="overview" class="section level2">
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
-<p>The goal of fitzRoy is to provide a set of functions that allows for users to easily get access to AFL data from sources such as afltables.com and footywire.com. There are also tools for processing and cleaning that data.</p>
+<p><code>fitzRoy</code> aims to provide a consistent and reliable API to various data sources of both the Mens and Womens competitions of the AFL. These functions provide easy and tidy access to data such as fixtures, results and statistics from various data sources.</p>
 </div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
@@ -119,63 +131,21 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>The <code>fitzRoy</code> package can be used to simply get data from various sources.</p>
-<div id="getting-data" class="section level3">
+<p>The primary functions in <code>fitzRoy</code> are the <code>fetch_*</code> functions. These provide access to the most common types of data using a consistent API.</p>
+<p>The four main functions are <code>fetch_fixture</code>, <code>fetch_results</code>, <code>fetch_ladder</code> and <code>fetch_player_stats</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">comp =</span> <span class="st">"AFLM"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="reference/fetch_results.html">fetch_results</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw"><a href="reference/fetch_ladder.html">fetch_ladder</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw"><a href="reference/fetch_player_stats.html">fetch_player_stats</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">source =</span> <span class="st">"fryzigg"</span>)</span></code></pre></div>
+<p>See vignette on using the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">main fetch functions</a> to learn more.</p>
+<div id="afl-womens-data" class="section level3">
 <h3 class="hasAnchor">
-<a href="#getting-data" class="anchor"></a>Getting Data</h3>
-<p>Primarily, the tool can be used to access data from various sources. Data is included in the package and can be access directly however this will not be up to date. Each source of data has functions for updating data during the season.</p>
-<div id="mens-data" class="section level4">
-<h4 class="hasAnchor">
-<a href="#mens-data" class="anchor"></a>Mens data</h4>
-<p>Various data is included from both <a href="https://afltables.com">AFL Tables</a> and <a href="https://www.footywire.com">Footy Wire</a>. At the most basic level, you can access match results and the upcoming fixture as below. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/mens-stats.html">Mens Vignette</a> for further instructions.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>results &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_match_results.html">get_match_results</a></span>()</span>
-<span id="cb3-2"><a href="#cb3-2"></a>fixture &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_fixture.html">get_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2019</span>)</span></code></pre></div>
-</div>
-<div id="afl-womens-data" class="section level4">
-<h4 class="hasAnchor">
-<a href="#afl-womens-data" class="anchor"></a>AFL Womens data</h4>
+<a href="#afl-womens-data" class="anchor"></a>AFL Womens data</h3>
 <p>From 2019, we are able to provide access to AFL Women’s data. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for details on how to access it.</p>
-<p>NOTE: The AFL website has taken down the Women’s stats pages during the 2019/2020 offseason, so these functions no longer work. This is left for posterity and in the hope that they go back up evenually.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>aflw_match_data &lt;-<span class="st"> </span><span class="kw"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span></code></pre></div>
-</div>
-</div>
-<div id="elo-models" class="section level3">
-<h3 class="hasAnchor">
-<a href="#elo-models" class="anchor"></a>ELO models</h3>
-<p>A specific use case might be to use <code>fitzRoy</code> data as an input into a model. See the <a href="https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html">ELO model vignette</a> for an example of how this might be done.</p>
-</div>
-</div>
-<div id="docker-support" class="section level2">
-<h2 class="hasAnchor">
-<a href="#docker-support" class="anchor"></a>Docker Support</h2>
-<p>fitzRoy now provides <a href="https://www.docker.com/get-started">Docker</a> support in the form of an image hosted on <a href="https://hub.docker.com/r/jimmyday12/fitzroy/">DockerHub</a>.</p>
-<div id="usage-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#usage-1" class="anchor"></a>Usage</h3>
-<p>Once you have the images, (e.g. <code>docker pull jimmyday12/fitzroy:latest</code>) run one of the following commands.</p>
-<ul>
-<li>To start <a href="https://www.rstudio.com/">RStudio</a> with Fitzroy ready to use:
-<ul>
-<li>
-<code>docker run -d -p 8787:8787 --name fitzroy jimmyday12/fitzroy:latest</code> and open <code>http://localhost:8787</code>. *(Username: <code>rstudio</code>, Password: <code>rstudio</code>)</li>
-</ul>
-</li>
-<li>To start an R terminal prompt with fitzRoy ready to use:
-<ul>
-<li>
-<code>docker run -it jimmyday12/fitzroy:latest R</code> to start with an R terminal prompt.</li>
-<li>Run <code><a href="https://rdrr.io/r/base/quit.html">quit()</a></code> to exit the container</li>
-</ul>
-</li>
-</ul>
-</div>
-<div id="building-the-image-locally" class="section level3">
-<h3 class="hasAnchor">
-<a href="#building-the-image-locally" class="anchor"></a>Building the image locally</h3>
-<p>To build the Docker image run the following from the root of the repository.</p>
-<ul>
-<li><code>docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .</code></li>
-</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="reference/fetch_results.html">fetch_results</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw"><a href="reference/fetch_ladder.html">fetch_ladder</a></span>(<span class="dt">season =</span> <span class="dv">2020</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="kw"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span></code></pre></div>
 <hr>
 <p>Please note that the ‘fitzRoy’ project is released with a <a href="https://jimmyday12.github.io/fitzRoy/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>

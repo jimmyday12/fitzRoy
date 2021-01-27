@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Getting Started with AFL Women's data • fitzRoy</title>
+<title>AFL Womens Example • fitzRoy</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Getting Started with AFL Women's data">
+<script src="../pkgdown.js"></script><meta property="og:title" content="AFL Womens Example">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -50,6 +50,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/fitzRoy.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -60,16 +63,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
+      <a href="../articles/docker-support.html">Docker Support</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
+      <a href="../articles/mens-stats.html">AFL Mens Example</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li>
+      <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
+    </li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
   </ul>
 </li>
@@ -97,10 +109,10 @@
       </header><script src="womens-stats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Getting Started with AFL Women’s data</h1>
+      <h1>AFL Womens Example</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2021-01-13</h4>
+            <h4 class="date">2021-01-27</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -119,31 +131,17 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
 <span id="cb2-2"><a href="#cb2-2"></a></span>
 <span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "c6dab267a61275f9bd114fe10b9f31ab"</span></span></code></pre></div>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "f167bc0a6b1fa0f8db4d6c309cf12eea"</span></span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/get_aflw_match_data.html">get_aflw_match_data()</a></code> function to retrieve match data for all matches.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_match_data.html">get_aflw_match_data</a></span>()</span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; CD_R202126401, returning match fixture information only.</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; CD_R202126402, returning match fixture information only.</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; CD_R202126403, returning match fixture information only.</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; CD_R202126404, returning match fixture information only.</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; CD_R202126405, returning match fixture information only.</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; CD_R202126406, returning match fixture information only.</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; CD_R202126407, returning match fixture information only.</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; CD_R202126408, returning match fixture information only.</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; Warning in get_aflw_round_data(., cookie): Scores not present for round</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; CD_R202126409, returning match fixture information only.</span></span></code></pre></div>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; CD_R202126402, returning match fixture information only.</span></span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Rows: 205</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Rows: 156</span></span>
 <span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Columns: 30</span></span>
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; $ Match.Id             &lt;chr&gt; "CD_M20172640101", "CD_M20172640102", "CD_M20172…</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; $ Round.Id             &lt;chr&gt; "CD_R201726401", "CD_R201726401", "CD_R201726401…</span></span>

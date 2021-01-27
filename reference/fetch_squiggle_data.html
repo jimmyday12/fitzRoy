@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Update the included footywire stats data to the specified date. — update_footywire_stats • fitzRoy</title>
+<title>Access Squiggle data using the squiggle API service. — fetch_squiggle_data • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -35,8 +35,8 @@
 
 
 
-<meta property="og:title" content="Update the included footywire stats data to the specified date. — update_footywire_stats" />
-<meta property="og:description" content="update_footywire_stats returns a dataframe containing player match stats from footywire" />
+<meta property="og:title" content="Access Squiggle data using the squiggle API service. — fetch_squiggle_data" />
+<meta property="og:description" content="Use fetch_squiggle_data to access the Squiggle API. See instructions at api.squiggle.com.au." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -151,37 +151,59 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Update the included footywire stats data to the specified date.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/z_footywire-calcs.R'><code>R/z_footywire-calcs.R</code></a></small>
-    <div class="hidden name"><code>update_footywire_stats.Rd</code></div>
+    <h1>Access Squiggle data using the squiggle API service.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fetch-squiggle-data.R'><code>R/fetch-squiggle-data.R</code></a></small>
+    <div class="hidden name"><code>fetch_squiggle_data.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>update_footywire_stats</code> returns a dataframe containing player match stats from <a href='https://www.footywire.com'>footywire</a></p>
+    <p>Use <code>fetch_squiggle_data</code> to access the <a href='https://squiggle.com.au'>Squiggle</a> API. See instructions at <a href='https://api.squiggle.com.au'>api.squiggle.com.au</a>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>update_footywire_stats</span>(<span class='kw'>check_existing</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>fetch_squiggle_data</span>(
+  <span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"teams"</span>, <span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>, <span class='st'>"ladder"</span>, <span class='st'>"standings"</span>, <span class='st'>"virtual"</span>,
+    <span class='st'>"pav"</span>),
+  <span class='no'>...</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>check_existing</th>
-      <td><p>A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time.</p></td>
+      <th>query</th>
+      <td><p>A text string. The main query to use with the API. Must be one of <code>sources</code>, <code>games</code>, <code>tips</code>, <code>ladder</code> or <code>standings</code></p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>(optional) An optional argument provided to the <a href='https://api.squiggle.com.au'>Squiggle API</a>. See details for more info.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>Returns a data frame containing player match stats for each match ID</p>
+    <p>A dataframe, with the resultant data that matches the query specified in <code>query</code>, as well as any optional filters.</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.</p>
-<p>This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.</p>
+    <p>The optional arguments to squiggle can be one of the following.</p>
+<p>#'</p><ul>
+<li><p>year: an integer specifying the year to return data from, e.g. year = 2018</p></li>
+<li><p>round: an integer specifying the round to return data from, e.g. round = 12</p></li>
+<li><p>game: an integer specifying the game ID to return data from, e.g. game = 10</p></li>
+<li><p>source: an integer specifying the ID of the source to return data from, e.g. source = 1</p></li>
+</ul>
+
+<p>For full instructions, see <a href='https://api.squiggle.com.au'>api.squiggle.com.au</a></p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='fu'>update_footywire_stats</span>()
+<span class='co'># Return a list of the sources, with ID's</span>
+<span class='no'>sources</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_squiggle_data.html'>get_squiggle_data</a></span>(<span class='st'>"sources"</span>)
+
+<span class='co'># Get tips for Round 1, 2018</span>
+<span class='no'>tips</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_squiggle_data.html'>get_squiggle_data</a></span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"tips"</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2018</span>)
+
+<span class='co'># Get tips from Squiggle 2019</span>
+<span class='no'>squiggle</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='get_squiggle_data.html'>get_squiggle_data</a></span>(<span class='kw'>query</span> <span class='kw'>=</span> <span class='st'>"tips"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>year</span> <span class='kw'>=</span> <span class='fl'>2019</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

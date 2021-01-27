@@ -92,6 +92,9 @@
   </a>
 </li>
 <li>
+  <a href="../articles/fitzRoy.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
@@ -102,16 +105,25 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
+      <a href="../articles/docker-support.html">Docker Support</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">Getting started with AFL Men's data</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg Stats</a>
+      <a href="../articles/mens-stats.html">AFL Mens Example</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">Getting Started with AFL Women's data</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li>
+      <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
+    </li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
   </ul>
 </li>
@@ -140,7 +152,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Access Squiggle data using the squiggle API service.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/squiggle.R'><code>R/squiggle.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fetch-squiggle-data.R'><code>R/fetch-squiggle-data.R</code></a></small>
     <div class="hidden name"><code>get_squiggle_data.Rd</code></div>
     </div>
 
@@ -149,7 +161,8 @@
     </div>
 
     <pre class="usage"><span class='fu'>get_squiggle_data</span>(
-  <span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>, <span class='st'>"ladder"</span>, <span class='st'>"standings"</span>),
+  <span class='kw'>query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"teams"</span>, <span class='st'>"sources"</span>, <span class='st'>"games"</span>, <span class='st'>"tips"</span>, <span class='st'>"ladder"</span>, <span class='st'>"standings"</span>, <span class='st'>"virtual"</span>,
+    <span class='st'>"pav"</span>),
   <span class='no'>...</span>
 )</pre>
 
