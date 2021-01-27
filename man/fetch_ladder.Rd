@@ -33,7 +33,7 @@ corresponding the \code{Sys.Date()}}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
-\item{source}{One of "AFL" (default), "footywire", "afltables", "squiggle"}
+\item{source}{One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
 
