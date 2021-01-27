@@ -126,6 +126,6 @@ test_that("round numbers don't increment across bye weeks without matches", {
       max()
   }
   
-  expect_warning(betting_rounds <- get_footywire_betting_odds(2019)$Round)
-  expect_equal(calculate_max_round_lag(betting_rounds), 1)
+  expect_warning(betting_rounds <- get_footywire_betting_odds(2019, 2020))
+  expect_equal(calculate_max_round_lag(betting_rounds$Round), 1)
 })
