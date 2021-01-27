@@ -1,35 +1,29 @@
 
-test_that("fetch_betting_odds works for various inputs", {
 
-  })
-
-
-# Legacy Tests - should remove eventually --------------------------------------
-
-describe("get_footywire_betting_odds", {
+describe("fetch_betting_odds_footywire", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
   
   # Many regression tests require fetching multiple seasons,
   # so it's most efficient to fetch all years with known potential issues
-  full_betting_df <- get_footywire_betting_odds(
+  full_betting_df <- fetch_betting_odds_footywire(
     start_season = 2010, end_season = 2020
   )
   
   it("works with different inputs ", {
-    betting_df <- get_footywire_betting_odds(2018, 2019)
-    expect_is(betting_df, "data.frame")
-    expect_is(betting_df$Date[1], "Date")
+    betting_df <- fetch_betting_odds_footywire(2018, 2019)
+    expect_s3_class(betting_df, "data.frame")
+    expect_s3_class(betting_df$Date[1], "Date")
     
-    betting_df <- get_footywire_betting_odds("2018", "2019")
-    expect_is(betting_df, "data.frame")
-    expect_is(betting_df$Date[1], "Date")
+    betting_df <- fetch_betting_odds_footywire("2018", "2019")
+    expect_s3_class(betting_df, "data.frame")
+    expect_s3_class(betting_df$Date[1], "Date")
     
-    expect_warning(get_footywire_betting_odds(18, 2010))
+    expect_warning(fetch_betting_odds_footywire(18, 2010))
     this_year <- as.numeric(lubridate::year(Sys.Date()))
-    expect_warning(get_footywire_betting_odds(this_year - 1, this_year + 1))
-    expect_error(get_footywire_betting_odds("2018-01-01"))
-    expect_error(get_footywire_betting_odds(2016, "2018-01-01"))
+    expect_warning(fetch_betting_odds_footywire(this_year - 1, this_year + 1))
+    expect_error(supressWarnings(fetch_betting_odds_footywire("2018-01-01")))
+    expect_error(supressWarnings(fetch_betting_odds_footywire(2016, "2018-01-01")))
   })
   
   it("starts all seasons at round 1", {
@@ -52,14 +46,6 @@ describe("get_footywire_betting_odds", {
     expect_true(all(max_match_df$Round.Count <= 9))
   })
   
-  it("doesn't have any duplicate Season/Round/Team combinations", {
-    # home_df <- full_betting_df %>% dplyr::mutate(Team = .data$Home.Team)
-    # away_df <- full_betting_df %>% dplyr::mutate(Team = .data$Away.Team)
-    # combined_df <- dplyr::bind_rows(c(home_df, away_df))
-    
-    # expect_equal(nrow(combined_df), nrow(dplyr::distinct(combined_df)))
-    # removing this test for now - it's failing on github but I can't reproduce locally for some reason
-  })
   
   it("starts rounds on Wednesday by default", {
     max_matches_per_round <- 9
@@ -109,13 +95,22 @@ describe("get_footywire_betting_odds", {
     this_year <- as.numeric(lubridate::year(Sys.Date()))
     next_year <- this_year + 1
     
-    empty_betting_df <- get_footywire_betting_odds(
+    expect_warning(empty_betting_df <- fetch_betting_odds_footywire(
       start_season = next_year, end_season = next_year
-    )
+    ))
     
     # expect_equal(nrow(empty_betting_df), 0)
     expect_equal(colnames(empty_betting_df), colnames(full_betting_df))
   })
+})
+
+
+# Legacy Tests - should remove eventually --------------------------------------
+test_that("get_betting_odds works", {
+  expect_warning(full_betting_df <- get_footywire_betting_odds(
+    start_season = 2010, end_season = 2020
+  ))
+  expect_s3_class(full_betting_df, "tbl")
 })
 
 test_that("round numbers don't increment across bye weeks without matches", {
