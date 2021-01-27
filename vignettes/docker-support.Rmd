@@ -1,0 +1,40 @@
+---
+title: "Docker Support"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Docker Support}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fitzRoy)
+```
+
+## Docker Support
+
+fitzRoy now provides [Docker](https://www.docker.com/get-started) support in the form of an image hosted on [DockerHub](https://hub.docker.com/r/jimmyday12/fitzroy/).
+
+### Usage
+ 
+Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`) run one of the following commands.
+
+* To start [RStudio](https://www.rstudio.com/) with Fitzroy ready to use:
+  * `docker run -d -p 8787:8787 --name fitzroy jimmyday12/fitzroy:latest` and open `http://localhost:8787`.  *(Username: `rstudio`, Password: `rstudio`)
+* To start an R terminal prompt with fitzRoy ready to use:
+  * `docker run -it jimmyday12/fitzroy:latest R` to start with an R terminal prompt.
+  * Run `quit()` to exit the container
+
+### Building the image locally
+
+To build the Docker image run the following from the root of the repository.
+
+* `docker build -t jimmyday12/fitzroy:latest -f docker/rstudio/Dockerfile .`
+

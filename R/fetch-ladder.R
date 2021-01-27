@@ -13,7 +13,7 @@
 #'  corresponding the `Sys.Date()`
 #' @param round_number Round number, defaults to NULL which returns all rounds
 #' @param comp One of "AFLM" (default) or "AFLW"
-#' @param source One of "AFL" (default), "footywire", "afltables", "squiggle"
+#' @param source One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
 #' @param ... Optional parameters passed onto various functions depending on source.
 #'
 #' @return

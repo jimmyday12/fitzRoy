@@ -1,8 +1,8 @@
 ---
-title: "Using Fryzigg Stats"
+title: "Using Fryzigg API"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Using Fryzigg Stats}
+  %\VignetteIndexEntry{Using Fryzigg API}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

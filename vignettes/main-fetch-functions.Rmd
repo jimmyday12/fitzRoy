@@ -1,0 +1,119 @@
+---
+title: "Main Fetch functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Main Fetch functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message = FALSE, warning = FALSE}
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+library(fitzRoy)
+library(dplyr)
+```
+
+The goal of fitzRoy has been to provide a consistent and easy to use interface for accessing data from various sources. As of version 0.3.3.9000 of `fitzRoy`, the package now contains a much more consistent API to do so. This is with the introduction of the main `fetch_*` functions. 
+
+Each function uses the same arguments and each argument should behave the same across all of the functions. While there may be some slight differences in behaviour between different sources of data, the goal will be to move towards a much more consistent pattern of behaviour.
+
+# Main functions
+There are broadly 4 main functions
+
+* `fetch_fixture` - returns the fixture for a given round and season
+* `fetch_results` - returns the match results for a given round and season
+* `fetch_ladder` - returns the ladder for a given round and season
+* `fetch_player_stats` - returns the detailed player stats for a set of matches within a given round or season
+
+# Arguments
+Each function accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:
+
+* `season` - the season or seasons to return data from. If NULL (the default), will return the season that matches `Sys.Date()`
+* `round_number`- the round to return data from. If NULL (the default), will return data from all rounds
+* `source` - the source with which to return data from. Must be one of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
+* `comp` - the competition to return data from. Must be one of "AFLM" (default) or "AFLW". Not all data sources will have AFLW data.
+
+# Examples
+
+## Basic Usage
+We can use the sane defaults to simply return the fixture from the AFL Website. 
+
+```{r}
+fetch_fixture(2021)
+```
+
+This is the same as 
+
+```{r}
+fetch_fixture(season = 2021, comp = "AFLM", source = "AFL") %>%
+  select(compSeason.name, round.name, home.team.name, away.team.name, venue.name)
+```
+
+We can return just one round instead of the whole fixture.
+
+```{r}
+fetch_fixture(season = 2021, round_number = 2) %>%
+  select(compSeason.name, round.name, home.team.name, away.team.name, venue.name)
+
+```
+
+We could also return the AFLW fixture instead. 
+
+```{r}
+fetch_fixture(season = 2021, comp = "AFLW") %>%
+  select(compSeason.name, round.name, home.team.name, away.team.name, venue.name)
+
+```
+Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources. 
+
+```{r message=FALSE, warning=FALSE}
+fetch_fixture(2021, round_number = 1, source = "squiggle")
+```
+
+It should also be noted that the various sources of data have their own functions that can be called directly. 
+
+```{r eval=FALSE, message=FALSE, warning=FALSE}
+# The following are the same
+fetch_fixture(2021, round_number = 5, source = "squiggle")
+fetch_fixture_squiggle(2021, round_number = 5)
+```
+
+
+## Womens Data
+
+With these new functions we now have access to consistent AFLW data for the first time! 
+
+We can get the fixture. 
+
+```{r message=FALSE, warning=FALSE}
+fetch_fixture(2021, comp = "AFLW") %>%
+  select(compSeason.name, round.name, home.team.name, away.team.name, venue.name)
+
+```
+
+We can also see match results.
+
+```{r message=FALSE, warning=FALSE}
+fetch_results(2020, round_number = 1, comp = "AFLW") %>%
+  select( round.name, 
+         home.team.name, away.team.name, 
+         home.score.totalScore,
+         away.score.totalScore)
+
+```
+We can also get the ladder at any point.
+
+```{r message=FALSE, warning=FALSE}
+fetch_ladder(2020, round_number = 6, comp = "AFLW") %>%
+  select(season, round_name, position, team.name, played, pointsFor, pointsAgainst, )
+
+```
+
+At the moment, we don't have  `fetch_player_stats` working for AFLW data but this will come soon. In the meantime, read the full [AFL Womens Vingette](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) on how you can get AFLW stats using the old method. 

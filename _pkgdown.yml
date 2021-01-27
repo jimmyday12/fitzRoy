@@ -8,85 +8,95 @@ home:
 
 
 url: https://jimmyday12.github.io/fitzRoy/
+
 template:
   params:
     bootswatch: flatly
     ganalytics: UA-77406420-2
     
-news:
-  one_page: true
+  
 
 reference:
-  - title: Main Functions
-    desc: Functions used to fetch data
+  - title: Main Fetch Functions
     contents:
     - '`fetch_ladder`'
     - '`fetch_results`'
     - '`fetch_fixture`'
     - '`fetch_player_stats`'
-  - title: Ladder Functions
-    desc: Functions used to fetch ladder data
-    contents:  
-    - '`fetch_ladder_afl`'
-    - '`fetch_ladder_afltables`'
-    - '`fetch_ladder_squiggle`'
-  - title: Results Functions
-    desc: Functions used to fetch results data
-    contents:  
-    - '`fetch_results_afl`'
-    - '`fetch_results_afltables`'
-    - '`fetch_results_footywire`'
-    - '`fetch_results_squiggle`'
-  - title: Fixture Functions
-    desc: Functions used to fetch fixture data
-    contents:  
-    - '`fetch_fixture_afl`'
-    - '`fetch_fixture_footywire`'
-    - '`fetch_fixture_squiggle`'
-  - title: Player Stats Functions
-    desc: Functions used to fetch player stats data
-    contents:  
-    - '`fetch_player_stats_afltables`'
-    - '`fetch_player_stats_footywire`'
-    - '`fetch_player_stats_fryzigg`'
-  - title: Main Functions
-    desc: Most of these are going to be deprecated in favour of the above.
+    
+  - title: AFLW Data
     contents:
-      - '`get_fixture`'
-      - '`get_afltables_stats`'
-      - '`get_footywire_stats`'
-      - '`update_footywire_stats`'
-      - '`get_footywire_betting_odds`'
-      - '`get_match_results`'
-      - '`get_squiggle_data`'
       - '`get_aflw_detailed_data`'
       - '`get_aflw_detailed_match_data`'
       - '`get_aflw_match_data`'
       - '`get_aflw_round_data`'
       - '`get_aflw_rounds`'
-      - '`return_ladder`'
-      - '`get_fryzigg_stats`'
-      - '`get_afl_colour_palettes`'
-      - '`get_footywire_match_results`'
-      - '`fetch_ladder`'
-      - '`fetch_ladder_afl`'
-      - '`get_afl_fixture`'
       - '`get_aflw_player_stats`'
-      - '`fetch_betting_odds_footywire`'
-      - '`fetch_squiggle_data`'
       
-  - title: Data
-    desc: Included data 
+  - title: Other
     contents:
+      - fetch_squiggle_data
+      - get_fryzigg_stats
+      - fetch_betting_odds_footywire
+      - get_afl_colour_palettes
 
   - title: Internals
-    desc: Internal functions and helpers
     contents:
       - '`replace_teams`'
       - '`replace_venues`'
       - '`get_aflw_cookie`'
-      - '`get_score_progression_raw`'
       - '`get_afl_cookie`'
       
-      
-      
+  - title: Experimental
+    desc: >
+      Experimental functions are a testing ground for new approaches that we
+      believe to be worthy of greater exposure. There is no guarantee that these
+      functions will stay around in the future, so please reach out if you find
+      them useful.
+    contents:
+
+  - title: Superseded
+    desc: >
+      Superseded functions have been replaced by new approaches that we believe
+      to be superior, but we don't want to force you to change until you're
+      ready, so the existing functions will stay around for several years.
+    contents:
+    - '`get_fixture`'
+    - '`get_afltables_stats`'
+    - '`get_footywire_stats`'
+    - '`update_footywire_stats`'
+    - '`get_footywire_betting_odds`'
+    - '`get_match_results`'
+    - '`return_ladder`'
+    - '`get_fryzigg_stats`'
+    - '`get_afl_fixture`'
+    - '`get_squiggle_data`'
+    - '`get_footywire_match_results`'
+    - '`get_score_progression_raw`'
+
+articles:
+- title: Get started
+  navbar: ~
+  contents:
+  - fitzRoy
+  - main-fetch-functions
+
+- title: Workflow Examples
+  navbar: Workflow Examples
+  contents:
+  - mens-stats
+  - womens-stats
+  - elo-ratings-example
+  
+- title: APIs
+  navbar: APIs
+  contents:
+  - using-squiggle-api
+  - using-fryzigg-stats
+
+- title: Other
+  contents:
+  - docker-support
+    
+news:
+  one_page: true

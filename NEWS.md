@@ -1,13 +1,25 @@
 # fitzRoy (development version)
 
-* Added new function `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle`
-* Added new function `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables`
-* Added new function `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables`
-* Deprecated `get_footywire_match_results` - use `fetch_results_footywire`
-* Deprecated `get_match_results` - use `fetch_results_afltables`
+## Major Changes
+
+* Added a new group of `fetch_*` functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour
+* `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle` will return the fixture for a particular season and round
+* `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables` will return the results for a particular season and round
+* `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables` will return the ladder for a particular season and round.
+* `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
+
+## Deprecated Functions
+The following functions have been soft deprecated in favour of the above `fetch_*` functions. In most cases, calling a `fetch_*` function will be the same as calling the original deprecated function
+
 * Deprecated `get_afl_fixture` - use `fetch_fixture_afl`
 * Deprecated `get_fixture` - use `fetch_fixture_footywire`
+* Deprecated `get_match_results` - use `fetch_results_afltables`
+* Deprecated `get_footywire_match_results` - use `fetch_results_footywire`
 * Deprecated `return_ladder` - use `fetch_ladder_afltables`
+* Deprecated `get_footywire_stats` - use `fetch_footywire_stats`
+* Deprecated `get_fryzigg_stats` - use `fetch_player_stats_fryzigg`
+* Deprecated `get_afltables_stats` - use `fetch_player_stats_afltables`
+* Deprecated `update_footywire_stats` - use `fetch_player_stats_footywire`
 * Deprecated `get_footywire_betting_odds` - use `fetch_betting_odds_footywire`
 * Deprecated `get_score_progression_raw` - no replacement
 * Deprecated `get_footywire_match_ids` - use `fetch_footywire_match_ids`

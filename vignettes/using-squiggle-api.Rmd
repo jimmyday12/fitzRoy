@@ -1,0 +1,19 @@
+---
+title: "Using the Squiggle API"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using the Squiggle API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fitzRoy)
+```
