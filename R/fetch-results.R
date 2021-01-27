@@ -71,42 +71,30 @@ fetch_results <- function(season = NULL,
 
 
   if (source == "afltables") {
-    if (comp == "AFLW") {
-      rlang::warn("AFLW results not available for afltables.com")
-      return(NULL)
-    } else {
       return(fetch_results_afltables(
         season = season,
         round_number = round_number,
         ...
       ))
     }
-  }
+
 
   if (source == "footywire") {
-    if (comp == "AFLW") {
-      rlang::warn("AFLW results not available for footywire.com")
-      return(NULL)
-    } else {
       return(fetch_results_footywire(
         season = season,
         round_number = round_number,
         ...
       ))
     }
-  }
+
 
   if (source == "squiggle") {
-    if (comp == "AFLW") {
-      rlang::warn("AFLW results not available for squiggle.com")
-      return(NULL)
-    } else {
       return(fetch_fixture_squiggle(
         season = season,
         round_number = round_number
       ))
     }
-  }
+  
 }
 
 #' @rdname fetch_results

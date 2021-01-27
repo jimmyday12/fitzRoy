@@ -104,7 +104,7 @@ verify_year <- function(year) {
 #' @keywords internal
 #' @noRd
 return_start_end_dates <- function(season) {
-  season_checked <- season %>% purrr::map_int(check_season)
+  season_checked <- season %>% purrr::map_dbl(check_season)
 
   if (is.null(season)) {
     start_date <- lubridate::ymd("1897-01-01", quiet = TRUE)

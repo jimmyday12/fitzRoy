@@ -48,17 +48,17 @@ fetch_squiggle_data <- function(query = c(
   # Get optional expressions and check that they are valid
   # exp <- rlang::enexprs(...)
   exp <- list(...)
-
+  
   valid <- c(
     "year", "round", "game",
     "source", "complete", "team",
     "firstname", "surname", "match"
   )
-
+      
   if (!all(names(exp) %in% valid)) {
     rlang::abort(glue::glue(
       "Provided paramters must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
-    You provided the following: {toString(names(exp)}"
+    You provided the following: {toString(names(exp))}"
     ))
   }
 

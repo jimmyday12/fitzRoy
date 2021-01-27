@@ -51,7 +51,7 @@ fetch_player_stats <- function(season = NULL,
   check_comp_source(comp, source)
 
   if (source == "AFL") {
-    cli::cli_alert_warning("No player stats available for AFL website. Use `source` parameter to call one of \"footywire\", \"afltables\" or \"fryzigg\"")
+    rlang::warn(glue::glue("No player stats available for AFL website. Use `source` parameter to call one of \"footywire\", \"afltables\" or \"fryzigg\""))
     return(NULL)
   }
 
@@ -70,6 +70,7 @@ fetch_player_stats <- function(season = NULL,
   }
 
   if (source == "squiggle") {
+    rlang::warn(glue::glue("No player stats available for Squiggle. Use `source` parameter to call one of \"footywire\", \"afltables\" or \"fryzigg\""))
     return(NULL)
   }
 
@@ -147,13 +148,17 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
 #' @export
 fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL) {
   if (!is.null(round_number)) {
-    cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_afltables}.Returning data for all rounds in specified seasons")
+    cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_fryzigg}.Returning data for all rounds in specified seasons")
   }
 
-  # season <- check_season(season)
+  if (is.null(season)) {
+    season <- check_season(season)
+  } else {
+    season <- season %>% purrr::map_dbl(check_season)  
+    }
 
-  start <- verify_year(min(season))
-  end <- verify_year(max(season))
+  start <- min(season)
+  end <- max(season)
 
   id <- cli::cli_process_start("Returning cached data from {.val {start}} to {.val {end}}")
 
@@ -163,7 +168,7 @@ fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL) {
     format(as.Date(stats_df$match_date), "%Y") <= end)
 
   cli::cli_process_done(id)
-  return(stats_df)
+  return(tibble::as_tibble(stats_df))
 }
 
 #' @param check_existing logical, should we check existing data. This will likely be removed in future version as it takes a long time to re-scrape data
@@ -173,8 +178,12 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
   if (!rlang::is_bool(check_existing)) {
     stop(glue::glue("check_existing should be TRUE or FALSE, not `{class(check_existing)}`")) # nolint
   }
+  
+  if (!is.null(round_number)) {
+    cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_footywire}.Returning data for all rounds in specified seasons")
+  }
 
-  if (is.null(season)) season <- check_season(season)
+  if (is.null(season)) season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
 
   start_year <- max(min(season), 2010)
   end_year <- min(max(season), as.numeric(format(Sys.Date(), "%Y")))
@@ -217,7 +226,10 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 
     if (length(git_ids) == 0) {
       cli::cli_alert_info("No new matches found - returning data cached on github")
-      return(dat_git)
+      dat_git <- dat_git %>%
+        dplyr::filter(.data$Season == season)
+      
+      return(tibble::as_tibble(dat_git))
     } else {
       n <- length(git_ids)
       url <- "www.footywire.com"
@@ -226,14 +238,20 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
       new_data <- fetch_footywire_stats(git_ids)
       dat <- dat_git %>% dplyr::bind_rows(new_data)
       cli::cli_process_done(id3)
-
-      return(dat)
+    
+      dat <- dat %>%
+        dplyr::filter(.data$Season == season)
+      
+      return(tibble::as_tibble(dat))
     }
   } else {
     message("Downloading all data. Warning - this takes a long time")
     all_data_ids <- fw_ids
 
     dat <- get_footywire_stats(all_data_ids)
-    return(dat)
+    
+    dat <- dat %>%
+      dplyr::filter(.data$Season == season)
+    return(tibble::as_tibble(dat))
   }
 }
