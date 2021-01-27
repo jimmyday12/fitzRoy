@@ -101,4 +101,27 @@ test_that("get_fryzigg_stats works", {
   expect_error(supressWarnings(get_fryzigg_stats("")))
 })
 
+if (!testthat:::on_cran()) {
+  fw_dat <- suppressWarnings(update_footywire_stats())
+}
+
+test_that("update_footywire_stats works ", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  expect_type(fw_dat, "list")
+  expect_error(suppressWarnings(update_footywire_stats("a")))
+})
+
+test_that("no duplicate games in footywire data,", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  n_duplicates <- fw_dat %>%
+    dplyr::ungroup() %>%
+    dplyr::group_by(Date, Season, Round, Team, Player) %>%
+    dplyr::summarise(count_rows = dplyr::n())
+  
+  expect_lte(max(n_duplicates$count_rows), 1)
+})
 
