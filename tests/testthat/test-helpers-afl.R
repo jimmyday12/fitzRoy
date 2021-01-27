@@ -1,4 +1,3 @@
-context("test-afl_helpers.R")
 
 test_that("cookie returns value", {
   testthat::skip_if_offline()

@@ -18,4 +18,5 @@ The data for this function is hosted on github.
 # Gets all data
 get_afl_colour_palettes()
 }
+
 }

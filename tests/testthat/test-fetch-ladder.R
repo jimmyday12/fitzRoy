@@ -1,4 +1,3 @@
-context("test-fetch_ladder.R")
 
 test_that("fetch_ladder_afl works for various inputs", {
   testthat::skip_if_offline()

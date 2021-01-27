@@ -1,4 +1,3 @@
-context("test-fetch_fixture.R")
 
 test_that("fetch_fixture_afl works for various inputs", {
   testthat::skip_if_offline()

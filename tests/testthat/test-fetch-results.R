@@ -1,4 +1,3 @@
-context("test-fetch_results.R")
 
 test_that("fetch_results_afl works for various inputs", {
   testthat::skip_if_offline()

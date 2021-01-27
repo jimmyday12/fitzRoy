@@ -1,4 +1,3 @@
-context("test-helpers-general.R")
 
 test_that("check_season works for various inputs", {
   testthat::skip_if_offline()
@@ -70,12 +69,12 @@ test_that("return_start_end_date works for various inputs", {
   
   # 1 year
   x <- return_start_end_dates(2018)
-  expect_equivalent(x$start_date, as.POSIXct("2018-01-01", tz = "UTC"))
+  expect_equal(x$start_date, as.POSIXct("2018-01-01", tz = "UTC"))
   expect_equal(x$end_date, as.POSIXct("2018-12-31", tz = "UTC"))
   
   # Multiple years
   y <- return_start_end_dates(2000:2020)
-  expect_equivalent(y$start_date, as.POSIXct("2000-01-01", tz = "UTC"))
+  expect_equal(y$start_date, as.POSIXct("2000-01-01", tz = "UTC"))
   expect_equal(y$end_date, as.POSIXct("2020-12-31", tz = "UTC"))
   
   

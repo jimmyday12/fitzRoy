@@ -1,5 +1,3 @@
-context("test-womens_stats")
-
 
 
 skip_if_no_cookie <- function() {

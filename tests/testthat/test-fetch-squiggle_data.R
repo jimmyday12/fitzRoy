@@ -1,4 +1,3 @@
-context("test-squiggle-api-works.R")
 
 
 test_that("Squiggle API queries work", {

@@ -1,5 +1,3 @@
-context("test-helpers_afltables.R")
-
 
 test_that("replace_teams returns corrected teams", {
   expect_equal(replace_teams("A"), "A")

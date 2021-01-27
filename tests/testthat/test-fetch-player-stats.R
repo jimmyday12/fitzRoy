@@ -1,4 +1,3 @@
-context("test-fetch_player_stats.R")
 
 test_that("fetch_player_stats_afltables works for various inputs", {
   testthat::skip_if_offline()

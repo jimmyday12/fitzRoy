@@ -1,6 +1,3 @@
-context("test-helpers-footywire.R")
-
-
 # Legacy Tests - should remove eventually --------------------------------------
 test_that("get_match_data work with different inputs", {
   testthat::skip_if_offline()

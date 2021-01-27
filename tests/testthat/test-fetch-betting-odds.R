@@ -1,4 +1,3 @@
-context("test-fetch_footywire_betting_odds.R")
 
 test_that("fetch_betting_odds works for various inputs", {
 

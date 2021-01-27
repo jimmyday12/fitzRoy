@@ -1,5 +1,3 @@
-context("test-aflw_player_stats.R")
-
 if (!testthat:::on_cran()) {
   aflw_data <- get_aflw_player_stats(
     start = 2017,
