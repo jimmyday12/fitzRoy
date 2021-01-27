@@ -37,8 +37,8 @@ test_that("fetch_fixture_footywire works for various inputs", {
   # change round number
   expect_s3_class(fetch_fixture_footywire(2020, round_number = 1), "tbl")
   expect_s3_class(fetch_fixture_footywire(2020, round_number = 2), "tbl")
-  expect_warning(df <- fetch_fixture_footywire(2020, round_number = 50))
-  expect_s3_class(df, "tbl")
+  expect_s3_class(df <- fetch_fixture_footywire(2020, round_number = 50), "tbl")
+  expect_equal(nrow(df), 0)
 })
 
 test_that("fetch_fixture_squiggle returns data frame with required variables", {
@@ -67,9 +67,19 @@ test_that("fetch_fixture works", {
   testthat::skip_on_cran()
 
   # Test each source works
-  expect_s3_class(fetch_fixture(2020, round = 1, source = "squiggle"), "tbl")
-  expect_s3_class(fetch_fixture(2020, round = 1, source = "footywire"), "tbl")
-  expect_warning(fetch_fixture(2020, round = 1, source = "afltables"))
+  expect_s3_class(fetch_fixture(2020, round_number = 1, source = "AFL", comp = "AFLM"), "tbl")
+  expect_s3_class(fetch_fixture(2020, round_number = 1, source = "footywire", comp = "AFLM"), "tbl")
+  expect_s3_class(fetch_fixture(2020, round_number = 1, source = "squiggle", comp = "AFLM"), "tbl")
+  
+  # non working sources
+  expect_warning(fetch_fixture(2020, round_number = 1, source = "fryzigg", comp = "AFLM"))
+  expect_warning(fetch_fixture(2020, round_number = 1, source = "afltables", comp = "AFLM"))
+  
+  # Test that AFLW works
+  expect_s3_class(fetch_fixture(2020, round_number = 1, source = "AFL", comp = "AFLW"), "tbl")
+  expect_error(fetch_player_stats(2020, round_number = 1, source = "squiggle", comp = "AFLW"))
+  expect_error(fetch_player_stats(2020, round_number = 1, source = "footywire", comp = "AFLW"))
+  
 })
 
 
@@ -79,7 +89,7 @@ test_that("get_fixture works", {
   testthat::skip_on_cran()
   
   expect_warning(fix <- get_fixture(2012))
-  expect_is(fix, "tbl")
+  expect_s3_class(fix, "tbl")
   expect_equal(fix$Round[1], 1)
   expect_equal(fix$Round[2], 1)
   expect_equal(fix$Round[nrow(fix)], 27)
@@ -93,10 +103,10 @@ test_that("get_fixture works with different inputs ", {
   testthat::skip_on_cran()
   
   expect_warning(fixture_df <- get_fixture(2019))
-  expect_is(fixture_df, "data.frame")
-  expect_is(fixture_df$Date[1], "POSIXt")
-  expect_is(suppressWarnings(get_fixture(2019, TRUE))$Date[1], "Date")
-  expect_is(suppressWarnings(get_fixture(2017)), "data.frame")
+  expect_s3_class(fixture_df, "data.frame")
+  expect_s3_class(fixture_df$Date[1], "POSIXt")
+  expect_s3_class(suppressWarnings(get_fixture(2019, TRUE))$Date[1], "Date")
+  expect_s3_class(suppressWarnings(get_fixture(2017)), "data.frame")
   expect_error(suppressWarnings(get_fixture(18)))
   expect_error(suppressWarnings(get_fixture("2018-01-01")))
 })
@@ -131,7 +141,7 @@ test_that("2020 season round numbers are correct through round 13", {
     dplyr::filter(dplyr::n() > 1) %>%
     nrow()
   
-  expect_equal(n_duplicate_home_teams, n_duplicate_away_teams, 0)
+  expect_equal(n_duplicate_home_teams, n_duplicate_away_teams)
 })
 
 test_that("round numbers don't increment across bye weeks without matches", {

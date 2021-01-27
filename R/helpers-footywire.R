@@ -346,6 +346,7 @@ calculate_round_number <- function(round_names) {
   max_regular_round_number <- round_names %>%
     stringr::str_match_all(., DIGITS) %>%
     unlist(.) %>%
+    .[!stringr::str_detect(., "Round")] %>%
     as.numeric(.) %>%
     max(., na.rm = TRUE)
 
@@ -375,26 +376,20 @@ fetch_footywire_stats <- function(ids) {
 
   # Now get data
   # First, only proceed if we've accessed the URL
-  message("Getting data from https://www.footywire.com")
-
-  # Create Progress Bar
-  # nolint start
-  pb <- dplyr::progress_estimated(length(ids), min_time = 5)
+  length_ids <- length(ids)
+  id <- cli::cli_process_start("Getting data from {.url https://www.footywire.com} for {.val {length_ids}} match{?es}")
 
   # Loop through data using map
   dat <- ids %>%
-    purrr::map_df(~ {
-      pb$tick()$print() # update the progress bar (tick())
-      get_match_data(id = .x) # do function
-    })
-  # nolint end
+    purrr::map_df(~ 
+      get_match_data(id = .x))
 
   # Rearrange
   dat <- dat %>%
     dplyr::arrange(.data$Date, .data$Match_id, dplyr::desc(.data$Status))
 
   # Finish and return
-  message("Finished getting data")
+  cli::cli_process_done(id)
   return(dat)
 }
 

@@ -77,6 +77,11 @@ fetch_fixture <- function(season = NULL,
     return(NULL)
   }
 
+  if (source == "fryzigg") {
+    rlang::warn("Fryzigg does not have any fixture data")
+    return(NULL)
+  }
+  
   if (source == "squiggle") {
     return(fetch_fixture_squiggle(
       season = season,
@@ -174,6 +179,7 @@ Check the following url on footywire
 
   # Put this into dataframe format
   games_df <- matrix(games_text, ncol = 8, byrow = TRUE) %>%
+    as.data.frame() %>%
     tibble::as_tibble() %>%
     dplyr::select(.data$V1:.data$V4)
 
@@ -187,9 +193,10 @@ Check the following url on footywire
   games_df <- games_df %>%
     dplyr::mutate(
       Season = season,
-      Date = lubridate::ydm_hm(paste(season, .data$Date)),
-      Round = calculate_round_number(.data$Round.Name) %>% as.numeric(.)
-    ) %>%
+      Date = lubridate::ydm_hm(paste(season, .data$Date)))
+  
+  games_df <- games_df %>%
+    dplyr::mutate(Round = calculate_round_number(.data$Round.Name) %>% as.numeric(.)) %>%
     dplyr::select(., !c("Round.Name"))
 
   # Filter round

@@ -65,7 +65,7 @@ test_that("get_squiggle works", {
   testthat::skip_on_cran()
 
 
-  expect_warnings(dat <- get_squiggle_data())
+  expect_warning(dat <- get_squiggle_data())
   expect_type(dat, "list")
   
   # Test errors
