@@ -23,6 +23,7 @@ reference:
     - '`fetch_results`'
     - '`fetch_fixture`'
     - '`fetch_player_stats`'
+    - fetch_lineup
     
   - title: AFLW Data
     contents:

@@ -7,6 +7,7 @@
 * `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables` will return the results for a particular season and round
 * `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables` will return the ladder for a particular season and round.
 * `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
+* `fetch_lineup` and associated helper function `fetch_lineup_afl` will return the lineup for a particular season and round, including upcoming matches if teams have been announced
 
 ## Deprecated Functions
 The following functions have been soft deprecated in favour of the above `fetch_*` functions. In most cases, calling a `fetch_*` function will be the same as calling the original deprecated function

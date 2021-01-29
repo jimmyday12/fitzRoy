@@ -117,3 +117,48 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL, comp = 
   }
   return(id)
 }
+
+
+#' Returns match roster
+#'
+#' @param id Match ID from AFL website
+#' @param cookie cookie from AFL website, can be returned with `get_afl_cookie`
+#' @keywords internal
+#' @noRd
+fetch_match_roster_afl <- function(id, cookie = NULL) {
+  if (is.null(cookie)) cookie <- get_afl_cookie()
+  #print(id)
+  api <- paste0("https://api.afl.com.au/cfs/afl/matchRoster/full/", id)
+  
+  resp <- httr::GET(
+    url = api,
+    httr::add_headers(
+      "x-media-mis-token" = cookie
+    )
+  )
+  
+  cont <- resp %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON(flatten = TRUE)
+  
+  cont$matchRoster$homeTeam$clubDebuts <- list()
+  cont$matchRoster$homeTeam$milestones <- list()
+  cont$matchRoster$homeTeam$ins <- list()
+  cont$matchRoster$homeTeam$outs <- list()
+  home_df <- cont$matchRoster$homeTeam %>%
+    purrr::compact() %>%
+    purrr::flatten_dfr() %>%
+    dplyr::mutate(teamType = "home")
+  
+  cont$matchRoster$awayTeam$clubDebuts <- list()
+  cont$matchRoster$awayTeam$milestones <- list()
+  cont$matchRoster$awayTeam$ins <- list()
+  cont$matchRoster$awayTeam$outs <- list()
+  away_df <- cont$matchRoster$awayTeam %>%
+    purrr::compact() %>%
+    purrr::flatten_dfr() %>%
+    dplyr::mutate(teamType = "away")
+  
+  dplyr::bind_rows(home_df, away_df)
+  
+}
