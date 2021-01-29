@@ -55,39 +55,16 @@ fetch_fixture <- function(season = NULL,
   # Do some data checks
   season <- check_season(season)
   check_comp_source(comp, source)
-
-  if (source == "AFL") {
-    return(fetch_fixture_afl(
-      season = season,
-      round_number = round_number,
-      comp = comp
-    ))
-  }
-
-  if (source == "footywire") {
-    return(fetch_fixture_footywire(
-      season = season,
-      round_number = round_number,
-      ...
-    ))
-  }
-
-  if (source == "afltables") {
-    rlang::warn("afltables.com does not have any fixture data")
-    return(NULL)
-  }
-
-  if (source == "fryzigg") {
-    rlang::warn("Fryzigg does not have any fixture data")
-    return(NULL)
-  }
   
-  if (source == "squiggle") {
-    return(fetch_fixture_squiggle(
-      season = season,
-      round_number = round_number
-    ))
-  }
+  dat <- switch(source,
+                "AFL" = fetch_fixture_afl(season, round_number, comp),
+                "footywire" = fetch_fixture_footywire(season, round_number, ...),
+                "squiggle" = fetch_fixture_squiggle(season, round_number),
+                NULL)
+  
+  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Fixture data. Please use one of \"AFL\", \"footywire\" or \"squiggle\""))
+  return(dat)
+
 }
 
 
@@ -96,8 +73,14 @@ fetch_fixture <- function(season = NULL,
 fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   season <- check_season(season)
 
-  if (is.null(round_number)) round_number <- ""
-
+  if (is.null(round_number)) {
+    round_number <- ""
+    rnd_msg <- paste0("All Rounds, ", season)
+  } else {
+    rnd_msg <- paste0("Round ", round_number, ", ", season)
+  }
+  
+  cli_id <- cli::cli_process_start("Returning data for {.val {rnd_msg}}")
   comp_seas_id <- find_season_id(season, comp)
   comp_id <- find_comp_id(comp)
 
@@ -118,10 +101,11 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
     jsonlite::fromJSON(flatten = TRUE)
 
   df <- dplyr::as_tibble(cont$matches) %>%
-    dplyr::mutate(compSeason.year = as.numeric(gsub("([0-9]+).*$", "\\1", .data$compSeason.name)))
-
-  df %>%
+    dplyr::mutate(compSeason.year = as.numeric(gsub("([0-9]+).*$", "\\1", .data$compSeason.name))) %>%
     dplyr::filter(.data$compSeason.year == season)
+  
+  cli::cli_process_done(cli_id)
+  return(df)
 }
 
 

@@ -65,33 +65,15 @@ fetch_ladder <- function(season = NULL,
   season <- check_season(season)
   check_comp_source(comp, source)
 
-  if (source == "AFL") {
-    return(fetch_ladder_afl(
-      season = season,
-      round_number = round_number,
-      comp = comp
-    ))
-  }
+  dat <- switch(source,
+                "AFL" = fetch_ladder_afl(season, round_number, comp),
+                "afltables" = fetch_ladder_afltables(season, round_number, ...),
+                "squiggle" = fetch_ladder_squiggle(season, round_number),
+                NULL)
+  
+  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Ladder data. Please use one of \"AFL\", \"afltables\", or \"squiggle\""))
+  return(dat)
 
-  if (source == "footywire") {
-    rlang::warn("footywire.com does not have any ladder data")
-    return(NULL)
-  }
-
-  if (source == "afltables") {
-    return(fetch_ladder_afltables(
-      season = season,
-      round_number = round_number,
-      ...
-    ))
-  }
-
-  if (source == "squiggle") {
-    return(fetch_ladder_squiggle(
-      season = season,
-      round_number = round_number
-    ))
-  }
 }
 
 #' @rdname fetch_ladder

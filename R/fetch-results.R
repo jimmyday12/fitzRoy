@@ -60,41 +60,16 @@ fetch_results <- function(season = NULL,
   season <- check_season(season)
   check_comp_source(comp, source)
 
-  if (source == "AFL") {
-    return(fetch_results_afl(
-      season = season,
-      round_number = round_number,
-      comp = comp
-    ))
-  }
-
-
-
-  if (source == "afltables") {
-      return(fetch_results_afltables(
-        season = season,
-        round_number = round_number,
-        ...
-      ))
-    }
-
-
-  if (source == "footywire") {
-      return(fetch_results_footywire(
-        season = season,
-        round_number = round_number,
-        ...
-      ))
-    }
-
-
-  if (source == "squiggle") {
-      return(fetch_fixture_squiggle(
-        season = season,
-        round_number = round_number
-      ))
-    }
+  dat <- switch(source,
+                "AFL" = fetch_results_afl(season, round_number, comp),
+                "afltables" = fetch_results_afltables(season, round_number),
+                "footywire" = fetch_results_footywire(season, round_number, ...),
+                "squiggle" = fetch_results_squiggle(season, round_number),
+                NULL)
   
+  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Results data. Please use one of \"AFL\", \"afltables\", \"footywire\" or \"squiggle\""))
+  return(dat)
+
 }
 
 #' @rdname fetch_results

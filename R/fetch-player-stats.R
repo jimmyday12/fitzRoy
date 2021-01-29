@@ -50,36 +50,16 @@ fetch_player_stats <- function(season = NULL,
   # season <- check_season(season)
   check_comp_source(comp, source)
 
-  if (source == "AFL") {
-    rlang::warn(glue::glue("No player stats available for AFL website. Use `source` parameter to call one of \"footywire\", \"afltables\" or \"fryzigg\""))
-    return(NULL)
-  }
-
-  if (source == "footywire") {
-    return(fetch_player_stats_footywire(
-      season = season,
-      round_number = round_number
-    ))
-  }
-
-  if (source == "afltables") {
-    return(fetch_player_stats_afltables(
-      season = season,
-      round_number = round_number
-    ))
-  }
-
-  if (source == "squiggle") {
-    rlang::warn(glue::glue("No player stats available for Squiggle. Use `source` parameter to call one of \"footywire\", \"afltables\" or \"fryzigg\""))
-    return(NULL)
-  }
-
-  if (source == "fryzigg") {
-    return(fetch_player_stats_fryzigg(
-      season = season,
-      round_number = round_number
-    ))
-  }
+  
+  dat <- switch(source,
+                "footywire" = fetch_player_stats_footywire(season, round_number, ...),
+                "afltables" = fetch_player_stats_afltables(season, round_number),
+                "fryzigg" = fetch_player_stats_fryzigg(season, round_number),
+                NULL)
+  
+  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats. Please use one of \"footywire\", \"afltables\" or \"fryzigg\""))
+  return(dat)
+  
 }
 
 
