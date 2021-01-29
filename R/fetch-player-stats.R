@@ -88,15 +88,21 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
     get(ls()[ls() != "fname"])
   }
 
+  cli_id1 <- cli::cli_process_start("fetching cached data from {.url github.com}")
   dat <- load_r_data(dat_url)
+  cli::cli_process_done(cli_id1)
+  
   max_date <- max(dat$Date)
 
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
     if (length(urls) != 0) {
+      cli::cli_alert_info("New data found for {.val {length(urls)}} matches")
       dat_new <- scrape_afltables_match(urls)
       dat <- dplyr::bind_rows(dat, dat_new)
     }
+  } else {
+    cli::cli_alert_info("No new data found - returning cached data")
   }
   message("Finished getting afltables data")
   # Fix for players who's spelling changes on afltables.com
