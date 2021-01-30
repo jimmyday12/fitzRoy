@@ -17,7 +17,7 @@ Returns a data frame containing player match stats for each match ID
 }
 \details{
 The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
-To find match ID, find the relevant matches on https://wwww.footywire.com
+To find match ID, find the relevant matches on https://www.footywire.com
 }
 \examples{
 \dontrun{

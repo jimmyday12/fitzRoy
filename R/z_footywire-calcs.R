@@ -3,7 +3,7 @@
 #' \code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
 #'
 #' The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
-#' To find match ID, find the relevant matches on https://wwww.footywire.com
+#' To find match ID, find the relevant matches on https://www.footywire.com
 #'
 #' @param ids A vector containing match id's to return. Can be a single value or vector of values.
 #'

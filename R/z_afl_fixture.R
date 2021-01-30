@@ -1,6 +1,6 @@
 #' Get AFL fixture
 #'
-#' Returns the Fixture for the relevent Season and Round from the AFL.com.au website.
+#' Returns the Fixture for the relevant Season and Round from the AFL.com.au website.
 #'
 #' @param season season in YYYY format
 #' @param round_number round number

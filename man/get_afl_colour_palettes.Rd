@@ -2,7 +2,7 @@
 % Please edit documentation in R/team_colour_palettes.R
 \name{get_afl_colour_palettes}
 \alias{get_afl_colour_palettes}
-\title{Returns a table with the colour palattes for all teams}
+\title{Returns a table with the colour palettes for all teams}
 \usage{
 get_afl_colour_palettes()
 }

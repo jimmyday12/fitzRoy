@@ -1,4 +1,4 @@
-#' Returns a table with the colour palattes for all teams
+#' Returns a table with the colour palettes for all teams
 #'
 #' \code{get_afl_colour_palettes} returns a data frame containing the AFL team's primary, secondary and tertiary colours as applicable
 

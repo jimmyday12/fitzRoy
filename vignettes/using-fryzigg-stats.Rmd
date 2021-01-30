@@ -33,7 +33,7 @@ dat <- fitzRoy:::fryzigg
 
 
 ## Overview
-We have included a function to interface with the Fryzigg API. This data set includes advanced AFL stats that are typically not available on existing open data sites such as footywire.com and afltables.com. Many thanks to [Fryzigg](https://github.com/Fryzigg) on providing this API interfect. 
+We have included a function to interface with the Fryzigg API. This data set includes advanced AFL stats that are typically not available on existing open data sites such as footywire.com and afltables.com. Many thanks to [Fryzigg](https://github.com/Fryzigg) on providing this API interface. 
 
 
 ## Load packages

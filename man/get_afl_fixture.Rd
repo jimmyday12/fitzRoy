@@ -17,7 +17,7 @@ get_afl_fixture(season = NULL, round_number = NULL, comp = "AFLM")
 returns a dataframe with the fixture that matches season, round.
 }
 \description{
-Returns the Fixture for the relevent Season and Round from the AFL.com.au website.
+Returns the Fixture for the relevant Season and Round from the AFL.com.au website.
 }
 \examples{
 \dontrun{

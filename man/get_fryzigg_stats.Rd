@@ -7,7 +7,7 @@
 get_fryzigg_stats(start = 1897, end = as.numeric(format(Sys.Date(), "\%Y")))
 }
 \arguments{
-\item{start}{optional, character string or numeric for start year, in "YYYY"ormat}
+\item{start}{optional, character string or numeric for start year, in "YYYY" format}
 
 \item{end}{optional, character string or numeric for end year, in "YYYY"format}
 }
@@ -20,7 +20,7 @@ a data table containing player stats for each game between start and end years
 \details{
 This function returns a data frame containing match stats for each game within the specified date range. The data from contains all stats from the fryziggafl api and returns 1 row per player.
 
-The date for this fucntion is called from an API with data stored in a PostgreSQL database on AWS.
+The date for this function is called from an API with data stored in a PostgreSQL database on AWS.
 Updated at the conclusion of every game. A cached version to come.
 }
 \examples{

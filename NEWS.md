@@ -54,7 +54,7 @@ The following functions have been soft deprecated in favour of the above `fetch_
 ## Bug Fixes
 * Fixed `get_footywire_betting_odds` to return an empty data frame when only future seasons are requested rather than raising an error ([#112](https://github.com/jimmyday12/fitzRoy/issues/112), [@cfranklin11](https://github.com/cfranklin11))
 * Fixed issue with afltables data that caused issues with home/away team in drawn finals matches [#116](https://github.com/jimmyday12/fitzRoy/issues/116)
-* Fixed issue with duplate rows in footywire data [#115](https://github.com/jimmyday12/fitzRoy/issues/115)
+* Fixed issue with duplicate rows in footywire data [#115](https://github.com/jimmyday12/fitzRoy/issues/115)
 
 
 # fitzRoy 0.3.1
@@ -106,7 +106,7 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 
 # fitzRoy 0.1.9
 * `get_fixture()` now handles inconsistent assignment of Wednesday games and a related issue for some Round 1 matches where games were being assigned to the wrong round ([#54](https://github.com/jimmyday12/fitzRoy/issues/54)
-* `get_fixture()` now handles the canceled match in round 14, 2015  ([#56](https://github.com/jimmyday12/fitzRoy/issues/56), [@cfranklin11](https://github.com/cfranklin11))
+* `get_fixture()` now handles the cancelled match in round 14, 2015  ([#56](https://github.com/jimmyday12/fitzRoy/issues/56), [@cfranklin11](https://github.com/cfranklin11))
 * `get_aflw_round_data()` now correctly loads data and passes all tests ([#52](https://github.com/jimmyday12/fitzRoy/issues/52) [#53](https://github.com/jimmyday12/fitzRoy/issues/53))
 * `get_afltables_stats` no longer includes erroneous warning messages [#44](https://github.com/jimmyday12/fitzRoy/issues/44)
 * updated the included `fixture` data to 2019 [#50](https://github.com/jimmyday12/fitzRoy/issues/50)
