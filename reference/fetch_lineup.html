@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Returns a table with the colour palettes for all teams — get_afl_colour_palettes • fitzRoy</title>
+<title>Return the selected lineup for any completed or upcoming matches — fetch_lineup • fitzRoy</title>
 
 
 <!-- jquery -->
@@ -35,9 +35,11 @@
 
 
 
-<meta property="og:title" content="Returns a table with the colour palettes for all teams — get_afl_colour_palettes" />
-<meta property="og:description" content="get_afl_colour_palettes returns a data frame containing the AFL team's primary, secondary and tertiary colours as applicable
-The data for this function is hosted on github." />
+<meta property="og:title" content="Return the selected lineup for any completed or upcoming matches — fetch_lineup" />
+<meta property="og:description" content="fetch_lineup returns the Lineup for matches in given AFL Round. Internally, it calls
+a corresponding fetch_lineup_* function that depends on the source given.
+By default the source used will be the official AFL website.
+fetch_lineup_afl() can be called directly and return data from AFL website." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -152,33 +154,93 @@ The data for this function is hosted on github." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Returns a table with the colour palettes for all teams</h1>
-    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/team_colour_palettes.R'><code>R/team_colour_palettes.R</code></a></small>
-    <div class="hidden name"><code>get_afl_colour_palettes.Rd</code></div>
+    <h1>Return the selected lineup for any completed or upcoming matches</h1>
+    <small class="dont-index">Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/R/fetch_lineup.R'><code>R/fetch_lineup.R</code></a></small>
+    <div class="hidden name"><code>fetch_lineup.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p><code>get_afl_colour_palettes</code> returns a data frame containing the AFL team's primary, secondary and tertiary colours as applicable
-The data for this function is hosted on github.</p>
+    <p><code>fetch_lineup</code> returns the Lineup for matches in given AFL Round. Internally, it calls
+a corresponding <code>fetch_lineup_*</code> function that depends on the source given.
+By default the source used will be the official AFL website.</p>
+<p><code>fetch_lineup_afl()</code> can be called directly and return data from AFL website.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_afl_colour_palettes</span>()</pre>
+    <pre class="usage"><span class='fu'>fetch_lineup</span>(
+  <span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>,
+  <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>,
+  <span class='no'>...</span>
+)
 
+<span class='fu'>fetch_lineup_afl</span>(<span class='kw'>season</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>round_number</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLM"</span>)</pre>
+
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>season</th>
+      <td><p>Season in YYYY format, defaults to NULL which returns the year
+corresponding the <code><a href='https://rdrr.io/r/base/Sys.time.html'>Sys.Date()</a></code></p></td>
+    </tr>
+    <tr>
+      <th>round_number</th>
+      <td><p>Round number, defaults to NULL which returns all rounds</p></td>
+    </tr>
+    <tr>
+      <th>comp</th>
+      <td><p>One of "AFLM" (default) or "AFLW"</p></td>
+    </tr>
+    <tr>
+      <th>source</th>
+      <td><p>One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>Optional parameters passed onto various functions depending on source.</p></td>
+    </tr>
+    </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a data table containing team long name, team abbreviation, and colours</p>
+    <p>A Tibble with the lineup from the relevant <code>season</code> and <code>round</code>.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'>
+<ul>
+<li><p>fetch_lineup_afl for official AFL data.</p></li>
+</ul>
+</div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
-<span class='co'># Gets all data</span>
-<span class='fu'>get_afl_colour_palettes</span>()
+<span class='co'># Return data for whole season from AFL Website</span>
+<span class='fu'>fetch_lineup</span>(<span class='fl'>2020</span>)
+
+<span class='co'># This is equivalent to</span>
+<span class='fu'>fetch_lineup</span>(<span class='fl'>2020</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)
+<span class='fu'>fetch_lineup_afl</span>(<span class='fl'>2020</span>)
+
+<span class='co'># Return AFLW data</span>
+<span class='fu'>fetch_lineup</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"AFL"</span>)
+<span class='fu'>fetch_lineup_afl</span>(<span class='fl'>2020</span>, <span class='kw'>comp</span> <span class='kw'>=</span> <span class='st'>"AFLW"</span>)
+
+<span class='co'># Not all sources have lineup data and will return a warning</span>
+<span class='fu'>fetch_lineup</span>(<span class='fl'>2020</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"footywire"</span>)
+<span class='fu'>fetch_lineup</span>(<span class='fl'>2020</span>, <span class='kw'>source</span> <span class='kw'>=</span> <span class='st'>"squiggle"</span>)
+
+
+<span class='co'># Directly call functions for each source</span>
+<span class='fu'>fetch_lineup_afl</span>(<span class='fl'>2018</span>, <span class='kw'>round</span> <span class='kw'>=</span> <span class='fl'>9</span>)
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
       <li><a href="#value">Value</a></li>
+      <li><a href="#see-also">See also</a></li>
       <li><a href="#examples">Examples</a></li>
     </ul>
 

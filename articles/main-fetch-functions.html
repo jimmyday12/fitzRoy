@@ -254,21 +254,21 @@
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 9 x 24</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   hbehinds hscore ateamid tz    date  round  year hteam is_final hgoals</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;lgl&gt;     &lt;int&gt;   &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;    &lt;int&gt; &lt;lgl&gt; </span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1 NA            0       7 +11:… 2021…     1  2021 Adel…        0 NA    </span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 NA            0      16 +11:… 2021…     1  2021 Bris…        0 NA    </span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 NA            0      18 +11:… 2021…     1  2021 Coll…        0 NA    </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4 NA            0      10 +11:… 2021…     1  2021 Esse…        0 NA    </span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5 NA            0      15 +11:… 2021…     1  2021 Grea…        0 NA    </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 6 NA            0       6 +11:… 2021…     1  2021 Melb…        0 NA    </span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 7 NA            0      13 +11:… 2021…     1  2021 Nort…        0 NA    </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 8 NA            0       3 +11:… 2021…     1  2021 Rich…        0 NA    </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 9 NA            0       8 +11:… 2021…     1  2021 West…        0 NA    </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # … with 14 more variables: roundname &lt;chr&gt;, venue &lt;chr&gt;, updated &lt;chr&gt;,</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; #   complete &lt;int&gt;, ateam &lt;chr&gt;, id &lt;int&gt;, winnerteamid &lt;lgl&gt;, localtime &lt;chr&gt;,</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   hteamid &lt;int&gt;, ascore &lt;int&gt;, abehinds &lt;lgl&gt;, is_grand_final &lt;int&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   winner &lt;lgl&gt;, agoals &lt;lgl&gt;</span></span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   venue agoals winnerteamid localtime hteam hbehinds hteamid is_final roundname</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;chr&gt; &lt;lgl&gt;  &lt;lgl&gt;        &lt;chr&gt;     &lt;chr&gt; &lt;lgl&gt;      &lt;int&gt;    &lt;int&gt; &lt;chr&gt;    </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1 Adel… NA     NA           2021-03-… Adel… NA             1        0 Round 1  </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 Gabba NA     NA           2021-03-… Bris… NA             2        0 Round 1  </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 M.C.… NA     NA           2021-03-… Coll… NA             4        0 Round 1  </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4 Dock… NA     NA           2021-03-… Esse… NA             5        0 Round 1  </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5 Sydn… NA     NA           2021-03-… Grea… NA             9        0 Round 1  </span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 6 M.C.… NA     NA           2021-03-… Melb… NA            11        0 Round 1  </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 7 Dock… NA     NA           2021-03-… Nort… NA            12        0 Round 1  </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 8 M.C.… NA     NA           2021-03-… Rich… NA            14        0 Round 1  </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 9 Pert… NA     NA           2021-03-… West… NA            17        0 Round 1  </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # … with 15 more variables: updated &lt;chr&gt;, date &lt;chr&gt;, tz &lt;chr&gt;, ascore &lt;int&gt;,</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; #   year &lt;int&gt;, complete &lt;int&gt;, hgoals &lt;lgl&gt;, ateam &lt;chr&gt;, abehinds &lt;lgl&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   is_grand_final &lt;int&gt;, ateamid &lt;int&gt;, hscore &lt;int&gt;, round &lt;int&gt;, id &lt;int&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   winner &lt;lgl&gt;</span></span></code></pre></div>
 <p>It should also be noted that the various sources of data have their own functions that can be called directly.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># The following are the same</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">5</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
