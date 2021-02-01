@@ -1,10 +1,31 @@
 
+skip_if_no_cookie <- function() {
+  testthat::skip_if_offline()
+  
+  if (is.null(get_afl_cookie())) {
+    skip("AFL Cookie not working")
+  }
+}
+
+
 test_that("cookie returns value", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-
-  expect_type(get_afl_cookie(), "character")
+  cookie <- get_afl_cookie()
+  
+  expect_type(cookie, "character")
+  expect_equal(nchar(cookie), 32)
   expect_error(get_afl_cookie("test"))
+})
+
+test_that("get_aflw_cookie returns a 32 character string", {
+  testthat::skip_on_cran()
+  skip_if_no_cookie()
+  cookie <- suppressWarnings(get_aflw_cookie())
+  
+  expect_type(cookie, "character")
+  expect_equal(nchar(cookie), 32)
+  expect_error(get_aflw_cookie("a"))
 })
 
 test_that("find comp ID functions work", {

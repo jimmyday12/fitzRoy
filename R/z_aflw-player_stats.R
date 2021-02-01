@@ -25,14 +25,8 @@
 #' @importFrom rlang .data
 get_aflw_player_stats <- function(start = 2017,
                                   end = as.numeric(format(Sys.Date(), "%Y"))) {
-  start <- verify_year(start)
-  end <- verify_year(end)
-
-  message(paste("Returning cached data from", start, "to", end, "\n ", "This may take some time."))
-
-  dat_url <- url("http://www.fryziggafl.net/static/aflw_player_stats.rds", "rb")
-  stats_df <- readRDS(dat_url)
-  stats_df <- subset(stats_df, format(as.Date(stats_df$date), "%Y") >= start &
-    format(as.Date(stats_df$date), "%Y") <= end)
-  return(stats_df)
+  
+  .Deprecated("fetch_player_stats_fryzigg")
+  return(fetch_player_stats_fryzigg(start:end, round_number = NULL, comp = "AFLW"))
+  
 }

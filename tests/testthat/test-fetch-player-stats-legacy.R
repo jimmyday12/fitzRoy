@@ -106,3 +106,64 @@ test_that("finals drawn matches return the right home/away team", {
   
   expect_equal(nrow(bad_finals), 0)
 })
+
+
+
+skip_if_no_cookie <- function() {
+  testthat::skip_if_offline()
+  
+  if (is.null(get_afl_cookie())) {
+    skip("AFL Cookie not working")
+  }
+}
+
+test_that("get_aflw_rounds returns data frame with correct variables", {
+  testthat::skip_on_cran()
+  skip_if_no_cookie()
+  aflw_rounds_dat <- suppressWarnings(get_aflw_rounds(get_aflw_cookie()))
+  
+  expect_type(aflw_rounds_dat, "list")
+  expect_gte(nrow(aflw_rounds_dat), 1)
+})
+
+test_that("get_aflw_round_data returns data frame with correct variables", {
+  testthat::skip_on_cran()
+  skip_if_no_cookie()
+  
+  dat <- suppressWarnings(get_aflw_round_data("CD_R201826401", get_aflw_cookie()))
+  expect_type(dat, "list")
+  expect_equal(
+    colnames(dat),
+    c(
+      "Match.Id", "Round.Id", "Competition.Id", "Venue",
+      "Local.Start.Time", "Round.Number", "Round.Abbreviation",
+      "Weather.Type", "Weather.Description", "Temperature",
+      
+      "Home.Team", "Home.Goals", "Home.Behinds", "Home.Points",
+      "Home.Left.Behinds", "Home.Right.Behinds", "Home.Left.Posters",
+      "Home.Right.Posters", "Home.Rushed.Behinds",
+      "Home.Touched.Behinds",
+      
+      "Away.Team", "Away.Goals", "Away.Behinds", "Away.Points",
+      "Away.Left.Behinds", "Away.Right.Behinds", "Away.Left.Posters",
+      "Away.Right.Posters", "Away.Rushed.Behinds",
+      "Away.Touched.Behinds"
+    )
+  )
+})
+
+
+
+test_that("get_aflw_detailed_match_data returns dataframe with correct vars", {
+  testthat::skip_on_cran()
+  skip_if_no_cookie()
+  
+  expect_type(suppressWarnings(get_aflw_detailed_match_data(
+    "CD_M20172640101",
+    "CD_R201726401",
+    "CD_S2017264",
+    suppressWarnings(get_aflw_cookie())
+  )), "list")
+})
+
+

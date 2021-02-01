@@ -1,7 +1,15 @@
+skip_if_no_cookie <- function() {
+  testthat::skip_if_offline()
+  
+  if (is.null(get_afl_cookie())) {
+    skip("AFLW Cookie not working")
+  }
+}
 
 test_that("fetch_results_afl works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
+  skip_if_no_cookie()
 
   expect_s3_class(fetch_results_afl(2020, 1, comp = "AFLM"), "tbl")
 
