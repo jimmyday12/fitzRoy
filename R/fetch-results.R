@@ -75,11 +75,19 @@ fetch_results <- function(season = NULL,
 #' @rdname fetch_results
 #' @export
 fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
-  fetch_fixture_afl(
-    season = season,
-    round_number = round_number,
-    comp = comp
-  )
+  # get ids of season and round
+  season <- check_season(season)
+  season_id <- find_season_id(season, comp)
+  round_ids <- find_round_id(round_number, season_id = season_id, 
+                             comp = comp, providerId = TRUE)
+  
+  # get cookie
+  cookie <- get_afl_cookie()
+  
+  df <- round_ids %>%
+    purrr::map_dfr(fetch_round_results_afl, cookie)
+  
+  return(df)
 }
 
 
