@@ -70,9 +70,18 @@ check_comp_source <- function(comp, source) {
   check_comp(comp)
   check_source(source)
 
-  if (comp == "AFLW" & source != "AFL") {
-    rlang::abort(glue::glue("AFLW data only exists from source \"AFL\""))
-  }
+  valid <- c(
+    "AFL",
+    "fryzigg"
+  )
+  
+  if ((!source %in% valid) & comp == "AFLW") {
+    rlang::abort(glue::glue(
+      "For AFLW, source must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
+    You provided the following: {source}"
+    ))}
+    
+  
 }
 
 #' Verify Year

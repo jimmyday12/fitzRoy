@@ -54,7 +54,7 @@ test_that("check_source works for various inputs", {
   expect_error(check_comp_source("AFLW", "afltables"))
   expect_error(check_comp_source("AFLW", "footywire"))
   expect_error(check_comp_source("AFLW", "squiggle"))
-  expect_error(check_comp_source("AFLW", "fryzigg"))
+  
   
   
   # errors
