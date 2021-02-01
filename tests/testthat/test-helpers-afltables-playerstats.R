@@ -5,7 +5,7 @@ test_that("scape_afltables_ works", {
   
   url_new <- "https://afltables.com/afl/stats/games/2018/030820180812.html"
   url_old <- "https://afltables.com/afl/stats/games/1897/030618970508.html"
-  expect_error(scrape_afltables_match(url_new))
+  expect_type(scrape_afltables_match(url_new), "list")
   expect_type(scrape_afltables_match(url_old), "list")
   expect_error(scrape_afltables_match())
   expect_error(scrape_afltables_match(1))
@@ -26,12 +26,12 @@ test_that("get_afltables_player_ids works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
   
-  expect_type(get_afltables_player_ids(2020), "list")
+  max_seas <- Sys.Date() %>% format("%Y") %>% as.numeric()
+  
+  expect_type(get_afltables_player_ids(1897:2020), "list")
   expect_type(get_afltables_player_ids(2017), "list")
-  expect_error(get_afltables_player_ids(c(2017, 2018, 2019)))
   expect_error(get_afltables_player_ids())
-  expect_error(get_afltables_player_ids(2018))
-  expect_error(get_afltables_player_ids("a"))
+  expect_error(suppressWarnings(get_afltables_player_ids("a")))
 })
 
 

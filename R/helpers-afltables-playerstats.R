@@ -317,67 +317,58 @@ get_afltables_player_ids <- function(seasons) {
   }
 
   # nolint start
-  pre_urls <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
+  git_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
   # nolint end
 
   col_vars <- c("Season", "Player", "ID", "Team")
-
-  if (min(seasons) <= 2017) {
-    pre_2018 <- pre_urls %>%
-      readr::read_csv(col_types = c("dcdc")) %>%
-      dplyr::mutate(ID = as.integer(.data$ID)) %>%
-      dplyr::select(!!col_vars) %>%
-      dplyr::distinct() %>%
-      dplyr::filter(.data$Season %in% seasons)
-  }
-
-  if (max(seasons) > 2017) {
-    urls <- purrr::map_chr(seasons[seasons > 2017], base_url)
-
-    readUrl <- function(url) {
-      out <- tryCatch(readr::read_csv(url,
-        col_types = readr::cols(),
-        guess_max = 10000
-      ),
-      error = function(cond) {
-        return(data.frame())
-      }
-      )
-      return(out)
+  
+  ids <- git_url %>%
+    readr::read_csv(col_types = c("dcdc")) %>%
+    dplyr::mutate(ID = as.integer(.data$ID)) %>%
+    dplyr::select(!!col_vars) %>%
+    dplyr::distinct() %>%
+    dplyr::filter(.data$Season %in% seasons)
+  
+  # check for new ids
+  readUrl <- function(url) {
+    out <- tryCatch(readr::read_csv(url,
+                                    col_types = readr::cols(),
+                                    guess_max = 10000
+    ),
+    error = function(cond) {
+      return(data.frame())
     }
-
-    post_2017 <- urls %>%
-      purrr::map(readUrl)
-
-    post_2017_df <- post_2017 %>%
-      purrr::flatten_dfr()
-
-    if (nrow(post_2017_df) < 1) {
-      rlang::abort(glue::glue("Could not find any data for {min(seasons)} to {max(seasons)}"))
-      return(post_2017)
-    }
-
-    post_2017 <- post_2017 %>%
-      purrr::map(~ dplyr::mutate(., Round = as.character(Round)))
-
-    post_2017 <- post_2017 %>%
-      purrr::map2_dfr(
-        .y = seasons[seasons > 2017],
-        ~ dplyr::mutate(., Season = .y)
-      ) %>%
-      dplyr::select(!!col_vars) %>%
-      dplyr::distinct() %>%
-      dplyr::rename(Team.abb = .data$Team) %>%
-      dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
-      dplyr::select(!!col_vars)
+    )
+    return(out)
   }
+  
+  start <- 2017
+  end <- max(max(seasons), Sys.Date() %>% format("%Y") %>% as.numeric())
+  
+  urls <- purrr::map_chr(start:end, base_url)
+  
+  ids_new <- urls %>%
+    purrr::map(readUrl) %>%
+    purrr::map2_dfr(
+      .y = start:end,
+      ~ dplyr::mutate(., Season = .y)
+    ) 
 
-  if (max(seasons) <= 2017) {
-    return(pre_2018)
-  } else if (min(seasons) > 2017) {
-    return(post_2017)
-  } else {
-    id_data <- dplyr::bind_rows(pre_2018, post_2017)
-    return(id_data)
-  }
+  if (nrow(ids_new) < 1) {
+    return(ids)
+  } 
+  
+  ids_new <- ids_new %>%
+    dplyr::mutate(., Round = as.character(Round)) %>%
+    dplyr::select(!!col_vars) %>%
+    dplyr::distinct() %>%
+    dplyr::rename(Team.abb = .data$Team) %>%
+    dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
+    dplyr::select(!!col_vars)
+  
+  ids <- dplyr::bind_rows(ids, ids_new) %>%
+    dplyr::distinct()
+
+  return(ids)
+   
 }
