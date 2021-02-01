@@ -101,16 +101,16 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
                   .data$home.team.club.name, .data$away.team.club.name)
   
   home_teams <- matches %>%
-    dplyr::select(home.team.providerId, home.team.name) %>%
+    dplyr::select(.data$home.team.providerId, .data$home.team.name) %>%
     dplyr::rename_with(~gsub(x = .x, pattern = "home.team.", replacement = ""))
   
   away_teams <- matches %>%
-    dplyr::select(away.team.providerId, away.team.name) %>%
+    dplyr::select(.data$away.team.providerId, .data$away.team.name) %>%
     dplyr::rename_with(~gsub(x = .x, pattern = "away.team.", replacement = ""))
   
   teams <- dplyr::bind_rows(home_teams, away_teams) %>% 
     unique() %>%
-    dplyr::rename(team.name = name)
+    dplyr::rename(team.name = .data$name)
   
   
   df <- match_details %>%

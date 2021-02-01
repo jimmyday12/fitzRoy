@@ -2,6 +2,7 @@
 % Please edit documentation in R/fetch-player-stats.R
 \name{fetch_player_stats}
 \alias{fetch_player_stats}
+\alias{fetch_player_stats_afl}
 \alias{fetch_player_stats_afltables}
 \alias{fetch_player_stats_fryzigg}
 \alias{fetch_player_stats_footywire}
@@ -15,9 +16,11 @@ fetch_player_stats(
   ...
 )
 
+fetch_player_stats_afl(season = NULL, round_number = NULL, comp = "AFLM")
+
 fetch_player_stats_afltables(season = NULL, round_number = NULL)
 
-fetch_player_stats_fryzigg(season = NULL, round_number = NULL)
+fetch_player_stats_fryzigg(season = NULL, round_number = NULL, comp = "AFLM")
 
 fetch_player_stats_footywire(
   season = NULL,

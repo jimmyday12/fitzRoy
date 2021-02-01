@@ -47,11 +47,10 @@ if (is.null(cookie)) {
 
 ```
 
-We can use the `get_aflw_match_data()` function to retrieve match data for all
-matches.
+We can use the `fetch_results()` function to retrieve match data matches.
 
 ```{r fetch_match_stats, message=FALSE, warning=TRUE, eval = eval_param}
-match_data <- get_aflw_match_data()
+match_data <- fetch_results(2020, round_number = 1, comp = "AFLW")
 ```
 
 Note that there will be warnings if a fixture is available but no match data has

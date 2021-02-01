@@ -359,7 +359,7 @@ get_afltables_player_ids <- function(seasons) {
   } 
   
   ids_new <- ids_new %>%
-    dplyr::mutate(., Round = as.character(Round)) %>%
+    dplyr::mutate(., Round = as.character(.data$Round)) %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
     dplyr::rename(Team.abb = .data$Team) %>%

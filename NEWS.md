@@ -9,6 +9,7 @@
 * `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
 * `fetch_lineup` and associated helper function `fetch_lineup_afl` will return the lineup for a particular season and round, including upcoming matches if teams have been announced
 
+
 ## Deprecated Functions
 The following functions have been soft deprecated in favour of the above `fetch_*` functions. In most cases, calling a `fetch_*` function will be the same as calling the original deprecated function
 
@@ -24,7 +25,9 @@ The following functions have been soft deprecated in favour of the above `fetch_
 * Deprecated `get_footywire_betting_odds` - use `fetch_betting_odds_footywire`
 * Deprecated `get_score_progression_raw` - no replacement
 * Deprecated `get_footywire_match_ids` - use `fetch_footywire_match_ids`
-
+* Deprecated `get_aflw_cookie` - use `get_afl_cookie`
+* Deprecated `get_aflw_match_data` - use `fetch_results_afl`
+* Deprecated `get_aflw_player_stats` - use `fetch_player_stats_fryzigg`
 
 # fitzRoy 0.3.3
 

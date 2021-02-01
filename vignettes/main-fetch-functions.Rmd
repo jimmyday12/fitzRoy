@@ -102,10 +102,8 @@ We can also see match results.
 
 ```{r message=FALSE, warning=FALSE}
 fetch_results(2020, round_number = 1, comp = "AFLW") %>%
-  select( round.name, 
-         home.team.name, away.team.name, 
-         home.score.totalScore,
-         away.score.totalScore)
+  select( match.date, match.name,
+         homeTeamScore.matchScore.totalScore, awayTeamScore.matchScore.totalScore)
 
 ```
 We can also get the ladder at any point.

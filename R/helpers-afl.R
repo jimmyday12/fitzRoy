@@ -260,7 +260,7 @@ fetch_round_results_afl <- function(id, cookie = NULL){
   
   # add date
   df <- df %>%
-    dplyr::mutate(match.date = lubridate::ymd_hms(match.date))
+    dplyr::mutate(match.date = lubridate::ymd_hms(.data$match.date))
   
   # remove unwanted columns
   df <- df %>%
