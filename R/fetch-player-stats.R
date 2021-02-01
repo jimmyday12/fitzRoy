@@ -52,9 +52,10 @@ fetch_player_stats <- function(season = NULL,
 
   
   dat <- switch(source,
+                "AFL" = fetch_player_stats_afl(season, round_number, comp),
                 "footywire" = fetch_player_stats_footywire(season, round_number, ...),
                 "afltables" = fetch_player_stats_afltables(season, round_number),
-                "fryzigg" = fetch_player_stats_fryzigg(season, round_number),
+                "fryzigg" = fetch_player_stats_fryzigg(season, round_number, comp),
                 NULL)
   
   if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats. Please use one of \"footywire\", \"afltables\" or \"fryzigg\""))
@@ -62,7 +63,63 @@ fetch_player_stats <- function(season = NULL,
   
 }
 
-
+#' @rdname fetch_player_stats
+#' @export
+fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "AFLM"){
+  
+  
+  # some data checks
+  season <- check_season(season)
+  if (is.null(round_number)) round_number <- ""
+  
+  # Get match ids
+  cli_id1 <- cli::cli_process_start("Fetching match ids")
+  matches <- suppressMessages(fetch_fixture(season, round_number, comp))
+  ids <- matches$providerId
+  
+  
+  if (length(ids) == 0) {
+    return(NULL)
+  }
+  
+  cli::cli_process_done(cli_id1)
+  
+  # get cookie
+  cookie <- get_afl_cookie()
+  
+  # Loop through each match
+  cli_id2 <- cli::cli_process_start("Fetching player stats for {.val {length(ids)} match{?es}}.")
+  match_stats <- ids %>% purrr::map_dfr(fetch_match_stats_afl, cookie)
+  
+  cli::cli_process_done(cli_id2)
+  
+  # add match details
+  match_details <- matches %>% 
+    dplyr::select(.data$providerId, .data$utcStartTime, .data$status, 
+                  .data$compSeason.shortName, .data$round.name, 
+                  .data$round.roundNumber, .data$venue.name, 
+                  .data$home.team.club.name, .data$away.team.club.name)
+  
+  home_teams <- matches %>%
+    dplyr::select(home.team.providerId, home.team.name) %>%
+    dplyr::rename_with(~gsub(x = .x, pattern = "home.team.", replacement = ""))
+  
+  away_teams <- matches %>%
+    dplyr::select(away.team.providerId, away.team.name) %>%
+    dplyr::rename_with(~gsub(x = .x, pattern = "away.team.", replacement = ""))
+  
+  teams <- dplyr::bind_rows(home_teams, away_teams) %>% 
+    unique() %>%
+    dplyr::rename(team.name = name)
+  
+  
+  df <- match_details %>%
+    dplyr::left_join(match_stats, by = c("providerId")) %>%
+    dplyr::left_join(teams, by = c("teamId" = "providerId"))
+  
+  
+  return(df)
+}
 
 
 #' @rdname fetch_player_stats
@@ -132,7 +189,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
 
 #' @rdname fetch_player_stats
 #' @export
-fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL) {
+fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   if (!is.null(round_number)) {
     cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_fryzigg}.Returning data for all rounds in specified seasons")
   }
@@ -146,12 +203,26 @@ fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL) {
   start <- min(season)
   end <- max(season)
 
-  id <- cli::cli_process_start("Returning cached data from {.val {start}} to {.val {end}}")
+  id <- cli::cli_process_start("Returning cached {.field {comp}} data from {.val {season}}")
 
-  dat_url <- url("http://www.fryziggafl.net/static/fryziggafl.rds", "rb")
+ rds_url <- switch(comp,
+        "AFLM" = "http://www.fryziggafl.net/static/fryziggafl.rds",
+        "AFLW" = "http://www.fryziggafl.net/static/aflw_player_stats.rds")
+   
+ dat_url <- url(rds_url, "rb")
   stats_df <- readRDS(dat_url)
-  stats_df <- subset(stats_df, format(as.Date(stats_df$match_date), "%Y") >= start &
-    format(as.Date(stats_df$match_date), "%Y") <= end)
+  
+  if (comp == "AFLM") {
+    stats_df <- stats_df %>%
+      dplyr::mutate(date = .data$match_date)
+  }
+  
+  stats_df$date <- as.Date(stats_df$date)
+  # Filter
+  date_filt <- return_start_end_dates(start:end)
+  stats_df <- subset(stats_df, 
+                     date >= date_filt$start_date &
+                       date <= date_filt$end_date)
 
   cli::cli_process_done(id)
   return(tibble::as_tibble(stats_df))
