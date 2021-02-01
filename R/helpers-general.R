@@ -13,8 +13,7 @@ check_season <- function(x) {
       format("%Y") %>%
       as.numeric()
   }
-  if (nchar(x) < 4) rlang::abort(glue::glue("Season should be in YYYY format. 
-                                                Your season is only {nchar(x)} digits"))
+  if (min(nchar(x)) < 4) rlang::abort(glue::glue("Season should be in YYYY format"))
   return(x)
 }
 

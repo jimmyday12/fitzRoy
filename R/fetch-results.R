@@ -127,7 +127,7 @@ fetch_results_afltables <- function(season = NULL, round_number = NULL) {
 
   # Filter season
   match_data <- match_data %>%
-    dplyr::filter(.data$Season == season)
+    dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))
 
   # Find round number ----
   # QF/EF weekend is tricky as it is the same round number but different code
