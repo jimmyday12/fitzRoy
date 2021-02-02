@@ -275,7 +275,10 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     }
 
     dat_git <- load_r_data(dat_url2)
-
+    
+    dat_git <- dat_git %>%
+      dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))
+    
     # Check what's still missing
     git_ids <- fw_ids[!fw_ids %in% dat_git$Match_id]
 
@@ -283,8 +286,6 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 
     if (length(git_ids) == 0) {
       cli::cli_alert_info("No new matches found - returning data cached on github")
-      dat_git <- dat_git %>%
-        dplyr::filter(.data$Season == season)
       
       return(tibble::as_tibble(dat_git))
     } else {
@@ -308,7 +309,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     dat <- get_footywire_stats(all_data_ids)
     
     dat <- dat %>%
-      dplyr::filter(.data$Season == season)
+      dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))
     return(tibble::as_tibble(dat))
   }
 }
