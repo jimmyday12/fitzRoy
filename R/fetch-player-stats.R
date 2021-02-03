@@ -298,7 +298,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
       cli::cli_process_done(id3)
     
       dat <- dat %>%
-        dplyr::filter(.data$Season == season)
+        dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))
       
       return(tibble::as_tibble(dat))
     }
