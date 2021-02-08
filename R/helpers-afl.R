@@ -70,7 +70,7 @@ find_season_id <- function(season, comp = "AFLM") {
   comp_ids <- comp_cont$compSeasons %>%
     dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", .data$name)))
 
-  id <- comp_ids$id[comp_ids$season == season]
+  id <- comp_ids$id[comp_ids$season %in% season]
 
   if (length(id) < 1) {
     rlang::warn(glue::glue("Could not find a matching ID to the {comp} for {season}"))
@@ -87,8 +87,7 @@ find_season_id <- function(season, comp = "AFLM") {
 #' @keywords internal
 #' @noRd
 find_round_id <- function(round_number, season = NULL, season_id = NULL, 
-                          comp = "AFLM", 
-                          providerId = FALSE) {
+                          comp = "AFLM", providerId = FALSE, future_rounds = TRUE) {
 
   if (providerId) {
     id_name <- "providerId"
@@ -102,15 +101,12 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL,
 
   if (is.null(season_id)) season_id <- find_season_id(season, comp)
 
-  round_url <- paste0(
+  round_url <-  paste0(
     "https://aflapi.afl.com.au/afl/v2/compseasons/",
     season_id,
-    "/rounds"
-  )
+    "/rounds")
 
-  round_dat <- httr::GET(round_url,
-    query = list(pageSize = 30)
-  )
+  round_dat <- httr::GET(round_url, query = list(pageSize = 30))
 
   round_cont <- round_dat %>%
     httr::content(as = "text") %>%
@@ -118,10 +114,14 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL,
 
   df <- round_cont$rounds
   
-  if (is.null (round_number)) {
+  if (!future_rounds) {
+    df <- df[df$utcStartTime < Sys.Date() & df$utcStartTime != "", ]
+  }
+  
+  if (is.null(round_number)) {
     id <- df[, id_name]
   } else {
-    id <- df[df$roundNumber == round_number, id_name]  
+    id <- df[df$roundNumber %in% round_number, id_name]  
   }
   
 

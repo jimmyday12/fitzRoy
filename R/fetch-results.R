@@ -78,8 +78,11 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   # get ids of season and round
   season <- check_season(season)
   season_id <- find_season_id(season, comp)
-  round_ids <- find_round_id(round_number, season_id = season_id, 
-                             comp = comp, providerId = TRUE)
+  
+  round_ids <- season_id %>%
+    purrr::map(~find_round_id(round_number, season_id = .x, 
+                  comp = comp, providerId = TRUE, future_rounds = FALSE)) %>%
+    purrr::reduce(c)
   
   # get cookie
   cookie <- get_afl_cookie()
