@@ -70,7 +70,7 @@ find_season_id <- function(season, comp = "AFLM") {
   comp_ids <- comp_cont$compSeasons %>%
     dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", .data$name)))
 
-  id <- comp_ids$id[comp_ids$season %in% season]
+  id <- comp_ids$id[match(season, comp_ids$season)]
 
   if (length(id) < 1) {
     rlang::warn(glue::glue("Could not find a matching ID to the {comp} for {season}"))

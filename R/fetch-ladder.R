@@ -86,45 +86,64 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   # if (is.null(round_number)) round_number <- ""
 
   # fetch ids
-  seas_id <- find_season_id(season, comp)
-  if (!is.null(round_number)) {
-    round_id <- find_round_id(round_number, season_id = seas_id)
-  }
+  season_id <- find_season_id(season, comp)
+  if (length(season_id > 1)) round_number <- NULL
+  
+  if (is.null(round_number)) {
+    rlang::inform("No round number specified, trying to return most recent ladder for specified season")
+    round_id = ""
+  } else {
+    round_id <- find_round_id(round_number, season_id = season_id, 
+                                comp = comp, providerId = TRUE, 
+                                future_rounds = FALSE)
+  } 
 
   # Make request
-  api_url <- paste0(
+  api_url <- season_id %>% 
+    purrr::map_chr(~paste0(
     "https://aflapi.afl.com.au/afl/v2/compseasons/",
-    seas_id,
+    .x,
     "/ladders"
-  )
+  ))
 
-  resp <- httr::GET(
-    url = api_url,
-    query = list("roundId" = round_id)
-  )
-
-  if (resp$status_code == 404 | resp$status_code == 400) {
+  resp <- api_url %>%
+    purrr::map(httr::GET, query = list("roundId" = round_id))
+  
+  status_codes <- resp %>%
+    purrr::map_dbl(purrr::pluck, "status_code")
+  
+  if (any(status_codes == 404) | any(status_codes == 400)) {
     rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au/ladder\"?"))
   }
 
-  if (is.null(round_id)) {
-    rlang::inform("No round number specified, trying to return most recent ladder for specified season")
-  }
-
   cont <- resp %>%
-    httr::content(as = "text") %>%
-    jsonlite::fromJSON(flatten = TRUE)
+    purrr::map(httr::content, as = "text") %>%
+    purrr::map(jsonlite::fromJSON, flatten = TRUE)
 
-  ladder_df <- cont$ladders$entries[[1]]
+  ladder_list <- cont %>%
+    purrr::map(purrr::pluck, "ladders", "entries")
+  
+  ladder_list <- ladder_list %>%
+    purrr::map(dplyr::bind_rows, .id = "conference")
 
+  
+  args <- list(ladder_list = ladder_list,
+               season = season, 
+               season_name = cont %>% purrr::map(purrr::pluck, "compSeason", "name"), 
+               last_updated = cont %>% purrr::map(purrr::pluck, "lastUpdated"),
+               round_name = cont %>% purrr::map(purrr::pluck, "round", "name"),
+               round_number = cont %>% purrr::map(purrr::pluck, "round", "roundNumber"))
+  
+  ladder_df <- purrr::pmap_dfr(args, 
+              ~with(list(...), 
+                    dplyr::mutate(ladder_list, 
+                                  season = season,
+                                  season_name = season_name,
+                                  last_updated = last_updated,
+                                  round_name = round_name,
+                                  round_number = round_number)))
+  
   ladder_df <- ladder_df %>%
-    dplyr::mutate(
-      season = season,
-      season_name = cont$compSeason$name,
-      last_updated = cont$lastUpdated,
-      round_name = cont$round$name,
-      round_number = cont$round$roundNumber
-    ) %>%
     dplyr::select(
       .data$season, .data$season_name, .data$round_name,
       .data$round_number, .data$last_updated,
