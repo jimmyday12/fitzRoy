@@ -248,21 +248,21 @@
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
 <span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 9 x 24</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   round hgoals ateam ascore updated is_final ateamid    id  year tz    hbehinds</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;int&gt; &lt;lgl&gt;  &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;      &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;   </span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1     1 NA     Geel…      0 2020-1…        0       7  6243  2021 +11:… NA      </span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2     1 NA     Sydn…      0 2020-1…        0      16  6245  2021 +11:… NA      </span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3     1 NA     West…      0 2020-1…        0      18  6241  2021 +11:… NA      </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4     1 NA     Hawt…      0 2020-1…        0      10  6244  2021 +11:… NA      </span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5     1 NA     St K…      0 2020-1…        0      15  6247  2021 +11:… NA      </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 6     1 NA     Frem…      0 2020-1…        0       6  6242  2021 +11:… NA      </span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 7     1 NA     Port…      0 2020-1…        0      13  6246  2021 +11:… NA      </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 8     1 NA     Carl…      0 2020-1…        0       3  6240  2021 +11:… NA      </span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 9     1 NA     Gold…      0 2020-1…        0       8  6248  2021 +11:… NA      </span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # … with 13 more variables: abehinds &lt;lgl&gt;, roundname &lt;chr&gt;, hteamid &lt;int&gt;,</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; #   venue &lt;chr&gt;, complete &lt;int&gt;, date &lt;chr&gt;, hscore &lt;int&gt;, winner &lt;lgl&gt;,</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   is_grand_final &lt;int&gt;, localtime &lt;chr&gt;, hteam &lt;chr&gt;, agoals &lt;lgl&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   winnerteamid &lt;lgl&gt;</span></span></code></pre></div>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;      id hscore winner ateamid complete date  hbehinds agoals hteam winnerteamid</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;int&gt;  &lt;int&gt; &lt;lgl&gt;    &lt;int&gt;    &lt;int&gt; &lt;chr&gt; &lt;lgl&gt;    &lt;lgl&gt;  &lt;chr&gt; &lt;lgl&gt;       </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1  6243      0 NA           7        0 2021… NA       NA     Adel… NA          </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2  6245      0 NA          16        0 2021… NA       NA     Bris… NA          </span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3  6241      0 NA          18        0 2021… NA       NA     Coll… NA          </span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4  6244      0 NA          10        0 2021… NA       NA     Esse… NA          </span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5  6247      0 NA          15        0 2021… NA       NA     Grea… NA          </span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 6  6242      0 NA           6        0 2021… NA       NA     Melb… NA          </span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 7  6246      0 NA          13        0 2021… NA       NA     Nort… NA          </span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 8  6240      0 NA           3        0 2021… NA       NA     Rich… NA          </span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 9  6248      0 NA           8        0 2021… NA       NA     West… NA          </span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # … with 14 more variables: is_grand_final &lt;int&gt;, tz &lt;chr&gt;, year &lt;int&gt;,</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; #   localtime &lt;chr&gt;, abehinds &lt;lgl&gt;, roundname &lt;chr&gt;, ateam &lt;chr&gt;,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   hgoals &lt;lgl&gt;, round &lt;int&gt;, ascore &lt;int&gt;, updated &lt;chr&gt;, is_final &lt;int&gt;,</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   hteamid &lt;int&gt;, venue &lt;chr&gt;</span></span></code></pre></div>
 <p>It should also be noted that the various sources of data have their own functions that can be called directly.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># The following are the same</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">5</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
@@ -309,16 +309,23 @@
 <p>We can also get the ladder at any point.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../reference/fetch_ladder.html">fetch_ladder</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">6</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(season, round_name, position, team.name, played, pointsFor, pointsAgainst, )</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; # A tibble: 7 x 7</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;   season round_name position team.name       played pointsFor pointsAgainst</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;    &lt;dbl&gt; &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;            &lt;int&gt;     &lt;int&gt;         &lt;int&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt; 1   2020 Round 6           1 Kangaroos            6       309           136</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt; 2   2020 Round 6           2 GWS Giants           6       175           142</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt; 3   2020 Round 6           3 Brisbane Lions       6       198           185</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt; 4   2020 Round 6           4 Gold Coast Suns      6       154           152</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt; 5   2020 Round 6           5 Geelong Cats         6       211           261</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt; 6   2020 Round 6           6 Adelaide Crows       6       180           224</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt; 7   2020 Round 6           7 Richmond             6       115           322</span></span></code></pre></div>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; # A tibble: 14 x 7</span></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;    season round_name  position team.name         played pointsFor pointsAgainst</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;              &lt;int&gt;     &lt;int&gt;         &lt;int&gt;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;  1   2020 Semi Finals        1 Kangaroos              6       309           136</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;  2   2020 Semi Finals        2 GWS Giants             6       175           142</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;  3   2020 Semi Finals        3 Brisbane Lions         6       198           185</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt;  4   2020 Semi Finals        4 Gold Coast Suns        6       154           152</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt;  5   2020 Semi Finals        5 Geelong Cats           6       211           261</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;  6   2020 Semi Finals        6 Adelaide Crows         6       180           224</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;  7   2020 Semi Finals        7 Richmond               6       115           322</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt;  8   2020 Semi Finals        1 Fremantle              6       277           179</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt;  9   2020 Semi Finals        2 Carlton                6       249           164</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 10   2020 Semi Finals        3 Melbourne              6       204           124</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 11   2020 Semi Finals        4 Collingwood            6       229           149</span></span>
+<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 12   2020 Semi Finals        5 St Kilda               6       154           170</span></span>
+<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; 13   2020 Semi Finals        6 Western Bulldogs       6       179           246</span></span>
+<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; 14   2020 Semi Finals        7 West Coast Eagles      6        85           265</span></span></code></pre></div>
 <p>At the moment, we don’t have <code>fetch_player_stats</code> working for AFLW data but this will come soon. In the meantime, read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> on how you can get AFLW stats using the old method.</p>
 </div>
 </div>
