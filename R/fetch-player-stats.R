@@ -74,7 +74,7 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   
   # Get match ids
   cli_id1 <- cli::cli_process_start("Fetching match ids")
-  matches <- suppressMessages(fetch_fixture(season, round_number, comp))
+  matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
   ids <- matches$providerId
   
   
@@ -89,7 +89,11 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   
   # Loop through each match
   cli_id2 <- cli::cli_process_start("Fetching player stats for {.val {length(ids)} match{?es}}.")
-  match_stats <- ids %>% purrr::map_dfr(fetch_match_stats_afl, cookie)
+  
+  
+  match_stats <- ids %>% 
+    purrr::map_dfr(purrr::possibly(~fetch_match_stats_afl(.x, cookie), 
+                                   otherwise = data.frame()))
   
   cli::cli_process_done(cli_id2)
   

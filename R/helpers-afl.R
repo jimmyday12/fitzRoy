@@ -183,7 +183,6 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
 #' @keywords internal
 #' @noRd
 fetch_match_stats_afl <- function(id, cookie = NULL) {
-  
   if (is.null(cookie)) cookie <- get_aflw_cookie()
   #print(id)
   # Make request
@@ -195,6 +194,8 @@ fetch_match_stats_afl <- function(id, cookie = NULL) {
       "x-media-mis-token" = cookie
     )
   )
+  
+  check_afl_resp(resp)
   
   cont <- resp %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
@@ -248,6 +249,8 @@ fetch_round_results_afl <- function(id, cookie = NULL){
   resp <- httr::GET(url_api,
                     httr::add_headers(`X-media-mis-token` = cookie))
   
+  check_afl_resp(resp)
+  
   # extract json
   cont <- resp %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
@@ -269,5 +272,26 @@ fetch_round_results_afl <- function(id, cookie = NULL){
   return(df)
 }
   
+#' Checks afl response
+#'
+#' @param resp response object returned from POST/GET
+#' @keywords internal
+#' @noRd  
+check_afl_resp <- function(resp) {
+  if (httr::http_type(resp) != "application/json") {
+    rlang::abort("API did not return json", call. = FALSE)
+  }
   
+  parsed <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"), 
+                               simplifyVector = FALSE)
+  
+  if (httr::http_error(resp)) {
+    rlang::abort(glue::glue(
+      "GitHub API request failed 
+      {httr::status_code(resp)} - {parsed$techMessage}"),
+      call. = FALSE
+    )
+  }
+  
+}
   
