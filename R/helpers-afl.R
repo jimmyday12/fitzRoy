@@ -239,10 +239,10 @@ fetch_round_results_afl <- function(id, cookie = NULL){
   if (is.null(cookie)) cookie <- get_afl_cookie()
   
   url_api <- httr::modify_url("http://api.afl.com.au",
-                              paste0("/cfs/afl/matchItems/round/", id))
+                             path =  paste0("/cfs/afl/matchItems/round/", id))
   
   resp <- httr::GET(url_api,
-                    httr::add_headers("X-media-mis-token" = cookie))
+                    httr::add_headers("x-media-mis-token" = cookie))
   
   cont <- parse_resp_afl(resp)
   
