@@ -49,7 +49,6 @@ fetch_player_stats <- function(season = NULL,
   # Do some data checks
   # season <- check_season(season)
   check_comp_source(comp, source)
-
   
   dat <- switch(source,
                 "AFL" = fetch_player_stats_afl(season, round_number, comp),
@@ -58,7 +57,10 @@ fetch_player_stats <- function(season = NULL,
                 "fryzigg" = fetch_player_stats_fryzigg(season, round_number, comp),
                 NULL)
   
-  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats. Please use one of \"footywire\", \"afltables\" or \"fryzigg\""))
+  if (is.null(dat)) {
+    rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats. 
+                           Please use one of \"AFL\" \"footywire\", \"afltables\" or \"fryzigg\""))
+  }
   return(dat)
   
 }
@@ -76,12 +78,9 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   cli_id1 <- cli::cli_process_start("Fetching match ids")
   matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
   ids <- matches$providerId
-  
-  
   if (length(ids) == 0) {
     return(NULL)
   }
-  
   cli::cli_process_done(cli_id1)
   
   # get cookie
@@ -89,12 +88,9 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   
   # Loop through each match
   cli_id2 <- cli::cli_process_start("Fetching player stats for {.val {length(ids)} match{?es}}.")
-  
-  
   match_stats <- ids %>% 
     purrr::map_dfr(purrr::possibly(~fetch_match_stats_afl(.x, cookie), 
                                    otherwise = data.frame()))
-  
   cli::cli_process_done(cli_id2)
   
   # add match details
@@ -120,7 +116,6 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   df <- match_details %>%
     dplyr::left_join(match_stats, by = c("providerId")) %>%
     dplyr::left_join(teams, by = c("teamId" = "providerId"))
-  
   
   return(df)
 }

@@ -15,8 +15,8 @@ test_that("check_comp works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
   
-  expect_invisible(check_comp("AFLW"))
-  expect_invisible(check_comp("AFLM"))
+  expect_equal(check_comp("AFLW"), "AFLW")
+  expect_equal(check_comp("AFLM"), "AFLM")
   expect_error(check_comp("WAFL"))
   expect_error(check_comp(1))
 })
