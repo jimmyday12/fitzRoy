@@ -16,7 +16,7 @@ test_that("fetch_results_afl works for various inputs", {
   # change year
   expect_s3_class(fetch_results_afl(2018, 1, comp = "AFLM"), "tbl")
   expect_warning(df <- fetch_results_afl(2000, 1, comp = "AFLM"))
-  expect_s3_class(df, "tbl")
+  expect_null(df)
 
   # change round number
   expect_s3_class(fetch_results_afl(2020, round_number = 2), "tbl")
