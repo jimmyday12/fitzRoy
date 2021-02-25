@@ -317,7 +317,7 @@ get_afltables_player_ids <- function(seasons) {
   }
 
   # nolint start
-  git_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
+  git_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/main/data-raw/afl_tables_playerstats/player_ids.csv"
   # nolint end
 
   col_vars <- c("Season", "Player", "ID", "Team")

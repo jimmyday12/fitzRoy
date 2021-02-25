@@ -136,7 +136,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
 
 
   # nolint start
-  dat_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/master/data-raw/afl_tables_playerstats/afldata.rda")
+  dat_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/afldata.rda")
   # nolint end
 
   load_r_data <- function(fname) {
@@ -262,7 +262,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     url <- "https://github.com/jimmyday12/fitzRoy"
     id2 <- cli::cli_process_start("Checking data on {.url {url}}")
 
-    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/master/data-raw/player_stats/player_stats.rda" # nolint
+    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/main/data-raw/player_stats/player_stats.rda" # nolint
 
     load_r_data <- function(fname) {
       tmp <- tempfile(fileext = ".rda")
