@@ -51,7 +51,7 @@ library(lubridate)
 The primary way to access the data is via the `get_fryzigg_stats()` function. This function provides an easy interface to the Fryzigg API. It takes two arguments - `start` and `end` which are the years in which data will be returned (inclusive). They should be provided in YYYY format. 
 
 ```{r results, eval=FALSE}
-dat <- fitzRoy::get_fryzigg_stats(start = 2019, end = 2019)
+dat <- fitzRoy::fetch_player_stats_fryzigg(2019)
 ```
 
 We can get a quick view the the fields returned from the `fryzigg` API. 

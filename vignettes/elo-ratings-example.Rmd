@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
   eval = eval_param
 )
 
-results <- fitzRoy:::results
+results <- fitzRoy:::results_afltables_all
 fixture <- fitzRoy:::fixture
 ```
 
@@ -40,10 +40,12 @@ library(fitzRoy)
 ## Get data
 Our first job is to now get the relevant data. For the most basic of ELO models, we need to have the results of past matches that includes the home and away team and the score of the match. To do our predictions, we also need upcoming matches. We can get both of those things using `fitzRoy`.
 
+For this example we will use `results` data from [AFL Tables](afltables.com) and `fixture` data from [Footywire](footywire.com). While this is generally fine, it can cause issues with teams, dates, venues or various other data to be inconsistent. This example will try to show some ways to take that into account. 
+
 ```{r load_data, eval=FALSE, include=TRUE}
 # Get data
-results <- fitzRoy::get_match_results()
-fixture <- fitzRoy::get_fixture(2019)
+results <- fitzRoy::fetch_results_afltables()
+fixture <- fitzRoy::fetch_results_footywire(2019)
 ```
 
 ```{r load_data2, eval=eval_param}
@@ -68,7 +70,7 @@ results <- results %>%
 
 ```
 
-For the `fixture` data, we need to ensure the dates are in the same format as `results` (note - this should probably be done internally in `fitzRoy` - see [#58](https://github.com/jimmyday12/fitzRoy/issues/58)). For now, we can do it manually. 
+Since our `fixture` data and `results` data are coming from different sources, we need to fix a few things up. This is a good time to point out that using similar sources is great when possible! 
 
 ```{r clean_fixture, eval=eval_param}
 fixture <- fixture %>%
@@ -151,5 +153,3 @@ head(fixture)
 ```
 
 From here - you could turn these probabilities back into a margin through another mapping function. Again - I'll leave that for the reader to decide. 
-
-Looking forward to seeing all the new models utilising the power of fitzRoy. 

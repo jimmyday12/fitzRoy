@@ -17,3 +17,31 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(fitzRoy)
 ```
+
+### Squiggle Data
+You can access data from the [Squiggle API](https://api.squiggle.com.au) where the tips of well known AFL tipping models are collected. See full instructions on the above link. 
+
+```{r squiggle_sources1, message=FALSE, warning=FALSE, eval=FALSE}
+# You can get the sources
+sources <- get_squiggle_data("sources")
+```
+```{r squiggle_sources2, message=FALSE, warning=FALSE, eval=eval_param}
+head(sources)
+```
+
+```{r squiggle_tips1, message=FALSE, warning=FALSE, eval=FALSE}
+# Get all tips
+tips <- get_squiggle_data("tips")
+```
+```{r squiggle_tips2, message=FALSE, warning=FALSE, eval=eval_param}
+head(tips)  
+```
+
+```{r squiggle_round1, message=FALSE, warning=FALSE, eval=FALSE}
+# Get` just tips from round 1, 2018
+tips_round <- get_squiggle_data("tips", round = 1, year = 2018)
+```
+```{r squiggle_round2, message=FALSE, warning=FALSE, eval=eval_param}
+head(tips_round)
+```
+

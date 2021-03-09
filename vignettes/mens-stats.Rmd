@@ -49,32 +49,84 @@ library(dplyr)
 library(elo)
 library(lubridate)
 library(fitzRoy)
-
 ```
 
 ### Getting Data
+Primarily, `fitzRoy` can be used to access data from various sources using the `fetch_` functions. For a detailed view on how the API works - view the `main fetch functions` vignette. 
 
-Primarily, the tool can be used to access data from various sources. Data is included in the package and can be access directly however this will not be up to date. Each source of data has functions for updating data during the season. 
-
-### AFL Tables match results
-You can access the basic afl tables match results data. This includes all matches from 1897-current. It is generally updated on the day after a round finishes. 
-
-You can access the data directly from the package using `match_results`. This will be updated periodically but you will need to update your R package to get access to the latest data. It is better to use `get_match_results` directly, as this will give you up to date results.
+### Match Results
+You can access AFL match results data from various sources. The most complete is the afltables.com data, which includes all matches from 1897-current. 
 
 ```{r results, eval=FALSE}
-results <- get_match_results()
+results <- fetch_match_results_afltables()
 ```
 ```{r results2, eval=eval_param}
 tail(results)
 ```
 
-You can also convert this format into a more analysis friendly "long" format using the helper function `convert_results`. 
+While it is possible to return all historical data, it is usually good practice to only return a small amount of data - such as a single season or round - and keep your own offline database of historical data. 
 
-```{r convert, eval=eval_param}
-#results_long <- convert_results(results)
+```{r}
+results <- fetch_match_results_afltables(2020)
 
-#head(results_long)
 ```
+
+You can get results data from other sources including `AFL`, `Squiggle` and `Footywire`. The default source for `fetch_results()` is AFL.com.au. 
+
+```{r results-all, eval=FALSE}
+results_afl <- fetch_results(2020)
+results_squiggle <- fetch_results_squiggle(2020)
+results_footywire <- fetch_results_footywire(2020)
+```
+
+
+### Fixtures
+You can access the fixture using the `fetch_fixture` function. This will produce a fixture from AFL.com.au by default. If no season is provided, the current calendar year will be returned. 
+
+```{r fixture, eval=FALSE}
+fixture <- fetch_fixture()
+```
+```{r fixture2, eval=eval_param}
+head(fixture)
+```
+
+You can return historical or future fixtures (if available) by specifying the relevent season. You can also return specific rounds with the `round_number` argumenent. Other sources available include Squiggle and Footywire. 
+
+```{r}
+fetch_fixture(2020)
+fetch_fixture(2021, round_number = 1)
+fetch_fixture(2021, round_number = 1, source = "squiggle")
+fetch_fixture_footywire(2021, round_number = 1)
+
+```
+
+### Ladder
+
+You can recreate the ladder for every round of the home and away season since 1897. You can either pass in a dataframe extracted using `get_match_results` (ideal as `get_match_results` doesn't need to be executed every time `return_ladder` is called): 
+
+```{r ladder1, message=FALSE, warning=FALSE, eval=FALSE}
+ladder <- return_ladder(match_results_df = results)
+```
+```{r ladder2, message=FALSE, warning=FALSE, eval=eval_par.am}
+head(ladder)
+```
+
+Or leave the `match_results_df` argument blank (which will execute the `get_match_results()` function internally):
+
+```{r ladder3, message=FALSE, warning=FALSE, eval=FALSE}
+ladder <- return_ladder()
+```
+
+Alternatively, we can also return the ladder for any round, or any season, or a combination of both round and season:
+
+```{r ladder4, message=FALSE, warning=FALSE, eval=FALSE}
+ladder_round <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
+```
+```{r ladder5, message=FALSE, warning=FALSE, eval=eval_param}
+head(ladder_round)
+```
+### Player Stats
+
 
 ### AFL Tables player results
 A new function will return all detailed player stats from [AFLtables](https://afltables.com). Primarily, the easiest way to use this is simply to call `get_afltables_stats` with your required `start_date` and `end_date`.
@@ -87,27 +139,6 @@ stats <- get_afltables_stats(start_date = "2018-01-01", end_date = "2018-06-01")
 tail(stats)
 ```
 
-
-### Fixture
-You can access the fixture using `get_fixture` function. This will download the fixture for the current calendar year by default. 
-
-```{r fixture, eval=FALSE}
-fixture <- get_fixture()
-```
-```{r fixture2, eval=eval_param}
-head(fixture)
-```
-### Footywire Advanced Player Stats
-Footywire data is available in the form of advanced player match statistics from 2010 games onwards. This is when advanced statistics became available.
-
-*Note - as of v0.2.0, all internal data has been removed from the package. Please use the relevant functions instead.*
-
-The following code no longer works. 
-```{r footywire, eval=FALSE, include=TRUE}
-## Show the top of player_stats
-head(fitzRoy::player_stats)
-```
-
 We can also use the `update_footywire_stats` function to get the most up to date data. This will merge data from 2010-current with any new data points. 
 
 ```{r update_footywire, eval=FALSE, include=TRUE}
@@ -115,21 +146,6 @@ We can also use the `update_footywire_stats` function to get the most up to date
 dat <- update_footywire_stats()
 ```
 
-Alternatively, we can just return one game if we know it's ID. This can be found by looking at the URL of the match you want. For example, the ID of the 2019 AFL Grand Final is 9927.
-
-https://www.footywire.com/afl/footy/ft_match_statistics?mid=9927
-
-```{r get_footywire_gf, eval=FALSE, include=TRUE}
-## Update footywire data
-stats_gf <- get_footywire_stats(ids = 9927)
-```
-
-```{r get_footywire_gf2, eval=eval_param, include=TRUE}
-head(stats_gf)
-```
-
-### Weather
-Note - as of v0.2.0 this has been removed
 
 
 ### Squiggle Data
@@ -160,31 +176,7 @@ head(tips_round)
 ```
 
 
-### Create Ladder
 
-You can recreate the ladder for every round of the home and away season since 1897. You can either pass in a dataframe extracted using `get_match_results` (ideal as `get_match_results` doesn't need to be executed every time `return_ladder` is called): 
-
-```{r ladder1, message=FALSE, warning=FALSE, eval=FALSE}
-ladder <- return_ladder(match_results_df = results)
-```
-```{r ladder2, message=FALSE, warning=FALSE, eval=eval_param}
-head(ladder)
-```
-
-Or leave the `match_results_df` argument blank (which will execute the `get_match_results()` function internally):
-
-```{r ladder3, message=FALSE, warning=FALSE, eval=FALSE}
-ladder <- return_ladder()
-```
-
-Alternatively, we can also return the ladder for any round, or any season, or a combination of both round and season:
-
-```{r ladder4, message=FALSE, warning=FALSE, eval=FALSE}
-ladder_round <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
-```
-```{r ladder5, message=FALSE, warning=FALSE, eval=eval_param}
-head(ladder_round)
-```
 ---
 ```{r reset-options, message=FALSE, warning=FALSE, include=FALSE}
 options(original_options)

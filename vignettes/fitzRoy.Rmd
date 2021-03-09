@@ -1,19 +1,67 @@
 ---
-title: "fitzRoy"
+title: "Introduction to fitRoy"
+description: >
+  Learn how to get started with the basics of fitzRoy
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{fitzRoy}
+  %\VignetteIndexEntry{Introduction to fitzRoy}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
+not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
+
+
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>"
+  comment = "#>",
+  eval = eval_param
 )
+original_options <- options()
+options(tibble.print_min = 5, tibble.print_max = 5)
+requireNamespace("ggplot2", quietly = TRUE)
 ```
 
-```{r setup}
-library(fitzRoy)
+The goal of fitzRoy is to make it easy to access data from the AFLM and AFLW competitions. It provides a simple and consistent API to access data such as match results, fixtures and player statistics from multiple data sources. 
+
+## Fetching Data
+Primarily, `fitzRoy` can be used to access data from various sources using the `fetch_` functions. For a detailed view on how the API works - view the `main fetch functions` vignette. 
+
+### Match Results
+You can access AFL match results data from various sources. The most complete is the [AFL Tables](http://www.afltables.com) data, which includes all matches from 1897-current. 
+
+```{r results, eval=FALSE}
+results_afltables_all <- fetch_match_results_afltables()
 ```
+```{r results2, eval=eval_param}
+tail(results_afltables_all)
+```
+
+While it is possible to return all historical data, it is usually good practice to only return a small amount of data - such as a single season or round - and keep your own offline database of historical data. 
+
+```{r}
+
+results_new <- fetch_match_results_afltables(2021)
+bind_rows(results_afltables_all, results_new)
+
+```
+
+You can get results data from other sources including `AFL`, `Squiggle` and `Footywire`. The default source for `fetch_results()` is AFL.com.au. 
+
+```{r results-all, eval=FALSE}
+results_afl <- fetch_results(2020)
+results_squiggle <- fetch_results_squiggle(2020)
+results_footywire <- fetch_results_footywire(2020)
+```
+
+
+
+
+---
+```{r reset-options, message=FALSE, warning=FALSE, include=FALSE}
+options(original_options)
+```
+

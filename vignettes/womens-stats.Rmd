@@ -34,7 +34,7 @@ library(dplyr)
 A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won't work. 
 
 ```{r cookie, message = FALSE, warning = FALSE, eval=eval_param}
-cookie <- get_aflw_cookie()
+cookie <- get_afl_cookie()
 
 print(cookie)
 ```

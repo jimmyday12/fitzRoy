@@ -1,35 +1,52 @@
 # This script gets data that is going to be used by the Vignettes. Add data to here where required.
-
-
 # elo-ratings script to get data for vignette
-devtools::install_github("jimmyday12/fitzRoy")
-library(dplyr)
-library(elo)
-library(lubridate)
+#devtools::install_github("jimmyday12/fitzRoy")
+library(tidyverse)
 library(fitzRoy)
 
-# Get data
-results <- fitzRoy::get_match_results()
-fixture <- fitzRoy::get_fixture(2019)
+# ELO Ratings Example ----------------------------------------------------------
+results_afltables_all <- fitzRoy::fetch_results_afltables()
+fixture_footywire_2019 <- fitzRoy::fetch_fixture_footywire(2019)
+
+
+# Main Fetch Functions ---------------------------------------------------------
+fixture_afl_aflm_2021 <- fetch_fixture(2021)
+fixture_afl_aflw_2021 <- fetch_fixture(2021, comp = "AFLW")
+fixture_squiggle_2021 <- fetch_fixture(2021, source = "squiggle")
+results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW") 
+ladder_afl_aflw_2020 <- fetch_ladder(2020, comp = "AFLW") 
+
+# Using Fryzigg Stats ---------------------------------------
+stats_fryzigg_2019 <- fitzRoy::fetch_player_stats_fryzigg(2019)
+
+# Womens Stats ---------------------------------------
+cookie <- get_afl_cookie()
+results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW")
+first10 <- head(results_afl_aflw_2020, 10)
+first10_ids <- first10$Match.Id
+stats_aflw_2020 <- get_aflw_detailed_data(first10_ids)
+
+# Squiggle --------------------------------------------------
+squiggle_sources <- fetch_squiggle_data("sources")
+squiggle_tips <- fetch_squiggle_data("tips")
+squiggle_tips_2018_1 <- fetch_squiggle_data("tips", 
+                                            round = 1, year = 2018)
+
 
 # mens-stats
 # results <- get_match_results()
-stats <- get_afltables_stats(start_date = "2018-01-01", end_date = "2018-06-01")
-# fixture <- get_fixture()
-stats_gf <- get_footywire_stats(ids = 9927)
-ladder <- return_ladder(match_results_df = results)
-ladder_round <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
-sources <- get_squiggle_data("sources")
-tips <- get_squiggle_data("tips")
-tips_round <- get_squiggle_data("tips", round = 1, year = 2018)
-
-# womens-stats
-cookie <- get_aflw_cookie()
+# stats <- get_afltables_stats(start_date = "2018-01-01", end_date = "2018-06-01")
+# # fixture <- get_fixture()
+# stats_gf <- get_footywire_stats(ids = 9927)
+# ladder <- return_ladder(match_results_df = results)
+# ladder_round <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
+# 
 
 
 # This is used by other parts so it's important to keep.
 # First lets load afldata provided
-load(here::here("data-raw", "afl_tables_playerstats", "afltables_playerstats_provided.rda"))
+load(here::here("data-raw", 
+                "afl_tables_playerstats", "afltables_playerstats_provided.rda"))
 
 # Select out the columns we want
 afldata <- afldata %>%
@@ -101,11 +118,23 @@ team_abbr <- tibble(
     "PA", "RI", "SK", "SY", "WB", "WC"
   )
 )
-# Frizigg
-fryzigg <- fitzRoy::get_fryzigg_stats(start = 2019, end = 2019)
 
-usethis::use_data(stat_abbr, team_abbr, afldata_cols,
-  results, fixture, stats, stats_gf,
-  ladder, ladder_round, sources, tips, tips_round, fryzigg,
+
+usethis::use_data(stat_abbr, 
+                  team_abbr, 
+                  afldata_cols,
+                  results_afltables_all,
+                  results_afl_aflw_2020,
+                  fixture_footywire_2019,
+                  fixture_afl_aflm_2021,
+                  fixture_afl_aflw_2021,
+                  fixture_squiggle_2021,
+                  ladder_afl_aflw_2020,
+                  stats_fryzigg_2019,
+                  stats_aflw_2020,
+                  cookie,
+                  squiggle_sources,
+                  squiggle_tips,
+                  squiggle_tips_2018_1,
   internal = TRUE, overwrite = TRUE
 )
