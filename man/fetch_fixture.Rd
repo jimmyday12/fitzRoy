@@ -5,7 +5,7 @@
 \alias{fetch_fixture_afl}
 \alias{fetch_fixture_footywire}
 \alias{fetch_fixture_squiggle}
-\title{Fetch Fixture}
+\title{Return the fixture for a particular round of matches}
 \usage{
 fetch_fixture(
   season = NULL,
