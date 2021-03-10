@@ -6,13 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using Fryzigg API • fitzRoy</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Using Fryzigg API">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="fitzRoy">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -24,7 +24,7 @@
   gtag('config', 'UA-77406420-2');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -63,22 +63,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/docker-support.html">Docker Support</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Workflow Examples</li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
-    <li>
-      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
-    </li>
-    <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
-    </li>
+    <li class="divider">
+    <li class="dropdown-header">APIs</li>
     <li>
       <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">AFL Womens Example</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -88,7 +93,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/fitzRoy">
+  <a href="https://github.com/jimmyday12/fitzRoy/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,7 +111,7 @@
       </header><script src="using-fryzigg-stats_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Using Fryzigg API</h1>
+      <h1 data-toc-skip>Using Fryzigg API</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/using-fryzigg-stats.Rmd"><code>vignettes/using-fryzigg-stats.Rmd</code></a></small>
@@ -124,146 +129,144 @@
 <h3 class="hasAnchor">
 <a href="#getting-data" class="anchor"></a>Getting Data</h3>
 <p>The primary way to access the data is via the <code>fetch_fryzigg_stats()</code> function. This function provides an easy interface to the Fryzigg API. It takes one arguments - <code>season</code> which can be a single year or multiple years.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>dat &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://jimmyday12.github.io/fitzRoy//reference/fetch_player_stats.html">fetch_player_stats_fryzigg</a></span>(<span class="dv">2019</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dat</span> <span class="op">&lt;-</span> <span class="fu">fitzRoy</span><span class="fu">::</span><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats_fryzigg</a></span><span class="op">(</span><span class="fl">2019</span><span class="op">)</span></code></pre></div>
 <p>We can get a quick view the the fields returned from the <code>fryzigg</code> API.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(dat)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Rows: 9,108</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; Columns: 81</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; $ venue_name                     &lt;chr&gt; "MCG", "MCG", "MCG", "MCG", "MCG", "MCG…</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; $ match_id                       &lt;int&gt; 15408, 15408, 15408, 15408, 15408, 1540…</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; $ match_home_team                &lt;chr&gt; "Carlton", "Carlton", "Carlton", "Carlt…</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; $ match_away_team                &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; $ match_date                     &lt;chr&gt; "2019-03-21", "2019-03-21", "2019-03-21…</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; $ match_local_time               &lt;chr&gt; "19:25:00", "19:25:00", "19:25:00", "19…</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; $ match_attendance               &lt;int&gt; 85016, 85016, 85016, 85016, 85016, 8501…</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; $ match_round                    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1",…</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; $ match_home_team_goals          &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, …</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; $ match_home_team_behinds        &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,…</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; $ match_home_team_score          &lt;int&gt; 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,…</span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; $ match_away_team_goals          &lt;int&gt; 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,…</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; $ match_away_team_behinds        &lt;int&gt; 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,…</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; $ match_away_team_score          &lt;int&gt; 97, 97, 97, 97, 97, 97, 97, 97, 97, 97,…</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; $ match_margin                   &lt;int&gt; 33, 33, 33, 33, 33, 33, 33, 33, 33, 33,…</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; $ match_winner                   &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; $ match_weather_temp_c           &lt;int&gt; 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,…</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; $ match_weather_type             &lt;chr&gt; "OVERCAST", "OVERCAST", "OVERCAST", "OV…</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; $ player_id                      &lt;int&gt; 12464, 12686, 12584, 11931, 12341, 1248…</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; $ player_first_name              &lt;chr&gt; "Nathan", "Noah", "Jack", "Maverick", "…</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; $ player_last_name               &lt;chr&gt; "Broad", "Balta", "Graham", "Weller", "…</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt; $ player_height_cm               &lt;int&gt; 192, 194, 181, NA, 178, 186, 175, 179, …</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#&gt; $ player_weight_kg               &lt;int&gt; 89, 100, 82, NA, 77, 83, 82, 76, 95, 83…</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt; $ player_is_retired              &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, FALSE, FALSE…</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt; $ player_team                    &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; $ guernsey_number                &lt;int&gt; 35, 38, 34, 16, 23, 28, 3, 17, 30, 14, …</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt; $ kicks                          &lt;int&gt; 4, 5, 16, 9, 12, 9, 10, 10, 10, 16, 18,…</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; $ marks                          &lt;int&gt; 1, 2, 7, 2, 7, 5, 1, 4, 1, 6, 4, 6, 2, …</span></span>
-<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#&gt; $ handballs                      &lt;int&gt; 4, 0, 7, 6, 18, 13, 10, 7, 2, 8, 12, 11…</span></span>
-<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#&gt; $ disposals                      &lt;int&gt; 8, 5, 23, 15, 30, 22, 20, 17, 12, 24, 3…</span></span>
-<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#&gt; $ effective_disposals            &lt;int&gt; 6, 4, 16, 14, 23, 15, 14, 13, 6, 22, 19…</span></span>
-<span id="cb2-35"><a href="#cb2-35"></a><span class="co">#&gt; $ disposal_efficiency_percentage &lt;int&gt; 75, 80, 70, 93, 77, 68, 70, 77, 50, 92,…</span></span>
-<span id="cb2-36"><a href="#cb2-36"></a><span class="co">#&gt; $ goals                          &lt;int&gt; 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, …</span></span>
-<span id="cb2-37"><a href="#cb2-37"></a><span class="co">#&gt; $ behinds                        &lt;int&gt; 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, …</span></span>
-<span id="cb2-38"><a href="#cb2-38"></a><span class="co">#&gt; $ hitouts                        &lt;int&gt; 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
-<span id="cb2-39"><a href="#cb2-39"></a><span class="co">#&gt; $ tackles                        &lt;int&gt; 2, 1, 6, 1, 4, 5, 7, 2, 1, 4, 0, 4, 1, …</span></span>
-<span id="cb2-40"><a href="#cb2-40"></a><span class="co">#&gt; $ rebounds                       &lt;int&gt; 2, 0, 0, 2, 1, 0, 0, 0, 0, 8, 1, 0, 0, …</span></span>
-<span id="cb2-41"><a href="#cb2-41"></a><span class="co">#&gt; $ inside_fifties                 &lt;int&gt; 0, 3, 5, 3, 3, 5, 5, 4, 2, 3, 7, 6, 0, …</span></span>
-<span id="cb2-42"><a href="#cb2-42"></a><span class="co">#&gt; $ clearances                     &lt;int&gt; 0, 1, 4, 1, 3, 3, 4, 2, 0, 1, 5, 6, 0, …</span></span>
-<span id="cb2-43"><a href="#cb2-43"></a><span class="co">#&gt; $ clangers                       &lt;int&gt; 2, 5, 6, 1, 4, 7, 2, 0, 4, 2, 7, 5, 1, …</span></span>
-<span id="cb2-44"><a href="#cb2-44"></a><span class="co">#&gt; $ free_kicks_for                 &lt;int&gt; 1, 1, 1, 0, 2, 1, 3, 1, 0, 1, 0, 2, 1, …</span></span>
-<span id="cb2-45"><a href="#cb2-45"></a><span class="co">#&gt; $ free_kicks_against             &lt;int&gt; 0, 3, 1, 0, 0, 2, 0, 0, 2, 0, 3, 4, 1, …</span></span>
-<span id="cb2-46"><a href="#cb2-46"></a><span class="co">#&gt; $ brownlow_votes                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, …</span></span>
-<span id="cb2-47"><a href="#cb2-47"></a><span class="co">#&gt; $ contested_possessions          &lt;int&gt; 3, 2, 9, 4, 10, 10, 9, 6, 6, 4, 15, 14,…</span></span>
-<span id="cb2-48"><a href="#cb2-48"></a><span class="co">#&gt; $ uncontested_possessions        &lt;int&gt; 5, 4, 15, 11, 19, 15, 11, 10, 5, 14, 17…</span></span>
-<span id="cb2-49"><a href="#cb2-49"></a><span class="co">#&gt; $ contested_marks                &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, …</span></span>
-<span id="cb2-50"><a href="#cb2-50"></a><span class="co">#&gt; $ marks_inside_fifty             &lt;int&gt; 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, …</span></span>
-<span id="cb2-51"><a href="#cb2-51"></a><span class="co">#&gt; $ one_percenters                 &lt;int&gt; 6, 2, 2, 2, 0, 0, 1, 2, 0, 2, 2, 2, 0, …</span></span>
-<span id="cb2-52"><a href="#cb2-52"></a><span class="co">#&gt; $ bounces                        &lt;int&gt; 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, …</span></span>
-<span id="cb2-53"><a href="#cb2-53"></a><span class="co">#&gt; $ goal_assists                   &lt;int&gt; 0, 0, 0, 0, 0, 1, 1, 2, 0, 1, 1, 0, 0, …</span></span>
-<span id="cb2-54"><a href="#cb2-54"></a><span class="co">#&gt; $ time_on_ground_percentage      &lt;int&gt; 80, 52, 81, 85, 89, 79, 78, 88, 94, 83,…</span></span>
-<span id="cb2-55"><a href="#cb2-55"></a><span class="co">#&gt; $ afl_fantasy_score              &lt;int&gt; 32, 29, 106, 60, 112, 83, 80, 67, 41, 1…</span></span>
-<span id="cb2-56"><a href="#cb2-56"></a><span class="co">#&gt; $ supercoach_score               &lt;int&gt; 45, 18, 88, 63, 95, 67, 82, 82, 44, 112…</span></span>
-<span id="cb2-57"><a href="#cb2-57"></a><span class="co">#&gt; $ centre_clearances              &lt;int&gt; 0, 1, 2, 0, 0, 2, 1, 1, 0, 0, 2, 1, 0, …</span></span>
-<span id="cb2-58"><a href="#cb2-58"></a><span class="co">#&gt; $ stoppage_clearances            &lt;int&gt; 0, 0, 2, 1, 3, 1, 3, 1, 0, 1, 3, 5, 0, …</span></span>
-<span id="cb2-59"><a href="#cb2-59"></a><span class="co">#&gt; $ score_involvements             &lt;int&gt; 0, 2, 5, 4, 9, 6, 7, 9, 4, 5, 11, 8, 2,…</span></span>
-<span id="cb2-60"><a href="#cb2-60"></a><span class="co">#&gt; $ metres_gained                  &lt;int&gt; 187, 223, 475, 313, 412, 328, 342, 317,…</span></span>
-<span id="cb2-61"><a href="#cb2-61"></a><span class="co">#&gt; $ turnovers                      &lt;int&gt; 1, 2, 5, 3, 4, 4, 3, 1, 3, 4, 8, 6, 2, …</span></span>
-<span id="cb2-62"><a href="#cb2-62"></a><span class="co">#&gt; $ intercepts                     &lt;int&gt; 3, 1, 3, 1, 4, 0, 3, 1, 0, 8, 2, 5, 1, …</span></span>
-<span id="cb2-63"><a href="#cb2-63"></a><span class="co">#&gt; $ tackles_inside_fifty           &lt;int&gt; 0, 0, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0, 1, …</span></span>
-<span id="cb2-64"><a href="#cb2-64"></a><span class="co">#&gt; $ contest_def_losses             &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
-<span id="cb2-65"><a href="#cb2-65"></a><span class="co">#&gt; $ contest_def_one_on_ones        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, …</span></span>
-<span id="cb2-66"><a href="#cb2-66"></a><span class="co">#&gt; $ contest_off_one_on_ones        &lt;int&gt; 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 3, 0, 2, …</span></span>
-<span id="cb2-67"><a href="#cb2-67"></a><span class="co">#&gt; $ contest_off_wins               &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, …</span></span>
-<span id="cb2-68"><a href="#cb2-68"></a><span class="co">#&gt; $ def_half_pressure_acts         &lt;int&gt; 7, 4, 13, 2, 10, 3, 13, 5, 0, 12, 3, 7,…</span></span>
-<span id="cb2-69"><a href="#cb2-69"></a><span class="co">#&gt; $ effective_kicks                &lt;int&gt; 3, 4, 12, 8, 7, 5, 7, 7, 5, 14, 10, 9, …</span></span>
-<span id="cb2-70"><a href="#cb2-70"></a><span class="co">#&gt; $ f50_ground_ball_gets           &lt;int&gt; 0, 0, 1, 0, 0, 1, 2, 1, 2, 0, 1, 0, 0, …</span></span>
-<span id="cb2-71"><a href="#cb2-71"></a><span class="co">#&gt; $ ground_ball_gets               &lt;int&gt; 2, 0, 6, 2, 7, 6, 6, 5, 6, 3, 9, 11, 0,…</span></span>
-<span id="cb2-72"><a href="#cb2-72"></a><span class="co">#&gt; $ hitouts_to_advantage           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
-<span id="cb2-73"><a href="#cb2-73"></a><span class="co">#&gt; $ hitout_win_percentage          &lt;dbl&gt; 0.0, 31.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0…</span></span>
-<span id="cb2-74"><a href="#cb2-74"></a><span class="co">#&gt; $ intercept_marks                &lt;int&gt; 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, …</span></span>
-<span id="cb2-75"><a href="#cb2-75"></a><span class="co">#&gt; $ marks_on_lead                  &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, …</span></span>
-<span id="cb2-76"><a href="#cb2-76"></a><span class="co">#&gt; $ pressure_acts                  &lt;int&gt; 10, 11, 23, 18, 28, 16, 26, 11, 7, 17, …</span></span>
-<span id="cb2-77"><a href="#cb2-77"></a><span class="co">#&gt; $ rating_points                  &lt;dbl&gt; 6.1, 5.1, 8.7, 11.8, 11.5, 4.7, 14.5, 1…</span></span>
-<span id="cb2-78"><a href="#cb2-78"></a><span class="co">#&gt; $ ruck_contests                  &lt;int&gt; 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span></span>
-<span id="cb2-79"><a href="#cb2-79"></a><span class="co">#&gt; $ score_launches                 &lt;int&gt; 0, 1, 0, 0, 0, 1, 1, 2, 0, 2, 1, 4, 1, …</span></span>
-<span id="cb2-80"><a href="#cb2-80"></a><span class="co">#&gt; $ shots_at_goal                  &lt;int&gt; 0, 2, 1, 2, 2, 1, 0, 2, 2, 0, 0, 1, 2, …</span></span>
-<span id="cb2-81"><a href="#cb2-81"></a><span class="co">#&gt; $ spoils                         &lt;int&gt; 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 0, …</span></span>
-<span id="cb2-82"><a href="#cb2-82"></a><span class="co">#&gt; $ subbed                         &lt;chr&gt; "Not Subbed", "Not Subbed", "Not Subbed…</span></span>
-<span id="cb2-83"><a href="#cb2-83"></a><span class="co">#&gt; $ player_position                &lt;chr&gt; "INT", "INT", "INT", "INT", "R", "HFFL"…</span></span>
-<span id="cb2-84"><a href="#cb2-84"></a><span class="co">#&gt; $ date                           &lt;date&gt; 2019-03-21, 2019-03-21, 2019-03-21, 20…</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 9,108</span>
+<span class="co">#&gt; Columns: 81</span>
+<span class="co">#&gt; $ venue_name                     &lt;chr&gt; "MCG", "MCG", "MCG", "MCG", "MCG", "MCG…</span>
+<span class="co">#&gt; $ match_id                       &lt;int&gt; 15408, 15408, 15408, 15408, 15408, 1540…</span>
+<span class="co">#&gt; $ match_home_team                &lt;chr&gt; "Carlton", "Carlton", "Carlton", "Carlt…</span>
+<span class="co">#&gt; $ match_away_team                &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span>
+<span class="co">#&gt; $ match_date                     &lt;chr&gt; "2019-03-21", "2019-03-21", "2019-03-21…</span>
+<span class="co">#&gt; $ match_local_time               &lt;chr&gt; "19:25:00", "19:25:00", "19:25:00", "19…</span>
+<span class="co">#&gt; $ match_attendance               &lt;int&gt; 85016, 85016, 85016, 85016, 85016, 8501…</span>
+<span class="co">#&gt; $ match_round                    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1",…</span>
+<span class="co">#&gt; $ match_home_team_goals          &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, …</span>
+<span class="co">#&gt; $ match_home_team_behinds        &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,…</span>
+<span class="co">#&gt; $ match_home_team_score          &lt;int&gt; 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,…</span>
+<span class="co">#&gt; $ match_away_team_goals          &lt;int&gt; 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,…</span>
+<span class="co">#&gt; $ match_away_team_behinds        &lt;int&gt; 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,…</span>
+<span class="co">#&gt; $ match_away_team_score          &lt;int&gt; 97, 97, 97, 97, 97, 97, 97, 97, 97, 97,…</span>
+<span class="co">#&gt; $ match_margin                   &lt;int&gt; 33, 33, 33, 33, 33, 33, 33, 33, 33, 33,…</span>
+<span class="co">#&gt; $ match_winner                   &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span>
+<span class="co">#&gt; $ match_weather_temp_c           &lt;int&gt; 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,…</span>
+<span class="co">#&gt; $ match_weather_type             &lt;chr&gt; "OVERCAST", "OVERCAST", "OVERCAST", "OV…</span>
+<span class="co">#&gt; $ player_id                      &lt;int&gt; 12464, 12686, 12584, 11931, 12341, 1248…</span>
+<span class="co">#&gt; $ player_first_name              &lt;chr&gt; "Nathan", "Noah", "Jack", "Maverick", "…</span>
+<span class="co">#&gt; $ player_last_name               &lt;chr&gt; "Broad", "Balta", "Graham", "Weller", "…</span>
+<span class="co">#&gt; $ player_height_cm               &lt;int&gt; 192, 194, 181, NA, 178, 186, 175, 179, …</span>
+<span class="co">#&gt; $ player_weight_kg               &lt;int&gt; 89, 100, 82, NA, 77, 83, 82, 76, 95, 83…</span>
+<span class="co">#&gt; $ player_is_retired              &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, FALSE, FALSE…</span>
+<span class="co">#&gt; $ player_team                    &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span>
+<span class="co">#&gt; $ guernsey_number                &lt;int&gt; 35, 38, 34, 16, 23, 28, 3, 17, 30, 14, …</span>
+<span class="co">#&gt; $ kicks                          &lt;int&gt; 4, 5, 16, 9, 12, 9, 10, 10, 10, 16, 18,…</span>
+<span class="co">#&gt; $ marks                          &lt;int&gt; 1, 2, 7, 2, 7, 5, 1, 4, 1, 6, 4, 6, 2, …</span>
+<span class="co">#&gt; $ handballs                      &lt;int&gt; 4, 0, 7, 6, 18, 13, 10, 7, 2, 8, 12, 11…</span>
+<span class="co">#&gt; $ disposals                      &lt;int&gt; 8, 5, 23, 15, 30, 22, 20, 17, 12, 24, 3…</span>
+<span class="co">#&gt; $ effective_disposals            &lt;int&gt; 6, 4, 16, 14, 23, 15, 14, 13, 6, 22, 19…</span>
+<span class="co">#&gt; $ disposal_efficiency_percentage &lt;int&gt; 75, 80, 70, 93, 77, 68, 70, 77, 50, 92,…</span>
+<span class="co">#&gt; $ goals                          &lt;int&gt; 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, …</span>
+<span class="co">#&gt; $ behinds                        &lt;int&gt; 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, …</span>
+<span class="co">#&gt; $ hitouts                        &lt;int&gt; 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span>
+<span class="co">#&gt; $ tackles                        &lt;int&gt; 2, 1, 6, 1, 4, 5, 7, 2, 1, 4, 0, 4, 1, …</span>
+<span class="co">#&gt; $ rebounds                       &lt;int&gt; 2, 0, 0, 2, 1, 0, 0, 0, 0, 8, 1, 0, 0, …</span>
+<span class="co">#&gt; $ inside_fifties                 &lt;int&gt; 0, 3, 5, 3, 3, 5, 5, 4, 2, 3, 7, 6, 0, …</span>
+<span class="co">#&gt; $ clearances                     &lt;int&gt; 0, 1, 4, 1, 3, 3, 4, 2, 0, 1, 5, 6, 0, …</span>
+<span class="co">#&gt; $ clangers                       &lt;int&gt; 2, 5, 6, 1, 4, 7, 2, 0, 4, 2, 7, 5, 1, …</span>
+<span class="co">#&gt; $ free_kicks_for                 &lt;int&gt; 1, 1, 1, 0, 2, 1, 3, 1, 0, 1, 0, 2, 1, …</span>
+<span class="co">#&gt; $ free_kicks_against             &lt;int&gt; 0, 3, 1, 0, 0, 2, 0, 0, 2, 0, 3, 4, 1, …</span>
+<span class="co">#&gt; $ brownlow_votes                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, …</span>
+<span class="co">#&gt; $ contested_possessions          &lt;int&gt; 3, 2, 9, 4, 10, 10, 9, 6, 6, 4, 15, 14,…</span>
+<span class="co">#&gt; $ uncontested_possessions        &lt;int&gt; 5, 4, 15, 11, 19, 15, 11, 10, 5, 14, 17…</span>
+<span class="co">#&gt; $ contested_marks                &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, …</span>
+<span class="co">#&gt; $ marks_inside_fifty             &lt;int&gt; 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, …</span>
+<span class="co">#&gt; $ one_percenters                 &lt;int&gt; 6, 2, 2, 2, 0, 0, 1, 2, 0, 2, 2, 2, 0, …</span>
+<span class="co">#&gt; $ bounces                        &lt;int&gt; 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, …</span>
+<span class="co">#&gt; $ goal_assists                   &lt;int&gt; 0, 0, 0, 0, 0, 1, 1, 2, 0, 1, 1, 0, 0, …</span>
+<span class="co">#&gt; $ time_on_ground_percentage      &lt;int&gt; 80, 52, 81, 85, 89, 79, 78, 88, 94, 83,…</span>
+<span class="co">#&gt; $ afl_fantasy_score              &lt;int&gt; 32, 29, 106, 60, 112, 83, 80, 67, 41, 1…</span>
+<span class="co">#&gt; $ supercoach_score               &lt;int&gt; 45, 18, 88, 63, 95, 67, 82, 82, 44, 112…</span>
+<span class="co">#&gt; $ centre_clearances              &lt;int&gt; 0, 1, 2, 0, 0, 2, 1, 1, 0, 0, 2, 1, 0, …</span>
+<span class="co">#&gt; $ stoppage_clearances            &lt;int&gt; 0, 0, 2, 1, 3, 1, 3, 1, 0, 1, 3, 5, 0, …</span>
+<span class="co">#&gt; $ score_involvements             &lt;int&gt; 0, 2, 5, 4, 9, 6, 7, 9, 4, 5, 11, 8, 2,…</span>
+<span class="co">#&gt; $ metres_gained                  &lt;int&gt; 187, 223, 475, 313, 412, 328, 342, 317,…</span>
+<span class="co">#&gt; $ turnovers                      &lt;int&gt; 1, 2, 5, 3, 4, 4, 3, 1, 3, 4, 8, 6, 2, …</span>
+<span class="co">#&gt; $ intercepts                     &lt;int&gt; 3, 1, 3, 1, 4, 0, 3, 1, 0, 8, 2, 5, 1, …</span>
+<span class="co">#&gt; $ tackles_inside_fifty           &lt;int&gt; 0, 0, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0, 1, …</span>
+<span class="co">#&gt; $ contest_def_losses             &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span>
+<span class="co">#&gt; $ contest_def_one_on_ones        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, …</span>
+<span class="co">#&gt; $ contest_off_one_on_ones        &lt;int&gt; 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 3, 0, 2, …</span>
+<span class="co">#&gt; $ contest_off_wins               &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, …</span>
+<span class="co">#&gt; $ def_half_pressure_acts         &lt;int&gt; 7, 4, 13, 2, 10, 3, 13, 5, 0, 12, 3, 7,…</span>
+<span class="co">#&gt; $ effective_kicks                &lt;int&gt; 3, 4, 12, 8, 7, 5, 7, 7, 5, 14, 10, 9, …</span>
+<span class="co">#&gt; $ f50_ground_ball_gets           &lt;int&gt; 0, 0, 1, 0, 0, 1, 2, 1, 2, 0, 1, 0, 0, …</span>
+<span class="co">#&gt; $ ground_ball_gets               &lt;int&gt; 2, 0, 6, 2, 7, 6, 6, 5, 6, 3, 9, 11, 0,…</span>
+<span class="co">#&gt; $ hitouts_to_advantage           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span>
+<span class="co">#&gt; $ hitout_win_percentage          &lt;dbl&gt; 0.0, 31.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0…</span>
+<span class="co">#&gt; $ intercept_marks                &lt;int&gt; 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, …</span>
+<span class="co">#&gt; $ marks_on_lead                  &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, …</span>
+<span class="co">#&gt; $ pressure_acts                  &lt;int&gt; 10, 11, 23, 18, 28, 16, 26, 11, 7, 17, …</span>
+<span class="co">#&gt; $ rating_points                  &lt;dbl&gt; 6.1, 5.1, 8.7, 11.8, 11.5, 4.7, 14.5, 1…</span>
+<span class="co">#&gt; $ ruck_contests                  &lt;int&gt; 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span>
+<span class="co">#&gt; $ score_launches                 &lt;int&gt; 0, 1, 0, 0, 0, 1, 1, 2, 0, 2, 1, 4, 1, …</span>
+<span class="co">#&gt; $ shots_at_goal                  &lt;int&gt; 0, 2, 1, 2, 2, 1, 0, 2, 2, 0, 0, 1, 2, …</span>
+<span class="co">#&gt; $ spoils                         &lt;int&gt; 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 0, …</span>
+<span class="co">#&gt; $ subbed                         &lt;chr&gt; "Not Subbed", "Not Subbed", "Not Subbed…</span>
+<span class="co">#&gt; $ player_position                &lt;chr&gt; "INT", "INT", "INT", "INT", "R", "HFFL"…</span>
+<span class="co">#&gt; $ date                           &lt;date&gt; 2019-03-21, 2019-03-21, 2019-03-21, 20…</span></code></pre></div>
 <p>You can see the data includes both player and team data, where each row is a game by a player.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dat)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; # A tibble: 6 x 81</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt;   venue_name match_id match_home_team match_away_team match_date</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;     </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; 1 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 2 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 3 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 4 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 5 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 6 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; # … with 76 more variables: match_local_time &lt;chr&gt;, match_attendance &lt;int&gt;,</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; #   match_round &lt;chr&gt;, match_home_team_goals &lt;int&gt;,</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; #   match_home_team_behinds &lt;int&gt;, match_home_team_score &lt;int&gt;,</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; #   match_away_team_goals &lt;int&gt;, match_away_team_behinds &lt;int&gt;,</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; #   match_away_team_score &lt;int&gt;, match_margin &lt;int&gt;, match_winner &lt;chr&gt;,</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; #   match_weather_temp_c &lt;int&gt;, match_weather_type &lt;chr&gt;, player_id &lt;int&gt;,</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; #   player_first_name &lt;chr&gt;, player_last_name &lt;chr&gt;, player_height_cm &lt;int&gt;,</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; #   player_weight_kg &lt;int&gt;, player_is_retired &lt;lgl&gt;, player_team &lt;chr&gt;,</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; #   guernsey_number &lt;int&gt;, kicks &lt;int&gt;, marks &lt;int&gt;, handballs &lt;int&gt;,</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; #   disposals &lt;int&gt;, effective_disposals &lt;int&gt;,</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; #   disposal_efficiency_percentage &lt;int&gt;, goals &lt;int&gt;, behinds &lt;int&gt;,</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; #   hitouts &lt;int&gt;, tackles &lt;int&gt;, rebounds &lt;int&gt;, inside_fifties &lt;int&gt;,</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; #   clearances &lt;int&gt;, clangers &lt;int&gt;, free_kicks_for &lt;int&gt;,</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; #   free_kicks_against &lt;int&gt;, brownlow_votes &lt;int&gt;,</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; #   contested_possessions &lt;int&gt;, uncontested_possessions &lt;int&gt;,</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; #   contested_marks &lt;int&gt;, marks_inside_fifty &lt;int&gt;, one_percenters &lt;int&gt;,</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; #   bounces &lt;int&gt;, goal_assists &lt;int&gt;, time_on_ground_percentage &lt;int&gt;,</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; #   afl_fantasy_score &lt;int&gt;, supercoach_score &lt;int&gt;, centre_clearances &lt;int&gt;,</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; #   stoppage_clearances &lt;int&gt;, score_involvements &lt;int&gt;, metres_gained &lt;int&gt;,</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; #   turnovers &lt;int&gt;, intercepts &lt;int&gt;, tackles_inside_fifty &lt;int&gt;,</span></span>
-<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; #   contest_def_losses &lt;int&gt;, contest_def_one_on_ones &lt;int&gt;,</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; #   contest_off_one_on_ones &lt;int&gt;, contest_off_wins &lt;int&gt;,</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; #   def_half_pressure_acts &lt;int&gt;, effective_kicks &lt;int&gt;,</span></span>
-<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; #   f50_ground_ball_gets &lt;int&gt;, ground_ball_gets &lt;int&gt;,</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt; #   hitouts_to_advantage &lt;int&gt;, hitout_win_percentage &lt;dbl&gt;,</span></span>
-<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; #   intercept_marks &lt;int&gt;, marks_on_lead &lt;int&gt;, pressure_acts &lt;int&gt;,</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; #   rating_points &lt;dbl&gt;, ruck_contests &lt;int&gt;, score_launches &lt;int&gt;,</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a><span class="co">#&gt; #   shots_at_goal &lt;int&gt;, spoils &lt;int&gt;, subbed &lt;chr&gt;, player_position &lt;chr&gt;,</span></span>
-<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#&gt; #   date &lt;date&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 6 x 81</span>
+<span class="co">#&gt;   venue_name match_id match_home_team match_away_team match_date</span>
+<span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;     </span>
+<span class="co">#&gt; 1 MCG           15408 Carlton         Richmond        2019-03-21</span>
+<span class="co">#&gt; 2 MCG           15408 Carlton         Richmond        2019-03-21</span>
+<span class="co">#&gt; 3 MCG           15408 Carlton         Richmond        2019-03-21</span>
+<span class="co">#&gt; 4 MCG           15408 Carlton         Richmond        2019-03-21</span>
+<span class="co">#&gt; 5 MCG           15408 Carlton         Richmond        2019-03-21</span>
+<span class="co">#&gt; 6 MCG           15408 Carlton         Richmond        2019-03-21</span>
+<span class="co">#&gt; # … with 76 more variables: match_local_time &lt;chr&gt;, match_attendance &lt;int&gt;,</span>
+<span class="co">#&gt; #   match_round &lt;chr&gt;, match_home_team_goals &lt;int&gt;,</span>
+<span class="co">#&gt; #   match_home_team_behinds &lt;int&gt;, match_home_team_score &lt;int&gt;,</span>
+<span class="co">#&gt; #   match_away_team_goals &lt;int&gt;, match_away_team_behinds &lt;int&gt;,</span>
+<span class="co">#&gt; #   match_away_team_score &lt;int&gt;, match_margin &lt;int&gt;, match_winner &lt;chr&gt;,</span>
+<span class="co">#&gt; #   match_weather_temp_c &lt;int&gt;, match_weather_type &lt;chr&gt;, player_id &lt;int&gt;,</span>
+<span class="co">#&gt; #   player_first_name &lt;chr&gt;, player_last_name &lt;chr&gt;, player_height_cm &lt;int&gt;,</span>
+<span class="co">#&gt; #   player_weight_kg &lt;int&gt;, player_is_retired &lt;lgl&gt;, player_team &lt;chr&gt;,</span>
+<span class="co">#&gt; #   guernsey_number &lt;int&gt;, kicks &lt;int&gt;, marks &lt;int&gt;, handballs &lt;int&gt;,</span>
+<span class="co">#&gt; #   disposals &lt;int&gt;, effective_disposals &lt;int&gt;,</span>
+<span class="co">#&gt; #   disposal_efficiency_percentage &lt;int&gt;, goals &lt;int&gt;, behinds &lt;int&gt;,</span>
+<span class="co">#&gt; #   hitouts &lt;int&gt;, tackles &lt;int&gt;, rebounds &lt;int&gt;, inside_fifties &lt;int&gt;,</span>
+<span class="co">#&gt; #   clearances &lt;int&gt;, clangers &lt;int&gt;, free_kicks_for &lt;int&gt;,</span>
+<span class="co">#&gt; #   free_kicks_against &lt;int&gt;, brownlow_votes &lt;int&gt;,</span>
+<span class="co">#&gt; #   contested_possessions &lt;int&gt;, uncontested_possessions &lt;int&gt;,</span>
+<span class="co">#&gt; #   contested_marks &lt;int&gt;, marks_inside_fifty &lt;int&gt;, one_percenters &lt;int&gt;,</span>
+<span class="co">#&gt; #   bounces &lt;int&gt;, goal_assists &lt;int&gt;, time_on_ground_percentage &lt;int&gt;,</span>
+<span class="co">#&gt; #   afl_fantasy_score &lt;int&gt;, supercoach_score &lt;int&gt;, centre_clearances &lt;int&gt;,</span>
+<span class="co">#&gt; #   stoppage_clearances &lt;int&gt;, score_involvements &lt;int&gt;, metres_gained &lt;int&gt;,</span>
+<span class="co">#&gt; #   turnovers &lt;int&gt;, intercepts &lt;int&gt;, tackles_inside_fifty &lt;int&gt;,</span>
+<span class="co">#&gt; #   contest_def_losses &lt;int&gt;, contest_def_one_on_ones &lt;int&gt;,</span>
+<span class="co">#&gt; #   contest_off_one_on_ones &lt;int&gt;, contest_off_wins &lt;int&gt;,</span>
+<span class="co">#&gt; #   def_half_pressure_acts &lt;int&gt;, effective_kicks &lt;int&gt;,</span>
+<span class="co">#&gt; #   f50_ground_ball_gets &lt;int&gt;, ground_ball_gets &lt;int&gt;,</span>
+<span class="co">#&gt; #   hitouts_to_advantage &lt;int&gt;, hitout_win_percentage &lt;dbl&gt;,</span>
+<span class="co">#&gt; #   intercept_marks &lt;int&gt;, marks_on_lead &lt;int&gt;, pressure_acts &lt;int&gt;,</span>
+<span class="co">#&gt; #   rating_points &lt;dbl&gt;, ruck_contests &lt;int&gt;, score_launches &lt;int&gt;,</span>
+<span class="co">#&gt; #   shots_at_goal &lt;int&gt;, spoils &lt;int&gt;, subbed &lt;chr&gt;, player_position &lt;chr&gt;,</span>
+<span class="co">#&gt; #   date &lt;date&gt;</span></code></pre></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#overview">Overview</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -274,7 +277,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

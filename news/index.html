@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -63,7 +67,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -103,22 +107,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/docker-support.html">Docker Support</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
+    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">Workflow Examples</li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
-    <li>
-      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
-    </li>
-    <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
-    </li>
+    <li class="divider"></li>
+    <li class="dropdown-header">APIs</li>
     <li>
       <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">AFL Womens Example</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -128,7 +137,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jimmyday12/fitzRoy">
+  <a href="https://github.com/jimmyday12/fitzRoy/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -146,12 +155,12 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
       <small>Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="fitzroy-development-version" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="development version">
 <a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
 </h1>
 <div id="major-changes" class="section level2">
@@ -209,7 +218,7 @@
 </div>
 </div>
     <div id="fitzroy-033" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.3">
 <a href="#fitzroy-033" class="anchor"></a>fitzRoy 0.3.3<small> 2021-01-12 </small>
 </h1>
 <div id="breaking-changes" class="section level2">
@@ -249,7 +258,7 @@
 </div>
 </div>
     <div id="fitzroy-032" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.2">
 <a href="#fitzroy-032" class="anchor"></a>fitzRoy 0.3.2<small> 2020-05-23 </small>
 </h1>
 <div id="general-changes" class="section level2">
@@ -272,7 +281,7 @@
 </div>
 </div>
     <div id="fitzroy-031" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.1">
 <a href="#fitzroy-031" class="anchor"></a>fitzRoy 0.3.1<small> 2020-01-21 </small>
 </h1>
 <ul>
@@ -280,7 +289,7 @@
 </ul>
 </div>
     <div id="fitzroy-030" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.3.0">
 <a href="#fitzroy-030" class="anchor"></a>fitzRoy 0.3.0<small> 2020-01-08 </small>
 </h1>
 <div id="breaking-changes-1" class="section level2">
@@ -300,7 +309,7 @@
 </div>
 </div>
     <div id="fitzroy-020" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.2.0">
 <a href="#fitzroy-020" class="anchor"></a>fitzRoy 0.2.0<small> 2019-11-30 </small>
 </h1>
 <p>This release is in preparation for a CRAN submission. There are some breaking changes and removal of early functions that are no longer supported.</p>
@@ -335,7 +344,7 @@
 </div>
 </div>
     <div id="fitzroy-0113" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.13">
 <a href="#fitzroy-0113" class="anchor"></a>fitzRoy 0.1.13<small> Unreleased </small>
 </h1>
 <ul>
@@ -345,7 +354,7 @@
 </ul>
 </div>
     <div id="fitzroy-0112" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.12">
 <a href="#fitzroy-0112" class="anchor"></a>fitzRoy 0.1.12<small> Unreleased </small>
 </h1>
 <ul>
@@ -355,7 +364,7 @@
 </ul>
 </div>
     <div id="fitzroy-0111" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.11">
 <a href="#fitzroy-0111" class="anchor"></a>fitzRoy 0.1.11<small> Unreleased </small>
 </h1>
 <ul>
@@ -363,7 +372,7 @@
 </ul>
 </div>
     <div id="fitzroy-0110" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.10">
 <a href="#fitzroy-0110" class="anchor"></a>fitzRoy 0.1.10<small> Unreleased </small>
 </h1>
 <ul>
@@ -371,7 +380,7 @@
 </ul>
 </div>
     <div id="fitzroy-019" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.9">
 <a href="#fitzroy-019" class="anchor"></a>fitzRoy 0.1.9<small> Unreleased </small>
 </h1>
 <ul>
@@ -398,7 +407,7 @@
 </ul>
 </div>
     <div id="fitzroy-018" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.8">
 <a href="#fitzroy-018" class="anchor"></a>fitzRoy 0.1.8<small> Unreleased </small>
 </h1>
 <ul>
@@ -407,7 +416,7 @@
 </ul>
 </div>
     <div id="fitzroy-017" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.7">
 <a href="#fitzroy-017" class="anchor"></a>fitzRoy 0.1.7<small> Unreleased </small>
 </h1>
 <ul>
@@ -424,7 +433,7 @@
 </ul>
 </div>
     <div id="fitzroy-016" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.6">
 <a href="#fitzroy-016" class="anchor"></a>fitzRoy 0.1.6<small> Unreleased </small>
 </h1>
 <ul>
@@ -448,7 +457,7 @@
 </ul>
 </div>
     <div id="fitzroy-015" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.5">
 <a href="#fitzroy-015" class="anchor"></a>fitzRoy 0.1.5<small> Unreleased </small>
 </h1>
 <ul>
@@ -462,7 +471,7 @@
 </ul>
 </div>
     <div id="fitzroy-014" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.4">
 <a href="#fitzroy-014" class="anchor"></a>fitzRoy 0.1.4<small> Unreleased </small>
 </h1>
 <ul>
@@ -471,7 +480,7 @@
 </ul>
 </div>
     <div id="fitzroy-013" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.3">
 <a href="#fitzroy-013" class="anchor"></a>fitzRoy 0.1.3<small> Unreleased </small>
 </h1>
 <ul>
@@ -479,7 +488,7 @@
 </ul>
 </div>
     <div id="fitzroy-012" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.2">
 <a href="#fitzroy-012" class="anchor"></a>fitzRoy 0.1.2<small> Unreleased </small>
 </h1>
 <ul>
@@ -488,7 +497,7 @@
 </ul>
 </div>
     <div id="fitzroy-011" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.1">
 <a href="#fitzroy-011" class="anchor"></a>fitzRoy 0.1.1<small> Unreleased </small>
 </h1>
 <ul>
@@ -497,7 +506,7 @@
 </ul>
 </div>
     <div id="fitzroy-0109000" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.1.0.9000">
 <a href="#fitzroy-0109000" class="anchor"></a>fitzRoy 0.1.0.9000<small> Unreleased </small>
 </h1>
 <p>Initial release of FitzRoy package.</p>
@@ -511,7 +520,7 @@
 </ul>
 </div>
     <div id="fitzroy-0009000" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="0.0.0.9000">
 <a href="#fitzroy-0009000" class="anchor"></a>fitzRoy 0.0.0.9000<small> Unreleased </small>
 </h1>
 <ul>
@@ -521,33 +530,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#fitzroy-development-version">development version</a></li>
-        <li><a href="#fitzroy-033">0.3.3</a></li>
-        <li><a href="#fitzroy-032">0.3.2</a></li>
-        <li><a href="#fitzroy-031">0.3.1</a></li>
-        <li><a href="#fitzroy-030">0.3.0</a></li>
-        <li><a href="#fitzroy-020">0.2.0</a></li>
-        <li><a href="#fitzroy-0113">0.1.13</a></li>
-        <li><a href="#fitzroy-0112">0.1.12</a></li>
-        <li><a href="#fitzroy-0111">0.1.11</a></li>
-        <li><a href="#fitzroy-0110">0.1.10</a></li>
-        <li><a href="#fitzroy-019">0.1.9</a></li>
-        <li><a href="#fitzroy-018">0.1.8</a></li>
-        <li><a href="#fitzroy-017">0.1.7</a></li>
-        <li><a href="#fitzroy-016">0.1.6</a></li>
-        <li><a href="#fitzroy-015">0.1.5</a></li>
-        <li><a href="#fitzroy-014">0.1.4</a></li>
-        <li><a href="#fitzroy-013">0.1.3</a></li>
-        <li><a href="#fitzroy-012">0.1.2</a></li>
-        <li><a href="#fitzroy-011">0.1.1</a></li>
-        <li><a href="#fitzroy-0109000">0.1.0.9000</a></li>
-        <li><a href="#fitzroy-0009000">0.0.0.9000</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -559,7 +545,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

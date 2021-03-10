@@ -6,13 +6,13 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Using the Squiggle API • fitzRoy</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Using the Squiggle API">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="fitzRoy">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -24,7 +24,7 @@
   gtag('config', 'UA-77406420-2');
 </script>
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -63,22 +63,27 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="../articles/docker-support.html">Docker Support</a>
+      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
+    </li>
+    <li class="divider">
+    <li class="dropdown-header">Workflow Examples</li>
+    <li>
+      <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
-    <li>
-      <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
-    </li>
-    <li>
-      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
-    </li>
+    <li class="divider">
+    <li class="dropdown-header">APIs</li>
     <li>
       <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
     <li>
-      <a href="../articles/womens-stats.html">AFL Womens Example</a>
+      <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
+    </li>
+    <li class="divider">
+    <li>
+      <a href="../articles/index.html">More...</a>
     </li>
   </ul>
 </li>
@@ -88,7 +93,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/fitzRoy">
+  <a href="https://github.com/jimmyday12/fitzRoy/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -106,7 +111,7 @@
       </header><script src="using-squiggle-api_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Using the Squiggle API</h1>
+      <h1 data-toc-skip>Using the Squiggle API</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/using-squiggle-api.Rmd"><code>vignettes/using-squiggle-api.Rmd</code></a></small>
@@ -116,8 +121,9 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(fitzRoy)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span></code></pre></div>
 <div id="squiggle-data" class="section level1">
 <h1 class="hasAnchor">
 <a href="#squiggle-data" class="anchor"></a>Squiggle Data</h1>
@@ -152,7 +158,8 @@
 <p>Optional arguments can then be supplied based on the query.</p>
 <p>For example, <code>games</code> takes the following optional arguments. * <code>year</code> - Year * <code>round</code> - Round * <code>game</code> - Game ID * <code>complete</code> - Percent of game complete</p>
 <p>These can be supplied as named arugments after the query. For example, to return games from just 2020, we would use the following.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="dt">query =</span> <span class="st">"games"</span>, <span class="dt">year =</span> <span class="dv">2020</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 162 x 24
 #&gt;    date   updated hscore ateam is_grand_final  year localtime hteam ascore    id
 #&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
@@ -179,7 +186,8 @@
 <h2 class="hasAnchor">
 <a href="#teams" class="anchor"></a>Teams</h2>
 <p>Fetch info about one or more AFL teams.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"teams"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"teams"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 18 x 4
 #&gt;    logo                                           name                 id abbrev
 #&gt;    &lt;chr&gt;                                          &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; 
@@ -206,7 +214,8 @@
 <h2 class="hasAnchor">
 <a href="#games" class="anchor"></a>Games</h2>
 <p>Fetch info about one or more games.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="dt">query =</span> <span class="st">"games"</span>, <span class="dt">year =</span> <span class="dv">2020</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 162 x 24
 #&gt;    date   updated hscore ateam is_grand_final  year localtime hteam ascore    id
 #&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
@@ -229,8 +238,9 @@
 <h2 class="hasAnchor">
 <a href="#sources" class="anchor"></a>Sources</h2>
 <p>Fetch info about one or more computer models.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># You can get the sources</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"sources"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># You can get the sources</span>
+<span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"sources"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 22 x 4
 #&gt;    name           icon                               url                      id
 #&gt;    &lt;chr&gt;          &lt;chr&gt;                              &lt;chr&gt;                 &lt;int&gt;
@@ -250,8 +260,9 @@
 <h2 class="hasAnchor">
 <a href="#tips" class="anchor"></a>Tips</h2>
 <p>Fetch info about one or more tips made by computer models.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Get all tips</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"tips"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get all tips</span>
+<span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 12,917 x 21
 #&gt;      err correct ateamid  year hconfidence gameid tipteamid    bits confidence
 #&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;  &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
@@ -269,8 +280,9 @@
 #&gt; #   ateam &lt;chr&gt;, updated &lt;chr&gt;, venue &lt;chr&gt;, source &lt;chr&gt;, margin &lt;dbl&gt;,
 #&gt; #   date &lt;chr&gt;, hmargin &lt;dbl&gt;, hteamid &lt;int&gt;, sourceid &lt;int&gt;, tip &lt;chr&gt;</code></pre>
 <p>We can just look at one particular round.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Get` just tips from round 1, 2018</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"tips"</span>, <span class="dt">round =</span> <span class="dv">1</span>, <span class="dt">year =</span> <span class="dv">2018</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get` just tips from round 1, 2018</span>
+<span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span>, round <span class="op">=</span> <span class="fl">1</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 126 x 21
 #&gt;      err correct ateamid  year hconfidence gameid tipteamid    bits confidence
 #&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;  &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
@@ -292,7 +304,8 @@
 <h2 class="hasAnchor">
 <a href="#standings" class="anchor"></a>Standings</h2>
 <p>Fetch info about team standings at a point in time, i.e. the ladder.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"standings"</span>, <span class="dt">year =</span> <span class="dv">2020</span>, <span class="dt">round =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"standings"</span>, year <span class="op">=</span> <span class="fl">2020</span>, round <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 18 x 15
 #&gt;     wins    id  rank goals_against goals_for  for. draws   pts percentage name  
 #&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt; 
@@ -321,7 +334,8 @@
 <h2 class="hasAnchor">
 <a href="#ladder" class="anchor"></a>Ladder</h2>
 <p>Fetch info about one or more projected ladders generated by computer models. For the actual ladder, see standings instead.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"ladder"</span>, <span class="dt">year =</span> <span class="dv">2019</span>, <span class="dt">round =</span> <span class="dv">15</span>, <span class="dt">source =</span> <span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"ladder"</span>, year <span class="op">=</span> <span class="fl">2019</span>, round <span class="op">=</span> <span class="fl">15</span>, source <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 18 x 12
 #&gt;    swarms    wins percentage team  sourceid  rank round mean_rank updated teamid
 #&gt;    &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
@@ -349,10 +363,11 @@
 <h2 class="hasAnchor">
 <a href="#pav" class="anchor"></a>PAV</h2>
 <p>Fetch info about players using HPN Footy’s Player Approximate Value.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span>(<span class="st">"pav"</span>, </span>
-<span id="cb18-2"><a href="#cb18-2"></a>                    <span class="dt">firstname =</span> <span class="st">"Dustin"</span>, </span>
-<span id="cb18-3"><a href="#cb18-3"></a>                    <span class="dt">surname =</span> <span class="st">"Martin"</span>, </span>
-<span id="cb18-4"><a href="#cb18-4"></a>                    <span class="dt">year =</span> <span class="dv">2017</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"pav"</span>, 
+                    firstname <span class="op">=</span> <span class="st">"Dustin"</span>, 
+                    surname <span class="op">=</span> <span class="st">"Martin"</span>, 
+                    year <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 x 21
 #&gt;   mPAV_total  year PAV_def_rank pavid PAV_off_rank PAV_mid_rank PAV_total_rank
 #&gt;        &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;int&gt;        &lt;int&gt;        &lt;int&gt;          &lt;int&gt;
@@ -365,32 +380,11 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li>
-<a href="#squiggle-data">Squiggle Data</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#queries">Queries</a></li>
-      <li><a href="#optional-arguments">Optional Arguments</a></li>
-      </ul>
-</li>
-      <li>
-<a href="#examples">Examples</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#teams">Teams</a></li>
-      <li><a href="#games">Games</a></li>
-      <li><a href="#sources">Sources</a></li>
-      <li><a href="#tips">Tips</a></li>
-      <li><a href="#standings">Standings</a></li>
-      <li><a href="#ladder">Ladder</a></li>
-      <li><a href="#pav">PAV</a></li>
-      </ul>
-</li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -401,7 +395,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
