@@ -45,6 +45,22 @@ fitzRoy:::fixture_afl_aflw_2021 %>%
          home.team.name, away.team.name, 
          venue.name)
 ```
+## Lineup
+We can get the lineup for a given set of matches in a particular round. 
+```{r lineup, include=TRUE, eval=FALSE}
+fetch_lineup(2021, round_number = 1, comp = "AFLW") %>%
+  select(round.name, status, teamName, 
+         player.playerName.givenName,
+         player.playerName.surname, teamStatus)
+```
+
+```{r lineup_included, echo=FALSE, eval=eval_param}
+fitzRoy:::lineup_aflw_2021_1 %>%
+  select(round.name, status, teamName, 
+         player.playerName.givenName,
+         player.playerName.surname, teamStatus)
+```
+
 
 ## Results
 The match results, including the teams playing, venue information and final scores are retunred via `fetch_results`. 

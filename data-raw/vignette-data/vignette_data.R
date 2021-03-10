@@ -8,6 +8,9 @@ library(fitzRoy)
 results_afltables_all <- fitzRoy::fetch_results_afltables(1897:2021)
 fixture_footywire_2019 <- fitzRoy::fetch_fixture_footywire(2019)
 
+# FitzRoy 
+lineup_aflw_2021_1 <- fetch_lineup(2021, round_number = 1, 
+                                   comp = "AFLW")
 
 # Main Fetch Functions ---------------------------------------------------------
 fixture_afl_aflm_2021 <- fetch_fixture(2021)
@@ -138,6 +141,7 @@ team_abbr <- tibble(
 usethis::use_data(stat_abbr, 
                   team_abbr, 
                   afldata_cols,
+                  lineup_aflw_2021_1,
                   results_afltables_all,
                   results_afl_aflw_2020,
                   fixture_footywire_2019,
