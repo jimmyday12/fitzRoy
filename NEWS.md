@@ -29,6 +29,10 @@ The following functions have been soft deprecated in favour of the above `fetch_
 * Deprecated `get_aflw_match_data` - use `fetch_results_afl`
 * Deprecated `get_aflw_player_stats` - use `fetch_player_stats_fryzigg`
 
+# Bug fixes
+* Fixed issue with master branch being renamed to main
+* Fixed issue with `fetch_betting_odds` not working in new season
+
 # fitzRoy 0.3.3
 
 ## Breaking changes
