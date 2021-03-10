@@ -15,13 +15,15 @@ online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  eval = eval_param
+	eval = eval_param,
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
 )
 
 results <- fitzRoy:::results_afltables_all
-fixture <- fitzRoy:::fixture
+fixture <- fitzRoy:::fixture_footywire_2019
 ```
 
 A common example of how one might use `fitzRoy` is for creating a simple [ELO](https://en.wikipedia.org/wiki/Elo_rating_system) rating system. These models are common for tippers that are part of [The Squiggle](https://squiggle.com.au/) and also becoming common in other team sports. This vignette shows a minimum working example to get you started on creating an ELO model from scratch, using `fitzRoy` to get data and [the `elo` package](https://github.com/eheinzen/elo) to do the modelling.
@@ -30,11 +32,10 @@ A common example of how one might use `fitzRoy` is for creating a simple [ELO](h
 First we need to grab a few packages. If you don't have any of these, you'll need to install them. 
 
 ```{r load_packages, eval=eval_param, message=FALSE, warning=FALSE}
+library(fitzRoy)
 library(dplyr)
 library(elo)
 library(lubridate)
-library(fitzRoy)
-
 ```
 
 ## Get data
@@ -42,11 +43,14 @@ Our first job is to now get the relevant data. For the most basic of ELO models,
 
 For this example we will use `results` data from [AFL Tables](afltables.com) and `fixture` data from [Footywire](footywire.com). While this is generally fine, it can cause issues with teams, dates, venues or various other data to be inconsistent. This example will try to show some ways to take that into account. 
 
+
 ```{r load_data, eval=FALSE, include=TRUE}
 # Get data
-results <- fitzRoy::fetch_results_afltables()
-fixture <- fitzRoy::fetch_results_footywire(2019)
+results <- fitzRoy::fetch_results_afltables(1897:2019)
+fixture <- fitzRoy::fetch_fixture_footywire(2019)
 ```
+
+We can make sure our results are from before the fixture we are trying to predict for. 
 
 ```{r load_data2, eval=eval_param}
 results <- results %>% filter(Date < "2019-01-01")

@@ -1,4 +1,4 @@
-#' Fetch Fixture
+#' Return the fixture for a particular round of matches
 #'
 #' @description
 #' `fetch_fixture` returns the Fixture for a given AFL Round. Internally, it calls

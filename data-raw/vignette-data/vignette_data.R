@@ -5,32 +5,47 @@ library(tidyverse)
 library(fitzRoy)
 
 # ELO Ratings Example ----------------------------------------------------------
-results_afltables_all <- fitzRoy::fetch_results_afltables()
+results_afltables_all <- fitzRoy::fetch_results_afltables(1897:2021)
 fixture_footywire_2019 <- fitzRoy::fetch_fixture_footywire(2019)
 
 
 # Main Fetch Functions ---------------------------------------------------------
 fixture_afl_aflm_2021 <- fetch_fixture(2021)
-fixture_afl_aflw_2021 <- fetch_fixture(2021, comp = "AFLW")
 fixture_squiggle_2021 <- fetch_fixture(2021, source = "squiggle")
-results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW") 
-ladder_afl_aflw_2020 <- fetch_ladder(2020, comp = "AFLW") 
+
 
 # Using Fryzigg Stats ---------------------------------------
 stats_fryzigg_2019 <- fitzRoy::fetch_player_stats_fryzigg(2019)
 
 # Womens Stats ---------------------------------------
+fixture_afl_aflw_2021 <- fetch_fixture(2021, comp = "AFLW")
+results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW") 
+ladder_afl_aflw_2020 <- fetch_ladder(2020, comp = "AFLW") 
+stats_afl_aflw_2020 <- fetch_player_stats(2020, comp = "AFLW")
+
 cookie <- get_afl_cookie()
 results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW")
 first10 <- head(results_afl_aflw_2020, 10)
 first10_ids <- first10$Match.Id
-stats_aflw_2020 <- get_aflw_detailed_data(first10_ids)
+detailed_stats_aflw_2020 <- get_aflw_detailed_data(first10_ids)
 
 # Squiggle --------------------------------------------------
+squiggle_teams <- fetch_squiggle_data("teams")
+squiggle_games <- fetch_squiggle_data(query = "games", year = 2020)
 squiggle_sources <- fetch_squiggle_data("sources")
 squiggle_tips <- fetch_squiggle_data("tips")
-squiggle_tips_2018_1 <- fetch_squiggle_data("tips", 
-                                            round = 1, year = 2018)
+squiggle_standings <- fetch_squiggle_data("standings", year = 2020, 
+                                                 round = 1)
+squiggle_pav <- fetch_squiggle_data("pav", 
+                    firstname = "Dustin", 
+                    surname = "Martin", 
+                    year = 2017)
+squiggle_ladder <- fetch_squiggle_data("ladder", 
+                                             year = 2019, 
+                                             round = 15, 
+                                             source = 1)
+
+
 
 
 # mens-stats
@@ -131,10 +146,15 @@ usethis::use_data(stat_abbr,
                   fixture_squiggle_2021,
                   ladder_afl_aflw_2020,
                   stats_fryzigg_2019,
-                  stats_aflw_2020,
+                  stats_afl_aflw_2020,
+                  detailed_stats_aflw_2020,
                   cookie,
                   squiggle_sources,
                   squiggle_tips,
-                  squiggle_tips_2018_1,
+                  squiggle_teams,
+                  squiggle_games,
+                  squiggle_standings,
+                  squiggle_pav,
+                  squiggle_ladder,
   internal = TRUE, overwrite = TRUE
 )

@@ -8,49 +8,34 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
-```{r setup, include = FALSE}
 not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
 online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
 
-
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  eval = eval_param
+	eval = eval_param,
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
 )
-original_options <- options()
-options(tibble.print_min = 5, tibble.print_max = 5)
-requireNamespace("ggplot2", quietly = TRUE)
-dat <- fitzRoy:::fryzigg
+
+library(fitzRoy)
+library(dplyr)
+
+
+dat <- fitzRoy:::stats_fryzigg_2019
 ```
 
 
 ## Overview
 We have included a function to interface with the Fryzigg API. This data set includes advanced AFL stats that are typically not available on existing open data sites such as footywire.com and afltables.com. Many thanks to [Fryzigg](https://github.com/Fryzigg) on providing this API interface. 
 
-
-## Load packages
-First we need to grab a few packages. If you don't have any of these, you'll need to install them. 
-
-```{r load_packages, eval=eval_param, message=FALSE, warning=FALSE}
-library(fitzRoy)
-library(dplyr)
-library(elo)
-library(lubridate)
-```
-
 ### Getting Data
 
-The primary way to access the data is via the `get_fryzigg_stats()` function. This function provides an easy interface to the Fryzigg API. It takes two arguments - `start` and `end` which are the years in which data will be returned (inclusive). They should be provided in YYYY format. 
+The primary way to access the data is via the `fetch_fryzigg_stats()` function. This function provides an easy interface to the Fryzigg API. It takes one arguments - `season` which can be a single year or multiple years.
 
-```{r results, eval=FALSE}
+```{r results, eval=FALSE, include=TRUE}
 dat <- fitzRoy::fetch_player_stats_fryzigg(2019)
 ```
 
@@ -65,7 +50,4 @@ You can see the data includes both player and team data, where each row is a gam
 ```{r results3, eval=eval_param}
 head(dat)
 ```
----
-```{r reset-options, message=FALSE, warning=FALSE, include=FALSE}
-options(original_options)
-```
+
