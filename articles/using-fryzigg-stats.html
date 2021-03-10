@@ -72,9 +72,6 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">AFL Mens Example</a>
-    </li>
-    <li>
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li>
@@ -123,247 +120,136 @@
 <h2 class="hasAnchor">
 <a href="#overview" class="anchor"></a>Overview</h2>
 <p>We have included a function to interface with the Fryzigg API. This data set includes advanced AFL stats that are typically not available on existing open data sites such as footywire.com and afltables.com. Many thanks to <a href="https://github.com/Fryzigg">Fryzigg</a> on providing this API interface.</p>
-</div>
-<div id="load-packages" class="section level2">
-<h2 class="hasAnchor">
-<a href="#load-packages" class="anchor"></a>Load packages</h2>
-<p>First we need to grab a few packages. If you don’t have any of these, you’ll need to install them.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(fitzRoy)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(elo)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(lubridate)</span></code></pre></div>
 <div id="getting-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#getting-data" class="anchor"></a>Getting Data</h3>
-<p>The primary way to access the data is via the <code><a href="../reference/get_fryzigg_stats.html">get_fryzigg_stats()</a></code> function. This function provides an easy interface to the Fryzigg API. It takes two arguments - <code>start</code> and <code>end</code> which are the years in which data will be returned (inclusive). They should be provided in YYYY format.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dat &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://jimmyday12.github.io/fitzRoy//reference/get_fryzigg_stats.html">get_fryzigg_stats</a></span>(<span class="dt">start =</span> <span class="dv">2019</span>, <span class="dt">end =</span> <span class="dv">2019</span>)</span></code></pre></div>
+<p>The primary way to access the data is via the <code>fetch_fryzigg_stats()</code> function. This function provides an easy interface to the Fryzigg API. It takes one arguments - <code>season</code> which can be a single year or multiple years.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>dat &lt;-<span class="st"> </span>fitzRoy<span class="op">::</span><span class="kw"><a href="https://jimmyday12.github.io/fitzRoy//reference/fetch_player_stats.html">fetch_player_stats_fryzigg</a></span>(<span class="dv">2019</span>)</span></code></pre></div>
 <p>We can get a quick view the the fields returned from the <code>fryzigg</code> API.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(dat)</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; Rows: 9,108</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; Columns: 80</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt; $ venue_name                     &lt;chr&gt; "MCG", "MCG", "MCG", "MCG", "MCG", "MC…</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; $ match_id                       &lt;int&gt; 15408, 15408, 15408, 15408, 15408, 154…</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; $ match_home_team                &lt;chr&gt; "Carlton", "Carlton", "Carlton", "Carl…</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; $ match_away_team                &lt;chr&gt; "Richmond", "Richmond", "Richmond", "R…</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; $ match_date                     &lt;chr&gt; "2019-03-21", "2019-03-21", "2019-03-2…</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; $ match_local_time               &lt;chr&gt; "19:25:00", "19:25:00", "19:25:00", "1…</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; $ match_attendance               &lt;int&gt; 85016, 85016, 85016, 85016, 85016, 850…</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; $ match_round                    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1"…</span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; $ match_home_team_goals          &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,…</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; $ match_home_team_behinds        &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10…</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; $ match_home_team_score          &lt;int&gt; 64, 64, 64, 64, 64, 64, 64, 64, 64, 64…</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; $ match_away_team_goals          &lt;int&gt; 14, 14, 14, 14, 14, 14, 14, 14, 14, 14…</span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; $ match_away_team_behinds        &lt;int&gt; 13, 13, 13, 13, 13, 13, 13, 13, 13, 13…</span></span>
-<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; $ match_away_team_score          &lt;int&gt; 97, 97, 97, 97, 97, 97, 97, 97, 97, 97…</span></span>
-<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; $ match_margin                   &lt;int&gt; 33, 33, 33, 33, 33, 33, 33, 33, 33, 33…</span></span>
-<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; $ match_winner                   &lt;chr&gt; "Richmond", "Richmond", "Richmond", "R…</span></span>
-<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; $ match_weather_temp_c           &lt;int&gt; 25, 25, 25, 25, 25, 25, 25, 25, 25, 25…</span></span>
-<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; $ match_weather_type             &lt;chr&gt; "OVERCAST", "OVERCAST", "OVERCAST", "O…</span></span>
-<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; $ player_id                      &lt;int&gt; 12464, 12584, 12341, 12686, 11931, 119…</span></span>
-<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; $ player_first_name              &lt;chr&gt; "Nathan", "Jack", "Kane", "Noah", "Mav…</span></span>
-<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; $ player_last_name               &lt;chr&gt; "Broad", "Graham", "Lambert", "Balta",…</span></span>
-<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; $ player_height_cm               &lt;int&gt; 192, 181, 178, 194, NA, 175, 186, 179,…</span></span>
-<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; $ player_weight_kg               &lt;int&gt; 89, 82, 77, 100, NA, 82, 83, 76, 91, 9…</span></span>
-<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; $ player_is_retired              &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, TRUE, FALS…</span></span>
-<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; $ player_team                    &lt;chr&gt; "Richmond", "Richmond", "Richmond", "R…</span></span>
-<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; $ guernsey_number                &lt;int&gt; 35, 34, 23, 38, 16, 3, 28, 17, 4, 9, 3…</span></span>
-<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; $ kicks                          &lt;int&gt; 4, 16, 12, 5, 9, 10, 9, 10, 18, 10, 16…</span></span>
-<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; $ marks                          &lt;int&gt; 1, 7, 7, 2, 2, 1, 5, 4, 4, 1, 4, 6, 3,…</span></span>
-<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; $ handballs                      &lt;int&gt; 4, 7, 18, 0, 6, 10, 13, 7, 12, 22, 13,…</span></span>
-<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; $ disposals                      &lt;int&gt; 8, 23, 30, 5, 15, 20, 22, 17, 30, 32, …</span></span>
-<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; $ effective_disposals            &lt;int&gt; 6, 16, 23, 4, 14, 14, 15, 13, 19, 26, …</span></span>
-<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt; $ disposal_efficiency_percentage &lt;int&gt; 75, 70, 77, 80, 93, 70, 68, 77, 63, 81…</span></span>
-<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; $ goals                          &lt;int&gt; 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1,…</span></span>
-<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; $ behinds                        &lt;int&gt; 0, 1, 1, 0, 1, 0, 0, 2, 0, 0, 0, 0, 0,…</span></span>
-<span id="cb3-38"><a href="#cb3-38"></a><span class="co">#&gt; $ hitouts                        &lt;int&gt; 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span></span>
-<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#&gt; $ tackles                        &lt;int&gt; 2, 6, 4, 1, 1, 7, 5, 2, 0, 6, 1, 1, 2,…</span></span>
-<span id="cb3-40"><a href="#cb3-40"></a><span class="co">#&gt; $ rebounds                       &lt;int&gt; 2, 0, 1, 0, 2, 0, 0, 0, 1, 2, 4, 5, 5,…</span></span>
-<span id="cb3-41"><a href="#cb3-41"></a><span class="co">#&gt; $ inside_fifties                 &lt;int&gt; 0, 5, 3, 3, 3, 5, 5, 4, 7, 2, 5, 1, 3,…</span></span>
-<span id="cb3-42"><a href="#cb3-42"></a><span class="co">#&gt; $ clearances                     &lt;int&gt; 0, 4, 3, 1, 1, 4, 3, 2, 5, 8, 1, 1, 0,…</span></span>
-<span id="cb3-43"><a href="#cb3-43"></a><span class="co">#&gt; $ clangers                       &lt;int&gt; 2, 6, 4, 5, 1, 2, 7, 0, 7, 3, 1, 1, 4,…</span></span>
-<span id="cb3-44"><a href="#cb3-44"></a><span class="co">#&gt; $ free_kicks_for                 &lt;int&gt; 1, 1, 2, 1, 0, 3, 1, 1, 0, 3, 1, 1, 1,…</span></span>
-<span id="cb3-45"><a href="#cb3-45"></a><span class="co">#&gt; $ free_kicks_against             &lt;int&gt; 0, 1, 0, 3, 0, 0, 2, 0, 3, 1, 0, 0, 1,…</span></span>
-<span id="cb3-46"><a href="#cb3-46"></a><span class="co">#&gt; $ brownlow_votes                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,…</span></span>
-<span id="cb3-47"><a href="#cb3-47"></a><span class="co">#&gt; $ contested_possessions          &lt;int&gt; 3, 9, 10, 2, 4, 9, 10, 6, 15, 22, 6, 4…</span></span>
-<span id="cb3-48"><a href="#cb3-48"></a><span class="co">#&gt; $ uncontested_possessions        &lt;int&gt; 5, 15, 19, 4, 11, 11, 15, 10, 17, 10, …</span></span>
-<span id="cb3-49"><a href="#cb3-49"></a><span class="co">#&gt; $ contested_marks                &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,…</span></span>
-<span id="cb3-50"><a href="#cb3-50"></a><span class="co">#&gt; $ marks_inside_fifty             &lt;int&gt; 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0,…</span></span>
-<span id="cb3-51"><a href="#cb3-51"></a><span class="co">#&gt; $ one_percenters                 &lt;int&gt; 6, 2, 0, 2, 2, 1, 0, 2, 2, 0, 0, 1, 4,…</span></span>
-<span id="cb3-52"><a href="#cb3-52"></a><span class="co">#&gt; $ bounces                        &lt;int&gt; 2, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, 0, 0,…</span></span>
-<span id="cb3-53"><a href="#cb3-53"></a><span class="co">#&gt; $ goal_assists                   &lt;int&gt; 0, 0, 0, 0, 0, 1, 1, 2, 1, 0, 0, 0, 1,…</span></span>
-<span id="cb3-54"><a href="#cb3-54"></a><span class="co">#&gt; $ time_on_ground_percentage      &lt;int&gt; 80, 81, 89, 52, 85, 78, 79, 88, 79, 89…</span></span>
-<span id="cb3-55"><a href="#cb3-55"></a><span class="co">#&gt; $ afl_fantasy_score              &lt;int&gt; 32, 106, 112, 29, 60, 80, 83, 67, 81, …</span></span>
-<span id="cb3-56"><a href="#cb3-56"></a><span class="co">#&gt; $ supercoach_score               &lt;int&gt; 45, 88, 95, 18, 63, 82, 67, 82, 109, 1…</span></span>
-<span id="cb3-57"><a href="#cb3-57"></a><span class="co">#&gt; $ centre_clearances              &lt;int&gt; 0, 2, 0, 1, 0, 1, 2, 1, 2, 5, 0, 0, 0,…</span></span>
-<span id="cb3-58"><a href="#cb3-58"></a><span class="co">#&gt; $ stoppage_clearances            &lt;int&gt; 0, 2, 3, 0, 1, 3, 1, 1, 3, 3, 1, 1, 0,…</span></span>
-<span id="cb3-59"><a href="#cb3-59"></a><span class="co">#&gt; $ score_involvements             &lt;int&gt; 0, 5, 9, 2, 4, 7, 6, 9, 11, 5, 7, 2, 8…</span></span>
-<span id="cb3-60"><a href="#cb3-60"></a><span class="co">#&gt; $ metres_gained                  &lt;int&gt; 187, 475, 412, 223, 313, 342, 328, 317…</span></span>
-<span id="cb3-61"><a href="#cb3-61"></a><span class="co">#&gt; $ turnovers                      &lt;int&gt; 1, 5, 4, 2, 3, 3, 4, 1, 8, 3, 5, 2, 4,…</span></span>
-<span id="cb3-62"><a href="#cb3-62"></a><span class="co">#&gt; $ intercepts                     &lt;int&gt; 3, 3, 4, 1, 1, 3, 0, 1, 2, 4, 3, 6, 6,…</span></span>
-<span id="cb3-63"><a href="#cb3-63"></a><span class="co">#&gt; $ tackles_inside_fifty           &lt;int&gt; 0, 1, 1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 0,…</span></span>
-<span id="cb3-64"><a href="#cb3-64"></a><span class="co">#&gt; $ contest_def_losses             &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span></span>
-<span id="cb3-65"><a href="#cb3-65"></a><span class="co">#&gt; $ contest_def_one_on_ones        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,…</span></span>
-<span id="cb3-66"><a href="#cb3-66"></a><span class="co">#&gt; $ contest_off_one_on_ones        &lt;int&gt; 0, 0, 0, 2, 0, 0, 0, 2, 3, 2, 0, 0, 0,…</span></span>
-<span id="cb3-67"><a href="#cb3-67"></a><span class="co">#&gt; $ contest_off_wins               &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 2, 1, 0, 0, 0,…</span></span>
-<span id="cb3-68"><a href="#cb3-68"></a><span class="co">#&gt; $ def_half_pressure_acts         &lt;int&gt; 7, 13, 10, 4, 2, 13, 3, 5, 3, 11, 5, 6…</span></span>
-<span id="cb3-69"><a href="#cb3-69"></a><span class="co">#&gt; $ effective_kicks                &lt;int&gt; 3, 12, 7, 4, 8, 7, 5, 7, 10, 6, 9, 9, …</span></span>
-<span id="cb3-70"><a href="#cb3-70"></a><span class="co">#&gt; $ f50_ground_ball_gets           &lt;int&gt; 0, 1, 0, 0, 0, 2, 1, 1, 1, 1, 2, 0, 0,…</span></span>
-<span id="cb3-71"><a href="#cb3-71"></a><span class="co">#&gt; $ ground_ball_gets               &lt;int&gt; 2, 6, 7, 0, 2, 6, 6, 5, 9, 16, 5, 4, 5…</span></span>
-<span id="cb3-72"><a href="#cb3-72"></a><span class="co">#&gt; $ hitouts_to_advantage           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span></span>
-<span id="cb3-73"><a href="#cb3-73"></a><span class="co">#&gt; $ hitout_win_percentage          &lt;dbl&gt; 0.0, 0.0, 0.0, 31.6, 0.0, 0.0, 0.0, 0.…</span></span>
-<span id="cb3-74"><a href="#cb3-74"></a><span class="co">#&gt; $ intercept_marks                &lt;int&gt; 0, 1, 1, 1, 0, 0, 0, 0, 1, 0, 0, 2, 0,…</span></span>
-<span id="cb3-75"><a href="#cb3-75"></a><span class="co">#&gt; $ marks_on_lead                  &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0,…</span></span>
-<span id="cb3-76"><a href="#cb3-76"></a><span class="co">#&gt; $ pressure_acts                  &lt;int&gt; 10, 23, 28, 11, 18, 26, 16, 11, 6, 21,…</span></span>
-<span id="cb3-77"><a href="#cb3-77"></a><span class="co">#&gt; $ rating_points                  &lt;dbl&gt; 6.1, 8.7, 11.5, 5.1, 11.8, 14.5, 4.7, …</span></span>
-<span id="cb3-78"><a href="#cb3-78"></a><span class="co">#&gt; $ ruck_contests                  &lt;int&gt; 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0…</span></span>
-<span id="cb3-79"><a href="#cb3-79"></a><span class="co">#&gt; $ score_launches                 &lt;int&gt; 0, 0, 0, 1, 0, 1, 1, 2, 1, 2, 0, 1, 2,…</span></span>
-<span id="cb3-80"><a href="#cb3-80"></a><span class="co">#&gt; $ shots_at_goal                  &lt;int&gt; 0, 1, 2, 2, 2, 0, 1, 2, 0, 0, 1, 0, 1,…</span></span>
-<span id="cb3-81"><a href="#cb3-81"></a><span class="co">#&gt; $ spoils                         &lt;int&gt; 6, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 3,…</span></span>
-<span id="cb3-82"><a href="#cb3-82"></a><span class="co">#&gt; $ subbed                         &lt;chr&gt; "Not Subbed", "Not Subbed", "Not Subbe…</span></span>
-<span id="cb3-83"><a href="#cb3-83"></a><span class="co">#&gt; $ player_position                &lt;chr&gt; "INT", "INT", "R", "INT", "INT", "RR",…</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(dat)</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; Rows: 9,108</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt; Columns: 81</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; $ venue_name                     &lt;chr&gt; "MCG", "MCG", "MCG", "MCG", "MCG", "MCG…</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt; $ match_id                       &lt;int&gt; 15408, 15408, 15408, 15408, 15408, 1540…</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt; $ match_home_team                &lt;chr&gt; "Carlton", "Carlton", "Carlton", "Carlt…</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt; $ match_away_team                &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt; $ match_date                     &lt;chr&gt; "2019-03-21", "2019-03-21", "2019-03-21…</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt; $ match_local_time               &lt;chr&gt; "19:25:00", "19:25:00", "19:25:00", "19…</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt; $ match_attendance               &lt;int&gt; 85016, 85016, 85016, 85016, 85016, 8501…</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt; $ match_round                    &lt;chr&gt; "1", "1", "1", "1", "1", "1", "1", "1",…</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt; $ match_home_team_goals          &lt;int&gt; 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, …</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt; $ match_home_team_behinds        &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,…</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; $ match_home_team_score          &lt;int&gt; 64, 64, 64, 64, 64, 64, 64, 64, 64, 64,…</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; $ match_away_team_goals          &lt;int&gt; 14, 14, 14, 14, 14, 14, 14, 14, 14, 14,…</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; $ match_away_team_behinds        &lt;int&gt; 13, 13, 13, 13, 13, 13, 13, 13, 13, 13,…</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; $ match_away_team_score          &lt;int&gt; 97, 97, 97, 97, 97, 97, 97, 97, 97, 97,…</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; $ match_margin                   &lt;int&gt; 33, 33, 33, 33, 33, 33, 33, 33, 33, 33,…</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; $ match_winner                   &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; $ match_weather_temp_c           &lt;int&gt; 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,…</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; $ match_weather_type             &lt;chr&gt; "OVERCAST", "OVERCAST", "OVERCAST", "OV…</span></span>
+<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; $ player_id                      &lt;int&gt; 12464, 12686, 12584, 11931, 12341, 1248…</span></span>
+<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; $ player_first_name              &lt;chr&gt; "Nathan", "Noah", "Jack", "Maverick", "…</span></span>
+<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; $ player_last_name               &lt;chr&gt; "Broad", "Balta", "Graham", "Weller", "…</span></span>
+<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt; $ player_height_cm               &lt;int&gt; 192, 194, 181, NA, 178, 186, 175, 179, …</span></span>
+<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#&gt; $ player_weight_kg               &lt;int&gt; 89, 100, 82, NA, 77, 83, 82, 76, 95, 83…</span></span>
+<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt; $ player_is_retired              &lt;lgl&gt; FALSE, FALSE, FALSE, TRUE, FALSE, FALSE…</span></span>
+<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt; $ player_team                    &lt;chr&gt; "Richmond", "Richmond", "Richmond", "Ri…</span></span>
+<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; $ guernsey_number                &lt;int&gt; 35, 38, 34, 16, 23, 28, 3, 17, 30, 14, …</span></span>
+<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt; $ kicks                          &lt;int&gt; 4, 5, 16, 9, 12, 9, 10, 10, 10, 16, 18,…</span></span>
+<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; $ marks                          &lt;int&gt; 1, 2, 7, 2, 7, 5, 1, 4, 1, 6, 4, 6, 2, …</span></span>
+<span id="cb2-32"><a href="#cb2-32"></a><span class="co">#&gt; $ handballs                      &lt;int&gt; 4, 0, 7, 6, 18, 13, 10, 7, 2, 8, 12, 11…</span></span>
+<span id="cb2-33"><a href="#cb2-33"></a><span class="co">#&gt; $ disposals                      &lt;int&gt; 8, 5, 23, 15, 30, 22, 20, 17, 12, 24, 3…</span></span>
+<span id="cb2-34"><a href="#cb2-34"></a><span class="co">#&gt; $ effective_disposals            &lt;int&gt; 6, 4, 16, 14, 23, 15, 14, 13, 6, 22, 19…</span></span>
+<span id="cb2-35"><a href="#cb2-35"></a><span class="co">#&gt; $ disposal_efficiency_percentage &lt;int&gt; 75, 80, 70, 93, 77, 68, 70, 77, 50, 92,…</span></span>
+<span id="cb2-36"><a href="#cb2-36"></a><span class="co">#&gt; $ goals                          &lt;int&gt; 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, …</span></span>
+<span id="cb2-37"><a href="#cb2-37"></a><span class="co">#&gt; $ behinds                        &lt;int&gt; 0, 0, 1, 1, 1, 0, 0, 2, 0, 0, 0, 1, 0, …</span></span>
+<span id="cb2-38"><a href="#cb2-38"></a><span class="co">#&gt; $ hitouts                        &lt;int&gt; 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span id="cb2-39"><a href="#cb2-39"></a><span class="co">#&gt; $ tackles                        &lt;int&gt; 2, 1, 6, 1, 4, 5, 7, 2, 1, 4, 0, 4, 1, …</span></span>
+<span id="cb2-40"><a href="#cb2-40"></a><span class="co">#&gt; $ rebounds                       &lt;int&gt; 2, 0, 0, 2, 1, 0, 0, 0, 0, 8, 1, 0, 0, …</span></span>
+<span id="cb2-41"><a href="#cb2-41"></a><span class="co">#&gt; $ inside_fifties                 &lt;int&gt; 0, 3, 5, 3, 3, 5, 5, 4, 2, 3, 7, 6, 0, …</span></span>
+<span id="cb2-42"><a href="#cb2-42"></a><span class="co">#&gt; $ clearances                     &lt;int&gt; 0, 1, 4, 1, 3, 3, 4, 2, 0, 1, 5, 6, 0, …</span></span>
+<span id="cb2-43"><a href="#cb2-43"></a><span class="co">#&gt; $ clangers                       &lt;int&gt; 2, 5, 6, 1, 4, 7, 2, 0, 4, 2, 7, 5, 1, …</span></span>
+<span id="cb2-44"><a href="#cb2-44"></a><span class="co">#&gt; $ free_kicks_for                 &lt;int&gt; 1, 1, 1, 0, 2, 1, 3, 1, 0, 1, 0, 2, 1, …</span></span>
+<span id="cb2-45"><a href="#cb2-45"></a><span class="co">#&gt; $ free_kicks_against             &lt;int&gt; 0, 3, 1, 0, 0, 2, 0, 0, 2, 0, 3, 4, 1, …</span></span>
+<span id="cb2-46"><a href="#cb2-46"></a><span class="co">#&gt; $ brownlow_votes                 &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, …</span></span>
+<span id="cb2-47"><a href="#cb2-47"></a><span class="co">#&gt; $ contested_possessions          &lt;int&gt; 3, 2, 9, 4, 10, 10, 9, 6, 6, 4, 15, 14,…</span></span>
+<span id="cb2-48"><a href="#cb2-48"></a><span class="co">#&gt; $ uncontested_possessions        &lt;int&gt; 5, 4, 15, 11, 19, 15, 11, 10, 5, 14, 17…</span></span>
+<span id="cb2-49"><a href="#cb2-49"></a><span class="co">#&gt; $ contested_marks                &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, …</span></span>
+<span id="cb2-50"><a href="#cb2-50"></a><span class="co">#&gt; $ marks_inside_fifty             &lt;int&gt; 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 1, …</span></span>
+<span id="cb2-51"><a href="#cb2-51"></a><span class="co">#&gt; $ one_percenters                 &lt;int&gt; 6, 2, 2, 2, 0, 0, 1, 2, 0, 2, 2, 2, 0, …</span></span>
+<span id="cb2-52"><a href="#cb2-52"></a><span class="co">#&gt; $ bounces                        &lt;int&gt; 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 0, …</span></span>
+<span id="cb2-53"><a href="#cb2-53"></a><span class="co">#&gt; $ goal_assists                   &lt;int&gt; 0, 0, 0, 0, 0, 1, 1, 2, 0, 1, 1, 0, 0, …</span></span>
+<span id="cb2-54"><a href="#cb2-54"></a><span class="co">#&gt; $ time_on_ground_percentage      &lt;int&gt; 80, 52, 81, 85, 89, 79, 78, 88, 94, 83,…</span></span>
+<span id="cb2-55"><a href="#cb2-55"></a><span class="co">#&gt; $ afl_fantasy_score              &lt;int&gt; 32, 29, 106, 60, 112, 83, 80, 67, 41, 1…</span></span>
+<span id="cb2-56"><a href="#cb2-56"></a><span class="co">#&gt; $ supercoach_score               &lt;int&gt; 45, 18, 88, 63, 95, 67, 82, 82, 44, 112…</span></span>
+<span id="cb2-57"><a href="#cb2-57"></a><span class="co">#&gt; $ centre_clearances              &lt;int&gt; 0, 1, 2, 0, 0, 2, 1, 1, 0, 0, 2, 1, 0, …</span></span>
+<span id="cb2-58"><a href="#cb2-58"></a><span class="co">#&gt; $ stoppage_clearances            &lt;int&gt; 0, 0, 2, 1, 3, 1, 3, 1, 0, 1, 3, 5, 0, …</span></span>
+<span id="cb2-59"><a href="#cb2-59"></a><span class="co">#&gt; $ score_involvements             &lt;int&gt; 0, 2, 5, 4, 9, 6, 7, 9, 4, 5, 11, 8, 2,…</span></span>
+<span id="cb2-60"><a href="#cb2-60"></a><span class="co">#&gt; $ metres_gained                  &lt;int&gt; 187, 223, 475, 313, 412, 328, 342, 317,…</span></span>
+<span id="cb2-61"><a href="#cb2-61"></a><span class="co">#&gt; $ turnovers                      &lt;int&gt; 1, 2, 5, 3, 4, 4, 3, 1, 3, 4, 8, 6, 2, …</span></span>
+<span id="cb2-62"><a href="#cb2-62"></a><span class="co">#&gt; $ intercepts                     &lt;int&gt; 3, 1, 3, 1, 4, 0, 3, 1, 0, 8, 2, 5, 1, …</span></span>
+<span id="cb2-63"><a href="#cb2-63"></a><span class="co">#&gt; $ tackles_inside_fifty           &lt;int&gt; 0, 0, 1, 0, 1, 2, 0, 1, 0, 0, 0, 0, 1, …</span></span>
+<span id="cb2-64"><a href="#cb2-64"></a><span class="co">#&gt; $ contest_def_losses             &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span id="cb2-65"><a href="#cb2-65"></a><span class="co">#&gt; $ contest_def_one_on_ones        &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, …</span></span>
+<span id="cb2-66"><a href="#cb2-66"></a><span class="co">#&gt; $ contest_off_one_on_ones        &lt;int&gt; 0, 2, 0, 0, 0, 0, 0, 2, 2, 0, 3, 0, 2, …</span></span>
+<span id="cb2-67"><a href="#cb2-67"></a><span class="co">#&gt; $ contest_off_wins               &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 2, 0, 0, …</span></span>
+<span id="cb2-68"><a href="#cb2-68"></a><span class="co">#&gt; $ def_half_pressure_acts         &lt;int&gt; 7, 4, 13, 2, 10, 3, 13, 5, 0, 12, 3, 7,…</span></span>
+<span id="cb2-69"><a href="#cb2-69"></a><span class="co">#&gt; $ effective_kicks                &lt;int&gt; 3, 4, 12, 8, 7, 5, 7, 7, 5, 14, 10, 9, …</span></span>
+<span id="cb2-70"><a href="#cb2-70"></a><span class="co">#&gt; $ f50_ground_ball_gets           &lt;int&gt; 0, 0, 1, 0, 0, 1, 2, 1, 2, 0, 1, 0, 0, …</span></span>
+<span id="cb2-71"><a href="#cb2-71"></a><span class="co">#&gt; $ ground_ball_gets               &lt;int&gt; 2, 0, 6, 2, 7, 6, 6, 5, 6, 3, 9, 11, 0,…</span></span>
+<span id="cb2-72"><a href="#cb2-72"></a><span class="co">#&gt; $ hitouts_to_advantage           &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, …</span></span>
+<span id="cb2-73"><a href="#cb2-73"></a><span class="co">#&gt; $ hitout_win_percentage          &lt;dbl&gt; 0.0, 31.6, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0…</span></span>
+<span id="cb2-74"><a href="#cb2-74"></a><span class="co">#&gt; $ intercept_marks                &lt;int&gt; 0, 1, 1, 0, 1, 0, 0, 0, 0, 1, 1, 1, 0, …</span></span>
+<span id="cb2-75"><a href="#cb2-75"></a><span class="co">#&gt; $ marks_on_lead                  &lt;int&gt; 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, …</span></span>
+<span id="cb2-76"><a href="#cb2-76"></a><span class="co">#&gt; $ pressure_acts                  &lt;int&gt; 10, 11, 23, 18, 28, 16, 26, 11, 7, 17, …</span></span>
+<span id="cb2-77"><a href="#cb2-77"></a><span class="co">#&gt; $ rating_points                  &lt;dbl&gt; 6.1, 5.1, 8.7, 11.8, 11.5, 4.7, 14.5, 1…</span></span>
+<span id="cb2-78"><a href="#cb2-78"></a><span class="co">#&gt; $ ruck_contests                  &lt;int&gt; 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,…</span></span>
+<span id="cb2-79"><a href="#cb2-79"></a><span class="co">#&gt; $ score_launches                 &lt;int&gt; 0, 1, 0, 0, 0, 1, 1, 2, 0, 2, 1, 4, 1, …</span></span>
+<span id="cb2-80"><a href="#cb2-80"></a><span class="co">#&gt; $ shots_at_goal                  &lt;int&gt; 0, 2, 1, 2, 2, 1, 0, 2, 2, 0, 0, 1, 2, …</span></span>
+<span id="cb2-81"><a href="#cb2-81"></a><span class="co">#&gt; $ spoils                         &lt;int&gt; 6, 0, 0, 0, 0, 0, 0, 0, 0, 2, 1, 2, 0, …</span></span>
+<span id="cb2-82"><a href="#cb2-82"></a><span class="co">#&gt; $ subbed                         &lt;chr&gt; "Not Subbed", "Not Subbed", "Not Subbed…</span></span>
+<span id="cb2-83"><a href="#cb2-83"></a><span class="co">#&gt; $ player_position                &lt;chr&gt; "INT", "INT", "INT", "INT", "R", "HFFL"…</span></span>
+<span id="cb2-84"><a href="#cb2-84"></a><span class="co">#&gt; $ date                           &lt;date&gt; 2019-03-21, 2019-03-21, 2019-03-21, 20…</span></span></code></pre></div>
 <p>You can see the data includes both player and team data, where each row is a game by a player.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dat)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt;        venue_name match_id match_home_team match_away_team match_date</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; 620384        MCG    15408         Carlton        Richmond 2019-03-21</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; 620385        MCG    15408         Carlton        Richmond 2019-03-21</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; 620386        MCG    15408         Carlton        Richmond 2019-03-21</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; 620387        MCG    15408         Carlton        Richmond 2019-03-21</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 620388        MCG    15408         Carlton        Richmond 2019-03-21</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 620389        MCG    15408         Carlton        Richmond 2019-03-21</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt;        match_local_time match_attendance match_round match_home_team_goals</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 620384         19:25:00            85016           1                     9</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 620385         19:25:00            85016           1                     9</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; 620386         19:25:00            85016           1                     9</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; 620387         19:25:00            85016           1                     9</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; 620388         19:25:00            85016           1                     9</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; 620389         19:25:00            85016           1                     9</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt;        match_home_team_behinds match_home_team_score match_away_team_goals</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; 620384                      10                    64                    14</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; 620385                      10                    64                    14</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; 620386                      10                    64                    14</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; 620387                      10                    64                    14</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; 620388                      10                    64                    14</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; 620389                      10                    64                    14</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt;        match_away_team_behinds match_away_team_score match_margin match_winner</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; 620384                      13                    97           33     Richmond</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; 620385                      13                    97           33     Richmond</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; 620386                      13                    97           33     Richmond</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; 620387                      13                    97           33     Richmond</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt; 620388                      13                    97           33     Richmond</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; 620389                      13                    97           33     Richmond</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt;        match_weather_temp_c match_weather_type player_id player_first_name</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; 620384                   25           OVERCAST     12464            Nathan</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt; 620385                   25           OVERCAST     12584              Jack</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt; 620386                   25           OVERCAST     12341              Kane</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; 620387                   25           OVERCAST     12686              Noah</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; 620388                   25           OVERCAST     11931          Maverick</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; 620389                   25           OVERCAST     11921              Dion</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt;        player_last_name player_height_cm player_weight_kg player_is_retired</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; 620384            Broad              192               89             FALSE</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt; 620385           Graham              181               82             FALSE</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt; 620386          Lambert              178               77             FALSE</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt; 620387            Balta              194              100             FALSE</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt; 620388           Weller               NA               NA              TRUE</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt; 620389          Prestia              175               82             FALSE</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a><span class="co">#&gt;        player_team guernsey_number kicks marks handballs disposals</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="co">#&gt; 620384    Richmond              35     4     1         4         8</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a><span class="co">#&gt; 620385    Richmond              34    16     7         7        23</span></span>
-<span id="cb4-47"><a href="#cb4-47"></a><span class="co">#&gt; 620386    Richmond              23    12     7        18        30</span></span>
-<span id="cb4-48"><a href="#cb4-48"></a><span class="co">#&gt; 620387    Richmond              38     5     2         0         5</span></span>
-<span id="cb4-49"><a href="#cb4-49"></a><span class="co">#&gt; 620388    Richmond              16     9     2         6        15</span></span>
-<span id="cb4-50"><a href="#cb4-50"></a><span class="co">#&gt; 620389    Richmond               3    10     1        10        20</span></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="co">#&gt;        effective_disposals disposal_efficiency_percentage goals behinds hitouts</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a><span class="co">#&gt; 620384                   6                             75     0       0       0</span></span>
-<span id="cb4-53"><a href="#cb4-53"></a><span class="co">#&gt; 620385                  16                             70     0       1       0</span></span>
-<span id="cb4-54"><a href="#cb4-54"></a><span class="co">#&gt; 620386                  23                             77     0       1       0</span></span>
-<span id="cb4-55"><a href="#cb4-55"></a><span class="co">#&gt; 620387                   4                             80     1       0       6</span></span>
-<span id="cb4-56"><a href="#cb4-56"></a><span class="co">#&gt; 620388                  14                             93     1       1       0</span></span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="co">#&gt; 620389                  14                             70     0       0       0</span></span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="co">#&gt;        tackles rebounds inside_fifties clearances clangers free_kicks_for</span></span>
-<span id="cb4-59"><a href="#cb4-59"></a><span class="co">#&gt; 620384       2        2              0          0        2              1</span></span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="co">#&gt; 620385       6        0              5          4        6              1</span></span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="co">#&gt; 620386       4        1              3          3        4              2</span></span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="co">#&gt; 620387       1        0              3          1        5              1</span></span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="co">#&gt; 620388       1        2              3          1        1              0</span></span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="co">#&gt; 620389       7        0              5          4        2              3</span></span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="co">#&gt;        free_kicks_against brownlow_votes contested_possessions</span></span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="co">#&gt; 620384                  0              0                     3</span></span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="co">#&gt; 620385                  1              0                     9</span></span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="co">#&gt; 620386                  0              0                    10</span></span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="co">#&gt; 620387                  3              0                     2</span></span>
-<span id="cb4-70"><a href="#cb4-70"></a><span class="co">#&gt; 620388                  0              0                     4</span></span>
-<span id="cb4-71"><a href="#cb4-71"></a><span class="co">#&gt; 620389                  0              0                     9</span></span>
-<span id="cb4-72"><a href="#cb4-72"></a><span class="co">#&gt;        uncontested_possessions contested_marks marks_inside_fifty</span></span>
-<span id="cb4-73"><a href="#cb4-73"></a><span class="co">#&gt; 620384                       5               0                  0</span></span>
-<span id="cb4-74"><a href="#cb4-74"></a><span class="co">#&gt; 620385                      15               0                  1</span></span>
-<span id="cb4-75"><a href="#cb4-75"></a><span class="co">#&gt; 620386                      19               0                  1</span></span>
-<span id="cb4-76"><a href="#cb4-76"></a><span class="co">#&gt; 620387                       4               0                  0</span></span>
-<span id="cb4-77"><a href="#cb4-77"></a><span class="co">#&gt; 620388                      11               0                  0</span></span>
-<span id="cb4-78"><a href="#cb4-78"></a><span class="co">#&gt; 620389                      11               0                  0</span></span>
-<span id="cb4-79"><a href="#cb4-79"></a><span class="co">#&gt;        one_percenters bounces goal_assists time_on_ground_percentage</span></span>
-<span id="cb4-80"><a href="#cb4-80"></a><span class="co">#&gt; 620384              6       2            0                        80</span></span>
-<span id="cb4-81"><a href="#cb4-81"></a><span class="co">#&gt; 620385              2       0            0                        81</span></span>
-<span id="cb4-82"><a href="#cb4-82"></a><span class="co">#&gt; 620386              0       0            0                        89</span></span>
-<span id="cb4-83"><a href="#cb4-83"></a><span class="co">#&gt; 620387              2       0            0                        52</span></span>
-<span id="cb4-84"><a href="#cb4-84"></a><span class="co">#&gt; 620388              2       0            0                        85</span></span>
-<span id="cb4-85"><a href="#cb4-85"></a><span class="co">#&gt; 620389              1       0            1                        78</span></span>
-<span id="cb4-86"><a href="#cb4-86"></a><span class="co">#&gt;        afl_fantasy_score supercoach_score centre_clearances stoppage_clearances</span></span>
-<span id="cb4-87"><a href="#cb4-87"></a><span class="co">#&gt; 620384                32               45                 0                   0</span></span>
-<span id="cb4-88"><a href="#cb4-88"></a><span class="co">#&gt; 620385               106               88                 2                   2</span></span>
-<span id="cb4-89"><a href="#cb4-89"></a><span class="co">#&gt; 620386               112               95                 0                   3</span></span>
-<span id="cb4-90"><a href="#cb4-90"></a><span class="co">#&gt; 620387                29               18                 1                   0</span></span>
-<span id="cb4-91"><a href="#cb4-91"></a><span class="co">#&gt; 620388                60               63                 0                   1</span></span>
-<span id="cb4-92"><a href="#cb4-92"></a><span class="co">#&gt; 620389                80               82                 1                   3</span></span>
-<span id="cb4-93"><a href="#cb4-93"></a><span class="co">#&gt;        score_involvements metres_gained turnovers intercepts</span></span>
-<span id="cb4-94"><a href="#cb4-94"></a><span class="co">#&gt; 620384                  0           187         1          3</span></span>
-<span id="cb4-95"><a href="#cb4-95"></a><span class="co">#&gt; 620385                  5           475         5          3</span></span>
-<span id="cb4-96"><a href="#cb4-96"></a><span class="co">#&gt; 620386                  9           412         4          4</span></span>
-<span id="cb4-97"><a href="#cb4-97"></a><span class="co">#&gt; 620387                  2           223         2          1</span></span>
-<span id="cb4-98"><a href="#cb4-98"></a><span class="co">#&gt; 620388                  4           313         3          1</span></span>
-<span id="cb4-99"><a href="#cb4-99"></a><span class="co">#&gt; 620389                  7           342         3          3</span></span>
-<span id="cb4-100"><a href="#cb4-100"></a><span class="co">#&gt;        tackles_inside_fifty contest_def_losses contest_def_one_on_ones</span></span>
-<span id="cb4-101"><a href="#cb4-101"></a><span class="co">#&gt; 620384                    0                  0                       0</span></span>
-<span id="cb4-102"><a href="#cb4-102"></a><span class="co">#&gt; 620385                    1                  0                       0</span></span>
-<span id="cb4-103"><a href="#cb4-103"></a><span class="co">#&gt; 620386                    1                  0                       0</span></span>
-<span id="cb4-104"><a href="#cb4-104"></a><span class="co">#&gt; 620387                    0                  0                       0</span></span>
-<span id="cb4-105"><a href="#cb4-105"></a><span class="co">#&gt; 620388                    0                  0                       0</span></span>
-<span id="cb4-106"><a href="#cb4-106"></a><span class="co">#&gt; 620389                    0                  0                       0</span></span>
-<span id="cb4-107"><a href="#cb4-107"></a><span class="co">#&gt;        contest_off_one_on_ones contest_off_wins def_half_pressure_acts</span></span>
-<span id="cb4-108"><a href="#cb4-108"></a><span class="co">#&gt; 620384                       0                0                      7</span></span>
-<span id="cb4-109"><a href="#cb4-109"></a><span class="co">#&gt; 620385                       0                0                     13</span></span>
-<span id="cb4-110"><a href="#cb4-110"></a><span class="co">#&gt; 620386                       0                0                     10</span></span>
-<span id="cb4-111"><a href="#cb4-111"></a><span class="co">#&gt; 620387                       2                0                      4</span></span>
-<span id="cb4-112"><a href="#cb4-112"></a><span class="co">#&gt; 620388                       0                0                      2</span></span>
-<span id="cb4-113"><a href="#cb4-113"></a><span class="co">#&gt; 620389                       0                0                     13</span></span>
-<span id="cb4-114"><a href="#cb4-114"></a><span class="co">#&gt;        effective_kicks f50_ground_ball_gets ground_ball_gets</span></span>
-<span id="cb4-115"><a href="#cb4-115"></a><span class="co">#&gt; 620384               3                    0                2</span></span>
-<span id="cb4-116"><a href="#cb4-116"></a><span class="co">#&gt; 620385              12                    1                6</span></span>
-<span id="cb4-117"><a href="#cb4-117"></a><span class="co">#&gt; 620386               7                    0                7</span></span>
-<span id="cb4-118"><a href="#cb4-118"></a><span class="co">#&gt; 620387               4                    0                0</span></span>
-<span id="cb4-119"><a href="#cb4-119"></a><span class="co">#&gt; 620388               8                    0                2</span></span>
-<span id="cb4-120"><a href="#cb4-120"></a><span class="co">#&gt; 620389               7                    2                6</span></span>
-<span id="cb4-121"><a href="#cb4-121"></a><span class="co">#&gt;        hitouts_to_advantage hitout_win_percentage intercept_marks marks_on_lead</span></span>
-<span id="cb4-122"><a href="#cb4-122"></a><span class="co">#&gt; 620384                    0                   0.0               0             0</span></span>
-<span id="cb4-123"><a href="#cb4-123"></a><span class="co">#&gt; 620385                    0                   0.0               1             0</span></span>
-<span id="cb4-124"><a href="#cb4-124"></a><span class="co">#&gt; 620386                    0                   0.0               1             0</span></span>
-<span id="cb4-125"><a href="#cb4-125"></a><span class="co">#&gt; 620387                    0                  31.6               1             0</span></span>
-<span id="cb4-126"><a href="#cb4-126"></a><span class="co">#&gt; 620388                    0                   0.0               0             0</span></span>
-<span id="cb4-127"><a href="#cb4-127"></a><span class="co">#&gt; 620389                    0                   0.0               0             0</span></span>
-<span id="cb4-128"><a href="#cb4-128"></a><span class="co">#&gt;        pressure_acts rating_points ruck_contests score_launches shots_at_goal</span></span>
-<span id="cb4-129"><a href="#cb4-129"></a><span class="co">#&gt; 620384            10           6.1             0              0             0</span></span>
-<span id="cb4-130"><a href="#cb4-130"></a><span class="co">#&gt; 620385            23           8.7             0              0             1</span></span>
-<span id="cb4-131"><a href="#cb4-131"></a><span class="co">#&gt; 620386            28          11.5             0              0             2</span></span>
-<span id="cb4-132"><a href="#cb4-132"></a><span class="co">#&gt; 620387            11           5.1            19              1             2</span></span>
-<span id="cb4-133"><a href="#cb4-133"></a><span class="co">#&gt; 620388            18          11.8             0              0             2</span></span>
-<span id="cb4-134"><a href="#cb4-134"></a><span class="co">#&gt; 620389            26          14.5             0              1             0</span></span>
-<span id="cb4-135"><a href="#cb4-135"></a><span class="co">#&gt;        spoils     subbed player_position</span></span>
-<span id="cb4-136"><a href="#cb4-136"></a><span class="co">#&gt; 620384      6 Not Subbed             INT</span></span>
-<span id="cb4-137"><a href="#cb4-137"></a><span class="co">#&gt; 620385      0 Not Subbed             INT</span></span>
-<span id="cb4-138"><a href="#cb4-138"></a><span class="co">#&gt; 620386      0 Not Subbed               R</span></span>
-<span id="cb4-139"><a href="#cb4-139"></a><span class="co">#&gt; 620387      0 Not Subbed             INT</span></span>
-<span id="cb4-140"><a href="#cb4-140"></a><span class="co">#&gt; 620388      0 Not Subbed             INT</span></span>
-<span id="cb4-141"><a href="#cb4-141"></a><span class="co">#&gt; 620389      0 Not Subbed              RR</span></span></code></pre></div>
-<hr>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dat)</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co">#&gt; # A tibble: 6 x 81</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt;   venue_name match_id match_home_team match_away_team match_date</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;   &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;     </span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt; 1 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt; 2 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt; 3 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt; 4 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt; 5 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt; 6 MCG           15408 Carlton         Richmond        2019-03-21</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt; # … with 76 more variables: match_local_time &lt;chr&gt;, match_attendance &lt;int&gt;,</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt; #   match_round &lt;chr&gt;, match_home_team_goals &lt;int&gt;,</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt; #   match_home_team_behinds &lt;int&gt;, match_home_team_score &lt;int&gt;,</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt; #   match_away_team_goals &lt;int&gt;, match_away_team_behinds &lt;int&gt;,</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; #   match_away_team_score &lt;int&gt;, match_margin &lt;int&gt;, match_winner &lt;chr&gt;,</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; #   match_weather_temp_c &lt;int&gt;, match_weather_type &lt;chr&gt;, player_id &lt;int&gt;,</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="co">#&gt; #   player_first_name &lt;chr&gt;, player_last_name &lt;chr&gt;, player_height_cm &lt;int&gt;,</span></span>
+<span id="cb3-18"><a href="#cb3-18"></a><span class="co">#&gt; #   player_weight_kg &lt;int&gt;, player_is_retired &lt;lgl&gt;, player_team &lt;chr&gt;,</span></span>
+<span id="cb3-19"><a href="#cb3-19"></a><span class="co">#&gt; #   guernsey_number &lt;int&gt;, kicks &lt;int&gt;, marks &lt;int&gt;, handballs &lt;int&gt;,</span></span>
+<span id="cb3-20"><a href="#cb3-20"></a><span class="co">#&gt; #   disposals &lt;int&gt;, effective_disposals &lt;int&gt;,</span></span>
+<span id="cb3-21"><a href="#cb3-21"></a><span class="co">#&gt; #   disposal_efficiency_percentage &lt;int&gt;, goals &lt;int&gt;, behinds &lt;int&gt;,</span></span>
+<span id="cb3-22"><a href="#cb3-22"></a><span class="co">#&gt; #   hitouts &lt;int&gt;, tackles &lt;int&gt;, rebounds &lt;int&gt;, inside_fifties &lt;int&gt;,</span></span>
+<span id="cb3-23"><a href="#cb3-23"></a><span class="co">#&gt; #   clearances &lt;int&gt;, clangers &lt;int&gt;, free_kicks_for &lt;int&gt;,</span></span>
+<span id="cb3-24"><a href="#cb3-24"></a><span class="co">#&gt; #   free_kicks_against &lt;int&gt;, brownlow_votes &lt;int&gt;,</span></span>
+<span id="cb3-25"><a href="#cb3-25"></a><span class="co">#&gt; #   contested_possessions &lt;int&gt;, uncontested_possessions &lt;int&gt;,</span></span>
+<span id="cb3-26"><a href="#cb3-26"></a><span class="co">#&gt; #   contested_marks &lt;int&gt;, marks_inside_fifty &lt;int&gt;, one_percenters &lt;int&gt;,</span></span>
+<span id="cb3-27"><a href="#cb3-27"></a><span class="co">#&gt; #   bounces &lt;int&gt;, goal_assists &lt;int&gt;, time_on_ground_percentage &lt;int&gt;,</span></span>
+<span id="cb3-28"><a href="#cb3-28"></a><span class="co">#&gt; #   afl_fantasy_score &lt;int&gt;, supercoach_score &lt;int&gt;, centre_clearances &lt;int&gt;,</span></span>
+<span id="cb3-29"><a href="#cb3-29"></a><span class="co">#&gt; #   stoppage_clearances &lt;int&gt;, score_involvements &lt;int&gt;, metres_gained &lt;int&gt;,</span></span>
+<span id="cb3-30"><a href="#cb3-30"></a><span class="co">#&gt; #   turnovers &lt;int&gt;, intercepts &lt;int&gt;, tackles_inside_fifty &lt;int&gt;,</span></span>
+<span id="cb3-31"><a href="#cb3-31"></a><span class="co">#&gt; #   contest_def_losses &lt;int&gt;, contest_def_one_on_ones &lt;int&gt;,</span></span>
+<span id="cb3-32"><a href="#cb3-32"></a><span class="co">#&gt; #   contest_off_one_on_ones &lt;int&gt;, contest_off_wins &lt;int&gt;,</span></span>
+<span id="cb3-33"><a href="#cb3-33"></a><span class="co">#&gt; #   def_half_pressure_acts &lt;int&gt;, effective_kicks &lt;int&gt;,</span></span>
+<span id="cb3-34"><a href="#cb3-34"></a><span class="co">#&gt; #   f50_ground_ball_gets &lt;int&gt;, ground_ball_gets &lt;int&gt;,</span></span>
+<span id="cb3-35"><a href="#cb3-35"></a><span class="co">#&gt; #   hitouts_to_advantage &lt;int&gt;, hitout_win_percentage &lt;dbl&gt;,</span></span>
+<span id="cb3-36"><a href="#cb3-36"></a><span class="co">#&gt; #   intercept_marks &lt;int&gt;, marks_on_lead &lt;int&gt;, pressure_acts &lt;int&gt;,</span></span>
+<span id="cb3-37"><a href="#cb3-37"></a><span class="co">#&gt; #   rating_points &lt;dbl&gt;, ruck_contests &lt;int&gt;, score_launches &lt;int&gt;,</span></span>
+<span id="cb3-38"><a href="#cb3-38"></a><span class="co">#&gt; #   shots_at_goal &lt;int&gt;, spoils &lt;int&gt;, subbed &lt;chr&gt;, player_position &lt;chr&gt;,</span></span>
+<span id="cb3-39"><a href="#cb3-39"></a><span class="co">#&gt; #   date &lt;date&gt;</span></span></code></pre></div>
 </div>
 </div>
   </div>
@@ -375,7 +261,6 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#overview">Overview</a></li>
-      <li><a href="#load-packages">Load packages</a></li>
       </ul>
 </div>
       </div>

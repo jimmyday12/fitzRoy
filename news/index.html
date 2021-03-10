@@ -112,9 +112,6 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">AFL Mens Example</a>
-    </li>
-    <li>
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li>
@@ -244,7 +241,7 @@
 <a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li>Fixed a bug with <code>get_afl_fixture</code> that was returning the wrong season if season was before 2012</li>
-<li>Removes all instances of <code><a href="https://rvest.tidyverse.org/reference/pluck.html">rvest::pluck</a></code> in preparation for it being depreciated in rvest 1.0.0 <a href="https://rvest.tidyverse.org/news/index.html">see changelog</a>, <a href="https://github.com/hadley">@hadley</a>
+<li>Removes all instances of <code>rvest::pluck</code> in preparation for it being depreciated in rvest 1.0.0 <a href="https://rvest.tidyverse.org/news/index.html">see changelog</a>, <a href="https://github.com/hadley">@hadley</a>
 </li>
 <li>Fixed <code>get_footywire_betting_odds</code> to handle duplicate date/venue combination in the 2020 season without raising error (<a href="https://github.com/jimmyday12/fitzRoy/issues/123"><a href='https://github.com/jimmyday12/fitzRoy/issues/123'>#123</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 <li>Fixed round calculations for <code>get_fixture</code> to handle the compressed 2020 fixture (<a href="https://github.com/jimmyday12/fitzRoy/issues/125"><a href='https://github.com/jimmyday12/fitzRoy/issues/125'>#125</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/128"><a href='https://github.com/jimmyday12/fitzRoy/issues/128'>#128</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/132"><a href='https://github.com/jimmyday12/fitzRoy/issues/132'>#132</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
@@ -262,9 +259,9 @@
 <li>The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Fixed <code>get_footywire_betting_odds</code> to return an empty data frame when only future seasons are requested rather than raising an error (<a href="https://github.com/jimmyday12/fitzRoy/issues/112"><a href='https://github.com/jimmyday12/fitzRoy/issues/112'>#112</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 <li>Fixed issue with afltables data that caused issues with home/away team in drawn finals matches <a href="https://github.com/jimmyday12/fitzRoy/issues/116"><a href='https://github.com/jimmyday12/fitzRoy/issues/116'>#116</a></a>
@@ -293,9 +290,9 @@
 <li>Addition of <code>replace_venues</code> - changes venue names for all data sources to match AFL Tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/15"><a href='https://github.com/jimmyday12/fitzRoy/issues/15'>#15</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Updated <code>womens-stats</code> vignette to prevent it from running chunks if the cookie had failed.</li>
 <li>Fixed incorrect round numbers for fixture and betting data from <code>footywire.com</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/93"><a href='https://github.com/jimmyday12/fitzRoy/issues/93'>#93</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/95"><a href='https://github.com/jimmyday12/fitzRoy/issues/95'>#95</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/102"><a href='https://github.com/jimmyday12/fitzRoy/issues/102'>#102</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/104"><a href='https://github.com/jimmyday12/fitzRoy/issues/104'>#104</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/106"><a href='https://github.com/jimmyday12/fitzRoy/issues/106'>#106</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>

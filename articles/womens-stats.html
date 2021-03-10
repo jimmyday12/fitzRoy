@@ -72,9 +72,6 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">AFL Mens Example</a>
-    </li>
-    <li>
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li>
@@ -112,7 +109,7 @@
       <h1>AFL Womens Example</h1>
                         <h4 class="author">Oscar Lane</h4>
             
-            <h4 class="date">2021-02-09</h4>
+            <h4 class="date">2021-03-10</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
@@ -121,120 +118,251 @@
 
     
     
-<p>NOTE - The AFL website for Women’s data has been taken down. This page is left for posterity however these functions no longer work.</p>
-<div id="match-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#match-data" class="anchor"></a>Match data</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(fitzRoy)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span></code></pre></div>
+<p>The package provides easy access to AFLW data from the AFL.com.au website. This can be accessed via the normal <code>fetch_</code> functions in the same way you would access Men’s data.</p>
+<p>This vignette talks through the main data sources. To fully understand how the <code>fetch_</code> functions work - please read the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Main Fetch Functions</a> vignette.</p>
+<div id="fixture" class="section level2">
+<h2 class="hasAnchor">
+<a href="#fixture" class="anchor"></a>Fixture</h2>
+<p>Firstly, we can return the fixture for a season or particular round.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2021</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="st">  </span><span class="kw">select</span>(compSeason.name, round.name, </span>
+<span id="cb1-3"><a href="#cb1-3"></a>         home.team.name, away.team.name, </span>
+<span id="cb1-4"><a href="#cb1-4"></a>         venue.name)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 63 x 5
+#&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     
+#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
+#&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      
+#&gt;  2 2021 NAB AFLW Com… Round 1    St Kilda        Western Bulldo… RSEA Park      
+#&gt;  3 2021 NAB AFLW Com… Round 1    Gold Coast Suns Melbourne       Metricon Stadi…
+#&gt;  4 2021 NAB AFLW Com… Round 1    West Coast Eag… Adelaide Crows  Mineral Resour…
+#&gt;  5 2021 NAB AFLW Com… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium  
+#&gt;  6 2021 NAB AFLW Com… Round 1    Richmond        Brisbane Lions  Swinburne Cent…
+#&gt;  7 2021 NAB AFLW Com… Round 1    Fremantle       GWS Giants      Fremantle Oval 
+#&gt;  8 2021 NAB AFLW Com… Round 2    Western Bulldo… Carlton         Victoria Unive…
+#&gt;  9 2021 NAB AFLW Com… Round 2    Collingwood     Geelong Cats    Victoria Park  
+#&gt; 10 2021 NAB AFLW Com… Round 2    Melbourne       Richmond        Casey Fields   
+#&gt; # … with 53 more rows</code></pre>
+</div>
+<div id="lineup" class="section level2">
+<h2 class="hasAnchor">
+<a href="#lineup" class="anchor"></a>Lineup</h2>
+<p>We can get the lineup for a given set of matches in a particular round.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/fetch_lineup.html">fetch_lineup</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">select</span>(round.name, status, teamName, </span>
+<span id="cb3-3"><a href="#cb3-3"></a>         player.playerName.givenName,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>         player.playerName.surname, teamStatus)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 294 x 6
+#&gt;    round.name status  teamName player.playerName.… player.playerName… teamStatus
+#&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;     
+#&gt;  1 Round 1    CONCLU… Carlton  Brooke              Vernon             FINAL_TEAM
+#&gt;  2 Round 1    CONCLU… Carlton  Natalie             Plane              FINAL_TEAM
+#&gt;  3 Round 1    CONCLU… Carlton  Vaomua              Laloifi            FINAL_TEAM
+#&gt;  4 Round 1    CONCLU… Carlton  Charlotte           Wilson             FINAL_TEAM
+#&gt;  5 Round 1    CONCLU… Carlton  Kerryn              Harrington         FINAL_TEAM
+#&gt;  6 Round 1    CONCLU… Carlton  Lauren              Brazzale           FINAL_TEAM
+#&gt;  7 Round 1    CONCLU… Carlton  Elise               O'Dea              FINAL_TEAM
+#&gt;  8 Round 1    CONCLU… Carlton  Katie               Loynes             FINAL_TEAM
+#&gt;  9 Round 1    CONCLU… Carlton  Abbie               McKay              FINAL_TEAM
+#&gt; 10 Round 1    CONCLU… Carlton  Tayla               Harris             FINAL_TEAM
+#&gt; # … with 284 more rows</code></pre>
+</div>
+<div id="results" class="section level2">
+<h2 class="hasAnchor">
+<a href="#results" class="anchor"></a>Results</h2>
+<p>The match results, including the teams playing, venue information and final scores are retunred via <code>fetch_results</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="../reference/fetch_results.html">fetch_results</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">select</span>( match.date, match.name,</span>
+<span id="cb5-3"><a href="#cb5-3"></a>         homeTeamScore.matchScore.totalScore, awayTeamScore.matchScore.totalScore)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 7 x 4
+#&gt;   match.date          match.name       homeTeamScore.match… awayTeamScore.match…
+#&gt;   &lt;dttm&gt;              &lt;chr&gt;                           &lt;int&gt;                &lt;int&gt;
+#&gt; 1 2020-02-07 08:45:00 Richmond Vs Car…                   14                   48
+#&gt; 2 2020-02-08 02:10:00 GWS Giants Vs G…                    9                    8
+#&gt; 3 2020-02-08 04:10:00 Melbourne Vs Ka…                   22                   20
+#&gt; 4 2020-02-08 06:10:00 Brisbane Lions …                   34                   21
+#&gt; 5 2020-02-09 02:10:00 Collingwood Vs …                   38                   11
+#&gt; 6 2020-02-09 04:10:00 St Kilda Vs Wes…                   14                   39
+#&gt; 7 2020-02-09 06:10:00 Fremantle Vs Ge…                   44                   28</code></pre>
+</div>
+<div id="ladder" class="section level2">
+<h2 class="hasAnchor">
+<a href="#ladder" class="anchor"></a>Ladder</h2>
+<p>We can also get the ladder at any point with <code>fetch_ladder</code>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw"><a href="../reference/fetch_ladder.html">fetch_ladder</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">6</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">select</span>(season, round_name, </span>
+<span id="cb7-3"><a href="#cb7-3"></a>         position, team.name, played, </span>
+<span id="cb7-4"><a href="#cb7-4"></a>         pointsFor, pointsAgainst)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 14 x 7
+#&gt;    season round_name  position team.name         played pointsFor pointsAgainst
+#&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;              &lt;int&gt;     &lt;int&gt;         &lt;int&gt;
+#&gt;  1   2020 Semi Finals        1 Kangaroos              6       309           136
+#&gt;  2   2020 Semi Finals        2 GWS Giants             6       175           142
+#&gt;  3   2020 Semi Finals        3 Brisbane Lions         6       198           185
+#&gt;  4   2020 Semi Finals        4 Gold Coast Suns        6       154           152
+#&gt;  5   2020 Semi Finals        5 Geelong Cats           6       211           261
+#&gt;  6   2020 Semi Finals        6 Adelaide Crows         6       180           224
+#&gt;  7   2020 Semi Finals        7 Richmond               6       115           322
+#&gt;  8   2020 Semi Finals        1 Fremantle              6       277           179
+#&gt;  9   2020 Semi Finals        2 Carlton                6       249           164
+#&gt; 10   2020 Semi Finals        3 Melbourne              6       204           124
+#&gt; 11   2020 Semi Finals        4 Collingwood            6       229           149
+#&gt; 12   2020 Semi Finals        5 St Kilda               6       154           170
+#&gt; 13   2020 Semi Finals        6 Western Bulldogs       6       179           246
+#&gt; 14   2020 Semi Finals        7 West Coast Eagles      6        85           265</code></pre>
+</div>
+<div id="stats" class="section level2">
+<h2 class="hasAnchor">
+<a href="#stats" class="anchor"></a>Stats</h2>
+<p>Lastly - we have basic player stats. This will return player level statistics such as possessions, time on ground, fantasy points and a myriad of other statistics.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">select</span>(player.player.player.givenName<span class="op">:</span>clearances.totalClearances)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 294 x 45
+#&gt;    player.player.pl… player.player.pl… teamId gamesPlayed timeOnGroundPer… goals
+#&gt;    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;  &lt;lgl&gt;                  &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1 Gabrielle         Seymour           CD_T8… NA                        93     0
+#&gt;  2 Kodi              Jacques           CD_T8… NA                        74     0
+#&gt;  3 Sabrina           Frederick         CD_T8… NA                        94     1
+#&gt;  4 Hannah            Burchell          CD_T8… NA                        60     0
+#&gt;  5 Tayla             Stahl             CD_T8… NA                        74     0
+#&gt;  6 Katie             Brennan           CD_T8… NA                        94     0
+#&gt;  7 Madeline          Brancatisano      CD_T8… NA                        67     0
+#&gt;  8 Laura             Bailey            CD_T8… NA                        70     0
+#&gt;  9 Monique           Conti             CD_T8… NA                        85     0
+#&gt; 10 Christina         Bernardi          CD_T8… NA                        70     0
+#&gt; # … with 284 more rows, and 39 more variables: behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;,
+#&gt; #   kicks &lt;dbl&gt;, handballs &lt;dbl&gt;, disposals &lt;dbl&gt;, marks &lt;dbl&gt;, bounces &lt;dbl&gt;,
+#&gt; #   tackles &lt;dbl&gt;, contestedPossessions &lt;dbl&gt;, uncontestedPossessions &lt;dbl&gt;,
+#&gt; #   totalPossessions &lt;dbl&gt;, inside50s &lt;dbl&gt;, marksInside50 &lt;dbl&gt;,
+#&gt; #   contestedMarks &lt;dbl&gt;, hitouts &lt;dbl&gt;, onePercenters &lt;dbl&gt;,
+#&gt; #   disposalEfficiency &lt;dbl&gt;, clangers &lt;dbl&gt;, freesFor &lt;dbl&gt;,
+#&gt; #   freesAgainst &lt;dbl&gt;, dreamTeamPoints &lt;dbl&gt;, rebound50s &lt;dbl&gt;,
+#&gt; #   goalAssists &lt;dbl&gt;, goalAccuracy &lt;dbl&gt;, ratingPoints &lt;lgl&gt;, ranking &lt;lgl&gt;,
+#&gt; #   lastUpdated &lt;chr&gt;, turnovers &lt;dbl&gt;, intercepts &lt;dbl&gt;,
+#&gt; #   tacklesInside50 &lt;dbl&gt;, shotsAtGoal &lt;dbl&gt;, goalEfficiency &lt;lgl&gt;,
+#&gt; #   shotEfficiency &lt;lgl&gt;, interchangeCounts &lt;lgl&gt;, scoreInvolvements &lt;dbl&gt;,
+#&gt; #   metresGained &lt;dbl&gt;, clearances.centreClearances &lt;dbl&gt;,
+#&gt; #   clearances.stoppageClearances &lt;dbl&gt;, clearances.totalClearances &lt;dbl&gt;</code></pre>
+</div>
+<div id="legacyadvanced-stats" class="section level2">
+<h2 class="hasAnchor">
+<a href="#legacyadvanced-stats" class="anchor"></a>Legacy/Advanced Stats</h2>
+<p>We have a legacy function to provide advanced AFLW stats. This is going to be deprecated in favour of a more robust solution but still works for now. The following code should show you how to use those functions. ### Match data</p>
 <p>A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won’t work.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_cookie.html">get_aflw_cookie</a></span>()</span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt; [1] "1e332209e0431b20f7f06b5a1099782a"</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>cookie &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_afl_cookie.html">get_afl_cookie</a></span>()</span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(cookie)</span></code></pre></div>
+<pre><code>#&gt; [1] "3ed8aa413ae9ed5096f410a0078c2047"</code></pre>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/fetch_results.html">fetch_results()</a></code> function to retrieve match data matches.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_results.html">fetch_results</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>match_data &lt;-<span class="st"> </span><span class="kw"><a href="../reference/fetch_results.html">fetch_results</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>)</span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(match_data)</span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co">#&gt; Rows: 7</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; Columns: 75</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt; $ match.name                          &lt;chr&gt; "Richmond Vs Carlton", "GWS Giant…</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt; $ match.date                          &lt;dttm&gt; 2020-02-07 08:45:00, 2020-02-08 …</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; $ match.status                        &lt;chr&gt; "CONCLUDED", "CONCLUDED", "CONCLU…</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; $ match.matchId                       &lt;chr&gt; "CD_M20202640101", "CD_M202026401…</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; $ match.venue                         &lt;chr&gt; "CD_V50", "CD_V402", "CD_V371", "…</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; $ match.utcStartTime                  &lt;chr&gt; "2020-02-07T08:45:00", "2020-02-0…</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; $ match.homeTeamId                    &lt;chr&gt; "CD_T8788", "CD_T7889", "CD_T7386…</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; $ match.awayTeamId                    &lt;chr&gt; "CD_T8096", "CD_T8786", "CD_T8466…</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; $ match.round                         &lt;chr&gt; "CD_R202026401", "CD_R202026401",…</span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; $ match.venueLocalStartTime           &lt;chr&gt; "2020-02-07T19:45:00", "2020-02-0…</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; $ match.abbr                          &lt;chr&gt; "RICH V CARL", "GWS V GCFC", "MEL…</span></span>
-<span id="cb4-15"><a href="#cb4-15"></a><span class="co">#&gt; $ match.twitterHashTag                &lt;chr&gt; "#AFLWTigersBlues", "#AFLWGiantsS…</span></span>
-<span id="cb4-16"><a href="#cb4-16"></a><span class="co">#&gt; $ match.homeTeam.name                 &lt;chr&gt; "Richmond", "GWS Giants", "Melbou…</span></span>
-<span id="cb4-17"><a href="#cb4-17"></a><span class="co">#&gt; $ match.homeTeam.timeZone             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-18"><a href="#cb4-18"></a><span class="co">#&gt; $ match.homeTeam.teamId               &lt;chr&gt; "CD_T8788", "CD_T7889", "CD_T7386…</span></span>
-<span id="cb4-19"><a href="#cb4-19"></a><span class="co">#&gt; $ match.homeTeam.abbr                 &lt;chr&gt; "RICH", "GWS", "MELB", "BL", "COL…</span></span>
-<span id="cb4-20"><a href="#cb4-20"></a><span class="co">#&gt; $ match.homeTeam.nickname             &lt;chr&gt; "Richmond", "Giants", "Demons", "…</span></span>
-<span id="cb4-21"><a href="#cb4-21"></a><span class="co">#&gt; $ match.awayTeam.name                 &lt;chr&gt; "Carlton", "Gold Coast Suns", "Ka…</span></span>
-<span id="cb4-22"><a href="#cb4-22"></a><span class="co">#&gt; $ match.awayTeam.timeZone             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-23"><a href="#cb4-23"></a><span class="co">#&gt; $ match.awayTeam.teamId               &lt;chr&gt; "CD_T8096", "CD_T8786", "CD_T8466…</span></span>
-<span id="cb4-24"><a href="#cb4-24"></a><span class="co">#&gt; $ match.awayTeam.abbr                 &lt;chr&gt; "CARL", "GCFC", "NMFC", "ADEL", "…</span></span>
-<span id="cb4-25"><a href="#cb4-25"></a><span class="co">#&gt; $ match.awayTeam.nickname             &lt;chr&gt; "Blues", "Suns", "Kangaroos", "Cr…</span></span>
-<span id="cb4-26"><a href="#cb4-26"></a><span class="co">#&gt; $ venue.address                       &lt;chr&gt; "Melbourne", "Sydney", "Melbourne…</span></span>
-<span id="cb4-27"><a href="#cb4-27"></a><span class="co">#&gt; $ venue.name                          &lt;chr&gt; "Ikon Park", "Blacktown Internati…</span></span>
-<span id="cb4-28"><a href="#cb4-28"></a><span class="co">#&gt; $ venue.state                         &lt;chr&gt; "VIC", "NSW", "VIC", "QLD", "VIC"…</span></span>
-<span id="cb4-29"><a href="#cb4-29"></a><span class="co">#&gt; $ venue.timeZone                      &lt;chr&gt; "Australia/Melbourne", "Australia…</span></span>
-<span id="cb4-30"><a href="#cb4-30"></a><span class="co">#&gt; $ venue.venueId                       &lt;chr&gt; "CD_V50", "CD_V402", "CD_V371", "…</span></span>
-<span id="cb4-31"><a href="#cb4-31"></a><span class="co">#&gt; $ venue.abbreviation                  &lt;chr&gt; "IKP", "BISP", "CAS", "HP", "VIPC…</span></span>
-<span id="cb4-32"><a href="#cb4-32"></a><span class="co">#&gt; $ venue.capacity                      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-33"><a href="#cb4-33"></a><span class="co">#&gt; $ venue.groundDimension               &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-34"><a href="#cb4-34"></a><span class="co">#&gt; $ venue.latitude                      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-35"><a href="#cb4-35"></a><span class="co">#&gt; $ venue.longitude                     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-36"><a href="#cb4-36"></a><span class="co">#&gt; $ round.name                          &lt;chr&gt; "Round 1", "Round 1", "Round 1", …</span></span>
-<span id="cb4-37"><a href="#cb4-37"></a><span class="co">#&gt; $ round.year                          &lt;chr&gt; "2020", "2020", "2020", "2020", "…</span></span>
-<span id="cb4-38"><a href="#cb4-38"></a><span class="co">#&gt; $ round.roundId                       &lt;chr&gt; "CD_R202026401", "CD_R202026401",…</span></span>
-<span id="cb4-39"><a href="#cb4-39"></a><span class="co">#&gt; $ round.abbreviation                  &lt;chr&gt; "Rd 1", "Rd 1", "Rd 1", "Rd 1", "…</span></span>
-<span id="cb4-40"><a href="#cb4-40"></a><span class="co">#&gt; $ round.competitionId                 &lt;chr&gt; "CD_S2020264", "CD_S2020264", "CD…</span></span>
-<span id="cb4-41"><a href="#cb4-41"></a><span class="co">#&gt; $ round.roundNumber                   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1</span></span>
-<span id="cb4-42"><a href="#cb4-42"></a><span class="co">#&gt; $ status                              &lt;chr&gt; "CONCLUDED", "CONCLUDED", "CONCLU…</span></span>
-<span id="cb4-43"><a href="#cb4-43"></a><span class="co">#&gt; $ matchId                             &lt;chr&gt; "CD_M20202640101", "CD_M202026401…</span></span>
-<span id="cb4-44"><a href="#cb4-44"></a><span class="co">#&gt; $ scoreWorm                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-45"><a href="#cb4-45"></a><span class="co">#&gt; $ scoreMap                            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-46"><a href="#cb4-46"></a><span class="co">#&gt; $ lastUpdated                         &lt;chr&gt; "2020-02-07T11:04:44.540+0000", "…</span></span>
-<span id="cb4-47"><a href="#cb4-47"></a><span class="co">#&gt; $ homeTeamScore.periodScore           &lt;list&gt; [&lt;data.frame[4 x 5]&gt;, &lt;data.fram…</span></span>
-<span id="cb4-48"><a href="#cb4-48"></a><span class="co">#&gt; $ homeTeamScore.rushedBehinds         &lt;int&gt; 0, 0, 0, 1, 0, 0, 2</span></span>
-<span id="cb4-49"><a href="#cb4-49"></a><span class="co">#&gt; $ homeTeamScore.minutesInFront        &lt;int&gt; 0, 9, 12, 56, 39, 0, 37</span></span>
-<span id="cb4-50"><a href="#cb4-50"></a><span class="co">#&gt; $ homeTeamScore.matchScore.totalScore &lt;int&gt; 14, 9, 22, 34, 38, 14, 44</span></span>
-<span id="cb4-51"><a href="#cb4-51"></a><span class="co">#&gt; $ homeTeamScore.matchScore.goals      &lt;int&gt; 2, 1, 3, 5, 5, 2, 6</span></span>
-<span id="cb4-52"><a href="#cb4-52"></a><span class="co">#&gt; $ homeTeamScore.matchScore.behinds    &lt;int&gt; 2, 3, 4, 4, 8, 2, 8</span></span>
-<span id="cb4-53"><a href="#cb4-53"></a><span class="co">#&gt; $ homeTeamScore.matchScore.superGoals &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-54"><a href="#cb4-54"></a><span class="co">#&gt; $ awayTeamScore.periodScore           &lt;list&gt; [&lt;data.frame[4 x 5]&gt;, &lt;data.fram…</span></span>
-<span id="cb4-55"><a href="#cb4-55"></a><span class="co">#&gt; $ awayTeamScore.rushedBehinds         &lt;int&gt; 4, 0, 0, 3, 0, 0, 3</span></span>
-<span id="cb4-56"><a href="#cb4-56"></a><span class="co">#&gt; $ awayTeamScore.minutesInFront        &lt;int&gt; 56, 23, 29, 0, 20, 60, 10</span></span>
-<span id="cb4-57"><a href="#cb4-57"></a><span class="co">#&gt; $ awayTeamScore.matchScore.totalScore &lt;int&gt; 48, 8, 20, 21, 11, 39, 28</span></span>
-<span id="cb4-58"><a href="#cb4-58"></a><span class="co">#&gt; $ awayTeamScore.matchScore.goals      &lt;int&gt; 6, 1, 3, 3, 1, 6, 4</span></span>
-<span id="cb4-59"><a href="#cb4-59"></a><span class="co">#&gt; $ awayTeamScore.matchScore.behinds    &lt;int&gt; 12, 2, 2, 3, 5, 3, 4</span></span>
-<span id="cb4-60"><a href="#cb4-60"></a><span class="co">#&gt; $ awayTeamScore.matchScore.superGoals &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
-<span id="cb4-61"><a href="#cb4-61"></a><span class="co">#&gt; $ matchClock.periods                  &lt;list&gt; [&lt;data.frame[4 x 5]&gt;, &lt;data.fram…</span></span>
-<span id="cb4-62"><a href="#cb4-62"></a><span class="co">#&gt; $ weather.description                 &lt;chr&gt; "Humid Partly cloudy", "Rain, hea…</span></span>
-<span id="cb4-63"><a href="#cb4-63"></a><span class="co">#&gt; $ weather.tempInCelsius               &lt;dbl&gt; 26, 21, 28, 18, 26, 26, 18</span></span>
-<span id="cb4-64"><a href="#cb4-64"></a><span class="co">#&gt; $ weather.weatherType                 &lt;chr&gt; "OVERCAST", "RAIN", "OVERCAST", "…</span></span>
-<span id="cb4-65"><a href="#cb4-65"></a><span class="co">#&gt; $ homeTeamScoreChart.goals            &lt;int&gt; 2, 1, 3, 5, 5, 2, 6</span></span>
-<span id="cb4-66"><a href="#cb4-66"></a><span class="co">#&gt; $ homeTeamScoreChart.leftBehinds      &lt;int&gt; 1, 2, 3, 1, 3, 0, 2</span></span>
-<span id="cb4-67"><a href="#cb4-67"></a><span class="co">#&gt; $ homeTeamScoreChart.rightBehinds     &lt;int&gt; 1, 1, 1, 1, 3, 2, 4</span></span>
-<span id="cb4-68"><a href="#cb4-68"></a><span class="co">#&gt; $ homeTeamScoreChart.leftPosters      &lt;int&gt; 0, 0, 0, 0, 1, 0, 0</span></span>
-<span id="cb4-69"><a href="#cb4-69"></a><span class="co">#&gt; $ homeTeamScoreChart.rightPosters     &lt;int&gt; 0, 0, 0, 1, 1, 0, 0</span></span>
-<span id="cb4-70"><a href="#cb4-70"></a><span class="co">#&gt; $ homeTeamScoreChart.rushedBehinds    &lt;int&gt; 0, 0, 0, 1, 0, 0, 2</span></span>
-<span id="cb4-71"><a href="#cb4-71"></a><span class="co">#&gt; $ homeTeamScoreChart.touchedBehinds   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0</span></span>
-<span id="cb4-72"><a href="#cb4-72"></a><span class="co">#&gt; $ awayTeamScoreChart.goals            &lt;int&gt; 6, 1, 3, 3, 1, 6, 4</span></span>
-<span id="cb4-73"><a href="#cb4-73"></a><span class="co">#&gt; $ awayTeamScoreChart.leftBehinds      &lt;int&gt; 3, 1, 1, 0, 1, 2, 0</span></span>
-<span id="cb4-74"><a href="#cb4-74"></a><span class="co">#&gt; $ awayTeamScoreChart.rightBehinds     &lt;int&gt; 3, 1, 1, 0, 4, 0, 1</span></span>
-<span id="cb4-75"><a href="#cb4-75"></a><span class="co">#&gt; $ awayTeamScoreChart.leftPosters      &lt;int&gt; 0, 0, 0, 0, 0, 1, 0</span></span>
-<span id="cb4-76"><a href="#cb4-76"></a><span class="co">#&gt; $ awayTeamScoreChart.rightPosters     &lt;int&gt; 1, 0, 0, 0, 0, 0, 0</span></span>
-<span id="cb4-77"><a href="#cb4-77"></a><span class="co">#&gt; $ awayTeamScoreChart.rushedBehinds    &lt;int&gt; 4, 0, 0, 3, 0, 0, 3</span></span>
-<span id="cb4-78"><a href="#cb4-78"></a><span class="co">#&gt; $ awayTeamScoreChart.touchedBehinds   &lt;int&gt; 1, 0, 0, 0, 0, 0, 0</span></span></code></pre></div>
-</div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">glimpse</span>(match_data)</span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co">#&gt; Rows: 7</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co">#&gt; Columns: 75</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co">#&gt; $ match.name                          &lt;chr&gt; "Richmond Vs Carlton", "GWS Giants…</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="co">#&gt; $ match.date                          &lt;dttm&gt; 2020-02-07 08:45:00, 2020-02-08 0…</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co">#&gt; $ match.status                        &lt;chr&gt; "CONCLUDED", "CONCLUDED", "CONCLUD…</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co">#&gt; $ match.matchId                       &lt;chr&gt; "CD_M20202640101", "CD_M2020264010…</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co">#&gt; $ match.venue                         &lt;chr&gt; "CD_V50", "CD_V402", "CD_V371", "C…</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co">#&gt; $ match.utcStartTime                  &lt;chr&gt; "2020-02-07T08:45:00", "2020-02-08…</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a><span class="co">#&gt; $ match.homeTeamId                    &lt;chr&gt; "CD_T8788", "CD_T7889", "CD_T7386"…</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="co">#&gt; $ match.awayTeamId                    &lt;chr&gt; "CD_T8096", "CD_T8786", "CD_T8466"…</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co">#&gt; $ match.round                         &lt;chr&gt; "CD_R202026401", "CD_R202026401", …</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co">#&gt; $ match.venueLocalStartTime           &lt;chr&gt; "2020-02-07T19:45:00", "2020-02-08…</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="co">#&gt; $ match.abbr                          &lt;chr&gt; "RICH V CARL", "GWS V GCFC", "MELB…</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="co">#&gt; $ match.twitterHashTag                &lt;chr&gt; "#AFLWTigersBlues", "#AFLWGiantsSu…</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a><span class="co">#&gt; $ match.homeTeam.name                 &lt;chr&gt; "Richmond", "GWS Giants", "Melbour…</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="co">#&gt; $ match.homeTeam.timeZone             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="co">#&gt; $ match.homeTeam.teamId               &lt;chr&gt; "CD_T8788", "CD_T7889", "CD_T7386"…</span></span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="co">#&gt; $ match.homeTeam.abbr                 &lt;chr&gt; "RICH", "GWS", "MELB", "BL", "COLL…</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a><span class="co">#&gt; $ match.homeTeam.nickname             &lt;chr&gt; "Richmond", "Giants", "Demons", "L…</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="co">#&gt; $ match.awayTeam.name                 &lt;chr&gt; "Carlton", "Gold Coast Suns", "Kan…</span></span>
+<span id="cb14-22"><a href="#cb14-22"></a><span class="co">#&gt; $ match.awayTeam.timeZone             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-23"><a href="#cb14-23"></a><span class="co">#&gt; $ match.awayTeam.teamId               &lt;chr&gt; "CD_T8096", "CD_T8786", "CD_T8466"…</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a><span class="co">#&gt; $ match.awayTeam.abbr                 &lt;chr&gt; "CARL", "GCFC", "NMFC", "ADEL", "W…</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a><span class="co">#&gt; $ match.awayTeam.nickname             &lt;chr&gt; "Blues", "Suns", "Kangaroos", "Cro…</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a><span class="co">#&gt; $ venue.address                       &lt;chr&gt; "Melbourne", "Sydney", "Melbourne"…</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a><span class="co">#&gt; $ venue.name                          &lt;chr&gt; "Ikon Park", "Blacktown Internatio…</span></span>
+<span id="cb14-28"><a href="#cb14-28"></a><span class="co">#&gt; $ venue.state                         &lt;chr&gt; "VIC", "NSW", "VIC", "QLD", "VIC",…</span></span>
+<span id="cb14-29"><a href="#cb14-29"></a><span class="co">#&gt; $ venue.timeZone                      &lt;chr&gt; "Australia/Melbourne", "Australia/…</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a><span class="co">#&gt; $ venue.venueId                       &lt;chr&gt; "CD_V50", "CD_V402", "CD_V371", "C…</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a><span class="co">#&gt; $ venue.abbreviation                  &lt;chr&gt; "IKP", "BISP", "CAS", "HP", "VIPC"…</span></span>
+<span id="cb14-32"><a href="#cb14-32"></a><span class="co">#&gt; $ venue.capacity                      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-33"><a href="#cb14-33"></a><span class="co">#&gt; $ venue.groundDimension               &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-34"><a href="#cb14-34"></a><span class="co">#&gt; $ venue.latitude                      &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-35"><a href="#cb14-35"></a><span class="co">#&gt; $ venue.longitude                     &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-36"><a href="#cb14-36"></a><span class="co">#&gt; $ round.name                          &lt;chr&gt; "Round 1", "Round 1", "Round 1", "…</span></span>
+<span id="cb14-37"><a href="#cb14-37"></a><span class="co">#&gt; $ round.year                          &lt;chr&gt; "2020", "2020", "2020", "2020", "2…</span></span>
+<span id="cb14-38"><a href="#cb14-38"></a><span class="co">#&gt; $ round.roundId                       &lt;chr&gt; "CD_R202026401", "CD_R202026401", …</span></span>
+<span id="cb14-39"><a href="#cb14-39"></a><span class="co">#&gt; $ round.abbreviation                  &lt;chr&gt; "Rd 1", "Rd 1", "Rd 1", "Rd 1", "R…</span></span>
+<span id="cb14-40"><a href="#cb14-40"></a><span class="co">#&gt; $ round.competitionId                 &lt;chr&gt; "CD_S2020264", "CD_S2020264", "CD_…</span></span>
+<span id="cb14-41"><a href="#cb14-41"></a><span class="co">#&gt; $ round.roundNumber                   &lt;int&gt; 1, 1, 1, 1, 1, 1, 1</span></span>
+<span id="cb14-42"><a href="#cb14-42"></a><span class="co">#&gt; $ status                              &lt;chr&gt; "CONCLUDED", "CONCLUDED", "CONCLUD…</span></span>
+<span id="cb14-43"><a href="#cb14-43"></a><span class="co">#&gt; $ matchId                             &lt;chr&gt; "CD_M20202640101", "CD_M2020264010…</span></span>
+<span id="cb14-44"><a href="#cb14-44"></a><span class="co">#&gt; $ scoreWorm                           &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-45"><a href="#cb14-45"></a><span class="co">#&gt; $ scoreMap                            &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-46"><a href="#cb14-46"></a><span class="co">#&gt; $ lastUpdated                         &lt;chr&gt; "2020-02-07T11:04:44.540+0000", "2…</span></span>
+<span id="cb14-47"><a href="#cb14-47"></a><span class="co">#&gt; $ homeTeamScore.periodScore           &lt;list&gt; [&lt;data.frame[4 x 5]&gt;], [&lt;data.fram…</span></span>
+<span id="cb14-48"><a href="#cb14-48"></a><span class="co">#&gt; $ homeTeamScore.rushedBehinds         &lt;int&gt; 0, 0, 0, 1, 0, 0, 2</span></span>
+<span id="cb14-49"><a href="#cb14-49"></a><span class="co">#&gt; $ homeTeamScore.minutesInFront        &lt;int&gt; 0, 9, 12, 56, 39, 0, 37</span></span>
+<span id="cb14-50"><a href="#cb14-50"></a><span class="co">#&gt; $ homeTeamScore.matchScore.totalScore &lt;int&gt; 14, 9, 22, 34, 38, 14, 44</span></span>
+<span id="cb14-51"><a href="#cb14-51"></a><span class="co">#&gt; $ homeTeamScore.matchScore.goals      &lt;int&gt; 2, 1, 3, 5, 5, 2, 6</span></span>
+<span id="cb14-52"><a href="#cb14-52"></a><span class="co">#&gt; $ homeTeamScore.matchScore.behinds    &lt;int&gt; 2, 3, 4, 4, 8, 2, 8</span></span>
+<span id="cb14-53"><a href="#cb14-53"></a><span class="co">#&gt; $ homeTeamScore.matchScore.superGoals &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-54"><a href="#cb14-54"></a><span class="co">#&gt; $ awayTeamScore.periodScore           &lt;list&gt; [&lt;data.frame[4 x 5]&gt;], [&lt;data.fram…</span></span>
+<span id="cb14-55"><a href="#cb14-55"></a><span class="co">#&gt; $ awayTeamScore.rushedBehinds         &lt;int&gt; 4, 0, 0, 3, 0, 0, 3</span></span>
+<span id="cb14-56"><a href="#cb14-56"></a><span class="co">#&gt; $ awayTeamScore.minutesInFront        &lt;int&gt; 56, 23, 29, 0, 20, 60, 10</span></span>
+<span id="cb14-57"><a href="#cb14-57"></a><span class="co">#&gt; $ awayTeamScore.matchScore.totalScore &lt;int&gt; 48, 8, 20, 21, 11, 39, 28</span></span>
+<span id="cb14-58"><a href="#cb14-58"></a><span class="co">#&gt; $ awayTeamScore.matchScore.goals      &lt;int&gt; 6, 1, 3, 3, 1, 6, 4</span></span>
+<span id="cb14-59"><a href="#cb14-59"></a><span class="co">#&gt; $ awayTeamScore.matchScore.behinds    &lt;int&gt; 12, 2, 2, 3, 5, 3, 4</span></span>
+<span id="cb14-60"><a href="#cb14-60"></a><span class="co">#&gt; $ awayTeamScore.matchScore.superGoals &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span></span>
+<span id="cb14-61"><a href="#cb14-61"></a><span class="co">#&gt; $ matchClock.periods                  &lt;list&gt; [&lt;data.frame[4 x 5]&gt;], [&lt;data.fram…</span></span>
+<span id="cb14-62"><a href="#cb14-62"></a><span class="co">#&gt; $ weather.description                 &lt;chr&gt; "Humid Partly cloudy", "Rain, heav…</span></span>
+<span id="cb14-63"><a href="#cb14-63"></a><span class="co">#&gt; $ weather.tempInCelsius               &lt;dbl&gt; 26, 21, 28, 18, 26, 26, 18</span></span>
+<span id="cb14-64"><a href="#cb14-64"></a><span class="co">#&gt; $ weather.weatherType                 &lt;chr&gt; "OVERCAST", "RAIN", "OVERCAST", "M…</span></span>
+<span id="cb14-65"><a href="#cb14-65"></a><span class="co">#&gt; $ homeTeamScoreChart.goals            &lt;int&gt; 2, 1, 3, 5, 5, 2, 6</span></span>
+<span id="cb14-66"><a href="#cb14-66"></a><span class="co">#&gt; $ homeTeamScoreChart.leftBehinds      &lt;int&gt; 1, 2, 3, 1, 3, 0, 2</span></span>
+<span id="cb14-67"><a href="#cb14-67"></a><span class="co">#&gt; $ homeTeamScoreChart.rightBehinds     &lt;int&gt; 1, 1, 1, 1, 3, 2, 4</span></span>
+<span id="cb14-68"><a href="#cb14-68"></a><span class="co">#&gt; $ homeTeamScoreChart.leftPosters      &lt;int&gt; 0, 0, 0, 0, 1, 0, 0</span></span>
+<span id="cb14-69"><a href="#cb14-69"></a><span class="co">#&gt; $ homeTeamScoreChart.rightPosters     &lt;int&gt; 0, 0, 0, 1, 1, 0, 0</span></span>
+<span id="cb14-70"><a href="#cb14-70"></a><span class="co">#&gt; $ homeTeamScoreChart.rushedBehinds    &lt;int&gt; 0, 0, 0, 1, 0, 0, 2</span></span>
+<span id="cb14-71"><a href="#cb14-71"></a><span class="co">#&gt; $ homeTeamScoreChart.touchedBehinds   &lt;int&gt; 0, 0, 0, 0, 0, 0, 0</span></span>
+<span id="cb14-72"><a href="#cb14-72"></a><span class="co">#&gt; $ awayTeamScoreChart.goals            &lt;int&gt; 6, 1, 3, 3, 1, 6, 4</span></span>
+<span id="cb14-73"><a href="#cb14-73"></a><span class="co">#&gt; $ awayTeamScoreChart.leftBehinds      &lt;int&gt; 3, 1, 1, 0, 1, 2, 0</span></span>
+<span id="cb14-74"><a href="#cb14-74"></a><span class="co">#&gt; $ awayTeamScoreChart.rightBehinds     &lt;int&gt; 3, 1, 1, 0, 4, 0, 1</span></span>
+<span id="cb14-75"><a href="#cb14-75"></a><span class="co">#&gt; $ awayTeamScoreChart.leftPosters      &lt;int&gt; 0, 0, 0, 0, 0, 1, 0</span></span>
+<span id="cb14-76"><a href="#cb14-76"></a><span class="co">#&gt; $ awayTeamScoreChart.rightPosters     &lt;int&gt; 1, 0, 0, 0, 0, 0, 0</span></span>
+<span id="cb14-77"><a href="#cb14-77"></a><span class="co">#&gt; $ awayTeamScoreChart.rushedBehinds    &lt;int&gt; 4, 0, 0, 3, 0, 0, 3</span></span>
+<span id="cb14-78"><a href="#cb14-78"></a><span class="co">#&gt; $ awayTeamScoreChart.touchedBehinds   &lt;int&gt; 1, 0, 0, 0, 0, 0, 0</span></span></code></pre></div>
 <div id="detailed-stats" class="section level3">
 <h3 class="hasAnchor">
 <a href="#detailed-stats" class="anchor"></a>Detailed stats</h3>
 <p>The <code><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> can be used to return more detailed data than the match data shown above. It takes a vector of match IDs as an argument. For example, let’s say we want detailed stats for the first 10 games in <code>match_data</code> above. Then we would do:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>first10 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(match_data, <span class="dv">10</span>)</span>
-<span id="cb5-2"><a href="#cb5-2"></a>first10_ids &lt;-<span class="st"> </span>first10<span class="op">$</span>Match.Id</span>
-<span id="cb5-3"><a href="#cb5-3"></a>first10_ids</span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>detailed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span>(first10_ids)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; Warning: 'get_aflw_cookie' is deprecated.</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt; Use 'get_afl_cookie' instead.</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt; See help("Deprecated")</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="kw"><a href="https://dplyr.tidyverse.org/reference/reexports.html">glimpse</a></span>(detailed)</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; Rows: 0</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; Columns: 0</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>first10 &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(match_data, <span class="dv">10</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a>first10_ids &lt;-<span class="st"> </span>first10<span class="op">$</span>Match.Id</span>
+<span id="cb15-3"><a href="#cb15-3"></a>first10_ids</span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co">#&gt; NULL</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>detailed &lt;-<span class="st"> </span><span class="kw"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span>(first10_ids)</span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">glimpse</span>(detailed)</span></code></pre></div>
+<pre><code>#&gt; Rows: 0
+#&gt; Columns: 0</code></pre>
+</div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#fixture">Fixture</a></li>
+      <li><a href="#lineup">Lineup</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#ladder">Ladder</a></li>
+      <li><a href="#stats">Stats</a></li>
+      <li><a href="#legacyadvanced-stats">Legacy/Advanced Stats</a></li>
+      </ul>
+</div>
       </div>
 
 </div>

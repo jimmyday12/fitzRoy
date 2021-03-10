@@ -72,9 +72,6 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li>
-      <a href="../articles/mens-stats.html">AFL Mens Example</a>
-    </li>
-    <li>
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li>
@@ -119,18 +116,17 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">message =</span> <span class="ot">FALSE</span>, <span class="dt">warning =</span> <span class="ot">FALSE</span>)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(fitzRoy)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</span></code></pre></div>
 <p>The goal of fitzRoy has been to provide a consistent and easy to use interface for accessing data from various sources. As of version 0.3.3.9000 of <code>fitzRoy</code>, the package now contains a much more consistent API to do so. This is with the introduction of the main <code>fetch_*</code> functions.</p>
 <p>Each function uses the same arguments and each argument should behave the same across all of the functions. While there may be some slight differences in behaviour between different sources of data, the goal will be to move towards a much more consistent pattern of behaviour.</p>
 <div id="main-functions" class="section level1">
 <h1 class="hasAnchor">
 <a href="#main-functions" class="anchor"></a>Main functions</h1>
-<p>There are broadly 4 main functions</p>
+<p>There are broadly 5 main functions</p>
 <ul>
 <li>
 <code>fetch_fixture</code> - returns the fixture for a given round and season</li>
+<li>
+<code>fetch_lineup</code> - returns the lineup any matches in a given round and season</li>
 <li>
 <code>fetch_results</code> - returns the match results for a given round and season</li>
 <li>
@@ -161,166 +157,104 @@
 <div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic Usage</h2>
-<p>We can use the sane defaults to simply return the fixture from the AFL Website.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co">#&gt; # A tibble: 198 x 45</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co">#&gt;       id providerId utcStartTime status compSeason.id compSeason.prov…</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;           </span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co">#&gt;  1  2991 CD_M20210… 2021-03-18T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co">#&gt;  2  2986 CD_M20210… 2021-03-19T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co">#&gt;  3  2992 CD_M20210… 2021-03-20T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co">#&gt;  4  2993 CD_M20210… 2021-03-20T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co">#&gt;  5  2994 CD_M20210… 2021-03-20T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co">#&gt;  6  2987 CD_M20210… 2021-03-20T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-11"><a href="#cb2-11"></a><span class="co">#&gt;  7  2990 CD_M20210… 2021-03-21T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-12"><a href="#cb2-12"></a><span class="co">#&gt;  8  2989 CD_M20210… 2021-03-21T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="co">#&gt;  9  2988 CD_M20210… 2021-03-21T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-14"><a href="#cb2-14"></a><span class="co">#&gt; 10  2999 CD_M20210… 2021-03-25T… SCHED…            34 CD_S2021014     </span></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="co">#&gt; # … with 188 more rows, and 39 more variables: compSeason.name &lt;chr&gt;,</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="co">#&gt; #   compSeason.shortName &lt;chr&gt;, compSeason.currentRoundNumber &lt;int&gt;,</span></span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="co">#&gt; #   round.id &lt;int&gt;, round.providerId &lt;chr&gt;, round.abbreviation &lt;chr&gt;,</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a><span class="co">#&gt; #   round.name &lt;chr&gt;, round.roundNumber &lt;int&gt;, round.byes &lt;list&gt;,</span></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="co">#&gt; #   home.team.id &lt;int&gt;, home.team.providerId &lt;chr&gt;, home.team.name &lt;chr&gt;,</span></span>
-<span id="cb2-20"><a href="#cb2-20"></a><span class="co">#&gt; #   home.team.abbreviation &lt;chr&gt;, home.team.nickname &lt;chr&gt;,</span></span>
-<span id="cb2-21"><a href="#cb2-21"></a><span class="co">#&gt; #   home.team.teamType &lt;chr&gt;, home.team.club.id &lt;int&gt;,</span></span>
-<span id="cb2-22"><a href="#cb2-22"></a><span class="co">#&gt; #   home.team.club.providerId &lt;chr&gt;, home.team.club.name &lt;chr&gt;,</span></span>
-<span id="cb2-23"><a href="#cb2-23"></a><span class="co">#&gt; #   home.team.club.abbreviation &lt;chr&gt;, home.team.club.nickname &lt;chr&gt;,</span></span>
-<span id="cb2-24"><a href="#cb2-24"></a><span class="co">#&gt; #   away.team.id &lt;int&gt;, away.team.providerId &lt;chr&gt;, away.team.name &lt;chr&gt;,</span></span>
-<span id="cb2-25"><a href="#cb2-25"></a><span class="co">#&gt; #   away.team.abbreviation &lt;chr&gt;, away.team.nickname &lt;chr&gt;,</span></span>
-<span id="cb2-26"><a href="#cb2-26"></a><span class="co">#&gt; #   away.team.teamType &lt;chr&gt;, away.team.club.id &lt;int&gt;,</span></span>
-<span id="cb2-27"><a href="#cb2-27"></a><span class="co">#&gt; #   away.team.club.providerId &lt;chr&gt;, away.team.club.name &lt;chr&gt;,</span></span>
-<span id="cb2-28"><a href="#cb2-28"></a><span class="co">#&gt; #   away.team.club.abbreviation &lt;chr&gt;, away.team.club.nickname &lt;chr&gt;,</span></span>
-<span id="cb2-29"><a href="#cb2-29"></a><span class="co">#&gt; #   venue.id &lt;int&gt;, venue.providerId &lt;chr&gt;, venue.name &lt;chr&gt;,</span></span>
-<span id="cb2-30"><a href="#cb2-30"></a><span class="co">#&gt; #   venue.abbreviation &lt;chr&gt;, venue.location &lt;chr&gt;, venue.state &lt;chr&gt;,</span></span>
-<span id="cb2-31"><a href="#cb2-31"></a><span class="co">#&gt; #   venue.timezone &lt;chr&gt;, compSeason.year &lt;dbl&gt;</span></span></code></pre></div>
+<p>All of the functions behave the same. The following are some examples using the <code>fetch_fixture</code> function but can equally be applied to any of the family of <code>fetch_</code> functions.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 198 x 46
+#&gt;       id providerId   utcStartTime       status  compSeason.id compSeason.provi…
+#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;              &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;            
+#&gt;  1  2991 CD_M2021014… 2021-03-18T08:25:… SCHEDU…            34 CD_S2021014      
+#&gt;  2  2986 CD_M2021014… 2021-03-19T08:50:… SCHEDU…            34 CD_S2021014      
+#&gt;  3  2992 CD_M2021014… 2021-03-20T02:45:… SCHEDU…            34 CD_S2021014      
+#&gt;  4  2993 CD_M2021014… 2021-03-20T05:35:… SCHEDU…            34 CD_S2021014      
+#&gt;  5  2994 CD_M2021014… 2021-03-20T08:25:… SCHEDU…            34 CD_S2021014      
+#&gt;  6  2987 CD_M2021014… 2021-03-20T08:45:… SCHEDU…            34 CD_S2021014      
+#&gt;  7  2990 CD_M2021014… 2021-03-21T02:10:… SCHEDU…            34 CD_S2021014      
+#&gt;  8  2989 CD_M2021014… 2021-03-21T04:20:… SCHEDU…            34 CD_S2021014      
+#&gt;  9  2988 CD_M2021014… 2021-03-21T07:10:… SCHEDU…            34 CD_S2021014      
+#&gt; 10  2999 CD_M2021014… 2021-03-25T08:20:… SCHEDU…            34 CD_S2021014      
+#&gt; # … with 188 more rows, and 40 more variables: compSeason.name &lt;chr&gt;,
+#&gt; #   compSeason.shortName &lt;chr&gt;, compSeason.currentRoundNumber &lt;int&gt;,
+#&gt; #   round.id &lt;int&gt;, round.providerId &lt;chr&gt;, round.abbreviation &lt;chr&gt;,
+#&gt; #   round.name &lt;chr&gt;, round.roundNumber &lt;int&gt;, round.byes &lt;list&gt;,
+#&gt; #   home.team.id &lt;int&gt;, home.team.providerId &lt;chr&gt;, home.team.name &lt;chr&gt;,
+#&gt; #   home.team.abbreviation &lt;chr&gt;, home.team.nickname &lt;chr&gt;,
+#&gt; #   home.team.teamType &lt;chr&gt;, home.team.club.id &lt;int&gt;,
+#&gt; #   home.team.club.providerId &lt;chr&gt;, home.team.club.name &lt;chr&gt;,
+#&gt; #   home.team.club.abbreviation &lt;chr&gt;, home.team.club.nickname &lt;chr&gt;,
+#&gt; #   away.team.id &lt;int&gt;, away.team.providerId &lt;chr&gt;, away.team.name &lt;chr&gt;,
+#&gt; #   away.team.abbreviation &lt;chr&gt;, away.team.nickname &lt;chr&gt;,
+#&gt; #   away.team.teamType &lt;chr&gt;, away.team.club.id &lt;int&gt;,
+#&gt; #   away.team.club.providerId &lt;chr&gt;, away.team.club.name &lt;chr&gt;,
+#&gt; #   away.team.club.abbreviation &lt;chr&gt;, away.team.club.nickname &lt;chr&gt;,
+#&gt; #   venue.id &lt;int&gt;, venue.providerId &lt;chr&gt;, venue.name &lt;chr&gt;,
+#&gt; #   venue.abbreviation &lt;chr&gt;, venue.location &lt;chr&gt;, venue.state &lt;chr&gt;,
+#&gt; #   venue.timezone &lt;chr&gt;, metadata.travel_link &lt;chr&gt;, compSeason.year &lt;dbl&gt;</code></pre>
 <p>This is the same as</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2021</span>, <span class="dt">comp =</span> <span class="st">"AFLM"</span>, <span class="dt">source =</span> <span class="st">"AFL"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(compSeason.name, round.name, home.team.name, away.team.name, venue.name)</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="co">#&gt; # A tibble: 198 x 5</span></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co">#&gt;    compSeason.name       round.name home.team.name   away.team.name  venue.name </span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co">#&gt;    &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;           &lt;chr&gt;      </span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co">#&gt;  1 2021 Toyota AFL Prem… Round 1    Richmond         Carlton         MCG        </span></span>
-<span id="cb3-7"><a href="#cb3-7"></a><span class="co">#&gt;  2 2021 Toyota AFL Prem… Round 1    Collingwood      Western Bulldo… MCG        </span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co">#&gt;  3 2021 Toyota AFL Prem… Round 1    Melbourne        Fremantle       MCG        </span></span>
-<span id="cb3-9"><a href="#cb3-9"></a><span class="co">#&gt;  4 2021 Toyota AFL Prem… Round 1    Adelaide Crows   Geelong Cats    Adelaide O…</span></span>
-<span id="cb3-10"><a href="#cb3-10"></a><span class="co">#&gt;  5 2021 Toyota AFL Prem… Round 1    Essendon         Hawthorn        Marvel Sta…</span></span>
-<span id="cb3-11"><a href="#cb3-11"></a><span class="co">#&gt;  6 2021 Toyota AFL Prem… Round 1    Brisbane Lions   Sydney Swans    Gabba      </span></span>
-<span id="cb3-12"><a href="#cb3-12"></a><span class="co">#&gt;  7 2021 Toyota AFL Prem… Round 1    North Melbourne  Port Adelaide   Marvel Sta…</span></span>
-<span id="cb3-13"><a href="#cb3-13"></a><span class="co">#&gt;  8 2021 Toyota AFL Prem… Round 1    GWS Giants       St Kilda        GIANTS Sta…</span></span>
-<span id="cb3-14"><a href="#cb3-14"></a><span class="co">#&gt;  9 2021 Toyota AFL Prem… Round 1    West Coast Eagl… Gold Coast Suns Optus Stad…</span></span>
-<span id="cb3-15"><a href="#cb3-15"></a><span class="co">#&gt; 10 2021 Toyota AFL Prem… Round 2    Carlton          Collingwood     MCG        </span></span>
-<span id="cb3-16"><a href="#cb3-16"></a><span class="co">#&gt; # … with 188 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2021</span>, <span class="dt">comp =</span> <span class="st">"AFLM"</span>, <span class="dt">source =</span> <span class="st">"AFL"</span>) </span></code></pre></div>
 <p>We can return just one round instead of the whole fixture.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">2</span>) <span class="op">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(compSeason.name, round.name, home.team.name, away.team.name, venue.name)</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co">#&gt; # A tibble: 9 x 5</span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co">#&gt;   compSeason.name       round.name home.team.name  away.team.name   venue.name  </span></span>
-<span id="cb4-5"><a href="#cb4-5"></a><span class="co">#&gt;   &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;       </span></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co">#&gt; 1 2021 Toyota AFL Prem… Round 2    Carlton         Collingwood      MCG         </span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co">#&gt; 2 2021 Toyota AFL Prem… Round 2    Geelong Cats    Brisbane Lions   GMHBA Stadi…</span></span>
-<span id="cb4-8"><a href="#cb4-8"></a><span class="co">#&gt; 3 2021 Toyota AFL Prem… Round 2    Sydney Swans    Adelaide Crows   SCG         </span></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co">#&gt; 4 2021 Toyota AFL Prem… Round 2    Port Adelaide   Essendon         Adelaide Ov…</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="co">#&gt; 5 2021 Toyota AFL Prem… Round 2    St Kilda        Melbourne        Marvel Stad…</span></span>
-<span id="cb4-11"><a href="#cb4-11"></a><span class="co">#&gt; 6 2021 Toyota AFL Prem… Round 2    Gold Coast Suns North Melbourne  Metricon St…</span></span>
-<span id="cb4-12"><a href="#cb4-12"></a><span class="co">#&gt; 7 2021 Toyota AFL Prem… Round 2    Hawthorn        Richmond         MCG         </span></span>
-<span id="cb4-13"><a href="#cb4-13"></a><span class="co">#&gt; 8 2021 Toyota AFL Prem… Round 2    Western Bulldo… West Coast Eagl… Marvel Stad…</span></span>
-<span id="cb4-14"><a href="#cb4-14"></a><span class="co">#&gt; 9 2021 Toyota AFL Prem… Round 2    Fremantle       GWS Giants       Optus Stadi…</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="st">  </span><span class="kw">select</span>(compSeason.name, round.name, home.team.name, away.team.name, venue.name)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 x 5
+#&gt;   compSeason.name       round.name home.team.name  away.team.name   venue.name  
+#&gt;   &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;       
+#&gt; 1 2021 Toyota AFL Prem… Round 2    Carlton         Collingwood      MCG         
+#&gt; 2 2021 Toyota AFL Prem… Round 2    Geelong Cats    Brisbane Lions   GMHBA Stadi…
+#&gt; 3 2021 Toyota AFL Prem… Round 2    Sydney Swans    Adelaide Crows   SCG         
+#&gt; 4 2021 Toyota AFL Prem… Round 2    Port Adelaide   Essendon         Adelaide Ov…
+#&gt; 5 2021 Toyota AFL Prem… Round 2    St Kilda        Melbourne        Marvel Stad…
+#&gt; 6 2021 Toyota AFL Prem… Round 2    Gold Coast Suns North Melbourne  Metricon St…
+#&gt; 7 2021 Toyota AFL Prem… Round 2    Hawthorn        Richmond         MCG         
+#&gt; 8 2021 Toyota AFL Prem… Round 2    Western Bulldo… West Coast Eagl… Marvel Stad…
+#&gt; 9 2021 Toyota AFL Prem… Round 2    Fremantle       GWS Giants       Optus Stadi…</code></pre>
 <p>We could also return the AFLW fixture instead.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2021</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(compSeason.name, round.name, home.team.name, away.team.name, venue.name)</span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co">#&gt; # A tibble: 21 x 5</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co">#&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     </span></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          </span></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co">#&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co">#&gt;  2 2021 NAB AFLW Com… Round 1    St Kilda        Western Bulldo… RSEA Park      </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co">#&gt;  3 2021 NAB AFLW Com… Round 1    Gold Coast Suns Melbourne       Metricon Stadi…</span></span>
-<span id="cb5-9"><a href="#cb5-9"></a><span class="co">#&gt;  4 2021 NAB AFLW Com… Round 1    West Coast Eag… Adelaide Crows  Mineral Resour…</span></span>
-<span id="cb5-10"><a href="#cb5-10"></a><span class="co">#&gt;  5 2021 NAB AFLW Com… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium  </span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="co">#&gt;  6 2021 NAB AFLW Com… Round 1    Richmond        Brisbane Lions  Swinburne Cent…</span></span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="co">#&gt;  7 2021 NAB AFLW Com… Round 1    Fremantle       GWS Giants      Fremantle Oval </span></span>
-<span id="cb5-13"><a href="#cb5-13"></a><span class="co">#&gt;  8 2021 NAB AFLW Com… Round 2    Western Bulldo… Carlton         Victoria Unive…</span></span>
-<span id="cb5-14"><a href="#cb5-14"></a><span class="co">#&gt;  9 2021 NAB AFLW Com… Round 2    Collingwood     Geelong Cats    Victoria Park  </span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="co">#&gt; 10 2021 NAB AFLW Com… Round 2    Melbourne       Richmond        Casey Fields   </span></span>
-<span id="cb5-16"><a href="#cb5-16"></a><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dt">season =</span> <span class="dv">2021</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">select</span>(compSeason.name, round.name, </span>
+<span id="cb6-3"><a href="#cb6-3"></a>         home.team.name, away.team.name, </span>
+<span id="cb6-4"><a href="#cb6-4"></a>         venue.name)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 63 x 5
+#&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     
+#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
+#&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      
+#&gt;  2 2021 NAB AFLW Com… Round 1    St Kilda        Western Bulldo… RSEA Park      
+#&gt;  3 2021 NAB AFLW Com… Round 1    Gold Coast Suns Melbourne       Metricon Stadi…
+#&gt;  4 2021 NAB AFLW Com… Round 1    West Coast Eag… Adelaide Crows  Mineral Resour…
+#&gt;  5 2021 NAB AFLW Com… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium  
+#&gt;  6 2021 NAB AFLW Com… Round 1    Richmond        Brisbane Lions  Swinburne Cent…
+#&gt;  7 2021 NAB AFLW Com… Round 1    Fremantle       GWS Giants      Fremantle Oval 
+#&gt;  8 2021 NAB AFLW Com… Round 2    Western Bulldo… Carlton         Victoria Unive…
+#&gt;  9 2021 NAB AFLW Com… Round 2    Collingwood     Geelong Cats    Victoria Park  
+#&gt; 10 2021 NAB AFLW Com… Round 2    Melbourne       Richmond        Casey Fields   
+#&gt; # … with 53 more rows</code></pre>
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co">#&gt; # A tibble: 9 x 24</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co">#&gt;   tz    hbehinds ateamid  year complete localtime abehinds hteamid</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co">#&gt;   &lt;chr&gt; &lt;lgl&gt;      &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;     &lt;lgl&gt;      &lt;int&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co">#&gt; 1 +11:… NA             7  2021        0 2021-03-… NA             1</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">#&gt; 2 +11:… NA            16  2021        0 2021-03-… NA             2</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">#&gt; 3 +11:… NA            18  2021        0 2021-03-… NA             4</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">#&gt; 4 +11:… NA            10  2021        0 2021-03-… NA             5</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">#&gt; 5 +11:… NA            15  2021        0 2021-03-… NA             9</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">#&gt; 6 +11:… NA             6  2021        0 2021-03-… NA            11</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">#&gt; 7 +11:… NA            13  2021        0 2021-03-… NA            12</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">#&gt; 8 +11:… NA             3  2021        0 2021-03-… NA            14</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">#&gt; 9 +11:… NA             8  2021        0 2021-03-… NA            17</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">#&gt; # … with 16 more variables: is_grand_final &lt;int&gt;, winner &lt;lgl&gt;, is_final &lt;int&gt;,</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">#&gt; #   id &lt;int&gt;, round &lt;int&gt;, venue &lt;chr&gt;, updated &lt;chr&gt;, ateam &lt;chr&gt;,</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">#&gt; #   roundname &lt;chr&gt;, hscore &lt;int&gt;, agoals &lt;lgl&gt;, winnerteamid &lt;lgl&gt;,</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">#&gt; #   date &lt;chr&gt;, ascore &lt;int&gt;, hteam &lt;chr&gt;, hgoals &lt;lgl&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 198 x 24
+#&gt;       id hteam  ascore localtime  year is_grand_final updated ateam hscore date 
+#&gt;    &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     &lt;int&gt;          &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;
+#&gt;  1  6243 Adela…      0 2021-03-…  2021              0 2020-1… Geel…      0 2021…
+#&gt;  2  6245 Brisb…      0 2021-03-…  2021              0 2020-1… Sydn…      0 2021…
+#&gt;  3  6241 Colli…      0 2021-03-…  2021              0 2020-1… West…      0 2021…
+#&gt;  4  6244 Essen…      0 2021-03-…  2021              0 2020-1… Hawt…      0 2021…
+#&gt;  5  6247 Great…      0 2021-03-…  2021              0 2020-1… St K…      0 2021…
+#&gt;  6  6242 Melbo…      0 2021-03-…  2021              0 2020-1… Frem…      0 2021…
+#&gt;  7  6246 North…      0 2021-03-…  2021              0 2020-1… Port…      0 2021…
+#&gt;  8  6240 Richm…      0 2021-03-…  2021              0 2020-1… Carl…      0 2021…
+#&gt;  9  6248 West …      0 2021-03-…  2021              0 2020-1… Gold…      0 2021…
+#&gt; 10  6249 Carlt…      0 2021-03-…  2021              0 2020-1… Coll…      0 2021…
+#&gt; # … with 188 more rows, and 14 more variables: round &lt;int&gt;, tz &lt;chr&gt;,
+#&gt; #   hgoals &lt;lgl&gt;, roundname &lt;chr&gt;, is_final &lt;int&gt;, winner &lt;lgl&gt;,
+#&gt; #   complete &lt;int&gt;, winnerteamid &lt;lgl&gt;, abehinds &lt;lgl&gt;, ateamid &lt;int&gt;,
+#&gt; #   hteamid &lt;int&gt;, hbehinds &lt;lgl&gt;, agoals &lt;lgl&gt;, venue &lt;chr&gt;</code></pre>
 <p>It should also be noted that the various sources of data have their own functions that can be called directly.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># The following are the same</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">5</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture_squiggle</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">5</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># The following are the same</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">5</span>, <span class="dt">source =</span> <span class="st">"squiggle"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture_squiggle</a></span>(<span class="dv">2021</span>, <span class="dt">round_number =</span> <span class="dv">5</span>)</span></code></pre></div>
 </div>
 <div id="womens-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#womens-data" class="anchor"></a>Womens Data</h2>
 <p>With these new functions we now have access to consistent AFLW data for the first time!</p>
-<p>We can get the fixture.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="kw"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span>(<span class="dv">2021</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(compSeason.name, round.name, home.team.name, away.team.name, venue.name)</span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="co">#&gt; # A tibble: 21 x 5</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="co">#&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     </span></span>
-<span id="cb8-5"><a href="#cb8-5"></a><span class="co">#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="co">#&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      </span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="co">#&gt;  2 2021 NAB AFLW Com… Round 1    St Kilda        Western Bulldo… RSEA Park      </span></span>
-<span id="cb8-8"><a href="#cb8-8"></a><span class="co">#&gt;  3 2021 NAB AFLW Com… Round 1    Gold Coast Suns Melbourne       Metricon Stadi…</span></span>
-<span id="cb8-9"><a href="#cb8-9"></a><span class="co">#&gt;  4 2021 NAB AFLW Com… Round 1    West Coast Eag… Adelaide Crows  Mineral Resour…</span></span>
-<span id="cb8-10"><a href="#cb8-10"></a><span class="co">#&gt;  5 2021 NAB AFLW Com… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium  </span></span>
-<span id="cb8-11"><a href="#cb8-11"></a><span class="co">#&gt;  6 2021 NAB AFLW Com… Round 1    Richmond        Brisbane Lions  Swinburne Cent…</span></span>
-<span id="cb8-12"><a href="#cb8-12"></a><span class="co">#&gt;  7 2021 NAB AFLW Com… Round 1    Fremantle       GWS Giants      Fremantle Oval </span></span>
-<span id="cb8-13"><a href="#cb8-13"></a><span class="co">#&gt;  8 2021 NAB AFLW Com… Round 2    Western Bulldo… Carlton         Victoria Unive…</span></span>
-<span id="cb8-14"><a href="#cb8-14"></a><span class="co">#&gt;  9 2021 NAB AFLW Com… Round 2    Collingwood     Geelong Cats    Victoria Park  </span></span>
-<span id="cb8-15"><a href="#cb8-15"></a><span class="co">#&gt; 10 2021 NAB AFLW Com… Round 2    Melbourne       Richmond        Casey Fields   </span></span>
-<span id="cb8-16"><a href="#cb8-16"></a><span class="co">#&gt; # … with 11 more rows</span></span></code></pre></div>
-<p>We can also see match results.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw"><a href="../reference/fetch_results.html">fetch_results</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">1</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>( match.date, match.name,</span>
-<span id="cb9-3"><a href="#cb9-3"></a>         homeTeamScore.matchScore.totalScore, awayTeamScore.matchScore.totalScore)</span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co">#&gt; # A tibble: 7 x 4</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a><span class="co">#&gt;   match.date          match.name       homeTeamScore.match… awayTeamScore.match…</span></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;                           &lt;int&gt;                &lt;int&gt;</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co">#&gt; 1 2020-02-07 08:45:00 Richmond Vs Car…                   14                   48</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co">#&gt; 2 2020-02-08 02:10:00 GWS Giants Vs G…                    9                    8</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co">#&gt; 3 2020-02-08 04:10:00 Melbourne Vs Ka…                   22                   20</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a><span class="co">#&gt; 4 2020-02-08 06:10:00 Brisbane Lions …                   34                   21</span></span>
-<span id="cb9-11"><a href="#cb9-11"></a><span class="co">#&gt; 5 2020-02-09 02:10:00 Collingwood Vs …                   38                   11</span></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co">#&gt; 6 2020-02-09 04:10:00 St Kilda Vs Wes…                   14                   39</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a><span class="co">#&gt; 7 2020-02-09 06:10:00 Fremantle Vs Ge…                   44                   28</span></span></code></pre></div>
-<p>We can also get the ladder at any point.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw"><a href="../reference/fetch_ladder.html">fetch_ladder</a></span>(<span class="dv">2020</span>, <span class="dt">round_number =</span> <span class="dv">6</span>, <span class="dt">comp =</span> <span class="st">"AFLW"</span>) <span class="op">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(season, round_name, position, team.name, played, pointsFor, pointsAgainst, )</span>
-<span id="cb10-3"><a href="#cb10-3"></a><span class="co">#&gt; # A tibble: 14 x 7</span></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co">#&gt;    season round_name  position team.name         played pointsFor pointsAgainst</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co">#&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;              &lt;int&gt;     &lt;int&gt;         &lt;int&gt;</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co">#&gt;  1   2020 Semi Finals        1 Kangaroos              6       309           136</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co">#&gt;  2   2020 Semi Finals        2 GWS Giants             6       175           142</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="co">#&gt;  3   2020 Semi Finals        3 Brisbane Lions         6       198           185</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="co">#&gt;  4   2020 Semi Finals        4 Gold Coast Suns        6       154           152</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="co">#&gt;  5   2020 Semi Finals        5 Geelong Cats           6       211           261</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="co">#&gt;  6   2020 Semi Finals        6 Adelaide Crows         6       180           224</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="co">#&gt;  7   2020 Semi Finals        7 Richmond               6       115           322</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="co">#&gt;  8   2020 Semi Finals        1 Fremantle              6       277           179</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="co">#&gt;  9   2020 Semi Finals        2 Carlton                6       249           164</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co">#&gt; 10   2020 Semi Finals        3 Melbourne              6       204           124</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="co">#&gt; 11   2020 Semi Finals        4 Collingwood            6       229           149</span></span>
-<span id="cb10-17"><a href="#cb10-17"></a><span class="co">#&gt; 12   2020 Semi Finals        5 St Kilda               6       154           170</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a><span class="co">#&gt; 13   2020 Semi Finals        6 Western Bulldogs       6       179           246</span></span>
-<span id="cb10-19"><a href="#cb10-19"></a><span class="co">#&gt; 14   2020 Semi Finals        7 West Coast Eagles      6        85           265</span></span></code></pre></div>
-<p>At the moment, we don’t have <code>fetch_player_stats</code> working for AFLW data but this will come soon. In the meantime, read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> on how you can get AFLW stats using the old method.</p>
+<p>At a high level, any <code>fetch_</code> function will allow you to specify the that <code>comp = "AFLW</code> and will return data. Please note that Womens data only exists when <code>source = "AFL"</code>, which is the default for all <code>fetch_</code> functions.</p>
+<p>Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for specific examples.</p>
 </div>
 </div>
   </div>
