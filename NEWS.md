@@ -32,6 +32,7 @@ The following functions have been soft deprecated in favour of the above `fetch_
 # Bug fixes
 * Fixed issue with master branch being renamed to main
 * Fixed issue with `fetch_betting_odds` not working in new season
+* Fixed issue with `fetch_ladder` where it was returning only latest season [#145](https://github.com/jimmyday12/fitzRoy/issues/145)
 
 # fitzRoy 0.3.3
 

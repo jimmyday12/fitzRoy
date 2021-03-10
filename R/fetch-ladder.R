@@ -11,7 +11,7 @@
 #'
 #' @param season Season in YYYY format, defaults to NULL which returns the year
 #'  corresponding the `Sys.Date()`
-#' @param round_number Round number, defaults to NULL which returns all rounds
+#' @param round_number Round number, defaults to NULL which returns latest round
 #' @param comp One of "AFLM" (default) or "AFLW"
 #' @param source One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
 #' @param ... Optional parameters passed onto various functions depending on source.
@@ -82,19 +82,23 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 
   # check inputs
   season <- check_season(season)
-  check_comp(comp)
+  comp <- check_comp(comp)
   # if (is.null(round_number)) round_number <- ""
-
+  
+  if (length(season) > 1) {
+    rlang::inform("Multiple seasons specified, ignoring round_number")
+    round_number <- NULL
+    }
   # fetch ids
   season_id <- find_season_id(season, comp)
-  if (length(season_id > 1)) round_number <- NULL
+  
   
   if (is.null(round_number)) {
     rlang::inform("No round number specified, trying to return most recent ladder for specified season")
     round_id = ""
   } else {
     round_id <- find_round_id(round_number, season_id = season_id, 
-                                comp = comp, providerId = TRUE, 
+                                comp = comp, providerId = FALSE, 
                                 future_rounds = FALSE)
   } 
 
