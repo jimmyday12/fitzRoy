@@ -98,6 +98,7 @@ footywire_html <- function(x, id) {
 #' @noRd
 get_match_data <- function(id) {
 
+  rlang::inform(glue::glue("Getting data from footywire for match id {id}"))
   # Create URL
   default_url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
   basic_url <- paste(default_url, id, sep = "")
@@ -144,7 +145,7 @@ get_match_data <- function(id) {
         # Join them
         info_columns <- c(
           "Date", "Season", "Round", "Venue", "Player",
-          "Team", "Opposition", "Status", "Match_id"
+          "Team", "Opposition", "Status", "Match_id", "GA"
         )
         player_stats_table <- player_stats_advanced %>%
           dplyr::select(-dplyr::one_of(info_columns)) %>%
