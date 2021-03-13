@@ -82,8 +82,11 @@ find_season_id <- function(season, comp = "AFLM") {
 #' @param season Season, in YYYY format.
 #' @keywords internal
 #' @noRd
-find_round_id <- function(round_number, season = NULL, season_id = NULL, 
-                          comp = "AFLM", providerId = FALSE, future_rounds = TRUE) {
+find_round_id <- function(round_number, season = NULL, 
+                          season_id = NULL, 
+                          comp = "AFLM", 
+                          providerId = FALSE, 
+                          future_rounds = TRUE) {
 
   if (providerId) {
     id_name <- "providerId"
@@ -121,7 +124,8 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL,
   
 
   if (length(id) < 1) {
-    rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au\"?"))
+    rlang::warn(glue::glue("No data found for specified round number and season"))
+    return(NULL)
   }
   return(id)
 }

@@ -174,7 +174,9 @@ get_match_data <- function(id) {
 #' @keywords internal
 #' @noRd
 fetch_footywire_match_ids <- function(season) {
-  paste0("https://www.footywire.com/afl/footy/ft_match_list?", season) %>%
+  url <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
+  
+  url %>%
     xml2::read_html() %>%
     rvest::html_nodes(".data:nth-child(5) a") %>%
     rvest::html_attr("href") %>%

@@ -20,7 +20,8 @@ test_that("fetch_results_afl works for various inputs", {
 
   # change round number
   expect_s3_class(fetch_results_afl(2020, round_number = 2), "tbl")
-  expect_error(fetch_results_afl(2020, round_number = 50))
+  expect_warning(df <- fetch_results_afl(2020, round_number = 50))
+  expect_null(df)
 
   # change comp
   expect_s3_class(fetch_results_afl(2020, round_number = 1, comp = "AFLW"), "tbl")
