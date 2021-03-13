@@ -1,10 +1,10 @@
 ---
-title: "Introduction to fitRoy"
+title: "Introduction to fitzRoy"
 description: >
   Learn how to get started with the basics of fitzRoy
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to fitRoy}
+  %\VignetteIndexEntry{Introduction to fitzRoy}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -30,7 +30,7 @@ library(dplyr)
 library(fitzRoy)
 ```
 ## Fetching Data
-Primarily, `fitzRoy` can be used to access data from various sources using the `fetch_` functions. For a detailed view on how the API works - view the [Main Fetch Functions]() vignette. 
+Primarily, `fitzRoy` can be used to access data from various sources using the `fetch_` functions. For a detailed view on how the API works - view the [Main Fetch Functions](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html) vignette. 
 
 ## Good practices
 In most cases, trying to use the same source for all of your analysis will be most beneficial. This is not always possible as some sources only go back so far (the AFL website only has data back to 2011), while some data is not available (AFL Tables doesn't have decent fixture data). If you are mixing sources, be careful to understand differences in naming structures, team names and player names. 
@@ -200,7 +200,7 @@ fetch_player_stats(2020, comp = "AFLW")
 fitzRoy:::stats_afl_aflw_2020
 ```
 
-We also have detailed player stats courtesty of Fryzigg.
+We also have detailed player stats courtesy of Fryzigg.
 
 ```{r stats2, include=TRUE, eval=FALSE}
 fetch_player_stats(2019, source = "fryzigg")
@@ -219,5 +219,8 @@ stats_afltables <- fetch_player_stats_afltables(1990)
 ```
 
 ### API's
+You can view how to return data from two providers using their API's at the respective Vignettes.
 
+* [Using the Squiggle API](https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html)
+* [Using the Fryzigg API](https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html)
 

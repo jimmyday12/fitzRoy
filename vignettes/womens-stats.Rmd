@@ -1,8 +1,6 @@
 ---
 title: "AFL Womens Example"
-author: "Oscar Lane"
-date: "`r Sys.Date()`"
-output: github_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{AFL Womens Example}
   %\VignetteEngine{knitr::rmarkdown}
@@ -63,7 +61,7 @@ fitzRoy:::lineup_aflw_2021_1 %>%
 
 
 ## Results
-The match results, including the teams playing, venue information and final scores are retunred via `fetch_results`. 
+The match results, including the teams playing, venue information and final scores are returned via `fetch_results`. 
 
 ```{r fetch_results_aflw, eval=FALSE, include=TRUE}
 fetch_results(2020, round_number = 1, comp = "AFLW") %>%

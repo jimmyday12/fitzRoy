@@ -53,7 +53,7 @@ For example, `games` takes the following optional arguments.
 * `game` - Game ID
 * `complete` - Percent of game complete
 
-These can be supplied as named arugments after the query. For example, to return games from just 2020, we would use the following.
+These can be supplied as named arguments after the query. For example, to return games from just 2020, we would use the following.
 
 ```{r, squiggle_games, include=TRUE,eval=FALSE}
 fetch_squiggle_data(query = "games", year = 2020)
