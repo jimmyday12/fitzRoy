@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -131,11 +131,42 @@
 <a href="#fetching-data" class="anchor"></a>Fetching Data</h2>
 <p>Primarily, <code>fitzRoy</code> can be used to access data from various sources using the <code>fetch_</code> functions. For a detailed view on how the API works - view the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Main Fetch Functions</a> vignette.</p>
 </div>
+<div id="data-sources" class="section level2">
+<h2 class="hasAnchor">
+<a href="#data-sources" class="anchor"></a>Data Sources</h2>
+<p>There are 5 main data sources for data in fitzRoy. Where possible, we do not edit the data from how we receive it, although in some cases, we do need to aggregate and calculate certain fields based on the structure of the site.</p>
+<p>You can choose your data source as an argument to any <code>fetch_</code> function using the <code>source =</code> argument.</p>
+<div id="afl-website" class="section level3">
+<h3 class="hasAnchor">
+<a href="#afl-website" class="anchor"></a>AFL website</h3>
+<p>We provide data from the (AFL website)[<a href="https://www.afl.com.au/" class="uri">https://www.afl.com.au/</a>] as the default to any <code>fetch_</code> function. This data is from the official AFL data provider. With this data, we can return data for both the Mens and Womens competitions. The oldest data is from 2012. It provides access to all data types including results, fixtures, ladders, lineups and stats.</p>
+</div>
+<div id="afl-tables" class="section level3">
+<h3 class="hasAnchor">
+<a href="#afl-tables" class="anchor"></a>AFL tables</h3>
+<p><a href="https://afltables.com/afl/afl_index.html">AFL Tables</a> has historically been the main source of data in fitzRoy. It is the most complete source of data about AFL that exists (to our knowledge at least!). It contains data from 1897 and is the only data source included in fitzRoy with such historical data. The types of data it contains are results, ladders and stats.</p>
+</div>
+<div id="footywire" class="section level3">
+<h3 class="hasAnchor">
+<a href="#footywire" class="anchor"></a>Footywire</h3>
+<p><a href="https://www.footywire.com/">Footywire</a> has traditionally been the main source of player statistics in fitzRoy. It contains data dating back to 2012 and was generally used as a supplement to AFL Tables data. The types of data it returns are results, fixtures and statistics.</p>
+</div>
+<div id="squiggle" class="section level3">
+<h3 class="hasAnchor">
+<a href="#squiggle" class="anchor"></a>Squiggle</h3>
+<p><a href="https://squiggle.com.au/">Squiggle</a> is a famous AFL Prediction and Analysis website run by <a href="https://twitter.com/squiggleafl?lang=en">Max Barry</a>. In recent years, Squiggle has become the main place to aggregate various predictive models. Max has provided a nice and well documented <a href="https://api.squiggle.com.au/">API</a> that fitzRoy uses to return data. Helper functions included in the <code>fetch_</code> family will return results, fixtures and ladders but the <code>fetch_squiggle_data</code> function provides direct access to the API. Read the <a href="https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html">Squiggle API vignette</a> for more details.</p>
+</div>
+<div id="fryzigg" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fryzigg" class="anchor"></a>Fryzigg</h3>
+<p>Twitter user <a href="https://twitter.com/fryzigg?lang=en">Fryzigg</a> has provided access to some advanced player statistics. These are included in the <code>fetch_player_stats</code> function. Read the <a href="https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html">Fryzigg API vignette</a> for more information.</p>
+</div>
+</div>
 <div id="good-practices" class="section level2">
 <h2 class="hasAnchor">
 <a href="#good-practices" class="anchor"></a>Good practices</h2>
 <p>In most cases, trying to use the same source for all of your analysis will be most beneficial. This is not always possible as some sources only go back so far (the AFL website only has data back to 2011), while some data is not available (AFL Tables doesn’t have decent fixture data). If you are mixing sources, be careful to understand differences in naming structures, team names and player names.</p>
-<p>It is also a good idea to avoid regularly calling whole datasets. Where possible, try to keep an off-line version of your data and only request the smallest amount possible to get the new data you require. This is both faster (less data transferred over your Internet connection and less data living in your memory) but also helps to reduce traffic on the data providers servers.</p>
+<p>It is also a good idea to avoid regularly fetching whole datasets. Where possible, try to keep an off-line version of your data and only request the smallest amount possible to get the new data you require. This is both faster (less data transferred over your Internet connection and less data living in your computer memory) but also helps to reduce traffic on the data providers servers.</p>
 </div>
 <div id="examples" class="section level2">
 <h2 class="hasAnchor">

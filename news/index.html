@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.3.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -159,33 +159,23 @@
       <small>Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="fitzroy-development-version" class="section level1">
-<h1 class="page-header" data-toc-text="development version">
-<a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
+    <div id="fitzroy-100" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#fitzroy-100" class="anchor"></a>fitzRoy 1.0.0<small> Unreleased </small>
 </h1>
-<div id="major-changes" class="section level2">
+<div id="new-features" class="section level2">
 <h2 class="hasAnchor">
-<a href="#major-changes" class="anchor"></a>Major Changes</h2>
+<a href="#new-features" class="anchor"></a>New Features</h2>
 <ul>
-<li>Added a new group of <code>fetch_*</code> functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour</li>
-<li>
-<code>fetch_fixture</code> and associated helper functions <code>fetch_fixture_afl</code>, <code>fetch_fixture_footywire</code> and <code>fetch_fixture_squiggle</code> will return the fixture for a particular season and round</li>
-<li>
-<code>fetch_results</code> and associated helper functions <code>fetch_results_afl</code>, <code>fetch_results_footywire</code>, <code>fetch_results_sqiggle</code> and <code>fetch_results_afltables</code> will return the results for a particular season and round</li>
-<li>
-<code>fetch_ladder</code> and associated helper functions <code>fetch_ladder_afl</code>, <code>fetch_ladder_sqiggle</code> and <code>fetch_ladder_afltables</code> will return the ladder for a particular season and round.</li>
-<li>
-<code>fetch_player_stats</code> and associated helper functions <code>fetch_player_stats_footywire</code>, <code>fetch_player_stats_afltables</code> and <code>fetch_player_stats_fryzigg</code> will return the match stats for a particular season and round.</li>
-<li>
-<code>fetch_lineup</code> and associated helper function <code>fetch_lineup_afl</code> will return the lineup for a particular season and round, including upcoming matches if teams have been announced</li>
+<li>Added a new group of <code>fetch_*</code> functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour ** <code>fetch_fixture</code> and associated helper functions <code>fetch_fixture_afl</code>, <code>fetch_fixture_footywire</code> and <code>fetch_fixture_squiggle</code> will return the fixture for a particular season and round ** <code>fetch_results</code> and associated helper functions <code>fetch_results_afl</code>, <code>fetch_results_footywire</code>, <code>fetch_results_sqiggle</code> and <code>fetch_results_afltables</code> will return the results for a particular season and round ** <code>fetch_ladder</code> and associated helper functions <code>fetch_ladder_afl</code>, <code>fetch_ladder_sqiggle</code> and <code>fetch_ladder_afltables</code> will return the ladder for a particular season and round. ** <code>fetch_player_stats</code> and associated helper functions <code>fetch_player_stats_footywire</code>, <code>fetch_player_stats_afltables</code> and <code>fetch_player_stats_fryzigg</code> will return the match stats for a particular season and round. ** <code>fetch_lineup</code> and associated helper function <code>fetch_lineup_afl</code> will return the lineup for a particular season and round, including upcoming matches if teams have been announced</li>
 </ul>
 </div>
 <div id="deprecated-functions" class="section level2">
 <h2 class="hasAnchor">
-<a href="#deprecated-functions" class="anchor"></a>Deprecated Functions</h2>
-<p>The following functions have been soft deprecated in favour of the above <code>fetch_*</code> functions. In most cases, calling a <code>fetch_*</code> function will be the same as calling the original deprecated function</p>
+<a href="#deprecated-functions" class="anchor"></a>Deprecated functions</h2>
+<p>The following have all been soft deprecated. They will still work but likely be removed in a future version.</p>
 <ul>
-<li>Deprecated <code>get_afl_fixture</code> - use <code>fetch_fixture_afl</code>
+<li>Deprecated <code>get_afl_fixture</code> - please use <code>fetch_fixture_afl</code>
 </li>
 <li>Deprecated <code>get_fixture</code> - use <code>fetch_fixture_footywire</code>
 </li>
@@ -216,6 +206,17 @@
 </li>
 </ul>
 </div>
+<div id="minor-changes-and-bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-and-bug-fixes" class="anchor"></a>Minor changes and bug fixes</h2>
+<ul>
+<li>Fixed issue with master branch being renamed to main</li>
+<li>Fixed issue with <code>fetch_betting_odds</code> not working in new season</li>
+<li>Fixed issue with <code>fetch_ladder</code> where it was returning only latest season <a href="https://github.com/jimmyday12/fitzRoy/issues/145"><a href='https://github.com/jimmyday12/fitzRoy/issues/145'>#145</a></a>
+</li>
+<li>Various fixes to data sources have been made on the data repo</li>
+</ul>
+</div>
 </div>
     <div id="fitzroy-033" class="section level1">
 <h1 class="page-header" data-toc-text="0.3.3">
@@ -229,9 +230,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New features</h2>
+<a href="#new-features-1" class="anchor"></a>New features</h2>
 <ul>
 <li>Added AFL stats <a href="https://github.com/Fryzigg">@fryzigg</a>
 </li>
@@ -268,9 +269,9 @@
 <li>The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Fixed <code>get_footywire_betting_odds</code> to return an empty data frame when only future seasons are requested rather than raising an error (<a href="https://github.com/jimmyday12/fitzRoy/issues/112"><a href='https://github.com/jimmyday12/fitzRoy/issues/112'>#112</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 <li>Fixed issue with afltables data that caused issues with home/away team in drawn finals matches <a href="https://github.com/jimmyday12/fitzRoy/issues/116"><a href='https://github.com/jimmyday12/fitzRoy/issues/116'>#116</a></a>
@@ -299,9 +300,9 @@
 <li>Addition of <code>replace_venues</code> - changes venue names for all data sources to match AFL Tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/15"><a href='https://github.com/jimmyday12/fitzRoy/issues/15'>#15</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug Fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug Fixes</h2>
 <ul>
 <li>Updated <code>womens-stats</code> vignette to prevent it from running chunks if the cookie had failed.</li>
 <li>Fixed incorrect round numbers for fixture and betting data from <code>footywire.com</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/93"><a href='https://github.com/jimmyday12/fitzRoy/issues/93'>#93</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/95"><a href='https://github.com/jimmyday12/fitzRoy/issues/95'>#95</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/102"><a href='https://github.com/jimmyday12/fitzRoy/issues/102'>#102</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/104"><a href='https://github.com/jimmyday12/fitzRoy/issues/104'>#104</a></a>, <a href="https://github.com/jimmyday12/fitzRoy/issues/106"><a href='https://github.com/jimmyday12/fitzRoy/issues/106'>#106</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
@@ -326,9 +327,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>get_footywire_betting_odds</code> function that returns basic match and betting data from www.footywire.com. (<a href="https://github.com/jimmyday12/fitzRoy/issues/10"><a href='https://github.com/jimmyday12/fitzRoy/issues/10'>#10</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>
