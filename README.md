@@ -46,8 +46,8 @@ devtools::install_github("jimmyday12/fitzRoy")
 The primary functions in `fitzRoy` are the `fetch_*` functions. These
 provide access to the most common types of data using a consistent API.
 View the [Quick Start
-Vignette](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html)
-to quickly get going with data analysis.
+Vignette](https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html) to
+quickly get going with data analysis.
 
 The five main functions are `fetch_fixture`, `fetch_lineup`,
 `fetch_results`, `fetch_ladder` and `fetch_player_stats`.
