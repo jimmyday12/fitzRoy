@@ -1,19 +1,16 @@
-# fitzRoy (development version)
+# fitzRoy 1.0.0
 
-## Major Changes
-
+## New Features
 * Added a new group of `fetch_*` functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour
-* `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle` will return the fixture for a particular season and round
-* `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables` will return the results for a particular season and round
-* `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables` will return the ladder for a particular season and round.
-* `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
-* `fetch_lineup` and associated helper function `fetch_lineup_afl` will return the lineup for a particular season and round, including upcoming matches if teams have been announced
+** `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle` will return the fixture for a particular season and round
+** `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables` will return the results for a particular season and round
+** `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables` will return the ladder for a particular season and round.
+** `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
+** `fetch_lineup` and associated helper function `fetch_lineup_afl` will return the lineup for a particular season and round, including upcoming matches if teams have been announced
 
-
-## Deprecated Functions
-The following functions have been soft deprecated in favour of the above `fetch_*` functions. In most cases, calling a `fetch_*` function will be the same as calling the original deprecated function
-
-* Deprecated `get_afl_fixture` - use `fetch_fixture_afl`
+## Deprecated functions
+The following have all been soft deprecated. They will still work but likely be removed in a future version.
+* Deprecated `get_afl_fixture` - please use `fetch_fixture_afl`
 * Deprecated `get_fixture` - use `fetch_fixture_footywire`
 * Deprecated `get_match_results` - use `fetch_results_afltables`
 * Deprecated `get_footywire_match_results` - use `fetch_results_footywire`
@@ -29,10 +26,11 @@ The following functions have been soft deprecated in favour of the above `fetch_
 * Deprecated `get_aflw_match_data` - use `fetch_results_afl`
 * Deprecated `get_aflw_player_stats` - use `fetch_player_stats_fryzigg`
 
-# Bug fixes
+## Minor changes and bug fixes
 * Fixed issue with master branch being renamed to main
 * Fixed issue with `fetch_betting_odds` not working in new season
 * Fixed issue with `fetch_ladder` where it was returning only latest season [#145](https://github.com/jimmyday12/fitzRoy/issues/145)
+* Various fixes to data sources have been made on the data repo
 
 # fitzRoy 0.3.3
 
