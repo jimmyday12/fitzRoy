@@ -101,6 +101,8 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
                                 comp = comp, providerId = FALSE, 
                                 future_rounds = FALSE)
   } 
+  
+  if(is.null(round_id)) return(NULL)
 
   # Make request
   api_url <- season_id %>% 
