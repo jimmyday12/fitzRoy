@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
       </span>
     </div>
 
@@ -131,8 +131,22 @@
     </li>
   </ul>
 </li>
-<li>
-  <a href="../news/index.html">Changelog</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    News
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Releases</li>
+    <li>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0.en/">fitzRoy 1.0.0</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+      <a href="../news/index.html">Changelog</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -159,6 +173,11 @@
       <small>Source: <a href='https://github.com/jimmyday12/fitzRoy/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="fitzroy-development-version" class="section level1">
+<h1 class="page-header" data-toc-text="development version">
+<a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
+</h1>
+</div>
     <div id="fitzroy-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
 <a href="#fitzroy-100" class="anchor"></a>fitzRoy 1.0.0<small> 2021-03-16 </small>
@@ -167,7 +186,17 @@
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>New Features</h2>
 <ul>
-<li>Added a new group of <code>fetch_*</code> functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour ** <code>fetch_fixture</code> and associated helper functions <code>fetch_fixture_afl</code>, <code>fetch_fixture_footywire</code> and <code>fetch_fixture_squiggle</code> will return the fixture for a particular season and round ** <code>fetch_results</code> and associated helper functions <code>fetch_results_afl</code>, <code>fetch_results_footywire</code>, <code>fetch_results_sqiggle</code> and <code>fetch_results_afltables</code> will return the results for a particular season and round ** <code>fetch_ladder</code> and associated helper functions <code>fetch_ladder_afl</code>, <code>fetch_ladder_sqiggle</code> and <code>fetch_ladder_afltables</code> will return the ladder for a particular season and round. ** <code>fetch_player_stats</code> and associated helper functions <code>fetch_player_stats_footywire</code>, <code>fetch_player_stats_afltables</code> and <code>fetch_player_stats_fryzigg</code> will return the match stats for a particular season and round. ** <code>fetch_lineup</code> and associated helper function <code>fetch_lineup_afl</code> will return the lineup for a particular season and round, including upcoming matches if teams have been announced</li>
+<li>Added a new group of <code>fetch_*</code> functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour</li>
+<li>
+<code>fetch_fixture</code> and associated helper functions <code>fetch_fixture_afl</code>, <code>fetch_fixture_footywire</code> and <code>fetch_fixture_squiggle</code> will return the fixture for a particular season and round</li>
+<li>
+<code>fetch_results</code> and associated helper functions <code>fetch_results_afl</code>, <code>fetch_results_footywire</code>, <code>fetch_results_sqiggle</code> and <code>fetch_results_afltables</code> will return the results for a particular season and round</li>
+<li>
+<code>fetch_ladder</code> and associated helper functions <code>fetch_ladder_afl</code>, <code>fetch_ladder_sqiggle</code> and <code>fetch_ladder_afltables</code> will return the ladder for a particular season and round.</li>
+<li>
+<code>fetch_player_stats</code> and associated helper functions <code>fetch_player_stats_footywire</code>, <code>fetch_player_stats_afltables</code> and <code>fetch_player_stats_fryzigg</code> will return the match stats for a particular season and round.</li>
+<li>
+<code>fetch_lineup</code> and associated helper function <code>fetch_lineup_afl</code> will return the lineup for a particular season and round, including upcoming matches if teams have been announced</li>
 </ul>
 </div>
 <div id="deprecated-functions" class="section level2">
