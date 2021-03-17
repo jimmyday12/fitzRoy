@@ -97,6 +97,10 @@ articles:
 - title: Other
   contents:
   - docker-support
-    
+
 news:
-  one_page: true
+  releases:
+    - text: "fitzRoy 1.0.0"
+      href: https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/
+   
+

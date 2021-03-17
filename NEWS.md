@@ -2,11 +2,11 @@
 
 ## New Features
 * Added a new group of `fetch_*` functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour
-** `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle` will return the fixture for a particular season and round
-** `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables` will return the results for a particular season and round
-** `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables` will return the ladder for a particular season and round.
-** `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
-** `fetch_lineup` and associated helper function `fetch_lineup_afl` will return the lineup for a particular season and round, including upcoming matches if teams have been announced
+* `fetch_fixture` and associated helper functions `fetch_fixture_afl`, `fetch_fixture_footywire` and `fetch_fixture_squiggle` will return the fixture for a particular season and round
+* `fetch_results` and associated helper functions `fetch_results_afl`, `fetch_results_footywire`, `fetch_results_sqiggle` and `fetch_results_afltables` will return the results for a particular season and round
+* `fetch_ladder` and associated helper functions `fetch_ladder_afl`, `fetch_ladder_sqiggle` and `fetch_ladder_afltables` will return the ladder for a particular season and round.
+* `fetch_player_stats` and associated helper functions `fetch_player_stats_footywire`, `fetch_player_stats_afltables` and `fetch_player_stats_fryzigg` will return the match stats for a particular season and round.
+* `fetch_lineup` and associated helper function `fetch_lineup_afl` will return the lineup for a particular season and round, including upcoming matches if teams have been announced
 
 ## Deprecated functions
 The following have all been soft deprecated. They will still work but likely be removed in a future version.
