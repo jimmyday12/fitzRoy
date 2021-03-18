@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![Run
-R-CMD-check](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions?query=workflow%3AR-CMD-check)
+[![R build
+status](https://github.com/jimmyday12/FitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/FitzRoy/actions)
 [![Coverage
 status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
 [![CRAN
