@@ -1,5 +1,7 @@
 # fitzRoy (development version)
 
+* Fixed an a bug in `fetch_fixture_footywire` for older versions of R [#146](https://github.com/jimmyday12/fitzRoy/issues/146)
+
 # fitzRoy 1.0.0
 
 ## New Features

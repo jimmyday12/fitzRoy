@@ -209,7 +209,7 @@ Check the following url on footywire
   games_df <- games_df %>%
     dplyr::group_by(.data$Season.Game) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
+    dplyr::mutate(Venue = replace_venues(as.character(.data$Venue))) %>%
     dplyr::ungroup()
 
   # Tidy columns
