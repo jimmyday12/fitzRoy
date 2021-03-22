@@ -155,7 +155,12 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
     if (length(urls) != 0) {
       cli::cli_alert_info("New data found for {.val {length(urls)}} matches")
       dat_new <- scrape_afltables_match(urls)
-      dat <- dplyr::bind_rows(dat, dat_new)
+
+      dat <- list(dat, dat_new) %>%
+        # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
+        # so we need to make them consistent before joining to avoid type errors
+        purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
+        dplyr::bind_rows(.)
     }
   } else {
     cli::cli_alert_info("No new data found - returning cached data")

@@ -30,6 +30,7 @@ test_that("get_afltables_player_ids works", {
   
   expect_type(get_afltables_player_ids(1897:2020), "list")
   expect_type(get_afltables_player_ids(2017), "list")
+  expect_type(get_afltables_player_ids(2021), "list")
   expect_error(get_afltables_player_ids())
   expect_error(suppressWarnings(get_afltables_player_ids("a")))
 })
