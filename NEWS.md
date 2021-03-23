@@ -1,6 +1,7 @@
 # fitzRoy (development version)
 
 * Fixed an a bug in `fetch_fixture_footywire` for older versions of R [#146](https://github.com/jimmyday12/fitzRoy/issues/146)
+* Fixed type mismatch in `fetch_player_stats_afltables` and handling blank seasons in `fetch_ladder_afl` ([#149](https://github.com/jimmyday12/fitzRoy/issues/149), [@cfranklin11](https://github.com/cfranklin11))
 
 # fitzRoy 1.0.0
 
