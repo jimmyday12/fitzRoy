@@ -26,11 +26,11 @@ test_that("check_source works for various inputs", {
   testthat::skip_on_cran()
   
   # successes
-  expect_invisible(check_source("AFL"))
-  expect_invisible(check_source("afltables"))
-  expect_invisible(check_source("footywire"))
-  expect_invisible(check_source("squiggle"))
-  expect_invisible(check_source("fryzigg"))
+  expect_equal(check_source("AFL"), "AFL")
+  expect_equal(check_source("afltables"), "afltables")
+  expect_equal(check_source("footywire"), "footywire")
+  expect_equal(check_source("squiggle"), "squiggle")
+  expect_equal(check_source("fryzigg"), "fryzigg")
   
   # errors
   expect_error(check_source())
