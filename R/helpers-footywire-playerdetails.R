@@ -1,5 +1,14 @@
 
-fetch_past_players_footywire <- function(team){
+#' Get past players footywire
+#'
+#' Returns past players
+#'
+#' @param team Team played for
+#'
+#'
+#' @keywords internal
+#' @noRd
+get_past_players_footywire <- function(team){
   path <- dplyr::case_when(
     team == "Adelaide" ~ "ti-adelaide-crows",
     team == "Brisbane Lions" ~ "ti-brisbane-lions",
@@ -29,10 +38,19 @@ fetch_past_players_footywire <- function(team){
     rvest::html_attr("href")
   
   players_url %>%
-    purrr::map_dfr(fetch_past_player_footywire)
+    purrr::map_dfr(get_past_player_footywire)
 }
 
-fetch_past_player_footywire <- function(path){
+#' Get afltables player ids
+#'
+#' Returns player details
+#'
+#' @param path path for 
+#'
+#'
+#' @keywords internal
+#' @noRd
+get_past_player_footywire <- function(path){
   
   players_html <- rvest::read_html(paste0("https://www.footywire.com/afl/footy/", path))
   
