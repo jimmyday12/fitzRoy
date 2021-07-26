@@ -50,7 +50,8 @@ test_that("fetch_results_afltables works for various inputs", {
   testthat::skip_on_cran()
 
   # TODO fix warnings
-
+  df <- fetch_results_afltables(1897:2021)
+  expect_false(anyNA(df$Home.Points))
   # test normal function
   expect_s3_class(fetch_results_afltables(2020, round = 1), "tbl")
 

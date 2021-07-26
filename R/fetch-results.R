@@ -115,10 +115,16 @@ fetch_results_afltables <- function(season = NULL, round_number = NULL) {
     "Away.Team", "Away.Score", "Venue"
   )
   url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
-  match_data <- suppressMessages(
-    readr::read_table(url_text, skip = 2, col_names = column_names)
-  )
-
+  #match_data <- suppressMessages(
+  #  readr::read_table(url_text, skip = 2, col_names = column_names)
+  #)
+  
+  tmp_file <- tempfile()
+  download.file(url_text, tmp_file)
+  match_data <- readr::read_fwf(tmp_file, skip = 2, col_types = c("dccccccc"))
+  names(match_data) <- column_names
+  tmp_file <- file.remove(tmp_file)
+  
   # Separate score out into components ----
   match_data <- match_data %>%
     tidyr::separate(.data$Home.Score,

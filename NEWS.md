@@ -3,6 +3,7 @@
 * Fixed an a bug in `fetch_fixture_footywire` for older versions of R [#146](https://github.com/jimmyday12/fitzRoy/issues/146)
 * Fixed type mismatch in `fetch_player_stats_afltables` and handling blank seasons in `fetch_ladder_afl` ([#149](https://github.com/jimmyday12/fitzRoy/issues/149), [@cfranklin11](https://github.com/cfranklin11))
 * Updated error message in `check_source` which is used in various functions [#147](https://github.com/jimmyday12/fitzRoy/issues/147)
+* Fixed issue with `fetch_results_afltabeles` caused by a `readr` update
 
 # fitzRoy 1.0.0
 
