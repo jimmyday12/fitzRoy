@@ -28,7 +28,7 @@ get_player_details_footywire <- function(team, current = TRUE){
     team == "West Coast" ~ "west-coast-eagles",
     team == "Western Bulldogs" ~ "western-bulldogs",
     TRUE ~ ""
-    )
+  )
   
   if (current == TRUE) {
     path <- paste0("tp-", team_abr)
@@ -63,7 +63,7 @@ get_player_details_footywire <- function(team, current = TRUE){
       dplyr::mutate(first_name = trimws(first_name))
     
     return(df)
-      
+    
   } else {
     
     players_url <- html %>%
@@ -75,8 +75,8 @@ get_player_details_footywire <- function(team, current = TRUE){
     
     return(df)
   }
-
-
+  
+  
 }
 
 #' Get afltables player ids
