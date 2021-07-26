@@ -194,7 +194,7 @@
 <span class="va">fixture</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">utcStartTime</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 63 x 5
+<pre><code>#&gt; # A tibble: 63 × 5
 #&gt;    utcStartTime      round.name home.team.name  away.team.name  venue.name      
 #&gt;    &lt;chr&gt;             &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;           
 #&gt;  1 2021-01-28T08:15… Round 1    Carlton         Collingwood     Ikon Park       
@@ -213,7 +213,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">5</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">utcStartTime</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 5
+<pre><code>#&gt; # A tibble: 9 × 5
 #&gt;   utcStartTime           round.name home.team.name   away.team.name venue.name  
 #&gt;   &lt;chr&gt;                  &lt;chr&gt;      &lt;chr&gt;            &lt;chr&gt;          &lt;chr&gt;       
 #&gt; 1 2021-04-15T09:20:00.0… Round 5    St Kilda         Richmond       Marvel Stad…
@@ -242,7 +242,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">round.name</span>, <span class="va">status</span>, <span class="va">teamName</span>, 
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 294 x 6
+<pre><code>#&gt; # A tibble: 294 × 6
 #&gt;    round.name status  teamName player.playerName.… player.playerName… teamStatus
 #&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;     
 #&gt;  1 Round 1    CONCLU… Carlton  Brooke              Vernon             FINAL_TEAM
@@ -264,7 +264,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">fetch_match_results_afltables</span><span class="op">(</span><span class="fl">1897</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span>
 <span class="va">results</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 15,614 x 16
+<pre><code>#&gt; # A tibble: 15,614 × 16
 #&gt;     Game Date       Round Home.Team   Home.Goals Home.Behinds Home.Points
 #&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;int&gt;        &lt;int&gt;       &lt;int&gt;
 #&gt;  1     1 1897-05-08 R1    Fitzroy              6           13          49
@@ -284,7 +284,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_results.html">fetch_results_afltables</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span>
 <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span><span class="op">(</span><span class="va">results</span>, <span class="va">results_new</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 15,776 x 16
+<pre><code>#&gt; # A tibble: 15,776 × 16
 #&gt;     Game Date       Round Home.Team   Home.Goals Home.Behinds Home.Points
 #&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;            &lt;int&gt;        &lt;int&gt;       &lt;int&gt;
 #&gt;  1     1 1897-05-08 R1    Fitzroy              6           13          49
@@ -312,7 +312,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">match.name</span>, <span class="va">venue.name</span>, <span class="va">round.name</span>,
          <span class="va">homeTeamScore.matchScore.totalScore</span>,
          <span class="va">awayTeamScore.matchScore.totalScore</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 46 x 5
+<pre><code>#&gt; # A tibble: 46 × 5
 #&gt;    match.name    venue.name     round.name homeTeamScore.mat… awayTeamScore.mat…
 #&gt;    &lt;chr&gt;         &lt;chr&gt;          &lt;chr&gt;                   &lt;int&gt;              &lt;int&gt;
 #&gt;  1 Richmond Vs … Ikon Park      Round 1                    14                 48
@@ -336,7 +336,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">season</span>, <span class="va">round_name</span>, <span class="va">position</span>, 
          <span class="va">team.name</span>, <span class="va">pointsFor</span>, <span class="va">pointsAgainst</span>, <span class="va">form</span><span class="op">)</span>
 <span class="va">ladder</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 14 x 7
+<pre><code>#&gt; # A tibble: 14 × 7
 #&gt;    season round_name  position team.name         pointsFor pointsAgainst form  
 #&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;                 &lt;int&gt;         &lt;int&gt; &lt;chr&gt; 
 #&gt;  1   2020 Semi Finals        1 Kangaroos               309           136 LWWWWW
@@ -372,7 +372,7 @@
 <p>The default is again the AFL.com.au which is fairly comprehensive.</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1,932 x 67
+<pre><code>#&gt; # A tibble: 1,932 × 67
 #&gt;    providerId  utcStartTime  status compSeason.shor… round.name round.roundNumb…
 #&gt;    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;            &lt;chr&gt;                 &lt;int&gt;
 #&gt;  1 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
@@ -412,7 +412,7 @@
 <p>We also have detailed player stats courtesy of Fryzigg.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2019</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9,108 x 81
+<pre><code>#&gt; # A tibble: 9,108 × 81
 #&gt;    venue_name match_id match_home_team match_away_team match_date
 #&gt;    &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;     
 #&gt;  1 MCG           15408 Carlton         Richmond        2019-03-21

@@ -146,7 +146,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 63 x 5
+<pre><code>#&gt; # A tibble: 63 × 5
 #&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     
 #&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
 #&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      
@@ -170,7 +170,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">round.name</span>, <span class="va">status</span>, <span class="va">teamName</span>, 
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 294 x 6
+<pre><code>#&gt; # A tibble: 294 × 6
 #&gt;    round.name status  teamName player.playerName.… player.playerName… teamStatus
 #&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;     
 #&gt;  1 Round 1    CONCLU… Carlton  Brooke              Vernon             FINAL_TEAM
@@ -193,7 +193,7 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span> <span class="va">match.date</span>, <span class="va">match.name</span>,
          <span class="va">homeTeamScore.matchScore.totalScore</span>, <span class="va">awayTeamScore.matchScore.totalScore</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 7 x 4
+<pre><code>#&gt; # A tibble: 7 × 4
 #&gt;   match.date          match.name       homeTeamScore.match… awayTeamScore.match…
 #&gt;   &lt;dttm&gt;              &lt;chr&gt;                           &lt;int&gt;                &lt;int&gt;
 #&gt; 1 2020-02-07 08:45:00 Richmond Vs Car…                   14                   48
@@ -213,7 +213,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">season</span>, <span class="va">round_name</span>, 
          <span class="va">position</span>, <span class="va">team.name</span>, <span class="va">played</span>, 
          <span class="va">pointsFor</span>, <span class="va">pointsAgainst</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 14 x 7
+<pre><code>#&gt; # A tibble: 14 × 7
 #&gt;    season round_name  position team.name         played pointsFor pointsAgainst
 #&gt;     &lt;dbl&gt; &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;              &lt;int&gt;     &lt;int&gt;         &lt;int&gt;
 #&gt;  1   2020 Semi Finals        1 Kangaroos              6       309           136
@@ -238,7 +238,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">player.player.player.givenName</span><span class="op">:</span><span class="va">clearances.totalClearances</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 294 x 45
+<pre><code>#&gt; # A tibble: 294 × 45
 #&gt;    player.player.pl… player.player.pl… teamId gamesPlayed timeOnGroundPer… goals
 #&gt;    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;  &lt;lgl&gt;                  &lt;dbl&gt; &lt;dbl&gt;
 #&gt;  1 Gabrielle         Seymour           CD_T8… NA                        93     0

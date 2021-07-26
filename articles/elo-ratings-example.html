@@ -128,7 +128,7 @@
       <h1 data-toc-skip>ELO Ratings Example</h1>
                         <h4 class="author">James Day</h4>
             
-            <h4 class="date">2021-03-23</h4>
+            <h4 class="date">2021-07-26</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/elo-ratings-example.Rmd"><code>vignettes/elo-ratings-example.Rmd</code></a></small>
       <div class="hidden name"><code>elo-ratings-example.Rmd</code></div>
@@ -161,7 +161,7 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&lt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 16</span>
+<span class="co">#&gt; # A tibble: 6 × 16</span>
 <span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points Away.Team</span>
 <span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;    </span>
 <span class="co">#&gt; 1 15402 2018-09-08 QF    West Coa…         12           14          86 Collingw…</span>
@@ -176,7 +176,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 7</span>
+<span class="co">#&gt; # A tibble: 6 × 7</span>
 <span class="co">#&gt;   Date                Season Season.Game Round Home.Team    Away.Team   Venue   </span>
 <span class="co">#&gt;   &lt;dttm&gt;               &lt;dbl&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;   </span>
 <span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton      Richmond    M.C.G.  </span>
@@ -202,7 +202,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Round.Number <span class="op">=</span> <span class="va">`Round`</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 7</span>
+<span class="co">#&gt; # A tibble: 6 × 7</span>
 <span class="co">#&gt;   Date       Season Season.Game Round.Number Home.Team    Away.Team    Venue    </span>
 <span class="co">#&gt;   &lt;date&gt;      &lt;dbl&gt;       &lt;int&gt;        &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;    </span>
 <span class="co">#&gt; 1 2019-03-21   2019           1            1 Carlton      Richmond     M.C.G.   </span>
@@ -319,7 +319,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">elo.data</span>, newdata <span class="op">=</span> <span class="va">fixture</span><span class="op">)</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 x 8</span>
+<span class="co">#&gt; # A tibble: 6 × 8</span>
 <span class="co">#&gt;   Date       Season Season.Game Round.Number Home.Team   Away.Team  Venue   Prob</span>
 <span class="co">#&gt;   &lt;date&gt;      &lt;dbl&gt;       &lt;int&gt;        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;</span>
 <span class="co">#&gt; 1 2019-03-21   2019           1            1 Carlton     Richmond   M.C.G. 0.361</span>

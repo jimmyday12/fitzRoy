@@ -179,7 +179,7 @@
 <p>All of the functions behave the same. The following are some examples using the <code>fetch_fixture</code> function but can equally be applied to any of the family of <code>fetch_</code> functions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 198 x 46
+<pre><code>#&gt; # A tibble: 198 × 46
 #&gt;       id providerId   utcStartTime       status  compSeason.id compSeason.provi…
 #&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;              &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;            
 #&gt;  1  2991 CD_M2021014… 2021-03-18T08:25:… SCHEDU…            34 CD_S2021014      
@@ -216,7 +216,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 5
+<pre><code>#&gt; # A tibble: 9 × 5
 #&gt;   compSeason.name       round.name home.team.name  away.team.name   venue.name  
 #&gt;   &lt;chr&gt;                 &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;       
 #&gt; 1 2021 Toyota AFL Prem… Round 2    Carlton         Collingwood      MCG         
@@ -234,7 +234,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 63 x 5
+<pre><code>#&gt; # A tibble: 63 × 5
 #&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     
 #&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
 #&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      
@@ -251,7 +251,7 @@
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 198 x 24
+<pre><code>#&gt; # A tibble: 198 × 24
 #&gt;       id hteam  ascore localtime  year is_grand_final updated ateam hscore date 
 #&gt;    &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     &lt;int&gt;          &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;
 #&gt;  1  6243 Adela…      0 2021-03-…  2021              0 2020-1… Geel…      0 2021…

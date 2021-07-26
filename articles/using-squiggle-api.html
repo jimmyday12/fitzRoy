@@ -174,7 +174,7 @@
 <p>These can be supplied as named arguments after the query. For example, to return games from just 2020, we would use the following.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 162 x 24
+<pre><code>#&gt; # A tibble: 162 × 24
 #&gt;    date   updated hscore ateam is_grand_final  year localtime hteam ascore    id
 #&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
 #&gt;  1 2020-… 2020-0…     71 Sydn…              0  2020 2020-03-… Adel…     74  4401
@@ -202,7 +202,7 @@
 <p>Fetch info about one or more AFL teams.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"teams"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 18 x 4
+<pre><code>#&gt; # A tibble: 18 × 4
 #&gt;    logo                                           name                 id abbrev
 #&gt;    &lt;chr&gt;                                          &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; 
 #&gt;  1 /wp-content/themes/squiggle/assets/images/Ade… Adelaide              1 ADE   
@@ -230,7 +230,7 @@
 <p>Fetch info about one or more games.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 162 x 24
+<pre><code>#&gt; # A tibble: 162 × 24
 #&gt;    date   updated hscore ateam is_grand_final  year localtime hteam ascore    id
 #&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
 #&gt;  1 2020-… 2020-0…     71 Sydn…              0  2020 2020-03-… Adel…     74  4401
@@ -255,7 +255,7 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># You can get the sources</span>
 <span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"sources"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 22 x 4
+<pre><code>#&gt; # A tibble: 22 × 4
 #&gt;    name           icon                               url                      id
 #&gt;    &lt;chr&gt;          &lt;chr&gt;                              &lt;chr&gt;                 &lt;int&gt;
 #&gt;  1 Squiggle       "/wp-content/uploads/2017/02/logo… "https://live.squigg…     1
@@ -277,7 +277,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get all tips</span>
 <span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 12,917 x 21
+<pre><code>#&gt; # A tibble: 12,917 × 21
 #&gt;      err correct ateamid  year hconfidence gameid tipteamid    bits confidence
 #&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;  &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
 #&gt;  1 42          1      14  2017        50        1        14  0            50  
@@ -297,7 +297,7 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get` just tips from round 1, 2018</span>
 <span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span>, round <span class="op">=</span> <span class="fl">1</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 126 x 21
+<pre><code>#&gt; # A tibble: 126 × 21
 #&gt;      err correct ateamid  year hconfidence gameid tipteamid    bits confidence
 #&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;  &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
 #&gt;  1  NA         1       3  2018        79.8    372        14  0.675        79.8
@@ -320,7 +320,7 @@
 <p>Fetch info about team standings at a point in time, i.e. the ladder.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"standings"</span>, year <span class="op">=</span> <span class="fl">2020</span>, round <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 18 x 15
+<pre><code>#&gt; # A tibble: 18 × 15
 #&gt;     wins    id  rank goals_against goals_for  for. draws   pts percentage name  
 #&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt; 
 #&gt;  1     1    13     1             4        10    76     0     4      262.  Port …
@@ -350,7 +350,7 @@
 <p>Fetch info about one or more projected ladders generated by computer models. For the actual ladder, see standings instead.</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"ladder"</span>, year <span class="op">=</span> <span class="fl">2019</span>, round <span class="op">=</span> <span class="fl">15</span>, source <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 18 x 12
+<pre><code>#&gt; # A tibble: 18 × 12
 #&gt;    swarms    wins percentage team  sourceid  rank round mean_rank updated teamid
 #&gt;    &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
 #&gt;  1 "c(\"0.…  12.7      111.  Adel…        1     6    15      6.11 2019-0…      1
@@ -382,7 +382,7 @@
                     firstname <span class="op">=</span> <span class="st">"Dustin"</span>, 
                     surname <span class="op">=</span> <span class="st">"Martin"</span>, 
                     year <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 x 21
+<pre><code>#&gt; # A tibble: 1 × 21
 #&gt;   mPAV_total  year PAV_def_rank pavid PAV_off_rank PAV_mid_rank PAV_total_rank
 #&gt;        &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;int&gt;        &lt;int&gt;        &lt;int&gt;          &lt;int&gt;
 #&gt; 1       0.96  2017          253  8632           16            1              2
