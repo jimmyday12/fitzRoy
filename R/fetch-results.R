@@ -110,20 +110,23 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
 fetch_results_afltables <- function(season = NULL, round_number = NULL) {
   season <- check_season(season)
   # Get data ----
-  column_names <- c(
-    "Game", "Date", "Round", "Home.Team", "Home.Score",
-    "Away.Team", "Away.Score", "Venue"
-  )
+
   url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
-  #match_data <- suppressMessages(
-  #  readr::read_table(url_text, skip = 2, col_names = column_names)
-  #)
   
-  tmp_file <- tempfile()
-  download.file(url_text, tmp_file)
-  match_data <- readr::read_fwf(tmp_file, skip = 2, col_types = c("dccccccc"))
-  names(match_data) <- column_names
-  tmp_file <- file.remove(tmp_file)
+  # Column widths
+  cols <- readr::fwf_cols(Game = 7, 
+                   Date = 17,
+                   Round = 5, 
+                   Home.Team = 18,
+                   Home.Score = 17,
+                   Away.Team = 18,
+                   Away.Score = 18,
+                   Venue = NA)
+  
+  match_data <- readr::read_fwf(url_text, 
+                  skip = 2, 
+                  col_positions = cols, 
+                  col_types = c("dcccccccc"))
   
   # Separate score out into components ----
   match_data <- match_data %>%
