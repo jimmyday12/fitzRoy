@@ -6,7 +6,7 @@
 \title{Fetch Coaches Votes}
 \usage{
 fetch_coaches_votes(
-  comp,
+  comp = "AFLM",
   season,
   round = 1:27,
   team = c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood", "Essendon",
@@ -22,7 +22,7 @@ scrape_coaches_votes(comp, season, round, finals)
 
 \item{season}{Season in YYYY format. This can be an array of seasons.}
 
-\item{round}{Optional - Round number - For finals this is the number of H&A rounds plus the Finals week.}
+\item{round}{Optional - Round number. For finals this is the number of H&A rounds plus the Finals week.}
 
 \item{team}{Optional - Team or teams whose matches should be retrieved (defaults to all teams)}
 }

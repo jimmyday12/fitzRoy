@@ -7,7 +7,7 @@
 #'
 #' @param comp One of "AFLM" (default) or "AFLW"
 #' @param season Season in YYYY format. This can be an array of seasons.
-#' @param round Optional - Round number - For finals this is the number of H&A rounds plus the Finals week.
+#' @param round Optional - Round number. For finals this is the number of H&A rounds plus the Finals week.
 #' @param team Optional - Team or teams whose matches should be retrieved (defaults to all teams)
 #'
 #' @return
@@ -35,7 +35,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-fetch_coaches_votes <- function(comp, season, round = 1:27,
+fetch_coaches_votes <- function(comp = "AFLM", season, round = 1:27,
                                 team = c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood",
                                          "Essendon", "Fremantle", "Geelong Cats", "Gold Coast Suns",
                                          "GWS Giants", "Hawthorn", "Melbourne", "North Melbourne",
