@@ -34,8 +34,6 @@
 #' @importFrom rlang .data
 calculate_coaches_vote_possibilities <- function(df, output_type){
   
-  require(tidyverse)
-  
   # error catching
   if(! output_type %in% c("Coach View", "Player View")) stop("Invalid Output Type")
   if(sum(names(df) %in% c("Player.Name", "Coaches.Votes")) != 2) stop("Input df has the wrong column names")
@@ -44,7 +42,7 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
   if(nrow(df) > 10) stop("Too many players")
   
   # start at the bottom for fewer options & reset row names
-  df <- arrange(df, Coaches.Votes) %>% `rownames<-`(NULL)
+  df <- dplyr::arrange(df, Coaches.Votes) %>% `rownames<-`(NULL)
   
   # template for votes
   template <- data.frame(Votes = c(5,4,3,2,1), C1 = NA, C2 = NA)
@@ -73,10 +71,10 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
           
           # if that combination is blocked out for this eligible option, skip to the next option
           if(n == 0){
-            if(!is.na(subset(opt, Votes == cv - n)$C2)) next
+            if(!is.na(dplyr::filter(opt, Votes == cv - n)$C2)) next
           } else if(cv == n){
-            if(!is.na(subset(opt, Votes == n)$C1)) next
-          } else if(!is.na(subset(opt, Votes == n)$C1) | !is.na(subset(opt, Votes == cv - n)$C2)) next
+            if(!is.na(dplyr::filter(opt, Votes == n)$C1)) next
+          } else if(!is.na(dplyr::filter(opt, Votes == n)$C1) | !is.na(dplyr::filter(opt, Votes == cv - n)$C2)) next
           
           # otherwise, update this option with this vote combination for this player
           opt_new = opt
@@ -141,7 +139,7 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
           # run function to...
           lapply(function(p){
             # collect the votes that player received in this iteration
-            player_votes <- c(subset(i, C1==p)$Votes, subset(i, C2==p)$Votes) %>% sort
+            player_votes <- c(dplyr::filter(i, C1==p)$Votes, dplyr::filter(i, C2==p)$Votes) %>% sort
             # control for zeroes
             if(length(player_votes)==1) player_votes <- c(0, player_votes)
             # re-map this data into a new data frame
@@ -150,7 +148,7 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
           # combine all data
           {do.call(rbind, .)} %>%
           # arrange for consistency
-          arrange(-V2, -V1, Player)
+          dplyr::arrange(-V2, -V1, Player)
       })
     # drop duplicate options
     # loop through outcomes
