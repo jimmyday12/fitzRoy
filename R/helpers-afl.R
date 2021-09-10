@@ -132,7 +132,7 @@ find_round_id <- function(round_number, season = NULL, season_id = NULL,
   }
   return(id)
 }
-curl 'https://api.afl.com.au/cfs/afl/statsCentre/players?competitionId=CD_S2021014&teamIds=CD_T20%2CCD_T70' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:89.0) Gecko/20100101 Firefox/89.0' -H 'Accept: */*' -H 'Accept-Language: en,en-US;q=0.5' --compressed -H 'Referer: https://www.afl.com.au/' -H 'x-media-mis-token: 63987adb28375aa7c2213f5f1abdd60d' -H 'Origin: https://www.afl.com.au' -H 'DNT: 1' -H 'Sec-GPC: 1' -H 'Connection: keep-alive'
+
 
 #' Returns match roster
 #'
