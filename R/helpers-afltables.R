@@ -1,3 +1,31 @@
+#' Check if a team is valid for afltables
+#'
+#' @param team Team 
+#'
+#' @keywords internal
+#' @noRd
+team_check_afltables <- function(team){
+  
+  valid_teams <- c("Adelaide", "Brisbane Lions", "Brisbane Bears", 
+    "Carlton", "Collingwood", "Essendon", "Fitzroy", 
+    "Fremantle", "GWS", "Geelong", "Gold Coast", 
+    "Hawthorn", "Melbourne", "North Melbourne", 
+    "Kangaroos", "Port Adelaide", "Richmond", "St Kilda", 
+    "Sydney", "South Melbourne", "West Coast", "University", 
+    "Western Bulldogs", "Footscray")
+  
+  valid <- team %in% valid_teams
+  
+  if (!valid) {
+    rlang::abort(glue::glue("{team} is not a valid input for afltables teams. 
+                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
+  }
+  
+  valid
+  
+}
+
+
 #' Internal function to ensure names match between different sources and also name changes.
 #' This gets applied to any web scraper
 #' @param team Team name
