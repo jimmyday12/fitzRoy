@@ -1,5 +1,5 @@
 
-#' Get past players footywire
+#' Get player details from footwire
 #'
 #' Returns past players
 #'
@@ -8,37 +8,75 @@
 #'
 #' @keywords internal
 #' @noRd
-get_past_players_footywire <- function(team){
-  path <- dplyr::case_when(
-    team == "Adelaide" ~ "ti-adelaide-crows",
-    team == "Brisbane Lions" ~ "ti-brisbane-lions",
-    team == "Carlton" ~ "ti-carlton-blues",
-    team == "Collingwood" ~ "ti-collingwood-magpies",
-    team == "Essendon" ~ "ti-essendon-bombers",
-    team == "GWS" ~ "ti-greater-western-sydney-giants",
-    team == "Geelong" ~ "ti-geelong-cats",
-    team == "Gold Coast" ~ "ti-gold-coast-suns",
-    team == "Hawthorn" ~ "ti-hawthorn-hawks",
-    team == "Melbourne" ~ "ti-melbourne-demons",
-    team == "Kangaroos" ~ "ti-kangaroos",
-    team == "Port Adelaide" ~ "ti-port-adelaide-power",
-    team == "Richmond" ~ "ti-richmond-tigers",
-    team == "St Kilda" ~ "ti-st-kilda-saints",
-    team == "Sydney" ~ "ti-sydney-swans",
-    team == "West Coast" ~ "ti-west-coast-eagles",
-    team == "Western Bulldogs" ~ "ti-western-bulldogs",
+get_player_details_footywire <- function(team, current = TRUE){
+  team_abr <- dplyr::case_when(
+    team == "Adelaide" ~ "adelaide-crows",
+    team == "Brisbane Lions" ~ "brisbane-lions",
+    team == "Carlton" ~ "carlton-blues",
+    team == "Collingwood" ~ "collingwood-magpies",
+    team == "Essendon" ~ "essendon-bombers",
+    team == "GWS" ~ "greater-western-sydney-giants",
+    team == "Geelong" ~ "geelong-cats",
+    team == "Gold Coast" ~ "gold-coast-suns",
+    team == "Hawthorn" ~ "hawthorn-hawks",
+    team == "Melbourne" ~ "melbourne-demons",
+    team == "Kangaroos" ~ "kangaroos",
+    team == "Port Adelaide" ~ "port-adelaide-power",
+    team == "Richmond" ~ "richmond-tigers",
+    team == "St Kilda" ~ "st-kilda-saints",
+    team == "Sydney" ~ "sydney-swans",
+    team == "West Coast" ~ "west-coast-eagles",
+    team == "Western Bulldogs" ~ "western-bulldogs",
     TRUE ~ ""
     )
+  
+  if (current == TRUE) {
+    path <- paste0("tp-", team_abr)
+  } else {
+    path <- paste0("ti-", team_abr)
+  }
   
   url <- paste0("https://www.footywire.com/afl/footy/", path)
   html <- rvest::read_html(url)
   
-  players_url <- html %>%
-    rvest::html_elements(".lnormtop a") %>%
-    rvest::html_attr("href")
-  
-  players_url %>%
-    purrr::map_dfr(get_past_player_footywire)
+  if (current == TRUE){
+    header.true <- function(df) {
+      names <- as.character(unlist(df[1,]))
+      "Age" %in% names
+    }
+    
+    tbls <- html %>%
+      rvest::html_table()
+    
+    ind <- tbls %>%
+      purrr::map_lgl(header.true) 
+    
+    df <- tbls[[which(ind)]]
+    
+    names(df) <- as.character(unlist(df[1,]))
+    df <- df[-1,]
+    
+    df <- df %>%
+      dplyr::mutate(Name = stringr::str_remove_all(Name, "\nR")) %>%
+      tidyr::separate(Name, c("surname", "first_name"), sep = ",") %>%
+      tidyr::separate(Position, c("Position_1", "Position_2"), sep = "\n", fill = "right") %>%
+      dplyr::mutate(first_name = trimws(first_name))
+    
+    return(df)
+      
+  } else {
+    
+    players_url <- html %>%
+      rvest::html_elements(".lnormtop a") %>%
+      rvest::html_attr("href")
+    
+    df <- players_url %>%
+      purrr::map_dfr(get_past_player_footywire)
+    
+    return(df)
+  }
+
+
 }
 
 #' Get afltables player ids
