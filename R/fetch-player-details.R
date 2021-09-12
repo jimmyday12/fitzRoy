@@ -7,15 +7,13 @@
 #' 
 #' By default the source used will be the official AFL website.
 #'
-#' [fetch_player_details_afltables()], 
-#' can be called directly and return data from AFL Tables
+#' [fetch_player_details_afltables()] and [fetch_player_details_footywire()]
+#' can be called directly and return data from AFL Tables and Footywire
 #' respectively.
 #'
-#' @param season Season in YYYY format, defaults to NULL which returns all data
 #' @param team team the player debuted for, defaults to NULL which returns all data
-#' @param players Players to return, defaults to NULL which returns all data.
 #' @param comp One of "AFLM" (default) or "AFLW"
-#' @param source One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
+#' @param source One of "AFL" (default), "footywire", "afltables"
 #' @param ... Optional parameters passed onto various functions depending on source.
 #'
 #' @return
@@ -24,17 +22,18 @@
 #'
 #' @examples
 #' \dontrun{
-#' # Return data for whole season from AFL Website
-#' fetch_player_details()
+#' # Return data for current Hawthorn players
+#' fetch_player_details("Hawthorn")
 #'
 #' }
 #'
 #' @family fetch player details functions
 #' @seealso
 #' * [fetch_player_details_afltables] for AFL Tables data.
+#' * [fetch_player_details_footywire] for Footywire data.
 fetch_player_details <- function(team = NULL,
                                  comp = "AFLM",
-                                 source = "afltables",
+                                 source = "afl",
                                  ...) {
   
   # Do some data checks
@@ -43,9 +42,10 @@ fetch_player_details <- function(team = NULL,
   
   dat <- switch(source,
                 "afltables" = fetch_player_details_afltables(team),
+                "footywire" = fetch_player_details_footywire(team),
                 NULL)
   
-  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Details data. Please use one of \"afltables\""))
+  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Details data. Please use one of \"afltables\" and \"footywire\""))
   return(dat)
   
 }
@@ -85,7 +85,7 @@ fetch_player_details_afltables <- function(team = NULL) {
 #' @export
 fetch_player_details_footywire <- function(team, current = TRUE){
   
-  valid_team <- team_check_afltables(team)
+  team_check_afltables(team)
   
   if (current == TRUE) {
     fetch_player_details_footywire_current(team)
