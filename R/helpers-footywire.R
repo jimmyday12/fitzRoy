@@ -1,4 +1,56 @@
+#' Check if a team is valid for footywire
+#'
+#' @param team Team 
+#'
+#' @keywords internal
+#' @noRd
+team_check_footywire <- function(team){
+  
+  valid_teams <- c("Adelaide", "Brisbane Lions",  
+                   "Carlton", "Collingwood", "Essendon",  
+                   "Fremantle", "GWS", "Geelong", "Gold Coast", 
+                   "Hawthorn", "Melbourne", "North Melbourne", 
+                   "Kangaroos", "Port Adelaide", "Richmond", "St Kilda", 
+                   "Sydney",  "West Coast", 
+                   "Western Bulldogs")
+  
+  valid <- team %in% valid_teams
+  
+  if (!valid) {
+    rlang::abort(glue::glue("{team} is not a valid input for footywire teams. 
+                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
+  }
+  
+  valid
+  
+}
 
+#' @keywords internal
+#' @noRd
+get_team_abrev_footywire <- function(team){
+  team_abr <- dplyr::case_when(
+    team == "Adelaide" ~ "adelaide-crows",
+    team == "Brisbane Lions" ~ "brisbane-lions",
+    team == "Carlton" ~ "carlton-blues",
+    team == "Collingwood" ~ "collingwood-magpies",
+    team == "Essendon" ~ "essendon-bombers",
+    team == "GWS" ~ "greater-western-sydney-giants",
+    team == "Geelong" ~ "geelong-cats",
+    team == "Gold Coast" ~ "gold-coast-suns",
+    team == "Hawthorn" ~ "hawthorn-hawks",
+    team == "Melbourne" ~ "melbourne-demons",
+    team == "Kangaroos" ~ "kangaroos",
+    team == "Port Adelaide" ~ "port-adelaide-power",
+    team == "Richmond" ~ "richmond-tigers",
+    team == "St Kilda" ~ "st-kilda-saints",
+    team == "Sydney" ~ "sydney-swans",
+    team == "West Coast" ~ "west-coast-eagles",
+    team == "Western Bulldogs" ~ "western-bulldogs",
+    TRUE ~ ""
+  )
+  
+  return(team_abr)
+}
 
 
 #' Helper function for \code{get_footywire_stats}
