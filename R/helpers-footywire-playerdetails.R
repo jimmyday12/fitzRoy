@@ -8,7 +8,7 @@
 #'
 #' @keywords internal
 #' @noRd
-fetch_player_details_footywire_current <- function(team_abr){
+fetch_player_details_footywire_current <- function(team){
   
     cli_current <- cli::cli_process_start("Fetching current player details for {team}")
     team_abr <- get_team_abrev_footywire(team)
