@@ -50,6 +50,8 @@ fetch_player_details <- function(team = NULL,
   
 }
 
+#' @rdname fetch_player_details
+#' @export
 fetch_player_details_afltables <- function(team = NULL) {
   
   if (is.null(team)) {
@@ -77,5 +79,20 @@ fetch_player_details_afltables <- function(team = NULL) {
   }
   
   
+}
+
+#' @rdname fetch_player_details
+#' @export
+fetch_player_details_footywire <- function(team, current = TRUE){
+  
+  valid_team <- team_check_afltables(team)
+  
+  if (current == TRUE) {
+    fetch_player_details_footywire_current(team)
+  } else {
+    fetch_player_details_footywire_past(team)
+  }
+
+
 }
 
