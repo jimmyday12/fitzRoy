@@ -1,3 +1,36 @@
+#' Find Team ID
+#'
+#' Returns the ID for the team
+#'
+#' @param team Afl team name
+#' @param comp "AFLM" or "AFLW"
+#' @keywords internal
+#' @noRd
+find_team_id <- function(team, comp = "AFLM") {
+  
+  check_comp(comp)
+  
+  api <- "https://aflapi.afl.com.au/afl/v2/teams"
+  
+  resp <- httr::GET(url = api,
+                    query = list("pageSize" = "1000"))
+  
+  cont <- resp %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON(flatten = TRUE)
+  
+  df <- cont$teams %>%
+    na.omit()
+  
+  if (comp == "AFLM") type <- "MEN"
+  if (comp == "AFLW") type <- "WOMEN"
+  
+  if(is.null(team)) return(df[df$teamType == type,])
+  
+  ids <- df$id[df$name == team & df$teamType == type]
+  min(ids, na.rm = TRUE)
+}
+
 #' Find Comp ID
 #'
 #' Returns the ID for the comp
@@ -64,7 +97,7 @@ find_season_id <- function(season, comp = "AFLM") {
   comp_dat <- httr::GET(compSeasons_url)
 
   comp_cont <- comp_dat %>%
-    httr::content(as = "text") %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE)
 
   comp_ids <- comp_cont$compSeasons %>%
@@ -271,5 +304,38 @@ fetch_round_results_afl <- function(id, cookie = NULL){
   return(df)
 }
   
+
+#' Fetches results of all matches in a round
+#'
+#' @param teamId team id returned by `find_team_id`
+#' @param compSeasonId comp season id returned by `find_season_id`
+#' @keywords internal
+#' @noRd
+fetch_squad_afl <- function(teamId, team, compSeasonId) {
+  
+  cli_team <- cli::cli_process_start("Fetching player details for {team}")
+  api <- "https://aflapi.afl.com.au//afl/v2/squads"
+  resp <- httr::GET(
+    url = api,
+    query = list(
+      "teamId" = teamId,
+      "compSeasonId" = compSeasonId,
+      "pageSize" = "1000"
+    )
+  )
+  
+  cont <- resp %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
+    jsonlite::fromJSON(flatten = TRUE)
+  
+  df <- dplyr::as_tibble(cont$squad$players)
+  
+  names(df) <- gsub("player.", "", names(df))
+  
+  cli::cli_process_done(cli_team)
+  
+  df %>%
+    dplyr::select(firstName, surname, id, everything())
+}
   
   

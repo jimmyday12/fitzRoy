@@ -50,6 +50,29 @@ fetch_player_details <- function(team = NULL,
   
 }
 
+fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
+  
+  season <- check_season(season)
+  check_comp(comp)
+  
+  comp_seas_id <- find_season_id(season, comp)
+  
+  team_ids <- find_team_id(team)
+  
+  if(is.null(team)){
+    team <- team_ids$name
+    team_ids <- team_ids$id
+    
+  }
+
+  
+  team_ids %>%
+    purrr::map2_dfr(.y = team, ~fetch_squad_afl(teamId = .x, 
+                                                 team = .y, 
+                                                 compSeasonId = comp_seas_id))
+  
+}
+
 #' @rdname fetch_player_details
 #' @export
 fetch_player_details_afltables <- function(team = NULL) {
