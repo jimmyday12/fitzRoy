@@ -6,7 +6,7 @@
 #' @param comp "AFLM" or "AFLW"
 #' @keywords internal
 #' @noRd
-find_team_id <- function(team, comp = "AFLM") {
+find_team_id <- function(team_abr, comp = "AFLM") {
   
   check_comp(comp)
   
@@ -20,15 +20,67 @@ find_team_id <- function(team, comp = "AFLM") {
     jsonlite::fromJSON(flatten = TRUE)
   
   df <- cont$teams %>%
-    na.omit()
+    na.omit() %>%
+    dplyr::select(id, abbreviation, name, teamType)
   
   if (comp == "AFLM") type <- "MEN"
   if (comp == "AFLW") type <- "WOMEN"
   
-  if(is.null(team)) return(df[df$teamType == type,])
+  if(is.null(team_abr)) return(df[df$teamType == type,])
   
-  ids <- df$id[df$name == team & df$teamType == type]
+  ids <- df$id[df$abbreviation == team_abr & df$teamType == type]
   min(ids, na.rm = TRUE)
+}
+
+#' Check if a team is valid for afl website
+#'
+#' @param team Team 
+#'
+#' @keywords internal
+#' @noRd
+team_check_afl <- function(team){
+  
+  valid_teams <- c("Adelaide", "Brisbane Lions",
+                   "Carlton", "Collingwood", "Essendon", 
+                   "Fremantle", "GWS", "Geelong", "Gold Coast", 
+                   "Hawthorn", "Melbourne", "North Melbourne", 
+                   "Port Adelaide", "Richmond", "St Kilda", 
+                   "Sydney",  "West Coast",
+                   "Western Bulldogs")
+  
+  valid <- team %in% valid_teams
+  
+  if (!valid) {
+    rlang::abort(glue::glue("{team} is not a valid input for afl teams. 
+                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
+  }
+}
+
+#' Internal function to return team name abbreviation for AFL API
+#' @param team Team name
+#' @export
+team_abr_afl <- function(team) {
+  # Internal function
+  dplyr::case_when(
+    team == "Adelaide" ~ "ADEL",
+    team == "Brisbane Lions" ~ "BL",
+    team == "Collingwood" ~ "COLL",
+    team == "Gold Coast" ~ "GCFC",
+    team == "Carlton" ~ "CARL",
+    team == "North Melbourne" ~ "NMFC",
+    team == "Port Adelaide" ~ "PORT",
+    team == "Western Bulldogs" ~ "WB",
+    team == "Hawthorn" ~ "HAW",
+    team == "Geelong" ~ "GEEL",
+    team == "St Kilda" ~ "STK",
+    team == "Sydney" ~ "SYD",
+    team == "Fremantle" ~ "FRE",
+    team == "GWS" ~ "GWS",
+    team == "Richmond" ~ "RICH",
+    team == "Melbourne" ~ "MELB",
+    team == "West Coast" ~ "WCE",
+    TRUE ~ team
+  )
 }
 
 #' Find Comp ID
@@ -47,7 +99,7 @@ find_comp_id <- function(comp) {
   comps_dat <- httr::GET(api_url)
 
   comps_cont <- comps_dat %>%
-    httr::content(as = "text") %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE)
 
   if (comp == "AFLM") comp <- "AFL"
