@@ -305,7 +305,7 @@ fetch_round_results_afl <- function(id, cookie = NULL){
 }
   
 
-#' Fetches results of all matches in a round
+#' Fetches squad 
 #'
 #' @param teamId team id returned by `find_team_id`
 #' @param compSeasonId comp season id returned by `find_season_id`

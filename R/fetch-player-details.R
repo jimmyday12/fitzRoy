@@ -50,6 +50,8 @@ fetch_player_details <- function(team = NULL,
   
 }
 
+#' @rdname fetch_player_details
+#' @export
 fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
   
   season <- check_season(season)
