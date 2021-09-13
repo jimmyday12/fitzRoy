@@ -7,11 +7,22 @@ test_that("fetch_ladder_afl works for various inputs", {
 
   # change year
   expect_s3_class(fetch_ladder_afl(2018, 1, comp = "AFLM"), "tbl")
-  expect_error(suppressWarnings(fetch_ladder_afl(2000, 1, comp = "AFLM")))
+  expect_warning(dat <- fetch_ladder_afl(2000, 1, comp = "AFLM"))
+  expect_null(dat)
 
   # change round number
-  expect_s3_class(fetch_ladder_afl(2020, round_number = 2), "tbl")
-  expect_s3_class(fetch_ladder_afl(2020, round_number = 50), "tbl")
+  lad <- fetch_ladder_afl(2020, round_number = 2)
+  expect_s3_class(lad, "tbl")
+  expect_equal(max(lad$round_number), 2)
+  expect_equal(min(lad$round_number), 2)
+  
+  lad <- fetch_ladder_afl(2021, comp = "AFLW", round_number = 5)
+  expect_s3_class(lad, "tbl")
+  expect_equal(max(lad$round_number), 5)
+  expect_equal(min(lad$round_number), 5)
+  
+  expect_warning(dat <- fetch_ladder_afl(2020, round_number = 50))
+  expect_null(dat)
 
   # change comp
   expect_s3_class(fetch_ladder_afl(2020, round_number = 1, comp = "AFLW"), "tbl")

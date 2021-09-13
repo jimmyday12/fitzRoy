@@ -84,15 +84,21 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
     return(NULL)
   }
   round_ids <- season_id %>%
-    purrr::map(~find_round_id(round_number, season_id = .x, 
-                  comp = comp, providerId = TRUE, future_rounds = FALSE)) %>%
+    purrr::map(~find_round_id(round_number, 
+                              season_id = .x, 
+                              comp = comp, 
+                              providerId = TRUE, 
+                              future_rounds = FALSE)) %>%
     purrr::reduce(c)
+  
+  if(is.null(round_ids)) return(NULL)
   
   # get cookie
   cookie <- get_afl_cookie()
   
   df <- round_ids %>%
-    purrr::map_dfr(fetch_round_results_afl, cookie)
+    purrr::map_dfr(fetch_round_results_afl, cookie) %>%
+    dplyr::filter(.data$match.status == "CONCLUDED")
   
   return(df)
 }
@@ -104,15 +110,24 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
 fetch_results_afltables <- function(season = NULL, round_number = NULL) {
   season <- check_season(season)
   # Get data ----
-  column_names <- c(
-    "Game", "Date", "Round", "Home.Team", "Home.Score",
-    "Away.Team", "Away.Score", "Venue"
-  )
-  url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
-  match_data <- suppressMessages(
-    readr::read_table(url_text, skip = 2, col_names = column_names)
-  )
 
+  url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
+  
+  # Column widths
+  cols <- readr::fwf_cols(Game = 7, 
+                   Date = 17,
+                   Round = 5, 
+                   Home.Team = 18,
+                   Home.Score = 17,
+                   Away.Team = 18,
+                   Away.Score = 18,
+                   Venue = NA)
+  
+  match_data <- readr::read_fwf(url_text, 
+                  skip = 2, 
+                  col_positions = cols, 
+                  col_types = c("dcccccccc"))
+  
   # Separate score out into components ----
   match_data <- match_data %>%
     tidyr::separate(.data$Home.Score,
@@ -201,7 +216,7 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
                  You provided \"{season}\""))
   }
 
-  cli::cli_process_start("Downloading {last_n_matches} match{?es} from Footywire")
+  cli_1 <- cli::cli_process_start("Downloading {last_n_matches} match{?es} from Footywire")
 
   pb <- progress::progress_bar$new(
     format = "  Downloading [:bar] :percent in :elapsed",
@@ -215,6 +230,10 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
   if (is.null(last_n_matches)) last_n_matches <- n_ids
   ids <- ids[(n_ids - last_n_matches + 1):n_ids]
 
+  if(length(ids) == 0){
+    cli::cli_process_failed(cli_1, msg = "No matches found")
+    return(NULL)
+  } 
   # get data for ids
 
   dat <- ids %>%
@@ -223,7 +242,7 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
       extract_match_data(.x)
     })
 
-  cli::cli_process_done()
+  cli::cli_process_done(cli_1)
 
   return(dat)
 }

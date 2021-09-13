@@ -1,4 +1,4 @@
-#' Fetch Fixture
+#' Return the fixture for a particular round of matches
 #'
 #' @description
 #' `fetch_fixture` returns the Fixture for a given AFL Round. Internally, it calls
@@ -209,7 +209,7 @@ Check the following url on footywire
   games_df <- games_df %>%
     dplyr::group_by(.data$Season.Game) %>%
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
-    dplyr::mutate(Venue = replace_venues(.data$Venue)) %>%
+    dplyr::mutate(Venue = replace_venues(as.character(.data$Venue))) %>%
     dplyr::ungroup()
 
   # Tidy columns

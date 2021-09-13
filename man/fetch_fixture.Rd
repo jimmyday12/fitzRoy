@@ -5,7 +5,7 @@
 \alias{fetch_fixture_afl}
 \alias{fetch_fixture_footywire}
 \alias{fetch_fixture_squiggle}
-\title{Fetch Fixture}
+\title{Return the fixture for a particular round of matches}
 \usage{
 fetch_fixture(
   season = NULL,
@@ -29,7 +29,7 @@ fetch_fixture_squiggle(season = NULL, round_number = NULL)
 \item{season}{Season in YYYY format, defaults to NULL which returns the year
 corresponding the \code{Sys.Date()}}
 
-\item{round_number}{Round number, defaults to NULL which returns all rounds}
+\item{round_number}{Round number, defaults to NULL which returns latest round}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 

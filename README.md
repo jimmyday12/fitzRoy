@@ -5,8 +5,8 @@
 
 <!-- badges: start -->
 
-[![Run
-R-CMD-check](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions?query=workflow%3AR-CMD-check)
+[![R build
+status](https://github.com/jimmyday12/FitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/FitzRoy/actions)
 [![Coverage
 status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
 [![CRAN
@@ -45,12 +45,16 @@ devtools::install_github("jimmyday12/fitzRoy")
 
 The primary functions in `fitzRoy` are the `fetch_*` functions. These
 provide access to the most common types of data using a consistent API.
+View the [Quick Start
+Vignette](https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html) to
+quickly get going with data analysis.
 
-The four main functions are `fetch_fixture`, `fetch_results`,
-`fetch_ladder` and `fetch_player_stats`.
+The five main functions are `fetch_fixture`, `fetch_lineup`,
+`fetch_results`, `fetch_ladder` and `fetch_player_stats`.
 
 ``` r
 fetch_fixture(season = 2020, comp = "AFLM")
+fetch_lineup(season = 2021, round_number = 1, comp = "AFLW")
 fetch_results(season = 2020, round_number = 1, comp = "AFLW")
 fetch_ladder(season = 2020, source = "squiggle")
 fetch_player_stats(season = 2020, source = "fryzigg")
@@ -58,7 +62,7 @@ fetch_player_stats(season = 2020, source = "fryzigg")
 
 See vignette on using the [main fetch
 functions](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html)
-to learn more.
+to learn more about how these functions work.
 
 ### AFL Womens data
 

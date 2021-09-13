@@ -100,7 +100,7 @@ describe("fetch_betting_odds_footywire", {
     ))
     
     # expect_equal(nrow(empty_betting_df), 0)
-    expect_equal(colnames(empty_betting_df), colnames(full_betting_df))
+    expect_null(empty_betting_df)
   })
 })
 

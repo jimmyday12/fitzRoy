@@ -26,7 +26,18 @@ check_season <- function(x) {
 #' @keywords internal
 #' @noRd
 check_comp <- function(x) {
-  if (!x %in% c("AFLM", "AFLW")) rlang::abort(glue::glue("Comp should be either \"AFLW\" or \"AFL\". You supplied {x}"))
+  valid <- c(
+    "AFLM",
+    "AFLW"
+  )
+  
+  if (!x %in% valid) {
+      rlang::abort(glue::glue(
+        "`Comp` must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
+    You provided the following: {x}"))
+  } else {
+    return(x)
+  }
 }
 
 #' Check Source
@@ -50,9 +61,11 @@ check_source <- function(x) {
 
   if (!x %in% valid) {
     rlang::abort(glue::glue(
-      "Provided paramters must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
+      "`Source` must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
     You provided the following: {x}"
     ))
+  } else {
+    return(x)
   }
 }
 

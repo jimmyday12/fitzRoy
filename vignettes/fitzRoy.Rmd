@@ -1,19 +1,246 @@
 ---
-title: "fitzRoy"
+title: "Introduction to fitzRoy"
+description: >
+  Learn how to get started with the basics of fitzRoy
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{fitzRoy}
+  %\VignetteIndexEntry{Introduction to fitzRoy}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r setup, echo=FALSE}
+not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
+
+
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
 )
 ```
 
-```{r setup}
+The goal of fitzRoy is to make it easy to access data from the AFLM and AFLW competitions. It provides a simple and consistent API to access data such as match results, fixtures and player statistics from multiple data sources. 
+
+```{r}
+library(dplyr)
 library(fitzRoy)
 ```
+## Fetching Data
+Primarily, `fitzRoy` can be used to access data from various sources using the `fetch_` functions. For a detailed view on how the API works - view the [Main Fetch Functions](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html) vignette. 
+
+## Data Sources
+There are 5 main data sources for data in fitzRoy. Where possible, we do not edit the data from how we receive it, although in some cases, we do need to aggregate and calculate certain fields based on the structure of the site. 
+
+You can choose your data source as an argument to any `fetch_` function using the `source = ` argument. 
+
+### AFL website
+We provide data from the (AFL website)[https://www.afl.com.au/] as the default to any `fetch_` function. This data is from the official AFL data provider. With this data, we can return data for both the Mens and Womens competitions. The oldest data is from 2012. It provides access to all data types including results, fixtures, ladders, lineups and stats.
+
+### AFL tables
+[AFL Tables](https://afltables.com/afl/afl_index.html) has historically been the main source of data in fitzRoy. It is the most complete source of data about AFL that exists (to our knowledge at least!). It contains data from 1897 and is the only data source included in fitzRoy with such historical data. The types of data it contains are results, ladders and stats. 
+
+### Footywire
+[Footywire](https://www.footywire.com/) has traditionally been the main source of player statistics in fitzRoy. It contains data dating back to 2012 and was generally used as a supplement to AFL Tables data. The types of data it returns are results, fixtures and statistics. 
+
+### Squiggle
+[Squiggle](https://squiggle.com.au/) is a famous AFL Prediction and Analysis website run by [Max Barry](https://twitter.com/squiggleafl?lang=en). In recent years, Squiggle has become the main place to aggregate various predictive models. Max has provided a nice and well documented [API](https://api.squiggle.com.au/) that fitzRoy uses to return data. Helper functions included in the `fetch_` family will return results, fixtures and ladders but the `fetch_squiggle_data` function provides direct access to the API. Read the [Squiggle API vignette](https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html) for more details. 
+
+### Fryzigg
+Twitter user [Fryzigg](https://twitter.com/fryzigg?lang=en) has provided access to some advanced player statistics. These are included in the `fetch_player_stats` function. Read the [Fryzigg API vignette](https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html) for more information.
+
+## Good practices
+In most cases, trying to use the same source for all of your analysis will be most beneficial. This is not always possible as some sources only go back so far (the AFL website only has data back to 2011), while some data is not available (AFL Tables doesn't have decent fixture data). If you are mixing sources, be careful to understand differences in naming structures, team names and player names. 
+
+It is also a good idea to avoid regularly fetching whole datasets. Where possible, try to keep an off-line version of your data and only request the smallest amount possible to get the new data you require. This is both faster (less data transferred over your Internet connection and less data living in your computer memory) but also helps to reduce traffic on the data providers servers. 
+
+## Examples
+### Fixture
+Fixture data is available from multiple places. The most reliable and complete data usually comes from the AFL website. From that website you can specify either the Mens or Womens competitions using the `comp` argument. 
+
+```{r fixture, include=TRUE, eval=FALSE}
+fixture <- fetch_fixture(2021, comp = "AFLW")
+fixture %>%
+  select(utcStartTime, round.name, 
+         home.team.name, away.team.name, venue.name)
+```
+```{r fixture_included, echo=FALSE, eval=eval_param}
+fixture <- fitzRoy:::fixture_afl_aflw_2021 
+fixture %>%
+  select(utcStartTime, round.name, 
+         home.team.name, away.team.name, venue.name)
+```
+
+If wanted, you could return just a single round.
+```{r fixture2, include=TRUE, eval=FALSE}
+fetch_fixture(2021, round_number = 5, comp = "AFLM") %>%
+  select(utcStartTime, round.name, 
+         home.team.name, away.team.name, venue.name)
+
+```
+```{r fixture2_included, echo=FALSE, eval=eval_param}
+fitzRoy:::fixture_afl_aflm_2021 %>%
+  filter(round.roundNumber == 5) %>%
+    select(utcStartTime, round.name, 
+         home.team.name, away.team.name, venue.name)
+
+```
+
+
+You can get results data from other sources including `Squiggle` and `Footywire`. The default source for `fetch_results()` is the AFL.com.au website. 
+
+```{r fixture_all, eval=FALSE}
+fixture_afl <- fetch_fixture(2020)
+fixture_aflw <- fetch_fixture(2020, round_number = 1, comp = "AFLW")
+fixture_squiggle <- fetch_fixture_squiggle(2020, round_number = 10)
+fixture_footywire <- fetch_fixture_squiggle(2018)
+```
+
+### Lineup
+You can get the lineup for a particular round. This is usually useful when running after the teams have been announced but before the match has been played. 
+
+The only data source with lineup data is the AFL.com.au website. 
+
+```{r lineup, include=TRUE, eval=FALSE}
+fetch_lineup(2021, round_number = 1, comp = "AFLW") %>%
+  select(round.name, status, teamName, 
+         player.playerName.givenName,
+         player.playerName.surname, teamStatus)
+```
+
+```{r lineup_included, echo=FALSE, eval=eval_param}
+fitzRoy:::lineup_aflw_2021_1 %>%
+  select(round.name, status, teamName, 
+         player.playerName.givenName,
+         player.playerName.surname, teamStatus)
+```
+
+### Results
+You can access AFL match results data from various sources. The most complete is the [AFL Tables](http://www.afltables.com) data, which includes all matches from 1897-current. 
+
+```{r results, include=TRUE, eval=FALSE}
+results <- fetch_match_results_afltables(1897:2019)
+results
+```
+```{r results_included, echo=FALSE, eval=eval_param}
+results <- fitzRoy:::results_afltables_all %>%
+  filter(Date < "2020-01-01")
+
+results
+```
+
+While it is possible to return all historical data, it is usually good practice to only return a small amount of data - such as a single season or round - and keep your own offline database of historical data. 
+
+```{r results2, include=TRUE, eval=FALSE}
+results_new <- fetch_results_afltables(2021)
+bind_rows(results, results_new)
+```
+```{r results2_included, echo=FALSE, eval=eval_param}
+results_new <- fitzRoy:::results_afltables_all %>%
+  filter(Date >= "2020-01-01")
+
+bind_rows(results, results_new)
+```
+
+
+You can get results data from other sources including `AFL`, `Squiggle` and `Footywire`. The default source for `fetch_results()` is the AFL.com.au website. 
+
+```{r results-all, eval=FALSE}
+results_afl <- fetch_results(2020, round_number = 11)
+results_aflw <- fetch_results(2020, comp = "AFLW")
+results_squiggle <- fetch_results_squiggle(2019, round_number = 1)
+results_footywire <- fetch_results_footywire(1990)
+```
+
+You can get AFLW results by using the `comp` argument.
+
+```{r results_aflw, include=TRUE, eval=FALSE}
+fetch_results(2020, comp = "AFLW") %>%
+  select(match.name, venue.name, round.name,
+         homeTeamScore.matchScore.totalScore,
+         awayTeamScore.matchScore.totalScore)
+```
+```{r results__afl2_included, echo=FALSE, eval=eval_param}
+fitzRoy:::results_afl_aflw_2020 %>%
+  select(match.name, venue.name, round.name,
+         homeTeamScore.matchScore.totalScore,
+         awayTeamScore.matchScore.totalScore)
+```
+
+### Ladder
+
+The ladder for a particular round can be returned using `fetch_ladder`. Usually this only makes sense to return for one round at a time, although it is possible to return multiple rounds. 
+
+```{r ladder, include=TRUE, eval=FALSE}
+ladder <- fetch_ladder(2020, round_number = 7, comp = "AFLW") %>%
+  select(season, round_name, position, 
+         team.name, pointsFor, pointsAgainst, form)
+ladder
+```
+```{r ladder_included, echo=FALSE, eval=eval_param}
+ladder <- fitzRoy:::ladder_afl_aflw_2020 %>%
+  select(season, round_name, position, 
+         team.name, pointsFor, pointsAgainst, form)
+ladder
+```
+There are many variables included in the AFL.com.au ladder. 
+
+
+```{r ladder2, include=TRUE, eval=FALSE}
+ladder <- fetch_ladder(2020, round_number = 7, comp = "AFLW")
+ncol(ladder)
+```
+```{r ladder2_included, echo=FALSE, eval=eval_param}
+ncol(fitzRoy:::ladder_afl_aflw_2020)
+
+```
+
+You can get ladder data from other sources including `Squiggle` and `Afltables`. The default source for `fetch_ladder()` is the AFL.com.au website. 
+
+```{r ladder-all, eval=FALSE}
+ladder_afl <- fetch_ladder(2020, round_number = 11)
+ladder_aflw <- fetch_ladder(2020, comp = "AFLW")
+ladder_squiggle <- fetch_ladder_squiggle(2019, round_number = 1)
+ladder_afltables <- fetch_ladder_afltables(1990)
+```
+
+### Stats
+
+We can return player statistics for a set of matches. The exact stats that are included varies quite a bit between data sources. 
+
+The default is again the AFL.com.au which is fairly comprehensive. 
+
+```{r stats, include=TRUE, eval=FALSE}
+fetch_player_stats(2020, comp = "AFLW")
+```
+```{r stats_included, echo=FALSE, eval=eval_param}
+fitzRoy:::stats_afl_aflw_2020
+```
+
+We also have detailed player stats courtesy of Fryzigg.
+
+```{r stats2, include=TRUE, eval=FALSE}
+fetch_player_stats(2019, source = "fryzigg")
+```
+```{r stats2_included, echo=FALSE, eval=eval_param}
+fitzRoy:::stats_fryzigg_2019
+```
+
+Other providers include Afltables and Footywire. 
+
+```{r stats-all, eval=FALSE}
+stats_afl <- fetch_player_stats(2020, round_number = 11)
+stats_aflw <- fetch_player_stats(2020, source = "AFL", comp = "AFLW")
+stats_footywire <- fetch_player_stats(2019, round_number = 1, source = "footywire")
+stats_afltables <- fetch_player_stats_afltables(1990)
+```
+
+### API's
+You can view how to return data from two providers using their API's at the respective Vignettes.
+
+* [Using the Squiggle API](https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html)
+* [Using the Fryzigg API](https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html)
+

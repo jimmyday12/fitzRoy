@@ -1,6 +1,6 @@
 Package: fitzRoy
 Title: Easily Scrape and Process AFL Data
-Version: 0.3.3.9000
+Version: 1.0.0.9000
 Authors@R:
     c(person(given = "James",
              family = "Day",
@@ -47,8 +47,8 @@ Imports:
     tidyselect,
     xml2,
     tibble,
-    glue,
     progress,
+    glue,
     cli
 Suggests:
     covr,

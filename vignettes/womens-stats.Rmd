@@ -1,8 +1,6 @@
 ---
 title: "AFL Womens Example"
-author: "Oscar Lane"
-date: "`r Sys.Date()`"
-output: github_document
+output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{AFL Womens Example}
   %\VignetteEngine{knitr::rmarkdown}
@@ -15,49 +13,142 @@ online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  eval = eval_param
+	eval = eval_param,
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
 )
-```
 
-NOTE - The AFL website for Women's data has been taken down. This page is left for posterity however these functions no longer work. 
-
-
-### Match data
-
-```{r libraries, message=FALSE, warning=FALSE, eval=eval_param}
 library(fitzRoy)
 library(dplyr)
 ```
 
+The package provides easy access to AFLW data from the AFL.com.au website. This can be accessed via the normal `fetch_` functions in the same way you would access Men's data. 
+
+This vignette talks through the main data sources. To fully understand how the `fetch_` functions work - please read the [Main Fetch Functions](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html) vignette. 
+
+## Fixture
+Firstly, we can return the fixture for a season or particular round. 
+
+```{r fetch_fixture_aflw2, eval=FALSE, include=TRUE}
+fetch_fixture(season = 2021, comp = "AFLW") %>%
+  select(compSeason.name, round.name, 
+         home.team.name, away.team.name, 
+         venue.name)
+```
+```{r fetch_fixture_aflw2_included,  echo=FALSE, eval=eval_param}
+fitzRoy:::fixture_afl_aflw_2021 %>%
+  select(compSeason.name, round.name, 
+         home.team.name, away.team.name, 
+         venue.name)
+```
+## Lineup
+We can get the lineup for a given set of matches in a particular round. 
+```{r lineup, include=TRUE, eval=FALSE}
+fetch_lineup(2021, round_number = 1, comp = "AFLW") %>%
+  select(round.name, status, teamName, 
+         player.playerName.givenName,
+         player.playerName.surname, teamStatus)
+```
+
+```{r lineup_included, echo=FALSE, eval=eval_param}
+fitzRoy:::lineup_aflw_2021_1 %>%
+  select(round.name, status, teamName, 
+         player.playerName.givenName,
+         player.playerName.surname, teamStatus)
+```
+
+
+## Results
+The match results, including the teams playing, venue information and final scores are returned via `fetch_results`. 
+
+```{r fetch_results_aflw, eval=FALSE, include=TRUE}
+fetch_results(2020, round_number = 1, comp = "AFLW") %>%
+  select( match.date, match.name,
+         homeTeamScore.matchScore.totalScore, awayTeamScore.matchScore.totalScore)
+
+```
+```{r fetch_results_aflw_included,  echo=FALSE, eval=eval_param}
+fitzRoy:::results_afl_aflw_2020 %>%
+  dplyr::filter(round.roundNumber == 1) %>%
+  select(match.date, match.name,
+         homeTeamScore.matchScore.totalScore,
+         awayTeamScore.matchScore.totalScore)
+```
+
+## Ladder
+We can also get the ladder at any point with `fetch_ladder`.
+
+```{r fetch_ladder_aflw2, eval=FALSE, include=TRUE}
+fetch_ladder(2020, round_number = 6, comp = "AFLW") %>%
+  select(season, round_name, 
+         position, team.name, played, 
+         pointsFor, pointsAgainst)
+
+```
+```{r fetch_ladder_aflw2_included,  echo=FALSE, eval=eval_param}
+fitzRoy:::ladder_afl_aflw_2020 %>%
+  dplyr::filter(round_number == 7) %>%
+  select(season, round_name, 
+         position, team.name, played, 
+         pointsFor, pointsAgainst)
+```
+
+
+## Stats
+Lastly - we have basic player stats. This will return player level statistics such as possessions, time on ground, fantasy points and a myriad of other statistics.
+
+```{r fetch_stats, eval=FALSE, include=TRUE}
+fetch_player_stats(2020, round_number = 1, comp = "AFLW") %>%
+  select(player.player.player.givenName:clearances.totalClearances)
+
+```
+```{r fetch_stats_included, echo=FALSE, eval=eval_param}
+fitzRoy:::stats_afl_aflw_2020 %>%
+  dplyr::filter(round.roundNumber == 1) %>%
+  dplyr::select(player.player.player.givenName:clearances.totalClearances)
+```
+
+## Legacy/Advanced Stats
+We have a legacy function to provide advanced AFLW stats. This is going to be deprecated in favour of a more robust solution but still works for now. The following code should show you how to use those functions. 
+### Match data
+
 A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won't work. 
 
-```{r cookie, message = FALSE, warning = FALSE, eval=eval_param}
-cookie <- get_aflw_cookie()
 
+```{r cookie, eval=FALSE, include=TRUE}
+cookie <- get_afl_cookie()
 print(cookie)
 ```
+```{r cookie_included, echo=FALSE, eval=eval_param}
+cookie <- fitzRoy:::cookie
+print(cookie)
+```
+
 Note - if this is `NULL` the rest of this Vignette won't show any outputs but the code will remain! 
 
 ```{r cookie_param, include=FALSE, eval=eval_param}
 if (is.null(cookie)) {
     eval_param = FALSE
   }
-
 ```
 
 We can use the `fetch_results()` function to retrieve match data matches.
 
-```{r fetch_match_stats, message=FALSE, warning=TRUE, eval = eval_param}
+```{r fetch_match_stats, eecho=FALSE, eval=eval_param}
 match_data <- fetch_results(2020, round_number = 1, comp = "AFLW")
+```
+```{r fetch_match_stats2, include=FALSE, eval = eval_param}
+match_data <- fitzRoy:::results_afl_aflw_2020 %>%
+  dplyr::filter(round.roundNumber == 1)
 ```
 
 Note that there will be warnings if a fixture is available but no match data has
 been added yet. If this is the case, make sure you don't try to request detailed
 match stats for these match IDs. 
 
-```{r show_match_stats, message=FALSE, warning=FALSE, eval = eval_param}
+```{r show_match_stats, eval=eval_param}
 glimpse(match_data)
 ```
 
@@ -68,14 +159,17 @@ match data shown above. It takes a vector of match IDs as an argument. For
 example, let's say we want detailed stats for the first 10 games in `match_data`
 above. Then we would do:
 
-```{r first_10, message=FALSE, warning=FALSE, eval = eval_param}
+```{r first_10, eval = eval_param}
 first10 <- head(match_data, 10)
 first10_ids <- first10$Match.Id
 first10_ids
 ```
 
-```{r, eval = eval_param}
+```{r detailed, eval=FALSE, include=TRUE}
 detailed <- get_aflw_detailed_data(first10_ids)
 glimpse(detailed)
+```
+```{r detailed_included, echo=FALSE, eval=eval_param}
+fitzRoy:::detailed_stats_aflw_2020 %>% glimpse()
 ```
 

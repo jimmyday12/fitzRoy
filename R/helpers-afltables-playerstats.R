@@ -317,7 +317,7 @@ get_afltables_player_ids <- function(seasons) {
   }
 
   # nolint start
-  git_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/master/data-raw/afl_tables_playerstats/player_ids.csv"
+  git_url <- "https://raw.githubusercontent.com/jimmyday12/fitzroy_data/main/data-raw/afl_tables_playerstats/player_ids.csv"
   # nolint end
 
   col_vars <- c("Season", "Player", "ID", "Team")
@@ -349,17 +349,27 @@ get_afltables_player_ids <- function(seasons) {
   
   ids_new <- urls %>%
     purrr::map(readUrl) %>%
+    purrr::discard(~ nrow(.x) == 0)
+
+  first_populated_season <- end - length(ids_new) + 1
+
+  # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
+  # so we need to make them consistent before joining to avoid type errors
+  mixed_cols <- c('Round', 'Jumper.No.')
+  cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
+
+  ids_new <- ids_new %>%
+    purrr::map(~ dplyr::mutate_at(., cols_to_convert, as.character)) %>%
     purrr::map2_dfr(
-      .y = start:end,
+      .y = first_populated_season:end,
       ~ dplyr::mutate(., Season = .y)
-    ) 
+    )
 
   if (nrow(ids_new) < 1) {
     return(ids)
   } 
   
   ids_new <- ids_new %>%
-    dplyr::mutate(., Round = as.character(.data$Round)) %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
     dplyr::rename(Team.abb = .data$Team) %>%

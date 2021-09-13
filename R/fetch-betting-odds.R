@@ -124,6 +124,7 @@ fetch_betting_odds_footywire <- function(
   }
 
   convert_to_data_frame <- function(raw_season_data) {
+    if(is.null(raw_season_data)) return(NULL)
     raw_betting_col_names <- c(
       "Date",
       "Venue",
@@ -240,6 +241,8 @@ fetch_betting_odds_footywire <- function(
     purrr::map(fetch_betting_odds_page) %>%
     purrr::map(., ~ do.call(extract_table_rows, .)) %>%
     purrr::map(convert_to_data_frame)
+  
+  if(all(betting_dfs %>% purrr::map_lgl(is.null))) return (NULL)
 
   betting_dfs %>%
     dplyr::bind_rows(.) %>%

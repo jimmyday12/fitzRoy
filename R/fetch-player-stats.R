@@ -49,7 +49,6 @@ fetch_player_stats <- function(season = NULL,
   # Do some data checks
   # season <- check_season(season)
   check_comp_source(comp, source)
-
   
   dat <- switch(source,
                 "AFL" = fetch_player_stats_afl(season, round_number, comp),
@@ -58,7 +57,10 @@ fetch_player_stats <- function(season = NULL,
                 "fryzigg" = fetch_player_stats_fryzigg(season, round_number, comp),
                 NULL)
   
-  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats. Please use one of \"footywire\", \"afltables\" or \"fryzigg\""))
+  if (is.null(dat)) {
+    rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats. 
+                           Please use one of \"AFL\" \"footywire\", \"afltables\" or \"fryzigg\""))
+  }
   return(dat)
   
 }
@@ -74,14 +76,11 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   
   # Get match ids
   cli_id1 <- cli::cli_process_start("Fetching match ids")
-  matches <- suppressMessages(fetch_fixture(season, round_number, comp))
+  matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
   ids <- matches$providerId
-  
-  
   if (length(ids) == 0) {
     return(NULL)
   }
-  
   cli::cli_process_done(cli_id1)
   
   # get cookie
@@ -89,8 +88,9 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   
   # Loop through each match
   cli_id2 <- cli::cli_process_start("Fetching player stats for {.val {length(ids)} match{?es}}.")
-  match_stats <- ids %>% purrr::map_dfr(fetch_match_stats_afl, cookie)
-  
+  match_stats <- ids %>% 
+    purrr::map_dfr(purrr::possibly(~fetch_match_stats_afl(.x, cookie), 
+                                   otherwise = data.frame()))
   cli::cli_process_done(cli_id2)
   
   # add match details
@@ -117,7 +117,6 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
     dplyr::left_join(match_stats, by = c("providerId")) %>%
     dplyr::left_join(teams, by = c("teamId" = "providerId"))
   
-  
   return(df)
 }
 
@@ -137,7 +136,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
 
 
   # nolint start
-  dat_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/master/data-raw/afl_tables_playerstats/afldata.rda")
+  dat_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/afldata.rda")
   # nolint end
 
   load_r_data <- function(fname) {
@@ -156,7 +155,12 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL) {
     if (length(urls) != 0) {
       cli::cli_alert_info("New data found for {.val {length(urls)}} matches")
       dat_new <- scrape_afltables_match(urls)
-      dat <- dplyr::bind_rows(dat, dat_new)
+
+      dat <- list(dat, dat_new) %>%
+        # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
+        # so we need to make them consistent before joining to avoid type errors
+        purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
+        dplyr::bind_rows(.)
     }
   } else {
     cli::cli_alert_info("No new data found - returning cached data")
@@ -263,7 +267,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     url <- "https://github.com/jimmyday12/fitzRoy"
     id2 <- cli::cli_process_start("Checking data on {.url {url}}")
 
-    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/master/data-raw/player_stats/player_stats.rda" # nolint
+    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/main/data-raw/player_stats/player_stats.rda" # nolint
 
     load_r_data <- function(fname) {
       tmp <- tempfile(fileext = ".rda")

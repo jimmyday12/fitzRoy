@@ -41,6 +41,11 @@ test_that("fetch_player_stats_footywire works for various inputs", {
   dat_round2 <- fetch_player_stats_footywire(season = 2020, round_number = 2)
   expect_equal(dat_round1, dat_round2)
   
+  # certain games are correct - relates to bug in original data scrape
+  gf <- fetch_player_stats_footywire(season = 2020) %>% 
+    dplyr::filter(Round == "Grand Final")
+  expect_equal(nrow(gf), 44)
+  
 })
 
 test_that("fetch_player_stats_fryzigg works for various inputs", {
