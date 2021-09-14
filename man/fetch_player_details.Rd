@@ -8,8 +8,8 @@
 \title{Fetch Player Details}
 \usage{
 fetch_player_details(
-  current = TRUE,
   team = NULL,
+  current = TRUE,
   comp = "AFLM",
   source = "AFL",
   ...
@@ -22,17 +22,15 @@ fetch_player_details_afltables(team = NULL)
 fetch_player_details_footywire(team, current = TRUE)
 }
 \arguments{
-\item{current}{logical, return the current team list for the current calendar year}
-
 \item{team}{team the player played for in the season for, defaults to NULL which returns all teams}
+
+\item{current}{logical, return the current team list for the current calendar year or all historical data}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
 \item{source}{One of "AFL" (default), "footywire", "afltables"}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
-
-\item{season}{(optional) Season to return a list for. Only works for source "AFL" when current is set to FALSE, otherwise it is ignored (see notes)}
 }
 \value{
 A Tibble with the details of the relevant players.
@@ -45,23 +43,24 @@ source is provided.
 By default the source used will be the official AFL website.
 
 \code{\link[=fetch_player_details_afl]{fetch_player_details_afl()}}, \code{\link[=fetch_player_details_afltables]{fetch_player_details_afltables()}} and \code{\link[=fetch_player_details_footywire]{fetch_player_details_footywire()}}
-can be called directly and return data from the AFL website, AFL Tables and Footywire
-respectively.
+can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
 
-The function will typically be used to return the current team lists. For historical data, you can use the \code{current} argument set to FALSE for Footywire and AFL Tables sources. For AFL, you can use the \code{season} argument.
+The function will typically be used to return the current team lists. For historical data, you can use the \code{current} argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data.
 }
 \examples{
 \dontrun{
 # Return data for current Hawthorn players
 fetch_player_details("Hawthorn")
-
+fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
+fetch_player_details("GWS", current = TRUE, csource = "footywire")
 }
 
 }
 \seealso{
 \itemize{
-\item \link{fetch_player_details_afltables} for AFL Tables data.
+\item \link{fetch_player_details_afl} for AFL.com data.
 \item \link{fetch_player_details_footywire} for Footywire data.
+\item \link{fetch_player_details_footywire} for AFL Tables data.
 }
 }
 \concept{fetch player details functions}
