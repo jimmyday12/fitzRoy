@@ -6,6 +6,7 @@
 * Fixed type mismatch in `fetch_player_stats_afltables` and handling blank seasons in `fetch_ladder_afl` ([#149](https://github.com/jimmyday12/fitzRoy/issues/149), [@cfranklin11](https://github.com/cfranklin11))
 * Updated error message in `check_source` which is used in various functions [#147](https://github.com/jimmyday12/fitzRoy/issues/147)
 * Fixed issue with `fetch_results_afltabeles` caused by a `readr` update
+* Added new set of functions for fetching player details - `fetch_player_details` and associated helper functions `fetch_player_details_afl`, `fetch_player_details_footywire` and `fetch_player_details_afltables` will return the player details for a particular team and season
 
 # fitzRoy 1.0.0
 
