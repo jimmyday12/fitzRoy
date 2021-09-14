@@ -24,7 +24,7 @@ get_player_debut_afltables <- function(team = NULL) {
   
   df <- df %>%
     dplyr::mutate_at(c("DOB", "debut_date"), lubridate::dmy) %>%
-    dplyr::mutate(debut_season = as.numeric(format(debut_date, "%Y")))
+    dplyr::mutate(debut_season = as.numeric(format(.data$debut_date, "%Y")))
   
   teams <- data.frame(
     stringsAsFactors = FALSE,
@@ -45,9 +45,9 @@ get_player_debut_afltables <- function(team = NULL) {
   # Fix teams
   df <- df %>%
     dplyr::left_join(teams, by = c("Team" = "original")) %>%
-    dplyr::rename(debut_team = full) %>%
+    dplyr::rename(debut_team = .data$full) %>%
     dplyr::left_join(teams, by = c("Oppo" = "original")) %>%
-    dplyr::rename(debut_opposition = full)
+    dplyr::rename(debut_opposition = .data$full)
   
   
   # Filter out team
@@ -58,8 +58,8 @@ get_player_debut_afltables <- function(team = NULL) {
   
   
   df %>%
-    dplyr::select(Player, DOB, debut_date, debut_season, 
-                  debut_round, debut_team, debut_opposition)
+    dplyr::select(.data$Player, .data$DOB, .data$debut_date, .data$debut_season, 
+                  .data$debut_round, .data$debut_team, .data$debut_opposition)
   
 }
 
@@ -101,16 +101,18 @@ get_player_details_afltables <- function(team) {
   df <- html %>%
     rvest::html_table() %>%
     purrr::pluck(1) %>%
-    dplyr::mutate(Team = team) %>%
+    dplyr::mutate(Team = .data$team) %>%
     dplyr::slice(1:dplyr::n()-1) %>%
-    tidyr::separate(`Games (W-D-L)`, into = c("Games", "Wins", "Draws", "Losses", "x"), fill = "right") %>%
-    dplyr::select(-x) %>%
+    tidyr::separate(.data$`Games (W-D-L)`, into = c("Games", "Wins", "Draws", "Losses", "x"), fill = "right") %>%
+    dplyr::select(-.data$x) %>%
     dplyr::mutate(date_accessed = Sys.Date()) %>%
-    tidyr::separate(Player, into = c("surname", "firstname"), sep = ",", fill = "right") %>%
+    tidyr::separate(.data$Player, into = c("surname", "firstname"), sep = ",", fill = "right") %>%
     dplyr::mutate(Player = paste0(trimws(.data$firstname), " ", trimws(.data$surname))) %>%
     dplyr::mutate(dplyr::across(dplyr::one_of(c("Cap", "Games", "Wins", "Draws", "Losses", "Goals")), as.numeric)) %>%
-    dplyr::select(Player, Team, everything(), -surname, -firstname, -DOB) %>%
-    dplyr::arrange(Cap)
+    dplyr::select(.data$Player, .data$Team, 
+                  dplyr::everything(), 
+                  -.data$surname, -.data$firstname, -.data$DOB) %>%
+    dplyr::arrange(.data$Cap)
   
   cli::cli_process_done(cli_team)
   return(df)

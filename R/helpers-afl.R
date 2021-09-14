@@ -18,8 +18,9 @@ find_team_id <- function(team_abr, comp = "AFLM") {
   cont <- parse_resp_afl(resp)
   
   df <- cont$teams %>%
-    na.omit() %>%
-    dplyr::select(id, abbreviation, name, teamType)
+    stats::na.omit() %>%
+    dplyr::select(.data$id, .data$abbreviation, 
+                  .data$name, .data$teamType)
   
   if (comp == "AFLM") type <- "MEN"
   if (comp == "AFLW") type <- "WOMEN"
@@ -379,7 +380,8 @@ fetch_squad_afl <- function(teamId, team, compSeasonId) {
   cli::cli_process_done(cli_team)
   
   df %>%
-    dplyr::select(firstName, surname, id, everything())
+    dplyr::select(.data$firstName, .data$surname, .data$id, 
+                  dplyr::everything())
 }
 
 #' Parses afl response and checks for errors
