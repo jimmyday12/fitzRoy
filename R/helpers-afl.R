@@ -357,9 +357,9 @@ fetch_round_results_afl <- function(id, cookie = NULL){
 #' @param compSeasonId comp season id returned by `find_season_id`
 #' @keywords internal
 #' @noRd
-fetch_squad_afl <- function(teamId, team, compSeasonId) {
+fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
   
-  cli_team <- cli::cli_process_start("Fetching player details for {team}")
+  cli_team <- cli::cli_process_start("Fetching player details for {team}, {season}")
   api <- "https://aflapi.afl.com.au//afl/v2/squads"
   
   resp <- httr::GET(
@@ -380,7 +380,13 @@ fetch_squad_afl <- function(teamId, team, compSeasonId) {
   cli::cli_process_done(cli_team)
   
   df %>%
-    dplyr::select(.data$firstName, .data$surname, .data$id, 
+    dplyr::mutate(season = season,
+                  team = team) %>%
+    dplyr::select(.data$firstName, 
+                  .data$surname, 
+                  .data$id, 
+                  .data$team,
+                  .data$season,
                   dplyr::everything())
 }
 

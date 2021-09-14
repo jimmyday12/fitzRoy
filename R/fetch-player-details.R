@@ -8,14 +8,12 @@
 #' By default the source used will be the official AFL website.
 #'
 #' [fetch_player_details_afl()], [fetch_player_details_afltables()] and [fetch_player_details_footywire()]
-#' can be called directly and return data from the AFL website, AFL Tables and Footywire
-#' respectively.
+#' can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
 #'
-#' The function will typically be used to return the current team lists. For historical data, you can use the `current` argument set to FALSE for Footywire and AFL Tables sources. For AFL, you can use the `season` argument.
+#' The function will typically be used to return the current team lists. For historical data, you can use the `current` argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data. 
 #' 
-#' @param current logical, return the current team list for the current calendar year
-#' @param season (optional) Season to return a list for. Only works for source "AFL" when current is set to FALSE, otherwise it is ignored (see notes)
 #' @param team team the player played for in the season for, defaults to NULL which returns all teams
+#' @param current logical, return the current team list for the current calendar year or all historical data
 #' @param comp One of "AFLM" (default) or "AFLW"
 #' @param source One of "AFL" (default), "footywire", "afltables"
 #' @param ... Optional parameters passed onto various functions depending on source.
@@ -28,21 +26,22 @@
 #' \dontrun{
 #' # Return data for current Hawthorn players
 #' fetch_player_details("Hawthorn")
-#'
+#' fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
+#' fetch_player_details("GWS", current = TRUE, csource = "footywire")
 #' }
 #'
 #' @family fetch player details functions
 #' @seealso
-#' * [fetch_player_details_afltables] for AFL Tables data.
+#' * [fetch_player_details_afl] for AFL.com data.
 #' * [fetch_player_details_footywire] for Footywire data.
-fetch_player_details <- function(current = TRUE,
-                                 team = NULL,
+#' * [fetch_player_details_footywire] for AFL Tables data.
+fetch_player_details <- function(team = NULL,
+                                 current = TRUE,
                                  comp = "AFLM",
                                  source = "AFL",
                                  ...) {
   
   # Do some data checks
-  season <- check_season(season)
   check_comp_source(comp, source)
   
   # Ignore certain parameters based on source
@@ -99,6 +98,7 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
     purrr::map2_dfr(.y = team_names, 
                     ~fetch_squad_afl(teamId = .x, 
                                      team = .y, 
+                                     season = season,
                                      compSeasonId = comp_seas_id))
   
   df %>%

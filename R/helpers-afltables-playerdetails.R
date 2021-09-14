@@ -101,14 +101,22 @@ get_player_details_afltables <- function(team) {
   df <- html %>%
     rvest::html_table() %>%
     purrr::pluck(1) %>%
-    dplyr::mutate(Team = .data$team) %>%
+    dplyr::mutate(Team = team) %>%
     dplyr::slice(1:dplyr::n()-1) %>%
-    tidyr::separate(.data$`Games (W-D-L)`, into = c("Games", "Wins", "Draws", "Losses", "x"), fill = "right") %>%
+    tidyr::separate(.data$`Games (W-D-L)`, 
+                    into = c("Games", "Wins", "Draws", "Losses", "x"), 
+                    fill = "right") %>%
     dplyr::select(-.data$x) %>%
     dplyr::mutate(date_accessed = Sys.Date()) %>%
-    tidyr::separate(.data$Player, into = c("surname", "firstname"), sep = ",", fill = "right") %>%
-    dplyr::mutate(Player = paste0(trimws(.data$firstname), " ", trimws(.data$surname))) %>%
-    dplyr::mutate(dplyr::across(dplyr::one_of(c("Cap", "Games", "Wins", "Draws", "Losses", "Goals")), as.numeric)) %>%
+    tidyr::separate(.data$Player, 
+                    into = c("surname", "firstname"), 
+                    sep = ",", fill = "right") %>%
+    dplyr::mutate(Player = paste0(trimws(.data$firstname),
+                                  " ",
+                                  trimws(.data$surname))) %>%
+    dplyr::mutate(dplyr::across(dplyr::one_of(c("Cap", "Games", "Wins", "Draws",
+                                                "Losses", "Goals")),
+                                as.numeric)) %>%
     dplyr::select(.data$Player, .data$Team, 
                   dplyr::everything(), 
                   -.data$surname, -.data$firstname, -.data$DOB) %>%
