@@ -29,16 +29,17 @@ The goal of fitzRoy has been to provide a consistent and easy to use interface f
 Each function uses the same arguments and each argument should behave the same across all of the functions. While there may be some slight differences in behaviour between different sources of data, the goal will be to move towards a much more consistent pattern of behaviour.
 
 # Main functions
-There are broadly 5 main functions
+There are a number of main functions
 
 * `fetch_fixture` - returns the fixture for a given round and season
 * `fetch_lineup` - returns the lineup any matches in a given round and season
 * `fetch_results` - returns the match results for a given round and season
 * `fetch_ladder` - returns the ladder for a given round and season
 * `fetch_player_stats` - returns the detailed player stats for a set of matches within a given round or season
+* `fetch_player_details` - returns details on players such as date of birth, height, weight and debut (depending on source)
 
 # Arguments
-Each function accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:
+Each function generally accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:
 
 * `season` - the season or seasons to return data from. If NULL (the default), will return the season that matches `Sys.Date()`
 * `round_number`- the round to return data from. If NULL (the default), will return data from all rounds
