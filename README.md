@@ -49,8 +49,8 @@ View the [Quick Start
 Vignette](https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html) to
 quickly get going with data analysis.
 
-The five main functions are `fetch_fixture`, `fetch_lineup`,
-`fetch_results`, `fetch_ladder` and `fetch_player_stats`.
+The main functions are `fetch_fixture`, `fetch_lineup`, `fetch_results`,
+`fetch_ladder` and `fetch_player_stats`.
 
 ``` r
 fetch_fixture(season = 2020, comp = "AFLM")
@@ -58,6 +58,7 @@ fetch_lineup(season = 2021, round_number = 1, comp = "AFLW")
 fetch_results(season = 2020, round_number = 1, comp = "AFLW")
 fetch_ladder(season = 2020, source = "squiggle")
 fetch_player_stats(season = 2020, source = "fryzigg")
+fetch_player_details(team = "Hawthorn", current = TRUE, source = "AFL")
 ```
 
 See vignette on using the [main fetch
