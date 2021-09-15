@@ -140,7 +140,7 @@
 <div id="main-functions" class="section level1">
 <h1 class="hasAnchor">
 <a href="#main-functions" class="anchor"></a>Main functions</h1>
-<p>There are broadly 5 main functions</p>
+<p>There are a number of main functions</p>
 <ul>
 <li>
 <code>fetch_fixture</code> - returns the fixture for a given round and season</li>
@@ -152,12 +152,14 @@
 <code>fetch_ladder</code> - returns the ladder for a given round and season</li>
 <li>
 <code>fetch_player_stats</code> - returns the detailed player stats for a set of matches within a given round or season</li>
+<li>
+<code>fetch_player_details</code> - returns details on players such as date of birth, height, weight and debut (depending on source)</li>
 </ul>
 </div>
 <div id="arguments" class="section level1">
 <h1 class="hasAnchor">
 <a href="#arguments" class="anchor"></a>Arguments</h1>
-<p>Each function accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:</p>
+<p>Each function generally accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:</p>
 <ul>
 <li>
 <code>season</code> - the season or seasons to return data from. If NULL (the default), will return the season that matches <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date()</a></code>
@@ -180,35 +182,25 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 198 × 46
-#&gt;       id providerId   utcStartTime       status  compSeason.id compSeason.provi…
-#&gt;    &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;              &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;            
-#&gt;  1  2991 CD_M2021014… 2021-03-18T08:25:… SCHEDU…            34 CD_S2021014      
-#&gt;  2  2986 CD_M2021014… 2021-03-19T08:50:… SCHEDU…            34 CD_S2021014      
-#&gt;  3  2992 CD_M2021014… 2021-03-20T02:45:… SCHEDU…            34 CD_S2021014      
-#&gt;  4  2993 CD_M2021014… 2021-03-20T05:35:… SCHEDU…            34 CD_S2021014      
-#&gt;  5  2994 CD_M2021014… 2021-03-20T08:25:… SCHEDU…            34 CD_S2021014      
-#&gt;  6  2987 CD_M2021014… 2021-03-20T08:45:… SCHEDU…            34 CD_S2021014      
-#&gt;  7  2990 CD_M2021014… 2021-03-21T02:10:… SCHEDU…            34 CD_S2021014      
-#&gt;  8  2989 CD_M2021014… 2021-03-21T04:20:… SCHEDU…            34 CD_S2021014      
-#&gt;  9  2988 CD_M2021014… 2021-03-21T07:10:… SCHEDU…            34 CD_S2021014      
-#&gt; 10  2999 CD_M2021014… 2021-03-25T08:20:… SCHEDU…            34 CD_S2021014      
+#&gt;       id providerId      utcStartTime     status compSeason.id compSeason.provi…
+#&gt;    &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;            
+#&gt;  1  2991 CD_M20210140101 2021-03-18T08:2… SCHED…            34 CD_S2021014      
+#&gt;  2  2986 CD_M20210140102 2021-03-19T08:5… SCHED…            34 CD_S2021014      
+#&gt;  3  2992 CD_M20210140103 2021-03-20T02:4… SCHED…            34 CD_S2021014      
+#&gt;  4  2993 CD_M20210140104 2021-03-20T05:3… SCHED…            34 CD_S2021014      
+#&gt;  5  2994 CD_M20210140105 2021-03-20T08:2… SCHED…            34 CD_S2021014      
+#&gt;  6  2987 CD_M20210140106 2021-03-20T08:4… SCHED…            34 CD_S2021014      
+#&gt;  7  2990 CD_M20210140107 2021-03-21T02:1… SCHED…            34 CD_S2021014      
+#&gt;  8  2989 CD_M20210140108 2021-03-21T04:2… SCHED…            34 CD_S2021014      
+#&gt;  9  2988 CD_M20210140109 2021-03-21T07:1… SCHED…            34 CD_S2021014      
+#&gt; 10  2999 CD_M20210140201 2021-03-25T08:2… SCHED…            34 CD_S2021014      
 #&gt; # … with 188 more rows, and 40 more variables: compSeason.name &lt;chr&gt;,
 #&gt; #   compSeason.shortName &lt;chr&gt;, compSeason.currentRoundNumber &lt;int&gt;,
 #&gt; #   round.id &lt;int&gt;, round.providerId &lt;chr&gt;, round.abbreviation &lt;chr&gt;,
 #&gt; #   round.name &lt;chr&gt;, round.roundNumber &lt;int&gt;, round.byes &lt;list&gt;,
 #&gt; #   home.team.id &lt;int&gt;, home.team.providerId &lt;chr&gt;, home.team.name &lt;chr&gt;,
 #&gt; #   home.team.abbreviation &lt;chr&gt;, home.team.nickname &lt;chr&gt;,
-#&gt; #   home.team.teamType &lt;chr&gt;, home.team.club.id &lt;int&gt;,
-#&gt; #   home.team.club.providerId &lt;chr&gt;, home.team.club.name &lt;chr&gt;,
-#&gt; #   home.team.club.abbreviation &lt;chr&gt;, home.team.club.nickname &lt;chr&gt;,
-#&gt; #   away.team.id &lt;int&gt;, away.team.providerId &lt;chr&gt;, away.team.name &lt;chr&gt;,
-#&gt; #   away.team.abbreviation &lt;chr&gt;, away.team.nickname &lt;chr&gt;,
-#&gt; #   away.team.teamType &lt;chr&gt;, away.team.club.id &lt;int&gt;,
-#&gt; #   away.team.club.providerId &lt;chr&gt;, away.team.club.name &lt;chr&gt;,
-#&gt; #   away.team.club.abbreviation &lt;chr&gt;, away.team.club.nickname &lt;chr&gt;,
-#&gt; #   venue.id &lt;int&gt;, venue.providerId &lt;chr&gt;, venue.name &lt;chr&gt;,
-#&gt; #   venue.abbreviation &lt;chr&gt;, venue.location &lt;chr&gt;, venue.state &lt;chr&gt;,
-#&gt; #   venue.timezone &lt;chr&gt;, metadata.travel_link &lt;chr&gt;, compSeason.year &lt;dbl&gt;</code></pre>
+#&gt; #   home.team.teamType &lt;chr&gt;, home.team.club.id &lt;int&gt;, …</code></pre>
 <p>This is the same as</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span> </code></pre></div>
@@ -235,18 +227,18 @@
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 63 × 5
-#&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     
-#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
-#&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      
-#&gt;  2 2021 NAB AFLW Com… Round 1    St Kilda        Western Bulldo… RSEA Park      
-#&gt;  3 2021 NAB AFLW Com… Round 1    Gold Coast Suns Melbourne       Metricon Stadi…
-#&gt;  4 2021 NAB AFLW Com… Round 1    West Coast Eag… Adelaide Crows  Mineral Resour…
-#&gt;  5 2021 NAB AFLW Com… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium  
-#&gt;  6 2021 NAB AFLW Com… Round 1    Richmond        Brisbane Lions  Swinburne Cent…
-#&gt;  7 2021 NAB AFLW Com… Round 1    Fremantle       GWS Giants      Fremantle Oval 
-#&gt;  8 2021 NAB AFLW Com… Round 2    Western Bulldo… Carlton         Victoria Unive…
-#&gt;  9 2021 NAB AFLW Com… Round 2    Collingwood     Geelong Cats    Victoria Park  
-#&gt; 10 2021 NAB AFLW Com… Round 2    Melbourne       Richmond        Casey Fields   
+#&gt;    compSeason.name           round.name home.team.name away.team.name venue.name
+#&gt;    &lt;chr&gt;                     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;     
+#&gt;  1 2021 NAB AFLW Competition Round 1    Carlton        Collingwood    Ikon Park 
+#&gt;  2 2021 NAB AFLW Competition Round 1    St Kilda       Western Bulld… RSEA Park 
+#&gt;  3 2021 NAB AFLW Competition Round 1    Gold Coast Su… Melbourne      Metricon …
+#&gt;  4 2021 NAB AFLW Competition Round 1    West Coast Ea… Adelaide Crows Mineral R…
+#&gt;  5 2021 NAB AFLW Competition Round 1    Geelong Cats   Kangaroos      GMHBA Sta…
+#&gt;  6 2021 NAB AFLW Competition Round 1    Richmond       Brisbane Lions Swinburne…
+#&gt;  7 2021 NAB AFLW Competition Round 1    Fremantle      GWS Giants     Fremantle…
+#&gt;  8 2021 NAB AFLW Competition Round 2    Western Bulld… Carlton        Victoria …
+#&gt;  9 2021 NAB AFLW Competition Round 2    Collingwood    Geelong Cats   Victoria …
+#&gt; 10 2021 NAB AFLW Competition Round 2    Melbourne      Richmond       Casey Fie…
 #&gt; # … with 53 more rows</code></pre>
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">

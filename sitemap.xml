@@ -16,6 +16,9 @@
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_lineup.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_player_details.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_player_stats.html</loc>
   </url>
   <url>
@@ -92,6 +95,9 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/return_ladder.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/team_abr_afl.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/update_footywire_stats.html</loc>

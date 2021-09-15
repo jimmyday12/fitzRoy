@@ -147,18 +147,18 @@
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 63 × 5
-#&gt;    compSeason.name    round.name home.team.name  away.team.name  venue.name     
-#&gt;    &lt;chr&gt;              &lt;chr&gt;      &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;          
-#&gt;  1 2021 NAB AFLW Com… Round 1    Carlton         Collingwood     Ikon Park      
-#&gt;  2 2021 NAB AFLW Com… Round 1    St Kilda        Western Bulldo… RSEA Park      
-#&gt;  3 2021 NAB AFLW Com… Round 1    Gold Coast Suns Melbourne       Metricon Stadi…
-#&gt;  4 2021 NAB AFLW Com… Round 1    West Coast Eag… Adelaide Crows  Mineral Resour…
-#&gt;  5 2021 NAB AFLW Com… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium  
-#&gt;  6 2021 NAB AFLW Com… Round 1    Richmond        Brisbane Lions  Swinburne Cent…
-#&gt;  7 2021 NAB AFLW Com… Round 1    Fremantle       GWS Giants      Fremantle Oval 
-#&gt;  8 2021 NAB AFLW Com… Round 2    Western Bulldo… Carlton         Victoria Unive…
-#&gt;  9 2021 NAB AFLW Com… Round 2    Collingwood     Geelong Cats    Victoria Park  
-#&gt; 10 2021 NAB AFLW Com… Round 2    Melbourne       Richmond        Casey Fields   
+#&gt;    compSeason.name           round.name home.team.name away.team.name venue.name
+#&gt;    &lt;chr&gt;                     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;     
+#&gt;  1 2021 NAB AFLW Competition Round 1    Carlton        Collingwood    Ikon Park 
+#&gt;  2 2021 NAB AFLW Competition Round 1    St Kilda       Western Bulld… RSEA Park 
+#&gt;  3 2021 NAB AFLW Competition Round 1    Gold Coast Su… Melbourne      Metricon …
+#&gt;  4 2021 NAB AFLW Competition Round 1    West Coast Ea… Adelaide Crows Mineral R…
+#&gt;  5 2021 NAB AFLW Competition Round 1    Geelong Cats   Kangaroos      GMHBA Sta…
+#&gt;  6 2021 NAB AFLW Competition Round 1    Richmond       Brisbane Lions Swinburne…
+#&gt;  7 2021 NAB AFLW Competition Round 1    Fremantle      GWS Giants     Fremantle…
+#&gt;  8 2021 NAB AFLW Competition Round 2    Western Bulld… Carlton        Victoria …
+#&gt;  9 2021 NAB AFLW Competition Round 2    Collingwood    Geelong Cats   Victoria …
+#&gt; 10 2021 NAB AFLW Competition Round 2    Melbourne      Richmond       Casey Fie…
 #&gt; # … with 53 more rows</code></pre>
 </div>
 <div id="lineup" class="section level2">
@@ -171,18 +171,18 @@
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 294 × 6
-#&gt;    round.name status  teamName player.playerName.… player.playerName… teamStatus
-#&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;     
-#&gt;  1 Round 1    CONCLU… Carlton  Brooke              Vernon             FINAL_TEAM
-#&gt;  2 Round 1    CONCLU… Carlton  Natalie             Plane              FINAL_TEAM
-#&gt;  3 Round 1    CONCLU… Carlton  Vaomua              Laloifi            FINAL_TEAM
-#&gt;  4 Round 1    CONCLU… Carlton  Charlotte           Wilson             FINAL_TEAM
-#&gt;  5 Round 1    CONCLU… Carlton  Kerryn              Harrington         FINAL_TEAM
-#&gt;  6 Round 1    CONCLU… Carlton  Lauren              Brazzale           FINAL_TEAM
-#&gt;  7 Round 1    CONCLU… Carlton  Elise               O'Dea              FINAL_TEAM
-#&gt;  8 Round 1    CONCLU… Carlton  Katie               Loynes             FINAL_TEAM
-#&gt;  9 Round 1    CONCLU… Carlton  Abbie               McKay              FINAL_TEAM
-#&gt; 10 Round 1    CONCLU… Carlton  Tayla               Harris             FINAL_TEAM
+#&gt;    round.name status    teamName player.playerName… player.playerNam… teamStatus
+#&gt;    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;             &lt;chr&gt;     
+#&gt;  1 Round 1    CONCLUDED Carlton  Brooke             Vernon            FINAL_TEAM
+#&gt;  2 Round 1    CONCLUDED Carlton  Natalie            Plane             FINAL_TEAM
+#&gt;  3 Round 1    CONCLUDED Carlton  Vaomua             Laloifi           FINAL_TEAM
+#&gt;  4 Round 1    CONCLUDED Carlton  Charlotte          Wilson            FINAL_TEAM
+#&gt;  5 Round 1    CONCLUDED Carlton  Kerryn             Harrington        FINAL_TEAM
+#&gt;  6 Round 1    CONCLUDED Carlton  Lauren             Brazzale          FINAL_TEAM
+#&gt;  7 Round 1    CONCLUDED Carlton  Elise              O'Dea             FINAL_TEAM
+#&gt;  8 Round 1    CONCLUDED Carlton  Katie              Loynes            FINAL_TEAM
+#&gt;  9 Round 1    CONCLUDED Carlton  Abbie              McKay             FINAL_TEAM
+#&gt; 10 Round 1    CONCLUDED Carlton  Tayla              Harris            FINAL_TEAM
 #&gt; # … with 284 more rows</code></pre>
 </div>
 <div id="results" class="section level2">
@@ -257,13 +257,7 @@
 #&gt; #   totalPossessions &lt;dbl&gt;, inside50s &lt;dbl&gt;, marksInside50 &lt;dbl&gt;,
 #&gt; #   contestedMarks &lt;dbl&gt;, hitouts &lt;dbl&gt;, onePercenters &lt;dbl&gt;,
 #&gt; #   disposalEfficiency &lt;dbl&gt;, clangers &lt;dbl&gt;, freesFor &lt;dbl&gt;,
-#&gt; #   freesAgainst &lt;dbl&gt;, dreamTeamPoints &lt;dbl&gt;, rebound50s &lt;dbl&gt;,
-#&gt; #   goalAssists &lt;dbl&gt;, goalAccuracy &lt;dbl&gt;, ratingPoints &lt;lgl&gt;, ranking &lt;lgl&gt;,
-#&gt; #   lastUpdated &lt;chr&gt;, turnovers &lt;dbl&gt;, intercepts &lt;dbl&gt;,
-#&gt; #   tacklesInside50 &lt;dbl&gt;, shotsAtGoal &lt;dbl&gt;, goalEfficiency &lt;lgl&gt;,
-#&gt; #   shotEfficiency &lt;lgl&gt;, interchangeCounts &lt;lgl&gt;, scoreInvolvements &lt;dbl&gt;,
-#&gt; #   metresGained &lt;dbl&gt;, clearances.centreClearances &lt;dbl&gt;,
-#&gt; #   clearances.stoppageClearances &lt;dbl&gt;, clearances.totalClearances &lt;dbl&gt;</code></pre>
+#&gt; #   freesAgainst &lt;dbl&gt;, dreamTeamPoints &lt;dbl&gt;, rebound50s &lt;dbl&gt;, …</code></pre>
 </div>
 <div id="legacyadvanced-stats" class="section level2">
 <h2 class="hasAnchor">

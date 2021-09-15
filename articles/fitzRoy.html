@@ -243,18 +243,18 @@
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 294 × 6
-#&gt;    round.name status  teamName player.playerName.… player.playerName… teamStatus
-#&gt;    &lt;chr&gt;      &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;               &lt;chr&gt;              &lt;chr&gt;     
-#&gt;  1 Round 1    CONCLU… Carlton  Brooke              Vernon             FINAL_TEAM
-#&gt;  2 Round 1    CONCLU… Carlton  Natalie             Plane              FINAL_TEAM
-#&gt;  3 Round 1    CONCLU… Carlton  Vaomua              Laloifi            FINAL_TEAM
-#&gt;  4 Round 1    CONCLU… Carlton  Charlotte           Wilson             FINAL_TEAM
-#&gt;  5 Round 1    CONCLU… Carlton  Kerryn              Harrington         FINAL_TEAM
-#&gt;  6 Round 1    CONCLU… Carlton  Lauren              Brazzale           FINAL_TEAM
-#&gt;  7 Round 1    CONCLU… Carlton  Elise               O'Dea              FINAL_TEAM
-#&gt;  8 Round 1    CONCLU… Carlton  Katie               Loynes             FINAL_TEAM
-#&gt;  9 Round 1    CONCLU… Carlton  Abbie               McKay              FINAL_TEAM
-#&gt; 10 Round 1    CONCLU… Carlton  Tayla               Harris             FINAL_TEAM
+#&gt;    round.name status    teamName player.playerName… player.playerNam… teamStatus
+#&gt;    &lt;chr&gt;      &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;             &lt;chr&gt;     
+#&gt;  1 Round 1    CONCLUDED Carlton  Brooke             Vernon            FINAL_TEAM
+#&gt;  2 Round 1    CONCLUDED Carlton  Natalie            Plane             FINAL_TEAM
+#&gt;  3 Round 1    CONCLUDED Carlton  Vaomua             Laloifi           FINAL_TEAM
+#&gt;  4 Round 1    CONCLUDED Carlton  Charlotte          Wilson            FINAL_TEAM
+#&gt;  5 Round 1    CONCLUDED Carlton  Kerryn             Harrington        FINAL_TEAM
+#&gt;  6 Round 1    CONCLUDED Carlton  Lauren             Brazzale          FINAL_TEAM
+#&gt;  7 Round 1    CONCLUDED Carlton  Elise              O'Dea             FINAL_TEAM
+#&gt;  8 Round 1    CONCLUDED Carlton  Katie              Loynes            FINAL_TEAM
+#&gt;  9 Round 1    CONCLUDED Carlton  Abbie              McKay             FINAL_TEAM
+#&gt; 10 Round 1    CONCLUDED Carlton  Tayla              Harris            FINAL_TEAM
 #&gt; # … with 284 more rows</code></pre>
 </div>
 <div id="results" class="section level3">
@@ -373,42 +373,25 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1,932 × 67
-#&gt;    providerId  utcStartTime  status compSeason.shor… round.name round.roundNumb…
-#&gt;    &lt;chr&gt;       &lt;chr&gt;         &lt;chr&gt;  &lt;chr&gt;            &lt;chr&gt;                 &lt;int&gt;
-#&gt;  1 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  2 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  3 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  4 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  5 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  6 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  7 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  8 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt;  9 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
-#&gt; 10 CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;    providerId      utcStartTime status compSeason.shor… round.name round.roundNumb…
+#&gt;    &lt;chr&gt;           &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;            &lt;chr&gt;                 &lt;int&gt;
+#&gt;  1 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  2 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  3 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  4 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  5 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  6 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  7 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  8 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt;  9 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
+#&gt; 10 CD_M20202640101 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1
 #&gt; # … with 1,922 more rows, and 61 more variables: venue.name &lt;chr&gt;,
 #&gt; #   home.team.club.name &lt;chr&gt;, away.team.club.name &lt;chr&gt;,
 #&gt; #   player.jumperNumber &lt;int&gt;, player.photoURL &lt;chr&gt;,
 #&gt; #   player.player.position &lt;chr&gt;, player.player.player.playerId &lt;chr&gt;,
 #&gt; #   player.player.player.captain &lt;lgl&gt;,
 #&gt; #   player.player.player.playerJumperNumber &lt;int&gt;,
-#&gt; #   player.player.player.givenName &lt;chr&gt;, player.player.player.surname &lt;chr&gt;,
-#&gt; #   teamId &lt;chr&gt;, gamesPlayed &lt;lgl&gt;, timeOnGroundPercentage &lt;dbl&gt;, goals &lt;dbl&gt;,
-#&gt; #   behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;, kicks &lt;dbl&gt;, handballs &lt;dbl&gt;,
-#&gt; #   disposals &lt;dbl&gt;, marks &lt;dbl&gt;, bounces &lt;dbl&gt;, tackles &lt;dbl&gt;,
-#&gt; #   contestedPossessions &lt;dbl&gt;, uncontestedPossessions &lt;dbl&gt;,
-#&gt; #   totalPossessions &lt;dbl&gt;, inside50s &lt;dbl&gt;, marksInside50 &lt;dbl&gt;,
-#&gt; #   contestedMarks &lt;dbl&gt;, hitouts &lt;dbl&gt;, onePercenters &lt;dbl&gt;,
-#&gt; #   disposalEfficiency &lt;dbl&gt;, clangers &lt;dbl&gt;, freesFor &lt;dbl&gt;,
-#&gt; #   freesAgainst &lt;dbl&gt;, dreamTeamPoints &lt;dbl&gt;, rebound50s &lt;dbl&gt;,
-#&gt; #   goalAssists &lt;dbl&gt;, goalAccuracy &lt;dbl&gt;, ratingPoints &lt;lgl&gt;, ranking &lt;lgl&gt;,
-#&gt; #   lastUpdated &lt;chr&gt;, turnovers &lt;dbl&gt;, intercepts &lt;dbl&gt;,
-#&gt; #   tacklesInside50 &lt;dbl&gt;, shotsAtGoal &lt;dbl&gt;, goalEfficiency &lt;lgl&gt;,
-#&gt; #   shotEfficiency &lt;lgl&gt;, interchangeCounts &lt;lgl&gt;, scoreInvolvements &lt;dbl&gt;,
-#&gt; #   metresGained &lt;dbl&gt;, clearances.centreClearances &lt;dbl&gt;,
-#&gt; #   clearances.stoppageClearances &lt;dbl&gt;, clearances.totalClearances &lt;dbl&gt;,
-#&gt; #   player.playerId &lt;chr&gt;, player.captain &lt;lgl&gt;,
-#&gt; #   player.playerJumperNumber &lt;int&gt;, player.givenName &lt;chr&gt;,
-#&gt; #   player.surname &lt;chr&gt;, teamStatus &lt;chr&gt;, team.name &lt;chr&gt;</code></pre>
+#&gt; #   player.player.player.givenName &lt;chr&gt;, player.player.player.surname &lt;chr&gt;, …</code></pre>
 <p>We also have detailed player stats courtesy of Fryzigg.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2019</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span></code></pre></div>
@@ -431,29 +414,7 @@
 #&gt; #   match_away_team_goals &lt;int&gt;, match_away_team_behinds &lt;int&gt;,
 #&gt; #   match_away_team_score &lt;int&gt;, match_margin &lt;int&gt;, match_winner &lt;chr&gt;,
 #&gt; #   match_weather_temp_c &lt;int&gt;, match_weather_type &lt;chr&gt;, player_id &lt;int&gt;,
-#&gt; #   player_first_name &lt;chr&gt;, player_last_name &lt;chr&gt;, player_height_cm &lt;int&gt;,
-#&gt; #   player_weight_kg &lt;int&gt;, player_is_retired &lt;lgl&gt;, player_team &lt;chr&gt;,
-#&gt; #   guernsey_number &lt;int&gt;, kicks &lt;int&gt;, marks &lt;int&gt;, handballs &lt;int&gt;,
-#&gt; #   disposals &lt;int&gt;, effective_disposals &lt;int&gt;,
-#&gt; #   disposal_efficiency_percentage &lt;int&gt;, goals &lt;int&gt;, behinds &lt;int&gt;,
-#&gt; #   hitouts &lt;int&gt;, tackles &lt;int&gt;, rebounds &lt;int&gt;, inside_fifties &lt;int&gt;,
-#&gt; #   clearances &lt;int&gt;, clangers &lt;int&gt;, free_kicks_for &lt;int&gt;,
-#&gt; #   free_kicks_against &lt;int&gt;, brownlow_votes &lt;int&gt;,
-#&gt; #   contested_possessions &lt;int&gt;, uncontested_possessions &lt;int&gt;,
-#&gt; #   contested_marks &lt;int&gt;, marks_inside_fifty &lt;int&gt;, one_percenters &lt;int&gt;,
-#&gt; #   bounces &lt;int&gt;, goal_assists &lt;int&gt;, time_on_ground_percentage &lt;int&gt;,
-#&gt; #   afl_fantasy_score &lt;int&gt;, supercoach_score &lt;int&gt;, centre_clearances &lt;int&gt;,
-#&gt; #   stoppage_clearances &lt;int&gt;, score_involvements &lt;int&gt;, metres_gained &lt;int&gt;,
-#&gt; #   turnovers &lt;int&gt;, intercepts &lt;int&gt;, tackles_inside_fifty &lt;int&gt;,
-#&gt; #   contest_def_losses &lt;int&gt;, contest_def_one_on_ones &lt;int&gt;,
-#&gt; #   contest_off_one_on_ones &lt;int&gt;, contest_off_wins &lt;int&gt;,
-#&gt; #   def_half_pressure_acts &lt;int&gt;, effective_kicks &lt;int&gt;,
-#&gt; #   f50_ground_ball_gets &lt;int&gt;, ground_ball_gets &lt;int&gt;,
-#&gt; #   hitouts_to_advantage &lt;int&gt;, hitout_win_percentage &lt;dbl&gt;,
-#&gt; #   intercept_marks &lt;int&gt;, marks_on_lead &lt;int&gt;, pressure_acts &lt;int&gt;,
-#&gt; #   rating_points &lt;dbl&gt;, ruck_contests &lt;int&gt;, score_launches &lt;int&gt;,
-#&gt; #   shots_at_goal &lt;int&gt;, spoils &lt;int&gt;, subbed &lt;chr&gt;, player_position &lt;chr&gt;,
-#&gt; #   date &lt;date&gt;</code></pre>
+#&gt; #   player_first_name &lt;chr&gt;, player_last_name &lt;chr&gt;, player_height_cm &lt;int&gt;, …</code></pre>
 <p>Other providers include Afltables and Footywire.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">stats_afl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">11</span><span class="op">)</span>
