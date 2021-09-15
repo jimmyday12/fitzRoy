@@ -71,6 +71,7 @@ fetch_player_details <- function(team = NULL,
   
 }
 
+#' @param season Season in YYYY format
 #' @rdname fetch_player_details
 #' @export
 fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {

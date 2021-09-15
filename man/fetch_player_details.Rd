@@ -31,6 +31,8 @@ fetch_player_details_footywire(team, current = TRUE)
 \item{source}{One of "AFL" (default), "footywire", "afltables"}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
+
+\item{season}{Season in YYYY format}
 }
 \value{
 A Tibble with the details of the relevant players.
