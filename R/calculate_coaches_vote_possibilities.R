@@ -2,7 +2,7 @@
 #'
 #' @description
 #' `calculate_coaches_vote_possibilities` returns all possible breakdowns of coaches votes between two coaches,
-#' given a breakdown of coaches votes
+#' given a breakdown of AFLCA coaches votes
 #'
 #' @param df Requires the following column names: Player.Name, Coaches.Votes. These can be returned from the
 #' function `fetch_coaches_votes`.
@@ -10,7 +10,7 @@
 #'
 #' @return
 #' For output_type "Coach View" - A list of data frames with columns: Votes, C1, C2
-#' For output_type "Player View" - A data frame with columns: Player, V1, V2
+#' For output_type "Player View" - A list of data frames with columns: Player, V1, V2
 #' @export
 #'
 #' @examples
@@ -38,6 +38,7 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
   if(! output_type %in% c("Coach View", "Player View")) stop("Invalid Output Type")
   if(sum(names(df) %in% c("Player.Name", "Coaches.Votes")) != 2) stop("Input df has the wrong column names")
   if(length(unique(df$Player.Name)) < nrow(df)) stop("Duplicate Player Names")
+  if(sum(df$Coaches.Votes) != 30) stop("Coaches Vote total does not add up")
   if(nrow(df) < 5) stop("Not enough players")
   if(nrow(df) > 10) stop("Too many players")
   

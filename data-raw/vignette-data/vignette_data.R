@@ -48,7 +48,9 @@ squiggle_ladder <- fetch_squiggle_data("ladder",
                                              round = 15, 
                                              source = 1)
 
-
+# Coaches Votes ---------------------------------------------
+aflm_coaches_votes <- fetch_coaches_votes(season = 2021, comp = "AFLM")
+aflw_coaches_votes <- fetch_coaches_votes(season = 2021, comp = "AFLW")
 
 
 # mens-stats
