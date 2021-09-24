@@ -38,7 +38,7 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
   if(! output_type %in% c("Coach View", "Player View")) stop("Invalid Output Type")
   if(sum(names(df) %in% c("Player.Name", "Coaches.Votes")) != 2) stop("Input df has the wrong column names")
   if(length(unique(df$Player.Name)) < nrow(df)) stop("Duplicate Player Names")
-  if(sum(df$Coaches.Votes) != 30) stop("Coaches Vote total does not add up")
+  if(sum(df$Coaches.Votes %>% as.numeric) != 30) stop("Coaches Vote total does not add up")
   if(nrow(df) < 5) stop("Not enough players")
   if(nrow(df) > 10) stop("Too many players")
   

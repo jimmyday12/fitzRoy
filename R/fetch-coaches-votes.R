@@ -67,7 +67,7 @@ fetch_coaches_votes <- function(season = NULL,
     split(1:nrow(.)) %>%
     # apply function to each round
     lapply(function(row){
-      try(scrape_coaches_votes(comp, row$Season, row$Round, row$Finals))
+      try(scrape_coaches_votes(row$Season, row$Round, comp, row$Finals))
     })
   
   # remove errors

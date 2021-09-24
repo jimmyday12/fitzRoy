@@ -37,15 +37,17 @@ scrape_coaches_votes <- function(season = NULL,
   # read the link
   html <- rvest::read_html(link)
   
+  closeAllConnections()
+  
   # extract each piece of information from the link
   home.teams <- rvest::html_elements(html, ".pr-md-3.votes-by-match .club_logo") %>%
     rvest::html_attr("title") %>% .[seq(1,length(.),2)]
   away.teams <- rvest::html_elements(html, ".pr-md-3.votes-by-match .club_logo") %>%
     rvest::html_attr("title") %>% .[seq(2,length(.),2)]
   votes <- rvest::html_elements(html, ".pr-md-3.votes-by-match .col-2") %>%
-    rvest::html_text %>% stringr::str_remove_all("\n") %>% stringr::str_remove_all("\t")
+    rvest::html_text() %>% stringr::str_remove_all("\n") %>% stringr::str_remove_all("\t")
   players <- rvest::html_elements(html, ".pr-md-3.votes-by-match .col-10") %>%
-    rvest::html_text %>% stringr::str_remove_all("\n") %>% stringr::str_remove_all("\t")
+    rvest::html_text() %>% stringr::str_remove_all("\n") %>% stringr::str_remove_all("\t")
   
   # arrange the info into a data frame
   df <- data.frame(Season = season, Round = round_number,
