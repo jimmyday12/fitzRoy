@@ -1,13 +1,13 @@
 test_that("Squiggle API queries work", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
-  
+
+
   expect_type(fetch_squiggle_data(), "list")
   expect_type(fetch_squiggle_data("sources"), "list")
   expect_type(fetch_squiggle_data("tips"), "list")
   expect_type(fetch_squiggle_data("games"), "list")
-  
+
   # Test errors
   expect_error(fetch_squiggle_data("a"))
   expect_error(fetch_squiggle_data("games", years = 2018))
@@ -18,7 +18,7 @@ test_that("Squiggle API queries work", {
 test_that("Squiggle API optional arguments work", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_type(
     fetch_squiggle_data(query = "tips", round = 1, year = 2018),
     "list"
@@ -50,7 +50,7 @@ test_that("Squiggle API optional arguments work", {
     ),
     "list"
   )
-  
+
   expect_error(fetch_squiggle_data(
     query = "tips",
     x = "",
@@ -67,11 +67,10 @@ test_that("get_squiggle works", {
 
   expect_warning(dat <- get_squiggle_data())
   expect_type(dat, "list")
-  
+
   # Test errors
   expect_error(supressWarnings(get_squiggle_data("a")))
   expect_error(supressWarnings(get_squiggle_data("games", years = 2018)))
   expect_error(supressWarnings(get_squiggle_data(1)))
   expect_error(supressWarnings(get_squiggle_data("a")))
 })
-

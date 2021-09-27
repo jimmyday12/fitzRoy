@@ -30,11 +30,12 @@ check_comp <- function(x) {
     "AFLM",
     "AFLW"
   )
-  
+
   if (!x %in% valid) {
-      rlang::abort(glue::glue(
-        "`Comp` must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
-    You provided the following: {x}"))
+    rlang::abort(glue::glue(
+      "`Comp` must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
+    You provided the following: {x}"
+    ))
   } else {
     return(x)
   }
@@ -86,14 +87,13 @@ check_comp_source <- function(comp, source) {
     "AFL",
     "fryzigg"
   )
-  
+
   if ((!source %in% valid) & comp == "AFLW") {
     rlang::abort(glue::glue(
       "For AFLW, source must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
     You provided the following: {source}"
-    ))}
-    
-  
+    ))
+  }
 }
 
 #' Verify Year

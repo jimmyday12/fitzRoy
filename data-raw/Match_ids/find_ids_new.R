@@ -17,7 +17,8 @@ find_ids_new <- function(year) {
 
 find_ids_old <- function(year) {
   year %>%
-    purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>% # nolint
+    purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
+    # nolint
     purrr::map(xml2::read_html) %>%
     purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
     purrr::map(~ rvest::html_attr(., "href")) %>%

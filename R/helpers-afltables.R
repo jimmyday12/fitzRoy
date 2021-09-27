@@ -1,28 +1,28 @@
 #' Check if a team is valid for afltables
 #'
-#' @param team Team 
+#' @param team Team
 #'
 #' @keywords internal
 #' @noRd
-team_check_afltables <- function(team){
-  
-  valid_teams <- c("Adelaide", "Brisbane Lions", "Brisbane Bears", 
-    "Carlton", "Collingwood", "Essendon", "Fitzroy", 
-    "Fremantle", "GWS", "Geelong", "Gold Coast", 
-    "Hawthorn", "Melbourne", "North Melbourne", 
-    "Kangaroos", "Port Adelaide", "Richmond", "St Kilda", 
-    "Sydney", "South Melbourne", "West Coast", "University", 
-    "Western Bulldogs", "Footscray")
-  
+team_check_afltables <- function(team) {
+  valid_teams <- c(
+    "Adelaide", "Brisbane Lions", "Brisbane Bears",
+    "Carlton", "Collingwood", "Essendon", "Fitzroy",
+    "Fremantle", "GWS", "Geelong", "Gold Coast",
+    "Hawthorn", "Melbourne", "North Melbourne",
+    "Kangaroos", "Port Adelaide", "Richmond", "St Kilda",
+    "Sydney", "South Melbourne", "West Coast", "University",
+    "Western Bulldogs", "Footscray"
+  )
+
   valid <- team %in% valid_teams
-  
+
   if (!valid) {
-    rlang::abort(glue::glue("{team} is not a valid input for afltables teams. 
+    rlang::abort(glue::glue("{team} is not a valid input for afltables teams.
                             Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
   }
-  
+
   valid
-  
 }
 
 
@@ -117,7 +117,7 @@ replace_venues <- function(venue) {
 #' @keywords internal
 #' @noRd
 convert_results <- function(results) {
-  
+
   # Convert results to wide format
   results %>%
     tidyr::gather("variable", "value", .data$Home.Team:.data$Away.Points) %>%
@@ -125,7 +125,7 @@ convert_results <- function(results) {
     tidyr::spread(.data$variable, .data$value) %>%
     dplyr::arrange(.data$Game) %>%
     dplyr::mutate(Margin = ifelse(.data$Status == "Home",
-                                  .data$Margin,
-                                  .data$Margin * -1
+      .data$Margin,
+      .data$Margin * -1
     ))
 }

@@ -1,33 +1,33 @@
 #' Check if a team is valid for footywire
 #'
-#' @param team Team 
+#' @param team Team
 #'
 #' @keywords internal
 #' @noRd
-team_check_footywire <- function(team){
-  
-  valid_teams <- c("Adelaide", "Brisbane Lions",  
-                   "Carlton", "Collingwood", "Essendon",  
-                   "Fremantle", "GWS", "Geelong", "Gold Coast", 
-                   "Hawthorn", "Melbourne", "North Melbourne", 
-                   "Kangaroos", "Port Adelaide", "Richmond", "St Kilda", 
-                   "Sydney",  "West Coast", 
-                   "Western Bulldogs")
-  
+team_check_footywire <- function(team) {
+  valid_teams <- c(
+    "Adelaide", "Brisbane Lions",
+    "Carlton", "Collingwood", "Essendon",
+    "Fremantle", "GWS", "Geelong", "Gold Coast",
+    "Hawthorn", "Melbourne", "North Melbourne",
+    "Kangaroos", "Port Adelaide", "Richmond", "St Kilda",
+    "Sydney", "West Coast",
+    "Western Bulldogs"
+  )
+
   valid <- team %in% valid_teams
-  
+
   if (!valid) {
-    rlang::abort(glue::glue("{team} is not a valid input for footywire teams. 
+    rlang::abort(glue::glue("{team} is not a valid input for footywire teams.
                             Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
   }
-  
+
   valid
-  
 }
 
 #' @keywords internal
 #' @noRd
-get_team_abrev_footywire <- function(team){
+get_team_abrev_footywire <- function(team) {
   team_abr <- dplyr::case_when(
     team == "Adelaide" ~ "adelaide-crows",
     team == "Brisbane Lions" ~ "brisbane-lions",
@@ -48,7 +48,7 @@ get_team_abrev_footywire <- function(team){
     team == "Western Bulldogs" ~ "western-bulldogs",
     TRUE ~ ""
   )
-  
+
   return(team_abr)
 }
 
@@ -149,7 +149,6 @@ footywire_html <- function(x, id) {
 #' @keywords internal
 #' @noRd
 get_match_data <- function(id) {
-
   rlang::inform(glue::glue("Getting data from footywire for match id {id}"))
   # Create URL
   default_url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
@@ -227,7 +226,7 @@ get_match_data <- function(id) {
 #' @noRd
 fetch_footywire_match_ids <- function(season) {
   url <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
-  
+
   url %>%
     xml2::read_html() %>%
     rvest::html_nodes(".data:nth-child(5) a") %>%
@@ -436,8 +435,8 @@ fetch_footywire_stats <- function(ids) {
 
   # Loop through data using map
   dat <- ids %>%
-    purrr::map_df(~ 
-      get_match_data(id = .x))
+    purrr::map_df(~
+    get_match_data(id = .x))
 
   # Rearrange
   dat <- dat %>%

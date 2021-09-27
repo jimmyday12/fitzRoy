@@ -1,5 +1,7 @@
 # fitzRoy (development version)
 
+* Added function `fetch_coaches_votes` to retrieve AFLCA coaches votes for any given match [@jlholden26](https://github.com/jlholden26)
+* Added function `calculate_coaches_vote_possibilities` to return all possible breakdowns of AFLCA coaches votes between two coaches [@jlholden26](https://github.com/jlholden26)
 * Fixed an a bug in `fetch_fixture_footywire` for older versions of R [#146](https://github.com/jimmyday12/fitzRoy/issues/146)
 * Fixed type mismatch in `fetch_player_stats_afltables` and handling blank seasons in `fetch_ladder_afl` ([#149](https://github.com/jimmyday12/fitzRoy/issues/149), [@cfranklin11](https://github.com/cfranklin11))
 * Updated error message in `check_source` which is used in various functions [#147](https://github.com/jimmyday12/fitzRoy/issues/147)

@@ -7,50 +7,56 @@
 #' @keywords internal
 #' @noRd
 find_team_id <- function(team_abr, comp = "AFLM") {
-  
   check_comp(comp)
-  
+
   api <- "https://aflapi.afl.com.au/afl/v2/teams"
-  
-  resp <- httr::GET(url = api,
-                    query = list("pageSize" = "1000"))
-  
+
+  resp <- httr::GET(
+    url = api,
+    query = list("pageSize" = "1000")
+  )
+
   cont <- parse_resp_afl(resp)
-  
+
   df <- cont$teams %>%
     stats::na.omit() %>%
-    dplyr::select(.data$id, .data$abbreviation, 
-                  .data$name, .data$teamType)
-  
+    dplyr::select(
+      .data$id, .data$abbreviation,
+      .data$name, .data$teamType
+    )
+
   if (comp == "AFLM") type <- "MEN"
   if (comp == "AFLW") type <- "WOMEN"
-  
-  if(is.null(team_abr)) return(df[df$teamType == type,])
-  
+
+  if (is.null(team_abr)) {
+    return(df[df$teamType == type, ])
+  }
+
   ids <- df$id[df$abbreviation == team_abr & df$teamType == type]
   min(ids, na.rm = TRUE)
 }
 
 #' Check if a team is valid for afl website
 #'
-#' @param team Team 
+#' @param team Team
 #'
 #' @keywords internal
 #' @noRd
-team_check_afl <- function(team){
-  
-  valid_teams <- c("Adelaide", "Brisbane Lions",
-                   "Carlton", "Collingwood", "Essendon", 
-                   "Fremantle", "GWS", "Geelong", "Gold Coast", 
-                   "Hawthorn", "Melbourne", "North Melbourne", 
-                   "Port Adelaide", "Richmond", "St Kilda", 
-                   "Sydney",  "West Coast",
-                   "Western Bulldogs")
-  
+team_check_afl <- function(team) {
+  valid_teams <- c(
+    "Adelaide", "Brisbane Lions",
+    "Carlton", "Collingwood", "Essendon",
+    "Fremantle", "GWS", "Geelong", "Gold Coast",
+    "Hawthorn", "Melbourne", "North Melbourne",
+    "Port Adelaide", "Richmond", "St Kilda",
+    "Sydney", "West Coast",
+    "Western Bulldogs"
+  )
+
   valid <- team %in% valid_teams
-  
+
   if (!valid) {
-    rlang::abort(glue::glue("{team} is not a valid input for afl teams. 
+    rlang::abort(glue::glue("{team} is not a valid input for afl teams.
                             Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
   }
 }
@@ -90,16 +96,16 @@ team_abr_afl <- function(team) {
 #' @keywords internal
 #' @noRd
 find_comp_id <- function(comp) {
-  
   comp <- check_comp(comp)
 
   api_url <- httr::modify_url("https://aflapi.afl.com.au",
-                              path = "/afl/v2/competitions/")
+    path = "/afl/v2/competitions/"
+  )
 
   resp <- httr::GET(api_url)
-  
+
   cont <- parse_resp_afl(resp)
-  
+
   if (comp == "AFLM") comp <- "AFL"
 
   ids <- cont$competitions$id[cont$competitions$code == comp]
@@ -139,10 +145,11 @@ find_season_id <- function(season, comp = "AFLM") {
   comp_id <- find_comp_id(comp)
 
   api <- httr::modify_url("https://aflapi.afl.com.au",
-                          path = paste0("/afl/v2/competitions/", comp_id, "/compseasons"))
+    path = paste0("/afl/v2/competitions/", comp_id, "/compseasons")
+  )
 
   resp <- httr::GET(api)
-  
+
   cont <- parse_resp_afl(resp)
 
   comp_ids <- cont$compSeasons %>%
@@ -151,7 +158,7 @@ find_season_id <- function(season, comp = "AFLM") {
   id <- comp_ids$id[match(season, comp_ids$season)]
 
   id <- id[!is.na(id)]
-  
+
   if (length(id) < 1) {
     rlang::warn(glue::glue("Could not find a matching ID to the {comp} for {season}"))
     return(NULL)
@@ -166,46 +173,49 @@ find_season_id <- function(season, comp = "AFLM") {
 #' @param season Season, in YYYY format.
 #' @keywords internal
 #' @noRd
-find_round_id <- function(round_number, season = NULL, 
-                          season_id = NULL, 
-                          comp = "AFLM", 
-                          providerId = FALSE, 
+find_round_id <- function(round_number, season = NULL,
+                          season_id = NULL,
+                          comp = "AFLM",
+                          providerId = FALSE,
                           future_rounds = TRUE) {
-
   if (providerId) {
     id_name <- "providerId"
   } else {
     id_name <- "id"
   }
-  
+
   # check inputs
   season <- check_season(season)
   comp <- check_comp(comp)
 
   if (is.null(season_id)) season_id <- find_season_id(season, comp)
 
-  api <-  httr::modify_url("https://aflapi.afl.com.au",
-                                 path = paste0("/afl/v2/compseasons/",
-                                               season_id,
-                                               "/rounds"))
+  api <- httr::modify_url("https://aflapi.afl.com.au",
+    path = paste0(
+      "/afl/v2/compseasons/",
+      season_id,
+      "/rounds"
+    )
+  )
 
-  resp <- httr::GET(api, 
-                    query = list(pageSize = 30))
-  
+  resp <- httr::GET(api,
+    query = list(pageSize = 30)
+  )
+
   cont <- parse_resp_afl(resp)
 
   df <- cont$rounds
-  
+
   if (!future_rounds) {
     df <- df[df$utcStartTime < Sys.Date() & df$utcStartTime != "", ]
   }
-  
+
   if (is.null(round_number)) {
     id <- df[, id_name]
   } else {
-    id <- df[df$roundNumber %in% round_number, id_name]  
+    id <- df[df$roundNumber %in% round_number, id_name]
   }
-  
+
 
   if (length(id) < 1) {
     rlang::warn(glue::glue("No data found for specified round number and season"))
@@ -223,41 +233,41 @@ find_round_id <- function(round_number, season = NULL,
 #' @noRd
 fetch_match_roster_afl <- function(id, cookie = NULL) {
   if (is.null(cookie)) cookie <- get_afl_cookie()
-  
+
   api <- httr::modify_url("https://api.afl.com.au",
-                          path = paste0("/cfs/afl/matchRoster/full/", id))
-  
+    path = paste0("/cfs/afl/matchRoster/full/", id)
+  )
+
   resp <- httr::GET(
     url = api,
     httr::add_headers(
       "x-media-mis-token" = cookie
     )
   )
-  
+
   cont <- parse_resp_afl(resp)
-  
+
   cont$matchRoster$homeTeam$clubDebuts <- list()
   cont$matchRoster$homeTeam$milestones <- list()
   cont$matchRoster$homeTeam$ins <- list()
   cont$matchRoster$homeTeam$outs <- list()
-  
+
   home_df <- cont$matchRoster$homeTeam %>%
     purrr::compact() %>%
     purrr::flatten_dfr() %>%
     dplyr::mutate(teamType = "home")
-  
+
   cont$matchRoster$awayTeam$clubDebuts <- list()
   cont$matchRoster$awayTeam$milestones <- list()
   cont$matchRoster$awayTeam$ins <- list()
   cont$matchRoster$awayTeam$outs <- list()
-  
+
   away_df <- cont$matchRoster$awayTeam %>%
     purrr::compact() %>%
     purrr::flatten_dfr() %>%
     dplyr::mutate(teamType = "away")
-  
+
   dplyr::bind_rows(home_df, away_df)
-  
 }
 
 #' Cleans names for player stats
@@ -267,11 +277,12 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
 #' @keywords internal
 #' @noRd
 fetch_match_stats_afl <- function(id, cookie = NULL) {
-  
   if (is.null(cookie)) cookie <- get_aflw_cookie()
-  
-  api <- httr::modify_url(url = "https://api.afl.com.au",
-                          path = paste0("/cfs/afl/playerStats/match/", id))
+
+  api <- httr::modify_url(
+    url = "https://api.afl.com.au",
+    path = paste0("/cfs/afl/playerStats/match/", id)
+  )
 
   resp <- httr::GET(
     url = api,
@@ -279,26 +290,26 @@ fetch_match_stats_afl <- function(id, cookie = NULL) {
       "x-media-mis-token" = cookie
     )
   )
-  
+
   cont <- parse_resp_afl(resp)
-  
+
   home_df <- cont$homeTeamPlayerStats %>%
     dplyr::select(-.data$teamId, -.data$playerStats.lastUpdated) %>%
     clean_names_playerstats_afl() %>%
     tibble::as_tibble() %>%
     dplyr::mutate(teamStatus = "home")
-  
+
   away_df <- cont$awayTeamPlayerStats %>%
     dplyr::select(-.data$teamId, -.data$playerStats.lastUpdated) %>%
     clean_names_playerstats_afl() %>%
     tibble::as_tibble() %>%
     dplyr::mutate(teamStatus = "away")
-  
-  
-  #return(home_df)
+
+
+  # return(home_df)
   df <- dplyr::bind_rows(home_df, away_df) %>%
     dplyr::mutate(providerId = id)
-  
+
   return(df)
 }
 
@@ -308,9 +319,9 @@ fetch_match_stats_afl <- function(id, cookie = NULL) {
 #' @param x data frame returned from `fetch_match_stats_afl`
 #' @keywords internal
 #' @noRd
-clean_names_playerstats_afl <- function(x){
+clean_names_playerstats_afl <- function(x) {
   names(x) <- gsub(x = names(x), pattern = "playerStats\\.", replacement = "")
-  #names(x) <- gsub(x = names(x), pattern = "player\\.", replacement = "")
+  # names(x) <- gsub(x = names(x), pattern = "player\\.", replacement = "")
   names(x) <- gsub(x = names(x), pattern = "stats\\.", replacement = "")
   names(x) <- gsub(x = names(x), pattern = "playerName\\.", replacement = "")
   return(x)
@@ -322,46 +333,47 @@ clean_names_playerstats_afl <- function(x){
 #' @param cookie cookie returned by `get_afl_cookie`
 #' @keywords internal
 #' @noRd
-fetch_round_results_afl <- function(id, cookie = NULL){
-
+fetch_round_results_afl <- function(id, cookie = NULL) {
   if (is.null(cookie)) cookie <- get_afl_cookie()
-  
+
   url_api <- httr::modify_url("http://api.afl.com.au",
-                             path =  paste0("/cfs/afl/matchItems/round/", id))
-  
-  resp <- httr::GET(url_api,
-                    httr::add_headers("x-media-mis-token" = cookie))
-  
+    path = paste0("/cfs/afl/matchItems/round/", id)
+  )
+
+  resp <- httr::GET(
+    url_api,
+    httr::add_headers("x-media-mis-token" = cookie)
+  )
+
   cont <- parse_resp_afl(resp)
-  
+
   df <- dplyr::as_tibble(cont$items)
-  
+
   # Fix names
   names(df) <- gsub(x = names(df), pattern = "score\\.", replacement = "")
-  
+
   # add date
   df <- df %>%
     dplyr::mutate(match.date = lubridate::ymd_hms(.data$match.date))
-  
+
   # remove unwanted columns
   df <- df %>%
     dplyr::select(-dplyr::contains(c("url", "link", "Videos")))
-  
+
   return(df)
 }
 
 
-#' Fetches squad 
+#' Fetches squad
 #'
 #' @param teamId team id returned by `find_team_id`
 #' @param compSeasonId comp season id returned by `find_season_id`
 #' @keywords internal
 #' @noRd
 fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
-  
   cli_team <- cli::cli_process_start("Fetching player details for {team}, {season}")
   api <- "https://aflapi.afl.com.au//afl/v2/squads"
-  
+
   resp <- httr::GET(
     url = api,
     query = list(
@@ -370,47 +382,51 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
       "pageSize" = "1000"
     )
   )
-  
+
   cont <- parse_resp_afl(resp)
-  
+
   df <- dplyr::as_tibble(cont$squad$players)
-  
+
   names(df) <- gsub("player.", "", names(df))
-  
+
   cli::cli_process_done(cli_team)
-  
+
   df %>%
-    dplyr::mutate(season = season,
-                  team = team) %>%
-    dplyr::select(.data$firstName, 
-                  .data$surname, 
-                  .data$id, 
-                  .data$team,
-                  .data$season,
-                  dplyr::everything())
+    dplyr::mutate(
+      season = season,
+      team = team
+    ) %>%
+    dplyr::select(
+      .data$firstName,
+      .data$surname,
+      .data$id,
+      .data$team,
+      .data$season,
+      dplyr::everything()
+    )
 }
 
 #' Parses afl response and checks for errors
 #'
 #' @param resp response object returned from POST/GET
 #' @keywords internal
-#' @noRd  
+#' @noRd
 parse_resp_afl <- function(resp) {
   if (httr::http_type(resp) != "application/json") {
     rlang::abort("API did not return json", call. = FALSE)
   }
-  
-  parsed <- resp %>% 
+
+  parsed <- resp %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE)
-  
+
   if (httr::http_error(resp)) {
     rlang::abort(glue::glue(
-      "GitHub API request failed 
-      {httr::status_code(resp)} - {parsed$techMessage}"),
-      call. = FALSE
+      "GitHub API request failed
+      {httr::status_code(resp)} - {parsed$techMessage}"
+    ),
+    call. = FALSE
     )
   }
   return(parsed)
 }
-  

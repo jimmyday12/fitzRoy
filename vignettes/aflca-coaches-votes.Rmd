@@ -1,0 +1,140 @@
+---
+title: "AFLCA Coaches Votes Functions"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{AFLCA Coaches Votes Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
+
+knitr::opts_chunk$set(
+	eval = eval_param,
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
+)
+
+library(fitzRoy)
+library(dplyr)
+```
+
+Functions have been added to fitzRoy to scrape and analyse AFLCA coaches votes.
+
+* `fetch_coaches_votes` - returns all AFLCA coaches votes for given season/s, round/s, and/or team's matches.
+* `calculate_coaches_vote_possibilities` - returns all possible breakdowns of coaches votes between two coaches, given a data frame like the one returned by `fetch_coaches_votes`.
+
+# Scraping Coaches Votes
+The `fetch_coaches_votes` function accepts 4 arguments. The `season`, `round_number` and `comp` arguments are common to the core `fetch_*` functions as per the [Main Fetch Functions Vignette](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html).
+
+* `season` - the season or seasons to return data from. If NULL (the default), will return the season that matches `Sys.Date()`
+* `round_number`- the round to return data from. If NULL (the default), will return data from all rounds
+* `comp` - the competition to return data from. Must be one of "AFLM" (default) or "AFLW". Not all data sources will have AFLW data.
+* `team` - the team/s whose matches to include. If NULL (the default), will return data from all teams.
+
+## Examples
+
+The following are some examples of ways to scrape the AFLCA coaches votes. Firstly, coaches votes can be retrieved for a season (or an array of seasons).
+
+```{r fetch_coaches_votes_aflm, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, comp = "AFLM")
+```
+```{r fetch_coaches_votes_aflm_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflm_coaches_votes
+```
+
+```{r fetch_coaches_votes_aflw, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, comp = "AFLW")
+```
+```{r fetch_coaches_votes_aflw_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflw_coaches_votes
+```
+
+We can return just one round instead of the whole fixture.
+
+```{r fetch_coaches_votes2_aflm, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM")
+```
+```{r fetch_coaches_votes2_aflm_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflm_coaches_votes %>%
+  dplyr::filter(Round == 24)
+```
+
+```{r fetch_coaches_votes2_aflw, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW")
+```
+```{r fetch_coaches_votes2_aflw_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflw_coaches_votes %>%
+  dplyr::filter(Round == 9)
+```
+
+We could also return coaches votes for matches including a particular team. 
+
+```{r fetch_coaches_votes3_aflm, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, comp = "AFLM", team = "Western Bulldogs")
+```
+```{r fetch_coaches_votes3_aflm_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflm_coaches_votes %>%
+  dplyr::filter(Home.Team == "Western Bulldogs" | Away.Team == "Western Bulldogs")
+```
+
+```{r fetch_coaches_votes3_aflw, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, comp = "AFLW", team = "Western Bulldogs")
+```
+```{r fetch_coaches_votes3_aflw_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflw_coaches_votes %>%
+  dplyr::filter(Home.Team=="Western Bulldogs" | Away.Team == "Western Bulldogs")
+```
+
+Combining these, we can return coaches votes for a single match.
+
+```{r fetch_coaches_votes4_aflm, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Western Bulldogs")
+```
+```{r fetch_coaches_votes4_aflm_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflm_coaches_votes %>%
+  dplyr::filter(Home.Team=="Western Bulldogs" & Round == 24)
+```
+
+```{r fetch_coaches_votes4_aflw, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "Western Bulldogs")
+```
+```{r fetch_coaches_votes4_aflw_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflw_coaches_votes %>%
+  dplyr::filter(Home.Team=="Western Bulldogs" & Round == 9)
+```
+
+# Calculating Coaches Vote Possibilities
+The `calculate_coaches_vote_possibilities` function accepts two arguments.
+
+* `df` - a data frame which requires column names `Player.Name`, `Coaches.Votes`. This can be returned from the `fetch_coaches_votes` function. The votes can only be from a single match.
+* `output_type` - the way to present the results. `"Coach View"` Will provide a list of data frames with possible votes by coach. `"Player View"` will provide a list of data frames with possible votes by player. See the examples section for how these data frames look.
+
+## Examples
+
+The following code will return the coaches votes for a particular match, then find the possible coaches vote breakdowns.
+
+```{r calculate_coaches_votes, eval=FALSE, include=TRUE}
+df <- fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Western Bulldogs")
+calculate_coaches_vote_possibilities(df, "Coach View")
+```
+```{r calculate_coaches_votes_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflm_coaches_votes %>%
+  dplyr::filter(Round == 24 & Home.Team == "Western Bulldogs") %>%
+  fitzRoy:::calculate_coaches_vote_possibilities("Coach View")
+```
+
+The following code will create a data frame manually, then find the possible coaches vote breakdowns.
+
+```{r calculate_coaches_votes2, eval=eval_param, include=TRUE}
+df <- data.frame(
+                Player.Name = c("Tom Liberatore","Jack Macrae","Marcus Bontempelli","Cody Weightman","Darcy Parish","Aaron Naughton","Jordan Ridley"),
+                Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)
+)
+calculate_coaches_vote_possibilities(df, "Player View")
+```

@@ -61,15 +61,15 @@ fetch_results <- function(season = NULL,
   check_comp_source(comp, source)
 
   dat <- switch(source,
-                "AFL" = fetch_results_afl(season, round_number, comp),
-                "afltables" = fetch_results_afltables(season, round_number),
-                "footywire" = fetch_results_footywire(season, round_number, ...),
-                "squiggle" = fetch_results_squiggle(season, round_number),
-                NULL)
-  
+    "AFL" = fetch_results_afl(season, round_number, comp),
+    "afltables" = fetch_results_afltables(season, round_number),
+    "footywire" = fetch_results_footywire(season, round_number, ...),
+    "squiggle" = fetch_results_squiggle(season, round_number),
+    NULL
+  )
+
   if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Results data. Please use one of \"AFL\", \"afltables\", \"footywire\" or \"squiggle\""))
   return(dat)
-
 }
 
 #' @rdname fetch_results
@@ -78,28 +78,31 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   # get ids of season and round
   season <- check_season(season)
   season_id <- find_season_id(season, comp)
-  
+
   if (is.null(season_id)) {
     rlang::warn(glue::glue("No data found for season {season} on AFL.com.au"))
     return(NULL)
   }
   round_ids <- season_id %>%
-    purrr::map(~find_round_id(round_number, 
-                              season_id = .x, 
-                              comp = comp, 
-                              providerId = TRUE, 
-                              future_rounds = FALSE)) %>%
+    purrr::map(~ find_round_id(round_number,
+      season_id = .x,
+      comp = comp,
+      providerId = TRUE,
+      future_rounds = FALSE
+    )) %>%
     purrr::reduce(c)
-  
-  if(is.null(round_ids)) return(NULL)
-  
+
+  if (is.null(round_ids)) {
+    return(NULL)
+  }
+
   # get cookie
   cookie <- get_afl_cookie()
-  
+
   df <- round_ids %>%
     purrr::map_dfr(fetch_round_results_afl, cookie) %>%
     dplyr::filter(.data$match.status == "CONCLUDED")
-  
+
   return(df)
 }
 
@@ -112,22 +115,25 @@ fetch_results_afltables <- function(season = NULL, round_number = NULL) {
   # Get data ----
 
   url_text <- "https://afltables.com/afl/stats/biglists/bg3.txt"
-  
+
   # Column widths
-  cols <- readr::fwf_cols(Game = 7, 
-                   Date = 17,
-                   Round = 5, 
-                   Home.Team = 18,
-                   Home.Score = 17,
-                   Away.Team = 18,
-                   Away.Score = 18,
-                   Venue = NA)
-  
-  match_data <- readr::read_fwf(url_text, 
-                  skip = 2, 
-                  col_positions = cols, 
-                  col_types = c("dcccccccc"))
-  
+  cols <- readr::fwf_cols(
+    Game = 7,
+    Date = 17,
+    Round = 5,
+    Home.Team = 18,
+    Home.Score = 17,
+    Away.Team = 18,
+    Away.Score = 18,
+    Venue = NA
+  )
+
+  match_data <- readr::read_fwf(url_text,
+    skip = 2,
+    col_positions = cols,
+    col_types = c("dcccccccc")
+  )
+
   # Separate score out into components ----
   match_data <- match_data %>%
     tidyr::separate(.data$Home.Score,
@@ -212,7 +218,7 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
   season <- check_season(season)
 
   if (season < 1965) {
-    rlang::abort(glue::glue("Season must be greater than 1965. 
+    rlang::abort(glue::glue("Season must be greater than 1965.
                  You provided \"{season}\""))
   }
 
@@ -230,10 +236,10 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
   if (is.null(last_n_matches)) last_n_matches <- n_ids
   ids <- ids[(n_ids - last_n_matches + 1):n_ids]
 
-  if(length(ids) == 0){
+  if (length(ids) == 0) {
     cli::cli_process_failed(cli_1, msg = "No matches found")
     return(NULL)
-  } 
+  }
   # get data for ids
 
   dat <- ids %>%

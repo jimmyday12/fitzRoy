@@ -55,16 +55,16 @@ fetch_fixture <- function(season = NULL,
   # Do some data checks
   season <- check_season(season)
   check_comp_source(comp, source)
-  
+
   dat <- switch(source,
-                "AFL" = fetch_fixture_afl(season, round_number, comp),
-                "footywire" = fetch_fixture_footywire(season, round_number, ...),
-                "squiggle" = fetch_fixture_squiggle(season, round_number),
-                NULL)
-  
+    "AFL" = fetch_fixture_afl(season, round_number, comp),
+    "footywire" = fetch_fixture_footywire(season, round_number, ...),
+    "squiggle" = fetch_fixture_squiggle(season, round_number),
+    NULL
+  )
+
   if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Fixture data. Please use one of \"AFL\", \"footywire\" or \"squiggle\""))
   return(dat)
-
 }
 
 
@@ -79,7 +79,7 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   } else {
     rnd_msg <- paste0("Round ", round_number, ", ", season)
   }
-  
+
   cli_id <- cli::cli_process_start("Returning data for {.val {rnd_msg}}")
   comp_seas_id <- find_season_id(season, comp)
   comp_id <- find_comp_id(comp)
@@ -103,7 +103,7 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   df <- dplyr::as_tibble(cont$matches) %>%
     dplyr::mutate(compSeason.year = as.numeric(gsub("([0-9]+).*$", "\\1", .data$compSeason.name))) %>%
     dplyr::filter(.data$compSeason.year == season)
-  
+
   cli::cli_process_done(cli_id)
   return(df)
 }
@@ -152,7 +152,7 @@ fetch_fixture_footywire <- function(season = NULL, round_number = NULL, convert_
 
   if (rlang::is_empty(games_text)) {
     warning(glue::glue(
-      "The data for {season} season seems to be empty. 
+      "The data for {season} season seems to be empty.
 Check the following url on footywire
 {url_fixture}"
     ))
@@ -177,8 +177,9 @@ Check the following url on footywire
   games_df <- games_df %>%
     dplyr::mutate(
       Season = season,
-      Date = lubridate::ydm_hm(paste(season, .data$Date)))
-  
+      Date = lubridate::ydm_hm(paste(season, .data$Date))
+    )
+
   games_df <- games_df %>%
     dplyr::mutate(Round = calculate_round_number(.data$Round.Name) %>% as.numeric(.)) %>%
     dplyr::select(., !c("Round.Name"))

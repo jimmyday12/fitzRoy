@@ -1,6 +1,6 @@
 # This script gets data that is going to be used by the Vignettes. Add data to here where required.
 # elo-ratings script to get data for vignette
-#devtools::install_github("jimmyday12/fitzRoy")
+# devtools::install_github("jimmyday12/fitzRoy")
 library(tidyverse)
 library(fitzRoy)
 
@@ -8,9 +8,11 @@ library(fitzRoy)
 results_afltables_all <- fitzRoy::fetch_results_afltables(1897:2021)
 fixture_footywire_2019 <- fitzRoy::fetch_fixture_footywire(2019)
 
-# FitzRoy 
-lineup_aflw_2021_1 <- fetch_lineup(2021, round_number = 1, 
-                                   comp = "AFLW")
+# FitzRoy
+lineup_aflw_2021_1 <- fetch_lineup(2021,
+  round_number = 1,
+  comp = "AFLW"
+)
 
 # Main Fetch Functions ---------------------------------------------------------
 fixture_afl_aflm_2021 <- fetch_fixture(2021)
@@ -22,8 +24,8 @@ stats_fryzigg_2019 <- fitzRoy::fetch_player_stats_fryzigg(2019)
 
 # Womens Stats ---------------------------------------
 fixture_afl_aflw_2021 <- fetch_fixture(2021, comp = "AFLW")
-results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW") 
-ladder_afl_aflw_2020 <- fetch_ladder(2020, comp = "AFLW") 
+results_afl_aflw_2020 <- fetch_results(2020, comp = "AFLW")
+ladder_afl_aflw_2020 <- fetch_ladder(2020, comp = "AFLW")
 stats_afl_aflw_2020 <- fetch_player_stats(2020, comp = "AFLW")
 
 cookie <- get_afl_cookie()
@@ -37,18 +39,24 @@ squiggle_teams <- fetch_squiggle_data("teams")
 squiggle_games <- fetch_squiggle_data(query = "games", year = 2020)
 squiggle_sources <- fetch_squiggle_data("sources")
 squiggle_tips <- fetch_squiggle_data("tips")
-squiggle_standings <- fetch_squiggle_data("standings", year = 2020, 
-                                                 round = 1)
-squiggle_pav <- fetch_squiggle_data("pav", 
-                    firstname = "Dustin", 
-                    surname = "Martin", 
-                    year = 2017)
-squiggle_ladder <- fetch_squiggle_data("ladder", 
-                                             year = 2019, 
-                                             round = 15, 
-                                             source = 1)
+squiggle_standings <- fetch_squiggle_data("standings",
+  year = 2020,
+  round = 1
+)
+squiggle_pav <- fetch_squiggle_data("pav",
+  firstname = "Dustin",
+  surname = "Martin",
+  year = 2017
+)
+squiggle_ladder <- fetch_squiggle_data("ladder",
+  year = 2019,
+  round = 15,
+  source = 1
+)
 
-
+# Coaches Votes ---------------------------------------------
+aflm_coaches_votes <- fetch_coaches_votes(season = 2021, comp = "AFLM")
+aflw_coaches_votes <- fetch_coaches_votes(season = 2021, comp = "AFLW")
 
 
 # mens-stats
@@ -58,13 +66,15 @@ squiggle_ladder <- fetch_squiggle_data("ladder",
 # stats_gf <- get_footywire_stats(ids = 9927)
 # ladder <- return_ladder(match_results_df = results)
 # ladder_round <- return_ladder(match_results_df = results, season_round = 15, season = 2018)
-# 
+#
 
 
 # This is used by other parts so it's important to keep.
 # First lets load afldata provided
-load(here::here("data-raw", 
-                "afl_tables_playerstats", "afltables_playerstats_provided.rda"))
+load(here::here(
+  "data-raw",
+  "afl_tables_playerstats", "afltables_playerstats_provided.rda"
+))
 
 # Select out the columns we want
 afldata <- afldata %>%
@@ -138,27 +148,30 @@ team_abbr <- tibble(
 )
 
 
-usethis::use_data(stat_abbr, 
-                  team_abbr, 
-                  afldata_cols,
-                  lineup_aflw_2021_1,
-                  results_afltables_all,
-                  results_afl_aflw_2020,
-                  fixture_footywire_2019,
-                  fixture_afl_aflm_2021,
-                  fixture_afl_aflw_2021,
-                  fixture_squiggle_2021,
-                  ladder_afl_aflw_2020,
-                  stats_fryzigg_2019,
-                  stats_afl_aflw_2020,
-                  detailed_stats_aflw_2020,
-                  cookie,
-                  squiggle_sources,
-                  squiggle_tips,
-                  squiggle_teams,
-                  squiggle_games,
-                  squiggle_standings,
-                  squiggle_pav,
-                  squiggle_ladder,
+
+usethis::use_data(stat_abbr,
+  team_abbr,
+  afldata_cols,
+  lineup_aflw_2021_1,
+  results_afltables_all,
+  results_afl_aflw_2020,
+  fixture_footywire_2019,
+  fixture_afl_aflm_2021,
+  fixture_afl_aflw_2021,
+  fixture_squiggle_2021,
+  ladder_afl_aflw_2020,
+  stats_fryzigg_2019,
+  stats_afl_aflw_2020,
+  detailed_stats_aflw_2020,
+  cookie,
+  squiggle_sources,
+  squiggle_tips,
+  squiggle_teams,
+  squiggle_games,
+  squiggle_standings,
+  squiggle_pav,
+  squiggle_ladder,
+  aflm_coaches_votes,
+  aflw_coaches_votes,
   internal = TRUE, overwrite = TRUE
 )
