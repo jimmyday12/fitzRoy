@@ -34,10 +34,11 @@ fetch_player_details_footywire_current <- function(team){
     df <- df[-1,]
     
     df <- df %>%
-      dplyr::mutate(Name = stringr::str_remove_all(Name, "\nR")) %>%
-      tidyr::separate(Name, c("surname", "first_name"), sep = ",") %>%
-      tidyr::separate(Position, c("Position_1", "Position_2"), sep = "\n", fill = "right") %>%
-      dplyr::mutate(first_name = trimws(first_name))
+      dplyr::mutate(Name = stringr::str_remove_all(.data$Name, "\nR")) %>%
+      tidyr::separate(.data$Name, c("surname", "first_name"), sep = ",") %>%
+      tidyr::separate(.data$Position, c("Position_1", "Position_2"), 
+                      sep = "\n", fill = "right") %>%
+      dplyr::mutate(first_name = trimws(.data$first_name))
     
     cli::cli_process_done(cli_current)
     return(df)
