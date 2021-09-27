@@ -53,13 +53,14 @@ scrape_coaches_votes <- function(season = NULL,
   df <- data.frame(Season = season, Round = round_number,
                    Home.Team = NA, Away.Team = NA, Player.Name = players, Coaches.Votes = votes) %>%
     # split the data frame into matches
-    dplyr::mutate(Match.Id = cumsum(Coaches.Votes=="Votes" & Player.Name == "Player (Club)")) %>%
+    dplyr::mutate(Match.Id = cumsum(.data$Coaches.Votes == "Votes" & 
+                                      .data$Player.Name == "Player (Club)")) %>%
     # assign home and away teams to each match
-    dplyr::mutate(Home.Team = home.teams[Match.Id],
-                  Away.Team = away.teams[Match.Id]) %>%
+    dplyr::mutate(Home.Team = home.teams[.data$Match.Id],
+                  Away.Team = away.teams[.data$Match.Id]) %>%
     # remove unnecessary rows/columns
-    dplyr::filter(!(Coaches.Votes=="Votes" & Player.Name == "Player (Club)")) %>%
-    dplyr::select(-Match.Id)
+    dplyr::filter(!(.data$Coaches.Votes=="Votes" & .data$Player.Name == "Player (Club)")) %>%
+    dplyr::select(-.data$Match.Id)
   
   return(df)
   

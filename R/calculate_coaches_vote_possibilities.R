@@ -24,7 +24,9 @@
 #' 
 #' # Create a manual data frame to calculate possibilities
 #' df <- data.frame(
-#' Player.Name = c("Tom Liberatore","Jack Macrae","Marcus Bontempelli","Cody Weightman","Darcy Parish","Aaron Naughton","Jordan Ridley"),
+#' Player.Name = c("Tom Liberatore","Jack Macrae",
+#' "Marcus Bontempelli","Cody Weightman",
+#' "Darcy Parish","Aaron Naughton","Jordan Ridley"),
 #' Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)
 #' )
 #' calculate_coaches_vote_possibilities(df, "Player View")
@@ -35,15 +37,15 @@
 calculate_coaches_vote_possibilities <- function(df, output_type){
   
   # error catching
-  if(! output_type %in% c("Coach View", "Player View")) stop("Invalid Output Type")
+  if (! output_type %in% c("Coach View", "Player View")) stop("Invalid Output Type")
   if(sum(names(df) %in% c("Player.Name", "Coaches.Votes")) != 2) stop("Input df has the wrong column names")
-  if(length(unique(df$Player.Name)) < nrow(df)) stop("Duplicate Player Names")
-  if(sum(df$Coaches.Votes %>% as.numeric) != 30) stop("Coaches Vote total does not add up")
-  if(nrow(df) < 5) stop("Not enough players")
-  if(nrow(df) > 10) stop("Too many players")
+  if (length(unique(df$Player.Name)) < nrow(df)) stop("Duplicate Player Names")
+  if (sum(df$Coaches.Votes %>% as.numeric) != 30) stop("Coaches Vote total does not add up")
+  if (nrow(df) < 5) stop("Not enough players")
+  if (nrow(df) > 10) stop("Too many players")
   
   # start at the bottom for fewer options & reset row names
-  df <- dplyr::arrange(df, Coaches.Votes) %>% `rownames<-`(NULL)
+  df <- dplyr::arrange(df, .data$Coaches.Votes) %>% `rownames<-`(NULL)
   
   # template for votes
   template <- data.frame(Votes = c(5,4,3,2,1), C1 = NA, C2 = NA)
@@ -72,10 +74,10 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
           
           # if that combination is blocked out for this eligible option, skip to the next option
           if(n == 0){
-            if(!is.na(dplyr::filter(opt, Votes == cv - n)$C2)) next
+            if(!is.na(dplyr::filter(opt, .data$Votes == cv - n)$C2)) next
           } else if(cv == n){
-            if(!is.na(dplyr::filter(opt, Votes == n)$C1)) next
-          } else if(!is.na(dplyr::filter(opt, Votes == n)$C1) | !is.na(dplyr::filter(opt, Votes == cv - n)$C2)) next
+            if(!is.na(dplyr::filter(opt, .data$Votes == n)$C1)) next
+          } else if(!is.na(dplyr::filter(opt, .data$Votes == n)$C1) | !is.na(dplyr::filter(opt, .data$Votes == cv - n)$C2)) next
           
           # otherwise, update this option with this vote combination for this player
           opt_new = opt
@@ -100,21 +102,22 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
   
   # drop duplicate options (C1 = C2 and C2 = C1)
   # loop through outcomes
-  if(length(final_outcomes) > 1){
+  if (length(final_outcomes) > 1) {
     
-    for(i in 1:(length(final_outcomes) - 1)){
+    for (i in 1:(length(final_outcomes) - 1)) {
       
       # skip if not possible
-      if(i>=length(final_outcomes)) next
+      if (i >= length(final_outcomes)) next
       
       # loop through pairing outcomes
-      for(j in (i+1):length(final_outcomes)){
+      for (j in (i + 1):length(final_outcomes)) {
         
         # skip if not possible
-        if(j>length(final_outcomes)) next
+        if (j > length(final_outcomes)) next
         
         # remove duplicate if it matches
-        if(sum(final_outcomes[[i]]$C1 != final_outcomes[[j]]$C2) + sum(final_outcomes[[i]]$C2 != final_outcomes[[j]]$C1) == 0){
+        if (sum(final_outcomes[[i]]$C1 != final_outcomes[[j]]$C2) + 
+            sum(final_outcomes[[i]]$C2 != final_outcomes[[j]]$C1) == 0) {
           final_outcomes[[j]] <- NULL
         }
         
@@ -124,7 +127,7 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
     
   }
   
-  if(output_type=="Coach View"){
+  if (output_type == "Coach View") {
     return(final_outcomes)
   } else {
     # create player view from coach view
@@ -140,28 +143,30 @@ calculate_coaches_vote_possibilities <- function(df, output_type){
           # run function to...
           lapply(function(p){
             # collect the votes that player received in this iteration
-            player_votes <- c(dplyr::filter(i, C1==p)$Votes, dplyr::filter(i, C2==p)$Votes) %>% sort
+            player_votes <- c(dplyr::filter(i, .data$C1 == p)$Votes, 
+                              dplyr::filter(i, .data$C2 == p)$Votes) %>% 
+              sort
             # control for zeroes
-            if(length(player_votes)==1) player_votes <- c(0, player_votes)
+            if (length(player_votes) == 1) player_votes <- c(0, player_votes)
             # re-map this data into a new data frame
             data.frame(Player = p, V1 = player_votes[1], V2 = player_votes[2])
           }) %>%
           # combine all data
           {do.call(rbind, .)} %>%
           # arrange for consistency
-          dplyr::arrange(-V2, -V1, Player)
+          dplyr::arrange(-.data$V2, -.data$V1, .data$Player)
       })
     # drop duplicate options
     # loop through outcomes
-    for(i in 1:(length(player_view) - 1)){
+    for (i in 1:(length(player_view) - 1)) {
       # skip if not possible
-      if(i>=length(player_view)) next
+      if (i >= length(player_view)) next
       # loop through pairing outcomes
-      for(j in (i+1):length(player_view)){
+      for (j in (i + 1):length(player_view)) {
         # skip if not possible
-        if(j>length(player_view)) next
+        if (j > length(player_view)) next
         # remove duplicate if it matches
-        if(identical(player_view[[i]], player_view[[j]])) player_view[[j]] <- NULL
+        if (identical(player_view[[i]], player_view[[j]])) player_view[[j]] <- NULL
       }
     }
     

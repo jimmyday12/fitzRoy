@@ -44,13 +44,15 @@ fetch_coaches_votes <- function(season = NULL,
   
   # error handling
   check_comp(comp)
-  if(sum(!team%in%c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood", "Essendon", "Fremantle",
-                    "Geelong Cats", "Gold Coast Suns", "GWS Giants", "Hawthorn", "Melbourne", "North Melbourne",
-                    "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans", "West Coast Eagles", "Western Bulldogs")
-         )>0) stop("Invalid team")
-  if(is.null(round_number)) round_number <- 1:27
+  if (sum(!team %in% c("Adelaide Crows", "Brisbane Lions", 
+                      "Carlton", "Collingwood", "Essendon", "Fremantle",
+                    "Geelong Cats", "Gold Coast Suns", "GWS Giants", "Hawthorn", 
+                    "Melbourne", "North Melbourne",
+                    "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans", 
+                    "West Coast Eagles", "Western Bulldogs")) > 0) stop("Invalid team")
+  if (is.null(round_number)) round_number <- 1:27
   season <- check_season(season)
-  if(is.null(team)) {team <- c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood",
+  if (is.null(team)) {team <- c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood",
                               "Essendon", "Fremantle", "Geelong Cats", "Gold Coast Suns",
                               "GWS Giants", "Hawthorn", "Melbourne", "North Melbourne",
                               "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans",
@@ -60,9 +62,9 @@ fetch_coaches_votes <- function(season = NULL,
     as.data.frame %>%
     # exclude obvious impossibilities
     dplyr::filter(!(
-      (Season<2018 & Finals) |
-        (Round<19 & Finals) |
-        (Round>23 & !Finals)
+      (.data$Season < 2018 & .data$Finals) |
+        (.data$Round < 19 & .data$Finals) |
+        (.data$Round > 23 & !.data$Finals)
     )) %>%
     split(1:nrow(.)) %>%
     # apply function to each round
@@ -71,13 +73,13 @@ fetch_coaches_votes <- function(season = NULL,
     })
   
   # remove errors
-  all_coaches_votes[sapply(all_coaches_votes, typeof)=="character"] <- NULL
+  all_coaches_votes[sapply(all_coaches_votes, typeof) =="character"] <- NULL
   
-  if(length(all_coaches_votes) == 0) stop("No matches returned")
+  if (length(all_coaches_votes) == 0) stop("No matches returned")
   
   # create data frame
   all_coaches_votes <- do.call(rbind, all_coaches_votes) %>%
-    dplyr::filter(Home.Team%in%team | Away.Team%in%team)
+    dplyr::filter(.data$Home.Team %in% team | .data$Away.Team %in% team)
   
   return(all_coaches_votes)
 }

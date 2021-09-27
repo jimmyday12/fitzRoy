@@ -31,7 +31,9 @@ calculate_coaches_vote_possibilities(df, "Player View")
 
 # Create a manual data frame to calculate possibilities
 df <- data.frame(
-Player.Name = c("Tom Liberatore","Jack Macrae","Marcus Bontempelli","Cody Weightman","Darcy Parish","Aaron Naughton","Jordan Ridley"),
+Player.Name = c("Tom Liberatore","Jack Macrae",
+"Marcus Bontempelli","Cody Weightman",
+"Darcy Parish","Aaron Naughton","Jordan Ridley"),
 Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)
 )
 calculate_coaches_vote_possibilities(df, "Player View")
