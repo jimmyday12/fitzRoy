@@ -1,6 +1,6 @@
 skip_if_no_cookie <- function() {
   testthat::skip_if_offline()
-  
+
   if (is.null(get_afl_cookie())) {
     skip("AFLW Cookie not working")
   }
@@ -108,7 +108,7 @@ test_that("old results functions returns deprecated warning", {
 test_that("get_match_results works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_warning(dat <- get_match_results())
   expect_type(dat, "list")
   expect_error(get_match_results("a"))
@@ -118,10 +118,8 @@ test_that("get_match_results works", {
 test_that("get_footywire_stats works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_warning(results <- get_footywire_match_results(2020, 2))
   expect_s3_class(results, "data.frame")
   expect_error(suppressWarnings(get_footywire_match_results("a")))
 })
-
-

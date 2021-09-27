@@ -2,19 +2,19 @@
 test_that("fetch_lineup_afl works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_s3_class(fetch_lineup_afl(2020, round_number = 1), "tbl")
-  
+
   # change year
   expect_s3_class(fetch_lineup_afl(2018, round_number = 1), "tbl")
   expect_warning(df <- fetch_lineup_afl(2000, round_number = 1))
   expect_null(df)
-  
+
   # change round number
   expect_s3_class(fetch_lineup_afl(2020, round_number = 1), "tbl")
   expect_s3_class(fetch_lineup_afl(2020, round_number = 2), "tbl")
   expect_error(fetch_lineup_afl(2020, round_number = 50))
-  
+
   # change comp
   expect_s3_class(fetch_lineup_afl(2020, round_number = 1, comp = "AFLW"), "tbl")
   expect_error(fetch_lineup_afl(2020, round_number = 1, comp = "test"))
@@ -25,23 +25,22 @@ test_that("fetch_lineup_afl works for various inputs", {
 test_that("fetch_lineup works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # Test each source works
   expect_s3_class(fetch_lineup(2020, round_number = 1, source = "AFL", comp = "AFLM"), "tbl")
-  
+
   # non working sources
   expect_warning(fetch_lineup(2020, round_number = 1, source = "footywire", comp = "AFLM"))
   expect_warning(fetch_lineup(2020, round_number = 1, source = "squiggle", comp = "AFLM"))
   expect_warning(fetch_lineup(2020, round_number = 1, source = "fryzigg", comp = "AFLM"))
   expect_warning(fetch_lineup(2020, round_number = 1, source = "afltables", comp = "AFLM"))
-  
+
   # Test that AFLW works
   expect_s3_class(fetch_lineup(2020, round_number = 1, source = "AFL", comp = "AFLW"), "tbl")
   expect_error(fetch_lineup(2020, round_number = 1, source = "squiggle", comp = "AFLW"))
   expect_error(fetch_lineup(2020, round_number = 1, source = "footywire", comp = "AFLW"))
   expect_error(fetch_lineup(2020, round_number = 1, source = "fryizgg", comp = "AFLW"))
   expect_error(fetch_lineup(2020, round_number = 1, source = "afltables", comp = "AFLW"))
-  
 })
 
 
@@ -49,13 +48,13 @@ test_that("fetch_lineup works", {
 test_that("get_fixture works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_warning(fix <- get_fixture(2012))
   expect_s3_class(fix, "tbl")
   expect_equal(fix$Round[1], 1)
   expect_equal(fix$Round[2], 1)
   expect_equal(fix$Round[nrow(fix)], 27)
-  
+
   expect_error(supressWarnings(get_fixture(2012:2013)))
   expect_error(supressWarnings(get_fixture("a")))
 })
@@ -63,7 +62,7 @@ test_that("get_fixture works", {
 test_that("get_fixture works with different inputs ", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_warning(fixture_df <- get_fixture(2019))
   expect_s3_class(fixture_df, "data.frame")
   expect_s3_class(fixture_df$Date[1], "POSIXt")
@@ -76,7 +75,7 @@ test_that("get_fixture works with different inputs ", {
 test_that("get_fixture filters out unplayed matches ", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # On footywire.com.au/afl/footy/ft_match_list, the 2015 season has two
   # matches marked MATCH CANCELLED along with multiple byes that result in
   # NA dates if not filtered out
@@ -87,29 +86,29 @@ test_that("get_fixture filters out unplayed matches ", {
 test_that("2020 season round numbers are correct through round 13", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # We filter for matches through round 12, because we don't want
   # unknown, future data changes to break tests
-  expect_warning(fixture <- get_fixture(2020) %>% 
-                   dplyr::filter(.data$Round <= 13))
-  
+  expect_warning(fixture <- get_fixture(2020) %>%
+    dplyr::filter(.data$Round <= 13))
+
   n_duplicate_home_teams <- fixture %>%
     dplyr::group_by(Season, Round, Home.Team) %>%
     dplyr::filter(dplyr::n() > 1) %>%
     nrow()
-  
+
   n_duplicate_away_teams <- fixture %>%
     dplyr::group_by(Season, Round, Home.Team) %>%
     dplyr::filter(dplyr::n() > 1) %>%
     nrow()
-  
+
   expect_equal(n_duplicate_home_teams, n_duplicate_away_teams)
 })
 
 test_that("round numbers don't increment across bye weeks without matches", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   calculate_max_round_lag <- function(rounds) {
     rounds %>%
       unique() %>%
@@ -118,7 +117,7 @@ test_that("round numbers don't increment across bye weeks without matches", {
       }) %>%
       max()
   }
-  
+
   expect_warning(fixture_rounds <- get_fixture(2019)$Round)
   expect_equal(calculate_max_round_lag(fixture_rounds), 1)
 })

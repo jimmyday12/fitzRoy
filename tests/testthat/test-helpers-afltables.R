@@ -19,7 +19,7 @@ test_that("replace_venues returns corrected venues", {
 test_that("conver_results works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   expect_type(convert_results(fetch_results_afltables(2020)), "list")
   expect_error(convert_results("a"))
 })

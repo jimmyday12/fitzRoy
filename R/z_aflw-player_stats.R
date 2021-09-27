@@ -25,8 +25,6 @@
 #' @importFrom rlang .data
 get_aflw_player_stats <- function(start = 2017,
                                   end = as.numeric(format(Sys.Date(), "%Y"))) {
-  
   .Deprecated("fetch_player_stats_fryzigg")
   return(fetch_player_stats_fryzigg(start:end, round_number = NULL, comp = "AFLW"))
-  
 }

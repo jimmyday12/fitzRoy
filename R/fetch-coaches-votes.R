@@ -40,26 +40,34 @@
 fetch_coaches_votes <- function(season = NULL,
                                 round_number = NULL,
                                 comp = "AFLM",
-                                team = NULL){
-  
+                                team = NULL) {
+
   # error handling
   check_comp(comp)
-  if (sum(!team %in% c("Adelaide Crows", "Brisbane Lions", 
-                      "Carlton", "Collingwood", "Essendon", "Fremantle",
-                    "Geelong Cats", "Gold Coast Suns", "GWS Giants", "Hawthorn", 
-                    "Melbourne", "North Melbourne",
-                    "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans", 
-                    "West Coast Eagles", "Western Bulldogs")) > 0) stop("Invalid team")
+  if (sum(!team %in% c(
+    "Adelaide Crows", "Brisbane Lions",
+    "Carlton", "Collingwood", "Essendon", "Fremantle",
+    "Geelong Cats", "Gold Coast Suns", "GWS Giants", "Hawthorn",
+    "Melbourne", "North Melbourne",
+    "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans",
+    "West Coast Eagles", "Western Bulldogs"
+  )) > 0) {
+    stop("Invalid team")
+  }
   if (is.null(round_number)) round_number <- 1:27
   season <- check_season(season)
-  if (is.null(team)) {team <- c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood",
-                              "Essendon", "Fremantle", "Geelong Cats", "Gold Coast Suns",
-                              "GWS Giants", "Hawthorn", "Melbourne", "North Melbourne",
-                              "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans",
-                              "West Coast Eagles", "Western Bulldogs")}
-  
-  all_coaches_votes <- expand.grid(Season = season, Round = round_number, Finals = c(F,T)) %>%
-    as.data.frame %>%
+  if (is.null(team)) {
+    team <- c(
+      "Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood",
+      "Essendon", "Fremantle", "Geelong Cats", "Gold Coast Suns",
+      "GWS Giants", "Hawthorn", "Melbourne", "North Melbourne",
+      "Port Adelaide", "Richmond", "St Kilda", "Sydney Swans",
+      "West Coast Eagles", "Western Bulldogs"
+    )
+  }
+
+  all_coaches_votes <- expand.grid(Season = season, Round = round_number, Finals = c(F, T)) %>%
+    as.data.frame() %>%
     # exclude obvious impossibilities
     dplyr::filter(!(
       (.data$Season < 2018 & .data$Finals) |
@@ -68,19 +76,19 @@ fetch_coaches_votes <- function(season = NULL,
     )) %>%
     split(1:nrow(.)) %>%
     # apply function to each round
-    lapply(function(row){
+    lapply(function(row) {
       try(scrape_coaches_votes(row$Season, row$Round, comp, row$Finals))
     })
-  
+
   # remove errors
-  all_coaches_votes[sapply(all_coaches_votes, typeof) =="character"] <- NULL
-  
+  all_coaches_votes[sapply(all_coaches_votes, typeof) == "character"] <- NULL
+
   if (length(all_coaches_votes) == 0) stop("No matches returned")
-  
+
   # create data frame
   all_coaches_votes <- do.call(rbind, all_coaches_votes) %>%
     dplyr::filter(.data$Home.Team %in% team | .data$Away.Team %in% team)
-  
+
   return(all_coaches_votes)
 }
 #' @rdname fetch_coaches_votes

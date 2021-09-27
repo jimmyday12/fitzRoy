@@ -1,17 +1,17 @@
 #' Fetch Player Details
 #'
 #' @description
-#' `fetch_player_details` returns player details such as date of birth, debut 
-#' and other details. The exact details that are returned will depend on which 
+#' `fetch_player_details` returns player details such as date of birth, debut
+#' and other details. The exact details that are returned will depend on which
 #' source is provided.
-#' 
+#'
 #' By default the source used will be the official AFL website.
 #'
 #' [fetch_player_details_afl()], [fetch_player_details_afltables()] and [fetch_player_details_footywire()]
 #' can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
 #'
-#' The function will typically be used to return the current team lists. For historical data, you can use the `current` argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data. 
-#' 
+#' The function will typically be used to return the current team lists. For historical data, you can use the `current` argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data.
+#'
 #' @param team team the player played for in the season for, defaults to NULL which returns all teams
 #' @param current logical, return the current team list for the current calendar year or all historical data
 #' @param comp One of "AFLM" (default) or "AFLW"
@@ -40,10 +40,10 @@ fetch_player_details <- function(team = NULL,
                                  comp = "AFLM",
                                  source = "AFL",
                                  ...) {
-  
+
   # Do some data checks
   check_comp_source(comp, source)
-  
+
   # Ignore certain parameters based on source
   if (source == "afltables") {
     cli::cli_alert("For the afltables source, details are returned for all seasons. Ignoring `current` argument")
@@ -56,33 +56,37 @@ fetch_player_details <- function(team = NULL,
   } else if (!current) {
     cli::cli_alert("Returning historical player details from source `{source}`")
   }
-  
+
   dat <- switch(source,
-                "AFL" = purrr::map_dfr(season, 
-                                       ~fetch_player_details_afl(season = .x, 
-                                                                 team = team, 
-                                                                 comp = comp)),
-                "afltables" = fetch_player_details_afltables(team),
-                "footywire" = fetch_player_details_footywire(team, current = current),
-                NULL)
-  
+    "AFL" = purrr::map_dfr(
+      season,
+      ~ fetch_player_details_afl(
+        season = .x,
+        team = team,
+        comp = comp
+      )
+    ),
+    "afltables" = fetch_player_details_afltables(team),
+    "footywire" = fetch_player_details_footywire(team, current = current),
+    NULL
+  )
+
   if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Player Details data. Please use one of \"afltables\" and \"footywire\""))
   return(dat)
-  
 }
 
 #' @param season Season in YYYY format
 #' @rdname fetch_player_details
 #' @export
 fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
-  
+
   # perform some validation
   season <- check_season(season)
   check_comp(comp)
-  
+
   # get season id
   comp_seas_id <- find_season_id(season, comp)
-  
+
   # return team abbreviation
   if (!is.null(team)) {
     team_check_afl(team)
@@ -94,14 +98,18 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
     team_ids <- team_dat$id
     team_names <- team_dat$name
   }
-  
+
   df <- team_ids %>%
-    purrr::map2_dfr(.y = team_names, 
-                    ~fetch_squad_afl(teamId = .x, 
-                                     team = .y, 
-                                     season = season,
-                                     compSeasonId = comp_seas_id))
-  
+    purrr::map2_dfr(
+      .y = team_names,
+      ~ fetch_squad_afl(
+        teamId = .x,
+        team = .y,
+        season = season,
+        compSeasonId = comp_seas_id
+      )
+    )
+
   df %>%
     dplyr::mutate(data_accessed = Sys.Date())
 }
@@ -109,46 +117,40 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
 #' @rdname fetch_player_details
 #' @export
 fetch_player_details_afltables <- function(team = NULL) {
-  
   if (is.null(team)) {
     cli_all <- cli::cli_process_start("Fetching player details for all teams")
-    
-    teams <- c("Adelaide", "Brisbane Lions", "Brisbane Bears", 
-               "Carlton", "Collingwood", "Essendon", "Fitzroy", 
-               "Fremantle", "GWS", "Geelong", "Gold Coast", 
-               "Hawthorn", "Melbourne", "North Melbourne", 
-               "Port Adelaide", "Richmond", "St Kilda", 
-               "Sydney", "West Coast", "University", 
-               "Western Bulldogs")
-    
+
+    teams <- c(
+      "Adelaide", "Brisbane Lions", "Brisbane Bears",
+      "Carlton", "Collingwood", "Essendon", "Fitzroy",
+      "Fremantle", "GWS", "Geelong", "Gold Coast",
+      "Hawthorn", "Melbourne", "North Melbourne",
+      "Port Adelaide", "Richmond", "St Kilda",
+      "Sydney", "West Coast", "University",
+      "Western Bulldogs"
+    )
+
     details_data <- teams %>%
       purrr::map_dfr(get_player_details_afltables)
-    
+
     cli::cli_process_done(cli_all)
-    
+
     return(details_data)
   } else {
-    
     details_data <- get_player_details_afltables(team)
-    
+
     return(details_data)
   }
-  
-  
 }
 
 #' @rdname fetch_player_details
 #' @export
-fetch_player_details_footywire <- function(team, current = TRUE){
-  
+fetch_player_details_footywire <- function(team, current = TRUE) {
   team_check_afltables(team)
-  
+
   if (current == TRUE) {
     fetch_player_details_footywire_current(team)
   } else {
     fetch_player_details_footywire_past(team)
   }
-  
-  
 }
-

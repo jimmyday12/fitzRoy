@@ -321,19 +321,19 @@ get_afltables_player_ids <- function(seasons) {
   # nolint end
 
   col_vars <- c("Season", "Player", "ID", "Team")
-  
+
   ids <- git_url %>%
     readr::read_csv(col_types = c("dcdc")) %>%
     dplyr::mutate(ID = as.integer(.data$ID)) %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
     dplyr::filter(.data$Season %in% seasons)
-  
+
   # check for new ids
   readUrl <- function(url) {
     out <- tryCatch(readr::read_csv(url,
-                                    col_types = readr::cols(),
-                                    guess_max = 10000
+      col_types = readr::cols(),
+      guess_max = 10000
     ),
     error = function(cond) {
       return(data.frame())
@@ -341,12 +341,12 @@ get_afltables_player_ids <- function(seasons) {
     )
     return(out)
   }
-  
+
   start <- 2017
   end <- max(max(seasons), Sys.Date() %>% format("%Y") %>% as.numeric())
-  
+
   urls <- purrr::map_chr(start:end, base_url)
-  
+
   ids_new <- urls %>%
     purrr::map(readUrl) %>%
     purrr::discard(~ nrow(.x) == 0)
@@ -355,7 +355,7 @@ get_afltables_player_ids <- function(seasons) {
 
   # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
   # so we need to make them consistent before joining to avoid type errors
-  mixed_cols <- c('Round', 'Jumper.No.')
+  mixed_cols <- c("Round", "Jumper.No.")
   cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
 
   ids_new <- ids_new %>%
@@ -367,18 +367,17 @@ get_afltables_player_ids <- function(seasons) {
 
   if (nrow(ids_new) < 1) {
     return(ids)
-  } 
-  
+  }
+
   ids_new <- ids_new %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
     dplyr::rename(Team.abb = .data$Team) %>%
     dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
     dplyr::select(!!col_vars)
-  
+
   ids <- dplyr::bind_rows(ids, ids_new) %>%
     dplyr::distinct()
 
   return(ids)
-   
 }

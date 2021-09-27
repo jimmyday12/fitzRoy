@@ -93,8 +93,7 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
-get_footywire_betting_odds <- function(
-                                       start_season = "2010",
+get_footywire_betting_odds <- function(start_season = "2010",
                                        end_season = lubridate::year(Sys.Date())) {
   .Deprecated("fetch_betting_odds_footywire")
   return(

@@ -66,14 +66,14 @@ fetch_ladder <- function(season = NULL,
   check_comp_source(comp, source)
 
   dat <- switch(source,
-                "AFL" = fetch_ladder_afl(season, round_number, comp),
-                "afltables" = fetch_ladder_afltables(season, round_number, ...),
-                "squiggle" = fetch_ladder_squiggle(season, round_number),
-                NULL)
-  
+    "AFL" = fetch_ladder_afl(season, round_number, comp),
+    "afltables" = fetch_ladder_afltables(season, round_number, ...),
+    "squiggle" = fetch_ladder_squiggle(season, round_number),
+    NULL
+  )
+
   if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Ladder data. Please use one of \"AFL\", \"afltables\", or \"squiggle\""))
   return(dat)
-
 }
 
 #' @rdname fetch_ladder
@@ -84,40 +84,44 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   season <- check_season(season)
   comp <- check_comp(comp)
   # if (is.null(round_number)) round_number <- ""
-  
+
   if (length(season) > 1) {
     rlang::inform("Multiple seasons specified, ignoring round_number")
     round_number <- NULL
-    }
+  }
   # fetch ids
   season_id <- find_season_id(season, comp)
-  
-  
+
+
   if (is.null(round_number)) {
     rlang::inform("No round number specified, trying to return most recent ladder for specified season")
-    round_id = ""
+    round_id <- ""
   } else {
-    round_id <- find_round_id(round_number, season_id = season_id, 
-                                comp = comp, providerId = FALSE, 
-                                future_rounds = FALSE)
+    round_id <- find_round_id(round_number,
+      season_id = season_id,
+      comp = comp, providerId = FALSE,
+      future_rounds = FALSE
+    )
   }
 
-  if(is.null(round_id) || is.null(season_id)) return(NULL)
+  if (is.null(round_id) || is.null(season_id)) {
+    return(NULL)
+  }
 
   # Make request
-  api_url <- season_id %>% 
-    purrr::map_chr(~paste0(
-    "https://aflapi.afl.com.au/afl/v2/compseasons/",
-    .x,
-    "/ladders"
-  ))
+  api_url <- season_id %>%
+    purrr::map_chr(~ paste0(
+      "https://aflapi.afl.com.au/afl/v2/compseasons/",
+      .x,
+      "/ladders"
+    ))
 
   resp <- api_url %>%
     purrr::map(httr::GET, query = list("roundId" = round_id))
-  
+
   status_codes <- resp %>%
     purrr::map_dbl(purrr::pluck, "status_code")
-  
+
   if (any(status_codes == 404) | any(status_codes == 400)) {
     rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au/ladder\"?"))
   }
@@ -128,27 +132,34 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 
   ladder_list <- cont %>%
     purrr::map(purrr::pluck, "ladders", "entries")
-  
+
   ladder_list <- ladder_list %>%
     purrr::map(dplyr::bind_rows, .id = "conference")
 
-  
-  args <- list(ladder_list = ladder_list,
-               season = season, 
-               season_name = cont %>% purrr::map(purrr::pluck, "compSeason", "name"), 
-               last_updated = cont %>% purrr::map(purrr::pluck, "lastUpdated"),
-               round_name = cont %>% purrr::map(purrr::pluck, "round", "name"),
-               round_number = cont %>% purrr::map(purrr::pluck, "round", "roundNumber"))
-  
-  ladder_df <- purrr::pmap_dfr(args, 
-              ~with(list(...), 
-                    dplyr::mutate(ladder_list, 
-                                  season = season,
-                                  season_name = season_name,
-                                  last_updated = last_updated,
-                                  round_name = round_name,
-                                  round_number = round_number)))
-  
+
+  args <- list(
+    ladder_list = ladder_list,
+    season = season,
+    season_name = cont %>% purrr::map(purrr::pluck, "compSeason", "name"),
+    last_updated = cont %>% purrr::map(purrr::pluck, "lastUpdated"),
+    round_name = cont %>% purrr::map(purrr::pluck, "round", "name"),
+    round_number = cont %>% purrr::map(purrr::pluck, "round", "roundNumber")
+  )
+
+  ladder_df <- purrr::pmap_dfr(
+    args,
+    ~ with(
+      list(...),
+      dplyr::mutate(ladder_list,
+        season = season,
+        season_name = season_name,
+        last_updated = last_updated,
+        round_name = round_name,
+        round_number = round_number
+      )
+    )
+  )
+
   ladder_df <- ladder_df %>%
     dplyr::select(
       .data$season, .data$season_name, .data$round_name,
