@@ -175,22 +175,22 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 162 × 24
-#&gt;    date   updated hscore ateam is_grand_final  year localtime hteam ascore    id
-#&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
-#&gt;  1 2020-… 2020-0…     71 Sydn…              0  2020 2020-03-… Adel…     74  4401
-#&gt;  2 2020-… 2020-0…     63 Frem…              0  2020 2020-03-… Esse…     57  4400
-#&gt;  3 2020-… 2020-0…     29 Port…              0  2020 2020-03-… Gold…     76  4403
-#&gt;  4 2020-… 2020-0…    105 Geel…              0  2020 2020-03-… Grea…     73  4402
-#&gt;  5 2020-… 2020-0…     90 Bris…              0  2020 2020-03-… Hawt…     62  4412
-#&gt;  6 2020-… 2020-0…     56 St K…              0  2020 2020-03-… Nort…     54  4404
-#&gt;  7 2020-… 2020-0…    105 Carl…              0  2020 2020-03-… Rich…     81  4396
-#&gt;  8 2020-… 2020-0…     78 Melb…              0  2020 2020-03-… West…     51  4413
-#&gt;  9 2020-… 2020-0…     34 Coll…              0  2020 2020-03-… West…     86  4397
-#&gt; 10 2020-… 2020-0…     81 Frem…              0  2020 2020-06-… Bris…     69  4746
-#&gt; # … with 152 more rows, and 14 more variables: agoals &lt;int&gt;, venue &lt;chr&gt;,
-#&gt; #   hteamid &lt;int&gt;, hbehinds &lt;int&gt;, complete &lt;int&gt;, abehinds &lt;int&gt;,
-#&gt; #   winnerteamid &lt;int&gt;, ateamid &lt;int&gt;, is_final &lt;int&gt;, winner &lt;chr&gt;,
-#&gt; #   round &lt;int&gt;, tz &lt;chr&gt;, hgoals &lt;int&gt;, roundname &lt;chr&gt;</code></pre>
+#&gt;    ateamid winner hteamid is_grand_final roundname venue round complete abehinds
+#&gt;      &lt;int&gt; &lt;chr&gt;    &lt;int&gt;          &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
+#&gt;  1      16 Sydney       1              0 Round 1   Adel…     1      100        8
+#&gt;  2       6 Essen…       5              0 Round 1   Dock…     1      100        9
+#&gt;  3      13 Port …       8              0 Round 1   Carr…     1      100       16
+#&gt;  4       7 Great…       9              0 Round 1   Sydn…     1      100        7
+#&gt;  5       2 Hawth…      10              0 Round 1   M.C.…     1      100        8
+#&gt;  6      15 North…      12              0 Round 1   Dock…     1      100       12
+#&gt;  7       3 Richm…      14              0 Round 1   M.C.…     1      100        9
+#&gt;  8      11 West …      17              0 Round 1   Pert…     1      100        9
+#&gt;  9       4 Colli…      18              0 Round 1   Dock…     1      100        8
+#&gt; 10       6 Brisb…       2              0 Round 2   Gabba     2      100        9
+#&gt; # … with 152 more rows, and 15 more variables: localtime &lt;chr&gt;, hbehinds &lt;int&gt;,
+#&gt; #   date &lt;chr&gt;, is_final &lt;int&gt;, hgoals &lt;int&gt;, year &lt;int&gt;, hscore &lt;int&gt;,
+#&gt; #   hteam &lt;chr&gt;, ascore &lt;int&gt;, tz &lt;chr&gt;, ateam &lt;chr&gt;, agoals &lt;int&gt;,
+#&gt; #   updated &lt;chr&gt;, winnerteamid &lt;int&gt;, id &lt;int&gt;</code></pre>
 </div>
 </div>
 <div id="examples" class="section level1">
@@ -203,26 +203,26 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"teams"</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 18 × 4
-#&gt;    logo                                           name                 id abbrev
-#&gt;    &lt;chr&gt;                                          &lt;chr&gt;             &lt;int&gt; &lt;chr&gt; 
-#&gt;  1 /wp-content/themes/squiggle/assets/images/Ade… Adelaide              1 ADE   
-#&gt;  2 /wp-content/themes/squiggle/assets/images/Bri… Brisbane Lions        2 BRI   
-#&gt;  3 /wp-content/themes/squiggle/assets/images/Car… Carlton               3 CAR   
-#&gt;  4 /wp-content/themes/squiggle/assets/images/Col… Collingwood           4 COL   
-#&gt;  5 /wp-content/themes/squiggle/assets/images/Ess… Essendon              5 ESS   
-#&gt;  6 /wp-content/themes/squiggle/assets/images/Fre… Fremantle             6 FRE   
-#&gt;  7 /wp-content/themes/squiggle/assets/images/Gee… Geelong               7 GEE   
-#&gt;  8 /wp-content/themes/squiggle/assets/images/Gol… Gold Coast            8 GC    
-#&gt;  9 /wp-content/themes/squiggle/assets/images/Gia… Greater Western …     9 GWS   
-#&gt; 10 /wp-content/themes/squiggle/assets/images/Haw… Hawthorn             10 HAW   
-#&gt; 11 /wp-content/themes/squiggle/assets/images/Mel… Melbourne            11 MEL   
-#&gt; 12 /wp-content/themes/squiggle/assets/images/Nor… North Melbourne      12 NOR   
-#&gt; 13 /wp-content/themes/squiggle/assets/images/Por… Port Adelaide        13 POR   
-#&gt; 14 /wp-content/themes/squiggle/assets/images/Ric… Richmond             14 RIC   
-#&gt; 15 /wp-content/themes/squiggle/assets/images/StK… St Kilda             15 STK   
-#&gt; 16 /wp-content/themes/squiggle/assets/images/Syd… Sydney               16 SYD   
-#&gt; 17 /wp-content/themes/squiggle/assets/images/Wes… West Coast           17 WCE   
-#&gt; 18 /wp-content/themes/squiggle/assets/images/Bul… Western Bulldogs     18 WBD</code></pre>
+#&gt;    abbrev logo                                              id name             
+#&gt;    &lt;chr&gt;  &lt;chr&gt;                                          &lt;int&gt; &lt;chr&gt;            
+#&gt;  1 ADE    /wp-content/themes/squiggle/assets/images/Ade…     1 Adelaide         
+#&gt;  2 BRI    /wp-content/themes/squiggle/assets/images/Bri…     2 Brisbane Lions   
+#&gt;  3 CAR    /wp-content/themes/squiggle/assets/images/Car…     3 Carlton          
+#&gt;  4 COL    /wp-content/themes/squiggle/assets/images/Col…     4 Collingwood      
+#&gt;  5 ESS    /wp-content/themes/squiggle/assets/images/Ess…     5 Essendon         
+#&gt;  6 FRE    /wp-content/themes/squiggle/assets/images/Fre…     6 Fremantle        
+#&gt;  7 GEE    /wp-content/themes/squiggle/assets/images/Gee…     7 Geelong          
+#&gt;  8 GC     /wp-content/themes/squiggle/assets/images/Gol…     8 Gold Coast       
+#&gt;  9 GWS    /wp-content/themes/squiggle/assets/images/Gia…     9 Greater Western …
+#&gt; 10 HAW    /wp-content/themes/squiggle/assets/images/Haw…    10 Hawthorn         
+#&gt; 11 MEL    /wp-content/themes/squiggle/assets/images/Mel…    11 Melbourne        
+#&gt; 12 NOR    /wp-content/themes/squiggle/assets/images/Nor…    12 North Melbourne  
+#&gt; 13 POR    /wp-content/themes/squiggle/assets/images/Por…    13 Port Adelaide    
+#&gt; 14 RIC    /wp-content/themes/squiggle/assets/images/Ric…    14 Richmond         
+#&gt; 15 STK    /wp-content/themes/squiggle/assets/images/StK…    15 St Kilda         
+#&gt; 16 SYD    /wp-content/themes/squiggle/assets/images/Syd…    16 Sydney           
+#&gt; 17 WCE    /wp-content/themes/squiggle/assets/images/Wes…    17 West Coast       
+#&gt; 18 WBD    /wp-content/themes/squiggle/assets/images/Bul…    18 Western Bulldogs</code></pre>
 </div>
 <div id="games" class="section level2">
 <h2 class="hasAnchor">
@@ -231,22 +231,22 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 162 × 24
-#&gt;    date   updated hscore ateam is_grand_final  year localtime hteam ascore    id
-#&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt; &lt;chr&gt;          &lt;int&gt; &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;  &lt;int&gt; &lt;int&gt;
-#&gt;  1 2020-… 2020-0…     71 Sydn…              0  2020 2020-03-… Adel…     74  4401
-#&gt;  2 2020-… 2020-0…     63 Frem…              0  2020 2020-03-… Esse…     57  4400
-#&gt;  3 2020-… 2020-0…     29 Port…              0  2020 2020-03-… Gold…     76  4403
-#&gt;  4 2020-… 2020-0…    105 Geel…              0  2020 2020-03-… Grea…     73  4402
-#&gt;  5 2020-… 2020-0…     90 Bris…              0  2020 2020-03-… Hawt…     62  4412
-#&gt;  6 2020-… 2020-0…     56 St K…              0  2020 2020-03-… Nort…     54  4404
-#&gt;  7 2020-… 2020-0…    105 Carl…              0  2020 2020-03-… Rich…     81  4396
-#&gt;  8 2020-… 2020-0…     78 Melb…              0  2020 2020-03-… West…     51  4413
-#&gt;  9 2020-… 2020-0…     34 Coll…              0  2020 2020-03-… West…     86  4397
-#&gt; 10 2020-… 2020-0…     81 Frem…              0  2020 2020-06-… Bris…     69  4746
-#&gt; # … with 152 more rows, and 14 more variables: agoals &lt;int&gt;, venue &lt;chr&gt;,
-#&gt; #   hteamid &lt;int&gt;, hbehinds &lt;int&gt;, complete &lt;int&gt;, abehinds &lt;int&gt;,
-#&gt; #   winnerteamid &lt;int&gt;, ateamid &lt;int&gt;, is_final &lt;int&gt;, winner &lt;chr&gt;,
-#&gt; #   round &lt;int&gt;, tz &lt;chr&gt;, hgoals &lt;int&gt;, roundname &lt;chr&gt;</code></pre>
+#&gt;    ateamid winner hteamid is_grand_final roundname venue round complete abehinds
+#&gt;      &lt;int&gt; &lt;chr&gt;    &lt;int&gt;          &lt;int&gt; &lt;chr&gt;     &lt;chr&gt; &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
+#&gt;  1      16 Sydney       1              0 Round 1   Adel…     1      100        8
+#&gt;  2       6 Essen…       5              0 Round 1   Dock…     1      100        9
+#&gt;  3      13 Port …       8              0 Round 1   Carr…     1      100       16
+#&gt;  4       7 Great…       9              0 Round 1   Sydn…     1      100        7
+#&gt;  5       2 Hawth…      10              0 Round 1   M.C.…     1      100        8
+#&gt;  6      15 North…      12              0 Round 1   Dock…     1      100       12
+#&gt;  7       3 Richm…      14              0 Round 1   M.C.…     1      100        9
+#&gt;  8      11 West …      17              0 Round 1   Pert…     1      100        9
+#&gt;  9       4 Colli…      18              0 Round 1   Dock…     1      100        8
+#&gt; 10       6 Brisb…       2              0 Round 2   Gabba     2      100        9
+#&gt; # … with 152 more rows, and 15 more variables: localtime &lt;chr&gt;, hbehinds &lt;int&gt;,
+#&gt; #   date &lt;chr&gt;, is_final &lt;int&gt;, hgoals &lt;int&gt;, year &lt;int&gt;, hscore &lt;int&gt;,
+#&gt; #   hteam &lt;chr&gt;, ascore &lt;int&gt;, tz &lt;chr&gt;, ateam &lt;chr&gt;, agoals &lt;int&gt;,
+#&gt; #   updated &lt;chr&gt;, winnerteamid &lt;int&gt;, id &lt;int&gt;</code></pre>
 </div>
 <div id="sources" class="section level2">
 <h2 class="hasAnchor">
@@ -255,20 +255,20 @@
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># You can get the sources</span>
 <span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"sources"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 22 × 4
-#&gt;    name                  icon                           url                   id
-#&gt;    &lt;chr&gt;                 &lt;chr&gt;                          &lt;chr&gt;              &lt;int&gt;
-#&gt;  1 Squiggle              "/wp-content/uploads/2017/02/… "https://live.squ…     1
-#&gt;  2 The Arc               "/wp-content/themes/squiggle/… "https://thearcfo…     2
-#&gt;  3 Figuring Footy        "/wp-content/themes/squiggle/… "http://figuringf…     3
-#&gt;  4 Matter of Stats       "/wp-content/themes/squiggle/… "http://www.matte…     4
-#&gt;  5 Punters               ""                             ""                     5
-#&gt;  6 Footy Maths Institute "/wp-content/themes/squiggle/… "https://footymat…     6
-#&gt;  7 PlusSixOne            "/wp-content/themes/squiggle/… "http://plussixon…     7
-#&gt;  8 Aggregate             ""                             "/introducing-s10…     8
-#&gt;  9 Graft                 "/wp-content/themes/squiggle/… "http://graftrati…     9
-#&gt; 10 Stattraction          "/wp-content/themes/squiggle/… "https://stattrac…    10
-#&gt; # … with 12 more rows</code></pre>
+<pre><code>#&gt; # A tibble: 25 × 4
+#&gt;       id url                                   name            icon             
+#&gt;    &lt;int&gt; &lt;chr&gt;                                 &lt;chr&gt;           &lt;chr&gt;            
+#&gt;  1     1 "https://live.squiggle.com.au/"       Squiggle        "/wp-content/upl…
+#&gt;  2     2 "https://thearcfooty.com/"            The Arc         "/wp-content/the…
+#&gt;  3     3 "http://figuringfooty.com/"           Figuring Footy  "/wp-content/the…
+#&gt;  4     4 "http://www.matterofstats.com/"       Matter of Stats "/wp-content/the…
+#&gt;  5     5 ""                                    Punters         ""               
+#&gt;  6     6 "https://footymaths.blogspot.com"     FMI             "/wp-content/the…
+#&gt;  7     7 "http://plussixoneblog.com/"          PlusSixOne      "/wp-content/the…
+#&gt;  8     8 "/introducing-s10/"                   Aggregate       ""               
+#&gt;  9     9 "http://graftratings.com/afl/"        Graft           "/wp-content/the…
+#&gt; 10    10 "https://stattraction.wordpress.com/" Stattraction    "/wp-content/the…
+#&gt; # … with 15 more rows</code></pre>
 </div>
 <div id="tips" class="section level2">
 <h2 class="hasAnchor">
@@ -277,42 +277,42 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get all tips</span>
 <span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 12,917 × 21
-#&gt;      err correct ateamid  year hconfidence gameid tipteamid    bits confidence
-#&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;  &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
-#&gt;  1 42          1      14  2017        50        1        14  0            50  
-#&gt;  2 NA          1      14  2017        42        1        14  0.214        58  
-#&gt;  3 48.4        0      14  2017        56.7      1         3 -0.208        56.7
-#&gt;  4  3.69       1      18  2017        37.3      2        18  0.326        62.7
-#&gt;  5  3          1      18  2017        38        2        18  0.310        62  
-#&gt;  6 53          1       9  2017        50        8         1  0            50  
-#&gt;  7 35          1      14  2017        41.2      1        14  0.234        58.8
-#&gt;  8  1          1      18  2017        35.9      2        18  0.358        64.1
-#&gt;  9 32          0      11  2017        52.9      4        15 -0.0862       52.9
-#&gt; 10 57          0      13  2017        79.4      3        16 -1.28         79.4
-#&gt; # … with 12,907 more rows, and 12 more variables: hteam &lt;chr&gt;, round &lt;int&gt;,
-#&gt; #   ateam &lt;chr&gt;, updated &lt;chr&gt;, venue &lt;chr&gt;, source &lt;chr&gt;, margin &lt;dbl&gt;,
-#&gt; #   date &lt;chr&gt;, hmargin &lt;dbl&gt;, hteamid &lt;int&gt;, sourceid &lt;int&gt;, tip &lt;chr&gt;</code></pre>
+<pre><code>#&gt; # A tibble: 14,848 × 21
+#&gt;     year hmargin    bits   err ateamid hteam       tipteamid ateam  tip   source
+#&gt;    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; 
+#&gt;  1  2017   -1     0      42         14 Carlton            14 Richm… Rich… Squig…
+#&gt;  2  2017   NA     0.214  NA         14 Carlton            14 Richm… Rich… Figur…
+#&gt;  3  2017    5.39 -0.208  48.4       14 Carlton             3 Richm… Carl… Matte…
+#&gt;  4  2017  -10.3   0.326   3.69      18 Collingwood        18 Weste… West… Matte…
+#&gt;  5  2017  -17     0.310   3         18 Collingwood        18 Weste… West… Squig…
+#&gt;  6  2017    3     0      53          9 Adelaide            1 Great… Adel… Squig…
+#&gt;  7  2017   -8     0.234  35         14 Carlton            14 Richm… Rich… The A…
+#&gt;  8  2017  -13     0.358   1         18 Collingwood        18 Weste… West… The A…
+#&gt;  9  2017    2    -0.0862 32         11 St Kilda           15 Melbo… St K… The A…
+#&gt; 10  2017   29    -1.28   57         13 Sydney             16 Port … Sydn… The A…
+#&gt; # … with 14,838 more rows, and 11 more variables: correct &lt;int&gt;, hteamid &lt;int&gt;,
+#&gt; #   updated &lt;chr&gt;, sourceid &lt;int&gt;, round &lt;int&gt;, venue &lt;chr&gt;, confidence &lt;dbl&gt;,
+#&gt; #   gameid &lt;int&gt;, hconfidence &lt;dbl&gt;, date &lt;chr&gt;, margin &lt;dbl&gt;</code></pre>
 <p>We can just look at one particular round.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># Get` just tips from round 1, 2018</span>
 <span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"tips"</span>, round <span class="op">=</span> <span class="fl">1</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 126 × 21
-#&gt;      err correct ateamid  year hconfidence gameid tipteamid    bits confidence
-#&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt; &lt;int&gt;       &lt;dbl&gt;  &lt;int&gt;     &lt;int&gt;   &lt;dbl&gt;      &lt;dbl&gt;
-#&gt;  1  NA         1       3  2018        79.8    372        14  0.675        79.8
-#&gt;  2  NA         1       1  2018        52.1    373         5  0.0588       52.1
-#&gt;  3  NA         1       2  2018        71.7    374        15  0.521        71.7
-#&gt;  4  NA         1       6  2018        79.4    375        13  0.666        79.4
-#&gt;  5  NA         0      12  2018        49.5    376        12 -0.0151       50.5
-#&gt;  6  NA         1       4  2018        54.4    377        10  0.122        54.4
-#&gt;  7  NA         1      18  2018        72.2    378         9  0.530        72.2
-#&gt;  8  NA         0       7  2018        56.4    379        11 -0.198        56.4
-#&gt;  9  NA         1      16  2018        30.0    380        16  0.486        70.0
-#&gt; 10   9.2       1       3  2018        79.8    372        14  0.674        79.8
-#&gt; # … with 116 more rows, and 12 more variables: hteam &lt;chr&gt;, round &lt;int&gt;,
-#&gt; #   ateam &lt;chr&gt;, updated &lt;chr&gt;, venue &lt;chr&gt;, source &lt;chr&gt;, margin &lt;dbl&gt;,
-#&gt; #   date &lt;chr&gt;, hmargin &lt;dbl&gt;, hteamid &lt;int&gt;, sourceid &lt;int&gt;, tip &lt;chr&gt;</code></pre>
+#&gt;     year hmargin    bits   err ateamid hteam    tipteamid ateam   tip     source
+#&gt;    &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;int&gt; &lt;chr&gt;        &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; 
+#&gt;  1  2018    NA    0.675   NA         3 Richmond        14 Carlton Richmo… Punte…
+#&gt;  2  2018    NA    0.0588  NA         1 Essendon         5 Adelai… Essend… Punte…
+#&gt;  3  2018    NA    0.521   NA         2 St Kilda        15 Brisba… St Kil… Punte…
+#&gt;  4  2018    NA    0.666   NA         6 Port Ad…        13 Freman… Port A… Punte…
+#&gt;  5  2018    NA   -0.0151  NA        12 Gold Co…        12 North … North … Punte…
+#&gt;  6  2018    NA    0.122   NA         4 Hawthorn        10 Collin… Hawtho… Punte…
+#&gt;  7  2018    NA    0.530   NA        18 Greater…         9 Wester… Greate… Punte…
+#&gt;  8  2018    NA   -0.198   NA         7 Melbour…        11 Geelong Melbou… Punte…
+#&gt;  9  2018    NA    0.486   NA        16 West Co…        16 Sydney  Sydney  Punte…
+#&gt; 10  2018    35.2  0.674    9.2       3 Richmond        14 Carlton Richmo… Aggre…
+#&gt; # … with 116 more rows, and 11 more variables: correct &lt;int&gt;, hteamid &lt;int&gt;,
+#&gt; #   updated &lt;chr&gt;, sourceid &lt;int&gt;, round &lt;int&gt;, venue &lt;chr&gt;, confidence &lt;dbl&gt;,
+#&gt; #   gameid &lt;int&gt;, hconfidence &lt;dbl&gt;, date &lt;chr&gt;, margin &lt;dbl&gt;</code></pre>
 </div>
 <div id="standings" class="section level2">
 <h2 class="hasAnchor">
@@ -321,28 +321,28 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"standings"</span>, year <span class="op">=</span> <span class="fl">2020</span>, round <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 18 × 15
-#&gt;     wins    id  rank goals_against goals_for  for. draws   pts percentage name  
-#&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;         &lt;int&gt;     &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;      &lt;dbl&gt; &lt;chr&gt; 
-#&gt;  1     1    13     1             4        10    76     0     4      262.  Port …
-#&gt;  2     1     4     2             5        13    86     0     4      253.  Colli…
-#&gt;  3     1    17     3             7        12    78     0     4      153.  West …
-#&gt;  4     1    10     4             9        14    90     0     4      145.  Hawth…
-#&gt;  5     1     9     5            11        17   105     0     4      144.  Great…
-#&gt;  6     1    14     6            12        16   105     0     4      130.  Richm…
-#&gt;  7     1     5     7             8         9    63     0     4      111.  Essen…
-#&gt;  8     1    16     8            11        11    74     0     4      104.  Sydney
-#&gt;  9     1    12     9             7         8    56     0     4      104.  North…
-#&gt; 10     0    15    10             8         7    54     0     0       96.4 St Ki…
-#&gt; 11     0     1    11            11        11    71     0     0       95.9 Adela…
-#&gt; 12     0     6    12             9         8    57     0     0       90.5 Frema…
-#&gt; 13     0     3    13            16        12    81     0     0       77.1 Carlt…
-#&gt; 14     0     7    14            17        11    73     0     0       69.5 Geelo…
-#&gt; 15     0     2    15            14         9    62     0     0       68.9 Brisb…
-#&gt; 16     0    11    16            12         7    51     0     0       65.4 Melbo…
-#&gt; 17     0    18    17            13         5    34     0     0       39.5 Weste…
-#&gt; 18     0     8    18            10         4    29     0     0       38.2 Gold …
-#&gt; # … with 5 more variables: against &lt;int&gt;, behinds_for &lt;int&gt;,
-#&gt; #   behinds_against &lt;int&gt;, losses &lt;int&gt;, played &lt;int&gt;</code></pre>
+#&gt;    percentage   pts  for. name           against losses  wins    id draws played
+#&gt;         &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;            &lt;int&gt;  &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;  &lt;int&gt;
+#&gt;  1      262.      4    76 Port Adelaide       29      0     1    13     0      1
+#&gt;  2      253.      4    86 Collingwood         34      0     1     4     0      1
+#&gt;  3      153.      4    78 West Coast          51      0     1    17     0      1
+#&gt;  4      145.      4    90 Hawthorn            62      0     1    10     0      1
+#&gt;  5      144.      4   105 Greater Weste…      73      0     1     9     0      1
+#&gt;  6      130.      4   105 Richmond            81      0     1    14     0      1
+#&gt;  7      111.      4    63 Essendon            57      0     1     5     0      1
+#&gt;  8      104.      4    74 Sydney              71      0     1    16     0      1
+#&gt;  9      104.      4    56 North Melbour…      54      0     1    12     0      1
+#&gt; 10       96.4     0    54 St Kilda            56      1     0    15     0      1
+#&gt; 11       95.9     0    71 Adelaide            74      1     0     1     0      1
+#&gt; 12       90.5     0    57 Fremantle           63      1     0     6     0      1
+#&gt; 13       77.1     0    81 Carlton            105      1     0     3     0      1
+#&gt; 14       69.5     0    73 Geelong            105      1     0     7     0      1
+#&gt; 15       68.9     0    62 Brisbane Lions      90      1     0     2     0      1
+#&gt; 16       65.4     0    51 Melbourne           78      1     0    11     0      1
+#&gt; 17       39.5     0    34 Western Bulld…      86      1     0    18     0      1
+#&gt; 18       38.2     0    29 Gold Coast          76      1     0     8     0      1
+#&gt; # … with 5 more variables: goals_for &lt;int&gt;, behinds_against &lt;int&gt;,
+#&gt; #   behinds_for &lt;int&gt;, rank &lt;int&gt;, goals_against &lt;int&gt;</code></pre>
 </div>
 <div id="ladder" class="section level2">
 <h2 class="hasAnchor">
@@ -351,27 +351,27 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"ladder"</span>, year <span class="op">=</span> <span class="fl">2019</span>, round <span class="op">=</span> <span class="fl">15</span>, source <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 18 × 12
-#&gt;    swarms    wins percentage team  sourceid  rank round mean_rank updated teamid
-#&gt;    &lt;chr&gt;    &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;int&gt;
-#&gt;  1 "c(\"0.…  12.7      111.  Adel…        1     6    15      6.11 2019-0…      1
-#&gt;  2 "c(\"0.…  13        107.  Bris…        1     5    15      6.01 2019-0…      2
-#&gt;  3 "c(\"0.…   6.1       82.8 Carl…        1    17    15     16.7  2019-0…      3
-#&gt;  4 "c(\"3.…  14.1      114   Coll…        1     4    15      4.20 2019-0…      4
-#&gt;  5 "c(\"0.…  10.8       99.8 Esse…        1    10    15      9.98 2019-0…      5
-#&gt;  6 "c(\"0.…  10.8      104.  Frem…        1     9    15      9.71 2019-0…      6
-#&gt;  7 "c(\"84…  17.3      138.  Geel…        1     1    15      1.21 2019-0…      7
-#&gt;  8 "c(\"0.…   4.9       70.2 Gold…        1    18    15     17.7  2019-0…      8
-#&gt;  9 "c(\"7.…  14.4      129.  Grea…        1     2    15      3.26 2019-0…      9
-#&gt; 10 "c(\"0.…   8.8       97.6 Hawt…        1    14    15     13.0  2019-0…     10
-#&gt; 11 "c(\"0.…   8         85.3 Melb…        1    16    15     14.8  2019-0…     11
-#&gt; 12 "c(\"0.…  10.2       98.9 Nort…        1    11    15     10.9  2019-0…     12
-#&gt; 13 "c(\"0.…  11.5      107.  Port…        1     8    15      8.24 2019-0…     13
-#&gt; 14 "c(\"0.…  12.8      101.  Rich…        1     7    15      6.67 2019-0…     14
-#&gt; 15 "c(\"0.…   9         83.2 St K…        1    15    15     13.8  2019-0…     15
-#&gt; 16 "c(\"0.…   9.2       93.4 Sydn…        1    13    15     12.9  2019-0…     16
-#&gt; 17 "c(\"4.…  14.4      107.  West…        1     3    15      4.16 2019-0…     17
-#&gt; 18 "c(\"0.…   9.8       94.1 West…        1    12    15     11.9  2019-0…     18
-#&gt; # … with 2 more variables: source &lt;chr&gt;, year &lt;int&gt;</code></pre>
+#&gt;    teamid team  swarms  rank round sourceid updated  wins mean_rank  year source
+#&gt;     &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;int&gt;    &lt;int&gt; &lt;chr&gt;   &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt; &lt;chr&gt; 
+#&gt;  1      1 Adel… "c(\"…     6    15        1 2019-0…  12.7      6.11  2019 Squig…
+#&gt;  2      2 Bris… "c(\"…     5    15        1 2019-0…  13        6.01  2019 Squig…
+#&gt;  3      3 Carl… "c(\"…    17    15        1 2019-0…   6.1     16.7   2019 Squig…
+#&gt;  4      4 Coll… "c(\"…     4    15        1 2019-0…  14.1      4.20  2019 Squig…
+#&gt;  5      5 Esse… "c(\"…    10    15        1 2019-0…  10.8      9.98  2019 Squig…
+#&gt;  6      6 Frem… "c(\"…     9    15        1 2019-0…  10.8      9.71  2019 Squig…
+#&gt;  7      7 Geel… "c(\"…     1    15        1 2019-0…  17.3      1.21  2019 Squig…
+#&gt;  8      8 Gold… "c(\"…    18    15        1 2019-0…   4.9     17.7   2019 Squig…
+#&gt;  9      9 Grea… "c(\"…     2    15        1 2019-0…  14.4      3.26  2019 Squig…
+#&gt; 10     10 Hawt… "c(\"…    14    15        1 2019-0…   8.8     13.0   2019 Squig…
+#&gt; 11     11 Melb… "c(\"…    16    15        1 2019-0…   8       14.8   2019 Squig…
+#&gt; 12     12 Nort… "c(\"…    11    15        1 2019-0…  10.2     10.9   2019 Squig…
+#&gt; 13     13 Port… "c(\"…     8    15        1 2019-0…  11.5      8.24  2019 Squig…
+#&gt; 14     14 Rich… "c(\"…     7    15        1 2019-0…  12.8      6.67  2019 Squig…
+#&gt; 15     15 St K… "c(\"…    15    15        1 2019-0…   9       13.8   2019 Squig…
+#&gt; 16     16 Sydn… "c(\"…    13    15        1 2019-0…   9.2     12.9   2019 Squig…
+#&gt; 17     17 West… "c(\"…     3    15        1 2019-0…  14.4      4.16  2019 Squig…
+#&gt; 18     18 West… "c(\"…    12    15        1 2019-0…   9.8     11.9   2019 Squig…
+#&gt; # … with 1 more variable: percentage &lt;dbl&gt;</code></pre>
 </div>
 <div id="pav" class="section level2">
 <h2 class="hasAnchor">
@@ -383,13 +383,13 @@
                     surname <span class="op">=</span> <span class="st">"Martin"</span>, 
                     year <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 × 21
-#&gt;   mPAV_total  year PAV_def_rank pavid PAV_off_rank PAV_mid_rank PAV_total_rank
-#&gt;        &lt;dbl&gt; &lt;int&gt;        &lt;int&gt; &lt;int&gt;        &lt;int&gt;        &lt;int&gt;          &lt;int&gt;
-#&gt; 1       0.96  2017          253  8632           16            1              2
-#&gt; # … with 14 more variables: team &lt;int&gt;, mPAV_off &lt;dbl&gt;, games &lt;int&gt;,
-#&gt; #   PAV_off &lt;dbl&gt;, PAV_def &lt;dbl&gt;, firstname &lt;chr&gt;, name &lt;chr&gt;, mPAV_mid &lt;dbl&gt;,
-#&gt; #   mPAV_rank &lt;int&gt;, mPAV_def &lt;dbl&gt;, X._of_team_games &lt;dbl&gt;, PAV_total &lt;dbl&gt;,
-#&gt; #   PAV_mid &lt;dbl&gt;, surname &lt;chr&gt;</code></pre>
+#&gt;   PAV_def PAV_total_rank mPAV_mid  team PAV_def_rank mPAV_off mPAV_rank
+#&gt;     &lt;dbl&gt;          &lt;int&gt;    &lt;dbl&gt; &lt;int&gt;        &lt;int&gt;    &lt;dbl&gt;     &lt;int&gt;
+#&gt; 1    2.69              2     2.06    14          253     1.24         2
+#&gt; # … with 14 more variables: firstname &lt;chr&gt;, mPAV_total &lt;dbl&gt;,
+#&gt; #   X._of_team_games &lt;dbl&gt;, PAV_total &lt;dbl&gt;, PAV_mid_rank &lt;int&gt;, year &lt;int&gt;,
+#&gt; #   PAV_off_rank &lt;int&gt;, pavid &lt;int&gt;, name &lt;chr&gt;, games &lt;int&gt;, PAV_mid &lt;dbl&gt;,
+#&gt; #   surname &lt;chr&gt;, PAV_off &lt;dbl&gt;, mPAV_def &lt;dbl&gt;</code></pre>
 </div>
 </div>
   </div>

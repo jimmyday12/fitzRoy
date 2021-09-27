@@ -146,7 +146,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 63 × 5
+<pre><code>#&gt; # A tibble: 68 × 5
 #&gt;    compSeason.name           round.name home.team.name away.team.name venue.name
 #&gt;    &lt;chr&gt;                     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;     
 #&gt;  1 2021 NAB AFLW Competition Round 1    Carlton        Collingwood    Ikon Park 
@@ -159,7 +159,7 @@
 #&gt;  8 2021 NAB AFLW Competition Round 2    Western Bulld… Carlton        Victoria …
 #&gt;  9 2021 NAB AFLW Competition Round 2    Collingwood    Geelong Cats   Victoria …
 #&gt; 10 2021 NAB AFLW Competition Round 2    Melbourne      Richmond       Casey Fie…
-#&gt; # … with 53 more rows</code></pre>
+#&gt; # … with 58 more rows</code></pre>
 </div>
 <div id="lineup" class="section level2">
 <h2 class="hasAnchor">
@@ -238,7 +238,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">player.player.player.givenName</span><span class="op">:</span><span class="va">clearances.totalClearances</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 294 × 45
+<pre><code>#&gt; # A tibble: 294 × 46
 #&gt;    player.player.pl… player.player.pl… teamId gamesPlayed timeOnGroundPer… goals
 #&gt;    &lt;chr&gt;             &lt;chr&gt;             &lt;chr&gt;  &lt;lgl&gt;                  &lt;dbl&gt; &lt;dbl&gt;
 #&gt;  1 Gabrielle         Seymour           CD_T8… NA                        93     0
@@ -251,7 +251,7 @@
 #&gt;  8 Laura             Bailey            CD_T8… NA                        70     0
 #&gt;  9 Monique           Conti             CD_T8… NA                        85     0
 #&gt; 10 Christina         Bernardi          CD_T8… NA                        70     0
-#&gt; # … with 284 more rows, and 39 more variables: behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;,
+#&gt; # … with 284 more rows, and 40 more variables: behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;,
 #&gt; #   kicks &lt;dbl&gt;, handballs &lt;dbl&gt;, disposals &lt;dbl&gt;, marks &lt;dbl&gt;, bounces &lt;dbl&gt;,
 #&gt; #   tackles &lt;dbl&gt;, contestedPossessions &lt;dbl&gt;, uncontestedPossessions &lt;dbl&gt;,
 #&gt; #   totalPossessions &lt;dbl&gt;, inside50s &lt;dbl&gt;, marksInside50 &lt;dbl&gt;,
@@ -267,7 +267,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cookie</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_afl_cookie.html">get_afl_cookie</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cookie</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; [1] "3ed8aa413ae9ed5096f410a0078c2047"</code></pre>
+<pre><code>#&gt; [1] "e0a6c03a684a049d1fca5d52d74e08e7"</code></pre>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/fetch_results.html">fetch_results()</a></code> function to retrieve match data matches.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
@@ -288,7 +288,7 @@
 <span class="co">#&gt; $ match.round                         &lt;chr&gt; "CD_R202026401", "CD_R202026401", …</span>
 <span class="co">#&gt; $ match.venueLocalStartTime           &lt;chr&gt; "2020-02-07T19:45:00", "2020-02-08…</span>
 <span class="co">#&gt; $ match.abbr                          &lt;chr&gt; "RICH V CARL", "GWS V GCFC", "MELB…</span>
-<span class="co">#&gt; $ match.twitterHashTag                &lt;chr&gt; "#AFLWTigersBlues", "#AFLWGiantsSu…</span>
+<span class="co">#&gt; $ match.twitterHashTag                &lt;chr&gt; "#AFLTigersBlues", "#AFLGiantsSuns…</span>
 <span class="co">#&gt; $ match.homeTeam.name                 &lt;chr&gt; "Richmond", "GWS Giants", "Melbour…</span>
 <span class="co">#&gt; $ match.homeTeam.timeZone             &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA</span>
 <span class="co">#&gt; $ match.homeTeam.teamId               &lt;chr&gt; "CD_T8788", "CD_T7889", "CD_T7386"…</span>

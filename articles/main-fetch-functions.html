@@ -181,20 +181,20 @@
 <p>All of the functions behave the same. The following are some examples using the <code>fetch_fixture</code> function but can equally be applied to any of the family of <code>fetch_</code> functions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 198 × 46
+<pre><code>#&gt; # A tibble: 207 × 55
 #&gt;       id providerId      utcStartTime     status compSeason.id compSeason.provi…
 #&gt;    &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;          &lt;int&gt; &lt;chr&gt;            
-#&gt;  1  2991 CD_M20210140101 2021-03-18T08:2… SCHED…            34 CD_S2021014      
-#&gt;  2  2986 CD_M20210140102 2021-03-19T08:5… SCHED…            34 CD_S2021014      
-#&gt;  3  2992 CD_M20210140103 2021-03-20T02:4… SCHED…            34 CD_S2021014      
-#&gt;  4  2993 CD_M20210140104 2021-03-20T05:3… SCHED…            34 CD_S2021014      
-#&gt;  5  2994 CD_M20210140105 2021-03-20T08:2… SCHED…            34 CD_S2021014      
-#&gt;  6  2987 CD_M20210140106 2021-03-20T08:4… SCHED…            34 CD_S2021014      
-#&gt;  7  2990 CD_M20210140107 2021-03-21T02:1… SCHED…            34 CD_S2021014      
-#&gt;  8  2989 CD_M20210140108 2021-03-21T04:2… SCHED…            34 CD_S2021014      
-#&gt;  9  2988 CD_M20210140109 2021-03-21T07:1… SCHED…            34 CD_S2021014      
-#&gt; 10  2999 CD_M20210140201 2021-03-25T08:2… SCHED…            34 CD_S2021014      
-#&gt; # … with 188 more rows, and 40 more variables: compSeason.name &lt;chr&gt;,
+#&gt;  1  2991 CD_M20210140101 2021-03-18T08:2… CONCL…            34 CD_S2021014      
+#&gt;  2  2986 CD_M20210140102 2021-03-19T08:5… CONCL…            34 CD_S2021014      
+#&gt;  3  2992 CD_M20210140103 2021-03-20T02:4… CONCL…            34 CD_S2021014      
+#&gt;  4  2993 CD_M20210140104 2021-03-20T05:3… CONCL…            34 CD_S2021014      
+#&gt;  5  2994 CD_M20210140105 2021-03-20T08:2… CONCL…            34 CD_S2021014      
+#&gt;  6  2987 CD_M20210140106 2021-03-20T08:4… CONCL…            34 CD_S2021014      
+#&gt;  7  2990 CD_M20210140107 2021-03-21T02:1… CONCL…            34 CD_S2021014      
+#&gt;  8  2989 CD_M20210140108 2021-03-21T04:2… CONCL…            34 CD_S2021014      
+#&gt;  9  2988 CD_M20210140109 2021-03-21T07:1… CONCL…            34 CD_S2021014      
+#&gt; 10  2999 CD_M20210140201 2021-03-25T08:2… CONCL…            34 CD_S2021014      
+#&gt; # … with 197 more rows, and 49 more variables: compSeason.name &lt;chr&gt;,
 #&gt; #   compSeason.shortName &lt;chr&gt;, compSeason.currentRoundNumber &lt;int&gt;,
 #&gt; #   round.id &lt;int&gt;, round.providerId &lt;chr&gt;, round.abbreviation &lt;chr&gt;,
 #&gt; #   round.name &lt;chr&gt;, round.roundNumber &lt;int&gt;, round.byes &lt;list&gt;,
@@ -226,7 +226,7 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 63 × 5
+<pre><code>#&gt; # A tibble: 68 × 5
 #&gt;    compSeason.name           round.name home.team.name away.team.name venue.name
 #&gt;    &lt;chr&gt;                     &lt;chr&gt;      &lt;chr&gt;          &lt;chr&gt;          &lt;chr&gt;     
 #&gt;  1 2021 NAB AFLW Competition Round 1    Carlton        Collingwood    Ikon Park 
@@ -239,27 +239,27 @@
 #&gt;  8 2021 NAB AFLW Competition Round 2    Western Bulld… Carlton        Victoria …
 #&gt;  9 2021 NAB AFLW Competition Round 2    Collingwood    Geelong Cats   Victoria …
 #&gt; 10 2021 NAB AFLW Competition Round 2    Melbourne      Richmond       Casey Fie…
-#&gt; # … with 53 more rows</code></pre>
+#&gt; # … with 58 more rows</code></pre>
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 198 × 24
-#&gt;       id hteam  ascore localtime  year is_grand_final updated ateam hscore date 
-#&gt;    &lt;int&gt; &lt;chr&gt;   &lt;int&gt; &lt;chr&gt;     &lt;int&gt;          &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;  &lt;int&gt; &lt;chr&gt;
-#&gt;  1  6243 Adela…      0 2021-03-…  2021              0 2020-1… Geel…      0 2021…
-#&gt;  2  6245 Brisb…      0 2021-03-…  2021              0 2020-1… Sydn…      0 2021…
-#&gt;  3  6241 Colli…      0 2021-03-…  2021              0 2020-1… West…      0 2021…
-#&gt;  4  6244 Essen…      0 2021-03-…  2021              0 2020-1… Hawt…      0 2021…
-#&gt;  5  6247 Great…      0 2021-03-…  2021              0 2020-1… St K…      0 2021…
-#&gt;  6  6242 Melbo…      0 2021-03-…  2021              0 2020-1… Frem…      0 2021…
-#&gt;  7  6246 North…      0 2021-03-…  2021              0 2020-1… Port…      0 2021…
-#&gt;  8  6240 Richm…      0 2021-03-…  2021              0 2020-1… Carl…      0 2021…
-#&gt;  9  6248 West …      0 2021-03-…  2021              0 2020-1… Gold…      0 2021…
-#&gt; 10  6249 Carlt…      0 2021-03-…  2021              0 2020-1… Coll…      0 2021…
-#&gt; # … with 188 more rows, and 14 more variables: round &lt;int&gt;, tz &lt;chr&gt;,
-#&gt; #   hgoals &lt;lgl&gt;, roundname &lt;chr&gt;, is_final &lt;int&gt;, winner &lt;lgl&gt;,
-#&gt; #   complete &lt;int&gt;, winnerteamid &lt;lgl&gt;, abehinds &lt;lgl&gt;, ateamid &lt;int&gt;,
-#&gt; #   hteamid &lt;int&gt;, hbehinds &lt;lgl&gt;, agoals &lt;lgl&gt;, venue &lt;chr&gt;</code></pre>
+<pre><code>#&gt; # A tibble: 207 × 24
+#&gt;    hteamid winner   ateamid date     localtime  hbehinds roundname venue   round
+#&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;int&gt;
+#&gt;  1       1 Adelaide       7 2021-03… 2021-03-2…       13 Round 1   Adelai…     1
+#&gt;  2       2 Sydney        16 2021-03… 2021-03-2…       10 Round 1   Gabba       1
+#&gt;  3       4 Western…      18 2021-03… 2021-03-1…       11 Round 1   M.C.G.      1
+#&gt;  4       5 Hawthorn      10 2021-03… 2021-03-2…       13 Round 1   Dockla…     1
+#&gt;  5       9 St Kilda      15 2021-03… 2021-03-2…       12 Round 1   Sydney…     1
+#&gt;  6      11 Melbour…       6 2021-03… 2021-03-2…       14 Round 1   M.C.G.      1
+#&gt;  7      12 Port Ad…      13 2021-03… 2021-03-2…       11 Round 1   Dockla…     1
+#&gt;  8      14 Richmond       3 2021-03… 2021-03-1…       15 Round 1   M.C.G.      1
+#&gt;  9      17 West Co…       8 2021-03… 2021-03-2…       11 Round 1   Perth …     1
+#&gt; 10       3 Colling…       4 2021-03… 2021-03-2…        7 Round 2   M.C.G.      2
+#&gt; # … with 197 more rows, and 15 more variables: complete &lt;int&gt;, abehinds &lt;int&gt;,
+#&gt; #   is_grand_final &lt;int&gt;, agoals &lt;int&gt;, ascore &lt;int&gt;, tz &lt;chr&gt;, ateam &lt;chr&gt;,
+#&gt; #   hscore &lt;int&gt;, hteam &lt;chr&gt;, is_final &lt;int&gt;, hgoals &lt;int&gt;, year &lt;int&gt;,
+#&gt; #   id &lt;int&gt;, updated &lt;chr&gt;, winnerteamid &lt;int&gt;</code></pre>
 <p>It should also be noted that the various sources of data have their own functions that can be called directly.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># The following are the same</span>

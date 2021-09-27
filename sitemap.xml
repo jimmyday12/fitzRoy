@@ -4,7 +4,13 @@
     <loc>https://jimmyday12.github.io/fitzRoy//index.html</loc>
   </url>
   <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/calculate_coaches_vote_possibilities.html</loc>
+  </url>
+  <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_betting_odds_footywire.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_coaches_votes.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/fetch_fixture.html</loc>
@@ -101,6 +107,9 @@
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//reference/update_footywire_stats.html</loc>
+  </url>
+  <url>
+    <loc>https://jimmyday12.github.io/fitzRoy//articles/aflca-coaches-votes.html</loc>
   </url>
   <url>
     <loc>https://jimmyday12.github.io/fitzRoy//articles/docker-support.html</loc>
