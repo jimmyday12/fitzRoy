@@ -2,24 +2,37 @@
 % Please edit documentation in R/fetch-player-details.R
 \name{fetch_player_details}
 \alias{fetch_player_details}
+\alias{fetch_player_details_afl}
 \alias{fetch_player_details_afltables}
 \alias{fetch_player_details_footywire}
 \title{Fetch Player Details}
 \usage{
-fetch_player_details(team = NULL, comp = "AFLM", source = "afl", ...)
+fetch_player_details(
+  current = TRUE,
+  team = NULL,
+  comp = "AFLM",
+  source = "AFL",
+  ...
+)
+
+fetch_player_details_afl(season, team = NULL, comp = "AFLM")
 
 fetch_player_details_afltables(team = NULL)
 
 fetch_player_details_footywire(team, current = TRUE)
 }
 \arguments{
-\item{team}{team the player debuted for, defaults to NULL which returns all data}
+\item{current}{logical, return the current team list for the current calendar year}
+
+\item{team}{team the player played for in the season for, defaults to NULL which returns all teams}
 
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
 \item{source}{One of "AFL" (default), "footywire", "afltables"}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
+
+\item{season}{(optional) Season to return a list for. Only works for source "AFL" when current is set to FALSE, otherwise it is ignored (see notes)}
 }
 \value{
 A Tibble with the details of the relevant players.
@@ -31,9 +44,11 @@ source is provided.
 
 By default the source used will be the official AFL website.
 
-\code{\link[=fetch_player_details_afltables]{fetch_player_details_afltables()}} and \code{\link[=fetch_player_details_footywire]{fetch_player_details_footywire()}}
-can be called directly and return data from AFL Tables and Footywire
+\code{\link[=fetch_player_details_afl]{fetch_player_details_afl()}}, \code{\link[=fetch_player_details_afltables]{fetch_player_details_afltables()}} and \code{\link[=fetch_player_details_footywire]{fetch_player_details_footywire()}}
+can be called directly and return data from the AFL website, AFL Tables and Footywire
 respectively.
+
+The function will typically be used to return the current team lists. For historical data, you can use the \code{current} argument set to FALSE for Footywire and AFL Tables sources. For AFL, you can use the \code{season} argument.
 }
 \examples{
 \dontrun{
