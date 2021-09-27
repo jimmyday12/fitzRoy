@@ -140,6 +140,7 @@ team_abbr <- tibble(
 )
 
 
+
 usethis::use_data(stat_abbr, 
                   team_abbr, 
                   afldata_cols,
@@ -162,5 +163,7 @@ usethis::use_data(stat_abbr,
                   squiggle_standings,
                   squiggle_pav,
                   squiggle_ladder,
+                  aflm_coaches_votes,
+                  aflw_coaches_votes,
   internal = TRUE, overwrite = TRUE
 )
