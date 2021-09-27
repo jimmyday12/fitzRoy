@@ -123,14 +123,14 @@ The following code will return the coaches votes for a particular match, then fi
 df <- fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Western Bulldogs")
 calculate_coaches_vote_possibilities(df, "Coach View")
 ```
-```{r fetch_coaches_votes4_aflw_included, echo=FALSE, eval=eval_param}
+```{r calculate_coaches_votes_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflm_coaches_votes %>%
   fitzRoy:::calculate_coaches_vote_possibilities("Coach View")
 ```
 
 The following code will create a data frame manually, then find the possible coaches vote breakdowns.
 
-```{r calculate_coaches_votes, eval=eval_param, include=TRUE}
+```{r calculate_coaches_votes2, eval=eval_param, include=TRUE}
 df <- data.frame(
                 Player.Name = c("Tom Liberatore","Jack Macrae","Marcus Bontempelli","Cody Weightman","Darcy Parish","Aaron Naughton","Jordan Ridley"),
                 Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)
