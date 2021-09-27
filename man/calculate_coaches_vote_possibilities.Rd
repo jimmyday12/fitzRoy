@@ -14,11 +14,11 @@ function \code{fetch_coaches_votes}.}
 }
 \value{
 For output_type "Coach View" - A list of data frames with columns: Votes, C1, C2
-For output_type "Player View" - A data frame with columns: Player, V1, V2
+For output_type "Player View" - A list of data frames with columns: Player, V1, V2
 }
 \description{
 \code{calculate_coaches_vote_possibilities} returns all possible breakdowns of coaches votes between two coaches,
-given a breakdown of coaches votes
+given a breakdown of AFLCA coaches votes
 }
 \examples{
 \dontrun{

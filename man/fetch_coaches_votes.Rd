@@ -2,29 +2,25 @@
 % Please edit documentation in R/fetch-coaches-votes.R
 \name{fetch_coaches_votes}
 \alias{fetch_coaches_votes}
-\alias{scrape_coaches_votes}
 \title{Fetch Coaches Votes}
 \usage{
 fetch_coaches_votes(
+  season = NULL,
+  round_number = NULL,
   comp = "AFLM",
-  season,
-  round = 1:27,
-  team = c("Adelaide Crows", "Brisbane Lions", "Carlton", "Collingwood", "Essendon",
-    "Fremantle", "Geelong Cats", "Gold Coast Suns", "GWS Giants", "Hawthorn",
-    "Melbourne", "North Melbourne", "Port Adelaide", "Richmond", "St Kilda",
-    "Sydney Swans", "West Coast Eagles", "Western Bulldogs")
+  team = NULL
 )
-
-scrape_coaches_votes(comp, season, round, finals)
 }
 \arguments{
+\item{season}{Season in YYYY format. This can be an array of seasons. Defaults to null in which case the
+season that matches \code{Sys.Date()} is used.}
+
+\item{round_number}{Round number. For finals this is the number of H&A rounds plus the Finals week. Defaults to null
+in which case all rounds are used.}
+
 \item{comp}{One of "AFLM" (default) or "AFLW"}
 
-\item{season}{Season in YYYY format. This can be an array of seasons.}
-
-\item{round}{Optional - Round number. For finals this is the number of H&A rounds plus the Finals week.}
-
-\item{team}{Optional - Team or teams whose matches should be retrieved (defaults to all teams)}
+\item{team}{Team or teams whose matches should be retrieved. Defaults to null in which case all teams are used.}
 }
 \value{
 A data frame with columns: Season, Round, Finals, Home.Team, Away.Team, Player.Name, Coaches.Votes
@@ -37,20 +33,20 @@ for a particular season, round and competition.
 \examples{
 \dontrun{
 # Return all coaches votes across all seasons
-fetch_coaches_votes(comp = "AFLM", season = 2007:2021)
-fetch_coaches_votes(comp = "AFLW", season = 2018:2021)
+fetch_coaches_votes(season = 2007:2021, comp = "AFLM")
+fetch_coaches_votes(season = 2018:2021, comp = "AFLW")
 
 # Return all coaches votes for a particular round
-fetch_coaches_votes(comp = "AFLM", season = 2021, round = 24)
-fetch_coaches_votes(comp = "AFLW", season = 2021, round = 9)
+fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM")
+fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW")
 
 # Return all coaches votes for a particular team
-fetch_coaches_votes(comp = "AFLM", season = 2021, team = "Western Bulldogs")
-fetch_coaches_votes(comp = "AFLW", season = 2021, team = "Western Bulldogs)
+fetch_coaches_votes(season = 2021, comp = "AFLM", team = "Western Bulldogs")
+fetch_coaches_votes(season = 2021, comp = "AFLW", team = "Western Bulldogs")
 
 # Return all coaches votes for a particular match
-fetch_coaches_votes(comp = "AFLM", season = 2021, round = 24, team = "Western Bulldogs")
-fetch_coaches_votes(comp = "AFLW", season = 2021, round = 9, team = "Western Bulldogs)
+fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Western Bulldogs")
+fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "Western Bulldogs")
 }
 
 }

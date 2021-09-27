@@ -7,3 +7,5 @@ inst/doc
 .Ruserdata
 docs
 .DS_Store
+/doc/
+/Meta/
