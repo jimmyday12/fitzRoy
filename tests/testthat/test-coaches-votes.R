@@ -20,14 +20,17 @@ test_that("calculate coaches votes works", {
   testthat::skip_on_cran()
   
   # check if a single round works
-  expect_s3_class(fetch_coaches_votes(2020, round_number = 5, team = "St Kilda") %>%
-                    calculate_coaches_vote_possibilities("Coach View"), "list")
-  expect_s3_class(fetch_coaches_votes(2020, round_number = 5, team = "St Kilda") %>%
-                    calculate_coaches_vote_possibilities("Player View"), "list")
-  expect_equal(fetch_coaches_votes(2020, round_number = 5, team = "St Kilda") %>%
-                    calculate_coaches_vote_possibilities("Coach View") %>% length, 4)
-  expect_equal(fetch_coaches_votes(2020, round_number = 5, team = "St Kilda") %>%
-                    calculate_coaches_vote_possibilities("Player View") %>% length, 2)
+  coach_view <- fetch_coaches_votes(2020, round_number = 5, team = "St Kilda") %>%
+    calculate_coaches_vote_possibilities("Coach View")
+  
+  player_view <- fetch_coaches_votes(2020, round_number = 5, team = "St Kilda") %>%
+    calculate_coaches_vote_possibilities("Player View")
+  
+  expect_type(coach_view, "list")
+  expect_type(player_view, "list")
+  
+  expect_equal(coach_view %>% length, 4)
+  expect_equal(player_view %>% length, 2)
   
   # invalid inputs
   expect_error(calculate_coaches_vote_possibilities(20, "Player View"))
