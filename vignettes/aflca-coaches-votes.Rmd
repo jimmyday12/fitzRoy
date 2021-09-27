@@ -125,6 +125,7 @@ calculate_coaches_vote_possibilities(df, "Coach View")
 ```
 ```{r calculate_coaches_votes_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflm_coaches_votes %>%
+  dplyr::filter(Round == 24 & Home.Team == "Western Bulldogs") %>%
   fitzRoy:::calculate_coaches_vote_possibilities("Coach View")
 ```
 
