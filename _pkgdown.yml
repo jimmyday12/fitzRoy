@@ -51,6 +51,7 @@ reference:
       - '`replace_venues`'
       - '`get_aflw_cookie`'
       - '`get_afl_cookie`'
+      - team_abr_afl
       
   - title: Experimental
     desc: >
