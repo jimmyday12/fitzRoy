@@ -34,6 +34,7 @@ Other contributors:
 \itemize{
   \item Matthew Erbs \email{matthew.erbs@merbla.com} [contributor]
   \item Jason Zivkovic \email{jaseziv83@gmail.com} [contributor]
+  \item Jacob Holden \email{jlholden26@gmail.com} [contributor]
 }
 
 }
