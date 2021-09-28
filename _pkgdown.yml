@@ -25,6 +25,7 @@ reference:
     - '`fetch_player_stats`'
     - fetch_lineup
     - fetch_player_details
+    - fetch_coaches_votes
     
   - title: AFLW Data
     contents:
@@ -34,6 +35,7 @@ reference:
       - '`get_aflw_round_data`'
       - '`get_aflw_rounds`'
       - '`get_aflw_player_stats`'
+
       
   - title: Other
     contents:
@@ -41,6 +43,7 @@ reference:
       - get_fryzigg_stats
       - fetch_betting_odds_footywire
       - get_afl_colour_palettes
+      - calculate_coaches_vote_possibilities
 
   - title: Internals
     contents:
@@ -88,6 +91,7 @@ articles:
   contents:
   - womens-stats
   - elo-ratings-example
+  - aflca-coaches-votes
   
 - title: APIs
   navbar: APIs
