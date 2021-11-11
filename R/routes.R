@@ -45,6 +45,21 @@ function(season = NULL, round = NULL, comp = "AFLM", source = "AFL") {
   fetch_player_stats(season = .season, round_number = round, comp = comp, source = source)
 }
 
+#* Get player details
+#* @param season <number> year of season
+#* @param round <number> round of season
+#* @param comp <"AFLM" | "AFLW">
+#* @param source One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
+#* @get /player_details
+function(season = NULL, round = NULL, comp = "AFLM", source = "AFL") {
+  if (identical(season,NULL)) {
+    .season <- 1897:2020
+  } else {
+    .season <- eval(parse(text = season))
+  }
+  fetch_player_details(season = .season, round_number = round, comp = comp, source = source)
+}
+
 #* Get lineup info
 #* @param season <number> year of season
 #* @param round <number> round of season
