@@ -52,7 +52,7 @@ head(details_aflw)
 
 The list of details returned for AFL.com.au website is below. 
 
-```{r}
+```{r, eval=eval_param}
 glimpse(details_aflw)
 ```
 

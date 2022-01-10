@@ -56,6 +56,7 @@ Imports:
     cli
 Suggests:
     covr,
+    elo,
     ggplot2,
     knitr,
     rmarkdown,
