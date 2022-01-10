@@ -110,6 +110,31 @@ fitzRoy:::stats_afl_aflw_2020 %>%
   dplyr::select(player.player.player.givenName:clearances.totalClearances)
 ```
 
+## Player Details
+We can return player details such as data of birth and listed height and weight. 
+
+```{r details_aflw, eval=FALSE, include=TRUE}
+details_aflw <- fetch_player_details(team = "Western Bulldogs", current = TRUE, comp = "AFLW", source = "AFL")
+
+head(details_aflw)
+```
+```{r details_aflw_included, echo=FALSE, eval=eval_param}
+details_aflw <- fitzRoy:::details_aflw
+head(details_aflw)
+```
+
+## Coaches Votes
+We can also return the coaches votes for a particular season, team or round. 
+
+```{r fetch_coaches_votes_aflw, eval=FALSE, include=TRUE}
+fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "Western Bulldogs")
+```
+```{r fetch_coaches_votes_aflw_included, echo=FALSE, eval=eval_param}
+fitzRoy:::aflw_coaches_votes %>%
+  dplyr::filter(Home.Team=="Western Bulldogs" & Round == 9) %>% 
+  head()
+```
+
 ## Legacy/Advanced Stats
 We have a legacy function to provide advanced AFLW stats. This is going to be deprecated in favour of a more robust solution but still works for now. The following code should show you how to use those functions. 
 ### Match data

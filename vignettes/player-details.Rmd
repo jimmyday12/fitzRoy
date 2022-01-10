@@ -1,0 +1,81 @@
+---
+title: "Fetching Player Details"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Player Details}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
+
+knitr::opts_chunk$set(
+	eval = eval_param,
+	message = FALSE,
+	warning = FALSE,
+	collapse = TRUE,
+	comment = "#>"
+)
+devtools::install_github("jimmyday12/fitzRoy")
+library(fitzRoy)
+library(dplyr)
+```
+
+A special case of the `fetch_` family of functions is the `fetch_player_details_` set of functions. You can read the general explanation of how to use the main fetch functions on the [Vignette](https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html). The player details functions accepts slightly different arguments. 
+
+
+## Basic Usage
+You can use `fetch_player_details` to return a list of player details for a given club and source. The source will determine exactly what details are returned. The default is the AFL.com.au website. 
+
+```{r details_aflm, eval=FALSE, include=TRUE}
+fetch_player_details("Hawthorn")
+```
+```{r details_aflm_included, echo=FALSE, eval=eval_param}
+fitzRoy:::details_aflm
+```
+
+The AFL website will return AFLW or AFLM data, while other sources only include AFLM data. 
+
+```{r details_aflw, eval=FALSE, include=TRUE}
+details_aflw <- fetch_player_details(team = "Western Bulldogs", current = TRUE, comp = "AFLW", source = "AFL")
+
+head(details_aflw)
+```
+```{r details_aflw_included, echo=FALSE, eval=eval_param}
+details_aflw <- fitzRoy:::details_aflw
+head(details_aflw)
+```
+
+The list of details returned for AFL.com.au website is below. 
+
+```{r}
+glimpse(details_aflw)
+```
+
+The AFLTables.com source will return all players who have played for the specified team over time.
+
+```{r details_afltables, eval=FALSE, include=TRUE}
+fetch_player_details("Hawthorn", source = "afltables")
+```
+```{r details_afltables_included, echo=FALSE, eval=eval_param}
+fitzRoy:::details_afltables
+```
+
+The Footywire.com source allows you to specify just the current list of players, which is fairly quick, or all players over time which can be a little slow. 
+
+
+```{r details_footywire, eval=FALSE, include=TRUE}
+fetch_player_details("Richmond", source = "footywire", current = TRUE)
+```
+```{r details_footywire_included, echo=FALSE, eval=eval_param}
+fitzRoy:::details_footywire
+```
+
+One challenge is that each source accepts different values for the `team` argument. There is a helper function that will return an error if the wrong team is supplied and provide a list of acceptable values for that specific source.
+
+```{r echo=TRUE, message=TRUE, warning=TRUE, error=TRUE}
+fetch_player_details("Greater Western Sydney", source = "afltables")
+```

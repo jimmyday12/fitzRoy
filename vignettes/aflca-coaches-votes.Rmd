@@ -48,6 +48,8 @@ fetch_coaches_votes(season = 2021, comp = "AFLM") %>% head()
 fitzRoy:::aflm_coaches_votes %>% head()
 ```
 
+We can also return votes for AFLW. 
+
 ```{r fetch_coaches_votes_aflw, eval=FALSE, include=TRUE}
 fetch_coaches_votes(season = 2021, comp = "AFLW") %>% head()
 ```

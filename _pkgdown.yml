@@ -97,6 +97,7 @@ articles:
   navbar: Workflow Examples
   contents:
   - womens-stats
+  - player-details
   - elo-ratings-example
   - aflca-coaches-votes
   
@@ -112,6 +113,8 @@ articles:
 
 news:
   releases:
+    - text: "fitzRoy 1.1.0"
+      href: https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/
     - text: "fitzRoy 1.0.0"
       href: https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/
    
