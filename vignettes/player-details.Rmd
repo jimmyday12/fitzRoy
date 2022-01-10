@@ -2,7 +2,7 @@
 title: "Fetching Player Details"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Player Details}
+  %\VignetteIndexEntry{Fetching Player Details}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
