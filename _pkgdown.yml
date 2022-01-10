@@ -17,7 +17,11 @@ template:
   
 
 reference:
-  - title: Main Fetch Functions
+  - title: Main Fetch Functions (AFLM and AFLW)
+    desc: >
+     These are the main functions to return data. They all have consistent 
+     arguments and APIs. You can access both Mens and Womens data providing you 
+     use the right source. 
     contents:
     - '`fetch_ladder`'
     - '`fetch_results`'
@@ -27,17 +31,10 @@ reference:
     - fetch_player_details
     - fetch_coaches_votes
     
-  - title: AFLW Data
-    contents:
-      - '`get_aflw_detailed_data`'
-      - '`get_aflw_detailed_match_data`'
-      - '`get_aflw_match_data`'
-      - '`get_aflw_round_data`'
-      - '`get_aflw_rounds`'
-      - '`get_aflw_player_stats`'
-
-      
   - title: Other
+    desc: >
+      These are other functions that return data but don't fit into the normal 
+      fetch functions.
     contents:
       - fetch_squiggle_data
       - get_fryzigg_stats
@@ -46,6 +43,9 @@ reference:
       - calculate_coaches_vote_possibilities
 
   - title: Internals
+    desc: >
+      Internal functions are mostly used internally by the package and won't be 
+      useful to end users.
     contents:
       - '`replace_teams`'
       - '`replace_venues`'
@@ -79,6 +79,12 @@ reference:
     - '`get_squiggle_data`'
     - '`get_footywire_match_results`'
     - '`get_score_progression_raw`'
+    - '`get_aflw_detailed_data`'
+    - '`get_aflw_detailed_match_data`'
+    - '`get_aflw_match_data`'
+    - '`get_aflw_round_data`'
+    - '`get_aflw_rounds`'
+    - '`get_aflw_player_stats`'
 
 articles:
 - title: Get started
@@ -107,6 +113,6 @@ articles:
 news:
   releases:
     - text: "fitzRoy 1.0.0"
-      href: https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0.en/
+      href: https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/
    
 
