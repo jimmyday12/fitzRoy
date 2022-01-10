@@ -1,12 +1,22 @@
-# fitzRoy (development version)
+# fitzRoy 1.1.0
+
+## New features
+
+* Added new set of functions for fetching player details - `fetch_player_details` and associated helper functions `fetch_player_details_afl`, `fetch_player_details_footywire` and `fetch_player_details_afltables` will return the player details for a particular team and season
 
 * Added function `fetch_coaches_votes` to retrieve AFLCA coaches votes for any given match [@jlholden26](https://github.com/jlholden26)
+
 * Added function `calculate_coaches_vote_possibilities` to return all possible breakdowns of AFLCA coaches votes between two coaches [@jlholden26](https://github.com/jlholden26)
+
+## Minor improvements and fixes
 * Fixed an a bug in `fetch_fixture_footywire` for older versions of R [#146](https://github.com/jimmyday12/fitzRoy/issues/146)
+
 * Fixed type mismatch in `fetch_player_stats_afltables` and handling blank seasons in `fetch_ladder_afl` ([#149](https://github.com/jimmyday12/fitzRoy/issues/149), [@cfranklin11](https://github.com/cfranklin11))
+
 * Updated error message in `check_source` which is used in various functions [#147](https://github.com/jimmyday12/fitzRoy/issues/147)
+
 * Fixed issue with `fetch_results_afltabeles` caused by a `readr` update
-* Added new set of functions for fetching player details - `fetch_player_details` and associated helper functions `fetch_player_details_afl`, `fetch_player_details_footywire` and `fetch_player_details_afltables` will return the player details for a particular team and season
+
 
 # fitzRoy 1.0.0
 
