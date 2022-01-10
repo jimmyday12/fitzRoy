@@ -26,7 +26,7 @@ fitzRoy now provides [Docker](https://www.docker.com/get-started) support in the
  
 Once you have the images, (e.g. `docker pull jimmyday12/fitzroy:latest`) run one of the following commands.
 
-* To start [RStudio](https://rstudio.com/) with Fitzroy ready to use:
+* To start [RStudio](https://www.rstudio.com/) with Fitzroy ready to use:
   * `docker run -d -p 8787:8787 --name fitzroy jimmyday12/fitzroy:latest` and open `http://localhost:8787`.  *(Username: `rstudio`, Password: `rstudio`)
 * To start an R terminal prompt with fitzRoy ready to use:
   * `docker run -it jimmyday12/fitzroy:latest R` to start with an R terminal prompt.

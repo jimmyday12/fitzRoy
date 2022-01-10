@@ -178,7 +178,7 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' Get AFLW match data
 #'
 #' Retrieves AFLW match data for all available matches. Sources data from
-#' \url{https://womens.afl/}
+#' \url{https://www.womens.afl/}
 #'
 #' @param start_year optional, integer for start year to return match data
 #' onwards from
