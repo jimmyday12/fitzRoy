@@ -40,7 +40,7 @@ scrape_coaches_votes <- function(season = NULL,
   # read the link
   html <- rvest::read_html(link)
 
-  closeAllConnections()
+  #closeAllConnections()
 
   # extract each piece of information from the link
   home.teams <- rvest::html_elements(html, ".pr-md-3.votes-by-match .club_logo") %>%
