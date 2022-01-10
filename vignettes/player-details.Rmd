@@ -11,6 +11,7 @@ vignette: >
 not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
 online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
+eval_param <- packageVersion("fitzRoy") == "1.1.0.9000"
 
 knitr::opts_chunk$set(
 	eval = eval_param,
@@ -19,7 +20,7 @@ knitr::opts_chunk$set(
 	collapse = TRUE,
 	comment = "#>"
 )
-devtools::install_github("jimmyday12/fitzRoy")
+#devtools::install_github("jimmyday12/fitzRoy")
 library(fitzRoy)
 library(dplyr)
 ```
@@ -76,6 +77,6 @@ fitzRoy:::details_footywire
 
 One challenge is that each source accepts different values for the `team` argument. There is a helper function that will return an error if the wrong team is supplied and provide a list of acceptable values for that specific source.
 
-```{r echo=TRUE, message=TRUE, warning=TRUE, error=TRUE}
+```{r echo=TRUE, message=TRUE, warning=TRUE, error=TRUE, purl = FALSE}
 fetch_player_details("Greater Western Sydney", source = "afltables")
 ```
