@@ -10,21 +10,24 @@
 |collate  |en_AU.UTF-8                  |
 |ctype    |en_AU.UTF-8                  |
 |tz       |Australia/Melbourne          |
-|date     |2021-03-14                   |
+|date     |2022-01-10                   |
 
 # Dependencies
 
-|package   |old   |new        |Δ  |
-|:---------|:-----|:----------|:--|
-|fitzRoy   |0.3.3 |0.3.3.9000 |*  |
-|cli       |NA    |2.3.1      |*  |
-|dplyr     |NA    |1.0.5      |*  |
-|lubridate |NA    |1.7.10     |*  |
-|pillar    |NA    |1.5.1      |*  |
-|rvest     |NA    |1.0.0      |*  |
-|tibble    |NA    |3.1.0      |*  |
-|tidyr     |NA    |1.1.3      |*  |
-|utf8      |NA    |1.2.1      |*  |
+|package |old   |new        |Δ  |
+|:-------|:-----|:----------|:--|
+|fitzRoy |1.0.0 |1.0.0.9000 |*  |
+|fansi   |NA    |0.5.0      |*  |
+|glue    |NA    |1.6.0      |*  |
+|hms     |NA    |1.1.1      |*  |
+|mime    |NA    |0.12       |*  |
+|openssl |NA    |1.4.6      |*  |
+|readr   |NA    |2.1.1      |*  |
+|rvest   |NA    |1.0.2      |*  |
+|stringi |NA    |1.7.6      |*  |
+|tzdb    |NA    |0.2.0      |*  |
+|vroom   |NA    |1.5.7      |*  |
+|xml2    |NA    |1.3.3      |*  |
 
 # Revdeps
 
