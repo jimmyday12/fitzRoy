@@ -147,7 +147,13 @@ team_abbr <- tibble(
   )
 )
 
+# Player Details ---------------------------------------------------------------
+details_aflm <- fetch_player_details("Hawthorn")
+details_aflw <- fetch_player_details(team = "Western Bulldogs", current = TRUE, comp = "AFLW", source = "AFL")
+details_afltables <- fetch_player_details("Hawthorn", source = "afltables")
+details_footywire <- fetch_player_details("Richmond", source = "footywire", current = TRUE)
 
+# Write data -------------------------------------------------------------------
 
 usethis::use_data(stat_abbr,
   team_abbr,
@@ -173,5 +179,9 @@ usethis::use_data(stat_abbr,
   squiggle_ladder,
   aflm_coaches_votes,
   aflw_coaches_votes,
+  details_aflm,
+  details_aflw,
+  details_afltables,
+  details_footywire,
   internal = TRUE, overwrite = TRUE
 )
