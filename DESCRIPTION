@@ -61,7 +61,6 @@ Suggests:
     rmarkdown,
     testthat,
     roxygen2,
-    elo,
     spelling,
     curl
 VignetteBuilder: knitr
