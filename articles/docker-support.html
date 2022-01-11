@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
       </span>
     </div>
 
@@ -71,6 +71,9 @@
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
+      <a href="../articles/player-details.html">Fetching Player Details</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
@@ -99,7 +102,10 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0.en/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+    </li>
+    <li>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
     </li>
     <li class="divider">
     <li>
@@ -139,7 +145,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/fitzRoy">fitzRoy</a></span><span class="op">)</span></code></pre></div>
 <div id="docker-support" class="section level2">
 <h2 class="hasAnchor">
 <a href="#docker-support" class="anchor"></a>Docker Support</h2>
@@ -149,7 +155,7 @@
 <a href="#usage" class="anchor"></a>Usage</h3>
 <p>Once you have the images, (e.g. <code>docker pull jimmyday12/fitzroy:latest</code>) run one of the following commands.</p>
 <ul>
-<li>To start <a href="https://rstudio.com/">RStudio</a> with Fitzroy ready to use:
+<li>To start <a href="https://www.rstudio.com/">RStudio</a> with Fitzroy ready to use:
 <ul>
 <li>
 <code>docker run -d -p 8787:8787 --name fitzroy jimmyday12/fitzroy:latest</code> and open <code>http://localhost:8787</code>. *(Username: <code>rstudio</code>, Password: <code>rstudio</code>)</li>

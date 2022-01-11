@@ -7,10 +7,11 @@ articles:
   elo-ratings-example: elo-ratings-example.html
   fitzRoy: fitzRoy.html
   main-fetch-functions: main-fetch-functions.html
+  player-details: player-details.html
   using-fryzigg-stats: using-fryzigg-stats.html
   using-squiggle-api: using-squiggle-api.html
   womens-stats: womens-stats.html
-last_built: 2021-09-28T11:31Z
+last_built: 2022-01-11T00:51Z
 urls:
   reference: https://jimmyday12.github.io/fitzRoy//reference
   article: https://jimmyday12.github.io/fitzRoy//articles

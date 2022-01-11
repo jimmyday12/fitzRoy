@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
       </span>
     </div>
 
@@ -115,6 +115,9 @@
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
+      <a href="../articles/player-details.html">Fetching Player Details</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
@@ -143,7 +146,10 @@
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0.en/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+    </li>
+    <li>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
     </li>
     <li class="divider"></li>
     <li>
@@ -180,27 +186,38 @@
 <h1 class="page-header" data-toc-text="development version">
 <a href="#fitzroy-development-version" class="anchor"></a>fitzRoy (development version)<small> Unreleased </small>
 </h1>
+</div>
+    <div id="fitzroy-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#fitzroy-110" class="anchor"></a>fitzRoy 1.1.0<small> 2022-01-10 </small>
+</h1>
+<div id="new-features" class="section level2">
+<h2 class="hasAnchor">
+<a href="#new-features" class="anchor"></a>New features</h2>
 <ul>
-<li>Added function <code>fetch_coaches_votes</code> to retrieve AFLCA coaches votes for any given match <a href="https://github.com/jlholden26">@jlholden26</a>
-</li>
-<li>Added function <code>calculate_coaches_vote_possibilities</code> to return all possible breakdowns of AFLCA coaches votes between two coaches <a href="https://github.com/jlholden26">@jlholden26</a>
-</li>
-<li>Fixed an a bug in <code>fetch_fixture_footywire</code> for older versions of R <a href="https://github.com/jimmyday12/fitzRoy/issues/146"><a href='https://github.com/jimmyday12/fitzRoy/issues/146'>#146</a></a>
-</li>
-<li>Fixed type mismatch in <code>fetch_player_stats_afltables</code> and handling blank seasons in <code>fetch_ladder_afl</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/149"><a href='https://github.com/jimmyday12/fitzRoy/issues/149'>#149</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
-<li>Updated error message in <code>check_source</code> which is used in various functions <a href="https://github.com/jimmyday12/fitzRoy/issues/147"><a href='https://github.com/jimmyday12/fitzRoy/issues/147'>#147</a></a>
-</li>
-<li>Fixed issue with <code>fetch_results_afltabeles</code> caused by a <code>readr</code> update</li>
-<li>Added new set of functions for fetching player details - <code>fetch_player_details</code> and associated helper functions <code>fetch_player_details_afl</code>, <code>fetch_player_details_footywire</code> and <code>fetch_player_details_afltables</code> will return the player details for a particular team and season</li>
+<li><p>Added new set of functions for fetching player details - <code>fetch_player_details</code> and associated helper functions <code>fetch_player_details_afl</code>, <code>fetch_player_details_footywire</code> and <code>fetch_player_details_afltables</code> will return the player details for a particular team and season</p></li>
+<li><p>Added function <code>fetch_coaches_votes</code> to retrieve AFLCA coaches votes for any given match <a href="https://github.com/jlholden26">@jlholden26</a></p></li>
+<li><p>Added function <code>calculate_coaches_vote_possibilities</code> to return all possible breakdowns of AFLCA coaches votes between two coaches <a href="https://github.com/jlholden26">@jlholden26</a></p></li>
 </ul>
+</div>
+<div id="minor-improvements-and-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<ul>
+<li><p>Fixed an a bug in <code>fetch_fixture_footywire</code> for older versions of R <a href="https://github.com/jimmyday12/fitzRoy/issues/146"><a href='https://github.com/jimmyday12/fitzRoy/issues/146'>#146</a></a></p></li>
+<li><p>Fixed type mismatch in <code>fetch_player_stats_afltables</code> and handling blank seasons in <code>fetch_ladder_afl</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/149"><a href='https://github.com/jimmyday12/fitzRoy/issues/149'>#149</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</p></li>
+<li><p>Updated error message in <code>check_source</code> which is used in various functions <a href="https://github.com/jimmyday12/fitzRoy/issues/147"><a href='https://github.com/jimmyday12/fitzRoy/issues/147'>#147</a></a></p></li>
+<li><p>Fixed issue with <code>fetch_results_afltabeles</code> caused by a <code>readr</code> update</p></li>
+</ul>
+</div>
 </div>
     <div id="fitzroy-100" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.0">
 <a href="#fitzroy-100" class="anchor"></a>fitzRoy 1.0.0<small> 2021-03-16 </small>
 </h1>
-<div id="new-features" class="section level2">
+<div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features" class="anchor"></a>New Features</h2>
+<a href="#new-features-1" class="anchor"></a>New Features</h2>
 <ul>
 <li>Added a new group of <code>fetch_*</code> functions to provide a common API to various data sources. Each function has common arguments and provides consistent behaviour</li>
 <li>
@@ -275,9 +292,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features-1" class="section level2">
+<div id="new-features-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-1" class="anchor"></a>New features</h2>
+<a href="#new-features-2" class="anchor"></a>New features</h2>
 <ul>
 <li>Added AFL stats <a href="https://github.com/Fryzigg">@fryzigg</a>
 </li>
@@ -291,9 +308,9 @@
 <li>Added new <code>fetch_ladder</code> generic function to return ladder data</li>
 </ul>
 </div>
-<div id="minor-improvements-and-fixes" class="section level2">
+<div id="minor-improvements-and-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-improvements-and-fixes" class="anchor"></a>Minor improvements and fixes</h2>
+<a href="#minor-improvements-and-fixes-1" class="anchor"></a>Minor improvements and fixes</h2>
 <ul>
 <li>Fixed a bug with <code>get_afl_fixture</code> that was returning the wrong season if season was before 2012</li>
 <li>Removes all instances of <code>rvest::pluck</code> in preparation for it being depreciated in rvest 1.0.0 <a href="https://rvest.tidyverse.org/news/index.html">see changelog</a>, <a href="https://github.com/hadley">@hadley</a>
@@ -372,9 +389,9 @@
 </li>
 </ul>
 </div>
-<div id="new-features-2" class="section level2">
+<div id="new-features-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#new-features-2" class="anchor"></a>New features</h2>
+<a href="#new-features-3" class="anchor"></a>New features</h2>
 <ul>
 <li>Added <code>get_footywire_betting_odds</code> function that returns basic match and betting data from www.footywire.com. (<a href="https://github.com/jimmyday12/fitzRoy/issues/10"><a href='https://github.com/jimmyday12/fitzRoy/issues/10'>#10</a></a>, <a href="https://github.com/cfranklin11">@cfranklin11</a>)</li>
 </ul>

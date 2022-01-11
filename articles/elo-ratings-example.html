@@ -37,7 +37,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
       </span>
     </div>
 
@@ -71,6 +71,9 @@
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
+      <a href="../articles/player-details.html">Fetching Player Details</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
@@ -99,7 +102,10 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0.en/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+    </li>
+    <li>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
     </li>
     <li class="divider">
     <li>
@@ -131,7 +137,7 @@
       <h1 data-toc-skip>ELO Ratings Example</h1>
                         <h4 class="author">James Day</h4>
             
-            <h4 class="date">2021-09-28</h4>
+            <h4 class="date">2022-01-11</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/elo-ratings-example.Rmd"><code>vignettes/elo-ratings-example.Rmd</code></a></small>
       <div class="hidden name"><code>elo-ratings-example.Rmd</code></div>
@@ -146,7 +152,7 @@
 <a href="#load-packages" class="anchor"></a>Load packages</h2>
 <p>First we need to grab a few packages. If you don’t have any of these, you’ll need to install them.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/fitzRoy/">fitzRoy</a></span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://jimmyday12.github.io/fitzRoy">fitzRoy</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/eheinzen/elo">elo</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span></code></pre></div>
@@ -163,31 +169,10 @@
 <p>We can make sure our results are from before the fixture we are trying to predict for.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&lt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 16</span>
-<span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points Away.Team</span>
-<span class="co">#&gt;   &lt;dbl&gt; &lt;date&gt;     &lt;chr&gt; &lt;chr&gt;          &lt;int&gt;        &lt;int&gt;       &lt;int&gt; &lt;chr&gt;    </span>
-<span class="co">#&gt; 1 15402 2018-09-08 QF    West Coa…         12           14          86 Collingw…</span>
-<span class="co">#&gt; 2 15403 2018-09-14 SF    Hawthorn          10           11          71 Melbourne</span>
-<span class="co">#&gt; 3 15404 2018-09-15 SF    Collingw…          9           15          69 GWS      </span>
-<span class="co">#&gt; 4 15405 2018-09-21 PF    Richmond           8           10          58 Collingw…</span>
-<span class="co">#&gt; 5 15406 2018-09-22 PF    West Coa…         18           13         121 Melbourne</span>
-<span class="co">#&gt; 6 15407 2018-09-29 GF    West Coa…         11           13          79 Collingw…</span>
-<span class="co">#&gt; # … with 8 more variables: Away.Goals &lt;int&gt;, Away.Behinds &lt;int&gt;,</span>
-<span class="co">#&gt; #   Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;, Season &lt;dbl&gt;,</span>
-<span class="co">#&gt; #   Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 7</span>
-<span class="co">#&gt;   Date                Season Season.Game Round Home.Team    Away.Team   Venue   </span>
-<span class="co">#&gt;   &lt;dttm&gt;               &lt;dbl&gt;       &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;   </span>
-<span class="co">#&gt; 1 2019-03-21 19:25:00   2019           1     1 Carlton      Richmond    M.C.G.  </span>
-<span class="co">#&gt; 2 2019-03-22 19:50:00   2019           2     1 Collingwood  Geelong     M.C.G.  </span>
-<span class="co">#&gt; 3 2019-03-23 13:45:00   2019           3     1 Melbourne    Port Adela… M.C.G.  </span>
-<span class="co">#&gt; 4 2019-03-23 16:05:00   2019           4     1 Adelaide     Hawthorn    Adelaid…</span>
-<span class="co">#&gt; 5 2019-03-23 19:20:00   2019           5     1 Brisbane Li… West Coast  Gabba   </span>
-<span class="co">#&gt; 6 2019-03-23 19:25:00   2019           6     1 Footscray    Sydney      Docklan…</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="prepare-data" class="section level2">
 <h2 class="hasAnchor">
@@ -201,19 +186,10 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Date <span class="op">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">Date</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html">ymd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html">format</a></span><span class="op">(</span><span class="va">Date</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html">rename</a></span><span class="op">(</span>Round.Number <span class="op">=</span> <span class="va">`Round`</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 7</span>
-<span class="co">#&gt;   Date       Season Season.Game Round.Number Home.Team      Away.Team   Venue   </span>
-<span class="co">#&gt;   &lt;date&gt;      &lt;dbl&gt;       &lt;int&gt;        &lt;dbl&gt; &lt;chr&gt;          &lt;chr&gt;       &lt;chr&gt;   </span>
-<span class="co">#&gt; 1 2019-03-21   2019           1            1 Carlton        Richmond    M.C.G.  </span>
-<span class="co">#&gt; 2 2019-03-22   2019           2            1 Collingwood    Geelong     M.C.G.  </span>
-<span class="co">#&gt; 3 2019-03-23   2019           3            1 Melbourne      Port Adela… M.C.G.  </span>
-<span class="co">#&gt; 4 2019-03-23   2019           4            1 Adelaide       Hawthorn    Adelaid…</span>
-<span class="co">#&gt; 5 2019-03-23   2019           5            1 Brisbane Lions West Coast  Gabba   </span>
-<span class="co">#&gt; 6 2019-03-23   2019           6            1 Footscray      Sydney      Docklan…</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="set-elo-parameters" class="section level2">
 <h2 class="hasAnchor">
@@ -254,63 +230,13 @@
 <p>Now that is run, we can view our results. The <code>elo</code> package provides various ways to do this.</p>
 <p>Firstly, using <code>as.data.frame</code> we can view the predicted and actual result of each game. Also in this table is the change in ELO rating for the home and away side. See below for the last few games of 2018.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;            team.A      team.B       p.A  wins.A    update.A    update.B</span>
-<span class="co">#&gt; 15402  West Coast Collingwood 0.5403392 0.60000  1.19321650 -1.19321650</span>
-<span class="co">#&gt; 15403    Hawthorn   Melbourne 0.5075040 0.29375 -4.27508038  4.27508038</span>
-<span class="co">#&gt; 15404 Collingwood         GWS 0.5649465 0.56250 -0.04892974  0.04892974</span>
-<span class="co">#&gt; 15405    Richmond Collingwood 0.5691912 0.25625 -6.25882377  6.25882377</span>
-<span class="co">#&gt; 15406  West Coast   Melbourne 0.5154826 0.91250  7.94034898 -7.94034898</span>
-<span class="co">#&gt; 15407  West Coast Collingwood 0.5462194 0.53125 -0.29938786  0.29938786</span>
-<span class="co">#&gt;          elo.A    elo.B</span>
-<span class="co">#&gt; 15402 1534.676 1534.198</span>
-<span class="co">#&gt; 15403 1520.579 1553.914</span>
-<span class="co">#&gt; 15404 1534.149 1518.861</span>
-<span class="co">#&gt; 15405 1546.280 1540.408</span>
-<span class="co">#&gt; 15406 1542.617 1545.974</span>
-<span class="co">#&gt; 15407 1542.317 1540.708</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>We can specifically focus on how each team’s rating changes over time using <code>as.matrix</code>. Again - viewing the end of 2018 also shows teams that didn’t make the finals have the same ELO as the rounds go on since they aren’t playing finals.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;         Adelaide Brisbane Lions  Carlton Collingwood Essendon Fitzroy Footscray</span>
-<span class="co">#&gt; [2776,] 1498.392       1486.347 1425.743    1535.573 1511.301    1500  1463.709</span>
-<span class="co">#&gt; [2777,] 1507.171       1483.508 1416.965    1535.391 1514.869    1500  1466.641</span>
-<span class="co">#&gt; [2778,] 1507.171       1483.508 1416.965    1534.198 1514.869    1500  1466.641</span>
-<span class="co">#&gt; [2779,] 1507.171       1483.508 1416.965    1534.149 1514.869    1500  1466.641</span>
-<span class="co">#&gt; [2780,] 1507.171       1483.508 1416.965    1540.408 1514.869    1500  1466.641</span>
-<span class="co">#&gt; [2781,] 1507.171       1483.508 1416.965    1540.708 1514.869    1500  1466.641</span>
-<span class="co">#&gt;         Fremantle  Geelong Gold Coast      GWS Hawthorn Melbourne</span>
-<span class="co">#&gt; [2776,]  1459.911 1533.936   1427.196 1515.733 1525.492  1543.083</span>
-<span class="co">#&gt; [2777,]  1460.093 1540.191   1420.941 1511.744 1527.216  1547.072</span>
-<span class="co">#&gt; [2778,]  1460.093 1537.624   1420.941 1518.812 1524.854  1549.639</span>
-<span class="co">#&gt; [2779,]  1460.093 1537.624   1420.941 1518.861 1520.579  1553.914</span>
-<span class="co">#&gt; [2780,]  1460.093 1537.624   1420.941 1518.861 1520.579  1545.974</span>
-<span class="co">#&gt; [2781,]  1460.093 1537.624   1420.941 1518.861 1520.579  1545.974</span>
-<span class="co">#&gt;         North Melbourne Port Adelaide Richmond St Kilda   Sydney University</span>
-<span class="co">#&gt; [2776,]        1509.214      1509.766 1553.109 1454.495 1516.356       1500</span>
-<span class="co">#&gt; [2777,]        1511.378      1506.199 1550.176 1452.330 1514.631       1500</span>
-<span class="co">#&gt; [2778,]        1511.378      1506.199 1552.539 1452.330 1507.563       1500</span>
-<span class="co">#&gt; [2779,]        1511.378      1506.199 1552.539 1452.330 1507.563       1500</span>
-<span class="co">#&gt; [2780,]        1511.378      1506.199 1546.280 1452.330 1507.563       1500</span>
-<span class="co">#&gt; [2781,]        1511.378      1506.199 1546.280 1452.330 1507.563       1500</span>
-<span class="co">#&gt;         West Coast</span>
-<span class="co">#&gt; [2776,]   1530.644</span>
-<span class="co">#&gt; [2777,]   1533.483</span>
-<span class="co">#&gt; [2778,]   1534.676</span>
-<span class="co">#&gt; [2779,]   1534.676</span>
-<span class="co">#&gt; [2780,]   1542.617</span>
-<span class="co">#&gt; [2781,]   1542.317</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>Lastly, we can check the final ELO ratings of each team at the end of our data using <code>final.elos</code> (here - up to end of 2018).</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://eheinzen.github.io/elo/reference/elo.run.helpers.html">final.elos</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span>
-<span class="co">#&gt;        Adelaide  Brisbane Lions         Carlton     Collingwood        Essendon </span>
-<span class="co">#&gt;        1507.171        1483.508        1416.965        1540.708        1514.869 </span>
-<span class="co">#&gt;         Fitzroy       Footscray       Fremantle         Geelong      Gold Coast </span>
-<span class="co">#&gt;        1380.902        1466.641        1460.093        1537.624        1420.941 </span>
-<span class="co">#&gt;             GWS        Hawthorn       Melbourne North Melbourne   Port Adelaide </span>
-<span class="co">#&gt;        1518.861        1520.579        1545.974        1511.378        1506.199 </span>
-<span class="co">#&gt;        Richmond        St Kilda          Sydney      University      West Coast </span>
-<span class="co">#&gt;        1546.280        1452.330        1507.563        1412.936        1542.317</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://eheinzen.github.io/elo/reference/elo.run.helpers.html">final.elos</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span></code></pre></div>
 <p>We could keep tweaking our parameters until we are happy. Ideally we’d have a training and test set and be using some kind of cost function to optimise these values on like a log likelihood, mean absolute margin or something similar. I’ll leave that as beyond the scope of this vignette though and assume we are happy with these parameters.</p>
 </div>
 <div id="do-predictions" class="section level2">
@@ -321,16 +247,7 @@
 <code class="sourceCode R"><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>Prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">elo.data</span>, newdata <span class="op">=</span> <span class="va">fixture</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 6 × 8</span>
-<span class="co">#&gt;   Date       Season Season.Game Round.Number Home.Team   Away.Team  Venue   Prob</span>
-<span class="co">#&gt;   &lt;date&gt;      &lt;dbl&gt;       &lt;int&gt;        &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;      &lt;chr&gt;  &lt;dbl&gt;</span>
-<span class="co">#&gt; 1 2019-03-21   2019           1            1 Carlton     Richmond   M.C.G. 0.361</span>
-<span class="co">#&gt; 2 2019-03-22   2019           2            1 Collingwood Geelong    M.C.G. 0.547</span>
-<span class="co">#&gt; 3 2019-03-23   2019           3            1 Melbourne   Port Adel… M.C.G. 0.599</span>
-<span class="co">#&gt; 4 2019-03-23   2019           4            1 Adelaide    Hawthorn   Adela… 0.524</span>
-<span class="co">#&gt; 5 2019-03-23   2019           5            1 Brisbane L… West Coast Gabba  0.459</span>
-<span class="co">#&gt; 6 2019-03-23   2019           6            1 Footscray   Sydney     Dockl… 0.484</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></code></pre></div>
 <p>From here - you could turn these probabilities back into a margin through another mapping function. Again - I’ll leave that for the reader to decide.</p>
 </div>
   </div>

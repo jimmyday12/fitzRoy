@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
       </span>
     </div>
 
@@ -115,6 +115,9 @@
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
     <li>
+      <a href="../articles/player-details.html">Fetching Player Details</a>
+    </li>
+    <li>
       <a href="../articles/elo-ratings-example.html">ELO Ratings Example</a>
     </li>
     <li>
@@ -143,7 +146,10 @@
   <ul class="dropdown-menu" role="menu">
     <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0.en/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+    </li>
+    <li>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
     </li>
     <li class="divider"></li>
     <li>
@@ -186,8 +192,8 @@
     <tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-main-fetch-functions" class="hasAnchor"><a href="#section-main-fetch-functions" class="anchor"></a>Main Fetch Functions</h2>
-          <p class="section-desc"></p>
+          <h2 id="section-main-fetch-functions-aflm-and-aflw-" class="hasAnchor"><a href="#section-main-fetch-functions-aflm-and-aflw-" class="anchor"></a>Main Fetch Functions (AFLM and AFLW)</h2>
+          <p class="section-desc"><p>These are the main functions to return data. They all have consistent arguments and APIs. You can access both Mens and Womens data providing you use the right source.</p></p>
         </th>
       </tr>
       
@@ -241,57 +247,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section-aflw-data" class="hasAnchor"><a href="#section-aflw-data" class="anchor"></a>AFLW Data</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> </p>
-        </td>
-        <td><p>Get detailed AFLW data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_detailed_match_data.html">get_aflw_detailed_match_data()</a></code> </p>
-        </td>
-        <td><p>Get detailed womens match data (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_match_data.html">get_aflw_match_data()</a></code> </p>
-        </td>
-        <td><p>Get AFLW match data</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_round_data.html">get_aflw_round_data()</a></code> </p>
-        </td>
-        <td><p>Get match data (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_rounds.html">get_aflw_rounds()</a></code> </p>
-        </td>
-        <td><p>Get rounds (internal function)</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="get_aflw_player_stats.html">get_aflw_player_stats()</a></code> </p>
-        </td>
-        <td><p>Return get match stats for all current AFLW matches</p></td>
-      </tr>
-    </tbody><tbody>
-      <tr>
-        <th colspan="2">
           <h2 id="section-other" class="hasAnchor"><a href="#section-other" class="anchor"></a>Other</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>These are other functions that return data but don’t fit into the normal fetch functions.</p></p>
         </th>
       </tr>
       
@@ -334,7 +291,7 @@
       <tr>
         <th colspan="2">
           <h2 id="section-internals" class="hasAnchor"><a href="#section-internals" class="anchor"></a>Internals</h2>
-          <p class="section-desc"></p>
+          <p class="section-desc"><p>Internal functions are mostly used internally by the package and won’t be useful to end users.</p></p>
         </th>
       </tr>
       
@@ -473,6 +430,42 @@ transforming all of them to AFL Tables naming conventions.</p></td>
           <p><code><a href="get_score_progression_raw.html">get_score_progression_raw()</a></code> </p>
         </td>
         <td><p>Get raw score progression data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> </p>
+        </td>
+        <td><p>Get detailed AFLW data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_detailed_match_data.html">get_aflw_detailed_match_data()</a></code> </p>
+        </td>
+        <td><p>Get detailed womens match data (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_match_data.html">get_aflw_match_data()</a></code> </p>
+        </td>
+        <td><p>Get AFLW match data</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_round_data.html">get_aflw_round_data()</a></code> </p>
+        </td>
+        <td><p>Get match data (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_rounds.html">get_aflw_rounds()</a></code> </p>
+        </td>
+        <td><p>Get rounds (internal function)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="get_aflw_player_stats.html">get_aflw_player_stats()</a></code> </p>
+        </td>
+        <td><p>Return get match stats for all current AFLW matches</p></td>
       </tr>
     </tbody>
     </table>
