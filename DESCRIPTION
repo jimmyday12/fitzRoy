@@ -64,8 +64,7 @@ Suggests:
     roxygen2,
     spelling,
     curl
-Remotes:  
-     eheinzen/elo
+Remotes: eheinzen/elo
 VignetteBuilder: knitr
 ByteCompile: true
 Encoding: UTF-8
