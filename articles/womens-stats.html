@@ -151,6 +151,10 @@
 <a href="#fixture" class="anchor"></a>Fixture</h2>
 <p>Firstly, we can return the fixture for a season or particular round.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">not_cran</span>
+<span class="va">online</span>
+<span class="va">eval_param</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
@@ -160,7 +164,7 @@
 <h2 class="hasAnchor">
 <a href="#lineup" class="anchor"></a>Lineup</h2>
 <p>We can get the lineup for a given set of matches in a particular round.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_lineup.html">fetch_lineup</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">round.name</span>, <span class="va">status</span>, <span class="va">teamName</span>, 
          <span class="va">player.playerName.givenName</span>,
@@ -170,7 +174,7 @@
 <h2 class="hasAnchor">
 <a href="#results" class="anchor"></a>Results</h2>
 <p>The match results, including the teams playing, venue information and final scores are returned via <code>fetch_results</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span> <span class="va">match.date</span>, <span class="va">match.name</span>,
          <span class="va">homeTeamScore.matchScore.totalScore</span>, <span class="va">awayTeamScore.matchScore.totalScore</span><span class="op">)</span></code></pre></div>
@@ -179,7 +183,7 @@
 <h2 class="hasAnchor">
 <a href="#ladder" class="anchor"></a>Ladder</h2>
 <p>We can also get the ladder at any point with <code>fetch_ladder</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">6</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">season</span>, <span class="va">round_name</span>, 
          <span class="va">position</span>, <span class="va">team.name</span>, <span class="va">played</span>, 
@@ -189,7 +193,7 @@
 <h2 class="hasAnchor">
 <a href="#stats" class="anchor"></a>Stats</h2>
 <p>Lastly - we have basic player stats. This will return player level statistics such as possessions, time on ground, fantasy points and a myriad of other statistics.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">player.player.player.givenName</span><span class="op">:</span><span class="va">clearances.totalClearances</span><span class="op">)</span></code></pre></div>
 </div>
@@ -197,7 +201,7 @@
 <h2 class="hasAnchor">
 <a href="#player-details" class="anchor"></a>Player Details</h2>
 <p>We can return player details such as data of birth and listed height and weight.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">details_aflw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Western Bulldogs"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span>
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></code></pre></div>
@@ -206,7 +210,7 @@
 <h2 class="hasAnchor">
 <a href="#coaches-votes" class="anchor"></a>Coaches Votes</h2>
 <p>We can also return the coaches votes for a particular season, team or round.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">9</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="legacyadvanced-stats" class="section level2">
@@ -214,25 +218,25 @@
 <a href="#legacyadvanced-stats" class="anchor"></a>Legacy/Advanced Stats</h2>
 <p>We have a legacy function to provide advanced AFLW stats. This is going to be deprecated in favour of a more robust solution but still works for now. The following code should show you how to use those functions. ### Match data</p>
 <p>A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won’t work.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cookie</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_afl_cookie.html">get_afl_cookie</a></span><span class="op">(</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cookie</span><span class="op">)</span></code></pre></div>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/fetch_results.html">fetch_results()</a></code> function to retrieve match data matches.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">match_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">match_data</span><span class="op">)</span></code></pre></div>
 <div id="detailed-stats" class="section level3">
 <h3 class="hasAnchor">
 <a href="#detailed-stats" class="anchor"></a>Detailed stats</h3>
 <p>The <code><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> can be used to return more detailed data than the match data shown above. It takes a vector of match IDs as an argument. For example, let’s say we want detailed stats for the first 10 games in <code>match_data</code> above. Then we would do:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">first10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">match_data</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">first10_ids</span> <span class="op">&lt;-</span> <span class="va">first10</span><span class="op">$</span><span class="va">Match.Id</span>
 <span class="va">first10_ids</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">detailed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span><span class="op">(</span><span class="va">first10_ids</span><span class="op">)</span>
 <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">detailed</span><span class="op">)</span></code></pre></div>
 </div>
