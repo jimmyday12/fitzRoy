@@ -25,6 +25,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fitzRoy.html">Get started</a>
 </li>
@@ -66,7 +62,8 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Workflow Examples</li>
+    </li>
+<li class="dropdown-header">Workflow Examples</li>
     <li>
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
@@ -80,7 +77,8 @@
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">APIs</li>
+    </li>
+<li class="dropdown-header">APIs</li>
     <li>
       <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
@@ -88,8 +86,9 @@
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -102,13 +101,14 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/" class="external-link">fitzRoy 1.1.0</a>
     </li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/" class="external-link">fitzRoy 1.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -116,7 +116,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/fitzRoy/">
+  <a href="https://github.com/jimmyday12/fitzRoy/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -137,7 +137,7 @@
       <h1 data-toc-skip>AFL Womens Example</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/womens-stats.Rmd"><code>vignettes/womens-stats.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/HEAD/vignettes/womens-stats.Rmd" class="external-link"><code>vignettes/womens-stats.Rmd</code></a></small>
       <div class="hidden name"><code>womens-stats.Rmd</code></div>
 
     </div>
@@ -146,102 +146,277 @@
     
 <p>The package provides easy access to AFLW data from the AFL.com.au website. This can be accessed via the normal <code>fetch_</code> functions in the same way you would access Men’s data.</p>
 <p>This vignette talks through the main data sources. To fully understand how the <code>fetch_</code> functions work - please read the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Main Fetch Functions</a> vignette.</p>
-<div id="fixture" class="section level2">
-<h2 class="hasAnchor">
-<a href="#fixture" class="anchor"></a>Fixture</h2>
+<div class="section level2">
+<h2 id="fixture">Fixture<a class="anchor" aria-label="anchor" href="#fixture"></a>
+</h2>
 <p>Firstly, we can return the fixture for a season or particular round.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">not_cran</span>
-<span class="co">#&gt; [1] FALSE</span>
+<span class="co">#&gt; [1] TRUE</span>
 <span class="va">online</span>
 <span class="co">#&gt; [1] TRUE</span>
 <span class="va">eval_param</span>
-<span class="co">#&gt; [1] FALSE</span></code></pre></div>
+<span class="co">#&gt; [1] TRUE</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 5</span></span>
+<span class="co">#&gt;    compSeason.name           round.name home.team.name away.team.name venue.name</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021 NAB AFLW Competition Round 1    Carlton        Collingwood    Ikon Park </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021 NAB AFLW Competition Round 1    St Kilda       Western Bulld… RSEA Park </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021 NAB AFLW Competition Round 1    Gold Coast Su… Melbourne      Metricon …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021 NAB AFLW Competition Round 1    West Coast Ea… Adelaide Crows Mineral R…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021 NAB AFLW Competition Round 1    Geelong Cats   Kangaroos      GMHBA Sta…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021 NAB AFLW Competition Round 1    Richmond       Brisbane Lions Swinburne…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021 NAB AFLW Competition Round 1    Fremantle      GWS Giants     Fremantle…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021 NAB AFLW Competition Round 2    Western Bulld… Carlton        Victoria …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021 NAB AFLW Competition Round 2    Collingwood    Geelong Cats   Victoria …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021 NAB AFLW Competition Round 2    Melbourne      Richmond       Casey Fie…</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows</span></span></code></pre>
 </div>
-<div id="lineup" class="section level2">
-<h2 class="hasAnchor">
-<a href="#lineup" class="anchor"></a>Lineup</h2>
+<div class="section level2">
+<h2 id="lineup">Lineup<a class="anchor" aria-label="anchor" href="#lineup"></a>
+</h2>
 <p>We can get the lineup for a given set of matches in a particular round.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_lineup.html">fetch_lineup</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">round.name</span>, <span class="va">status</span>, <span class="va">teamName</span>, 
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_lineup.html">fetch_lineup</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">round.name</span>, <span class="va">status</span>, <span class="va">teamName</span>, 
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 294 × 6</span></span>
+<span class="co">#&gt;    round.name status    teamName player.playerName… player.playerNam… teamStatus</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Round 1    CONCLUDED Carlton  Brooke             Vernon            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Round 1    CONCLUDED Carlton  Natalie            Plane             FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Round 1    CONCLUDED Carlton  Vaomua             Laloifi           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Round 1    CONCLUDED Carlton  Charlotte          Wilson            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Round 1    CONCLUDED Carlton  Kerryn             Harrington        FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Round 1    CONCLUDED Carlton  Lauren             Brazzale          FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Round 1    CONCLUDED Carlton  Elise              O'Dea             FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Round 1    CONCLUDED Carlton  Katie              Loynes            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Round 1    CONCLUDED Carlton  Abbie              McKay             FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Round 1    CONCLUDED Carlton  Tayla              Harris            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 284 more rows</span></span></code></pre>
 </div>
-<div id="results" class="section level2">
-<h2 class="hasAnchor">
-<a href="#results" class="anchor"></a>Results</h2>
+<div class="section level2">
+<h2 id="results">Results<a class="anchor" aria-label="anchor" href="#results"></a>
+</h2>
 <p>The match results, including the teams playing, venue information and final scores are returned via <code>fetch_results</code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span> <span class="va">match.date</span>, <span class="va">match.name</span>,
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span> <span class="va">match.date</span>, <span class="va">match.name</span>,
          <span class="va">homeTeamScore.matchScore.totalScore</span>, <span class="va">awayTeamScore.matchScore.totalScore</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 4</span></span>
+<span class="co">#&gt;   match.date          match.name       homeTeamScore.match… awayTeamScore.match…</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020-02-07 <span style="color: #949494;">08:45:00</span> Richmond Vs Car…                   14                   48</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020-02-08 <span style="color: #949494;">02:10:00</span> GWS Giants Vs G…                    9                    8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020-02-08 <span style="color: #949494;">04:10:00</span> Melbourne Vs Ka…                   22                   20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020-02-08 <span style="color: #949494;">06:10:00</span> Brisbane Lions …                   34                   21</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2020-02-09 <span style="color: #949494;">02:10:00</span> Collingwood Vs …                   38                   11</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-02-09 <span style="color: #949494;">04:10:00</span> St Kilda Vs Wes…                   14                   39</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2020-02-09 <span style="color: #949494;">06:10:00</span> Fremantle Vs Ge…                   44                   28</span></code></pre>
 </div>
-<div id="ladder" class="section level2">
-<h2 class="hasAnchor">
-<a href="#ladder" class="anchor"></a>Ladder</h2>
+<div class="section level2">
+<h2 id="ladder">Ladder<a class="anchor" aria-label="anchor" href="#ladder"></a>
+</h2>
 <p>We can also get the ladder at any point with <code>fetch_ladder</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">6</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">season</span>, <span class="va">round_name</span>, 
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">6</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">season</span>, <span class="va">round_name</span>, 
          <span class="va">position</span>, <span class="va">team.name</span>, <span class="va">played</span>, 
          <span class="va">pointsFor</span>, <span class="va">pointsAgainst</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 14 × 7</span></span>
+<span class="co">#&gt;    season round_name  position team.name         played pointsFor pointsAgainst</span>
+<span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        1 Kangaroos              6       309           136</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        2 GWS Giants             6       175           142</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        3 Brisbane Lions         6       198           185</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        4 Gold Coast Suns        6       154           152</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        5 Geelong Cats           6       211           261</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        6 Adelaide Crows         6       180           224</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        7 Richmond               6       115           322</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        1 Fremantle              6       277           179</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        2 Carlton                6       249           164</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        3 Melbourne              6       204           124</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">11</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        4 Collingwood            6       229           149</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">12</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        5 St Kilda               6       154           170</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">13</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        6 Western Bulldogs       6       179           246</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">14</span>   <span style="text-decoration: underline;">2</span>020 Semi Finals        7 West Coast Eagles      6        85           265</span></code></pre>
 </div>
-<div id="stats" class="section level2">
-<h2 class="hasAnchor">
-<a href="#stats" class="anchor"></a>Stats</h2>
+<div class="section level2">
+<h2 id="stats">Stats<a class="anchor" aria-label="anchor" href="#stats"></a>
+</h2>
 <p>Lastly - we have basic player stats. This will return player level statistics such as possessions, time on ground, fantasy points and a myriad of other statistics.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">player.player.player.givenName</span><span class="op">:</span><span class="va">clearances.totalClearances</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">player.player.player.givenName</span><span class="op">:</span><span class="va">clearances.totalClearances</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 294 × 46</span></span>
+<span class="co">#&gt;    player.player.pl… player.player.pl… teamId gamesPlayed timeOnGroundPer… goals</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Gabrielle         Seymour           CD_T8… <span style="color: #BB0000;">NA</span>                        93     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Kodi              Jacques           CD_T8… <span style="color: #BB0000;">NA</span>                        74     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Sabrina           Frederick         CD_T8… <span style="color: #BB0000;">NA</span>                        94     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Hannah            Burchell          CD_T8… <span style="color: #BB0000;">NA</span>                        60     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Tayla             Stahl             CD_T8… <span style="color: #BB0000;">NA</span>                        74     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Katie             Brennan           CD_T8… <span style="color: #BB0000;">NA</span>                        94     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Madeline          Brancatisano      CD_T8… <span style="color: #BB0000;">NA</span>                        67     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Laura             Bailey            CD_T8… <span style="color: #BB0000;">NA</span>                        70     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Monique           Conti             CD_T8… <span style="color: #BB0000;">NA</span>                        85     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Christina         Bernardi          CD_T8… <span style="color: #BB0000;">NA</span>                        70     0</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 284 more rows, and 40 more variables: behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   kicks &lt;dbl&gt;, handballs &lt;dbl&gt;, disposals &lt;dbl&gt;, marks &lt;dbl&gt;, bounces &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   tackles &lt;dbl&gt;, contestedPossessions &lt;dbl&gt;, uncontestedPossessions &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   totalPossessions &lt;dbl&gt;, inside50s &lt;dbl&gt;, marksInside50 &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   contestedMarks &lt;dbl&gt;, hitouts &lt;dbl&gt;, onePercenters &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   disposalEfficiency &lt;dbl&gt;, clangers &lt;dbl&gt;, freesFor &lt;dbl&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   freesAgainst &lt;dbl&gt;, dreamTeamPoints &lt;dbl&gt;, rebound50s &lt;dbl&gt;, …</span></span></code></pre>
 </div>
-<div id="player-details" class="section level2">
-<h2 class="hasAnchor">
-<a href="#player-details" class="anchor"></a>Player Details</h2>
+<div class="section level2">
+<h2 id="player-details">Player Details<a class="anchor" aria-label="anchor" href="#player-details"></a>
+</h2>
 <p>We can return player details such as data of birth and listed height and weight.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">details_aflw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Western Bulldogs"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 15</span></span>
+<span class="co">#&gt;   firstName surname     id team       season jumperNumber position    providerId</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hannah    Scott     <span style="text-decoration: underline;">1</span>502 Western B…   <span style="text-decoration: underline;">2</span>022           22 MEDIUM_DEF… CD_I10016…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Ashleigh  Guest     <span style="text-decoration: underline;">1</span>630 Western B…   <span style="text-decoration: underline;">2</span>022           19 MEDIUM_DEF… CD_I10044…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Brooke    Lochland  <span style="text-decoration: underline;">1</span>447 Western B…   <span style="text-decoration: underline;">2</span>022            1 MEDIUM_FOR… CD_I10044…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Ellyse    Gamble    <span style="text-decoration: underline;">1</span>445 Western B…   <span style="text-decoration: underline;">2</span>022           14 RUCK        CD_I10053…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Bailey    Hunt      <span style="text-decoration: underline;">1</span>649 Western B…   <span style="text-decoration: underline;">2</span>022           21 MEDIUM_DEF… CD_I10070…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Kirsten   McLeod    <span style="text-decoration: underline;">1</span>668 Western B…   <span style="text-decoration: underline;">2</span>022            6 MEDIUM_FOR… CD_I10070…</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: dateOfBirth &lt;chr&gt;, heightInCm &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   weightInKg &lt;int&gt;, recruitedFrom &lt;chr&gt;, debutYear &lt;chr&gt;, draftType &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   data_accessed &lt;date&gt;</span></span></code></pre>
 </div>
-<div id="coaches-votes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#coaches-votes" class="anchor"></a>Coaches Votes</h2>
+<div class="section level2">
+<h2 id="coaches-votes">Coaches Votes<a class="anchor" aria-label="anchor" href="#coaches-votes"></a>
+</h2>
 <p>We can also return the coaches votes for a particular season, team or round.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">9</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;     Season Round        Home.Team Away.Team           Player.Name Coaches.Votes</span>
+<span class="co">#&gt; 9.1   2021     9 Western Bulldogs  Richmond      Kirsty Lamb (WB)            10</span>
+<span class="co">#&gt; 9.2   2021     9 Western Bulldogs  Richmond  Brooke Lochland (WB)             8</span>
+<span class="co">#&gt; 9.3   2021     9 Western Bulldogs  Richmond  Ellie Blackburn (WB)             5</span>
+<span class="co">#&gt; 9.4   2021     9 Western Bulldogs  Richmond  Katie Brennan (RICH)             4</span>
+<span class="co">#&gt; 9.5   2021     9 Western Bulldogs  Richmond Rebecca Miller (RICH)             2</span>
+<span class="co">#&gt; 9.6   2021     9 Western Bulldogs  Richmond    Eleanor Brown (WB)             1</span></code></pre>
 </div>
-<div id="legacyadvanced-stats" class="section level2">
-<h2 class="hasAnchor">
-<a href="#legacyadvanced-stats" class="anchor"></a>Legacy/Advanced Stats</h2>
+<div class="section level2">
+<h2 id="legacyadvanced-stats">Legacy/Advanced Stats<a class="anchor" aria-label="anchor" href="#legacyadvanced-stats"></a>
+</h2>
 <p>We have a legacy function to provide advanced AFLW stats. This is going to be deprecated in favour of a more robust solution but still works for now. The following code should show you how to use those functions. ### Match data</p>
 <p>A good thing to check is that the cookie is working. Often this gets changed or moved and without it, the code won’t work.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">cookie</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_afl_cookie.html">get_afl_cookie</a></span><span class="op">(</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cookie</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">cookie</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; [1] "f992e7a132ed7631850b31ac6703fbae"</span></code></pre>
 <p>Note - if this is <code>NULL</code> the rest of this Vignette won’t show any outputs but the code will remain!</p>
 <p>We can use the <code><a href="../reference/fetch_results.html">fetch_results()</a></code> function to retrieve match data matches.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">match_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">match_data</span><span class="op">)</span></code></pre></div>
-<div id="detailed-stats" class="section level3">
-<h3 class="hasAnchor">
-<a href="#detailed-stats" class="anchor"></a>Detailed stats</h3>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">match_data</span><span class="op">)</span>
+<span class="co">#&gt; Rows: 7</span>
+<span class="co">#&gt; Columns: 75</span>
+<span class="co">#&gt; $ match.name                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Richmond Vs Carlton", "GWS Giants…</span>
+<span class="co">#&gt; $ match.date                          <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span> 2020-02-07 08:45:00, 2020-02-08 0…</span>
+<span class="co">#&gt; $ match.status                        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CONCLUDED", "CONCLUDED", "CONCLUD…</span>
+<span class="co">#&gt; $ match.matchId                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_M20202640101", "CD_M2020264010…</span>
+<span class="co">#&gt; $ match.venue                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_V50", "CD_V402", "CD_V371", "C…</span>
+<span class="co">#&gt; $ match.utcStartTime                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2020-02-07T08:45:00", "2020-02-08…</span>
+<span class="co">#&gt; $ match.homeTeamId                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_T8788", "CD_T7889", "CD_T7386"…</span>
+<span class="co">#&gt; $ match.awayTeamId                    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_T8096", "CD_T8786", "CD_T8466"…</span>
+<span class="co">#&gt; $ match.round                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_R202026401", "CD_R202026401", …</span>
+<span class="co">#&gt; $ match.venueLocalStartTime           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2020-02-07T19:45:00", "2020-02-08…</span>
+<span class="co">#&gt; $ match.abbr                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "RICH V CARL", "GWS V GCFC", "MELB…</span>
+<span class="co">#&gt; $ match.twitterHashTag                <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ match.homeTeam.name                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Richmond", "GWS Giants", "Melbour…</span>
+<span class="co">#&gt; $ match.homeTeam.timeZone             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ match.homeTeam.teamId               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_T8788", "CD_T7889", "CD_T7386"…</span>
+<span class="co">#&gt; $ match.homeTeam.abbr                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "RICH", "GWS", "MELB", "BL", "COLL…</span>
+<span class="co">#&gt; $ match.homeTeam.nickname             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Richmond", "Giants", "Demons", "L…</span>
+<span class="co">#&gt; $ match.awayTeam.name                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Carlton", "Gold Coast Suns", "Kan…</span>
+<span class="co">#&gt; $ match.awayTeam.timeZone             <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ match.awayTeam.teamId               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_T8096", "CD_T8786", "CD_T8466"…</span>
+<span class="co">#&gt; $ match.awayTeam.abbr                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CARL", "GCFC", "NMFC", "ADEL", "W…</span>
+<span class="co">#&gt; $ match.awayTeam.nickname             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Blues", "Suns", "Kangaroos", "Cro…</span>
+<span class="co">#&gt; $ venue.address                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Melbourne", "Sydney", "Melbourne"…</span>
+<span class="co">#&gt; $ venue.name                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Ikon Park", "Blacktown Internatio…</span>
+<span class="co">#&gt; $ venue.state                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "VIC", "NSW", "VIC", "QLD", "VIC",…</span>
+<span class="co">#&gt; $ venue.timeZone                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Australia/Melbourne", "Australia/…</span>
+<span class="co">#&gt; $ venue.venueId                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_V50", "CD_V402", "CD_V371", "C…</span>
+<span class="co">#&gt; $ venue.abbreviation                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "IKP", "BISP", "CAS", "HP", "VIPC"…</span>
+<span class="co">#&gt; $ venue.capacity                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ venue.groundDimension               <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ venue.latitude                      <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ venue.longitude                     <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ round.name                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Round 1", "Round 1", "Round 1", "…</span>
+<span class="co">#&gt; $ round.year                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2020", "2020", "2020", "2020", "2…</span>
+<span class="co">#&gt; $ round.roundId                       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_R202026401", "CD_R202026401", …</span>
+<span class="co">#&gt; $ round.abbreviation                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Rd 1", "Rd 1", "Rd 1", "Rd 1", "R…</span>
+<span class="co">#&gt; $ round.competitionId                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_S2020264", "CD_S2020264", "CD_…</span>
+<span class="co">#&gt; $ round.roundNumber                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 1, 1, 1</span>
+<span class="co">#&gt; $ status                              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CONCLUDED", "CONCLUDED", "CONCLUD…</span>
+<span class="co">#&gt; $ matchId                             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "CD_M20202640101", "CD_M2020264010…</span>
+<span class="co">#&gt; $ scoreWorm                           <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ scoreMap                            <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ lastUpdated                         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "2020-02-07T11:04:44.540+0000", "2…</span>
+<span class="co">#&gt; $ homeTeamScore.periodScore           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;data.frame[4 x 5]&gt;], [&lt;data.fram…</span>
+<span class="co">#&gt; $ homeTeamScore.rushedBehinds         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 1, 0, 0, 2</span>
+<span class="co">#&gt; $ homeTeamScore.minutesInFront        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 9, 12, 56, 39, 0, 37</span>
+<span class="co">#&gt; $ homeTeamScore.matchScore.totalScore <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 14, 9, 22, 34, 38, 14, 44</span>
+<span class="co">#&gt; $ homeTeamScore.matchScore.goals      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 1, 3, 5, 5, 2, 6</span>
+<span class="co">#&gt; $ homeTeamScore.matchScore.behinds    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 3, 4, 4, 8, 2, 8</span>
+<span class="co">#&gt; $ homeTeamScore.matchScore.superGoals <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ awayTeamScore.periodScore           <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;data.frame[4 x 5]&gt;], [&lt;data.fram…</span>
+<span class="co">#&gt; $ awayTeamScore.rushedBehinds         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 4, 0, 0, 3, 0, 0, 3</span>
+<span class="co">#&gt; $ awayTeamScore.minutesInFront        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 56, 23, 29, 0, 20, 60, 10</span>
+<span class="co">#&gt; $ awayTeamScore.matchScore.totalScore <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 48, 8, 20, 21, 11, 39, 28</span>
+<span class="co">#&gt; $ awayTeamScore.matchScore.goals      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 6, 1, 3, 3, 1, 6, 4</span>
+<span class="co">#&gt; $ awayTeamScore.matchScore.behinds    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 12, 2, 2, 3, 5, 3, 4</span>
+<span class="co">#&gt; $ awayTeamScore.matchScore.superGoals <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> NA, NA, NA, NA, NA, NA, NA</span>
+<span class="co">#&gt; $ matchClock.periods                  <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> [&lt;data.frame[4 x 5]&gt;], [&lt;data.fram…</span>
+<span class="co">#&gt; $ weather.description                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Humid Partly cloudy", "Rain, heav…</span>
+<span class="co">#&gt; $ weather.tempInCelsius               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 26, 21, 28, 18, 26, 26, 18</span>
+<span class="co">#&gt; $ weather.weatherType                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "OVERCAST", "RAIN", "OVERCAST", "M…</span>
+<span class="co">#&gt; $ homeTeamScoreChart.goals            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 2, 1, 3, 5, 5, 2, 6</span>
+<span class="co">#&gt; $ homeTeamScoreChart.leftBehinds      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 2, 3, 1, 3, 0, 2</span>
+<span class="co">#&gt; $ homeTeamScoreChart.rightBehinds     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 1, 1, 1, 3, 2, 4</span>
+<span class="co">#&gt; $ homeTeamScoreChart.leftPosters      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 0, 1, 0, 0</span>
+<span class="co">#&gt; $ homeTeamScoreChart.rightPosters     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 1, 1, 0, 0</span>
+<span class="co">#&gt; $ homeTeamScoreChart.rushedBehinds    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 1, 0, 0, 2</span>
+<span class="co">#&gt; $ homeTeamScoreChart.touchedBehinds   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 0, 0, 0, 0</span>
+<span class="co">#&gt; $ awayTeamScoreChart.goals            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 6, 1, 3, 3, 1, 6, 4</span>
+<span class="co">#&gt; $ awayTeamScoreChart.leftBehinds      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 3, 1, 1, 0, 1, 2, 0</span>
+<span class="co">#&gt; $ awayTeamScoreChart.rightBehinds     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 3, 1, 1, 0, 4, 0, 1</span>
+<span class="co">#&gt; $ awayTeamScoreChart.leftPosters      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 0, 0, 0, 0, 0, 1, 0</span>
+<span class="co">#&gt; $ awayTeamScoreChart.rightPosters     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 0, 0, 0, 0, 0, 0</span>
+<span class="co">#&gt; $ awayTeamScoreChart.rushedBehinds    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 4, 0, 0, 3, 0, 0, 3</span>
+<span class="co">#&gt; $ awayTeamScoreChart.touchedBehinds   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1, 0, 0, 0, 0, 0, 0</span></code></pre></div>
+<div class="section level3">
+<h3 id="detailed-stats">Detailed stats<a class="anchor" aria-label="anchor" href="#detailed-stats"></a>
+</h3>
 <p>The <code><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data()</a></code> can be used to return more detailed data than the match data shown above. It takes a vector of match IDs as an argument. For example, let’s say we want detailed stats for the first 10 games in <code>match_data</code> above. Then we would do:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">first10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">match_data</span>, <span class="fl">10</span><span class="op">)</span>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">first10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">match_data</span>, <span class="fl">10</span><span class="op">)</span>
 <span class="va">first10_ids</span> <span class="op">&lt;-</span> <span class="va">first10</span><span class="op">$</span><span class="va">Match.Id</span>
-<span class="va">first10_ids</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<span class="va">first10_ids</span>
+<span class="co">#&gt; NULL</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">detailed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span><span class="op">(</span><span class="va">first10_ids</span><span class="op">)</span>
-<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">detailed</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">detailed</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; Rows: 0</span>
+<span class="co">#&gt; Columns: 0</span></code></pre>
 </div>
 </div>
   </div>
@@ -257,11 +432,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
+  <p></p>
+<p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -269,6 +446,8 @@
 
   
 
+
+  
 
   </body>
 </html>

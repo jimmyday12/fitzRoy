@@ -25,6 +25,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fitzRoy.html">Get started</a>
 </li>
@@ -66,7 +62,8 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Workflow Examples</li>
+    </li>
+<li class="dropdown-header">Workflow Examples</li>
     <li>
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
@@ -80,7 +77,8 @@
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">APIs</li>
+    </li>
+<li class="dropdown-header">APIs</li>
     <li>
       <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
@@ -88,8 +86,9 @@
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -102,13 +101,14 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/" class="external-link">fitzRoy 1.1.0</a>
     </li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/" class="external-link">fitzRoy 1.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -116,7 +116,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/fitzRoy/">
+  <a href="https://github.com/jimmyday12/fitzRoy/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -137,7 +137,7 @@
       <h1 data-toc-skip>AFLCA Coaches Votes Functions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/aflca-coaches-votes.Rmd"><code>vignettes/aflca-coaches-votes.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/HEAD/vignettes/aflca-coaches-votes.Rmd" class="external-link"><code>vignettes/aflca-coaches-votes.Rmd</code></a></small>
       <div class="hidden name"><code>aflca-coaches-votes.Rmd</code></div>
 
     </div>
@@ -151,13 +151,13 @@
 <li>
 <code>calculate_coaches_vote_possibilities</code> - returns all possible breakdowns of coaches votes between two coaches, given a data frame like the one returned by <code>fetch_coaches_votes</code>.</li>
 </ul>
-<div id="scraping-coaches-votes" class="section level1">
-<h1 class="hasAnchor">
-<a href="#scraping-coaches-votes" class="anchor"></a>Scraping Coaches Votes</h1>
+<div class="section level1">
+<h1 id="scraping-coaches-votes">Scraping Coaches Votes<a class="anchor" aria-label="anchor" href="#scraping-coaches-votes"></a>
+</h1>
 <p>The <code>fetch_coaches_votes</code> function accepts 4 arguments. The <code>season</code>, <code>round_number</code> and <code>comp</code> arguments are common to the core <code>fetch_*</code> functions as per the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Main Fetch Functions Vignette</a>.</p>
 <ul>
 <li>
-<code>season</code> - the season or seasons to return data from. If NULL (the default), will return the season that matches <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date()</a></code>
+<code>season</code> - the season or seasons to return data from. If NULL (the default), will return the season that matches <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>
 </li>
 <li>
 <code>round_number</code>- the round to return data from. If NULL (the default), will return data from all rounds</li>
@@ -166,35 +166,119 @@
 <li>
 <code>team</code> - the team/s whose matches to include. If NULL (the default), will return data from all teams.</li>
 </ul>
-<div id="examples" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h2>
+<div class="section level2">
+<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h2>
 <p>The following are some examples of ways to scrape the AFLCA coaches votes. Firstly, coaches votes can be retrieved for a season (or an array of seasons).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;     Season Round Home.Team Away.Team           Player.Name Coaches.Votes</span>
+<span class="co">#&gt; 1.1   2021     1  Richmond   Carlton  Dustin Martin (RICH)            10</span>
+<span class="co">#&gt; 1.2   2021     1  Richmond   Carlton    Jack Graham (RICH)             7</span>
+<span class="co">#&gt; 1.3   2021     1  Richmond   Carlton   Samuel Walsh (CARL)             6</span>
+<span class="co">#&gt; 1.4   2021     1  Richmond   Carlton  Jack Riewoldt (RICH)             5</span>
+<span class="co">#&gt; 1.5   2021     1  Richmond   Carlton Patrick Cripps (CARL)             1</span>
+<span class="co">#&gt; 1.6   2021     1  Richmond   Carlton   Kane Lambert (RICH)             1</span></code></pre>
 <p>We can also return votes for AFLW.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>We can return just one round instead of the whole fixture.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">24</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">9</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
-<p>We could also return coaches votes for matches including a particular team.</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;     Season Round Home.Team   Away.Team               Player.Name Coaches.Votes</span>
+<span class="co">#&gt; 1.1   2021     1   Carlton Collingwood   Brittany Bonnici (COLL)             9</span>
+<span class="co">#&gt; 1.2   2021     1   Carlton Collingwood     Jaimee Lambert (COLL)             5</span>
+<span class="co">#&gt; 1.3   2021     1   Carlton Collingwood  Madison Prespakis (CARL)             4</span>
+<span class="co">#&gt; 1.4   2021     1   Carlton Collingwood    Ruby Schleicher (COLL)             4</span>
+<span class="co">#&gt; 1.5   2021     1   Carlton Collingwood Stacey Livingstone (COLL)             4</span>
+<span class="co">#&gt; 1.6   2021     1   Carlton Collingwood       Jess Hosking (CARL)             2</span></code></pre>
+<p>We can return just one round instead of the whole fixture.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
-<p>Combining these, we can return coaches votes for a single match.</p>
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">24</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;      Season Round     Home.Team    Away.Team            Player.Name</span>
+<span class="co">#&gt; 29.1   2021    24 Port Adelaide Geelong Cats     Travis Boak (PORT)</span>
+<span class="co">#&gt; 29.2   2021    24 Port Adelaide Geelong Cats     Ollie Wines (PORT)</span>
+<span class="co">#&gt; 29.3   2021    24 Port Adelaide Geelong Cats     Aliir Aliir (PORT)</span>
+<span class="co">#&gt; 29.4   2021    24 Port Adelaide Geelong Cats       Tom Jonas (PORT)</span>
+<span class="co">#&gt; 29.5   2021    24 Port Adelaide Geelong Cats Orazio Fantasia (PORT)</span>
+<span class="co">#&gt; 29.6   2021    24 Port Adelaide Geelong Cats      Jack Henry (GEEL)</span>
+<span class="co">#&gt;      Coaches.Votes</span>
+<span class="co">#&gt; 29.1             9</span>
+<span class="co">#&gt; 29.2             7</span>
+<span class="co">#&gt; 29.3             6</span>
+<span class="co">#&gt; 29.4             3</span>
+<span class="co">#&gt; 29.5             3</span>
+<span class="co">#&gt; 29.6             2</span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">9</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;     Season Round        Home.Team Away.Team           Player.Name Coaches.Votes</span>
+<span class="co">#&gt; 9.1   2021     9 Western Bulldogs  Richmond      Kirsty Lamb (WB)            10</span>
+<span class="co">#&gt; 9.2   2021     9 Western Bulldogs  Richmond  Brooke Lochland (WB)             8</span>
+<span class="co">#&gt; 9.3   2021     9 Western Bulldogs  Richmond  Ellie Blackburn (WB)             5</span>
+<span class="co">#&gt; 9.4   2021     9 Western Bulldogs  Richmond  Katie Brennan (RICH)             4</span>
+<span class="co">#&gt; 9.5   2021     9 Western Bulldogs  Richmond Rebecca Miller (RICH)             2</span>
+<span class="co">#&gt; 9.6   2021     9 Western Bulldogs  Richmond    Eleanor Brown (WB)             1</span></code></pre>
+<p>We could also return coaches votes for matches including a particular team.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;      Season Round   Home.Team        Away.Team             Player.Name</span>
+<span class="co">#&gt; 1.7    2021     1 Collingwood Western Bulldogs       Bailey Smith (WB)</span>
+<span class="co">#&gt; 1.8    2021     1 Collingwood Western Bulldogs      Darcy Moore (COLL)</span>
+<span class="co">#&gt; 1.9    2021     1 Collingwood Western Bulldogs    Bailey Williams (WB)</span>
+<span class="co">#&gt; 1.10   2021     1 Collingwood Western Bulldogs        Jack Macrae (WB)</span>
+<span class="co">#&gt; 1.11   2021     1 Collingwood Western Bulldogs Laitham Vandermeer (WB)</span>
+<span class="co">#&gt; 1.12   2021     1 Collingwood Western Bulldogs         Alex Keath (WB)</span>
+<span class="co">#&gt;      Coaches.Votes</span>
+<span class="co">#&gt; 1.7             10</span>
+<span class="co">#&gt; 1.8              8</span>
+<span class="co">#&gt; 1.9              4</span>
+<span class="co">#&gt; 1.10             4</span>
+<span class="co">#&gt; 1.11             3</span>
+<span class="co">#&gt; 1.12             1</span></code></pre>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;      Season Round Home.Team        Away.Team             Player.Name</span>
+<span class="co">#&gt; 1.8    2021     1  St Kilda Western Bulldogs Georgia Patrikios (STK)</span>
+<span class="co">#&gt; 1.9    2021     1  St Kilda Western Bulldogs    Ellie Blackburn (WB)</span>
+<span class="co">#&gt; 1.10   2021     1  St Kilda Western Bulldogs       Tarni White (STK)</span>
+<span class="co">#&gt; 1.11   2021     1  St Kilda Western Bulldogs        Kirsty Lamb (WB)</span>
+<span class="co">#&gt; 1.12   2021     1  St Kilda Western Bulldogs      Tyanna Smith (STK)</span>
+<span class="co">#&gt; 1.13   2021     1  St Kilda Western Bulldogs  Isabel Huntington (WB)</span>
+<span class="co">#&gt;      Coaches.Votes</span>
+<span class="co">#&gt; 1.8             10</span>
+<span class="co">#&gt; 1.9              8</span>
+<span class="co">#&gt; 1.10             6</span>
+<span class="co">#&gt; 1.11             2</span>
+<span class="co">#&gt; 1.12             2</span>
+<span class="co">#&gt; 1.13             2</span></code></pre>
+<p>Combining these, we can return coaches votes for a single match.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">24</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<pre><code><span class="co">#&gt;       Season Round        Home.Team Away.Team             Player.Name</span>
+<span class="co">#&gt; 29.20   2021    24 Western Bulldogs  Essendon     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 29.21   2021    24 Western Bulldogs  Essendon        Jack Macrae (WB)</span>
+<span class="co">#&gt; 29.22   2021    24 Western Bulldogs  Essendon Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 29.23   2021    24 Western Bulldogs  Essendon     Cody Weightman (WB)</span>
+<span class="co">#&gt; 29.24   2021    24 Western Bulldogs  Essendon      Darcy Parish (ESS)</span>
+<span class="co">#&gt; 29.25   2021    24 Western Bulldogs  Essendon     Aaron Naughton (WB)</span>
+<span class="co">#&gt;       Coaches.Votes</span>
+<span class="co">#&gt; 29.20             7</span>
+<span class="co">#&gt; 29.21             6</span>
+<span class="co">#&gt; 29.22             5</span>
+<span class="co">#&gt; 29.23             5</span>
+<span class="co">#&gt; 29.24             4</span>
+<span class="co">#&gt; 29.25             2</span></code></pre>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">9</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt;     Season Round        Home.Team Away.Team           Player.Name Coaches.Votes</span>
+<span class="co">#&gt; 9.1   2021     9 Western Bulldogs  Richmond      Kirsty Lamb (WB)            10</span>
+<span class="co">#&gt; 9.2   2021     9 Western Bulldogs  Richmond  Brooke Lochland (WB)             8</span>
+<span class="co">#&gt; 9.3   2021     9 Western Bulldogs  Richmond  Ellie Blackburn (WB)             5</span>
+<span class="co">#&gt; 9.4   2021     9 Western Bulldogs  Richmond  Katie Brennan (RICH)             4</span>
+<span class="co">#&gt; 9.5   2021     9 Western Bulldogs  Richmond Rebecca Miller (RICH)             2</span>
+<span class="co">#&gt; 9.6   2021     9 Western Bulldogs  Richmond    Eleanor Brown (WB)             1</span></code></pre>
 </div>
 </div>
-<div id="calculating-coaches-vote-possibilities" class="section level1">
-<h1 class="hasAnchor">
-<a href="#calculating-coaches-vote-possibilities" class="anchor"></a>Calculating Coaches Vote Possibilities</h1>
+<div class="section level1">
+<h1 id="calculating-coaches-vote-possibilities">Calculating Coaches Vote Possibilities<a class="anchor" aria-label="anchor" href="#calculating-coaches-vote-possibilities"></a>
+</h1>
 <p>The <code>calculate_coaches_vote_possibilities</code> function accepts two arguments.</p>
 <ul>
 <li>
@@ -202,20 +286,148 @@
 <li>
 <code>output_type</code> - the way to present the results. <code>"Coach View"</code> Will provide a list of data frames with possible votes by coach. <code>"Player View"</code> will provide a list of data frames with possible votes by player. See the examples section for how these data frames look.</li>
 </ul>
-<div id="examples-1" class="section level2">
-<h2 class="hasAnchor">
-<a href="#examples-1" class="anchor"></a>Examples</h2>
+<div class="section level2">
+<h2 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
+</h2>
 <p>The following code will return the coaches votes for a particular match, then find the possible coaches vote breakdowns.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">24</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/calculate_coaches_vote_possibilities.html">calculate_coaches_vote_possibilities</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"Coach View"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt;   Votes                      C1                      C2</span>
+<span class="co">#&gt; 1     5     Cody Weightman (WB)     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 2     4      Darcy Parish (ESS) Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 3     3        Jack Macrae (WB)        Jack Macrae (WB)</span>
+<span class="co">#&gt; 4     2     Tom Liberatore (WB)     Aaron Naughton (WB)</span>
+<span class="co">#&gt; 5     1 Marcus Bontempelli (WB)     Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt;   Votes                      C1                      C2</span>
+<span class="co">#&gt; 1     5     Cody Weightman (WB)        Jack Macrae (WB)</span>
+<span class="co">#&gt; 2     4      Darcy Parish (ESS)     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 3     3     Tom Liberatore (WB) Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 4     2 Marcus Bontempelli (WB)     Aaron Naughton (WB)</span>
+<span class="co">#&gt; 5     1        Jack Macrae (WB)     Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt;   Votes                      C1                  C2</span>
+<span class="co">#&gt; 1     5 Marcus Bontempelli (WB) Tom Liberatore (WB)</span>
+<span class="co">#&gt; 2     4      Darcy Parish (ESS) Cody Weightman (WB)</span>
+<span class="co">#&gt; 3     3        Jack Macrae (WB)    Jack Macrae (WB)</span>
+<span class="co">#&gt; 4     2     Tom Liberatore (WB) Aaron Naughton (WB)</span>
+<span class="co">#&gt; 5     1     Cody Weightman (WB) Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt;   Votes                      C1                  C2</span>
+<span class="co">#&gt; 1     5 Marcus Bontempelli (WB)    Jack Macrae (WB)</span>
+<span class="co">#&gt; 2     4      Darcy Parish (ESS) Tom Liberatore (WB)</span>
+<span class="co">#&gt; 3     3     Tom Liberatore (WB) Cody Weightman (WB)</span>
+<span class="co">#&gt; 4     2     Cody Weightman (WB) Aaron Naughton (WB)</span>
+<span class="co">#&gt; 5     1        Jack Macrae (WB) Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[5]]</span>
+<span class="co">#&gt;   Votes                      C1                      C2</span>
+<span class="co">#&gt; 1     5     Cody Weightman (WB)        Jack Macrae (WB)</span>
+<span class="co">#&gt; 2     4     Tom Liberatore (WB)      Darcy Parish (ESS)</span>
+<span class="co">#&gt; 3     3 Marcus Bontempelli (WB)     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 4     2     Aaron Naughton (WB) Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 5     1        Jack Macrae (WB)     Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[6]]</span>
+<span class="co">#&gt;   Votes                      C1                  C2</span>
+<span class="co">#&gt; 1     5 Marcus Bontempelli (WB)    Jack Macrae (WB)</span>
+<span class="co">#&gt; 2     4     Tom Liberatore (WB)  Darcy Parish (ESS)</span>
+<span class="co">#&gt; 3     3     Cody Weightman (WB) Tom Liberatore (WB)</span>
+<span class="co">#&gt; 4     2     Aaron Naughton (WB) Cody Weightman (WB)</span>
+<span class="co">#&gt; 5     1        Jack Macrae (WB) Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[7]]</span>
+<span class="co">#&gt;   Votes                  C1                      C2</span>
+<span class="co">#&gt; 1     5 Cody Weightman (WB) Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 2     4    Jack Macrae (WB)     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 3     3 Tom Liberatore (WB)      Darcy Parish (ESS)</span>
+<span class="co">#&gt; 4     2 Aaron Naughton (WB)        Jack Macrae (WB)</span>
+<span class="co">#&gt; 5     1  Darcy Parish (ESS)     Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[8]]</span>
+<span class="co">#&gt;   Votes                      C1                  C2</span>
+<span class="co">#&gt; 1     5 Marcus Bontempelli (WB) Cody Weightman (WB)</span>
+<span class="co">#&gt; 2     4        Jack Macrae (WB) Tom Liberatore (WB)</span>
+<span class="co">#&gt; 3     3     Tom Liberatore (WB)  Darcy Parish (ESS)</span>
+<span class="co">#&gt; 4     2     Aaron Naughton (WB)    Jack Macrae (WB)</span>
+<span class="co">#&gt; 5     1      Darcy Parish (ESS) Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[9]]</span>
+<span class="co">#&gt;   Votes                  C1                      C2</span>
+<span class="co">#&gt; 1     5 Tom Liberatore (WB) Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 2     4  Darcy Parish (ESS)     Cody Weightman (WB)</span>
+<span class="co">#&gt; 3     3    Jack Macrae (WB)        Jack Macrae (WB)</span>
+<span class="co">#&gt; 4     2 Aaron Naughton (WB)     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 5     1 Cody Weightman (WB)     Jordan Ridley (ESS)</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[10]]</span>
+<span class="co">#&gt;   Votes                      C1                      C2</span>
+<span class="co">#&gt; 1     5     Tom Liberatore (WB)     Cody Weightman (WB)</span>
+<span class="co">#&gt; 2     4      Darcy Parish (ESS) Marcus Bontempelli (WB)</span>
+<span class="co">#&gt; 3     3        Jack Macrae (WB)        Jack Macrae (WB)</span>
+<span class="co">#&gt; 4     2     Aaron Naughton (WB)     Tom Liberatore (WB)</span>
+<span class="co">#&gt; 5     1 Marcus Bontempelli (WB)     Jordan Ridley (ESS)</span></code></pre>
 <p>The following code will create a data frame manually, then find the possible coaches vote breakdowns.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>
-                Player.Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Tom Liberatore"</span>,<span class="st">"Jack Macrae"</span>,<span class="st">"Marcus Bontempelli"</span>,<span class="st">"Cody Weightman"</span>,<span class="st">"Darcy Parish"</span>,<span class="st">"Aaron Naughton"</span>,<span class="st">"Jordan Ridley"</span><span class="op">)</span>,
-                Coaches.Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+                Player.Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Tom Liberatore"</span>,<span class="st">"Jack Macrae"</span>,<span class="st">"Marcus Bontempelli"</span>,<span class="st">"Cody Weightman"</span>,<span class="st">"Darcy Parish"</span>,<span class="st">"Aaron Naughton"</span>,<span class="st">"Jordan Ridley"</span><span class="op">)</span>,
+                Coaches.Votes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>
 <span class="op">)</span>
-<span class="fu"><a href="../reference/calculate_coaches_vote_possibilities.html">calculate_coaches_vote_possibilities</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"Player View"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/calculate_coaches_vote_possibilities.html">calculate_coaches_vote_possibilities</a></span><span class="op">(</span><span class="va">df</span>, <span class="st">"Player View"</span><span class="op">)</span>
+<span class="co">#&gt; [[1]]</span>
+<span class="co">#&gt;               Player V1 V2</span>
+<span class="co">#&gt; 1     Tom Liberatore  2  5</span>
+<span class="co">#&gt; 2     Cody Weightman  0  5</span>
+<span class="co">#&gt; 3 Marcus Bontempelli  1  4</span>
+<span class="co">#&gt; 4       Darcy Parish  0  4</span>
+<span class="co">#&gt; 5        Jack Macrae  3  3</span>
+<span class="co">#&gt; 6     Aaron Naughton  0  2</span>
+<span class="co">#&gt; 7      Jordan Ridley  0  1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[2]]</span>
+<span class="co">#&gt;               Player V1 V2</span>
+<span class="co">#&gt; 1        Jack Macrae  1  5</span>
+<span class="co">#&gt; 2     Cody Weightman  0  5</span>
+<span class="co">#&gt; 3     Tom Liberatore  3  4</span>
+<span class="co">#&gt; 4       Darcy Parish  0  4</span>
+<span class="co">#&gt; 5 Marcus Bontempelli  2  3</span>
+<span class="co">#&gt; 6     Aaron Naughton  0  2</span>
+<span class="co">#&gt; 7      Jordan Ridley  0  1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[3]]</span>
+<span class="co">#&gt;               Player V1 V2</span>
+<span class="co">#&gt; 1     Tom Liberatore  2  5</span>
+<span class="co">#&gt; 2 Marcus Bontempelli  0  5</span>
+<span class="co">#&gt; 3     Cody Weightman  1  4</span>
+<span class="co">#&gt; 4       Darcy Parish  0  4</span>
+<span class="co">#&gt; 5        Jack Macrae  3  3</span>
+<span class="co">#&gt; 6     Aaron Naughton  0  2</span>
+<span class="co">#&gt; 7      Jordan Ridley  0  1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[4]]</span>
+<span class="co">#&gt;               Player V1 V2</span>
+<span class="co">#&gt; 1        Jack Macrae  1  5</span>
+<span class="co">#&gt; 2 Marcus Bontempelli  0  5</span>
+<span class="co">#&gt; 3     Tom Liberatore  3  4</span>
+<span class="co">#&gt; 4       Darcy Parish  0  4</span>
+<span class="co">#&gt; 5     Cody Weightman  2  3</span>
+<span class="co">#&gt; 6     Aaron Naughton  0  2</span>
+<span class="co">#&gt; 7      Jordan Ridley  0  1</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; [[5]]</span>
+<span class="co">#&gt;               Player V1 V2</span>
+<span class="co">#&gt; 1     Cody Weightman  0  5</span>
+<span class="co">#&gt; 2 Marcus Bontempelli  0  5</span>
+<span class="co">#&gt; 3     Tom Liberatore  3  4</span>
+<span class="co">#&gt; 4        Jack Macrae  2  4</span>
+<span class="co">#&gt; 5       Darcy Parish  1  3</span>
+<span class="co">#&gt; 6     Aaron Naughton  0  2</span>
+<span class="co">#&gt; 7      Jordan Ridley  0  1</span></code></pre></div>
 </div>
 </div>
   </div>
@@ -231,11 +443,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
+  <p></p>
+<p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -243,6 +457,8 @@
 
   
 
+
+  
 
   </body>
 </html>

@@ -25,6 +25,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/fitzRoy.html">Get started</a>
 </li>
@@ -66,7 +62,8 @@
       <a href="../articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Workflow Examples</li>
+    </li>
+<li class="dropdown-header">Workflow Examples</li>
     <li>
       <a href="../articles/womens-stats.html">AFL Womens Example</a>
     </li>
@@ -80,7 +77,8 @@
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">APIs</li>
+    </li>
+<li class="dropdown-header">APIs</li>
     <li>
       <a href="../articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
@@ -88,8 +86,9 @@
       <a href="../articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="../articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="../articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -102,13 +101,14 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/" class="external-link">fitzRoy 1.1.0</a>
     </li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/" class="external-link">fitzRoy 1.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="../news/index.html">Changelog</a>
     </li>
   </ul>
@@ -116,7 +116,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/fitzRoy/">
+  <a href="https://github.com/jimmyday12/fitzRoy/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -137,7 +137,7 @@
       <h1 data-toc-skip>Main Fetch functions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/master/vignettes/main-fetch-functions.Rmd"><code>vignettes/main-fetch-functions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/HEAD/vignettes/main-fetch-functions.Rmd" class="external-link"><code>vignettes/main-fetch-functions.Rmd</code></a></small>
       <div class="hidden name"><code>main-fetch-functions.Rmd</code></div>
 
     </div>
@@ -146,9 +146,9 @@
     
 <p>The goal of fitzRoy has been to provide a consistent and easy to use interface for accessing data from various sources. As of version 0.3.3.9000 of <code>fitzRoy</code>, the package now contains a much more consistent API to do so. This is with the introduction of the main <code>fetch_*</code> functions.</p>
 <p>Each function uses the same arguments and each argument should behave the same across all of the functions. While there may be some slight differences in behaviour between different sources of data, the goal will be to move towards a much more consistent pattern of behaviour.</p>
-<div id="main-functions" class="section level1">
-<h1 class="hasAnchor">
-<a href="#main-functions" class="anchor"></a>Main functions</h1>
+<div class="section level1">
+<h1 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
+</h1>
 <p>There are a number of main functions</p>
 <ul>
 <li>
@@ -165,13 +165,13 @@
 <code>fetch_player_details</code> - returns details on players such as date of birth, height, weight and debut (depending on source)</li>
 </ul>
 </div>
-<div id="arguments" class="section level1">
-<h1 class="hasAnchor">
-<a href="#arguments" class="anchor"></a>Arguments</h1>
+<div class="section level1">
+<h1 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a>
+</h1>
 <p>Each function generally accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:</p>
 <ul>
 <li>
-<code>season</code> - the season or seasons to return data from. If NULL (the default), will return the season that matches <code><a href="https://rdrr.io/r/base/Sys.time.html">Sys.Date()</a></code>
+<code>season</code> - the season or seasons to return data from. If NULL (the default), will return the season that matches <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>
 </li>
 <li>
 <code>round_number</code>- the round to return data from. If NULL (the default), will return data from all rounds</li>
@@ -181,40 +181,103 @@
 <code>comp</code> - the competition to return data from. Must be one of “AFLM” (default) or “AFLW”. Not all data sources will have AFLW data.</li>
 </ul>
 </div>
-<div id="examples" class="section level1">
-<h1 class="hasAnchor">
-<a href="#examples" class="anchor"></a>Examples</h1>
-<div id="basic-usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#basic-usage" class="anchor"></a>Basic Usage</h2>
+<div class="section level1">
+<h1 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h1>
+<div class="section level2">
+<h2 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
+</h2>
 <p>All of the functions behave the same. The following are some examples using the <code>fetch_fixture</code> function but can equally be applied to any of the family of <code>fetch_</code> functions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 207 × 55</span></span>
+<span class="co">#&gt;       id providerId      utcStartTime     status compSeason.id compSeason.provi…</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>  <span style="text-decoration: underline;">2</span>991 CD_M20210140101 2021-03-18T08:2… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>  <span style="text-decoration: underline;">2</span>986 CD_M20210140102 2021-03-19T08:5… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>  <span style="text-decoration: underline;">2</span>992 CD_M20210140103 2021-03-20T02:4… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>  <span style="text-decoration: underline;">2</span>993 CD_M20210140104 2021-03-20T05:3… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>  <span style="text-decoration: underline;">2</span>994 CD_M20210140105 2021-03-20T08:2… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>  <span style="text-decoration: underline;">2</span>987 CD_M20210140106 2021-03-20T08:4… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>  <span style="text-decoration: underline;">2</span>990 CD_M20210140107 2021-03-21T02:1… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>  <span style="text-decoration: underline;">2</span>989 CD_M20210140108 2021-03-21T04:2… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>  <span style="text-decoration: underline;">2</span>988 CD_M20210140109 2021-03-21T07:1… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>  <span style="text-decoration: underline;">2</span>999 CD_M20210140201 2021-03-25T08:2… CONCL…            34 CD_S2021014      </span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 197 more rows, and 49 more variables: compSeason.name &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   compSeason.shortName &lt;chr&gt;, compSeason.currentRoundNumber &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   round.id &lt;int&gt;, round.providerId &lt;chr&gt;, round.abbreviation &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   round.name &lt;chr&gt;, round.roundNumber &lt;int&gt;, round.byes &lt;list&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   home.team.id &lt;int&gt;, home.team.providerId &lt;chr&gt;, home.team.name &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   home.team.abbreviation &lt;chr&gt;, home.team.nickname &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   home.team.teamType &lt;chr&gt;, home.team.club.id &lt;int&gt;, …</span></span></code></pre>
 <p>This is the same as</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span> </code></pre></div>
 <p>We can return just one round instead of the whole fixture.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
-<p>We could also return the AFLW fixture instead.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 5</span></span>
+<span class="co">#&gt;   compSeason.name       round.name home.team.name  away.team.name   venue.name  </span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2021 Toyota AFL Prem… Round 2    Carlton         Collingwood      MCG         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2021 Toyota AFL Prem… Round 2    Geelong Cats    Brisbane Lions   GMHBA Stadi…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2021 Toyota AFL Prem… Round 2    Sydney Swans    Adelaide Crows   SCG         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2021 Toyota AFL Prem… Round 2    Port Adelaide   Essendon         Adelaide Ov…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2021 Toyota AFL Prem… Round 2    St Kilda        Melbourne        Marvel Stad…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2021 Toyota AFL Prem… Round 2    Gold Coast Suns North Melbourne  Metricon St…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2021 Toyota AFL Prem… Round 2    Hawthorn        Richmond         MCG         </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 2021 Toyota AFL Prem… Round 2    Western Bulldo… West Coast Eagl… Marvel Stad…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 2021 Toyota AFL Prem… Round 2    Fremantle       GWS Giants       Optus Stadi…</span></code></pre>
+<p>We could also return the AFLW fixture instead.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, 
          <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 5</span></span>
+<span class="co">#&gt;    compSeason.name           round.name home.team.name away.team.name venue.name</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021 NAB AFLW Competition Round 1    Carlton        Collingwood    Ikon Park </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021 NAB AFLW Competition Round 1    St Kilda       Western Bulld… RSEA Park </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021 NAB AFLW Competition Round 1    Gold Coast Su… Melbourne      Metricon …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021 NAB AFLW Competition Round 1    West Coast Ea… Adelaide Crows Mineral R…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021 NAB AFLW Competition Round 1    Geelong Cats   Kangaroos      GMHBA Sta…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021 NAB AFLW Competition Round 1    Richmond       Brisbane Lions Swinburne…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021 NAB AFLW Competition Round 1    Fremantle      GWS Giants     Fremantle…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021 NAB AFLW Competition Round 2    Western Bulld… Carlton        Victoria …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021 NAB AFLW Competition Round 2    Collingwood    Geelong Cats   Victoria …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021 NAB AFLW Competition Round 2    Melbourne      Richmond       Casey Fie…</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows</span></span></code></pre>
 <p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 207 × 24</span></span>
+<span class="co">#&gt;    is_grand_final date    hscore ateamid agoals ascore hgoals hteamid localtime </span>
+<span class="co">#&gt;             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>              0 2021-0…    103       7     13     91     15       1 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>              0 2021-0…     94      16     19    125     14       2 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>              0 2021-0…     53      18     10     69      7       4 2021-03-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>              0 2021-0…     91      10     14     92     13       5 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>              0 2021-0…     78      15     13     86     11       9 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>              0 2021-0…     80       6      8     58     11      11 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>              0 2021-0…     65      13     17    117      9      12 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>              0 2021-0…    105       3     11     80     15      14 2021-03-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>              0 2021-0…     83       8      8     58     12      17 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span>              0 2021-0…     85       4     16    106     13       3 2021-03-2…</span>
+<span class="co">#&gt; <span style="color: #949494;"># … with 197 more rows, and 15 more variables: abehinds &lt;int&gt;, tz &lt;chr&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   updated &lt;chr&gt;, ateam &lt;chr&gt;, complete &lt;int&gt;, winnerteamid &lt;int&gt;, year &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   hbehinds &lt;int&gt;, venue &lt;chr&gt;, hteam &lt;chr&gt;, is_final &lt;int&gt;, id &lt;int&gt;,</span></span>
+<span class="co">#&gt; <span style="color: #949494;">#   roundname &lt;chr&gt;, round &lt;int&gt;, winner &lt;chr&gt;</span></span></code></pre>
 <p>It should also be noted that the various sources of data have their own functions that can be called directly.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># The following are the same</span>
 <span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">5</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span>
 <span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture_squiggle</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="womens-data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#womens-data" class="anchor"></a>Womens Data</h2>
+<div class="section level2">
+<h2 id="womens-data">Womens Data<a class="anchor" aria-label="anchor" href="#womens-data"></a>
+</h2>
 <p>With these new functions we now have access to consistent AFLW data for the first time!</p>
 <p>At a high level, any <code>fetch_</code> function will allow you to specify the that <code>comp = "AFLW</code> and will return data. Please note that Womens data only exists when <code>source = "AFL"</code>, which is the default for all <code>fetch_</code> functions.</p>
 <p>Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for specific examples.</p>
@@ -233,11 +296,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
+  <p></p>
+<p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -245,6 +310,8 @@
 
   
 
+
+  
 
   </body>
 </html>

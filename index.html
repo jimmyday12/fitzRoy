@@ -25,6 +25,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -37,18 +39,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/fitzRoy.html">Get started</a>
 </li>
@@ -66,7 +62,8 @@
       <a href="articles/main-fetch-functions.html">Main Fetch functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">Workflow Examples</li>
+    </li>
+<li class="dropdown-header">Workflow Examples</li>
     <li>
       <a href="articles/womens-stats.html">AFL Womens Example</a>
     </li>
@@ -80,7 +77,8 @@
       <a href="articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
     <li class="divider">
-    <li class="dropdown-header">APIs</li>
+    </li>
+<li class="dropdown-header">APIs</li>
     <li>
       <a href="articles/using-squiggle-api.html">Using the Squiggle API</a>
     </li>
@@ -88,8 +86,9 @@
       <a href="articles/using-fryzigg-stats.html">Using Fryzigg API</a>
     </li>
     <li class="divider">
-    <li>
-      <a href="articles/index.html">More...</a>
+    </li>
+<li>
+      <a href="articles/index.html">More articles...</a>
     </li>
   </ul>
 </li>
@@ -102,13 +101,14 @@
   <ul class="dropdown-menu" role="menu">
 <li class="dropdown-header">Releases</li>
     <li>
-      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/">fitzRoy 1.1.0</a>
+      <a href="https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/" class="external-link">fitzRoy 1.1.0</a>
     </li>
     <li>
-      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/">fitzRoy 1.0.0</a>
+      <a href="https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/" class="external-link">fitzRoy 1.0.0</a>
     </li>
     <li class="divider">
-    <li>
+    </li>
+<li>
       <a href="news/index.html">Changelog</a>
     </li>
   </ul>
@@ -116,7 +116,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/jimmyday12/fitzRoy/">
+  <a href="https://github.com/jimmyday12/fitzRoy/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -133,31 +133,30 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="fitzroy-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#fitzroy-" class="anchor"></a>fitzRoy <img src="reference/figures/fitz_hex.png" align="right" width="120" height="139">
+<div class="section level1">
+<div class="page-header"><h1 id="fitzroy-">fitzRoy <img src="reference/figures/fitz_hex.png" align="right" width="120" height="139"><a class="anchor" aria-label="anchor" href="#fitzroy-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p><code>fitzRoy</code> aims to provide a consistent and reliable API to various data sources of both the Mens and Womens competitions of the AFL. These functions provide easy and tidy access to data such as fixtures, results and statistics from various data sources.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>Install the released version of fitzRoy from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"fitzRoy"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"fitzRoy"</span><span class="op">)</span></code></pre></div>
 <p>Or install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"jimmyday12/fitzRoy"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jimmyday12/fitzRoy"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>The primary functions in <code>fitzRoy</code> are the <code>fetch_*</code> functions. These provide access to the most common types of data using a consistent API. View the <a href="https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html">Quick Start Vignette</a> to quickly get going with data analysis.</p>
 <p>The main functions are <code>fetch_fixture</code>, <code>fetch_lineup</code>, <code>fetch_results</code>, <code>fetch_ladder</code> and <code>fetch_player_stats</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -168,9 +167,9 @@
 <span class="fu"><a href="reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span>
 <span class="fu"><a href="reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Hawthorn"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></code></pre></div>
 <p>See vignette on using the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">main fetch functions</a> to learn more about how these functions work.</p>
-<div id="afl-womens-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#afl-womens-data" class="anchor"></a>AFL Womens data</h3>
+<div class="section level3">
+<h3 id="afl-womens-data">AFL Womens data<a class="anchor" aria-label="anchor" href="#afl-womens-data"></a>
+</h3>
 <p>From 2019, we are able to provide access to AFL Women’s data. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for details on how to access it.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span>
@@ -186,60 +185,70 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=fitzRoy">https://​cloud.r-project.org/​package=fitzRoy</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/jimmyday12/fitzRoy/">https://​github.com/​jimmyday12/​fitzRoy/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/jimmyday12/fitzRoy/issues">https://​github.com/​jimmyday12/​fitzRoy/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=fitzRoy" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/jimmyday12/fitzRoy/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/jimmyday12/fitzRoy/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-3" class="external-link">GPL-3</a></li>
 </ul>
 </div>
+
 <div class="community">
-<h2>Community</h2>
+<h2 data-toc-skip>Community</h2>
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
 </ul>
 </div>
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing fitzRoy</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>James Day <br><small class="roles"> Maintainer, author </small>  </li>
 <li>Robert Nguyen <br><small class="roles"> Author </small>  </li>
 <li>Oscar Lane <br><small class="roles"> Author </small>  </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/jimmyday12/FitzRoy/actions"><img src="https://github.com/jimmyday12/FitzRoy/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/jimmyday12/FitzRoy?branch=master"><img src="https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
-<li><a href="https://CRAN.R-project.org/package=fitzRoy"><img src="https://www.r-pkg.org/badges/version/fitzRoy" alt="CRAN status"></a></li>
-<li><a href="http://www.repostatus.org/#active"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a></li>
-<li><a href="https://www.r-pkg.org/pkg/fitzRoy"><img src="https://cranlogs.r-pkg.org/badges/fitzRoy" alt="CRAN RStudio mirror downloads"></a></li>
-<li><a href="https://www.r-pkg.org/pkg/fitzRoy"><img src="https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy" alt="CRAN RStudio total downloads"></a></li>
+<li><a href="https://github.com/jimmyday12/FitzRoy/actions" class="external-link"><img src="https://github.com/jimmyday12/FitzRoy/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/github/jimmyday12/FitzRoy?branch=master" class="external-link"><img src="https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=fitzRoy" class="external-link"><img src="https://www.r-pkg.org/badges/version/fitzRoy" alt="CRAN status"></a></li>
+<li><a href="http://www.repostatus.org/#active" class="external-link"><img src="http://www.repostatus.org/badges/latest/active.svg" alt="Project Status"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/fitzRoy" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/fitzRoy" alt="CRAN RStudio mirror downloads"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/fitzRoy" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/fitzRoy" alt="CRAN RStudio total downloads"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
+  <p></p>
+<p>Developed by James Day, Robert Nguyen, Oscar Lane.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
 </div>
 
       </footer>
@@ -247,6 +256,8 @@
 
   
 
+
+  
 
   </body>
 </html>
