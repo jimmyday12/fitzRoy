@@ -31,6 +31,13 @@ This vignette talks through the main data sources. To fully understand how the `
 ## Fixture
 Firstly, we can return the fixture for a season or particular round. 
 
+```{r}
+not_cran
+online
+eval_param
+
+```
+
 ```{r fetch_fixture_aflw2, eval=FALSE, include=TRUE}
 fetch_fixture(season = 2021, comp = "AFLW") %>%
   select(compSeason.name, round.name, 
