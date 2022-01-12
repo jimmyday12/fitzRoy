@@ -52,14 +52,6 @@ reference:
       - '`get_aflw_cookie`'
       - '`get_afl_cookie`'
       - team_abr_afl
-      
-  - title: Experimental
-    desc: >
-      Experimental functions are a testing ground for new approaches that we
-      believe to be worthy of greater exposure. There is no guarantee that these
-      functions will stay around in the future, so please reach out if you find
-      them useful.
-    contents:
 
   - title: Superseded
     desc: >

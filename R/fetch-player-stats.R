@@ -10,8 +10,7 @@
 #' Squiggle, respectively.
 #'
 #' @inheritParams fetch_ladder
-#' @return
-#' A Tibble with the player stats from the relevant `season` and `round`.
+#' @return A Tibble with the player stats from the relevant `season` and `round`.
 #' @export
 #'
 #' @examples

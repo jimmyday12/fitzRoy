@@ -8,8 +8,7 @@
 #' [fetch_lineup_afl()] can be called directly and return data from AFL website.
 #'
 #' @inheritParams fetch_ladder
-#' @return
-#' A Tibble with the lineup from the relevant `season` and `round`.
+#' @return A Tibble with the lineup from the relevant `season` and `round`.
 #' @export
 #'
 #' @examples

@@ -215,7 +215,6 @@ get_aflw_match_data <- function(start_year = 2017) {
 #' `get_aflw_match_data()`
 #'
 #' @return Dataframe with detailed match data. Each row is a match.
-#' @export
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 #' @export

@@ -18,8 +18,7 @@
 #' @param source One of "AFL" (default), "footywire", "afltables"
 #' @param ... Optional parameters passed onto various functions depending on source.
 #'
-#' @return
-#' A Tibble with the details of the relevant players.
+#' @return A Tibble with the details of the relevant players.
 #' @export
 #'
 #' @examples

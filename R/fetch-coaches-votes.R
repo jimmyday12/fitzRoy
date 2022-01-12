@@ -12,8 +12,7 @@
 #' @param comp One of "AFLM" (default) or "AFLW"
 #' @param team Team or teams whose matches should be retrieved. Defaults to null in which case all teams are used.
 #'
-#' @return
-#' A data frame with columns: Season, Round, Finals, Home.Team, Away.Team, Player.Name, Coaches.Votes
+#' @return A data frame with columns: Season, Round, Finals, Home.Team, Away.Team, Player.Name, Coaches.Votes
 #' @export
 #'
 #' @examples

@@ -8,7 +8,7 @@
 #' function `fetch_coaches_votes`.
 #' @param output_type One of "Coach View", "Player View". Defaults to "Coach View".
 #'
-#' @return
+#' @return Data frame
 #' For output_type "Coach View" - A list of data frames with columns: Votes, C1, C2
 #' For output_type "Player View" - A list of data frames with columns: Player, V1, V2
 #' @export

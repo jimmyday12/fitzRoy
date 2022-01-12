@@ -16,8 +16,7 @@
 #' @param source One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
 #' @param ... Optional parameters passed onto various functions depending on source.
 #'
-#' @return
-#' A Tibble with the ladder from the relevant `season` and `round`.
+#' @return A Tibble with the ladder from the relevant `season` and `round`.
 #' @export
 #'
 #' @examples

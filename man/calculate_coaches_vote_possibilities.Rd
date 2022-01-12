@@ -13,6 +13,7 @@ function \code{fetch_coaches_votes}.}
 \item{output_type}{One of "Coach View", "Player View". Defaults to "Coach View".}
 }
 \value{
+Data frame
 For output_type "Coach View" - A list of data frames with columns: Votes, C1, C2
 For output_type "Player View" - A list of data frames with columns: Player, V1, V2
 }
