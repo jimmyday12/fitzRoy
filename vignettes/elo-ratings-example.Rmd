@@ -13,7 +13,6 @@ vignette: >
 not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
 online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
-eval_param <- FALSE
 
 knitr::opts_chunk$set(
 	eval = eval_param,
@@ -22,6 +21,7 @@ knitr::opts_chunk$set(
 	collapse = TRUE,
 	comment = "#>"
 )
+
 
 results <- fitzRoy:::results_afltables_all
 fixture <- fitzRoy:::fixture_footywire_2019
@@ -65,13 +65,12 @@ head(fixture)
 ```
 
 ## Prepare data
-Before we create our model, some data preparation. In the ELO package we are using, we need a way to identify each round as a separate match, so we'll combine `season` and `Round.Number` into a string as a unique identifier when combined with the team name. We also need a way to tell it when a new season is starting, so we'll create a logical field that indicates if the game is the first game for a team that season. 
+Before we create our model, some data preparation. In the ELO package we are using, we need a way to identify each round as a separate match, so we'll combine `season` and `Round.Number` into a string as a unique identifier when combined with the team name.  
 
 
 ```{r clean_results, eval=eval_param}
 results <- results %>%
-  mutate(seas_rnd = paste0(Season, ".", Round.Number),
-         First.Game = ifelse(Round.Number == 1, TRUE, FALSE))
+  mutate(seas_rnd = paste0(Season, ".", Round.Number))
 
 ```
 
@@ -118,8 +117,8 @@ elo.data <- elo.run(
   map_margin_to_outcome(Home.Points - Away.Points) ~
   adjust(Home.Team, HGA) +
     Away.Team +
-    group(seas_rnd) +
-    regress(First.Game, 1500, carryOver),
+    regress(Season, 1500, carryOver) +
+    group(seas_rnd),
   k = k_val,
   data = results
 )
