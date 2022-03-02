@@ -173,20 +173,20 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 15</span></span>
-<span class="co">#&gt;   firstName surname     id team       season jumperNumber position    providerId</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hannah    Scott     <span style="text-decoration: underline;">1</span>502 Western B…   <span style="text-decoration: underline;">2</span>022           22 MEDIUM_DEF… CD_I10016…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Ashleigh  Guest     <span style="text-decoration: underline;">1</span>630 Western B…   <span style="text-decoration: underline;">2</span>022           19 MEDIUM_DEF… CD_I10044…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Brooke    Lochland  <span style="text-decoration: underline;">1</span>447 Western B…   <span style="text-decoration: underline;">2</span>022            1 MEDIUM_FOR… CD_I10044…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Ellyse    Gamble    <span style="text-decoration: underline;">1</span>445 Western B…   <span style="text-decoration: underline;">2</span>022           14 RUCK        CD_I10053…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Bailey    Hunt      <span style="text-decoration: underline;">1</span>649 Western B…   <span style="text-decoration: underline;">2</span>022           21 MEDIUM_DEF… CD_I10070…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Kirsten   McLeod    <span style="text-decoration: underline;">1</span>668 Western B…   <span style="text-decoration: underline;">2</span>022            6 MEDIUM_FOR… CD_I10070…</span>
+<span class="co">#&gt;   firstName surname     id team          season jumperNumber position providerId</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hannah    Scott     <span style="text-decoration: underline;">1</span>502 Western Bull…   <span style="text-decoration: underline;">2</span>022           22 MEDIUM_… CD_I10016…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Ashleigh  Guest     <span style="text-decoration: underline;">1</span>630 Western Bull…   <span style="text-decoration: underline;">2</span>022           19 MEDIUM_… CD_I10044…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Brooke    Lochland  <span style="text-decoration: underline;">1</span>447 Western Bull…   <span style="text-decoration: underline;">2</span>022            1 MEDIUM_… CD_I10044…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Ellyse    Gamble    <span style="text-decoration: underline;">1</span>445 Western Bull…   <span style="text-decoration: underline;">2</span>022           14 RUCK     CD_I10053…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Bailey    Hunt      <span style="text-decoration: underline;">1</span>649 Western Bull…   <span style="text-decoration: underline;">2</span>022           21 MEDIUM_… CD_I10070…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Kirsten   McLeod    <span style="text-decoration: underline;">1</span>668 Western Bull…   <span style="text-decoration: underline;">2</span>022            6 MEDIUM_… CD_I10070…</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: dateOfBirth &lt;chr&gt;, heightInCm &lt;int&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   weightInKg &lt;int&gt;, recruitedFrom &lt;chr&gt;, debutYear &lt;chr&gt;, draftType &lt;chr&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   data_accessed &lt;date&gt;</span></span></code></pre>
 <p>The list of details returned for AFL.com.au website is below.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 31</span>
 <span class="co">#&gt; Columns: 15</span>
 <span class="co">#&gt; $ firstName     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Hannah", "Ashleigh", "Brooke", "Ellyse", "Bailey", "Kir…</span>
@@ -208,43 +208,44 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Hawthorn"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 948 × 15</span></span>
-<span class="co">#&gt;    Player  Team     Cap `#`   HT    WT    Games  Wins Draws Losses Goals Seasons</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Paddy … Hawth…     1 6     183cm <span style="color: #949494;">"</span>82k…    31     6     1     24    13 1925-1…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Dave E… Hawth…     2 23    175cm <span style="color: #949494;">"</span>70k…     3     0     0      3     5 1925   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Fred F… Hawth…     3 11    183cm <span style="color: #949494;">"</span>84k…    37     6     1     30    10 1925-1…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Jack G… Hawth…     4 14    171cm <span style="color: #949494;">""</span>       40     7     0     33     9 1925-1…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Gil He… Hawth…     5 17    185cm <span style="color: #949494;">"</span>84k…    17     2     0     15     9 1925, …</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Jim Ja… Hawth…     6 1     174cm <span style="color: #949494;">"</span>73k…    22     4     1     17     1 1925-1…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Jim Mc… Hawth…     7 8     175cm <span style="color: #949494;">"</span>73k…    46     6     1     39     7 1925-1…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Stan M… Hawth…     8 3     173cm <span style="color: #949494;">"</span>75k…    17     3     0     14    <span style="color: #BB0000;">NA</span> 1925   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Cyril … Hawth…     9 2     180cm <span style="color: #949494;">"</span>70k…    18     2     1     15     1 1925-1…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Bert O… Hawth…    10 21    182cm <span style="color: #949494;">"</span>80k…    12     2     0     10     6 1925   </span>
+<span class="co">#&gt;    Player   Team    Cap `#`   HT    WT    Games  Wins Draws Losses Goals Seasons</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Paddy B… Hawt…     1 6     183cm <span style="color: #949494;">"</span>82k…    31     6     1     24    13 1925-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Dave El… Hawt…     2 23    175cm <span style="color: #949494;">"</span>70k…     3     0     0      3     5 1925   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Fred Fi… Hawt…     3 11    183cm <span style="color: #949494;">"</span>84k…    37     6     1     30    10 1925-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Jack Gi… Hawt…     4 14    171cm <span style="color: #949494;">""</span>       40     7     0     33     9 1925-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Gil Hen… Hawt…     5 17    185cm <span style="color: #949494;">"</span>84k…    17     2     0     15     9 1925, …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Jim Jac… Hawt…     6 1     174cm <span style="color: #949494;">"</span>73k…    22     4     1     17     1 1925-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Jim McC… Hawt…     7 8     175cm <span style="color: #949494;">"</span>73k…    46     6     1     39     7 1925-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Stan Mc… Hawt…     8 3     173cm <span style="color: #949494;">"</span>75k…    17     3     0     14    <span style="color: #BB0000;">NA</span> 1925   </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Cyril N… Hawt…     9 2     180cm <span style="color: #949494;">"</span>70k…    18     2     1     15     1 1925-1…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Bert Of… Hawt…    10 21    182cm <span style="color: #949494;">"</span>80k…    12     2     0     10     6 1925   </span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 938 more rows, and 3 more variables: Debut &lt;chr&gt;, Last &lt;chr&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   date_accessed &lt;date&gt;</span></span></code></pre>
 <p>The Footywire.com source allows you to specify just the current list of players, which is fairly quick, or all players over time which can be a little slow.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Richmond"</span>, source <span class="op">=</span> <span class="st">"footywire"</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 43 × 11</span></span>
-<span class="co">#&gt;    No    surname  first_name Games Age    `Date of Birth` Height Weight Origin  </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16    Aarts    Jake       34    27yr … 8 Dec 1994      177cm  76kg   Richmon…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 7     Baker    Liam       64    23yr … 27 Jan 1998     173cm  72kg   Subiaco </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 21    Balta    Noah       44    22yr … 23 Oct 1999     194cm  102kg  Calder …</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 41    Banks    Sam        0     18yr … 2 Apr 2003      186cm  71kg   Tasmani…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 29    Bolton   Shai       67    23yr … 8 Dec 1998      175cm  77kg   South F…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 35    Broad    Nathan     84    28yr … 15 Apr 1993     192cm  89kg   Swan Di…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 30    Brown    Tom        0     18yr … 30 Jul 2003     186cm  77kg   Murray …</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 22    Caddy    Josh       171   29yr … 28 Sep 1992     186cm  87kg   Norther…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 11    Castagna Jason      117   25yr … 12 Jul 1996     182cm  82kg   Norther…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 42    Clarke   Judson     0     18yr … 17 Oct 2003     179cm  69kg   Dandeno…</span>
+<span class="co">#&gt;    No    surname  first_name Games Age      `Date of Birth` Height Weight Origin</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 16    Aarts    Jake       34    27yr 1m… 8 Dec 1994      177cm  76kg   Richm…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 7     Baker    Liam       64    23yr 11… 27 Jan 1998     173cm  72kg   Subia…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 21    Balta    Noah       44    22yr 2m… 23 Oct 1999     194cm  102kg  Calde…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 41    Banks    Sam        0     18yr 9m… 2 Apr 2003      186cm  71kg   Tasma…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 29    Bolton   Shai       67    23yr 1m… 8 Dec 1998      175cm  77kg   South…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 35    Broad    Nathan     84    28yr 8m… 15 Apr 1993     192cm  89kg   Swan …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 30    Brown    Tom        0     18yr 5m… 30 Jul 2003     186cm  77kg   Murra…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 22    Caddy    Josh       171   29yr 3m… 28 Sep 1992     186cm  87kg   North…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 11    Castagna Jason      117   25yr 5m… 12 Jul 1996     182cm  82kg   North…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 42    Clarke   Judson     0     18yr 2m… 17 Oct 2003     179cm  69kg   Dande…</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 33 more rows, and 2 more variables: Position_1 &lt;chr&gt;, Position_2 &lt;chr&gt;</span></span></code></pre>
 <p>One challenge is that each source accepts different values for the <code>team</code> argument. There is a helper function that will return an error if the wrong team is supplied and provide a list of acceptable values for that specific source.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Greater Western Sydney"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span>
 <span class="co">#&gt; → For the afltables source, details are returned for all seasons. Ignoring `current` argument</span>
 <span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Fetching player details for Greater Western Sydney</span>
-<span class="co">#&gt; Error: Greater Western Sydney is not a valid input for afltables teams.</span>
+<span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `team_check_afltables()`:</span></span>
+<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Greater Western Sydney is not a valid input for afltables teams.</span>
 <span class="co">#&gt; Should be one of Adelaide, Brisbane Lions, Brisbane Bears, Carlton, Collingwood, Essendon, Fitzroy, Fremantle, GWS, Geelong, Gold Coast, Hawthorn, Melbourne, North Melbourne, Kangaroos, Port Adelaide, Richmond, St Kilda, Sydney, South Melbourne, West Coast, University, Western Bulldogs, Footscray</span>
 <span class="co">#&gt; <span style="color: #BB0000;">✖</span> Fetching player details for Greater Western Sydney ... failed</span>
 <span class="co">#&gt; </span></code></pre></div>
@@ -268,7 +269,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

@@ -187,18 +187,18 @@
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 294 × 6</span></span>
-<span class="co">#&gt;    round.name status    teamName player.playerName… player.playerNam… teamStatus</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Round 1    CONCLUDED Carlton  Brooke             Vernon            FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Round 1    CONCLUDED Carlton  Natalie            Plane             FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Round 1    CONCLUDED Carlton  Vaomua             Laloifi           FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Round 1    CONCLUDED Carlton  Charlotte          Wilson            FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Round 1    CONCLUDED Carlton  Kerryn             Harrington        FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Round 1    CONCLUDED Carlton  Lauren             Brazzale          FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Round 1    CONCLUDED Carlton  Elise              O'Dea             FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Round 1    CONCLUDED Carlton  Katie              Loynes            FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Round 1    CONCLUDED Carlton  Abbie              McKay             FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Round 1    CONCLUDED Carlton  Tayla              Harris            FINAL_TEAM</span>
+<span class="co">#&gt;    round.name status    teamName player.playerName.… player.playerNa… teamStatus</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Round 1    CONCLUDED Carlton  Brooke              Vernon           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Round 1    CONCLUDED Carlton  Natalie             Plane            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Round 1    CONCLUDED Carlton  Vaomua              Laloifi          FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Round 1    CONCLUDED Carlton  Charlotte           Wilson           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Round 1    CONCLUDED Carlton  Kerryn              Harrington       FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Round 1    CONCLUDED Carlton  Lauren              Brazzale         FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Round 1    CONCLUDED Carlton  Elise               O'Dea            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Round 1    CONCLUDED Carlton  Katie               Loynes           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Round 1    CONCLUDED Carlton  Abbie               McKay            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Round 1    CONCLUDED Carlton  Tayla               Harris           FINAL_TEAM</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 284 more rows</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -210,15 +210,15 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span> <span class="va">match.date</span>, <span class="va">match.name</span>,
          <span class="va">homeTeamScore.matchScore.totalScore</span>, <span class="va">awayTeamScore.matchScore.totalScore</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 7 × 4</span></span>
-<span class="co">#&gt;   match.date          match.name       homeTeamScore.match… awayTeamScore.match…</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020-02-07 <span style="color: #949494;">08:45:00</span> Richmond Vs Car…                   14                   48</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020-02-08 <span style="color: #949494;">02:10:00</span> GWS Giants Vs G…                    9                    8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020-02-08 <span style="color: #949494;">04:10:00</span> Melbourne Vs Ka…                   22                   20</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020-02-08 <span style="color: #949494;">06:10:00</span> Brisbane Lions …                   34                   21</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2020-02-09 <span style="color: #949494;">02:10:00</span> Collingwood Vs …                   38                   11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-02-09 <span style="color: #949494;">04:10:00</span> St Kilda Vs Wes…                   14                   39</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2020-02-09 <span style="color: #949494;">06:10:00</span> Fremantle Vs Ge…                   44                   28</span></code></pre>
+<span class="co">#&gt;   match.date          match.name               homeTeamScore.m… awayTeamScore.m…</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                               <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2020-02-07 <span style="color: #949494;">08:45:00</span> Richmond Vs Carlton                    14               48</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2020-02-08 <span style="color: #949494;">02:10:00</span> GWS Giants Vs Gold Coas…                9                8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2020-02-08 <span style="color: #949494;">04:10:00</span> Melbourne Vs Kangaroos                 22               20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2020-02-08 <span style="color: #949494;">06:10:00</span> Brisbane Lions Vs Adela…               34               21</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2020-02-09 <span style="color: #949494;">02:10:00</span> Collingwood Vs West Coa…               38               11</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2020-02-09 <span style="color: #949494;">04:10:00</span> St Kilda Vs Western Bul…               14               39</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2020-02-09 <span style="color: #949494;">06:10:00</span> Fremantle Vs Geelong Ca…               44               28</span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="ladder">Ladder<a class="anchor" aria-label="anchor" href="#ladder"></a>
@@ -255,18 +255,18 @@
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">player.player.player.givenName</span><span class="op">:</span><span class="va">clearances.totalClearances</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 294 × 46</span></span>
-<span class="co">#&gt;    player.player.pl… player.player.pl… teamId gamesPlayed timeOnGroundPer… goals</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Gabrielle         Seymour           CD_T8… <span style="color: #BB0000;">NA</span>                        93     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Kodi              Jacques           CD_T8… <span style="color: #BB0000;">NA</span>                        74     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Sabrina           Frederick         CD_T8… <span style="color: #BB0000;">NA</span>                        94     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Hannah            Burchell          CD_T8… <span style="color: #BB0000;">NA</span>                        60     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Tayla             Stahl             CD_T8… <span style="color: #BB0000;">NA</span>                        74     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Katie             Brennan           CD_T8… <span style="color: #BB0000;">NA</span>                        94     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Madeline          Brancatisano      CD_T8… <span style="color: #BB0000;">NA</span>                        67     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Laura             Bailey            CD_T8… <span style="color: #BB0000;">NA</span>                        70     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Monique           Conti             CD_T8… <span style="color: #BB0000;">NA</span>                        85     0</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Christina         Bernardi          CD_T8… <span style="color: #BB0000;">NA</span>                        70     0</span>
+<span class="co">#&gt;    player.player.pla… player.player.p… teamId gamesPlayed timeOnGroundPer… goals</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Gabrielle          Seymour          CD_T8… <span style="color: #BB0000;">NA</span>                        93     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Kodi               Jacques          CD_T8… <span style="color: #BB0000;">NA</span>                        74     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Sabrina            Frederick        CD_T8… <span style="color: #BB0000;">NA</span>                        94     1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Hannah             Burchell         CD_T8… <span style="color: #BB0000;">NA</span>                        60     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Tayla              Stahl            CD_T8… <span style="color: #BB0000;">NA</span>                        74     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Katie              Brennan          CD_T8… <span style="color: #BB0000;">NA</span>                        94     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Madeline           Brancatisano     CD_T8… <span style="color: #BB0000;">NA</span>                        67     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Laura              Bailey           CD_T8… <span style="color: #BB0000;">NA</span>                        70     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Monique            Conti            CD_T8… <span style="color: #BB0000;">NA</span>                        85     0</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Christina          Bernardi         CD_T8… <span style="color: #BB0000;">NA</span>                        70     0</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 284 more rows, and 40 more variables: behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   kicks &lt;dbl&gt;, handballs &lt;dbl&gt;, disposals &lt;dbl&gt;, marks &lt;dbl&gt;, bounces &lt;dbl&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   tackles &lt;dbl&gt;, contestedPossessions &lt;dbl&gt;, uncontestedPossessions &lt;dbl&gt;,</span></span>
@@ -284,14 +284,14 @@
 
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 15</span></span>
-<span class="co">#&gt;   firstName surname     id team       season jumperNumber position    providerId</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hannah    Scott     <span style="text-decoration: underline;">1</span>502 Western B…   <span style="text-decoration: underline;">2</span>022           22 MEDIUM_DEF… CD_I10016…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Ashleigh  Guest     <span style="text-decoration: underline;">1</span>630 Western B…   <span style="text-decoration: underline;">2</span>022           19 MEDIUM_DEF… CD_I10044…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Brooke    Lochland  <span style="text-decoration: underline;">1</span>447 Western B…   <span style="text-decoration: underline;">2</span>022            1 MEDIUM_FOR… CD_I10044…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Ellyse    Gamble    <span style="text-decoration: underline;">1</span>445 Western B…   <span style="text-decoration: underline;">2</span>022           14 RUCK        CD_I10053…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Bailey    Hunt      <span style="text-decoration: underline;">1</span>649 Western B…   <span style="text-decoration: underline;">2</span>022           21 MEDIUM_DEF… CD_I10070…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Kirsten   McLeod    <span style="text-decoration: underline;">1</span>668 Western B…   <span style="text-decoration: underline;">2</span>022            6 MEDIUM_FOR… CD_I10070…</span>
+<span class="co">#&gt;   firstName surname     id team          season jumperNumber position providerId</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> Hannah    Scott     <span style="text-decoration: underline;">1</span>502 Western Bull…   <span style="text-decoration: underline;">2</span>022           22 MEDIUM_… CD_I10016…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> Ashleigh  Guest     <span style="text-decoration: underline;">1</span>630 Western Bull…   <span style="text-decoration: underline;">2</span>022           19 MEDIUM_… CD_I10044…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> Brooke    Lochland  <span style="text-decoration: underline;">1</span>447 Western Bull…   <span style="text-decoration: underline;">2</span>022            1 MEDIUM_… CD_I10044…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> Ellyse    Gamble    <span style="text-decoration: underline;">1</span>445 Western Bull…   <span style="text-decoration: underline;">2</span>022           14 RUCK     CD_I10053…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> Bailey    Hunt      <span style="text-decoration: underline;">1</span>649 Western Bull…   <span style="text-decoration: underline;">2</span>022           21 MEDIUM_… CD_I10070…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> Kirsten   McLeod    <span style="text-decoration: underline;">1</span>668 Western Bull…   <span style="text-decoration: underline;">2</span>022            6 MEDIUM_… CD_I10070…</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: dateOfBirth &lt;chr&gt;, heightInCm &lt;int&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   weightInKg &lt;int&gt;, recruitedFrom &lt;chr&gt;, debutYear &lt;chr&gt;, draftType &lt;chr&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   data_accessed &lt;date&gt;</span></span></code></pre>
@@ -325,7 +325,7 @@
 <code class="sourceCode R"><span class="va">match_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
 <p>Note that there will be warnings if a fixture is available but no match data has been added yet. If this is the case, make sure you don’t try to request detailed match stats for these match IDs.</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">match_data</span><span class="op">)</span>
+<code class="sourceCode R"><span class="fu"><a href="https://dplyr.tidyverse.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">match_data</span><span class="op">)</span>
 <span class="co">#&gt; Rows: 7</span>
 <span class="co">#&gt; Columns: 75</span>
 <span class="co">#&gt; $ match.name                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "Richmond Vs Carlton", "GWS Giants…</span>
@@ -414,7 +414,7 @@
 <span class="co">#&gt; NULL</span></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">detailed</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_aflw_detailed_data.html">get_aflw_detailed_data</a></span><span class="op">(</span><span class="va">first10_ids</span><span class="op">)</span>
-<span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">detailed</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="https://dplyr.tidyverse.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">detailed</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; Rows: 0</span>
 <span class="co">#&gt; Columns: 0</span></code></pre>
 </div>
@@ -438,7 +438,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

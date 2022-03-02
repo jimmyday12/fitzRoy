@@ -204,18 +204,18 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">utcStartTime</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 68 × 5</span></span>
-<span class="co">#&gt;    utcStartTime      round.name home.team.name  away.team.name  venue.name      </span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021-01-28T08:15… Round 1    Carlton         Collingwood     Ikon Park       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021-01-29T08:10… Round 1    St Kilda        Western Bulldo… RSEA Park       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021-01-30T04:10… Round 1    Gold Coast Suns Melbourne       Metricon Stadium</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021-01-30T06:10… Round 1    West Coast Eag… Adelaide Crows  Mineral Resourc…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021-01-31T01:10… Round 1    Geelong Cats    Kangaroos       GMHBA Stadium   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021-01-31T03:10… Round 1    Richmond        Brisbane Lions  Swinburne Centre</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021-01-31T05:10… Round 1    Fremantle       GWS Giants      Fremantle Oval  </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021-02-05T08:45… Round 2    Western Bulldo… Carlton         Victoria Univer…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021-02-06T04:10… Round 2    Collingwood     Geelong Cats    Victoria Park   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021-02-06T06:10… Round 2    Melbourne       Richmond        Casey Fields    </span>
+<span class="co">#&gt;    utcStartTime              round.name home.team.name away.team.name venue.name</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> 2021-01-28T08:15:00.000+… Round 1    Carlton        Collingwood    Ikon Park </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> 2021-01-29T08:10:00.000+… Round 1    St Kilda       Western Bulld… RSEA Park </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> 2021-01-30T04:10:00.000+… Round 1    Gold Coast Su… Melbourne      Metricon …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> 2021-01-30T06:10:00.000+… Round 1    West Coast Ea… Adelaide Crows Mineral R…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> 2021-01-31T01:10:00.000+… Round 1    Geelong Cats   Kangaroos      GMHBA Sta…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> 2021-01-31T03:10:00.000+… Round 1    Richmond       Brisbane Lions Swinburne…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> 2021-01-31T05:10:00.000+… Round 1    Fremantle      GWS Giants     Fremantle…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> 2021-02-05T08:45:00.000+… Round 2    Western Bulld… Carlton        Victoria …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021-02-06T04:10:00.000+… Round 2    Collingwood    Geelong Cats   Victoria …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021-02-06T06:10:00.000+… Round 2    Melbourne      Richmond       Casey Fie…</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows</span></span></code></pre>
 <p>If wanted, you could return just a single round.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -223,17 +223,17 @@
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">utcStartTime</span>, <span class="va">round.name</span>, 
          <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 5</span></span>
-<span class="co">#&gt;   utcStartTime           round.name home.team.name   away.team.name venue.name  </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2021-04-15T09:20:00.0… Round 5    St Kilda         Richmond       Marvel Stad…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2021-04-16T10:10:00.0… Round 5    West Coast Eagl… Collingwood    Optus Stadi…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2021-04-17T06:35:00.0… Round 5    Western Bulldogs Gold Coast Su… Marvel Stad…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2021-04-17T06:35:00.0… Round 5    Sydney Swans     GWS Giants     SCG         </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2021-04-17T09:25:00.0… Round 5    Carlton          Port Adelaide  MCG         </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2021-04-17T09:25:00.0… Round 5    Brisbane Lions   Essendon       Gabba       </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2021-04-18T03:10:00.0… Round 5    Adelaide Crows   Fremantle      Adelaide Ov…</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 2021-04-18T05:20:00.0… Round 5    Hawthorn         Melbourne      MCG         </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 2021-04-18T06:40:00.0… Round 5    Geelong Cats     North Melbour… GMHBA Stadi…</span></code></pre>
+<span class="co">#&gt;   utcStartTime               round.name home.team.name away.team.name venue.name</span>
+<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2021-04-15T09:20:00.000+0… Round 5    St Kilda       Richmond       Marvel St…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2021-04-16T10:10:00.000+0… Round 5    West Coast Ea… Collingwood    Optus Sta…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2021-04-17T06:35:00.000+0… Round 5    Western Bulld… Gold Coast Su… Marvel St…</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2021-04-17T06:35:00.000+0… Round 5    Sydney Swans   GWS Giants     SCG       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2021-04-17T09:25:00.000+0… Round 5    Carlton        Port Adelaide  MCG       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2021-04-17T09:25:00.000+0… Round 5    Brisbane Lions Essendon       Gabba     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">7</span> 2021-04-18T03:10:00.000+0… Round 5    Adelaide Crows Fremantle      Adelaide …</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">8</span> 2021-04-18T05:20:00.000+0… Round 5    Hawthorn       Melbourne      MCG       </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 2021-04-18T06:40:00.000+0… Round 5    Geelong Cats   North Melbour… GMHBA Sta…</span></code></pre>
 <p>You can get results data from other sources including <code>Squiggle</code> and <code>Footywire</code>. The default source for <code><a href="../reference/fetch_results.html">fetch_results()</a></code> is the AFL.com.au website.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">fixture_afl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span>
@@ -252,18 +252,18 @@
          <span class="va">player.playerName.givenName</span>,
          <span class="va">player.playerName.surname</span>, <span class="va">teamStatus</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 294 × 6</span></span>
-<span class="co">#&gt;    round.name status    teamName player.playerName… player.playerNam… teamStatus</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Round 1    CONCLUDED Carlton  Brooke             Vernon            FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Round 1    CONCLUDED Carlton  Natalie            Plane             FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Round 1    CONCLUDED Carlton  Vaomua             Laloifi           FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Round 1    CONCLUDED Carlton  Charlotte          Wilson            FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Round 1    CONCLUDED Carlton  Kerryn             Harrington        FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Round 1    CONCLUDED Carlton  Lauren             Brazzale          FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Round 1    CONCLUDED Carlton  Elise              O'Dea             FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Round 1    CONCLUDED Carlton  Katie              Loynes            FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Round 1    CONCLUDED Carlton  Abbie              McKay             FINAL_TEAM</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Round 1    CONCLUDED Carlton  Tayla              Harris            FINAL_TEAM</span>
+<span class="co">#&gt;    round.name status    teamName player.playerName.… player.playerNa… teamStatus</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Round 1    CONCLUDED Carlton  Brooke              Vernon           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> Round 1    CONCLUDED Carlton  Natalie             Plane            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Round 1    CONCLUDED Carlton  Vaomua              Laloifi          FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Round 1    CONCLUDED Carlton  Charlotte           Wilson           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Round 1    CONCLUDED Carlton  Kerryn              Harrington       FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> Round 1    CONCLUDED Carlton  Lauren              Brazzale         FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Round 1    CONCLUDED Carlton  Elise               O'Dea            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Round 1    CONCLUDED Carlton  Katie               Loynes           FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Round 1    CONCLUDED Carlton  Abbie               McKay            FINAL_TEAM</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Round 1    CONCLUDED Carlton  Tayla               Harris           FINAL_TEAM</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 284 more rows</span></span></code></pre>
 </div>
 <div class="section level3">
@@ -322,18 +322,18 @@
          <span class="va">homeTeamScore.matchScore.totalScore</span>,
          <span class="va">awayTeamScore.matchScore.totalScore</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 46 × 5</span></span>
-<span class="co">#&gt;    match.name    venue.name     round.name homeTeamScore.mat… awayTeamScore.mat…</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Richmond Vs … Ikon Park      Round 1                    14                 48</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> GWS Giants V… Blacktown Int… Round 1                     9                  8</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Melbourne Vs… Casey Fields   Round 1                    22                 20</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Brisbane Lio… Hickey Park    Round 1                    34                 21</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Collingwood … Victoria Park  Round 1                    38                 11</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> St Kilda Vs … RSEA Park      Round 1                    14                 39</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Fremantle Vs… Fremantle Oval Round 1                    44                 28</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Western Bull… Victoria Univ… Round 2                    12                 32</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Kangaroos Vs… University of… Round 2                    37                 19</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Gold Coast S… Metricon Stad… Round 2                    33                 22</span>
+<span class="co">#&gt;    match.name            venue.name round.name homeTeamScore.m… awayTeamScore.m…</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> Richmond Vs Carlton   Ikon Park  Round 1                  14               48</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> GWS Giants Vs Gold C… Blacktown… Round 1                   9                8</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> Melbourne Vs Kangaro… Casey Fie… Round 1                  22               20</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> Brisbane Lions Vs Ad… Hickey Pa… Round 1                  34               21</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> Collingwood Vs West … Victoria … Round 1                  38               11</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> St Kilda Vs Western … RSEA Park  Round 1                  14               39</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> Fremantle Vs Geelong… Fremantle… Round 1                  44               28</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> Western Bulldogs Vs … Victoria … Round 2                  12               32</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Kangaroos Vs GWS Gia… Universit… Round 2                  37               19</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Gold Coast Suns Vs R… Metricon … Round 2                  33               22</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 36 more rows</span></span></code></pre>
 </div>
 <div class="section level3">
@@ -382,18 +382,18 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,932 × 68</span></span>
-<span class="co">#&gt;    providerId  utcStartTime  status compSeason.shor… round.name round.roundNumb…</span>
-<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> CD_M202026… 2020-02-07T0… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt;    providerId   utcStartTime status compSeason.shor… round.name round.roundNumb…</span>
+<span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>            <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
+<span class="co">#&gt; <span style="color: #BCBCBC;">10</span> CD_M2020264… 2020-02-07T… CONCL… 2020 AFL Womens  Round 1                   1</span>
 <span class="co">#&gt; <span style="color: #949494;"># … with 1,922 more rows, and 62 more variables: venue.name &lt;chr&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   home.team.club.name &lt;chr&gt;, away.team.club.name &lt;chr&gt;,</span></span>
 <span class="co">#&gt; <span style="color: #949494;">#   player.jumperNumber &lt;int&gt;, player.photoURL &lt;chr&gt;,</span></span>
@@ -460,7 +460,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

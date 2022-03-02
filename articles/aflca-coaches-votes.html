@@ -151,9 +151,9 @@
 <li>
 <code>calculate_coaches_vote_possibilities</code> - returns all possible breakdowns of coaches votes between two coaches, given a data frame like the one returned by <code>fetch_coaches_votes</code>.</li>
 </ul>
-<div class="section level1">
-<h1 id="scraping-coaches-votes">Scraping Coaches Votes<a class="anchor" aria-label="anchor" href="#scraping-coaches-votes"></a>
-</h1>
+<div class="section level2">
+<h2 id="scraping-coaches-votes">Scraping Coaches Votes<a class="anchor" aria-label="anchor" href="#scraping-coaches-votes"></a>
+</h2>
 <p>The <code>fetch_coaches_votes</code> function accepts 4 arguments. The <code>season</code>, <code>round_number</code> and <code>comp</code> arguments are common to the core <code>fetch_*</code> functions as per the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Main Fetch Functions Vignette</a>.</p>
 <ul>
 <li>
@@ -166,9 +166,9 @@
 <li>
 <code>team</code> - the team/s whose matches to include. If NULL (the default), will return data from all teams.</li>
 </ul>
-<div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
-</h2>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
 <p>The following are some examples of ways to scrape the AFLCA coaches votes. Firstly, coaches votes can be retrieved for a season (or an array of seasons).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
@@ -276,9 +276,9 @@
 <span class="co">#&gt; 9.6   2021     9 Western Bulldogs  Richmond    Eleanor Brown (WB)             1</span></code></pre>
 </div>
 </div>
-<div class="section level1">
-<h1 id="calculating-coaches-vote-possibilities">Calculating Coaches Vote Possibilities<a class="anchor" aria-label="anchor" href="#calculating-coaches-vote-possibilities"></a>
-</h1>
+<div class="section level2">
+<h2 id="calculating-coaches-vote-possibilities">Calculating Coaches Vote Possibilities<a class="anchor" aria-label="anchor" href="#calculating-coaches-vote-possibilities"></a>
+</h2>
 <p>The <code>calculate_coaches_vote_possibilities</code> function accepts two arguments.</p>
 <ul>
 <li>
@@ -286,9 +286,9 @@
 <li>
 <code>output_type</code> - the way to present the results. <code>"Coach View"</code> Will provide a list of data frames with possible votes by coach. <code>"Player View"</code> will provide a list of data frames with possible votes by player. See the examples section for how these data frames look.</li>
 </ul>
-<div class="section level2">
-<h2 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
-</h2>
+<div class="section level3">
+<h3 id="examples-1">Examples<a class="anchor" aria-label="anchor" href="#examples-1"></a>
+</h3>
 <p>The following code will return the coaches votes for a particular match, then find the possible coaches vote breakdowns.</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">24</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, team <span class="op">=</span> <span class="st">"Western Bulldogs"</span><span class="op">)</span>
@@ -449,7 +449,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
