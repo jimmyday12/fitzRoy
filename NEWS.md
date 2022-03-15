@@ -1,5 +1,7 @@
 # fitzRoy (development version)
 
+* Fixed bug that was preventing Fremantle player details from being returned in `fetch_player_details_footwire` ([#169](https://github.com/jimmyday12/fitzRoy/issues/169))
+
 # fitzRoy 1.1.0
 
 ## New features

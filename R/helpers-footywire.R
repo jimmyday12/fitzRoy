@@ -27,6 +27,7 @@ team_check_footywire <- function(team) {
 
 #' @keywords internal
 #' @noRd
+
 get_team_abrev_footywire <- function(team) {
   team_abr <- dplyr::case_when(
     team == "Adelaide" ~ "adelaide-crows",
@@ -34,6 +35,7 @@ get_team_abrev_footywire <- function(team) {
     team == "Carlton" ~ "carlton-blues",
     team == "Collingwood" ~ "collingwood-magpies",
     team == "Essendon" ~ "essendon-bombers",
+    team == "Fremantle" ~ "fremantle-dockers",
     team == "GWS" ~ "greater-western-sydney-giants",
     team == "Geelong" ~ "geelong-cats",
     team == "Gold Coast" ~ "gold-coast-suns",
