@@ -77,13 +77,13 @@ fetch_lineup_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 
   # get cookie
   cookie <- get_afl_cookie()
-
-
   # Loop through each match
-  cli_id2 <- cli::cli_process_start("Fetching lineups for {.val {length(ids)} match{?es}}.")
+  cli_id2 <- cli::cli_process_start("Checking lineups for {.emph {length(ids)}} match{?es}.")
   lineup_df <- purrr::map_dfr(ids, fetch_match_roster_afl, cookie)
   cli::cli_process_done(cli_id2)
 
+  if (length(lineup_df) == 0) return(NULL)
+     
   # add match details
   match_details <- matches %>%
     dplyr::select(

@@ -244,7 +244,11 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
       "x-media-mis-token" = cookie
     )
   )
-
+  
+  if(httr::status_code(resp) == 404) {
+    cli::cli_alert_warning("No match found for match ID {.val {id}}. Returning NULL")
+    return(NULL)
+  }
   cont <- parse_resp_afl(resp)
 
   cont$matchRoster$homeTeam$clubDebuts <- list()
