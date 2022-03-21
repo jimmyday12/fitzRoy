@@ -5,8 +5,7 @@
 
 <!-- badges: start -->
 
-[![R build
-status](https://github.com/jimmyday12/FitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/FitzRoy/actions)
+[![R-CMD-check](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions)
 [![Coverage
 status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
 [![CRAN
