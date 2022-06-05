@@ -174,7 +174,8 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 #' @export
 fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_results_df = NULL) {
   suppressWarnings(if (is.null(match_results_df)) {
-    match_results_df <- fetch_results_afltables(season, round_number)
+    match_results_df <- purrr::map_dfr(.x = c(1:round_number),
+                                       .f  = ~fetch_results_afltables(season, .x))
   })
 
   # first some cleaning up
