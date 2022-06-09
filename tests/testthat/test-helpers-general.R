@@ -17,7 +17,10 @@ test_that("check_comp works for various inputs", {
 
   expect_equal(check_comp("AFLW"), "AFLW")
   expect_equal(check_comp("AFLM"), "AFLM")
-  expect_error(check_comp("WAFL"))
+  expect_equal(check_comp("VFL"), "VFL")
+  expect_equal(check_comp("VFLW"), "VFLW")
+  expect_equal(check_comp("WAFL"), "WAFL")
+  expect_error(check_comp("SAFL"))
   expect_error(check_comp(1))
 })
 

@@ -99,12 +99,15 @@ find_comp_id <- function(comp) {
   comp <- check_comp(comp)
 
   api_url <- httr::modify_url("https://aflapi.afl.com.au",
-    path = "/afl/v2/competitions/"
+    path = "/afl/v2/competitions?pageSize=50"
   )
 
   resp <- httr::GET(api_url)
 
   cont <- parse_resp_afl(resp)
+  
+  cont$competitions <- cont$competitions %>% 
+    dplyr::filter(!stringr::str_detect(name, "Legacy"))
 
   if (comp == "AFLM") comp <- "AFL"
 

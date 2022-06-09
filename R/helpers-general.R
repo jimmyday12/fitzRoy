@@ -28,7 +28,12 @@ check_season <- function(x) {
 check_comp <- function(x) {
   valid <- c(
     "AFLM",
-    "AFLW"
+    "AFLW",
+    "VFL",
+    "VFLW",
+    "WAFL",
+    "U18B",
+    "U18G"
   )
 
   if (!x %in% valid) {

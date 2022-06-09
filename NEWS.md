@@ -2,6 +2,7 @@
 
 * Fixed bug that was preventing Fremantle player details from being returned in `fetch_player_details_footwire` ([#169](https://github.com/jimmyday12/fitzRoy/issues/169))
 * Fixed bug that was causing an error if a round didn't have full lineups
+* Added more competitions that the AFL source can download  ([#173](https://github.com/jimmyday12/fitzRoy/issues/173))
 
 # fitzRoy 1.1.0
 
