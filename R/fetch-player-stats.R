@@ -94,20 +94,21 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   cli::cli_process_done(cli_id2)
 
   # add match details
+  vars <- c("providerId", "utcStartTime", "status", 
+            "compSeason.shortName", "round.name", "round.roundNumber", 
+            "venue.name", 
+            "home.team.name", "home.team.club.name", 
+            "away.team.name", "away.team.club.name")
+  
   match_details <- matches %>%
-    dplyr::select(
-      .data$providerId, .data$utcStartTime, .data$status,
-      .data$compSeason.shortName, .data$round.name,
-      .data$round.roundNumber, .data$venue.name,
-      .data$home.team.club.name, .data$away.team.club.name
-    )
+    dplyr::select(dplyr::any_of(vars))
 
   home_teams <- matches %>%
-    dplyr::select(.data$home.team.providerId, .data$home.team.name) %>%
+    dplyr::select(dplyr::any_of(c("home.team.providerId", "home.team.name"))) %>%
     dplyr::rename_with(~ gsub(x = .x, pattern = "home.team.", replacement = ""))
 
   away_teams <- matches %>%
-    dplyr::select(.data$away.team.providerId, .data$away.team.name) %>%
+    dplyr::select(dplyr::any_of(c("away.team.providerId", "away.team.name"))) %>%
     dplyr::rename_with(~ gsub(x = .x, pattern = "away.team.", replacement = ""))
 
   teams <- dplyr::bind_rows(home_teams, away_teams) %>%
