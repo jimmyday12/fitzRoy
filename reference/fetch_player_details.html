@@ -125,39 +125,52 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fetch_player_details</span><span class="op">(</span>
-  team <span class="op">=</span> <span class="cn">NULL</span>,
-  current <span class="op">=</span> <span class="cn">TRUE</span>,
-  comp <span class="op">=</span> <span class="st">"AFLM"</span>,
-  source <span class="op">=</span> <span class="st">"AFL"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">fetch_player_details_afl</span><span class="op">(</span><span class="va">season</span>, team <span class="op">=</span> <span class="cn">NULL</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span>
-
-<span class="fu">fetch_player_details_afltables</span><span class="op">(</span>team <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">fetch_player_details_footywire</span><span class="op">(</span><span class="va">team</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_player_details</span><span class="op">(</span></span>
+<span>  team <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  comp <span class="op">=</span> <span class="st">"AFLM"</span>,</span>
+<span>  source <span class="op">=</span> <span class="st">"AFL"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_details_afl</span><span class="op">(</span><span class="va">season</span>, team <span class="op">=</span> <span class="cn">NULL</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_details_afltables</span><span class="op">(</span>team <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_details_footywire</span><span class="op">(</span><span class="va">team</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>team</dt>
 <dd><p>team the player played for in the season for, defaults to NULL which returns all teams</p></dd>
+
+
 <dt>current</dt>
 <dd><p>logical, return the current team list for the current calendar year or all historical data</p></dd>
+
+
 <dt>comp</dt>
 <dd><p>One of "AFLM" (default) or "AFLW"</p></dd>
+
+
 <dt>source</dt>
 <dd><p>One of "AFL" (default), "footywire", "afltables"</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Optional parameters passed onto various functions depending on source.</p></dd>
+
+
 <dt>season</dt>
 <dd><p>Season in YYYY format</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A Tibble with the details of the relevant players.</p>
+    
+
+<p>A Tibble with the details of the relevant players.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -170,13 +183,13 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Return data for current Hawthorn players</span></span>
-<span class="r-in"><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Hawthorn"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Adelaide"</span>, current <span class="op">=</span> <span class="cn">FALSE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"GWS"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, csource <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Return data for current Hawthorn players</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Hawthorn"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Adelaide"</span>, current <span class="op">=</span> <span class="cn">FALSE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"GWS"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, csource <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -191,7 +204,7 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

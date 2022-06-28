@@ -123,25 +123,25 @@ Squiggle, respectively.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">fetch_player_stats</span><span class="op">(</span>
-  season <span class="op">=</span> <span class="cn">NULL</span>,
-  round_number <span class="op">=</span> <span class="cn">NULL</span>,
-  comp <span class="op">=</span> <span class="st">"AFLM"</span>,
-  source <span class="op">=</span> <span class="st">"AFL"</span>,
-  <span class="va">...</span>
-<span class="op">)</span>
-
-<span class="fu">fetch_player_stats_afl</span><span class="op">(</span>season <span class="op">=</span> <span class="cn">NULL</span>, round_number <span class="op">=</span> <span class="cn">NULL</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span>
-
-<span class="fu">fetch_player_stats_afltables</span><span class="op">(</span>season <span class="op">=</span> <span class="cn">NULL</span>, round_number <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span>
-
-<span class="fu">fetch_player_stats_fryzigg</span><span class="op">(</span>season <span class="op">=</span> <span class="cn">NULL</span>, round_number <span class="op">=</span> <span class="cn">NULL</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span>
-
-<span class="fu">fetch_player_stats_footywire</span><span class="op">(</span>
-  season <span class="op">=</span> <span class="cn">NULL</span>,
-  round_number <span class="op">=</span> <span class="cn">NULL</span>,
-  check_existing <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_player_stats</span><span class="op">(</span></span>
+<span>  season <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  round_number <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  comp <span class="op">=</span> <span class="st">"AFLM"</span>,</span>
+<span>  source <span class="op">=</span> <span class="st">"AFL"</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_stats_afl</span><span class="op">(</span>season <span class="op">=</span> <span class="cn">NULL</span>, round_number <span class="op">=</span> <span class="cn">NULL</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_stats_afltables</span><span class="op">(</span>season <span class="op">=</span> <span class="cn">NULL</span>, round_number <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_stats_fryzigg</span><span class="op">(</span>season <span class="op">=</span> <span class="cn">NULL</span>, round_number <span class="op">=</span> <span class="cn">NULL</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">fetch_player_stats_footywire</span><span class="op">(</span></span>
+<span>  season <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  round_number <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  check_existing <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -149,20 +149,33 @@ Squiggle, respectively.</p>
     <dl><dt>season</dt>
 <dd><p>Season in YYYY format, defaults to NULL which returns the year
 corresponding the <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code></p></dd>
+
+
 <dt>round_number</dt>
 <dd><p>Round number, defaults to NULL which returns latest round</p></dd>
+
+
 <dt>comp</dt>
 <dd><p>One of "AFLM" (default) or "AFLW"</p></dd>
+
+
 <dt>source</dt>
 <dd><p>One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"</p></dd>
+
+
 <dt>...</dt>
 <dd><p>Optional parameters passed onto various functions depending on source.</p></dd>
+
+
 <dt>check_existing</dt>
 <dd><p>logical, should we check existing data. This will likely be removed in future version as it takes a long time to re-scrape data</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A Tibble with the player stats from the relevant <code>season</code> and <code>round</code>.</p>
+    
+
+<p>A Tibble with the player stats from the relevant <code>season</code> and <code>round</code>.</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -176,26 +189,26 @@ corresponding the <code><a href="https://rdrr.io/r/base/Sys.time.html" class="ex
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Return data for whole season from footywire</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># This is equivalent to</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats_footywire</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Currently there is no AFLW data and will return a warning</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats</span><span class="op">(</span><span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Different sources</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats</span><span class="op">(</span><span class="fl">2015</span>, round <span class="op">=</span> <span class="fl">5</span>, source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats</span><span class="op">(</span><span class="fl">2015</span>, round <span class="op">=</span> <span class="fl">5</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Directly call functions for each source</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats_afltables</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">fetch_fixture_fryzigg</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">fetch_player_stats_footywire</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Return data for whole season from footywire</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats</span><span class="op">(</span>source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># This is equivalent to</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats_footywire</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Currently there is no AFLW data and will return a warning</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats</span><span class="op">(</span><span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Different sources</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats</span><span class="op">(</span><span class="fl">2015</span>, round <span class="op">=</span> <span class="fl">5</span>, source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats</span><span class="op">(</span><span class="fl">2015</span>, round <span class="op">=</span> <span class="fl">5</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Directly call functions for each source</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats_afltables</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_fixture_fryzigg</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_stats_footywire</span><span class="op">(</span><span class="fl">2020</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -210,7 +223,7 @@ corresponding the <code><a href="https://rdrr.io/r/base/Sys.time.html" class="ex
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

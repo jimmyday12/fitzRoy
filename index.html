@@ -147,11 +147,11 @@
 </h2>
 <p>Install the released version of fitzRoy from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"fitzRoy"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"fitzRoy"</span><span class="op">)</span></span></code></pre></div>
 <p>Or install the development version from GitHub with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jimmyday12/fitzRoy"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jimmyday12/fitzRoy"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -159,22 +159,22 @@
 <p>The primary functions in <code>fitzRoy</code> are the <code>fetch_*</code> functions. These provide access to the most common types of data using a consistent API. View the <a href="https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html">Quick Start Vignette</a> to quickly get going with data analysis.</p>
 <p>The main functions are <code>fetch_fixture</code>, <code>fetch_lineup</code>, <code>fetch_results</code>, <code>fetch_ladder</code> and <code>fetch_player_stats</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_lineup.html">fetch_lineup</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_results.html">fetch_results</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Hawthorn"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_lineup.html">fetch_lineup</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_results.html">fetch_results</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">1</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Hawthorn"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></span></code></pre></div>
 <p>See vignette on using the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">main fetch functions</a> to learn more about how these functions work.</p>
 <div class="section level3">
 <h3 id="afl-womens-data">AFL Womens data<a class="anchor" aria-label="anchor" href="#afl-womens-data"></a>
 </h3>
 <p>From 2019, we are able to provide access to AFL Women’s data. Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for details on how to access it.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_results.html">fetch_results</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span>
-<span class="fu"><a href="reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span>
-<span class="fu"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_results.html">fetch_results</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <hr>
 <p>Please note that the ‘fitzRoy’ project is released with a <a href="https://jimmyday12.github.io/fitzRoy/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
@@ -204,6 +204,7 @@
 <ul class="list-unstyled">
 <li><a href="CONTRIBUTING.html">Contributing guide</a></li>
 <li><a href="CODE_OF_CONDUCT.html">Code of conduct</a></li>
+<li><a href="SUPPORT.html">Getting help</a></li>
 </ul>
 </div>
 
@@ -247,7 +248,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer>

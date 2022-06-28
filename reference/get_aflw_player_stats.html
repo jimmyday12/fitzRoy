@@ -113,22 +113,27 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_aflw_player_stats</span><span class="op">(</span>
-  start <span class="op">=</span> <span class="fl">2017</span>,
-  end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_aflw_player_stats</span><span class="op">(</span></span>
+<span>  start <span class="op">=</span> <span class="fl">2017</span>,</span>
+<span>  end <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"%Y"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>start</dt>
 <dd><p>optional, character string or numeric for start year, in "YYYY" format</p></dd>
+
+
 <dt>end</dt>
 <dd><p>optional, character string or numeric for end year, in "YYYY"format</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a data table containing player stats for each game between start and end years</p>
+    
+
+<p>a data table containing player stats for each game between start and end years</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -139,13 +144,13 @@ Updated at the conclusion of every game. A cached version to come.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">#</span></span>
-<span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co"># Gets all data</span></span>
-<span class="r-in"><span class="fu">get_aflw_player_stats</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Specify a date range</span></span>
-<span class="r-in"><span class="fu">get_aflw_player_stats</span><span class="op">(</span>start <span class="op">=</span> <span class="fl">2018</span>, end <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co"># Gets all data</span></span></span>
+<span class="r-in"><span><span class="fu">get_aflw_player_stats</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Specify a date range</span></span></span>
+<span class="r-in"><span><span class="fu">get_aflw_player_stats</span><span class="op">(</span>start <span class="op">=</span> <span class="fl">2018</span>, end <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -160,7 +165,7 @@ Updated at the conclusion of every game. A cached version to come.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

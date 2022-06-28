@@ -117,33 +117,42 @@ competition IDs, which are given in the tables produced by
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">get_aflw_detailed_match_data</span><span class="op">(</span><span class="va">matchid</span>, <span class="va">roundid</span>, <span class="va">competitionid</span>, <span class="va">cookie</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">get_aflw_detailed_match_data</span><span class="op">(</span><span class="va">matchid</span>, <span class="va">roundid</span>, <span class="va">competitionid</span>, <span class="va">cookie</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>matchid</dt>
 <dd><p>matchid from <code>get_match_data()</code></p></dd>
+
+
 <dt>roundid</dt>
 <dd><p>roundid from <code>get_match_data()</code></p></dd>
+
+
 <dt>competitionid</dt>
 <dd><p>competitionid from <code>get_match_data()</code></p></dd>
+
+
 <dt>cookie</dt>
 <dd><p>cookie from <code>get_womens_cookie()</code></p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Dataframe with detailed match data (wide)</p>
+    
+
+<p>Dataframe with detailed match data (wide)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">get_aflw_detailed_match_data</span><span class="op">(</span></span>
-<span class="r-in">  <span class="st">"CD_M20172640101"</span>,</span>
-<span class="r-in">  <span class="st">"CD_R201726401"</span>, <span class="st">"CD_S2017264"</span>, <span class="fu"><a href="get_aflw_cookie.html">get_aflw_cookie</a></span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">get_aflw_detailed_match_data</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  <span class="st">"CD_M20172640101"</span>,</span></span>
+<span class="r-in"><span>  <span class="st">"CD_R201726401"</span>, <span class="st">"CD_S2017264"</span>, <span class="fu"><a href="get_aflw_cookie.html">get_aflw_cookie</a></span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -158,7 +167,7 @@ competition IDs, which are given in the tables produced by
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>

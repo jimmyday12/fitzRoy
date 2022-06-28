@@ -113,21 +113,28 @@
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">return_ladder</span><span class="op">(</span>match_results_df <span class="op">=</span> <span class="cn">NA</span>, season_round <span class="op">=</span> <span class="cn">NA</span>, season <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">return_ladder</span><span class="op">(</span>match_results_df <span class="op">=</span> <span class="cn">NA</span>, season_round <span class="op">=</span> <span class="cn">NA</span>, season <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>match_results_df</dt>
 <dd><p>A dataframe that has been returned from get_match_results. If empty <code>get_match_results</code> will execute first</p></dd>
+
+
 <dt>season_round</dt>
 <dd><p>An integer of the round or vector of integers for multiple rounds. If empty, all rounds returned</p></dd>
+
+
 <dt>season</dt>
 <dd><p>An integer of the season or vector of integers for multiple seasons. If empty, all seasons returned</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>Returns a data frame containing a line for each team's ladder position at each round of a season</p>
+    
+
+<p>Returns a data frame containing a line for each team's ladder position at each round of a season</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -137,11 +144,11 @@ Will only allow selecting rounds of the premiership season, not finals.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="fu">return_ladder</span><span class="op">(</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">return_ladder</span><span class="op">(</span>match_results_df <span class="op">=</span> <span class="va">get_match_results_df</span>, season_round <span class="op">=</span> <span class="fl">23</span>, season <span class="op">=</span> <span class="fl">1990</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu">return_ladder</span><span class="op">(</span>season_round <span class="op">=</span> <span class="fl">10</span>, season <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="fu">return_ladder</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">return_ladder</span><span class="op">(</span>match_results_df <span class="op">=</span> <span class="va">get_match_results_df</span>, season_round <span class="op">=</span> <span class="fl">23</span>, season <span class="op">=</span> <span class="fl">1990</span><span class="op">:</span><span class="fl">2019</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">return_ladder</span><span class="op">(</span>season_round <span class="op">=</span> <span class="fl">10</span>, season <span class="op">=</span> <span class="fl">2019</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -156,7 +163,7 @@ Will only allow selecting rounds of the premiership season, not finals.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
 </div>
 
       </footer></div>
