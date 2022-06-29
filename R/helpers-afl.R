@@ -41,7 +41,7 @@ fetch_teams_afl <- function(comp){
       .data$name, .data$teamType
     )
   
-  type <- case_when(
+  type <- dplyr::case_when(
     comp == "AFLM" ~ "MEN",
     comp == "AFLW" ~ "WOMEN",
     comp == "VFL" ~ "VFL_MEN",
@@ -202,7 +202,7 @@ find_comp_id <- function(comp) {
   cont <- parse_resp_afl(resp)
   
   cont$competitions <- cont$competitions %>% 
-    dplyr::filter(!stringr::str_detect(name, "Legacy"))
+    dplyr::filter(!stringr::str_detect(.data$name, "Legacy"))
 
   if (comp == "AFLM") comp <- "AFL"
 

@@ -15,7 +15,12 @@ fetch_player_details(
   ...
 )
 
-fetch_player_details_afl(season, team = NULL, comp = "AFLM")
+fetch_player_details_afl(
+  season,
+  team = NULL,
+  comp = "AFLM",
+  official_teams = FALSE
+)
 
 fetch_player_details_afltables(team = NULL)
 
@@ -33,6 +38,8 @@ fetch_player_details_footywire(team, current = TRUE)
 \item{...}{Optional parameters passed onto various functions depending on source.}
 
 \item{season}{Season in YYYY format}
+
+\item{official_teams}{boolean, defaults to FALSE. Indicates if we should match \code{team} to the official list from the API. If this is TRUE, it will use the list from the API and uou can use \code{fetch_teams_afl} to see what these names should be}
 }
 \value{
 A Tibble with the details of the relevant players.

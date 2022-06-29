@@ -75,6 +75,7 @@ fetch_player_details <- function(team = NULL,
 }
 
 #' @param season Season in YYYY format
+#' @param official_teams boolean, defaults to FALSE. Indicates if we should match `team` to the official list from the API. If this is TRUE, it will use the list from the API and uou can use `fetch_teams_afl` to see what these names should be
 #' @rdname fetch_player_details
 #' @export
 fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM", official_teams = FALSE) {
