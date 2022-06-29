@@ -1,3 +1,66 @@
+#' Fetch Valid Teams from AFL API
+#'
+#' Returns a dataframe of teams
+#'
+#' @param comp "AFLM" or "AFLW"
+#' @keywords internal
+#' @noRd
+fetch_teams_afl <- function(comp){
+  
+  team_api <- function(page) {
+    api <- "https://aflapi.afl.com.au/afl/v2/teams"
+    
+    resp <- httr::GET(
+      url = api,
+      query = list("pageSize" = "1000", 
+                   page = page))
+    
+    cont <- parse_resp_afl(resp)
+  }
+  
+  cont <- team_api(0)
+  
+  #check_for_more
+  if (cont$meta$pagination$numPages > 1) {
+    page_ind <- 0:(cont$meta$pagination$numPages - 1)
+    
+    teams <- page_ind %>%
+      purrr::map(team_api) %>%
+      purrr::map_dfr(purrr::pluck, "teams")
+    
+    
+  } else {
+    teams <- cont$teams
+  }
+  
+  
+  df <- teams %>%
+    stats::na.omit() %>%
+    dplyr::select(
+      .data$id, .data$abbreviation,
+      .data$name, .data$teamType
+    )
+  
+  type <- case_when(
+    comp == "AFLM" ~ "MEN",
+    comp == "AFLW" ~ "WOMEN",
+    comp == "VFL" ~ "VFL_MEN",
+    comp == "VFLW" ~ "VFL_WOMEN",
+    comp == "U18B" ~ "U18_BOYS",
+    comp == "U18G" ~ "U18_GIRLS",
+    comp == "WAFL" ~ "WAFL_MEN",
+    is.null(comp) ~ "ALL",
+    TRUE ~ ""
+  )
+  
+  if (type == "ALL") return(df)
+  
+  df[df$teamType == type, ]
+  
+}
+
+
+
 #' Find Team ID
 #'
 #' Returns the ID for the team
@@ -7,35 +70,18 @@
 #' @keywords internal
 #' @noRd
 find_team_id <- function(team_abr, comp = "AFLM") {
+  
   check_comp(comp)
-
-  api <- "https://aflapi.afl.com.au/afl/v2/teams"
-
-  resp <- httr::GET(
-    url = api,
-    query = list("pageSize" = "1000")
-  )
-
-  cont <- parse_resp_afl(resp)
-
-  df <- cont$teams %>%
-    stats::na.omit() %>%
-    dplyr::select(
-      .data$id, .data$abbreviation,
-      .data$name, .data$teamType
-    )
-
-  if (comp == "AFLM") type <- "MEN"
-  if (comp == "AFLW") type <- "WOMEN"
-
+  
+  df <- fetch_teams_afl(comp)
+  
   if (is.null(team_abr)) {
-    return(df[df$teamType == type, ])
+    return(df)
   }
 
-  ids <- df$id[df$abbreviation == team_abr & df$teamType == type]
+  ids <- df$id[df$abbreviation == team_abr]
   min(ids, na.rm = TRUE)
 }
-
 #' Check if a team is valid for afl website
 #'
 #' @param team Team
@@ -43,6 +89,12 @@ find_team_id <- function(team_abr, comp = "AFLM") {
 #' @keywords internal
 #' @noRd
 team_check_afl <- function(team) {
+  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams. 
+              You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
+              .frequency = "regularly",
+              .frequency_id = "fpd_depr",
+              id = "fpd_depr")
+  
   valid_teams <- c(
     "Adelaide", "Brisbane Lions",
     "Carlton", "Collingwood", "Essendon",
@@ -52,19 +104,29 @@ team_check_afl <- function(team) {
     "Sydney", "West Coast",
     "Western Bulldogs"
   )
-
+  
   valid <- team %in% valid_teams
-
+  
   if (!valid) {
     rlang::abort(glue::glue("{team} is not a valid input for afl teams.
                             Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
   }
+  
+
 }
 
 #' Internal function to return team name abbreviation for AFL API
 #' @param team Team name
 #' @export
 team_abr_afl <- function(team) {
+  
+  
+  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams. 
+              You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
+              .frequency = "regularly",
+              .frequency_id = "fpd_depr",
+              id = "fpd_depr")
+  
   # Internal function
   dplyr::case_when(
     team == "Adelaide" ~ "ADEL",
@@ -86,6 +148,39 @@ team_abr_afl <- function(team) {
     team == "West Coast" ~ "WCE",
     TRUE ~ team
   )
+
+}
+
+
+#' Check if a team is valid for afl website
+#'
+#' @param team Team name
+#' @param comp Competition
+#' @keywords internal
+#' @noRd
+team_check_afl2 <- function(team, comp = "AFLM") {
+  
+  valid_teams <- fetch_teams_afl(comp)
+  
+
+  valid <- team %in% valid_teams$name
+
+  if (!valid) {
+    rlang::abort(glue::glue("\"{team}\" is not a valid input for afl teams for the \"{comp}\" comp.
+                            Run `fetch_teams_afl(\"{comp}\")` to see a list of valid teams"))
+  }
+}
+
+#' Internal function to return team name abbreviation for AFL API
+#' @param team Team name
+#' @param comp Competition
+#' @export
+team_abr_afl2 <- function(team, comp ="AFLM") {
+  
+  teams <- fetch_teams_afl(comp)
+  
+  teams$abbreviation[teams$name == team]
+  
 }
 
 #' Find Comp ID

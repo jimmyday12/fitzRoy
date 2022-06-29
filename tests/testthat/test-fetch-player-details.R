@@ -71,3 +71,16 @@ test_that("fetch_player_details works", {
   expect_error(fetch_player_details(current = TRUE, team = "Hawthorn", source = "afltables", comp = "AFLW"))
   expect_error(fetch_player_details(current = TRUE, team = "Hawthorn", source = "footywire", comp = "AFLW"))
 })
+
+
+test_that("fetch_player_details works for non-AFL leagues", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  # Test each source works
+  expect_s3_class(fetch_player_details_afl(2022, comp = "VFL"), "tbl")
+  expect_s3_class(fetch_player_details_afl(2022, team = "Casey Demons", comp = "VFL"), "tbl")
+  expect_s3_class(fetch_player_details_afl(2022, comp = "WAFL"), "tbl")
+  expect_s3_class(fetch_player_details_afl(2022, comp = "U18B"), "tbl")
+  expect_s3_class(fetch_player_details_afl(2022, comp = "U18G"), "tbl")
+})

@@ -77,7 +77,7 @@ fetch_player_details <- function(team = NULL,
 #' @param season Season in YYYY format
 #' @rdname fetch_player_details
 #' @export
-fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
+fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM", official_teams = FALSE) {
 
   # perform some validation
   season <- check_season(season)
@@ -85,15 +85,25 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM") {
 
   # get season id
   comp_seas_id <- find_season_id(season, comp)
+  
+  if (!comp %in% c("AFLM", "AFLW")) official_teams <- TRUE
 
   # return team abbreviation
   if (!is.null(team)) {
-    team_check_afl(team)
-    team_abr <- team_abr_afl(team)
-    team_ids <- find_team_id(team_abr, comp)
-    team_names <- team
+    if (official_teams) {
+      team_check_afl2(team, comp)
+      team_abr <- team_abr_afl2(team, comp)
+      team_ids <- find_team_id(team_abr, comp)
+      team_names <- team  
+    } else {
+      team_check_afl(team)
+      team_abr <- team_abr_afl(team)
+      team_ids <- find_team_id(team_abr, comp)
+      team_names <- team
+    }
+    
   } else {
-    team_dat <- find_team_id(team)
+    team_dat <- find_team_id(team, comp = comp)
     team_ids <- team_dat$id
     team_names <- team_dat$name
   }
