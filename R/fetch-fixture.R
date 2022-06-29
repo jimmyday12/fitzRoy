@@ -96,11 +96,11 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   )
 
   cont <- resp %>%
-    httr::content(as = "text") %>%
+    httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE)
 
   df <- dplyr::as_tibble(cont$matches) %>%
-    dplyr::mutate(compSeason.year = as.numeric(gsub("([0-9]+).*$", "\\1", .data$compSeason.name))) %>%
+    dplyr::mutate(compSeason.year = as.numeric(gsub("^.*([0-9]{4}).*", "\\1", .data$compSeason.name))) %>%
     dplyr::filter(.data$compSeason.year == season)
 
   cli::cli_process_done(cli_id)

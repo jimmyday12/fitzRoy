@@ -156,7 +156,7 @@ find_season_id <- function(season, comp = "AFLM") {
   cont <- parse_resp_afl(resp)
 
   comp_ids <- cont$compSeasons %>%
-    dplyr::mutate(season = as.numeric(gsub("([0-9]+).*$", "\\1", .data$name)))
+    dplyr::mutate(season = as.numeric(gsub("^.*([0-9]{4}).*", "\\1", .data$name)))
 
   id <- comp_ids$id[match(season, comp_ids$season)]
 
