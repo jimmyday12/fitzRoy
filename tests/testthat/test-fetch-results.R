@@ -123,3 +123,16 @@ test_that("get_footywire_stats works", {
   expect_s3_class(results, "data.frame")
   expect_error(suppressWarnings(get_footywire_match_results("a")))
 })
+
+test_that("fetch_results works for non-AFL leagues", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  # Test each source works
+  expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "WAFL"), "tbl")
+  expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
+  expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
+  expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
+  expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  
+})
