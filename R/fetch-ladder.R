@@ -126,7 +126,7 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   }
 
   cont <- resp %>%
-    purrr::map(httr::content, as = "text") %>%
+    purrr::map(httr::content, as = "text", encoding = "UTF-8") %>%
     purrr::map(jsonlite::fromJSON, flatten = TRUE)
 
   ladder_list <- cont %>%

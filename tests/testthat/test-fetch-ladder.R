@@ -79,3 +79,16 @@ test_that("fetch_ladder works", {
   expect_s3_class(fetch_ladder(2020, round = 1, source = "afltables"), "tbl")
   expect_warning(fetch_ladder(2020, round = 1, source = "footywire"))
 })
+
+test_that("fetch_ladder works for non-AFL leagues", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  # Test each source works
+  expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "WAFL"), "tbl")
+  expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
+  expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
+  expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
+  expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  
+})
