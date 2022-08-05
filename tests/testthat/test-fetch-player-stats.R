@@ -6,7 +6,7 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   # test normal function
   dat <- fetch_player_stats_afltables()
   expect_s3_class(dat, "tbl")
-  expect_equal(min(dat$Season), 1897)
+  expect_lte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric())
   expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
 
   # change year
