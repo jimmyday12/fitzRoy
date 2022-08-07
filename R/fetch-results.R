@@ -9,6 +9,7 @@
 #' can be called directly and return data from AFL website, AFL Tables, Footywire and
 #' Squiggle, respectively.
 #'
+#' @param round_number Round number, defaults to NULL which returns all rounds
 #' @inheritParams fetch_ladder
 #' @return
 #' A Tibble with the results from the relevant `season` and `round`.
