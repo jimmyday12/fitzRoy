@@ -133,7 +133,7 @@ return_start_end_dates <- function(season) {
   season_checked <- season %>% purrr::map_dbl(check_season)
 
   if (is.null(season)) {
-    start_date <- lubridate::ymd(paste0(format(Sys.Date(), "%Y"), "/01/01"), quiet = TRUE)
+    start_date <- lubridate::ymd("1897-01-01", quiet = TRUE)
     end_date <- lubridate::parse_date_time(Sys.Date(), c("dmy", "ymd"), quiet = TRUE)
   } else {
     start_date <- lubridate::parse_date_time(

@@ -1,6 +1,5 @@
 # fitzRoy (development version)
 
-* Breaking change - fixed bug in `fetch_player_stats_afltables` where NULL date was defaulting to 1897 instead of current season like other `fetch_*` functions ([#175](https://github.com/jimmyday12/fitzRoy/issues/175)). This is breaking behaviour to previous versions so will bump the version number but it should be an expected change to make the argument consistent with others
 * Fixed bug that was preventing Fremantle player details from being returned in `fetch_player_details_footwire` ([#169](https://github.com/jimmyday12/fitzRoy/issues/169))
 * Fixed bug that was causing an error if a round didn't have full lineups
 * Added more competitions that the AFL source can download  ([#173](https://github.com/jimmyday12/fitzRoy/issues/173))
