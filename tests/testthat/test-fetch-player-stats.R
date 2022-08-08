@@ -18,6 +18,13 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   # change round number - doesn't do anything
   dat_round2 <- fetch_player_stats_afltables(season = 2020, round_number = 2)
   expect_equal(dat_round1, dat_round2)
+  
+  # Test browlow
+  current_year <- as.numeric(format(Sys.Date(), "%Y"))
+  dat_last_year <- fetch_player_stats_afltables(current_year - 1 )
+  
+  expect_equal(sum(is.na(dat_last_year$Brownlow.Votes)), 0)
+  
 })
 
 test_that("fetch_player_stats_footywire works for various inputs", {
