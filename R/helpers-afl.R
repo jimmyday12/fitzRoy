@@ -174,6 +174,7 @@ team_check_afl2 <- function(team, comp = "AFLM") {
 #' Internal function to return team name abbreviation for AFL API
 #' @param team Team name
 #' @param comp Competition
+#' @keywords internal
 #' @export
 team_abr_afl2 <- function(team, comp ="AFLM") {
   
