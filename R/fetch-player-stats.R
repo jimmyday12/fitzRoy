@@ -164,7 +164,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   }
   
   dat <- dat %>%
-    dplyr::filter(.data$Date < max_date)
+    dplyr::filter(.data$Date <= max_date)
 
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
