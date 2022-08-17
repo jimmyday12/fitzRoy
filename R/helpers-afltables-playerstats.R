@@ -351,6 +351,7 @@ get_afltables_player_ids <- function(seasons) {
     purrr::map(readUrl) %>%
     purrr::discard(~ nrow(.x) == 0)
 
+
   first_populated_season <- end - length(ids_new) + 1
 
   # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
@@ -372,12 +373,24 @@ get_afltables_player_ids <- function(seasons) {
   ids_new <- ids_new %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
-    dplyr::rename(Team.abb = .data$Team) %>%
+    dplyr::rename(Team.abb = .data$Team)  %>%
     dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
     dplyr::select(!!col_vars)
+  
+  ids_new_min <- min(ids_new$Season)
+  ids_new_max <- max(ids_new$Season)
+  
+  ids_old <- ids %>%
+    dplyr::filter(.data$Season < ids_new_min | .data$Season > ids_new_max)
+  
+  if (nrow(ids_old) < 1) {
+    return(dplyr::distinct(ids_new))
+  } else {
+    ids <- dplyr::bind_rows(ids_old, ids_new) %>%
+      dplyr::distinct()
+    
+    return(ids)
+  }
 
-  ids <- dplyr::bind_rows(ids, ids_new) %>%
-    dplyr::distinct()
-
-  return(ids)
+  
 }
