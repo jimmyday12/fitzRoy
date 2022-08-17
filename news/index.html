@@ -109,9 +109,12 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
-<ul><li>Fixed bug that was preventing Fremantle player details from being returned in <code>fetch_player_details_footwire</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/169" class="external-link">#169</a>)</li>
+<ul><li>Breaking change - fixed bug in <code>fetch_player_stats_afltables</code> where NULL date was defaulting to 1897 instead of current season like other <code>fetch_*</code> functions (<a href="https://github.com/jimmyday12/fitzRoy/issues/175" class="external-link">#175</a>). This is breaking behaviour to previous versions so will bump the version number but it should be an expected change to make the argument consistent with others</li>
+<li>Fixed bug that was preventing Fremantle player details from being returned in <code>fetch_player_details_footwire</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/169" class="external-link">#169</a>)</li>
 <li>Fixed bug that was causing an error if a round didn’t have full lineups</li>
 <li>Added more competitions that the AFL source can download (<a href="https://github.com/jimmyday12/fitzRoy/issues/173" class="external-link">#173</a>)</li>
+<li>Fixed issue in the cached data where some dates were missing, depending on when the data was scraped (<a href="https://github.com/jimmyday12/fitzRoy/issues/181" class="external-link">#181</a>)</li>
+<li>Fixed issue where specific players were getting ID’s assigned incorrectly. I’ve partially fixed that issue but will only be useful for bugs found in 2021 onwards. I’ll have to manually fix older issues (<a href="https://github.com/jimmyday12/fitzRoy/issues/168" class="external-link">#168</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.1.0" id="fitzroy-110">fitzRoy 1.1.0<small>2022-01-10</small><a class="anchor" aria-label="anchor" href="#fitzroy-110"></a></h2>
@@ -370,7 +373,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

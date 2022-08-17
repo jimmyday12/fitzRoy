@@ -184,22 +184,24 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 162 × 24</span></span></span>
-<span><span class="co">#&gt;    ascore hteamid hgoals localtime    is_grand_final date  hscore ateamid agoals</span></span>
-<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     74       1     11 2020-03-21 …              0 2020…     71      16     11</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     57       5      9 2020-03-21 …              0 2020…     63       6      8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     76       8      4 2020-03-21 …              0 2020…     29      13     10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     73       9     17 2020-03-21 …              0 2020…    105       7     11</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     62      10     14 2020-03-22 …              0 2020…     90       2      9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     54      12      8 2020-03-22 …              0 2020…     56      15      7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     81      14     16 2020-03-19 …              0 2020…    105       3     12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     51      17     12 2020-03-22 …              0 2020…     78      11      7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     86      18      5 2020-03-20 …              0 2020…     34       4     13</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     69       2     12 2020-06-13 …              0 2020…     81       6     10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 152 more rows, and 15 more variables: hbehinds &lt;int&gt;, venue &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   hteam &lt;chr&gt;, is_final &lt;int&gt;, id &lt;int&gt;, roundname &lt;chr&gt;, round &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   winner &lt;chr&gt;, abehinds &lt;int&gt;, ateam &lt;chr&gt;, tz &lt;chr&gt;, updated &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   complete &lt;int&gt;, winnerteamid &lt;int&gt;, year &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt;    ascore hteamid hgoals localtime   is_gr…¹ date  hscore ateamid agoals hbehi…²</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     74       1     11 2020-03-21…       0 2020…     71      16     11       5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     57       5      9 2020-03-21…       0 2020…     63       6      8       9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     76       8      4 2020-03-21…       0 2020…     29      13     10       5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     73       9     17 2020-03-21…       0 2020…    105       7     11       3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     62      10     14 2020-03-22…       0 2020…     90       2      9       6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     54      12      8 2020-03-22…       0 2020…     56      15      7       8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     81      14     16 2020-03-19…       0 2020…    105       3     12       9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     51      17     12 2020-03-22…       0 2020…     78      11      7       6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     86      18      5 2020-03-20…       0 2020…     34       4     13       4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     69       2     12 2020-06-13…       0 2020…     81       6     10       9</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 152 more rows, 14 more variables: venue &lt;chr&gt;, hteam &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   is_final &lt;int&gt;, id &lt;int&gt;, roundname &lt;chr&gt;, round &lt;int&gt;, winner &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abehinds &lt;int&gt;, ateam &lt;chr&gt;, tz &lt;chr&gt;, updated &lt;chr&gt;, complete &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   winnerteamid &lt;int&gt;, year &lt;int&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​is_grand_final, ²​hbehinds</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
 </div>
 </div>
 <div class="section level2">
@@ -240,22 +242,24 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span>query <span class="op">=</span> <span class="st">"games"</span>, year <span class="op">=</span> <span class="fl">2020</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 162 × 24</span></span></span>
-<span><span class="co">#&gt;    ascore hteamid hgoals localtime    is_grand_final date  hscore ateamid agoals</span></span>
-<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     74       1     11 2020-03-21 …              0 2020…     71      16     11</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     57       5      9 2020-03-21 …              0 2020…     63       6      8</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     76       8      4 2020-03-21 …              0 2020…     29      13     10</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     73       9     17 2020-03-21 …              0 2020…    105       7     11</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     62      10     14 2020-03-22 …              0 2020…     90       2      9</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     54      12      8 2020-03-22 …              0 2020…     56      15      7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     81      14     16 2020-03-19 …              0 2020…    105       3     12</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     51      17     12 2020-03-22 …              0 2020…     78      11      7</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     86      18      5 2020-03-20 …              0 2020…     34       4     13</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     69       2     12 2020-06-13 …              0 2020…     81       6     10</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 152 more rows, and 15 more variables: hbehinds &lt;int&gt;, venue &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   hteam &lt;chr&gt;, is_final &lt;int&gt;, id &lt;int&gt;, roundname &lt;chr&gt;, round &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   winner &lt;chr&gt;, abehinds &lt;int&gt;, ateam &lt;chr&gt;, tz &lt;chr&gt;, updated &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   complete &lt;int&gt;, winnerteamid &lt;int&gt;, year &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt;    ascore hteamid hgoals localtime   is_gr…¹ date  hscore ateamid agoals hbehi…²</span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     74       1     11 2020-03-21…       0 2020…     71      16     11       5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     57       5      9 2020-03-21…       0 2020…     63       6      8       9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     76       8      4 2020-03-21…       0 2020…     29      13     10       5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     73       9     17 2020-03-21…       0 2020…    105       7     11       3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     62      10     14 2020-03-22…       0 2020…     90       2      9       6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     54      12      8 2020-03-22…       0 2020…     56      15      7       8</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     81      14     16 2020-03-19…       0 2020…    105       3     12       9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     51      17     12 2020-03-22…       0 2020…     78      11      7       6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     86      18      5 2020-03-20…       0 2020…     34       4     13       4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     69       2     12 2020-06-13…       0 2020…     81       6     10       9</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 152 more rows, 14 more variables: venue &lt;chr&gt;, hteam &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   is_final &lt;int&gt;, id &lt;int&gt;, roundname &lt;chr&gt;, round &lt;int&gt;, winner &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abehinds &lt;int&gt;, ateam &lt;chr&gt;, tz &lt;chr&gt;, updated &lt;chr&gt;, complete &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   winnerteamid &lt;int&gt;, year &lt;int&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​is_grand_final, ²​hbehinds</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="sources">Sources<a class="anchor" aria-label="anchor" href="#sources"></a>
@@ -277,7 +281,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="color: #949494;">"</span>/introducing-s10/<span style="color: #949494;">"</span>                   <span style="color: #949494;">""</span>                              8 Aggr…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="color: #949494;">"</span>http://graftratings.com/afl/<span style="color: #949494;">"</span>        <span style="color: #949494;">"</span>/wp-content/themes/squigg…     9 Graft</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="color: #949494;">"</span>https://stattraction.wordpress.com/<span style="color: #949494;">"</span> <span style="color: #949494;">"</span>/wp-content/themes/squigg…    10 Stat…</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 15 more rows</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 15 more rows</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="tips">Tips<a class="anchor" aria-label="anchor" href="#tips"></a>
@@ -301,7 +306,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>   29     <span style="text-decoration: underline;">2</span>017      3      13 The A…       0 57    -<span style="color: #BB0000;">1.28</span>   Port… 2017-0… 2017…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 15,672 more rows, and 10 more variables: hteamid &lt;int&gt;, round &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   hconfidence &lt;dbl&gt;, margin &lt;dbl&gt;, tipteamid &lt;int&gt;, sourceid &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   venue &lt;chr&gt;, hteam &lt;chr&gt;, confidence &lt;dbl&gt;, tip &lt;chr&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   venue &lt;chr&gt;, hteam &lt;chr&gt;, confidence &lt;dbl&gt;, tip &lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
 <p>We can just look at one particular round.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get` just tips from round 1, 2018</span></span>
@@ -321,7 +327,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>    35.2  <span style="text-decoration: underline;">2</span>018    372       3 Aggre…       1   9.2  0.674  Carl… 2018-0… 2018…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 116 more rows, and 10 more variables: hteamid &lt;int&gt;, round &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   hconfidence &lt;dbl&gt;, margin &lt;dbl&gt;, tipteamid &lt;int&gt;, sourceid &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   venue &lt;chr&gt;, hteam &lt;chr&gt;, confidence &lt;dbl&gt;, tip &lt;chr&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   venue &lt;chr&gt;, hteam &lt;chr&gt;, confidence &lt;dbl&gt;, tip &lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="standings">Standings<a class="anchor" aria-label="anchor" href="#standings"></a>
@@ -330,28 +337,30 @@
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"standings"</span>, year <span class="op">=</span> <span class="fl">2020</span>, round <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 15</span></span></span>
-<span><span class="co">#&gt;    percentage played goals_against name   behinds_for  wins losses against draws</span></span>
-<span><span class="co">#&gt;         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      262.       1             4 Port …          16     1      0      29     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>      253.       1             5 Colli…           8     1      0      34     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>      153.       1             7 West …           6     1      0      51     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>      145.       1             9 Hawth…           6     1      0      62     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>      144.       1            11 Great…           3     1      0      73     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>      130.       1            12 Richm…           9     1      0      81     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>      111.       1             8 Essen…           9     1      0      57     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      104.       1            11 Sydney           8     1      0      71     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      104.       1             7 North…           8     1      0      54     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>       96.4      1             8 St Ki…          12     0      1      56     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>       95.9      1            11 Adela…           5     0      1      74     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>       90.5      1             9 Frema…           9     0      1      63     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>       77.1      1            16 Carlt…           9     0      1     105     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>       69.5      1            17 Geelo…           7     0      1     105     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>       68.9      1            14 Brisb…           8     0      1      90     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>       65.4      1            12 Melbo…           9     0      1      78     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>       39.5      1            13 Weste…           4     0      1      86     0</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>       38.2      1            10 Gold …           5     0      1      76     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 6 more variables: for. &lt;int&gt;, id &lt;int&gt;, rank &lt;int&gt;, pts &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   goals_for &lt;int&gt;, behinds_against &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt;    percent…¹ played goals…² name  behin…³  wins losses against draws  for.    id</span></span>
+<span><span class="co">#&gt;        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>     262.       1       4 Port…      16     1      0      29     0    76    13</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>     253.       1       5 Coll…       8     1      0      34     0    86     4</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>     153.       1       7 West…       6     1      0      51     0    78    17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>     145.       1       9 Hawt…       6     1      0      62     0    90    10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>     144.       1      11 Grea…       3     1      0      73     0   105     9</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>     130.       1      12 Rich…       9     1      0      81     0   105    14</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>     111.       1       8 Esse…       9     1      0      57     0    63     5</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     104.       1      11 Sydn…       8     1      0      71     0    74    16</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     104.       1       7 Nort…       8     1      0      54     0    56    12</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>      96.4      1       8 St K…      12     0      1      56     0    54    15</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>      95.9      1      11 Adel…       5     0      1      74     0    71     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>      90.5      1       9 Frem…       9     0      1      63     0    57     6</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>      77.1      1      16 Carl…       9     0      1     105     0    81     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>      69.5      1      17 Geel…       7     0      1     105     0    73     7</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>      68.9      1      14 Bris…       8     0      1      90     0    62     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>      65.4      1      12 Melb…       9     0      1      78     0    51    11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>      39.5      1      13 West…       4     0      1      86     0    34    18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>      38.2      1      10 Gold…       5     0      1      76     0    29     8</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 4 more variables: rank &lt;int&gt;, pts &lt;int&gt;, goals_for &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   behinds_against &lt;int&gt;, and abbreviated variable names ¹​percentage,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​goals_against, ³​behinds_for</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="ladder">Ladder<a class="anchor" aria-label="anchor" href="#ladder"></a>
@@ -360,27 +369,29 @@
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_squiggle_data.html">fetch_squiggle_data</a></span><span class="op">(</span><span class="st">"ladder"</span>, year <span class="op">=</span> <span class="fl">2019</span>, round <span class="op">=</span> <span class="fl">15</span>, source <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 18 × 12</span></span></span>
-<span><span class="co">#&gt;    teamid mean_rank updated  percentage source sourceid swarms  rank  wins round</span></span>
-<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      1      6.11 2019-07…      111.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     6  12.7    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>      2      6.01 2019-07…      107.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     5  13      15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>      3     16.7  2019-07…       82.8 Squig…        1 <span style="color: #949494;">"</span>c(\"…    17   6.1    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>      4      4.20 2019-07…      114   Squig…        1 <span style="color: #949494;">"</span>c(\"…     4  14.1    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>      5      9.98 2019-07…       99.8 Squig…        1 <span style="color: #949494;">"</span>c(\"…    10  10.8    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>      6      9.71 2019-07…      104.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     9  10.8    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>      7      1.21 2019-07…      138.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     1  17.3    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      8     17.7  2019-07…       70.2 Squig…        1 <span style="color: #949494;">"</span>c(\"…    18   4.9    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      9      3.26 2019-07…      129.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     2  14.4    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     10     13.0  2019-07…       97.6 Squig…        1 <span style="color: #949494;">"</span>c(\"…    14   8.8    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>     11     14.8  2019-07…       85.3 Squig…        1 <span style="color: #949494;">"</span>c(\"…    16   8      15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>     12     10.9  2019-07…       98.9 Squig…        1 <span style="color: #949494;">"</span>c(\"…    11  10.2    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>     13      8.24 2019-07…      107.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     8  11.5    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>     14      6.67 2019-07…      101.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     7  12.8    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>     15     13.8  2019-07…       83.2 Squig…        1 <span style="color: #949494;">"</span>c(\"…    15   9      15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>     16     12.9  2019-07…       93.4 Squig…        1 <span style="color: #949494;">"</span>c(\"…    13   9.2    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>     17      4.16 2019-07…      107.  Squig…        1 <span style="color: #949494;">"</span>c(\"…     3  14.4    15</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>     18     11.9  2019-07…       94.1 Squig…        1 <span style="color: #949494;">"</span>c(\"…    12   9.8    15</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 more variables: team &lt;chr&gt;, year &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt;    teamid mean_r…¹ updated perce…² source sourc…³ swarms  rank  wins round team </span></span>
+<span><span class="co">#&gt;     <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span>      1     6.11 2019-0…   111.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     6  12.7    15 Adel…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span>      2     6.01 2019-0…   107.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     5  13      15 Bris…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span>      3    16.7  2019-0…    82.8 Squig…       1 <span style="color: #949494;">"</span>c(\"…    17   6.1    15 Carl…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span>      4     4.20 2019-0…   114   Squig…       1 <span style="color: #949494;">"</span>c(\"…     4  14.1    15 Coll…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span>      5     9.98 2019-0…    99.8 Squig…       1 <span style="color: #949494;">"</span>c(\"…    10  10.8    15 Esse…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span>      6     9.71 2019-0…   104.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     9  10.8    15 Frem…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span>      7     1.21 2019-0…   138.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     1  17.3    15 Geel…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>      8    17.7  2019-0…    70.2 Squig…       1 <span style="color: #949494;">"</span>c(\"…    18   4.9    15 Gold…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>      9     3.26 2019-0…   129.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     2  14.4    15 Grea…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     10    13.0  2019-0…    97.6 Squig…       1 <span style="color: #949494;">"</span>c(\"…    14   8.8    15 Hawt…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span>     11    14.8  2019-0…    85.3 Squig…       1 <span style="color: #949494;">"</span>c(\"…    16   8      15 Melb…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">12</span>     12    10.9  2019-0…    98.9 Squig…       1 <span style="color: #949494;">"</span>c(\"…    11  10.2    15 Nort…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">13</span>     13     8.24 2019-0…   107.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     8  11.5    15 Port…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">14</span>     14     6.67 2019-0…   101.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     7  12.8    15 Rich…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">15</span>     15    13.8  2019-0…    83.2 Squig…       1 <span style="color: #949494;">"</span>c(\"…    15   9      15 St K…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">16</span>     16    12.9  2019-0…    93.4 Squig…       1 <span style="color: #949494;">"</span>c(\"…    13   9.2    15 Sydn…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">17</span>     17     4.16 2019-0…   107.  Squig…       1 <span style="color: #949494;">"</span>c(\"…     3  14.4    15 West…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">18</span>     18    11.9  2019-0…    94.1 Squig…       1 <span style="color: #949494;">"</span>c(\"…    12   9.8    15 West…</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: year &lt;int&gt;, and abbreviated variable names</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​mean_rank, ²​percentage, ³​sourceid</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="pav">PAV<a class="anchor" aria-label="anchor" href="#pav"></a>
@@ -392,13 +403,15 @@
 <span>                    surname <span class="op">=</span> <span class="st">"Martin"</span>, </span>
 <span>                    year <span class="op">=</span> <span class="fl">2017</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 21</span></span></span>
-<span><span class="co">#&gt;   PAV_mid_rank mPAV_def games firstname mPAV_mid  year PAV_total PAV_def_rank</span></span>
-<span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>            1    -<span style="color: #BB0000;">0.41</span>    25 Dustin        2.06  <span style="text-decoration: underline;">2</span>017      26.8          253</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 13 more variables: name &lt;chr&gt;, PAV_off_rank &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   X._of_team_games &lt;dbl&gt;, PAV_total_rank &lt;int&gt;, PAV_mid &lt;dbl&gt;, surname &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   PAV_def &lt;dbl&gt;, team &lt;int&gt;, mPAV_total &lt;dbl&gt;, pavid &lt;int&gt;, mPAV_off &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   PAV_off &lt;dbl&gt;, mPAV_rank &lt;int&gt;</span></span></span></code></pre>
+<span><span class="co">#&gt;   PAV_mid_rank mPAV_…¹ games first…² mPAV_…³  year PAV_t…⁴ PAV_d…⁵ name  PAV_o…⁶</span></span>
+<span><span class="co">#&gt;          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>            1   -<span style="color: #BB0000;">0.41</span>    25 Dustin     2.06  <span style="text-decoration: underline;">2</span>017    26.8     253 Mart…      16</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 11 more variables: X._of_team_games &lt;dbl&gt;, PAV_total_rank &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   PAV_mid &lt;dbl&gt;, surname &lt;chr&gt;, PAV_def &lt;dbl&gt;, team &lt;int&gt;, mPAV_total &lt;dbl&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   pavid &lt;int&gt;, mPAV_off &lt;dbl&gt;, PAV_off &lt;dbl&gt;, mPAV_rank &lt;int&gt;, and</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   abbreviated variable names ¹​mPAV_def, ²​firstname, ³​mPAV_mid, ⁴​PAV_total,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​PAV_def_rank, ⁶​PAV_off_rank</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
 </div>
 </div>
   </div>
@@ -420,7 +433,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
