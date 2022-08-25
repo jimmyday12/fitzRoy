@@ -167,8 +167,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 32 more rows, 7 more variables: heightInCm &lt;int&gt;, weightInKg &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   recruitedFrom &lt;chr&gt;, debutYear &lt;chr&gt;, draftType &lt;chr&gt;, draftPosition &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   data_accessed &lt;date&gt;, and abbreviated variable names ¹​jumperNumber,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​position, ³​providerId, ⁴​dateOfBirth, ⁵​draftYear</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​position, ³​providerId, ⁴​dateOfBirth, ⁵​draftYear</span></span></span></code></pre>
 <p>The AFL website will return AFLW or AFLM data, while other sources only include AFLM data.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">details_aflw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Western Bulldogs"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></span>
@@ -186,8 +185,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 5 more variables: weightInKg &lt;int&gt;, recruitedFrom &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   debutYear &lt;chr&gt;, draftType &lt;chr&gt;, data_accessed &lt;date&gt;, and abbreviated</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​jumperNumber, ²​position, ³​providerId, ⁴​dateOfBirth,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​heightInCm</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ⁵​heightInCm</span></span></span></code></pre>
 <p>The list of details returned for AFL.com.au website is below.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></span>
@@ -225,8 +223,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Cyril N… Hawt…     9 2     180cm <span style="color: #949494;">"</span>70k…    18     2     1     15     1 1925-1…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Bert Of… Hawt…    10 21    182cm <span style="color: #949494;">"</span>80k…    12     2     0     10     6 1925   </span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 938 more rows, and 3 more variables: Debut &lt;chr&gt;, Last &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   date_accessed &lt;date&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   date_accessed &lt;date&gt;</span></span></span></code></pre>
 <p>The Footywire.com source allows you to specify just the current list of players, which is fairly quick, or all players over time which can be a little slow.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Richmond"</span>, source <span class="op">=</span> <span class="st">"footywire"</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -244,8 +241,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 11    Castagna Jason      117   25yr 5m… 12 Jul… 182cm  82kg   North… Forward</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 42    Clarke   Judson     0     18yr 2m… 17 Oct… 179cm  69kg   Dande… Midfie…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 33 more rows, 1 more variable: Position_2 &lt;chr&gt;, and abbreviated</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​`Date of Birth`, ²​Position_1</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   variable names ¹​`Date of Birth`, ²​Position_1</span></span></span></code></pre>
 <p>One challenge is that each source accepts different values for the <code>team</code> argument. There is a helper function that will return an error if the wrong team is supplied and provide a list of acceptable values for that specific source.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Greater Western Sydney"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span></span>

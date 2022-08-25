@@ -217,8 +217,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021-02-06T04:10:00.000+0000 Round 2    Collingwood       Geelong Ca… Victor…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021-02-06T06:10:00.000+0000 Round 2    Melbourne         Richmond    Casey …</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows, and abbreviated variable names ¹​away.team.name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​venue.name</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​venue.name</span></span></span></code></pre>
 <p>If wanted, you could return just a single round.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">5</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -268,8 +267,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Round 1    CONCLUDED Carlton  Abbie                       McKay       FINAL_…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Round 1    CONCLUDED Carlton  Tayla                       Harris      FINAL_…</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 284 more rows, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​player.playerName.surname, ²​teamStatus</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​player.playerName.surname, ²​teamStatus</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="results">Results<a class="anchor" aria-label="anchor" href="#results"></a>
@@ -294,8 +292,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 15,604 more rows, 7 more variables: Away.Behinds &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;, Season &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​Home.Behinds, ²​Home.Points, ³​Away.Team, ⁴​Away.Goals</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​Home.Behinds, ²​Home.Points, ³​Away.Team, ⁴​Away.Goals</span></span></span></code></pre>
 <p>While it is possible to return all historical data, it is usually good practice to only return a small amount of data - such as a single season or round - and keep your own offline database of historical data.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results_new</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_results.html">fetch_results_afltables</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></span>
@@ -316,8 +313,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 15,973 more rows, 7 more variables: Away.Behinds &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Away.Points &lt;int&gt;, Venue &lt;chr&gt;, Margin &lt;int&gt;, Season &lt;dbl&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Round.Type &lt;chr&gt;, Round.Number &lt;int&gt;, and abbreviated variable names</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​Home.Behinds, ²​Home.Points, ³​Away.Team, ⁴​Away.Goals</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ¹​Home.Behinds, ²​Home.Points, ³​Away.Team, ⁴​Away.Goals</span></span></span></code></pre>
 <p>You can get results data from other sources including <code>AFL</code>, <code>Squiggle</code> and <code>Footywire</code>. The default source for <code><a href="../reference/fetch_results.html">fetch_results()</a></code> is the AFL.com.au website.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results_afl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_results.html">fetch_results</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span>
@@ -344,8 +340,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> Kangaroos Vs GWS Giants          University of Tasma… Round 2      37      19</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> Gold Coast Suns Vs Richmond      Metricon Stadium     Round 2      33      22</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 36 more rows, and abbreviated variable names ¹​round.name,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ²​homeTeamScore.matchScore.totalScore, ³​awayTeamScore.matchScore.totalScore</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ²​homeTeamScore.matchScore.totalScore, ³​awayTeamScore.matchScore.totalScore</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="ladder">Ladder<a class="anchor" aria-label="anchor" href="#ladder"></a>
@@ -411,8 +406,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   player.player.player.playerJumperNumber &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   player.player.player.givenName &lt;chr&gt;, player.player.player.surname &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   teamId &lt;chr&gt;, gamesPlayed &lt;lgl&gt;, timeOnGroundPercentage &lt;dbl&gt;, goals &lt;dbl&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;, kicks &lt;dbl&gt;, handballs &lt;dbl&gt;, …</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   behinds &lt;dbl&gt;, superGoals &lt;lgl&gt;, kicks &lt;dbl&gt;, handballs &lt;dbl&gt;, …</span></span></span></code></pre>
 <p>We also have detailed player stats courtesy of Fryzigg.</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2019</span>, source <span class="op">=</span> <span class="st">"fryzigg"</span><span class="op">)</span></span></code></pre></div>
@@ -435,8 +429,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   match_margin &lt;int&gt;, match_winner &lt;chr&gt;, match_weather_temp_c &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   match_weather_type &lt;chr&gt;, player_id &lt;int&gt;, player_first_name &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   player_last_name &lt;chr&gt;, player_height_cm &lt;int&gt;, player_weight_kg &lt;int&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   player_is_retired &lt;lgl&gt;, player_team &lt;chr&gt;, guernsey_number &lt;int&gt;, …</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   player_is_retired &lt;lgl&gt;, player_team &lt;chr&gt;, guernsey_number &lt;int&gt;, …</span></span></span></code></pre>
 <p>Other providers include Afltables and Footywire.</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stats_afl</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2020</span>, round_number <span class="op">=</span> <span class="fl">11</span><span class="op">)</span></span>
