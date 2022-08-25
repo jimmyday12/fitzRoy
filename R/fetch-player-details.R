@@ -109,17 +109,12 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM", officia
     team_names <- team_dat$name
   }
 
-  df <- team_ids %>%
-    purrr::map2_dfr(
-      .y = team_names,
-      ~ fetch_squad_afl(
-        teamId = .x,
-        team = .y,
-        season = season,
-        compSeasonId = comp_seas_id
-      )
-    )
-
+  args <- list(teamId = team_ids,
+               team = team_names,
+               compSeasonId = comp_seas_id)
+  
+  df <- purrr::pmap_dfr(args, fetch_squad_afl, season = season)
+  
   df %>%
     dplyr::mutate(data_accessed = Sys.Date())
 }

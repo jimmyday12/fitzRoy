@@ -254,7 +254,7 @@ find_season_id <- function(season, comp = "AFLM") {
   comp_ids <- cont$compSeasons %>%
     dplyr::mutate(season = as.numeric(gsub("^.*([0-9]{4}).*", "\\1", .data$name)))
 
-  id <- comp_ids$id[match(season, comp_ids$season)]
+  id <- comp_ids$id[comp_ids$season == season]
 
   id <- id[!is.na(id)]
 
@@ -373,7 +373,7 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
   dplyr::bind_rows(home_df, away_df)
 }
 
-#' Cleans names for player stats
+#' Returns match stats for a given match ID
 #'
 #' @param id Match ID from AFL website
 #' @param cookie cookie from AFL website, can be returned with `get_afl_cookie`

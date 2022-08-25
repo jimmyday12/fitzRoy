@@ -14,7 +14,7 @@ test_that("fetch_fixture_afl works for various inputs", {
   # change round number
   expect_s3_class(fetch_fixture_afl(2020, round_number = 1), "tbl")
   expect_s3_class(fetch_fixture_afl(2020, round_number = 2), "tbl")
-  expect_error(fetch_fixture_afl(2020, round_number = 50))
+  expect_s3_class(fetch_fixture_afl(2020, round_number = 50), "tbl")
 
   # change comp
   expect_s3_class(fetch_fixture_afl(2020, round_number = 1, comp = "AFLW"), "tbl")
