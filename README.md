@@ -93,7 +93,7 @@ fetch_fixture(2022, source = "AFL", comp = "WAFL")
 
 Available comps include \* “VFL” \* “VFLW” \* “WAFL” \* “U18B” \* “U18G”
 
-------------------------------------------------------------------------
+-----
 
 Please note that the ‘fitzRoy’ project is released with a [Contributor
 Code of
