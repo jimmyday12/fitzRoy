@@ -81,6 +81,22 @@ get_aflw_match_data()
 
 ```
 
+### Non-AFL data
+An experimental feature as of version 1.2.0 is returning non-AFL related data. This only works for the source `AFL` but there are other comps that are available. These comps do not have as much data as the AFLM and AFLW comps but some functions will work. 
+
+
+```{r, eval = FALSE}
+fetch_fixture(2022, source = "AFL", comp = "VFL")
+fetch_player_stats(2022, round = 1, source = "AFL", comp = "VFLW")
+fetch_fixture(2022, source = "AFL", comp = "WAFL")
+```
+
+Available comps include
+* "VFL"
+* "VFLW"
+* "WAFL"
+* "U18B"
+* "U18G"
 
 ---
 
