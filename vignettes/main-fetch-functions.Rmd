@@ -44,7 +44,7 @@ Each function generally accepts 4 arguments. These are consistent between functi
 * `season` - the season or seasons to return data from. If NULL (the default), will return the season that matches `Sys.Date()`
 * `round_number`- the round to return data from. If NULL (the default), will return data from all rounds
 * `source` - the source with which to return data from. Must be one of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
-* `comp` - the competition to return data from. Must be one of "AFLM" (default) or "AFLW". Not all data sources will have AFLW data.
+* `comp` - the competition to return data from. Must be one of "AFLM" (default), "AFLW", "VFL", "VFLW", "WAFL", "U18B" or "U18G." Not all data sources will have non-AFL data.
 
 # Examples
 
@@ -119,3 +119,21 @@ With these new functions we now have access to consistent AFLW data for the firs
 At a high level, any `fetch_` function will allow you to specify the that `comp = "AFLW` and will return data. Please note that Womens data only exists when `source = "AFL"`, which is the default for all `fetch_` functions. 
 
 Read the full [AFL Womens Vingette](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html) for specific examples. 
+
+## Non-AFL data
+An experimental feature as of version 1.2.0 is returning non-AFL related data. This only works for the source `AFL` but there are other comps that are available. These comps do not have as much data as the AFLM and AFLW comps but some functions will work. 
+
+
+```{r, eval = FALSE}
+fetch_fixture(2022, source = "AFL", comp = "VFL")
+fetch_player_stats(2022, round = 1, source = "AFL", comp = "VFLW")
+fetch_fixture(2022, source = "AFL", comp = "WAFL")
+```
+
+Available comps include
+* "VFL"
+* "VFLW"
+* "WAFL"
+* "U18B"
+* "U18G"
+

@@ -12,7 +12,7 @@
 #' @param season Season in YYYY format, defaults to NULL which returns the year
 #'  corresponding the `Sys.Date()`
 #' @param round_number Round number, defaults to NULL which returns latest round
-#' @param comp One of "AFLM" (default) or "AFLW"
+#' @param comp One of "AFLM" (default), "AFLW", "VFL", "VFLW", "WAFL", "U18B" or "U18G." Not all data sources will have non-AFL data
 #' @param source One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"
 #' @param ... Optional parameters passed onto various functions depending on source.
 #'

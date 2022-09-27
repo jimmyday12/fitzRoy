@@ -119,7 +119,7 @@ fitzRoy:::lineup_aflw_2021_1 %>%
 ```
 
 ### Results
-You can access AFL match results data from various sources. The most complete is the [AFL Tables](http://www.afltables.com) data, which includes all matches from 1897-current. 
+You can access AFL match results data from various sources. The most complete is the [AFL Tables](https://afltables.com/afl/afl_index.html) data, which includes all matches from 1897-current. 
 
 ```{r results, include=TRUE, eval=FALSE}
 results <- fetch_match_results_afltables(1897:2019)
