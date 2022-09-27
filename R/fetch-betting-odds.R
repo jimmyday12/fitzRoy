@@ -17,7 +17,7 @@
 #' @importFrom rlang .data
 fetch_betting_odds_footywire <- function(start_season = "2010",
                                          end_season = lubridate::year(Sys.Date())) {
-  if (class(end_season) == "Date") format(end_season, "%Y")
+  if (inherits(end_season, "Date")) format(end_season, "%Y")
 
   rename_home_away_columns <- function(col_name) {
     paste0(
