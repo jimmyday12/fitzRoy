@@ -1,12 +1,27 @@
-# fitzRoy (development version)
+# fitzRoy 1.2.0
 
-* Breaking change - fixed bug in `fetch_player_stats_afltables` where NULL date was defaulting to 1897 instead of current season like other `fetch_*` functions ([#175](https://github.com/jimmyday12/fitzRoy/issues/175)). This is breaking behaviour to previous versions so will bump the version number but it should be an expected change to make the argument consistent with others
+## Breaking changes
+
+* Fixed a bug in `fetch_player_stats_afltables` where NULL date was defaulting to 1897 instead of current season like other `fetch_*` functions ([#175](https://github.com/jimmyday12/fitzRoy/issues/175)). This is breaking behaviour to previous versions so will bump the version number but it should be an expected change to make the argument consistent with others
+
+## Second 2022 AFLW Season is now returned
+
+* Having two seasons from the same year was preventing users from accessing the 2nd season. * This release fixes this issue. Any AFLW related function should now return both seasons, which is not ideal but the best I can think of without moving towards named seasons ([#184](https://github.com/jimmyday12/fitzRoy/issues/184))
+
+## Non-AFL data
+
+* There are now more competitions that the AFL source can download using the `comp` argument such as  ([#173](https://github.com/jimmyday12/fitzRoy/issues/173))
+
+## Bug Fixes
+
 * Fixed bug that was preventing Fremantle player details from being returned in `fetch_player_details_footwire` ([#169](https://github.com/jimmyday12/fitzRoy/issues/169))
+
 * Fixed bug that was causing an error if a round didn't have full lineups
-* Added more competitions that the AFL source can download  ([#173](https://github.com/jimmyday12/fitzRoy/issues/173))
+
 * Fixed issue in the cached data where some dates were missing, depending on when the data was scraped ([#181](https://github.com/jimmyday12/fitzRoy/issues/181))
+
 * Fixed issue where specific players were getting ID's assigned incorrectly. I've partially fixed that issue but will only be useful for bugs found in 2021 onwards. I'll have to manually fix older issues ([#168](https://github.com/jimmyday12/fitzRoy/issues/168))
-* Fixed issue with various functions where only the 1st of the 2022 seasons for AFLW were being returned. It should now return both, which is not ideal but the best I can think of without moving towards named seasons ([#184](https://github.com/jimmyday12/fitzRoy/issues/184))
+
 
 # fitzRoy 1.1.0
 
