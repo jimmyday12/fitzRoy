@@ -39,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">fitzRoy</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.2.0</span>
       </span>
     </div>
 
@@ -175,6 +175,16 @@
 <span><span class="fu"><a href="reference/fetch_results.html">fetch_results</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/fetch_ladder.html">fetch_ladder</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2020</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/get_aflw_match_data.html">get_aflw_match_data</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="non-afl-data">Non-AFL data<a class="anchor" aria-label="anchor" href="#non-afl-data"></a>
+</h3>
+<p>An experimental feature as of version 1.2.0 is returning non-AFL related data. This only works for the source <code>AFL</code> but there are other comps that are available. These comps do not have as much data as the AFLM and AFLW comps but some functions will work.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2022</span>, source <span class="op">=</span> <span class="st">"AFL"</span>, comp <span class="op">=</span> <span class="st">"VFL"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2022</span>, round <span class="op">=</span> <span class="fl">1</span>, source <span class="op">=</span> <span class="st">"AFL"</span>, comp <span class="op">=</span> <span class="st">"VFLW"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2022</span>, source <span class="op">=</span> <span class="st">"AFL"</span>, comp <span class="op">=</span> <span class="st">"WAFL"</span><span class="op">)</span></span></code></pre></div>
+<p>Available comps include * “VFL” * “VFLW” * “WAFL” * “U18B” * “U18G”</p>
 <hr>
 <p>Please note that the ‘fitzRoy’ project is released with a <a href="https://jimmyday12.github.io/fitzRoy/CODE_OF_CONDUCT.html">Contributor Code of Conduct</a>. By contributing to this project, you agree to abide by its terms.</p>
 </div>
