@@ -20,7 +20,7 @@ library(fitzRoy)
 
 ## Docker Support
 
-fitzRoy now provides [Docker](https://www.docker.com/get-started) support in the form of an image hosted on [DockerHub](https://hub.docker.com/r/jimmyday12/fitzroy/).
+fitzRoy now provides [Docker](https://www.docker.com/get-started/) support in the form of an image hosted on [DockerHub](https://hub.docker.com/r/jimmyday12/fitzroy/).
 
 ### Usage
  

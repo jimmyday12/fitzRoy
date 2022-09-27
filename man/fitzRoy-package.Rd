@@ -11,7 +11,6 @@ An easy package for scraping and processing Australia Rules Football (AFL) data.
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://jimmyday12.github.io/fitzRoy}
   \item \url{https://jimmyday12.github.io/fitzRoy/}
   \item \url{https://github.com/jimmyday12/fitzRoy}
   \item Report bugs at \url{https://github.com/jimmyday12/fitzRoy/issues}
