@@ -1,3 +1,5 @@
+# fitzRoy (development version)
+
 # fitzRoy 1.2.0
 
 ## Breaking changes
