@@ -13,9 +13,9 @@ jobs:
     name: Render README
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
+      - uses: actions/checkout@v3
+      - uses: r-lib/actions/setup-r@v2
+      - uses: r-lib/actions/setup-pandoc@v2
       - name: Install packages
         run: Rscript -e 'install.packages(c("rmarkdown", "fitzRoy", "tidyverse"))' 
       - name: Render README
