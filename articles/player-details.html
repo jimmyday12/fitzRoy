@@ -134,7 +134,7 @@
 
       
 
-      </header><script src="player-details_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Fetching Player Details</h1>
@@ -147,14 +147,21 @@
 
     
     
-<p>A special case of the <code>fetch_</code> family of functions is the <code>fetch_player_details_</code> set of functions. You can read the general explanation of how to use the main fetch functions on the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Vignette</a>. The player details functions accepts slightly different arguments.</p>
+<p>A special case of the <code>fetch_</code> family of functions is the
+<code>fetch_player_details_</code> set of functions. You can read the
+general explanation of how to use the main fetch functions on the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Vignette</a>.
+The player details functions accepts slightly different arguments.</p>
 <div class="section level2">
 <h2 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h2>
-<p>You can use <code>fetch_player_details</code> to return a list of player details for a given club and source. The source will determine exactly what details are returned. The default is the AFL.com.au website.</p>
+<p>You can use <code>fetch_player_details</code> to return a list of
+player details for a given club and source. The source will determine
+exactly what details are returned. The default is the AFL.com.au
+website.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Hawthorn"</span><span class="op">)</span></span></code></pre></div>
-<p>The AFL website will return AFLW or AFLM data, while other sources only include AFLM data.</p>
+<p>The AFL website will return AFLW or AFLM data, while other sources
+only include AFLM data.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">details_aflw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Western Bulldogs"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></span>
 <span></span>
@@ -162,13 +169,19 @@
 <p>The list of details returned for AFL.com.au website is below.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></span></code></pre></div>
-<p>The AFLTables.com source will return all players who have played for the specified team over time.</p>
+<p>The AFLTables.com source will return all players who have played for
+the specified team over time.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Hawthorn"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span></span></code></pre></div>
-<p>The Footywire.com source allows you to specify just the current list of players, which is fairly quick, or all players over time which can be a little slow.</p>
+<p>The Footywire.com source allows you to specify just the current list
+of players, which is fairly quick, or all players over time which can be
+a little slow.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Richmond"</span>, source <span class="op">=</span> <span class="st">"footywire"</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>One challenge is that each source accepts different values for the <code>team</code> argument. There is a helper function that will return an error if the wrong team is supplied and provide a list of acceptable values for that specific source.</p>
+<p>One challenge is that each source accepts different values for the
+<code>team</code> argument. There is a helper function that will return
+an error if the wrong team is supplied and provide a list of acceptable
+values for that specific source.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Greater Western Sydney"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -191,7 +204,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

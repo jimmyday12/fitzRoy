@@ -134,7 +134,7 @@
 
       
 
-      </header><script src="main-fetch-functions_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Main Fetch functions</h1>
@@ -147,41 +147,63 @@
 
     
     
-<p>The goal of fitzRoy has been to provide a consistent and easy to use interface for accessing data from various sources. As of version 0.3.3.9000 of <code>fitzRoy</code>, the package now contains a much more consistent API to do so. This is with the introduction of the main <code>fetch_*</code> functions.</p>
-<p>Each function uses the same arguments and each argument should behave the same across all of the functions. While there may be some slight differences in behaviour between different sources of data, the goal will be to move towards a much more consistent pattern of behaviour.</p>
+<p>The goal of fitzRoy has been to provide a consistent and easy to use
+interface for accessing data from various sources. As of version
+0.3.3.9000 of <code>fitzRoy</code>, the package now contains a much more
+consistent API to do so. This is with the introduction of the main
+<code>fetch_*</code> functions.</p>
+<p>Each function uses the same arguments and each argument should behave
+the same across all of the functions. While there may be some slight
+differences in behaviour between different sources of data, the goal
+will be to move towards a much more consistent pattern of behaviour.</p>
 <div class="section level2">
 <h2 id="main-functions">Main functions<a class="anchor" aria-label="anchor" href="#main-functions"></a>
 </h2>
 <p>There are a number of main functions</p>
 <ul>
 <li>
-<code>fetch_fixture</code> - returns the fixture for a given round and season</li>
+<code>fetch_fixture</code> - returns the fixture for a given round
+and season</li>
 <li>
-<code>fetch_lineup</code> - returns the lineup any matches in a given round and season</li>
+<code>fetch_lineup</code> - returns the lineup any matches in a
+given round and season</li>
 <li>
-<code>fetch_results</code> - returns the match results for a given round and season</li>
+<code>fetch_results</code> - returns the match results for a given
+round and season</li>
 <li>
-<code>fetch_ladder</code> - returns the ladder for a given round and season</li>
+<code>fetch_ladder</code> - returns the ladder for a given round and
+season</li>
 <li>
-<code>fetch_player_stats</code> - returns the detailed player stats for a set of matches within a given round or season</li>
+<code>fetch_player_stats</code> - returns the detailed player stats
+for a set of matches within a given round or season</li>
 <li>
-<code>fetch_player_details</code> - returns details on players such as date of birth, height, weight and debut (depending on source)</li>
+<code>fetch_player_details</code> - returns details on players such
+as date of birth, height, weight and debut (depending on source)</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a>
 </h2>
-<p>Each function generally accepts 4 arguments. These are consistent between functions and provide sane and common defaults. The common arguments are:</p>
+<p>Each function generally accepts 4 arguments. These are consistent
+between functions and provide sane and common defaults. The common
+arguments are:</p>
 <ul>
 <li>
-<code>season</code> - the season or seasons to return data from. If NULL (the default), will return the season that matches <code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>
+<code>season</code> - the season or seasons to return data from. If
+NULL (the default), will return the season that matches
+<code><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date()</a></code>
 </li>
 <li>
-<code>round_number</code>- the round to return data from. If NULL (the default), will return data from all rounds</li>
+<code>round_number</code>- the round to return data from. If NULL
+(the default), will return data from all rounds</li>
 <li>
-<code>source</code> - the source with which to return data from. Must be one of “AFL” (default), “footywire”, “fryzigg”, “afltables”, “squiggle”</li>
+<code>source</code> - the source with which to return data from.
+Must be one of “AFL” (default), “footywire”, “fryzigg”, “afltables”,
+“squiggle”</li>
 <li>
-<code>comp</code> - the competition to return data from. Must be one of “AFLM” (default), “AFLW”, “VFL”, “VFLW”, “WAFL”, “U18B” or “U18G.” Not all data sources will have non-AFL data.</li>
+<code>comp</code> - the competition to return data from. Must be one
+of “AFLM” (default), “AFLW”, “VFL”, “VFLW”, “WAFL”, “U18B” or “U18G.”
+Not all data sources will have non-AFL data.</li>
 </ul>
 </div>
 <div class="section level2">
@@ -190,7 +212,9 @@
 <div class="section level3">
 <h3 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h3>
-<p>All of the functions behave the same. The following are some examples using the <code>fetch_fixture</code> function but can equally be applied to any of the family of <code>fetch_</code> functions.</p>
+<p>All of the functions behave the same. The following are some examples
+using the <code>fetch_fixture</code> function but can equally be applied
+to any of the family of <code>fetch_</code> functions.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 207 × 55</span></span></span>
@@ -253,7 +277,9 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> 2021 NAB AFLW Competition Round 2    Collingwood       Geelong Cats   Victor…</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> 2021 NAB AFLW Competition Round 2    Melbourne         Richmond       Casey …</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 58 more rows, and abbreviated variable name ¹​venue.name</span></span></span></code></pre>
-<p>Lastly - we can choose a different source. Note that the field names and even the names of the teams and/or venues will be different for difference sources.</p>
+<p>Lastly - we can choose a different source. Note that the field names
+and even the names of the teams and/or venues will be different for
+difference sources.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">1</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 207 × 24</span></span></span>
@@ -274,7 +300,8 @@
 <span><span class="co">#&gt; <span style="color: #949494;">#   hbehinds &lt;int&gt;, venue &lt;chr&gt;, hteam &lt;chr&gt;, is_final &lt;int&gt;, id &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   roundname &lt;chr&gt;, round &lt;int&gt;, winner &lt;chr&gt;, and abbreviated variable names</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   ¹​is_grand_final, ²​localtime, ³​abehinds</span></span></span></code></pre>
-<p>It should also be noted that the various sources of data have their own functions that can be called directly.</p>
+<p>It should also be noted that the various sources of data have their
+own functions that can be called directly.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># The following are the same</span></span>
 <span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">5</span>, source <span class="op">=</span> <span class="st">"squiggle"</span><span class="op">)</span></span>
@@ -283,19 +310,28 @@
 <div class="section level3">
 <h3 id="womens-data">Womens Data<a class="anchor" aria-label="anchor" href="#womens-data"></a>
 </h3>
-<p>With these new functions we now have access to consistent AFLW data for the first time!</p>
-<p>At a high level, any <code>fetch_</code> function will allow you to specify the that <code>comp = "AFLW</code> and will return data. Please note that Womens data only exists when <code>source = "AFL"</code>, which is the default for all <code>fetch_</code> functions.</p>
-<p>Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL Womens Vingette</a> for specific examples.</p>
+<p>With these new functions we now have access to consistent AFLW data
+for the first time!</p>
+<p>At a high level, any <code>fetch_</code> function will allow you to
+specify the that <code>comp = "AFLW</code> and will return data. Please
+note that Womens data only exists when <code>source = "AFL"</code>,
+which is the default for all <code>fetch_</code> functions.</p>
+<p>Read the full <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">AFL
+Womens Vingette</a> for specific examples.</p>
 </div>
 <div class="section level3">
 <h3 id="non-afl-data">Non-AFL data<a class="anchor" aria-label="anchor" href="#non-afl-data"></a>
 </h3>
-<p>An experimental feature as of version 1.2.0 is returning non-AFL related data. This only works for the source <code>AFL</code> but there are other comps that are available. These comps do not have as much data as the AFLM and AFLW comps but some functions will work.</p>
+<p>An experimental feature as of version 1.2.0 is returning non-AFL
+related data. This only works for the source <code>AFL</code> but there
+are other comps that are available. These comps do not have as much data
+as the AFLM and AFLW comps but some functions will work.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2022</span>, source <span class="op">=</span> <span class="st">"AFL"</span>, comp <span class="op">=</span> <span class="st">"VFL"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/fetch_player_stats.html">fetch_player_stats</a></span><span class="op">(</span><span class="fl">2022</span>, round <span class="op">=</span> <span class="fl">1</span>, source <span class="op">=</span> <span class="st">"AFL"</span>, comp <span class="op">=</span> <span class="st">"VFLW"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span><span class="fl">2022</span>, source <span class="op">=</span> <span class="st">"AFL"</span>, comp <span class="op">=</span> <span class="st">"WAFL"</span><span class="op">)</span></span></code></pre></div>
-<p>Available comps include * “VFL” * “VFLW” * “WAFL” * “U18B” * “U18G”</p>
+<p>Available comps include * “VFL” * “VFLW” * “WAFL” * “U18B” *
+“U18G”</p>
 </div>
 </div>
   </div>
@@ -317,7 +353,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>

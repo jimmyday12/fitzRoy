@@ -110,18 +110,23 @@
       <small>Source: <a href="https://github.com/jimmyday12/fitzRoy/blob/HEAD/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section level2"><h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2></div>
     <div class="section level2">
-<h2 class="page-header" data-toc-text="1.2.0" id="fitzroy-120">fitzRoy 1.2.0<a class="anchor" aria-label="anchor" href="#fitzroy-120"></a></h2>
+<h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.2.0" id="fitzroy-120">fitzRoy 1.2.0<small>2022-09-29</small><a class="anchor" aria-label="anchor" href="#fitzroy-120"></a></h2>
 <div class="section level3">
 <h3 id="breaking-changes-1-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-1-2-0"></a></h3>
-<ul><li>Fixed a bug in <code>fetch_player_stats_afltables</code> where NULL date was defaulting to 1897 instead of current season like other <code>fetch_*</code> functions (<a href="https://github.com/jimmyday12/fitzRoy/issues/175" class="external-link">#175</a>). This is breaking behaviour to previous versions so will bump the version number but it should be an expected change to make the argument consistent with others</li></ul></div>
+<ul><li>Fixed a bug in <code>fetch_player_stats_afltables</code> where NULL date was defaulting to 1897 instead of current season like other <code>fetch_*</code> functions (<a href="https://github.com/jimmyday12/fitzRoy/issues/175" class="external-link">#175</a>). This is breaking behaviour to previous versions so will bump the version number but it should be an expected change to make the argument consistent with others</li>
+</ul></div>
 <div class="section level3">
 <h3 id="second-aflw-season-is-now-returned-1-2-0">Second 2022 AFLW Season is now returned<a class="anchor" aria-label="anchor" href="#second-aflw-season-is-now-returned-1-2-0"></a></h3>
-<ul><li>Having two seasons from the same year was preventing users from accessing the 2nd season. * This release fixes this issue. Any AFLW related function should now return both seasons, which is not ideal but the best I can think of without moving towards named seasons (<a href="https://github.com/jimmyday12/fitzRoy/issues/184" class="external-link">#184</a>)</li></ul></div>
+<ul><li>Having two seasons from the same year was preventing users from accessing the 2nd season. * This release fixes this issue. Any AFLW related function should now return both seasons, which is not ideal but the best I can think of without moving towards named seasons (<a href="https://github.com/jimmyday12/fitzRoy/issues/184" class="external-link">#184</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="non-afl-data-1-2-0">Non-AFL data<a class="anchor" aria-label="anchor" href="#non-afl-data-1-2-0"></a></h3>
-<ul><li>There are now more competitions that the AFL source can download using the <code>comp</code> argument such as (<a href="https://github.com/jimmyday12/fitzRoy/issues/173" class="external-link">#173</a>)</li></ul></div>
+<ul><li>There are now more competitions that the AFL source can download using the <code>comp</code> argument such as (<a href="https://github.com/jimmyday12/fitzRoy/issues/173" class="external-link">#173</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-1-2-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-2-0"></a></h3>
 <ul><li><p>Fixed bug that was preventing Fremantle player details from being returned in <code>fetch_player_details_footwire</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/169" class="external-link">#169</a>)</p></li>
@@ -180,7 +185,8 @@
 <div class="section level3">
 <h3 id="breaking-changes-0-3-3">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-3"></a></h3>
 <ul><li>Changed how round numbers are calculated for Footywire data sets (from calendar weeks to using round labels in the HTML) <a href="https://github.com/cfranklin11" class="external-link">@cfranklin11</a>
-</li></ul></div>
+</li>
+</ul></div>
 <div class="section level3">
 <h3 id="new-features-0-3-3">New features<a class="anchor" aria-label="anchor" href="#new-features-0-3-3"></a></h3>
 <ul><li>Added AFL stats <a href="https://github.com/Fryzigg" class="external-link">@fryzigg</a>
@@ -207,7 +213,8 @@
 <h2 class="page-header" data-toc-text="0.3.2" id="fitzroy-032">fitzRoy 0.3.2<small>2020-05-23</small><a class="anchor" aria-label="anchor" href="#fitzroy-032"></a></h2>
 <div class="section level3">
 <h3 id="general-changes-0-3-2">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-3-2"></a></h3>
-<ul><li>The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.</li></ul></div>
+<ul><li>The Updated AFLW API URL has been updated to reflect changes to the afl.com.au website. This should now be working for the new season.</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-3-2">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-2"></a></h3>
 <ul><li>Fixed <code>get_footywire_betting_odds</code> to return an empty data frame when only future seasons are requested rather than raising an error (<a href="https://github.com/jimmyday12/fitzRoy/issues/112" class="external-link">#112</a>, <a href="https://github.com/cfranklin11" class="external-link">@cfranklin11</a>)</li>
@@ -219,12 +226,14 @@
 </div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.1" id="fitzroy-031">fitzRoy 0.3.1<small>2020-01-21</small><a class="anchor" aria-label="anchor" href="#fitzroy-031"></a></h2>
-<ul><li>Updating vignettes to use internal data rather than downloading from the internet</li></ul></div>
+<ul><li>Updating vignettes to use internal data rather than downloading from the internet</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.3.0" id="fitzroy-030">fitzRoy 0.3.0<small>2020-01-08</small><a class="anchor" aria-label="anchor" href="#fitzroy-030"></a></h2>
 <div class="section level3">
 <h3 id="breaking-changes-0-3-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-0-3-0"></a></h3>
-<ul><li>Addition of <code>replace_venues</code> - changes venue names for all data sources to match AFL Tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/15" class="external-link">#15</a>, <a href="https://github.com/cfranklin11" class="external-link">@cfranklin11</a>)</li></ul></div>
+<ul><li>Addition of <code>replace_venues</code> - changes venue names for all data sources to match AFL Tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/15" class="external-link">#15</a>, <a href="https://github.com/cfranklin11" class="external-link">@cfranklin11</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-0-3-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-0-3-0"></a></h3>
 <ul><li>Updated <code>womens-stats</code> vignette to prevent it from running chunks if the cookie had failed.</li>
@@ -246,7 +255,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="new-features-0-2-0">New features<a class="anchor" aria-label="anchor" href="#new-features-0-2-0"></a></h3>
-<ul><li>Added <code>get_footywire_betting_odds</code> function that returns basic match and betting data from www.footywire.com. (<a href="https://github.com/jimmyday12/fitzRoy/issues/10" class="external-link">#10</a>, <a href="https://github.com/cfranklin11" class="external-link">@cfranklin11</a>)</li></ul></div>
+<ul><li>Added <code>get_footywire_betting_odds</code> function that returns basic match and betting data from www.footywire.com. (<a href="https://github.com/jimmyday12/fitzRoy/issues/10" class="external-link">#10</a>, <a href="https://github.com/cfranklin11" class="external-link">@cfranklin11</a>)</li>
+</ul></div>
 <div class="section level3">
 <h3 id="general-changes-0-2-0">General changes<a class="anchor" aria-label="anchor" href="#general-changes-0-2-0"></a></h3>
 <ul><li>Separated out data to be hosted on it’s own repo at <a href="https://github.com/jimmyday12/fitzroy_data" class="external-link uri">https://github.com/jimmyday12/fitzroy_data</a>
@@ -268,10 +278,12 @@
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.11" id="fitzroy-0111">fitzRoy 0.1.11<a class="anchor" aria-label="anchor" href="#fitzroy-0111"></a></h2>
-<ul><li>Updated <code><a href="../reference/get_aflw_cookie.html">get_aflw_cookie()</a></code> to align with change in site API (<a href="https://github.com/jimmyday12/fitzRoy/issues/62" class="external-link">#62</a>)</li></ul></div>
+<ul><li>Updated <code><a href="../reference/get_aflw_cookie.html">get_aflw_cookie()</a></code> to align with change in site API (<a href="https://github.com/jimmyday12/fitzRoy/issues/62" class="external-link">#62</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.10" id="fitzroy-0110">fitzRoy 0.1.10<a class="anchor" aria-label="anchor" href="#fitzroy-0110"></a></h2>
-<ul><li>footywire scrapers no longer fail due to footywire.com updating their site (<a href="https://github.com/jimmyday12/fitzRoy/issues/61" class="external-link">#61</a>)</li></ul></div>
+<ul><li>footywire scrapers no longer fail due to footywire.com updating their site (<a href="https://github.com/jimmyday12/fitzRoy/issues/61" class="external-link">#61</a>)</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.9" id="fitzroy-019">fitzRoy 0.1.9<a class="anchor" aria-label="anchor" href="#fitzroy-019"></a></h2>
 <ul><li>
@@ -298,7 +310,8 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.8" id="fitzroy-018">fitzRoy 0.1.8<a class="anchor" aria-label="anchor" href="#fitzroy-018"></a></h2>
 <ul><li>new feature - Woman’s Stats. New set of functions for Woman’s data. Read the vignette <a href="https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html">here</a> - many thanks to <a href="https://github.com/OscarLane" class="external-link">OscarLane</a>
-</li></ul></div>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.7" id="fitzroy-017">fitzRoy 0.1.7<a class="anchor" aria-label="anchor" href="#fitzroy-017"></a></h2>
 <ul><li>fixed bug for dependency of <code>stringr</code> package. Now updated to ensure version 1.3.1 or greater <a href="https://github.com/jimmyday12/fitzRoy/issues/33" class="external-link">#33</a>
@@ -345,14 +358,17 @@
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.4" id="fitzroy-014">fitzRoy 0.1.4<a class="anchor" aria-label="anchor" href="#fitzroy-014"></a></h2>
 <ul><li>
-<code>update_footywire</code> now more efficiently searches through missing match_ids</li></ul></div>
+<code>update_footywire</code> now more efficiently searches through missing match_ids</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.3" id="fitzroy-013">fitzRoy 0.1.3<a class="anchor" aria-label="anchor" href="#fitzroy-013"></a></h2>
-<ul><li>Fixed bug where Fixture returned NA due to Bye rounds</li></ul></div>
+<ul><li>Fixed bug where Fixture returned NA due to Bye rounds</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.2" id="fitzroy-012">fitzRoy 0.1.2<a class="anchor" aria-label="anchor" href="#fitzroy-012"></a></h2>
 <ul><li>Added <code>get_squggle_data</code> function to return data from the <a href="https://api.squiggle.com.au" class="external-link">Squiggle API</a>
-</li></ul></div>
+</li>
+</ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="0.1.1" id="fitzroy-011">fitzRoy 0.1.1<a class="anchor" aria-label="anchor" href="#fitzroy-011"></a></h2>
 <ul><li>Added raw scoring profession data</li>
@@ -387,7 +403,7 @@
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer></div>
