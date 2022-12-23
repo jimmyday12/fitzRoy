@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/jimmyday12/fitzRoy/workflows/R-CMD-check/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions)
+[![R-CMD-check](https://github.com/jimmyday12/fitzRoy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions/workflows/R-CMD-check.yaml)
 [![Coverage
 status](https://codecov.io/gh/jimmyday12/FitzRoy/branch/master/graph/badge.svg)](https://codecov.io/github/jimmyday12/FitzRoy?branch=master)
 [![CRAN
@@ -93,7 +93,7 @@ fetch_fixture(2022, source = "AFL", comp = "WAFL")
 
 Available comps include \* “VFL” \* “VFLW” \* “WAFL” \* “U18B” \* “U18G”
 
------
+------------------------------------------------------------------------
 
 Please note that the ‘fitzRoy’ project is released with a [Contributor
 Code of
