@@ -1,5 +1,8 @@
 # fitzRoy (development version)
 
+* Fixed a bug where `fetch_footywire_stats` was breaking due to changes in the footwire site
+* Fixed a bug with new debut players receiving an ID of 0 in `fetch_player_stats_afltables` ([#189](https://github.com/jimmyday12/fitzRoy/issues/189))
+
 # fitzRoy 1.2.0
 
 ## Breaking changes

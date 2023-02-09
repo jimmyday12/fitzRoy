@@ -365,7 +365,7 @@ get_afltables_player_ids <- function(seasons) {
                    .id = "Season") %>%
     dplyr::mutate(Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
                   Season = stringr::str_remove(.data$Season, "_stats.txt"),
-                  Season = as.numeric(Season))
+                  Season = as.numeric(.data$Season))
   
   if (nrow(ids_new) < 1) {
     return(ids)

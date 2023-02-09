@@ -96,7 +96,7 @@ footywire_html <- function(x, id) {
   # Now get the table data. The Home Team is in the 13th table
   home_stats <- x %>%
     rvest::html_nodes("table") %>%
-    .[[12]] %>%
+    .[[13]] %>%
     rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
       Team = home_team,
@@ -107,7 +107,7 @@ footywire_html <- function(x, id) {
   # Now get the table data
   away_stats <- x %>%
     rvest::html_nodes("table") %>%
-    .[[16]] %>%
+    .[[18]] %>%
     rvest::html_table(header = TRUE) %>%
     dplyr::mutate(
       Team = away_team,
