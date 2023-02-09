@@ -1,10 +1,21 @@
+# get most recent season
+current_year <- Sys.Date() %>% format("%Y") %>% as.numeric()
+x <- fetch_results_afltables(current_year)
+if (nrow(x) == 0) {
+  seas <- current_year - 1
+} else {
+  seas <- current_year
+}
+
 
 test_that("fetch_player_stats_afltables works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
+  
+
 
   # test normal function
-  dat <- fetch_player_stats_afltables()
+  dat <- fetch_player_stats_afltables(seas)
   expect_s3_class(dat, "tbl")
   expect_lte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric())
   expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
@@ -20,10 +31,11 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   expect_equal(dat_round1, dat_round2)
   
   # Test browlow
-  current_year <- as.numeric(format(Sys.Date(), "%Y"))
-  dat_last_year <- fetch_player_stats_afltables(current_year - 1 )
+  expect_equal(sum(is.na(dat$Brownlow.Votes)), 0)
   
-  expect_equal(sum(is.na(dat_last_year$Brownlow.Votes)), 0)
+  # Test debutants aren't getting ID of 0
+  zero_id <- dat %>% dplyr::filter(ID == 0)
+  expect_equal(nrow(zero_id), 0)
   
 })
 

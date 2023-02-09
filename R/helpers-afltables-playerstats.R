@@ -11,7 +11,7 @@
 #' @keywords internal
 #' @noRd
 scrape_afltables_match <- function(match_urls) {
-
+  
   # For each game url, download data, extract the stats
   # tables #3 and #5 and bind together
   cli::cli_process_start("Downloading data")
@@ -343,16 +343,17 @@ get_afltables_player_ids <- function(seasons) {
   }
 
   start <- 2017
-  end <- max(max(seasons), Sys.Date() %>% format("%Y") %>% as.numeric())
+  
+  # need to check if the current years season has started
+  current_year <- Sys.Date() %>% format("%Y") %>% as.numeric()
+  end <- max(max(seasons), current_year)
 
   urls <- purrr::map_chr(start:end, base_url)
 
   ids_new <- urls %>%
+    purrr::set_names() %>%
     purrr::map(readUrl) %>%
-    purrr::discard(~ nrow(.x) == 0)
-
-
-  first_populated_season <- end - length(ids_new) + 1
+    purrr::discard(~ nrow(.x) == 0) 
 
   # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
   # so we need to make them consistent before joining to avoid type errors
@@ -360,12 +361,12 @@ get_afltables_player_ids <- function(seasons) {
   cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
 
   ids_new <- ids_new %>%
-    purrr::map(~ dplyr::mutate_at(., cols_to_convert, as.character)) %>%
-    purrr::map2_dfr(
-      .y = first_populated_season:end,
-      ~ dplyr::mutate(., Season = .y)
-    )
-
+    purrr::map_dfr(~ dplyr::mutate_at(., cols_to_convert, as.character),
+                   .id = "Season") %>%
+    dplyr::mutate(Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
+                  Season = stringr::str_remove(.data$Season, "_stats.txt"),
+                  Season = as.numeric(Season))
+  
   if (nrow(ids_new) < 1) {
     return(ids)
   }
@@ -373,7 +374,7 @@ get_afltables_player_ids <- function(seasons) {
   ids_new <- ids_new %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
-    dplyr::rename(Team.abb = .data$Team)  %>%
+    dplyr::rename(Team.abb = "Team")  %>%
     dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
     dplyr::select(!!col_vars)
   
