@@ -2,6 +2,8 @@
 
 * Fixed a bug where `fetch_footywire_stats` was breaking due to changes in the footwire site
 * Fixed a bug with new debut players receiving an ID of 0 in `fetch_player_stats_afltables` ([#189](https://github.com/jimmyday12/fitzRoy/issues/189))
+* Fixed a bug with `fetch_player_stats_afl` where it was throwing an error if trying to get AFL stats for a new season. It now returns NULL instead of an error  ([#190](https://github.com/jimmyday12/fitzRoy/issues/190))
+* Fixed a minor bug with the rendering of messages in `fetch_player_stats_afl` ([#185](https://github.com/jimmyday12/fitzRoy/issues/185))
 
 # fitzRoy 1.2.0
 
