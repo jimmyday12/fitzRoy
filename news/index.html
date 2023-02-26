@@ -114,6 +114,8 @@
 <h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
 <ul><li>Fixed a bug where <code>fetch_footywire_stats</code> was breaking due to changes in the footwire site</li>
 <li>Fixed a bug with new debut players receiving an ID of 0 in <code>fetch_player_stats_afltables</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/189" class="external-link">#189</a>)</li>
+<li>Fixed a bug with <code>fetch_player_stats_afl</code> where it was throwing an error if trying to get AFL stats for a new season. It now returns NULL instead of an error (<a href="https://github.com/jimmyday12/fitzRoy/issues/190" class="external-link">#190</a>)</li>
+<li>Fixed a minor bug with the rendering of messages in <code>fetch_player_stats_afl</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/185" class="external-link">#185</a>)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.2.0" id="fitzroy-120">fitzRoy 1.2.0<small>2022-09-29</small><a class="anchor" aria-label="anchor" href="#fitzroy-120"></a></h2>
