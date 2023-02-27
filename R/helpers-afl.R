@@ -37,8 +37,8 @@ fetch_teams_afl <- function(comp){
   df <- teams %>%
     stats::na.omit() %>%
     dplyr::select(
-      .data$id, .data$abbreviation,
-      .data$name, .data$teamType
+      "id", "abbreviation",
+      "name", "teamType"
     )
   
   type <- dplyr::case_when(
@@ -398,13 +398,13 @@ fetch_match_stats_afl <- function(id, cookie = NULL) {
   cont <- parse_resp_afl(resp)
 
   home_df <- cont$homeTeamPlayerStats %>%
-    dplyr::select(-.data$teamId, -.data$playerStats.lastUpdated) %>%
+    dplyr::select(-"teamId", -"playerStats.lastUpdated") %>%
     clean_names_playerstats_afl() %>%
     tibble::as_tibble() %>%
     dplyr::mutate(teamStatus = "home")
 
   away_df <- cont$awayTeamPlayerStats %>%
-    dplyr::select(-.data$teamId, -.data$playerStats.lastUpdated) %>%
+    dplyr::select(-"teamId", -"playerStats.lastUpdated") %>%
     clean_names_playerstats_afl() %>%
     tibble::as_tibble() %>%
     dplyr::mutate(teamStatus = "away")
@@ -501,11 +501,11 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
       team = team
     ) %>%
     dplyr::select(
-      .data$firstName,
-      .data$surname,
-      .data$id,
-      .data$team,
-      .data$season,
+      "firstName",
+      "surname",
+      "id",
+      "team",
+      "season",
       dplyr::everything()
     )
 }

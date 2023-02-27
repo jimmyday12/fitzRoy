@@ -120,9 +120,9 @@ convert_results <- function(results) {
 
   # Convert results to wide format
   results %>%
-    tidyr::gather("variable", "value", .data$Home.Team:.data$Away.Points) %>%
-    tidyr::separate(.data$variable, into = c("Status", "variable")) %>%
-    tidyr::spread(.data$variable, .data$value) %>%
+    tidyr::gather("variable", "value", "Home.Team":"Away.Points") %>%
+    tidyr::separate("variable", into = c("Status", "variable")) %>%
+    tidyr::spread("variable", "value") %>%
     dplyr::arrange(.data$Game) %>%
     dplyr::mutate(Margin = ifelse(.data$Status == "Home",
       .data$Margin,

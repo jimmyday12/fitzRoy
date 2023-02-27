@@ -49,9 +49,9 @@ get_player_debut_afltables <- function(team = NULL) {
   # Fix teams
   df <- df %>%
     dplyr::left_join(teams, by = c("Team" = "original")) %>%
-    dplyr::rename(debut_team = .data$full) %>%
+    dplyr::rename(debut_team = "full") %>%
     dplyr::left_join(teams, by = c("Oppo" = "original")) %>%
-    dplyr::rename(debut_opposition = .data$full)
+    dplyr::rename(debut_opposition = "full")
 
 
   # Filter out team
@@ -63,8 +63,13 @@ get_player_debut_afltables <- function(team = NULL) {
 
   df %>%
     dplyr::select(
-      .data$Player, .data$DOB, .data$debut_date, .data$debut_season,
-      .data$debut_round, .data$debut_team, .data$debut_opposition
+      "Player", 
+      "DOB", 
+      "debut_date", 
+      "debut_season",
+      "debut_round", 
+      "debut_team", 
+      "debut_opposition"
     )
 }
 
@@ -108,13 +113,13 @@ get_player_details_afltables <- function(team) {
     purrr::pluck(1) %>%
     dplyr::mutate(Team = team) %>%
     dplyr::slice(1:dplyr::n() - 1) %>%
-    tidyr::separate(.data$`Games (W-D-L)`,
+    tidyr::separate("Games (W-D-L)",
       into = c("Games", "Wins", "Draws", "Losses", "x"),
       fill = "right"
     ) %>%
-    dplyr::select(-.data$x) %>%
+    dplyr::select(-'x') %>%
     dplyr::mutate(date_accessed = Sys.Date()) %>%
-    tidyr::separate(.data$Player,
+    tidyr::separate("Player",
       into = c("surname", "firstname"),
       sep = ",", fill = "right"
     ) %>%
@@ -131,9 +136,12 @@ get_player_details_afltables <- function(team) {
       as.numeric
     )) %>%
     dplyr::select(
-      .data$Player, .data$Team,
+      "Player", 
+      "Team",
       dplyr::everything(),
-      -.data$surname, -.data$firstname, -.data$DOB
+      -"surname", 
+      -"firstname", 
+      -"DOB"
     ) %>%
     dplyr::arrange(.data$Cap)
 

@@ -85,9 +85,10 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   season_id <- find_season_id(season, comp)
 
   if (is.null(season_id)) {
-    rlang::warn(glue::glue("No data found for season {season} on AFL.com.au"))
+    rlang::warn(glue::glue("No results data found for season {season} on AFL.com.au for {comp}"))
     return(NULL)
   }
+  
   round_ids <- season_id %>%
     purrr::map(~ find_round_id(round_number,
       season_id = .x,

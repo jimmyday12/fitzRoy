@@ -31,7 +31,7 @@ scrape_afltables_match <- function(match_urls) {
 
 
   replace_names <- function(x) {
-    names(x) <- x[1, ]
+    names(x) <- as.character(x[1, ])
     x[-1, ]
   }
 
@@ -141,13 +141,13 @@ scrape_afltables_match <- function(match_urls) {
   names(games_df) <- make.names(names(games_df))
 
   # nolint start
-  if ("X." %in% names(games_df)) games_df <- dplyr::rename(games_df, Jumper.No. = .data$X.)
+  if ("X." %in% names(games_df)) games_df <- dplyr::rename(games_df, Jumper.No. = "X.")
   if ("X1." %in% names(games_df)) {
     games_df <- dplyr::rename(games_df,
-      One.Percenters = .data$X1.
+      One.Percenters = "X1."
     )
   }
-  if ("X.P" %in% names(games_df)) games_df <- dplyr::rename(games_df, TOG = .data$X.P)
+  if ("X.P" %in% names(games_df)) games_df <- dplyr::rename(games_df, TOG = "X.P")
   # nolint end
 
   # change column types
@@ -162,11 +162,11 @@ scrape_afltables_match <- function(match_urls) {
       Date = lubridate::ymd(format(.data$Date, "%Y-%m-%d")),
       Season = as.integer(lubridate::year(.data$Date))
     ) %>%
-    tidyr::separate(.data$Player,
+    tidyr::separate("Player",
       into = c("Surname", "First.name"), sep = ","
     ) %>%
     dplyr::mutate_at(c("Surname", "First.name"), stringr::str_squish) %>%
-    tidyr::separate(.data$Umpires,
+    tidyr::separate("Umpires",
       into = c(
         "Umpire.1", "Umpire.2",
         "Umpire.3", "Umpire.4"
@@ -180,7 +180,7 @@ scrape_afltables_match <- function(match_urls) {
 
   sep <- function(...) {
     dots <- list(...)
-    tidyr::separate_(..., into = sprintf(
+    tidyr::separate(..., into = sprintf(
       "%s%s", dots[[2]],
       c("G", "B", "P")
     ), sep = "\\.")
@@ -192,8 +192,8 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::mutate_at(dplyr::vars(dplyr::contains("HQ")), as.integer) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::contains("AQ")), as.integer) %>%
     dplyr::rename(
-      Home.score = .data$HQ4P,
-      Away.score = .data$AQ4P
+      Home.score = "HQ4P",
+      Away.score = "AQ4P"
     )
 
   ids <- get_afltables_player_ids(
@@ -205,7 +205,7 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::left_join(ids,
       by = c("Season", "Player", "Playing.for" = "Team")
     ) %>%
-    dplyr::select(-.data$Player)
+    dplyr::select(-"Player")
 
   df <- games_joined %>%
     dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat))))

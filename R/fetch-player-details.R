@@ -87,6 +87,11 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM", officia
   # get season id
   comp_seas_id <- find_season_id(season, comp)
   
+  if (is.null(comp_seas_id)) {
+    rlang::warn(glue::glue("No player details data found for season {season} on AFL.com.au for {comp}"))
+    return(NULL)
+  }
+  
   if (!comp %in% c("AFLM", "AFLW")) official_teams <- TRUE
 
   # return team abbreviation
