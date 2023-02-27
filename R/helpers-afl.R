@@ -252,6 +252,7 @@ find_season_id <- function(season, comp = "AFLM") {
   cont <- parse_resp_afl(resp)
 
   comp_ids <- cont$compSeasons %>%
+    dplyr::filter(!stringr::str_detect(.data$name, "Legacy")) %>%
     dplyr::mutate(season = as.numeric(gsub("^.*([0-9]{4}).*", "\\1", .data$name)))
 
   id <- comp_ids$id[comp_ids$season == season]
