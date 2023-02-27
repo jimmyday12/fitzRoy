@@ -141,11 +141,11 @@ fetch_results_afltables <- function(season = NULL, round_number = NULL) {
 
   # Separate score out into components ----
   match_data <- match_data %>%
-    tidyr::separate(.data$Home.Score,
+    tidyr::separate("Home.Score",
       into = c("Home.Goals", "Home.Behinds", "Home.Points"),
       sep = "\\.", convert = TRUE
     ) %>%
-    tidyr::separate(.data$Away.Score,
+    tidyr::separate("Away.Score",
       into = c("Away.Goals", "Away.Behinds", "Away.Points"),
       sep = "\\.", convert = TRUE
     )
@@ -193,7 +193,7 @@ fetch_results_afltables <- function(season = NULL, round_number = NULL) {
   match_data <- match_data %>%
     dplyr::group_by(.data$Season) %>%
     dplyr::mutate(Round.Number = dplyr::dense_rank(.data$Round.New)) %>%
-    dplyr::select(-.data$Round.New) %>%
+    dplyr::select(-"Round.New") %>%
     dplyr::ungroup()
 
   # Filter out round

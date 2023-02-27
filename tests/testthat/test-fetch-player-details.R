@@ -82,5 +82,6 @@ test_that("fetch_player_details works for non-AFL leagues", {
   expect_s3_class(fetch_player_details_afl(2022, team = "Casey Demons", comp = "VFL"), "tbl")
   expect_s3_class(fetch_player_details_afl(2022, comp = "WAFL"), "tbl")
   expect_s3_class(fetch_player_details_afl(2022, comp = "U18B"), "tbl")
-  expect_s3_class(fetch_player_details_afl(2022, comp = "U18G"), "tbl")
+  expect_s3_class(fetch_player_details_afl(2019, comp = "U18G"), "tbl")
+  expect_null(fetch_player_details_afl(2022, comp = "U18G"), "tbl")
 })

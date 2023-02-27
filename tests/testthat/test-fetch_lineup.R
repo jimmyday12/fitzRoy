@@ -137,6 +137,7 @@ test_that("fetch_lineup works for non-AFL leagues", {
   expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
   expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
   expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
-  expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  expect_s3_class(fetch_lineup(2019, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  expect_null(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
   
 })
