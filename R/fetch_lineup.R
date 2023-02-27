@@ -72,7 +72,12 @@ fetch_lineup_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
     return(NULL)
   }
   
-  ids <- matches$providerId
+  if (nrow(matches) == 0) {
+    rlang::warn(glue::glue("No matches data for season {season} on AFL.com.au for {comp}"))
+    return(NULL)
+  }
+  
+  ids <- matches$"providerId"
 
 
   if (length(ids) == 0) {
@@ -99,7 +104,8 @@ fetch_lineup_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
     )
 
   df <- dplyr::left_join(match_details, lineup_df,
-    by = c("providerId" = "matchId")
+    by = c("providerId" = "matchId"),
+    multiple = "all"
   )
 
   df %>% tibble::as_tibble()
