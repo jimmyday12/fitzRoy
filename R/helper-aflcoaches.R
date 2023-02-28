@@ -73,7 +73,7 @@ scrape_coaches_votes <- function(season = NULL,
     ) %>%
     # remove unnecessary rows/columns
     dplyr::filter(!(.data$Coaches.Votes == "Votes" & .data$Player.Name == "Player (Club)")) %>%
-    dplyr::select(-.data$Match.Id)
+    dplyr::select(-"Match.Id")
 
   return(df)
 }

@@ -5,8 +5,7 @@
 \title{Access Squiggle data using the squiggle API service.}
 \usage{
 fetch_squiggle_data(
-  query = c("teams", "sources", "games", "tips", "ladder", "standings", "virtual",
-    "pav"),
+  query = c("teams", "sources", "games", "tips", "ladder", "standings", "virtual", "pav"),
   ...
 )
 }

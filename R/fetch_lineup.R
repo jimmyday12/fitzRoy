@@ -65,8 +65,19 @@ fetch_lineup_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 
   # Get match ids
   cli_id1 <- cli::cli_process_start("Fetching match ids")
-  matches <- suppressMessages(fetch_fixture(season, round_number, comp))
-  ids <- matches$providerId
+  matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
+  
+  if (is.null(matches)) {
+    rlang::warn(glue::glue("No matches data for season {season} on AFL.com.au for {comp}"))
+    return(NULL)
+  }
+  
+  if (nrow(matches) == 0) {
+    rlang::warn(glue::glue("No matches data for season {season} on AFL.com.au for {comp}"))
+    return(NULL)
+  }
+  
+  ids <- matches$"providerId"
 
 
   if (length(ids) == 0) {
@@ -87,13 +98,14 @@ fetch_lineup_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   # add match details
   match_details <- matches %>%
     dplyr::select(
-      .data$providerId, .data$utcStartTime, .data$status,
-      .data$compSeason.shortName, .data$round.name,
-      .data$round.roundNumber, .data$venue.name
+      "providerId", "utcStartTime", "status",
+      "compSeason.shortName", "round.name",
+      "round.roundNumber", "venue.name"
     )
 
   df <- dplyr::left_join(match_details, lineup_df,
-    by = c("providerId" = "matchId")
+    by = c("providerId" = "matchId"),
+    multiple = "all"
   )
 
   df %>% tibble::as_tibble()

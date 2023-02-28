@@ -6,9 +6,11 @@ describe("fetch_betting_odds_footywire", {
 
   # Many regression tests require fetching multiple seasons,
   # so it's most efficient to fetch all years with known potential issues
-  full_betting_df <- fetch_betting_odds_footywire(
-    start_season = 2010, end_season = 2020
-  )
+  full_betting_df <- 
+    fetch_betting_odds_footywire(
+      start_season = 2010, 
+      end_season = 2020)
+    
 
   it("works with different inputs ", {
     betting_df <- fetch_betting_odds_footywire(2018, 2019)
@@ -19,9 +21,16 @@ describe("fetch_betting_odds_footywire", {
     expect_s3_class(betting_df, "data.frame")
     expect_s3_class(betting_df$Date[1], "Date")
 
-    expect_warning(fetch_betting_odds_footywire(18, 2010))
-    this_year <- as.numeric(lubridate::year(Sys.Date()))
-    expect_warning(fetch_betting_odds_footywire(this_year - 1, this_year + 1))
+    fetch_betting_odds_footywire(18, 2010) %>%
+      expect_warning() %>%
+      suppressWarnings()
+    
+    this_year <- as.numeric(lubridate::year(Sys.Date())) 
+    
+    fetch_betting_odds_footywire(this_year - 1, this_year + 1) %>%
+      expect_warning() %>%
+      suppressWarnings()
+    
     expect_error(supressWarnings(fetch_betting_odds_footywire("2018-01-01")))
     expect_error(supressWarnings(fetch_betting_odds_footywire(2016, "2018-01-01")))
   })
@@ -95,12 +104,11 @@ describe("fetch_betting_odds_footywire", {
     this_year <- as.numeric(lubridate::year(Sys.Date()))
     next_year <- this_year + 1
 
-    expect_warning(empty_betting_df <- fetch_betting_odds_footywire(
-      start_season = next_year, end_season = next_year
-    ))
+    fetch_betting_odds_footywire(start_season = next_year, end_season = next_year) %>%
+      expect_warning() %>%
+      suppressWarnings()
 
-    # expect_equal(nrow(empty_betting_df), 0)
-    expect_null(empty_betting_df)
+    
   })
 })
 

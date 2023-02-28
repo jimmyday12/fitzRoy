@@ -63,7 +63,9 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
     years <- page[[1]] %>%
       rvest::html_nodes("option") %>%
       rvest::html_text() %>%
-      as.numeric()
+      stringr::str_extract("[0-9]*") 
+    
+    as.numeric(years[!years == ""])
   }
 
   extract_table_rows <- function(page_html, season) {
@@ -163,7 +165,7 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
         dimnames = list(NULL, raw_betting_col_names)
       ) %>%
       as.data.frame(.) %>%
-      tidyr::fill(c(.data$Date, .data$Venue)) %>%
+      tidyr::fill(c("Date", "Venue")) %>%
       dplyr::mutate(
         Date = lubridate::dmy(.data$Date),
         Venue = as.character(.data$Venue),
@@ -192,7 +194,7 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
   valid_seasons <- fetch_valid_seasons()
   valid_end_season <- min(
     as.numeric(end_season),
-    max(valid_seasons)
+    max(valid_seasons, na.rm = TRUE)
   )
 
   if (is.na(valid_end_season)) {
@@ -212,7 +214,7 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
     )
   }
 
-  valid_start_season <- max(as.numeric(start_season), min(valid_seasons))
+  valid_start_season <- max(as.numeric(start_season), min(valid_seasons, na.rm = TRUE))
   valid_start_season <- min(valid_start_season, valid_end_season)
 
   if (is.na(valid_start_season)) {
@@ -257,10 +259,10 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
     ) %>%
     tidyr::pivot_wider(
       .,
-      names_from = c(.data$Home.Away),
+      names_from = c("Home.Away"),
       values_from = c(
-        .data$Team, .data$Score, .data$Margin,
-        .data$Win.Odds, .data$Win.Paid, .data$Line.Odds, .data$Line.Paid
+        "Team", "Score", "Margin",
+        "Win.Odds", "Win.Paid", "Line.Odds", "Line.Paid"
       )
     ) %>%
     dplyr::select(., !c("Match.ID")) %>%

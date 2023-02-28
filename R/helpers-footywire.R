@@ -126,14 +126,14 @@ footywire_html <- function(x, id) {
       Match_id = id
     ) %>%
     dplyr::select(
-      .data$Date,
-      .data$Season,
-      .data$Round,
-      .data$Venue,
-      .data$Player,
-      .data$Team,
-      .data$Opposition,
-      .data$Status,
+      "Date",
+      "Season",
+      "Round",
+      "Venue",
+      "Player",
+      "Team",
+      "Opposition",
+      "Status",
       dplyr::everything()
     )
 
@@ -208,9 +208,9 @@ get_match_data <- function(id) {
         # Tidy Names
         player_stats_table <- player_stats_table %>%
           dplyr::rename(
-            DE = .data$DE.,
-            TOG = .data$TOG.,
-            One.Percenters = .data$X1.
+            DE = "DE.",
+            TOG = "TOG.",
+            One.Percenters = "X1."
           )
       }
     }
@@ -268,19 +268,21 @@ extract_footywire_match_table <- function(xml) {
     .[[1]]
 
   tbl <- tbl %>%
-    dplyr::rename(Points = .data$Final) %>%
-    dplyr::select(.data$Team, .data$Points) %>%
+    dplyr::rename(Points = "Final") %>%
+    dplyr::select(
+      "Team", 
+      "Points") %>%
     dplyr::mutate(Status = c("Home", "Away")) %>%
     tidyr::pivot_wider(
-      names_from = .data$Status,
-      values_from = c(.data$Team, .data$Points),
+      names_from = "Status",
+      values_from = c("Team", "Points"),
       names_sep = "."
     ) %>%
     dplyr::rename(
-      Home.Team = .data$Team.Home,
-      Away.Team = .data$Team.Away,
-      Home.Points = .data$Points.Home,
-      Away.Points = .data$Points.Away
+      Home.Team = "Team.Home",
+      Away.Team = "Team.Away",
+      Home.Points = "Points.Home",
+      Away.Points = "Points.Away"
     )
 
   match_details <- extract_footywire_match_details(xml)
@@ -293,9 +295,14 @@ extract_footywire_match_table <- function(xml) {
       Venue = match_details$venue
     ) %>%
     dplyr::select(
-      .data$Date, .data$Time, .data$Round, .data$Venue,
-      .data$Home.Team, .data$Away.Team,
-      .data$Home.Points, .data$Away.Points
+      "Date", 
+      "Time", 
+      "Round", 
+      "Venue",
+      "Home.Team", 
+      "Away.Team",
+      "Home.Points", 
+      "Away.Points"
     )
 
   return(tbl)

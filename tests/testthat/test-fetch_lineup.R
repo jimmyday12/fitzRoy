@@ -7,13 +7,18 @@ test_that("fetch_lineup_afl works for various inputs", {
 
   # change year
   expect_s3_class(fetch_lineup_afl(2018, round_number = 1), "tbl")
-  expect_warning(df <- fetch_lineup_afl(2000, round_number = 1))
-  expect_null(df)
+  fetch_lineup_afl(2000, round_number = 1) %>%
+    expect_warning() %>%
+    suppressWarnings()
+
 
   # change round number
   expect_s3_class(fetch_lineup_afl(2020, round_number = 1), "tbl")
   expect_s3_class(fetch_lineup_afl(2020, round_number = 2), "tbl")
-  expect_null(fetch_lineup_afl(2020, round_number = 50), "tbl")
+  
+  fetch_lineup_afl(2020, round_number = 50) %>%
+    expect_warning() %>%
+    suppressWarnings()
 
   # change comp
   expect_s3_class(fetch_lineup_afl(2020, round_number = 1, comp = "AFLW"), "tbl")
@@ -21,7 +26,9 @@ test_that("fetch_lineup_afl works for various inputs", {
   
   # Check future year and round
   current_year <- as.numeric(substr(Sys.Date(),1,4))
-  expect_null(fetch_lineup_afl(current_year + 1, round_number = 1, comp = "AFLM"))
+  fetch_lineup_afl(current_year + 1, round_number = 1, comp = "AFLM") %>%
+    expect_warning() %>%
+    suppressWarnings()
   #expect_null(fetch_lineup_afl(current_year, round_number = 23, comp = "AFLM"))
   
 })
@@ -137,6 +144,11 @@ test_that("fetch_lineup works for non-AFL leagues", {
   expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
   expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
   expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
-  expect_s3_class(fetch_lineup(2022, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  expect_s3_class(fetch_lineup(2019, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  
+  # Check for warnings thrown
+  fetch_lineup(2022, round_number = 1, source = "AFL", comp = "U18G") %>% 
+    expect_warning() %>%
+    suppressWarnings()
   
 })

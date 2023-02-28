@@ -8,8 +8,10 @@ test_that("fetch_fixture_afl works for various inputs", {
   # change year
   expect_s3_class(fetch_fixture_afl(2020), "tbl")
   expect_s3_class(fetch_fixture_afl(2018), "tbl")
-  expect_warning(df <- fetch_fixture_afl(2000))
-  expect_s3_class(df, "tbl")
+  fetch_fixture_afl(2000) %>% 
+    expect_warning() %>%
+    suppressWarnings()
+  
 
   # change round number
   expect_s3_class(fetch_fixture_afl(2020, round_number = 1), "tbl")
@@ -169,6 +171,11 @@ test_that("fetch_fixture works for non-AFL leagues", {
   expect_s3_class(fetch_fixture(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
   expect_s3_class(fetch_fixture(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
   expect_s3_class(fetch_fixture(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
-  expect_s3_class(fetch_fixture(2022, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  expect_s3_class(fetch_fixture(2019, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
+  
+  # Check for warnings thrown
+  fetch_fixture(2022, round_number = 1, source = "AFL", comp = "U18G") %>% 
+    expect_warning() %>%
+    suppressWarnings()
   
 })

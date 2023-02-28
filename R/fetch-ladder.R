@@ -91,6 +91,10 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   # fetch ids
   season_id <- find_season_id(season, comp)
 
+  if (is.null(season_id)) {
+    rlang::warn(glue::glue("No ladder data found for season {season} on AFL.com.au for {comp}"))
+    return(NULL)
+  }
 
   if (is.null(round_number)) {
     rlang::inform("No round number specified, trying to return most recent ladder for specified season")
@@ -161,8 +165,8 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 
   ladder_df <- ladder_df %>%
     dplyr::select(
-      .data$season, .data$season_name, .data$round_name,
-      .data$round_number, .data$last_updated,
+      "season", "season_name", "round_name",
+      "round_number", "last_updated",
       dplyr::everything()
     )
 
@@ -192,21 +196,21 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   # create a long df, with each observation being a team, for the round, for the season
   home_dat <- match_results_df %>%
     dplyr::select(
-      Team = .data$Home.Team,
-      .data$Round.Number, .data$Season,
-      .data$winner, Score = .data$Home.Points,
-      OppScore = .data$Away.Points
+      Team = "Home.Team",
+      "Round.Number", "Season","winner", 
+      Score = "Home.Points",
+      OppScore = "Away.Points"
     ) %>%
     dplyr::mutate(home_or_away = "Home")
 
   away_dat <- match_results_df %>%
     dplyr::select(
-      Team = .data$Away.Team,
-      .data$Round.Number,
-      .data$Season,
-      .data$winner,
-      Score = .data$Away.Points,
-      OppScore = .data$Home.Points
+      Team = "Away.Team",
+      "Round.Number",
+      "Season",
+      "winner",
+      Score = "Away.Points",
+      OppScore = "Home.Points"
     ) %>%
     dplyr::mutate(home_or_away = "Away")
 
@@ -224,10 +228,13 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   # ie in some rounds, there aren't the right amount of teams in each round
   df <- team_view %>%
     dplyr::distinct(.data$Season, .data$Team) %>%
-    dplyr::left_join(team_view %>%
-      dplyr::distinct(.data$Season, .data$Round.Number), by = "Season") %>%
-    dplyr::left_join(team_view, by = c("Season", "Round.Number", "Team")) %>%
-    dplyr::select(-.data$winner, -.data$home_or_away)
+    dplyr::left_join(team_view %>% dplyr::distinct(.data$Season, .data$Round.Number), 
+      by = "Season", 
+      multiple = "all") %>%
+    dplyr::left_join(team_view, 
+                     by = c("Season", "Round.Number", "Team"), 
+                     multiple = "all") %>%
+    dplyr::select(-"winner", -"home_or_away")
 
 
   # function to replace the missing results (ie where the team had a bye) with zeros
@@ -277,7 +284,12 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
 
   # select final columns for output ladder table
   ladder <- ladder %>%
-    dplyr::select(.data$Season, .data$Team, .data$Round.Number, Season.Points = .data$season_points, Score.For = .data$score_for, Score.Against = .data$score_against, Percentage = .data$percentage, Ladder.Position = .data$ladder_pos)
+    dplyr::select("Season", "Team", "Round.Number", 
+                  Season.Points = "season_points", 
+                  Score.For = "score_for", 
+                  Score.Against = "score_against", 
+                  Percentage = "percentage", 
+                  Ladder.Position = "ladder_pos")
 
 
   # Allowing for ladder filtering -------------------------------------------
