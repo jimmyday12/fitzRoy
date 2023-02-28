@@ -90,7 +90,9 @@ test_that("fetch_results works", {
   # Test some various inputs
   expect_s3_class(fetch_results(2020, round = 1), "data.frame")
   expect_error(fetch_results(20))
-  expect_warning(fetch_results(2000) %>% suppressWarnings())
+  fetch_results(2000) %>% 
+    expect_warning() %>%
+    suppressWarnings()
   expect_s3_class(fetch_results(2020, round = 1, source = "footywire", last_n_matches = 1), "data.frame")
   expect_s3_class(fetch_results(2020, round = 1, source = "afltables"), "data.frame")
 })
