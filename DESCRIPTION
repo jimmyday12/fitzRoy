@@ -53,7 +53,8 @@ Imports:
     tibble,
     progress,
     glue,
-    cli
+    cli,
+    lifecycle
 Suggests:
     covr,
     elo,
