@@ -5,6 +5,7 @@
 * Fixed a bug with `fetch_player_stats_afl` where it was throwing an error if trying to get AFL stats for a new season. It now returns NULL instead of an error  ([#190](https://github.com/jimmyday12/fitzRoy/issues/190))
 * Fixed a minor bug with the rendering of messages in `fetch_player_stats_afl` ([#185](https://github.com/jimmyday12/fitzRoy/issues/185))
 * Fixed a range of warnings that were either unhelpful or not being adequately captured in unit tests
+* Added proper lifecycle deprecation to the old `get_` functions. These will be formally removed in the next release
 
 # fitzRoy 1.2.0
 
