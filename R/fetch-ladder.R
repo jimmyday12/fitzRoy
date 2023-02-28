@@ -228,9 +228,12 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   # ie in some rounds, there aren't the right amount of teams in each round
   df <- team_view %>%
     dplyr::distinct(.data$Season, .data$Team) %>%
-    dplyr::left_join(team_view %>%
-      dplyr::distinct(.data$Season, .data$Round.Number), by = "Season") %>%
-    dplyr::left_join(team_view, by = c("Season", "Round.Number", "Team")) %>%
+    dplyr::left_join(team_view %>% dplyr::distinct(.data$Season, .data$Round.Number), 
+      by = "Season", 
+      multiple = "all") %>%
+    dplyr::left_join(team_view, 
+                     by = c("Season", "Round.Number", "Team"), 
+                     multiple = "all") %>%
     dplyr::select(-"winner", -"home_or_away")
 
 

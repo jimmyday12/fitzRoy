@@ -130,8 +130,8 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
     dplyr::rename(team.name = "name")
 
   df <- match_details %>%
-    dplyr::left_join(match_stats, by = c("providerId")) %>%
-    dplyr::left_join(teams, by = c("teamId" = "providerId"))
+    dplyr::left_join(match_stats, by = c("providerId"), multiple = "all") %>%
+    dplyr::left_join(teams, by = c("teamId" = "providerId"), multiple = "all")
 
   return(df)
 }
