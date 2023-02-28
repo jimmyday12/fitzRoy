@@ -1,19 +1,22 @@
 #' Get AFL fixture
 #'
-#' Returns the Fixture for the relevant Season and Round from the AFL.com.au website.
-#'
-#' @param season season in YYYY format
-#' @param round_number round number
-#' @param comp One of "AFLM" or "AFLW"
-#'
-#' @return returns a dataframe with the fixture that matches season, round.
-#' @export
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' All `get_` functions were replaced with `fetch_*` functions. 
+#' Please use `fetch_fixture_afl()` instead
 #'
 #' @examples
+#' #
 #' \dontrun{
-#' get_afl_fixture(2020, round = 1)
+#' get_afl_fixture(2020, 1)
+#' # ->
+#' fetch_fixture_afl(2020, 1, "AFLM)
 #' }
+#' @keywords internal
 get_afl_fixture <- function(season = NULL, round_number = NULL, comp = "AFLM") {
-  .Deprecated("fetch_fixture_afl")
+  lifecycle::deprecate_warn("1.0.0",
+                            "get_afl_fixture()",
+                            "fetch_fixture_afl()")
   fetch_fixture_afl(season, round_number, comp)
 }

@@ -1,19 +1,23 @@
 #' Get basic match results from afltables.com
 #'
-#' \code{get_match_results} returns a dataframe containing all match results from 1897-current
-#'
-#' The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access.
-#' It generally is updated on the day after the last game
-#'
-#' @return Returns a data frame containing a line for each match
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' All `get_` functions were replaced with `fetch_*` functions. 
+#' Please use `fetch_results_afltables()` instead
 #'
 #' @examples
+#' #
 #' \dontrun{
 #' get_match_results()
+#' # ->
+#' fetch_results_afltables()
 #' }
-#' @export
+#' @keywords internal
 get_match_results <- function() {
-  .Deprecated("fetch_results_afltables")
+  lifecycle::deprecate_warn("1.0.0",
+                            "get_match_results()",
+                            "fetch_results_afltables()")
   fetch_results_afltables()
 }
 

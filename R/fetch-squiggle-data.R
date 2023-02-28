@@ -116,37 +116,20 @@ Does your query make sense? Try the following URL in your browser
 
 #' Access Squiggle data using the squiggle API service.
 #'
-#' Use `get_squiggle_data` to access the [Squiggle](https://squiggle.com.au) API. See instructions at [api.squiggle.com.au](https://api.squiggle.com.au).
-#'
-#' The optional arguments to squiggle can be one of the following.
-#'
-#' #' \itemize{
-#'   \item year: an integer specifying the year to return data from, e.g. year = 2018
-#'   \item round: an integer specifying the round to return data from, e.g. round = 12
-#'   \item game: an integer specifying the game ID to return data from, e.g. game = 10
-#'   \item source: an integer specifying the ID of the source to return data from, e.g. source = 1
-#' }
-#'
-#' For full instructions, see [api.squiggle.com.au](https://api.squiggle.com.au)
-#'
-#' @param query A text string. The main query to use with the API. Must be one of `sources`, `games`, `tips`, `ladder` or `standings`
-#'
-#' @param ... (optional) An optional argument provided to the [Squiggle API](https://api.squiggle.com.au). See details for more info.
-#'
-#' @return A dataframe, with the resultant data that matches the query specified in `query`, as well as any optional filters.
-#' @export
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' All `get_` functions were replaced with `fetch_*` functions. 
+#' Please use `fetch_squiggle_data()` instead
 #'
 #' @examples
+#' #
 #' \dontrun{
-#' # Return a list of the sources, with ID's
-#' sources <- get_squiggle_data("sources")
-#'
-#' # Get tips for Round 1, 2018
-#' tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
-#'
-#' # Get tips from Squiggle 2019
-#' squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
+#' get_squiggle_data(2020, 1)
+#' # ->
+#' fetch_squiggle_data(2020, 1, "AFLM)
 #' }
+#' @keywords internal
 get_squiggle_data <- function(query = c(
                                 "teams",
                                 "sources",
@@ -157,6 +140,8 @@ get_squiggle_data <- function(query = c(
                                 "virtual",
                                 "pav"
                               ), ...) {
-  .Deprecated("fetch_squiggle_data")
+  lifecycle::deprecate_warn("1.0.0",
+                            "get_squiggle_data()",
+                            "fetch_squiggle_data()")
   fetch_squiggle_data(query = query, ...)
 }

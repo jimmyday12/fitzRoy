@@ -1,18 +1,22 @@
-#' Get AFL Stats cookie (internal function)
-#'
-#' Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
-#' further requests.
-#'
-#' @return token code
-#' @importFrom magrittr %>%
-#'
+#' Get AFL Stats cookie 
+#' 
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' Replaced with a standard function to return cookies for either mens or womens data
+#' 
 #' @examples
+#' #
 #' \dontrun{
-#' cookie <- get_aflw_cookie()
+#' get_aflw_cookie(2020, 1)
+#' # ->
+#' fetch_fixture_afl(2020, 1, "AFLM)
 #' }
-#' @export
+#' @keywords internal
 get_aflw_cookie <- function() {
-  .Deprecated("get_afl_cookie")
+  lifecycle::deprecate_warn("1.0.0",
+                            "get_aflw_cookie()",
+                            "get_afl_cookie()")
   get_afl_cookie()
 }
 
@@ -176,29 +180,27 @@ get_aflw_round_data <- function(roundid, cookie) {
 }
 
 #' Get AFLW match data
-#'
-#' Retrieves AFLW match data for all available matches. Sources data from
-#' \url{https://www.womens.afl/}
-#'
-#' @param start_year optional, integer for start year to return match data
-#' onwards from
-#'
-#' @export
-#' @return a data frame of data for all available AFLW matches
-#' @export
-#' @importFrom magrittr %>%
-#' @importFrom rlang .data
-#'
+#' 
+#' @description
+#' `r lifecycle::badge("deprecated")`
+#' 
+#' All `get_` functions were replaced with `fetch_*` functions. 
+#' Please use `fetch_fixture_afl()` instead
+#' 
 #' @examples
+#' #
 #' \dontrun{
-#' # All data
-#' get_aflw_match_data()
-#'
-#' # 2018 data onward
-#' get_aflw_match_data(start_year = 2018)
+#' get_aflw_match_data(2020)
+#' # ->
+#' fetch_results_afl(2020, comp = "AFLW)
 #' }
+#' @keywords internal
 get_aflw_match_data <- function(start_year = 2017) {
-  .Deprecated("fetch_results_afl")
+  
+  lifecycle::deprecate_warn("1.0.0",
+                            "get_aflw_match_data()",
+                            "fetch_results_afl()")
+  
   end_year <- Sys.Date() %>%
     format("%Y") %>%
     as.numeric()
