@@ -8,9 +8,9 @@
 #' @examples
 #' #
 #' \dontrun{
-#' get_aflw_cookie(2020, 1)
+#' get_aflw_cookie()
 #' # ->
-#' fetch_fixture_afl(2020, 1, "AFLM)
+#' get_aflw_cookie()
 #' }
 #' @keywords internal
 get_aflw_cookie <- function() {
@@ -192,7 +192,7 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' \dontrun{
 #' get_aflw_match_data(2020)
 #' # ->
-#' fetch_results_afl(2020, comp = "AFLW)
+#' fetch_results_afl(2020, comp = "AFLW")
 #' }
 #' @keywords internal
 get_aflw_match_data <- function(start_year = 2017) {

@@ -12,7 +12,7 @@
 #' \dontrun{
 #' get_aflw_player_stats(2017, 2018)
 #' # ->
-#' fetch_player_stats_fryzigg(2017:2018, comp = "AFLW)
+#' fetch_player_stats_fryzigg(2017:2018, comp = "AFLW")
 #' }
 #' @keywords internal
 get_aflw_player_stats <- function(start = 2017,

@@ -9,22 +9,18 @@ get_footywire_betting_odds(
   end_season = lubridate::year(Sys.Date())
 )
 }
-\arguments{
-\item{start_season}{First season to return, in yyyy format. Earliest season with data available is 2010.}
-
-\item{end_season}{Last season to return, in yyyy format}
-}
-\value{
-Returns a data frame containing betting odds and basic match info
-}
 \description{
-\code{get_footywire_betting_odds} returns a data frame containing betting odds and basic match info for Men's AFL matches.
-}
-\details{
-The data frame contains the home and away team as well as venue.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_betting_odds_footywire()} instead
 }
 \examples{
+#
 \dontrun{
-get_footywire_betting_odds(2012, 2018)
+get_footywire_betting_odds(2017, 2018)
+# ->
+fetch_betting_odds_footywire(2017, 2018)
 }
 }
+\keyword{internal}

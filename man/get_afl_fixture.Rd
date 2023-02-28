@@ -6,21 +6,10 @@
 \usage{
 get_afl_fixture(season = NULL, round_number = NULL, comp = "AFLM")
 }
-\arguments{
-\item{season}{season in YYYY format}
-
-\item{round_number}{round number}
-
-\item{comp}{One of "AFLM" or "AFLW"}
-}
-\value{
-returns a dataframe with the fixture that matches season, round.
-}
 \description{
-Returns the Fixture for the relevant Season and Round from the AFL.com.au website.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_fixture_afl()} instead
 }
-\examples{
-\dontrun{
-get_afl_fixture(2020, round = 1)
-}
-}
+\keyword{internal}

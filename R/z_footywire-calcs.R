@@ -36,6 +36,7 @@ get_footywire_stats <- function(ids) {
 #' # ->
 #' fetch_player_stats_footywire(2010:2018)
 #' }
+#' @keywords internal
 update_footywire_stats <- function(check_existing = TRUE) {
   lifecycle::deprecate_warn("1.0.0",
                             "update_footywire_stats()",
@@ -62,6 +63,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' # ->
 #' fetch_fixture_footywire(2020)
 #' }
+#' @keywords internal
 get_fixture <- function(season = lubridate::year(Sys.Date()),
                         convert_date = FALSE) {
   lifecycle::deprecate_warn("1.0.0",

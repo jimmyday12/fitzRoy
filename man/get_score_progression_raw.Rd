@@ -6,17 +6,16 @@
 \usage{
 get_score_progression_raw()
 }
-\value{
-Returns a data frame containing raw score progression data
-}
 \description{
-\code{get_score_progression_raw} returns a dataframe raw, unprocessed scoring progression data from afltables.
-}
-\details{
-The data is unprocessed and unstructured but is a starting point for analysis. It only exists for 2010 to 2017.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+This function has been deprecated due to its inefficiency
 }
 \examples{
+#
 \dontrun{
-get_score_progession_raw()
+get_match_results()
+# ->
+fetch_results_afltables()
 }
 }

@@ -125,9 +125,9 @@ Does your query make sense? Try the following URL in your browser
 #' @examples
 #' #
 #' \dontrun{
-#' get_squiggle_data(2020, 1)
+#' get_squiggle_data()
 #' # ->
-#' fetch_squiggle_data(2020, 1, "AFLM)
+#' fetch_squiggle_data()
 #' }
 #' @keywords internal
 get_squiggle_data <- function(query = c(

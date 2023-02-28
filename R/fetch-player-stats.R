@@ -137,8 +137,8 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
 }
 
 
-#' @param rescrape Logical, defaults to FALSE. Determinse if we should rescrape data for a given season. By default, we return cached data which is much faster. Rescraping is slow but sometimes needed if historical data has changed. 
-#' @param rescrape_start_season Numeric, if rescrape = TRUE, which season should we start scraping from. Defaults to minimum value of season
+#' @param rescrape Logical, defaults to FALSE. Determines if we should re-scrape data for a given season. By default, we return cached data which is much faster. Re-scraping is slow but sometimes needed if historical data has changed. 
+#' @param rescrape_start_season Numeric, if `rescrape = TRUE`, which season should we start scraping from. Defaults to minimum value of season
 #'
 #' @rdname fetch_player_stats
 #' @export

@@ -11,7 +11,7 @@
 #' \dontrun{
 #' get_afl_fixture(2020, 1)
 #' # ->
-#' fetch_fixture_afl(2020, 1, "AFLM)
+#' fetch_fixture_afl(2020, 1, "AFLM")
 #' }
 #' @keywords internal
 get_afl_fixture <- function(season = NULL, round_number = NULL, comp = "AFLM") {

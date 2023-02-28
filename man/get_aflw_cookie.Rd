@@ -2,19 +2,13 @@
 % Please edit documentation in R/womens_stats.R
 \name{get_aflw_cookie}
 \alias{get_aflw_cookie}
-\title{Get AFL Stats cookie (internal function)}
+\title{Get AFL Stats cookie}
 \usage{
 get_aflw_cookie()
 }
-\value{
-token code
-}
 \description{
-Gets a cookie from http://www.afl.com.au/womens/matches/stats to authenticate
-further requests.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+Replaced with a standard function to return cookies for either mens or womens data
 }
-\examples{
-\dontrun{
-cookie <- get_aflw_cookie()
-}
-}
+\keyword{internal}

@@ -6,23 +6,10 @@
 \usage{
 get_aflw_match_data(start_year = 2017)
 }
-\arguments{
-\item{start_year}{optional, integer for start year to return match data
-onwards from}
-}
-\value{
-a data frame of data for all available AFLW matches
-}
 \description{
-Retrieves AFLW match data for all available matches. Sources data from
-\url{https://www.womens.afl/}
-}
-\examples{
-\dontrun{
-# All data
-get_aflw_match_data()
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-# 2018 data onward
-get_aflw_match_data(start_year = 2018)
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_fixture_afl()} instead
 }
-}
+\keyword{internal}

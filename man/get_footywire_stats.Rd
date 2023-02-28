@@ -6,22 +6,18 @@
 \usage{
 get_footywire_stats(ids)
 }
-\arguments{
-\item{ids}{A vector containing match id's to return. Can be a single value or vector of values.}
-}
-\value{
-Returns a data frame containing player match stats for each match ID
-}
 \description{
-\code{get_footywire_stats} returns a dataframe containing player match stats from footywire from 2010 onwards.
-}
-\details{
-The dataframe contains both basic and advanced player statistics from each match specified in the match_id input.
-To find match ID, find the relevant matches on https://www.footywire.com
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_footywire_stats()} instead
 }
 \examples{
+#
 \dontrun{
-get_footywire_stats(ids = 5000:5100)
+get_footywire_stats(5000)
+# ->
+fetch_footywire_stats(5000)
 }
-
 }
+\keyword{internal}

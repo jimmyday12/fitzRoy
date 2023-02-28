@@ -6,22 +6,17 @@
 \usage{
 get_fixture(season = lubridate::year(Sys.Date()), convert_date = FALSE)
 }
-\arguments{
-\item{season}{Season to return, in yyyy format}
-
-\item{convert_date}{logical, if TRUE, converts date column to date format instead of date time.}
-}
-\value{
-Returns a data frame containing the date, teams and venue of each game
-}
 \description{
-\code{get_fixture} returns a dataframe containing upcoming AFL Men's season fixture.
-}
-\details{
-The dataframe contains the home and away team as well as venue.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_fixture_footywire()} instead
 }
 \examples{
+#
 \dontrun{
-get_fixture(2018)
+get_fixture(2020)
+# ->
+fetch_fixture_footywire(2020)
 }
 }

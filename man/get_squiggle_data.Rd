@@ -9,38 +9,10 @@ get_squiggle_data(
   ...
 )
 }
-\arguments{
-\item{query}{A text string. The main query to use with the API. Must be one of \code{sources}, \code{games}, \code{tips}, \code{ladder} or \code{standings}}
-
-\item{...}{(optional) An optional argument provided to the \href{https://api.squiggle.com.au}{Squiggle API}. See details for more info.}
-}
-\value{
-A dataframe, with the resultant data that matches the query specified in \code{query}, as well as any optional filters.
-}
 \description{
-Use \code{get_squiggle_data} to access the \href{https://squiggle.com.au}{Squiggle} API. See instructions at \href{https://api.squiggle.com.au}{api.squiggle.com.au}.
-}
-\details{
-The optional arguments to squiggle can be one of the following.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-#' \itemize{
-\item year: an integer specifying the year to return data from, e.g. year = 2018
-\item round: an integer specifying the round to return data from, e.g. round = 12
-\item game: an integer specifying the game ID to return data from, e.g. game = 10
-\item source: an integer specifying the ID of the source to return data from, e.g. source = 1
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_squiggle_data()} instead
 }
-
-For full instructions, see \href{https://api.squiggle.com.au}{api.squiggle.com.au}
-}
-\examples{
-\dontrun{
-# Return a list of the sources, with ID's
-sources <- get_squiggle_data("sources")
-
-# Get tips for Round 1, 2018
-tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
-
-# Get tips from Squiggle 2019
-squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
-}
-}
+\keyword{internal}

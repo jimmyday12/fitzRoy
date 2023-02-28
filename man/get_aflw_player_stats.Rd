@@ -9,29 +9,10 @@ get_aflw_player_stats(
   end = as.numeric(format(Sys.Date(), "\%Y"))
 )
 }
-\arguments{
-\item{start}{optional, character string or numeric for start year, in "YYYY" format}
-
-\item{end}{optional, character string or numeric for end year, in "YYYY"format}
-}
-\value{
-a data table containing player stats for each game between start and end years
-}
 \description{
-\code{get_aflw_player_stats} returns a data frame containing match stats for each game within the specified date range
-}
-\details{
-This function returns a data frame containing match stats for each game within the specified date range. Returns 1 row per player.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-The date for this function is called from an API with data stored in a PostgreSQL database on AWS.
-Updated at the conclusion of every game. A cached version to come.
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_player_stats_fryzigg()} instead
 }
-\examples{
-#
-\dontrun{
-# Gets all data
-get_aflw_player_stats()
-# Specify a date range
-get_aflw_player_stats(start = 2018, end = 2019)
-}
-}
+\keyword{internal}

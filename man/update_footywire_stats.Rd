@@ -6,22 +6,17 @@
 \usage{
 update_footywire_stats(check_existing = TRUE)
 }
-\arguments{
-\item{check_existing}{A logical specifying if we should check against existing dataset. Defaults to TRUE. Making it false will download all data from all history which will take some time.}
-}
-\value{
-Returns a data frame containing player match stats for each match ID
-}
 \description{
-\code{update_footywire_stats} returns a dataframe containing player match stats from \href{https://www.footywire.com}{footywire}
-}
-\details{
-The dataframe contains both basic and advanced player statistics from each match from 2010 to the specified end date.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-This function utilised the included ID's dataset to map known ID's. It looks for any new data that isn't already loaded and proceeds to download it.
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_player_stats_footywire()} instead
 }
 \examples{
+#
 \dontrun{
 update_footywire_stats()
+# ->
+fetch_player_stats_footywire(2010:2018)
 }
 }

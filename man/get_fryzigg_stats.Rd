@@ -6,29 +6,18 @@
 \usage{
 get_fryzigg_stats(start = 1897, end = as.numeric(format(Sys.Date(), "\%Y")))
 }
-\arguments{
-\item{start}{optional, character string or numeric for start year, in "YYYY" format}
-
-\item{end}{optional, character string or numeric for end year, in "YYYY"format}
-}
-\value{
-a data table containing player stats for each game between start and end years
-}
 \description{
-\code{get_fryzigg_stats} returns a data frame containing match stats for each game within the specified date range
-}
-\details{
-This function returns a data frame containing match stats for each game within the specified date range. The data from contains all stats from the fryziggafl api and returns 1 row per player.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-The date for this function is called from an API with data stored in a PostgreSQL database on AWS.
-Updated at the conclusion of every game. A cached version to come.
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_player_stats_fryzigg()} instead
 }
 \examples{
 #
 \dontrun{
-# Gets all data
-get_fryzigg_stats()
-# Specify a date range
-get_fryzigg_stats(start = 2018, end = 2019)
+get_fryzigg_stats(2020, 2021)
+# ->
+fetch_player_stats_fryzigg(2020:2021)
 }
 }
+\keyword{internal}

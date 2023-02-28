@@ -6,24 +6,18 @@
 \usage{
 get_footywire_match_results(season, last_n_matches = NULL)
 }
-\arguments{
-\item{season}{season to return results for}
-
-\item{last_n_matches}{number of matches to return, starting from the most recent}
-}
-\value{
-Returns a data frame of match results from the year and number of results
-}
 \description{
-Returns the results of matches played in a particular season. You can limit how many results you return with the \code{last_n_results} parameter.
-}
-\details{
-For example - you might just want to return the results from last round so you'd set \code{last_n_results = 9}.
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
 
-If you want to return a large amount of results, it is more efficient to use \code{get_match_results()} however this can sometimes take some time to update the latest rounds results.
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_results_footywire()} instead
 }
 \examples{
+#
 \dontrun{
-get_footywire_match_results(2020, last_n_matches = 5)
+get_footywire_match_results(2020, 1)
+# ->
+fetch_results_footywire(2020, 1)
 }
 }
+\keyword{internal}

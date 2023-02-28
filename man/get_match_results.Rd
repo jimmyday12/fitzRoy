@@ -6,18 +6,18 @@
 \usage{
 get_match_results()
 }
-\value{
-Returns a data frame containing a line for each match
-}
 \description{
-\code{get_match_results} returns a dataframe containing all match results from 1897-current
-}
-\details{
-The dataframe contains information about the Date, teams involved, scores and venue. It comes from afltables 'big lists' section. This is a limited dataset but is very fast to access.
-It generally is updated on the day after the last game
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+
+All \code{get_} functions were replaced with \verb{fetch_*} functions.
+Please use \code{fetch_results_afltables()} instead
 }
 \examples{
+#
 \dontrun{
 get_match_results()
+# ->
+fetch_results_afltables()
 }
 }
+\keyword{internal}
