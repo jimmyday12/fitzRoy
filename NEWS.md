@@ -1,4 +1,4 @@
-# fitzRoy (development version)
+# fitzRoy 1.3.0
 
 * Fixed a bug where `fetch_footywire_stats` was breaking due to changes in the footywire site
 * Fixed a bug with new debut players receiving an ID of 0 in `fetch_player_stats_afltables` ([#189](https://github.com/jimmyday12/fitzRoy/issues/189))

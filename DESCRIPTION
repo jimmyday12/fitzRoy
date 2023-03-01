@@ -1,6 +1,6 @@
 Package: fitzRoy
 Title: Easily Scrape and Process AFL Data
-Version: 1.2.0.9000
+Version: 1.3.0
 Authors@R:
     c(person(given = "James",
              family = "Day",
