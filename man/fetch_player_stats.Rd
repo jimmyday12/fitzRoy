@@ -45,9 +45,9 @@ corresponding the \code{Sys.Date()}}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
 
-\item{rescrape}{Logical, defaults to FALSE. Determinse if we should rescrape data for a given season. By default, we return cached data which is much faster. Rescraping is slow but sometimes needed if historical data has changed.}
+\item{rescrape}{Logical, defaults to FALSE. Determines if we should re-scrape data for a given season. By default, we return cached data which is much faster. Re-scraping is slow but sometimes needed if historical data has changed.}
 
-\item{rescrape_start_season}{Numeric, if rescrape = TRUE, which season should we start scraping from. Defaults to minimum value of season}
+\item{rescrape_start_season}{Numeric, if \code{rescrape = TRUE}, which season should we start scraping from. Defaults to minimum value of season}
 
 \item{check_existing}{logical, should we check existing data. This will likely be removed in future version as it takes a long time to re-scrape data}
 }

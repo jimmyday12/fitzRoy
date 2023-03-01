@@ -20,3 +20,4 @@ get_fixture(2020)
 fetch_fixture_footywire(2020)
 }
 }
+\keyword{internal}

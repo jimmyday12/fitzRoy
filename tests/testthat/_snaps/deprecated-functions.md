@@ -19,7 +19,7 @@
 # get_match_results is deprecated
 
     Code
-      x <- get_match_results()
+      x <- get_match_results(2020)
     Condition
       Warning:
       `get_match_results()` was deprecated in fitzRoy 1.0.0.
@@ -109,7 +109,7 @@
       i Please use `fetch_fixture_afl()` instead.
     Message
       i Returning data for "Round 1, 2020"
-      v Returning data for "Round 1, 2020" [141ms]
+      v Returning data for "Round 1, 2020" ... done
       
     Code
       expect_type(x, "list")

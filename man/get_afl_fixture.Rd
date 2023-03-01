@@ -12,4 +12,12 @@ get_afl_fixture(season = NULL, round_number = NULL, comp = "AFLM")
 All \code{get_} functions were replaced with \verb{fetch_*} functions.
 Please use \code{fetch_fixture_afl()} instead
 }
+\examples{
+#
+\dontrun{
+get_afl_fixture(2020, 1)
+# ->
+fetch_fixture_afl(2020, 1, "AFLM")
+}
+}
 \keyword{internal}

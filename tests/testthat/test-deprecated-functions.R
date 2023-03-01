@@ -17,7 +17,7 @@ test_that("get_match_results is deprecated", {
   testthat::skip_on_cran()
   
   expect_snapshot({
-    x <- get_match_results()
+    x <- get_match_results(2020)
     expect_type(x, "list")
   })
   

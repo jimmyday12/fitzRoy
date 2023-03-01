@@ -4,7 +4,7 @@
 \alias{get_match_results}
 \title{Get basic match results from afltables.com}
 \usage{
-get_match_results()
+get_match_results(season = NULL)
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}

@@ -12,4 +12,12 @@ get_aflw_match_data(start_year = 2017)
 All \code{get_} functions were replaced with \verb{fetch_*} functions.
 Please use \code{fetch_fixture_afl()} instead
 }
+\examples{
+#
+\dontrun{
+get_aflw_match_data(2020)
+# ->
+fetch_results_afl(2020, comp = "AFLW")
+}
+}
 \keyword{internal}

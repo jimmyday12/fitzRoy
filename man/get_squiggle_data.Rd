@@ -15,4 +15,12 @@ get_squiggle_data(
 All \code{get_} functions were replaced with \verb{fetch_*} functions.
 Please use \code{fetch_squiggle_data()} instead
 }
+\examples{
+#
+\dontrun{
+get_squiggle_data()
+# ->
+fetch_squiggle_data()
+}
+}
 \keyword{internal}

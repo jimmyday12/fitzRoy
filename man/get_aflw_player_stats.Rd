@@ -15,4 +15,12 @@ get_aflw_player_stats(
 All \code{get_} functions were replaced with \verb{fetch_*} functions.
 Please use \code{fetch_player_stats_fryzigg()} instead
 }
+\examples{
+#
+\dontrun{
+get_aflw_player_stats(2017, 2018)
+# ->
+fetch_player_stats_fryzigg(2017:2018, comp = "AFLW")
+}
+}
 \keyword{internal}

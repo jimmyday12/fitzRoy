@@ -11,4 +11,12 @@ get_aflw_cookie()
 
 Replaced with a standard function to return cookies for either mens or womens data
 }
+\examples{
+#
+\dontrun{
+get_aflw_cookie()
+# ->
+get_aflw_cookie()
+}
+}
 \keyword{internal}

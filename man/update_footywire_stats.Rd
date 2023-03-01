@@ -20,3 +20,4 @@ update_footywire_stats()
 fetch_player_stats_footywire(2010:2018)
 }
 }
+\keyword{internal}

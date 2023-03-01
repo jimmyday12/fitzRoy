@@ -79,7 +79,7 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
     rnd_msg <- paste0("Round ", round_number, ", ", season)
   }
 
-  cli::cli_progress_step("Returning data for {.val {rnd_msg}}")
+  cli_id <- cli::cli_process_start("Returning data for {.val {rnd_msg}}")
   comp_seas_id <- find_season_id(season, comp)
   
   if (is.null(comp_seas_id)) {
@@ -106,6 +106,7 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
       httr::content(as = "text", encoding = "UTF-8") %>%
       jsonlite::fromJSON(flatten = TRUE)
     
+    cli::cli_process_done(cli_id)
     df <- dplyr::as_tibble(cont$matches)
     
   }
