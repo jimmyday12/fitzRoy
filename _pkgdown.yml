@@ -105,11 +105,14 @@ articles:
 
 news:
   releases:
+    - text: "fitzRoy 1.3.0"
+      href: https://www.plussixoneblog.com/posts/2023-03-02-fitzRoy-v-1-3-0/
+    - text: "fitzRoy 1.2.0"
+      href: https://www.plussixoneblog.com/posts/2022-09-29-fitzRoy-v-1-2-0.en.html
     - text: "fitzRoy 1.1.0"
-      href: https://plussixoneblog.com/post/2022-09-29-fitzroy-v-1-2-0/
-    - text: "fitzRoy 1.1.0"
-      href: https://plussixoneblog.com/post/2022-01-11-fitzroy-v-1-1-0/
+      href: https://www.plussixoneblog.com/posts/2022-01-11-fitzRoy-v-1-1-0.en.html
     - text: "fitzRoy 1.0.0"
-      href: https://plussixoneblog.com/post/2021-03-15-fitzroy-v-1-0-0/
+      href: https://www.plussixoneblog.com/posts/2021-03-15-fitzRoy-v-1-0-0.en.html
+
    
 
