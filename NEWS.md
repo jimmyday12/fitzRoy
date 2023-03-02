@@ -1,3 +1,5 @@
+# fitzRoy (development version)
+
 # fitzRoy 1.3.0
 
 * Fixed a bug where `fetch_footywire_stats` was breaking due to changes in the footywire site
