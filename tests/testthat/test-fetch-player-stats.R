@@ -30,8 +30,10 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   dat_round2 <- fetch_player_stats_afltables(season = 2020, round_number = 2)
   expect_equal(dat_round1, dat_round2)
   
-  # Test browlow
-  expect_equal(sum(is.na(dat$Brownlow.Votes)), 0)
+  # Test Brownlow using previous season to ensure votes exist
+  previous_season <- seas - 1
+  previous_data <- fetch_player_stats_afltables(season = previous_season)
+  expect_equal(sum(is.na(previous_data$Brownlow.Votes)), 0)
   
   # Test debutants aren't getting ID of 0
   zero_id <- dat %>% dplyr::filter(ID == 0)
