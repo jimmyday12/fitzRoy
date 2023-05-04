@@ -102,7 +102,12 @@ footywire_html <- function(x, id) {
       Team = home_team,
       Opposition = away_team,
       Status = "Home"
-    )
+    ) %>%
+    dplyr::mutate(dplyr::across(c(-"Player", 
+                                  -"Team",
+                                  -"Opposition", 
+                                  -"Status"), 
+                                as.numeric))
 
   # Now get the table data
   away_stats <- x %>%
@@ -113,7 +118,12 @@ footywire_html <- function(x, id) {
       Team = away_team,
       Opposition = home_team,
       Status = "Away"
-    )
+    ) %>%
+    dplyr::mutate(dplyr::across(c(-"Player", 
+                                  -"Team",
+                                  -"Opposition", 
+                                  -"Status"), 
+                                as.numeric))
 
   ## Add data to ind.table
   player_stats <- home_stats %>%

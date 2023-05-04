@@ -65,6 +65,9 @@ test_that("fetch_player_stats_footywire works for various inputs", {
   gf <- fetch_player_stats_footywire(season = 2020) %>%
     dplyr::filter(Round == "Grand Final")
   expect_equal(nrow(gf), 44)
+  
+  #specific bug on a game with unused sub
+  expect_s3_class(fetch_footywire_stats(10808), "tbl")
 })
 
 test_that("fetch_player_stats_fryzigg works for various inputs", {
