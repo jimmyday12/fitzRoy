@@ -23,13 +23,13 @@
 #' @examples
 #' \dontrun{
 #' # Return a list of the sources, with ID's
-#' sources <- get_squiggle_data("sources")
+#' sources <- fetch_squiggle_data("sources")
 #'
 #' # Get tips for Round 1, 2018
-#' tips <- get_squiggle_data(query = "tips", round = 1, year = 2018)
+#' tips <- fetch_squiggle_data(query = "tips", round = 1, year = 2018)
 #'
 #' # Get tips from Squiggle 2019
-#' squiggle <- get_squiggle_data(query = "tips", source = 1, year = 2019)
+#' squiggle <- fetch_squiggle_data(query = "tips", source = 1, year = 2019)
 #' }
 fetch_squiggle_data <- function(query = c(
                                   "teams",
