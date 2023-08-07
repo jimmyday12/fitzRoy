@@ -35,11 +35,11 @@ fetch_teams_afl <- function(comp){
   
   
   df <- teams %>%
-    stats::na.omit() %>%
     dplyr::select(
       "id", "abbreviation",
       "name", "teamType"
-    )
+    ) %>%
+    stats::na.omit()
   
   type <- dplyr::case_when(
     comp == "AFLM" ~ "MEN",
