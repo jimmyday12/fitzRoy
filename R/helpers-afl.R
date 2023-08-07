@@ -37,7 +37,8 @@ fetch_teams_afl <- function(comp){
   df <- teams %>%
     dplyr::select(
       "id", "abbreviation",
-      "name", "teamType"
+      "name", "teamType",
+      "club.id","club.providerId","club.name","club.abbreviation","club.nickname"
     ) %>%
     stats::na.omit()
   
