@@ -1,6 +1,7 @@
 # fitzRoy (development version)
 
 * Fixed a bug where `fetch_footywire_stats` was breaking due to an 'unused sub' in game this year ([#201](https://github.com/jimmyday12/fitzRoy/issues/201))
+* Fixed a bug where `fetch_player_details` was failing 
 
 # fitzRoy 1.3.0
 

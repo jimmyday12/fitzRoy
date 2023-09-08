@@ -488,6 +488,7 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
     )
   )
 
+  if (httr::http_error(resp)) return(NULL)
   cont <- parse_resp_afl(resp)
 
   df <- dplyr::as_tibble(cont$squad$players)
