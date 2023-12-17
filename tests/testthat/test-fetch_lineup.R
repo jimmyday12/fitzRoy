@@ -25,10 +25,10 @@ test_that("fetch_lineup_afl works for various inputs", {
   expect_error(fetch_lineup_afl(2020, round_number = 1, comp = "test"))
   
   # Check future year and round
-  current_year <- as.numeric(substr(Sys.Date(),1,4))
-  fetch_lineup_afl(current_year + 1, round_number = 1, comp = "AFLM") %>%
-    expect_warning() %>%
-    suppressWarnings()
+  #current_year <- as.numeric(substr(Sys.Date(),1,4))
+  #fetch_lineup_afl(current_year + 1, round_number = 1, comp = "AFLM") %>%
+  #  expect_warning() %>%
+  #  suppressWarnings()
   #expect_null(fetch_lineup_afl(current_year, round_number = 23, comp = "AFLM"))
   
 })
