@@ -132,43 +132,27 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
 #' @export
 fetch_fixture_footywire <- function(season = NULL, round_number = NULL, convert_date = FALSE) {
   season <- check_season(season)
-  # create url
-  url_fixture <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season) # nolint
-  fixture_xml <- xml2::read_html(url_fixture)
-
-  prepend_rounds_to_match_rows <- function(cumulative_nodes, current_node) {
-    current_column <- cumulative_nodes$current_column %% 8
-    is_round_node <- stringr::str_detect(current_node, stringr::regex("Round \\d+|Final", ignore_case = TRUE))
-
-    if (is_round_node) {
-      current_round <- current_node
-      nodes_to_append <- c(current_node)
-    } else {
-      current_round <- cumulative_nodes$current_round
-
-      if (current_column == 0) {
-        nodes_to_append <- c(current_round, current_node)
-      } else {
-        nodes_to_append <- c(current_node)
-      }
-    }
-
-    return(list(
-      current_round = current_round,
-      current_column = current_column + length(nodes_to_append),
-      nodes = c(cumulative_nodes$nodes, nodes_to_append)
-    ))
-  }
-
-  # Get XML and extract text from .data
-  games_text <- fixture_xml %>%
-    rvest::html_nodes(".data, .tbtitle") %>%
-    rvest::html_text() %>%
-    purrr::reduce(., prepend_rounds_to_match_rows, .init = list(current_column = 0)) %>%
-    .$nodes
+  
+  # Build request
+  req <- httr2::request("https://www.footywire.com/afl/footy/ft_match_list") |> 
+    httr2::req_url_query("year" = season) |> 
+    httr2::req_headers("User-Agent"= "fitzRoy")
+  
+  # Make request
+  resp <- req |> 
+    httr2::req_perform()
+  
+  # Get HTML
+  html_resp <- resp |> 
+    httr2::resp_body_html()
+  
+  # Get tables
+  html_tables <- html_resp |> 
+    rvest::html_elements("table") |> 
+    rvest::html_table()
 
 
-  if (rlang::is_empty(games_text)) {
+  if (rlang::is_empty(html_tables)) {
     warning(glue::glue(
       "The data for {season} season seems to be empty.
 Check the following url on footywire
@@ -178,51 +162,76 @@ Check the following url on footywire
     games_df <- dplyr::tibble()
     return(games_df)
   }
+  
+  # Extract the table we need
+  df <- html_tables |> 
+    purrr::discard(function(x) nrow(x) < 100) |> 
+    purrr::discard(function(x) ncol(x) > 8) |> 
+    purrr::pluck(1)
+  
+  # Extract Round and Header data
+  df <- df %>%
+    dplyr::mutate(
+      Round = ifelse(grepl("Round", X1) | grepl("Final", X1), X1, NA),
+      IsRound = !is.na(Round),
+      IsHeader = X1 == "Date") |> 
+    tidyr::fill(Round, .direction = "down") |> 
+    dplyr::mutate(Round = ifelse(IsHeader, NA, Round)) # Remove round from header rows
+  
+  header_names <- df |> 
+    dplyr::filter(IsHeader) |> 
+    dplyr::select(-IsHeader, -Round, -IsRound) |> 
+    dplyr::slice_head(n = 1) |> 
+    as.character() |> 
+    c("Round.Name")
+  
+  # Remove those columns
+  df <- df |> 
+    dplyr::filter(!IsRound) |> 
+    dplyr::filter(!IsHeader) |> 
+    dplyr::select(-IsRound, -IsHeader) |> 
+    dplyr::filter(X1 != "")
+  
+  # Add header names
+  names(df) <- header_names
 
-  # Put this into dataframe format
-  games_df <- matrix(games_text, ncol = 8, byrow = TRUE) %>%
-    as.data.frame() %>%
-    tibble::as_tibble() %>%
-    dplyr::select("V1":"V4")
-
-  # Update names
-  names(games_df) <- c("Round.Name", "Date", "Teams", "Venue")
-
-  # Remove Bye & Match Cancelled
-  games_df <- games_df %>%
+  # FIlter out games we don't want
+  games_df <- df %>%
     dplyr::filter(.data$Venue != "BYE" & .data$Venue != "MATCH CANCELLED")
-
+  
+  # Create Date
   games_df <- games_df %>%
     dplyr::mutate(
       Season = season,
-      Date = lubridate::ydm_hm(paste(season, .data$Date))
+      Date = lubridate::ydm_hm(paste(season, .data$Date), quiet = TRUE)
     )
-
-  games_df <- games_df %>%
-    dplyr::mutate(Round = calculate_round_number(.data$Round.Name) %>% as.numeric(.)) %>%
-    dplyr::select(., !c("Round.Name"))
-
-  # Filter round
+  
+  # Create round number
+  games_df <- games_df %>% 
+    dplyr::mutate(Round = as.integer(factor(.data$Round.Name, 
+                                            levels = unique(games_df$Round.Name))))
+  
+  # Filter round if it's included
   if (!is.null(round_number)) {
     games_df <- games_df %>%
       dplyr::filter(.data$Round == round_number)
   }
-
+  
   # Fix names
   games_df <- games_df %>%
     dplyr::group_by(.data$Date, .data$Round, .data$Venue) %>%
-    tidyr::separate("Teams",
-      into = c("Home.Team", "Away.Team"),
-      sep = "\\\nv\\s\\\n"
+    tidyr::separate("Home v Away Teams",
+                    into = c("Home.Team", "Away.Team"),
+                    sep = "\\\nv\\s\\\n"
     ) %>%
     dplyr::mutate_at(
       c("Home.Team", "Away.Team"),
       stringr::str_remove_all, "[\r\n]"
     )
-
+  
   # Add season game number
   games_df$Season.Game <- dplyr::row_number(games_df$Date)
-
+  
   # Fix Teams
   # Uses internal replace teams function
   games_df <- games_df %>%
@@ -230,13 +239,13 @@ Check the following url on footywire
     dplyr::mutate_at(c("Home.Team", "Away.Team"), replace_teams) %>%
     dplyr::mutate(Venue = replace_venues(as.character(.data$Venue))) %>%
     dplyr::ungroup()
-
-  # Tidy columns
+  
   games_df <- games_df %>%
     dplyr::select(
-      "Date", "Season", "Season.Game", "Round",
+      "Date", "Season", "Season.Game", "Round", "Round.Name",
       "Home.Team", "Away.Team", "Venue"
     )
+  
   if (convert_date == TRUE) {
     games_df$Date <- as.Date(format(games_df$Date, "%Y-%m-%d"))
   }
