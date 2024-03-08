@@ -54,7 +54,8 @@ Imports:
     progress,
     glue,
     cli,
-    lifecycle
+    lifecycle,
+    httr2
 Suggests:
     covr,
     elo,
