@@ -3,6 +3,7 @@
 * Fixed a bug where `fetch_footywire_stats` was breaking due to an 'unused sub' in game this year ([#201](https://github.com/jimmyday12/fitzRoy/issues/201))
 * Fixed a bug where `fetch_player_details` was failing 
 * Removed a test for `fetch_lineup` due to the response being unreliable depending on the time of year
+* Fixed a bug where `fetch_fixture_footywire` wasn't working for season 2024 due to Opening round ([#209](https://github.com/jimmyday12/fitzRoy/issues/209))
 
 # fitzRoy 1.3.0
 
