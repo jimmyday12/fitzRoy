@@ -172,25 +172,25 @@ Check the following url on footywire
   # Extract Round and Header data
   df <- df %>%
     dplyr::mutate(
-      Round = ifelse(grepl("Round", X1) | grepl("Final", X1), X1, NA),
-      IsRound = !is.na(Round),
-      IsHeader = X1 == "Date") |> 
-    tidyr::fill(Round, .direction = "down") |> 
-    dplyr::mutate(Round = ifelse(IsHeader, NA, Round)) # Remove round from header rows
+      Round = ifelse(grepl("Round", .data$X1) | grepl("Final", .data$X1), .data$X1, NA),
+      IsRound = !is.na(.data$Round),
+      IsHeader = .data$X1 == "Date") |> 
+    tidyr::fill(.data$Round, .direction = "down") |> 
+    dplyr::mutate(Round = ifelse(.data$IsHeader, NA, .data$Round)) # Remove round from header rows
   
   header_names <- df |> 
-    dplyr::filter(IsHeader) |> 
-    dplyr::select(-IsHeader, -Round, -IsRound) |> 
+    dplyr::filter(.data$IsHeader) |> 
+    dplyr::select(-.data$IsHeader, -.data$Round, -.data$IsRound) |> 
     dplyr::slice_head(n = 1) |> 
     as.character() |> 
     c("Round.Name")
   
   # Remove those columns
   df <- df |> 
-    dplyr::filter(!IsRound) |> 
-    dplyr::filter(!IsHeader) |> 
-    dplyr::select(-IsRound, -IsHeader) |> 
-    dplyr::filter(X1 != "")
+    dplyr::filter(!.data$IsRound) |> 
+    dplyr::filter(!.data$IsHeader) |> 
+    dplyr::select(-.data$IsRound, -.data$IsHeader) |> 
+    dplyr::filter(.data$X1 != "")
   
   # Add header names
   names(df) <- header_names
