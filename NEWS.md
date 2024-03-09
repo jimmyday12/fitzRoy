@@ -4,7 +4,7 @@
 * Fixed a bug where `fetch_player_details` was failing 
 * Removed a test for `fetch_lineup` due to the response being unreliable depending on the time of year
 * Fixed a bug where `fetch_fixture_footywire` wasn't working for season 2024 due to Opening round ([#209](https://github.com/jimmyday12/fitzRoy/issues/209))
-* Fixed a bug where `fetch_results_footywire` wasn't working for season 2024 due to Opening round ([#211](https://github.com/jimmyday12/fitzRoy/issues/211))
+* Fixed a bug where `fetch_results_footywire` wasn't working for season 2024 due to Opening round ([#211](https://github.com/jimmyday12/fitzRoy/issues/211)) 
 
 
 # fitzRoy 1.3.0
