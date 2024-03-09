@@ -230,16 +230,26 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
 
   cli_1 <- cli::cli_process_start("Downloading {last_n_matches} match{?es} from Footywire")
 
-  pb <- progress::progress_bar$new(
-    format = "  Downloading [:bar] :percent in :elapsed",
-    clear = FALSE, total = last_n_matches, width = 60
-  )
+  #pb <- progress::progress_bar$new(
+  #  format = "  Downloading [:bar] :percent in :elapsed",
+  #  clear = FALSE, 
+  #  total = last_n_matches, 
+  #  width = 60
+  #)
 
-  pb$tick(0)
+  #pb$tick(0)
 
   ids <- fetch_footywire_match_ids(season)
   n_ids <- length(ids)
-  if (is.null(last_n_matches)) last_n_matches <- n_ids
+  
+  if (is.null(last_n_matches)) {
+    last_n_matches <- n_ids
+  }
+  
+  if (last_n_matches > n_ids) {
+    last_n_matches <- n_ids
+  }
+  
   ids <- ids[(n_ids - last_n_matches + 1):n_ids]
 
   if (length(ids) == 0) {
@@ -249,10 +259,7 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
   # get data for ids
 
   dat <- ids %>%
-    purrr::map_dfr(~ {
-      pb$tick()
-      extract_match_data(.x)
-    })
+    purrr::map_dfr(~extract_match_data(.x)) 
 
   cli::cli_process_done(cli_1)
 

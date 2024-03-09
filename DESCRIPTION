@@ -51,7 +51,6 @@ Imports:
     tidyselect,
     xml2,
     tibble,
-    progress,
     glue,
     cli,
     lifecycle,
