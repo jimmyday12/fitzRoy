@@ -31,7 +31,7 @@ Description: An easy package for scraping and processing Australia Rules Footbal
     from 'AFL Tables' <https://afltables.com/afl/afl_index.html>, 'Footy Wire' <https://www.footywire.com> and
     'The Squiggle' <https://squiggle.com.au>. Further functions allow for easy processing, 
     cleaning and transformation of this data into formats that can be used for analysis. 
-License: GPL-3
+License: GPL (>= 3)
 URL: https://jimmyday12.github.io/fitzRoy/, https://github.com/jimmyday12/fitzRoy 
 BugReports: https://github.com/jimmyday12/fitzRoy/issues
 Depends:
