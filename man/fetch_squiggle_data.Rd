@@ -5,14 +5,17 @@
 \title{Access Squiggle data using the squiggle API service.}
 \usage{
 fetch_squiggle_data(
-  query = c("teams", "sources", "games", "tips", "ladder", "standings", "virtual", "pav"),
-  ...
+  query,
+  ...,
+  user_agent = "fitzRoy Package https://github.com/jimmyday12/fitzRoy"
 )
 }
 \arguments{
-\item{query}{A text string. The main query to use with the API. Must be one of \code{sources}, \code{games}, \code{tips}, \code{ladder} or \code{standings}}
+\item{query}{A text string. The main query to use with the API. Please read the Squiggle documentation for information about valid queries}
 
 \item{...}{(optional) An optional argument provided to the \href{https://api.squiggle.com.au}{Squiggle API}. See details for more info.}
+
+\item{user_agent}{(optional) Use this to set something meaningful so that Squiggle admin can contact you if needed.}
 }
 \value{
 A dataframe, with the resultant data that matches the query specified in \code{query}, as well as any optional filters.
@@ -21,14 +24,7 @@ A dataframe, with the resultant data that matches the query specified in \code{q
 Use \code{fetch_squiggle_data} to access the \href{https://squiggle.com.au}{Squiggle} API. See instructions at \href{https://api.squiggle.com.au}{api.squiggle.com.au}.
 }
 \details{
-The optional arguments to squiggle can be one of the following.
-
-#' \itemize{
-\item year: an integer specifying the year to return data from, e.g. year = 2018
-\item round: an integer specifying the round to return data from, e.g. round = 12
-\item game: an integer specifying the game ID to return data from, e.g. game = 10
-\item source: an integer specifying the ID of the source to return data from, e.g. source = 1
-}
+Optional arguments can be provided to further restrict the data you are pulling.
 
 For full instructions, see \href{https://api.squiggle.com.au}{api.squiggle.com.au}
 }

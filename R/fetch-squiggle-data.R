@@ -2,21 +2,13 @@
 #'
 #' Use `fetch_squiggle_data` to access the [Squiggle](https://squiggle.com.au) API. See instructions at [api.squiggle.com.au](https://api.squiggle.com.au).
 #'
-#' The optional arguments to squiggle can be one of the following.
-#'
-#' #' \itemize{
-#'   \item year: an integer specifying the year to return data from, e.g. year = 2018
-#'   \item round: an integer specifying the round to return data from, e.g. round = 12
-#'   \item game: an integer specifying the game ID to return data from, e.g. game = 10
-#'   \item source: an integer specifying the ID of the source to return data from, e.g. source = 1
-#' }
+#' Optional arguments can be provided to further restrict the data you are pulling. 
 #'
 #' For full instructions, see [api.squiggle.com.au](https://api.squiggle.com.au)
 #'
-#' @param query A text string. The main query to use with the API. Must be one of `sources`, `games`, `tips`, `ladder` or `standings`
-#'
+#' @param query A text string. The main query to use with the API. Please read the Squiggle documentation for information about valid queries
 #' @param ... (optional) An optional argument provided to the [Squiggle API](https://api.squiggle.com.au). See details for more info.
-#'
+#' @param user_agent (optional) Use this to set something meaningful so that Squiggle admin can contact you if needed.
 #' @return A dataframe, with the resultant data that matches the query specified in `query`, as well as any optional filters.
 #' @export
 #'
@@ -31,87 +23,44 @@
 #' # Get tips from Squiggle 2019
 #' squiggle <- fetch_squiggle_data(query = "tips", source = 1, year = 2019)
 #' }
-fetch_squiggle_data <- function(query = c(
-                                  "teams",
-                                  "sources",
-                                  "games",
-                                  "tips",
-                                  "ladder",
-                                  "standings",
-                                  "virtual",
-                                  "pav"
-                                ), ...) {
+fetch_squiggle_data <- function(query, 
+                                 ...,
+                                 user_agent = "fitzRoy Package https://github.com/jimmyday12/fitzRoy") {
 
-  # Ensure query is valid
-  query <- match.arg(query)
-
-  # Get optional expressions and check that they are valid
-  # exp <- rlang::enexprs(...)
-  exp <- list(...)
-
-  valid <- c(
-    "year", "round", "game",
-    "source", "complete", "team",
-    "firstname", "surname", "match"
-  )
-
-  if (!all(names(exp) %in% valid)) {
-    rlang::abort(glue::glue(
-      "Provided paramters must be one of {glue::glue_collapse(valid, sep = \", \", last = \" or \")}
-    You provided the following: {toString(names(exp))}"
+  # Extract optional params
+  params <- list(q = query,
+                 ...)
+  
+  api_url <- "https://api.squiggle.com.au"
+  
+  req <- httr2::request(api_url) |> 
+    httr2::req_url_query(!!!params, 
+                         format = "JSON") |> 
+    httr2::req_user_agent(user_agent)
+  
+  cli::cli_progress_step("Getting data from {.field {req$url}}")
+  
+  resp <- req |> 
+    httr2::req_perform()
+  
+  cont_type <- resp |> 
+    httr2::resp_content_type()
+  
+  
+  if(cont_type == "text/html") {
+    cli::cli_abort(c(
+      "API did not return any data",
+      "i" = "Did you check that the queries provided are valid?",
+      "x" = "You've supplied the following queries: {.val {names(params)}}"
+      
     ))
-  }
-
-  url <- "https://api.squiggle.com.au/?" %>%
-    paste0("q=", query)
-
-  if (length(exp > 0)) {
-    add_filt <- function(x, name) {
-      if (!is.null(x)) paste0(";", name, "=", x)
-    }
-
-    url <- exp %>%
-      purrr::map2_chr(.x = ., .y = names(.), .f = add_filt) %>%
-      purrr::reduce(paste0) %>%
-      paste0(url, .)
-  }
-
-  cli::cli_process_start("Getting data from {.field {url}}")
-
-  # set user agent
-  ua <- httr::user_agent("https://github.com/jimmyday12/fitzRoy/")
-
-  resp <- httr::GET(url, ua)
-  httr::warn_for_status(resp)
-
-  if (httr::status_code(resp) != 200) {
-    rlang::abort(
-      glue::glue(
-        "The URL responded with the following status:
-{httr::http_status(resp)$message}
-
-Does your query make sense? Try the following URL in your browser
-{resp$url}"
-      )
-    )
-  }
-
-  if (httr::http_type(resp) != "application/json") {
-    stop("API did not return json", call. = FALSE)
-  }
-
-  dat <- jsonlite::fromJSON(httr::content(resp, "text"), simplifyVector = TRUE)
-
-
-  # Convert the
-  df <- as.data.frame(dat[[1]])
-  df[, ] <- lapply(df[, ], as.character)
-  df <- as.data.frame(
-    lapply(df, function(x) utils::type.convert(x, as.is = TRUE)),
-    stringsAsFactors = FALSE
-  )
-  cli::cli_process_done()
-  return(tibble::as_tibble(df))
+  } 
+  
+  resp |> 
+    httr2::resp_body_string() |> 
+    jsonlite::fromJSON(flatten = TRUE) |> 
+    purrr::pluck(1) |> 
+    tibble::as_tibble()
 }
 
 #' Access Squiggle data using the squiggle API service.
@@ -131,17 +80,25 @@ Does your query make sense? Try the following URL in your browser
 #' }
 #' @keywords internal
 get_squiggle_data <- function(query = c(
-                                "teams",
-                                "sources",
-                                "games",
-                                "tips",
-                                "ladder",
-                                "standings",
-                                "virtual",
-                                "pav"
-                              ), ...) {
+  "teams",
+  "sources",
+  "games",
+  "tips",
+  "ladder",
+  "standings",
+  "virtual",
+  "pav"
+), ...) {
   lifecycle::deprecate_warn("1.0.0",
                             "get_squiggle_data()",
                             "fetch_squiggle_data()")
   fetch_squiggle_data(query = query, ...)
 }
+
+
+
+
+
+
+
+

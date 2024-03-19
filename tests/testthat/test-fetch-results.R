@@ -71,7 +71,7 @@ test_that("fetch_results_squiggle returns data frame with required variables", {
     format("%Y") %>%
     as.numeric()
 
-  expect_s3_class(fetch_results_squiggle(), "tbl")
+  expect_s3_class(fetch_results_squiggle(yr), "tbl")
 
   # change year
   expect_s3_class(fetch_results_squiggle(yr - 2, 1), "tbl")
