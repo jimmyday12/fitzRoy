@@ -6,6 +6,7 @@
 * Fixed a bug where `fetch_fixture_footywire` wasn't working for season 2024 due to Opening round ([#209](https://github.com/jimmyday12/fitzRoy/issues/209))
 * Fixed a bug where `fetch_results_footywire` wasn't working for season 2024 due to Opening round ([#211](https://github.com/jimmyday12/fitzRoy/issues/211)) 
 * Updated the Squiggle API code to be more flexible
+* Updated `replace_teams` to handle for indigenous round team names and made it more robust to handle random team name variations ([#215](https://github.com/jimmyday12/fitzRoy/issues/215))
 
 
 # fitzRoy 1.3.0
