@@ -33,38 +33,44 @@ team_check_afltables <- function(team) {
 replace_teams <- function(team) {
   # Internal function
   dplyr::case_when(
-    team == "Kangaroos" ~ "North Melbourne",
+    # keeping these three as is as the initialisation could conceivably appear in another team name string and want to avoid word boundaries
     team == "NM" ~ "North Melbourne",
-    team == "Western Bulldog" ~ "Footscray",
-    team == "Western Bulldogs" ~ "Footscray",
     team == "WB" ~ "Footscray",
-    team == "South Melbourne" ~ "Sydney",
-    team == "Brisbane Bears" ~ "Brisbane Lions",
-    team == "Lions" ~ "Brisbane Lions",
-    team == "Brisbane" ~ "Brisbane Lions",
-    team == "GW Sydney" ~ "GWS",
-    team == "Greater Western Sydney" ~ "GWS",
-    team == "GC" ~ "Gold Coast",
-    team == "StK" ~ "St Kilda",
     team == "PA" ~ "Port Adelaide",
-    team == "WCE" ~ "West Coast",
-    team == "Tigers" ~ "Richmond",
-    team == "Blues" ~ "Carlton",
-    team == "Demons" ~ "Melbourne",
-    team == "Giants" ~ "GWS",
-    team == "GWS Giants" ~ "GWS",
-    team == "Suns" ~ "Gold Coast",
-    team == "Bombers" ~ "Essendon",
-    team == "Swans" ~ "Sydney",
-    team == "Magpies" ~ "Collingwood",
-    team == "Crows" ~ "Adelaide",
-    team == "Bulldogs" ~ "Footscray",
-    team == "Dockers" ~ "Fremantle",
-    team == "Power" ~ "Port Adelaide",
-    team == "Saints" ~ "St Kilda",
-    team == "Eagles" ~ "West Coast",
-    team == "Cats" ~ "Geelong",
-    team == "Hawks" ~ "Hawthorn",
+    # keeping this one so that it's the same behaviour for University Blues:
+    team == "Blues" ~ "Carlton", 
+    
+    # simplifying the coercing of team names
+    stringr::str_detect(tolower(team), "crows") ~ "Adelaide",
+    stringr::str_detect(tolower(team), "brisbane|lions|bears") ~ "Brisbane Lions",
+    stringr::str_detect(tolower(team), "carlton") ~ "Carlton", # this allows us to coerce any occurrence of 'Carlton Blues' to 'Carlton'
+    stringr::str_detect(tolower(team), "magpies|pies") ~ "Collingwood",
+    stringr::str_detect(tolower(team), "bombers") ~ "Essendon",
+    stringr::str_detect(tolower(team), "bulldog") ~ "Footscray",
+    stringr::str_detect(tolower(team), "docker") ~ "Fremantle",
+    stringr::str_detect(tolower(team), "gw syd|gws|greater western|giants") ~ "GWS",
+    stringr::str_detect(tolower(team), "cats") ~ "Geelong",
+    stringr::str_detect(tolower(team), "gc|suns") ~ "Gold Coast",
+    stringr::str_detect(tolower(team), "hawks") ~ "Hawthorn",
+    stringr::str_detect(tolower(team), "demons") ~ "Melbourne",
+    stringr::str_detect(tolower(team), "kangaroos") ~ "North Melbourne",
+    stringr::str_detect(tolower(team), "power") ~ "Port Adelaide",
+    stringr::str_detect(tolower(team), "tigers") ~ "Richmond",
+    stringr::str_detect(tolower(team), "stk|saints") ~ "St Kilda",
+    stringr::str_detect(tolower(team), "swans|south melbourne") ~ "Sydney",
+    stringr::str_detect(tolower(team), "wce|eagles") ~ "West Coast",
+    
+    # AFL have also introduced capitalised team names for GC and GWS
+    stringr::str_detect(team, "SUNS") ~ "Gold Coast",
+    stringr::str_detect(team, "GIANTS") ~ "GWS",
+    
+    # handle for indigenous round team names
+    team == "Narrm" ~ "Melbourne",
+    team == "Walyalup" ~ "Fremantle",
+    team == "Yartapuulti" ~ "Port Adelaide",
+    team == "Euro-Yroke" ~ "St Kilda",
+    team == "Kuwarna" ~ "Adelaide",
+    team == "Waalitj Marawar" ~ "West Coast",
     TRUE ~ team
   )
 }
