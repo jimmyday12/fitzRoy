@@ -115,14 +115,23 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
+</div>
+    <div class="section level2">
+<h2 class="page-header" data-toc-text="1.4.0" id="fitzroy-140">fitzRoy 1.4.0<a class="anchor" aria-label="anchor" href="#fitzroy-140"></a></h2>
+<div class="section level3">
+<h3 id="new-features-1-4-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-4-0"></a></h3>
+<ul><li>Updated the Squiggle API code to be more flexible</li>
+<li>Updated <code>replace_teams</code> to handle for indigenous round team names and made it more robust to handle random team name variations (<a href="https://github.com/jimmyday12/fitzRoy/issues/215" class="external-link">#215</a>)</li>
+</ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-1-4-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-4-0"></a></h3>
 <ul><li>Fixed a bug where <code>fetch_footywire_stats</code> was breaking due to an ‘unused sub’ in game this year (<a href="https://github.com/jimmyday12/fitzRoy/issues/201" class="external-link">#201</a>)</li>
 <li>Fixed a bug where <code>fetch_player_details</code> was failing</li>
 <li>Removed a test for <code>fetch_lineup</code> due to the response being unreliable depending on the time of year</li>
 <li>Fixed a bug where <code>fetch_fixture_footywire</code> wasn’t working for season 2024 due to Opening round (<a href="https://github.com/jimmyday12/fitzRoy/issues/209" class="external-link">#209</a>)</li>
 <li>Fixed a bug where <code>fetch_results_footywire</code> wasn’t working for season 2024 due to Opening round (<a href="https://github.com/jimmyday12/fitzRoy/issues/211" class="external-link">#211</a>)</li>
-<li>Updated the Squiggle API code to be more flexible</li>
-<li>Updated <code>replace_teams</code> to handle for indigenous round team names and made it more robust to handle random team name variations (<a href="https://github.com/jimmyday12/fitzRoy/issues/215" class="external-link">#215</a>)</li>
 </ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.3.0" id="fitzroy-130">fitzRoy 1.3.0<small>2023-03-01</small><a class="anchor" aria-label="anchor" href="#fitzroy-130"></a></h2>
 <ul><li>Fixed a bug where <code>fetch_footywire_stats</code> was breaking due to changes in the footywire site</li>
@@ -339,7 +348,7 @@
 </li>
 <li>added docker support, thanks to Matthew Erbs <a href="https://github.com/jimmyday12/fitzRoy/issues/13" class="external-link">#13</a>
 </li>
-<li>fixed bug with <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> where it was returning a grouped <code>tibble</code>. Thanks to <a href="https://github.com/tyluRp" class="external-link">tyluRp</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/38" class="external-link">#38</a>
+<li>fixed bug with <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> where it was returning a grouped <code>tibble</code>. Thanks to tyluRp <a href="https://github.com/jimmyday12/fitzRoy/issues/38" class="external-link">#38</a>
 </li>
 <li>added a basic vignette. Thanks to <a href="https://github.com/Lingtax" class="external-link">@Lingtax</a>
 </li>
@@ -354,12 +363,12 @@
 </li>
 <li>fixed bug where certain games from 2018 that had ‘notes’ were being parsed incorrectly <a href="https://github.com/jimmyday12/fitzRoy/issues/30" class="external-link">#30</a>
 </li>
-<li>fixed bug where certain games from early 1900 were missing. Thanks to <a href="https://twitter.com/MatterOfStats" class="external-link">Tony</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/31" class="external-link">#31</a>
+<li>fixed bug where certain games from early 1900 were missing. Thanks to <a href="https://x.com/MatterOfStats" class="external-link">Tony</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/31" class="external-link">#31</a>
 </li>
 <li>fixed bug with <code>get_afltables_player_ids</code> where it was returning 0 for all players <a href="https://github.com/jimmyday12/fitzRoy/issues/34" class="external-link">#34</a>
 </li>
 <li>fixed bug with <code>get_afltables_player_ids</code> where it was returning 0 for GWS and Bulldogs players</li>
-<li>fixed bug with <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> where it was returning a grouped <code>tibble</code>. Thanks to <a href="https://github.com/tyluRp" class="external-link">tyluRp</a> <a href="https://github.com/jimmyday12/fitzRoy/issues/38" class="external-link">#38</a>
+<li>fixed bug with <code><a href="../reference/get_afltables_stats.html">get_afltables_stats()</a></code> where it was returning a grouped <code>tibble</code>. Thanks to tyluRp <a href="https://github.com/jimmyday12/fitzRoy/issues/38" class="external-link">#38</a>
 </li>
 <li>added a basic vignette. Thanks to <a href="https://github.com/Lingtax" class="external-link">@Lingtax</a>
 </li>
