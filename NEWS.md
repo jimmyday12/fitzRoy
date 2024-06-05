@@ -1,12 +1,19 @@
 # fitzRoy (development version)
 
+# fitzRoy 1.4.0
+
+## New Features
+
+* Updated the Squiggle API code to be more flexible
+* Updated `replace_teams` to handle for indigenous round team names and made it more robust to handle random team name variations ([#215](https://github.com/jimmyday12/fitzRoy/issues/215))
+
+## Bug Fixes
+
 * Fixed a bug where `fetch_footywire_stats` was breaking due to an 'unused sub' in game this year ([#201](https://github.com/jimmyday12/fitzRoy/issues/201))
 * Fixed a bug where `fetch_player_details` was failing 
 * Removed a test for `fetch_lineup` due to the response being unreliable depending on the time of year
 * Fixed a bug where `fetch_fixture_footywire` wasn't working for season 2024 due to Opening round ([#209](https://github.com/jimmyday12/fitzRoy/issues/209))
 * Fixed a bug where `fetch_results_footywire` wasn't working for season 2024 due to Opening round ([#211](https://github.com/jimmyday12/fitzRoy/issues/211)) 
-* Updated the Squiggle API code to be more flexible
-* Updated `replace_teams` to handle for indigenous round team names and made it more robust to handle random team name variations ([#215](https://github.com/jimmyday12/fitzRoy/issues/215))
 
 
 # fitzRoy 1.3.0
