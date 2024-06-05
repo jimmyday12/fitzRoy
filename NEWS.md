@@ -200,7 +200,7 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 * fixed bug for dependency of `stringr` package. Now updated to ensure version 1.3.1 or greater [#33](https://github.com/jimmyday12/fitzRoy/issues/33)
 * fixed bug with round number for finals [#40](https://github.com/jimmyday12/fitzRoy/issues/40)
 * added docker support, thanks to Matthew Erbs [#13](https://github.com/jimmyday12/fitzRoy/issues/13)
-* fixed bug with `get_afltables_stats()` where it was returning a grouped `tibble`. Thanks to [tyluRp](https://github.com/tyluRp) [#38](https://github.com/jimmyday12/fitzRoy/issues/38)
+* fixed bug with `get_afltables_stats()` where it was returning a grouped `tibble`. Thanks to tyluRp [#38](https://github.com/jimmyday12/fitzRoy/issues/38)
 * added a basic vignette. Thanks to [@Lingtax](https://github.com/Lingtax)
 
 
@@ -210,10 +210,10 @@ This release is in preparation for a CRAN submission. There are some breaking ch
 * fixed bug where 2017 elimination final was parsing incorrectly due to extra time [#28](https://github.com/jimmyday12/fitzRoy/issues/28)
 * fixed bug where the default `start_date` missed Round 1, 1987 [#29](https://github.com/jimmyday12/fitzRoy/issues/29)
 * fixed bug where certain games from 2018 that had 'notes' were being parsed incorrectly [#30](https://github.com/jimmyday12/fitzRoy/issues/30)
-* fixed bug where certain games from early 1900 were missing. Thanks to [Tony](https://twitter.com/MatterOfStats) [#31](https://github.com/jimmyday12/fitzRoy/issues/31)
+* fixed bug where certain games from early 1900 were missing. Thanks to [Tony](https://x.com/MatterOfStats) [#31](https://github.com/jimmyday12/fitzRoy/issues/31)
 * fixed bug with `get_afltables_player_ids` where it was returning 0 for all players [#34](https://github.com/jimmyday12/fitzRoy/issues/34)
 * fixed bug with `get_afltables_player_ids` where it was returning 0 for GWS and Bulldogs players 
-* fixed bug with `get_afltables_stats()` where it was returning a grouped `tibble`. Thanks to [tyluRp](https://github.com/tyluRp) [#38](https://github.com/jimmyday12/fitzRoy/issues/38)
+* fixed bug with `get_afltables_stats()` where it was returning a grouped `tibble`. Thanks to tyluRp [#38](https://github.com/jimmyday12/fitzRoy/issues/38)
 * added a basic vignette. Thanks to [@Lingtax](https://github.com/Lingtax)
 
 # fitzRoy 0.1.5
