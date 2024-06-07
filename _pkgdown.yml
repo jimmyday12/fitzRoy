@@ -105,6 +105,8 @@ articles:
 
 news:
   releases:
+    - text: "fitzRoy 1.4.0"
+      href: https://www.plussixoneblog.com/posts/2024-06-07-fiztRoy-v-1-4-0/
     - text: "fitzRoy 1.3.0"
       href: https://www.plussixoneblog.com/posts/2023-03-02-fitzRoy-v-1-3-0/
     - text: "fitzRoy 1.2.0"

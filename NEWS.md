@@ -1,4 +1,4 @@
-# fitzRoy 1.4.0
+# fitzRoy development version
 
 # fitzRoy 1.4.0
 
