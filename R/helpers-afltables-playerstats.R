@@ -125,7 +125,7 @@ scrape_afltables_match <- function(match_urls) {
       AQ3 = .y[4],
       AQ4 = .y[5]
     )) %>%
-    purrr::reduce(dplyr::bind_rows)
+    purrr::list_rbind()
 
   games_df <- games_df %>%
     dplyr::mutate(Date = gsub("\\([^]]*", "", .data$Date))
