@@ -395,14 +395,14 @@ get_afltables_player_ids <- function(seasons) {
 
   ### Make sure name is consistent across years
   ids <- ids %>%
-    group_by(ID) %>%
-    mutate(Player = dplyr::last(Player)) %>%
-    ungroup()
+    dplyr::group_by(ID) %>%
+    dplyr::mutate(Player = dplyr::last(Player)) %>%
+    dplyr::ungroup()
 
   ### Fix certain players whose names have changed on afltables
   ids <-
     ids %>%
-    mutate(Player = case_when(
+    dplyr::mutate(Player = case_when(
       ID == 12104 ~ "Cam Sutcliffe",
       TRUE ~ Player
     ))
