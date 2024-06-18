@@ -196,8 +196,8 @@ scrape_afltables_match <- function(match_urls) {
       Away.score = "AQ4P"
     )
 
-  ids <- get_afltables_player_ids(
-    min(games_cleaned$Season):max(games_cleaned$Season)
+  ids <- get_afltables_player_ids(1897:check_season(NULL)
+    # min(games_cleaned$Season):max(games_cleaned$Season)
   )
 
   games_joined <- games_cleaned %>%
@@ -393,12 +393,18 @@ get_afltables_player_ids <- function(seasons) {
       dplyr::distinct()
   }
 
-  
-  ids <- 
-    ids %>%
+  ### Make sure name is consistent across years
+  ids <-ids %>%
     group_by(ID) %>%
     mutate(Player = dplyr::last(Player)) %>%
     ungroup()
+  
+  ### Fix certain players whose names have changed on afltables
+  ids<- 
+    ids %>% 
+    mutate(Player = case_when(ID == 12104 ~ "Cam Sutcliffe",
+                              TRUE ~ Player)
+    )
   
   return(ids)
 }
