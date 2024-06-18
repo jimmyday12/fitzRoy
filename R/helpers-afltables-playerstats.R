@@ -322,12 +322,11 @@ get_afltables_player_ids <- function(seasons) {
 
   col_vars <- c("Season", "Player", "ID", "Team")
 
-  ids <- git_url %>%
+  ids_old <- git_url %>%
     readr::read_csv(col_types = c("dcdc")) %>%
     dplyr::mutate(ID = as.integer(.data$ID)) %>%
     dplyr::select(!!col_vars) %>%
-    dplyr::distinct() %>%
-    dplyr::filter(.data$Season %in% seasons)
+    dplyr::distinct()
 
   # check for new ids
   readUrl <- function(url) {
@@ -382,7 +381,7 @@ get_afltables_player_ids <- function(seasons) {
   ids_new_min <- min(ids_new$Season)
   ids_new_max <- max(ids_new$Season)
   
-  ids_old <- ids %>%
+  ids_old <- ids_old %>%
     dplyr::filter(.data$Season < ids_new_min | .data$Season > ids_new_max)
   
   if (nrow(ids_old) < 1) {
@@ -404,7 +403,8 @@ get_afltables_player_ids <- function(seasons) {
     ids %>% 
     mutate(Player = case_when(ID == 12104 ~ "Cam Sutcliffe",
                               TRUE ~ Player)
-    )
+    ) %>%
+    dplyr::filter(.data$Season %in% seasons)
   
   return(ids)
 }
