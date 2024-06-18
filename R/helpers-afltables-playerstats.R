@@ -194,10 +194,7 @@ scrape_afltables_match <- function(match_urls) {
       Away.score = "AQ4P"
     )
 
-  ids <- get_afltables_player_ids(
-    1897:check_season(NULL)
-    # min(games_cleaned$Season):max(games_cleaned$Season)
-  )
+  ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season))
 
   games_joined <- games_cleaned %>%
     dplyr::mutate(Player = paste(.data$First.name, .data$Surname)) %>%
