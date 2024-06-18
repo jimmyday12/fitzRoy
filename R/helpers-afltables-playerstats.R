@@ -353,7 +353,8 @@ get_afltables_player_ids <- function(seasons) {
   ids_new <- urls %>%
     purrr::set_names() %>%
     purrr::map(readUrl) %>%
-    purrr::discard(~ nrow(.x) == 0) 
+    purrr::discard(~ nrow(.x) == 0)
+    
 
   # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
   # so we need to make them consistent before joining to avoid type errors
@@ -361,8 +362,8 @@ get_afltables_player_ids <- function(seasons) {
   cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
 
   ids_new <- ids_new %>%
-    purrr::map_dfr(~ dplyr::mutate_at(., cols_to_convert, as.character),
-                   .id = "Season") %>%
+    purrr::map(~ dplyr::mutate_at(., cols_to_convert, as.character)) %>%
+    purrr::list_rbind(names_to = "Season") %>%
     dplyr::mutate(Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
                   Season = stringr::str_remove(.data$Season, "_stats.txt"),
                   Season = as.numeric(.data$Season))
@@ -385,13 +386,19 @@ get_afltables_player_ids <- function(seasons) {
     dplyr::filter(.data$Season < ids_new_min | .data$Season > ids_new_max)
   
   if (nrow(ids_old) < 1) {
-    return(dplyr::distinct(ids_new))
+    ids <- ids_new %>%
+      dplyr::distinct()
   } else {
     ids <- dplyr::bind_rows(ids_old, ids_new) %>%
       dplyr::distinct()
-    
-    return(ids)
   }
 
   
+  ids <- 
+    ids %>%
+    group_by(ID) %>%
+    mutate(Player = dplyr::last(Player)) %>%
+    ungroup()
+  
+  return(ids)
 }
