@@ -83,9 +83,9 @@ scrape_afltables_match <- function(match_urls) {
 
   att_fn <- function(x) {
     if (x) {
-      "(?<=Date:\\s)(.*)(?=\\sAtt)"
+      "\\d{1,2}-\\w{3}-\\d{4} \\d{1,2}:\\d{2} [AP]M"
     } else {
-      "(?<=Date:\\s)(.*)(?=\\s)"
+      "\\d{1,2}-\\w{3}-\\d{4} \\d{1,2}:\\d{2} [AP]M"
     }
   }
 
