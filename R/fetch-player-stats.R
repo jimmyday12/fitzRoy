@@ -155,7 +155,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
 
 
   # nolint start
-  dat_url <- url("https://github.com/peteowen1/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/afldata.rda")
+  dat_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/afldata.rda")
   # nolint end
 
   load_r_data <- function(fname) {
