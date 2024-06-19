@@ -1,4 +1,3 @@
-
 #' Return afltables player match stats
 #'
 #' \code{scrape_afltables_match} returns a character vector containing match URLs for the specified date range
@@ -11,7 +10,6 @@
 #' @keywords internal
 #' @noRd
 scrape_afltables_match <- function(match_urls) {
-  
   # For each game url, download data, extract the stats
   # tables #3 and #5 and bind together
   cli::cli_process_start("Downloading data")
@@ -196,9 +194,7 @@ scrape_afltables_match <- function(match_urls) {
       Away.score = "AQ4P"
     )
 
-  ids <- get_afltables_player_ids(
-    min(games_cleaned$Season):max(games_cleaned$Season)
-  )
+  ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season))
 
   games_joined <- games_cleaned %>%
     dplyr::mutate(Player = paste(.data$First.name, .data$Surname)) %>%
@@ -322,30 +318,32 @@ get_afltables_player_ids <- function(seasons) {
 
   col_vars <- c("Season", "Player", "ID", "Team")
 
-  ids <- git_url %>%
+  ids_old <- git_url %>%
     readr::read_csv(col_types = c("dcdc")) %>%
     dplyr::mutate(ID = as.integer(.data$ID)) %>%
     dplyr::select(!!col_vars) %>%
-    dplyr::distinct() %>%
-    dplyr::filter(.data$Season %in% seasons)
+    dplyr::distinct()
 
   # check for new ids
   readUrl <- function(url) {
-    out <- tryCatch(readr::read_csv(url,
-      col_types = readr::cols(),
-      guess_max = 10000
-    ),
-    error = function(cond) {
-      return(data.frame())
-    }
+    out <- tryCatch(
+      readr::read_csv(url,
+        col_types = readr::cols(),
+        guess_max = 10000
+      ),
+      error = function(cond) {
+        return(data.frame())
+      }
     )
     return(out)
   }
 
   start <- 2017
-  
+
   # need to check if the current years season has started
-  current_year <- Sys.Date() %>% format("%Y") %>% as.numeric()
+  current_year <- Sys.Date() %>%
+    format("%Y") %>%
+    as.numeric()
   end <- max(max(seasons), current_year)
 
   urls <- purrr::map_chr(start:end, base_url)
@@ -353,7 +351,8 @@ get_afltables_player_ids <- function(seasons) {
   ids_new <- urls %>%
     purrr::set_names() %>%
     purrr::map(readUrl) %>%
-    purrr::discard(~ nrow(.x) == 0) 
+    purrr::discard(~ nrow(.x) == 0)
+
 
   # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
   # so we need to make them consistent before joining to avoid type errors
@@ -361,12 +360,14 @@ get_afltables_player_ids <- function(seasons) {
   cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
 
   ids_new <- ids_new %>%
-    purrr::map_dfr(~ dplyr::mutate_at(., cols_to_convert, as.character),
-                   .id = "Season") %>%
-    dplyr::mutate(Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
-                  Season = stringr::str_remove(.data$Season, "_stats.txt"),
-                  Season = as.numeric(.data$Season))
-  
+    purrr::map(~ dplyr::mutate_at(., cols_to_convert, as.character)) %>%
+    purrr::list_rbind(names_to = "Season") %>%
+    dplyr::mutate(
+      Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
+      Season = stringr::str_remove(.data$Season, "_stats.txt"),
+      Season = as.numeric(.data$Season)
+    )
+
   if (nrow(ids_new) < 1) {
     return(ids)
   }
@@ -374,24 +375,41 @@ get_afltables_player_ids <- function(seasons) {
   ids_new <- ids_new %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct() %>%
-    dplyr::rename(Team.abb = "Team")  %>%
+    dplyr::rename(Team.abb = "Team") %>%
     dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
     dplyr::select(!!col_vars)
-  
+
   ids_new_min <- min(ids_new$Season)
   ids_new_max <- max(ids_new$Season)
-  
-  ids_old <- ids %>%
+
+  ids_old <- ids_old %>%
     dplyr::filter(.data$Season < ids_new_min | .data$Season > ids_new_max)
-  
+
   if (nrow(ids_old) < 1) {
-    return(dplyr::distinct(ids_new))
+    ids <- ids_new %>%
+      dplyr::distinct()
   } else {
     ids <- dplyr::bind_rows(ids_old, ids_new) %>%
       dplyr::distinct()
-    
-    return(ids)
   }
 
-  
+  ### Make sure name is consistent across years
+  ids <- ids %>%
+    dplyr::group_by(.data$ID) %>%
+    dplyr::mutate(Player = dplyr::last(.data$Player)) %>%
+    dplyr::ungroup()
+
+  ### Fix certain players whose names have changed on afltables
+  ids <-
+    ids %>%
+    dplyr::mutate(Player = dplyr::case_when(
+      .data$ID == 12104 ~ "Cam Sutcliffe",
+      TRUE ~ .data$Player
+    ))
+
+  # Filter for required seasons
+  ids <- ids %>%
+    dplyr::filter(.data$Season %in% seasons)
+
+  return(ids)
 }
