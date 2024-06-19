@@ -28,54 +28,45 @@ scrape_afltables_match <- function(match_urls) {
   cli::cli_process_start("Processing XMLS")
 
 
-  replace_names <- function(x) {
-    names(x) <- as.character(x[1, ])
-    x[-1, ]
-  }
+  parse_afl_xmls <- function(page) {
+    # Extract the first table and get team names from it
+    details <- rvest::html_node(page, "table") %>% rvest::html_table()
+    team_names <- details$X2[2:3]
 
-  details <- match_xmls %>%
-    purrr::map(rvest::html_nodes, "br+ table td") %>%
-    purrr::map(rvest::html_text)
-
-  home_scores <- match_xmls %>%
-    purrr::map(rvest::html_nodes, "br+ table tr:nth-child(2) td") %>%
-    purrr::map(rvest::html_text)
-
-  away_scores <- match_xmls %>%
-    purrr::map(rvest::html_nodes, "br+ table tr:nth-child(3) td") %>%
-    purrr::map(rvest::html_text)
-
-  # Check if notes table exists
-  notes_tbl <- match_xmls %>%
-    purrr::map(rvest::html_nodes, "table:nth-child(10)") %>%
-    purrr::map(rvest::html_text) %>%
-    purrr::map(purrr::is_empty)
-
-  notes_fn <- function(x) {
-    if (x) {
-      c(3, 5)
-    } else {
-      c(4, 6)
+    # Function to extract a table based on some unique text it contains
+    extract_table <- function(page, unique_text) {
+      tables <- rvest::html_nodes(page, "table")
+      for (i in seq_along(tables)) {
+        table <- tables[[i]]
+        if (any(grepl(unique_text, rvest::html_text(table)))) {
+          return(rvest::html_table(table) %>%
+            janitor::row_to_names(row_number = 1))
+        }
+      }
+      return(NULL)
     }
+
+    # Extract the match statistics tables for both teams
+    team1_stats <-
+      extract_table(page, paste0(team_names[1], " Match Statistics")) %>%
+      dplyr::mutate(Playing.for = team_names[1])
+    team2_stats <- extract_table(page, paste0(team_names[2], " Match Statistics")) %>%
+      dplyr::mutate(Playing.for = team_names[2])
+
+    return(list(
+      details = details,
+      home_games = team1_stats,
+      away_games = team2_stats
+    ))
   }
 
-  notes_ind <- notes_tbl %>%
-    purrr::map(notes_fn)
+  scraped_data <- purrr::map(match_xmls, ~ parse_afl_xmls(.))
 
-  games <- match_xmls %>%
-    purrr::map(rvest::html_table, fill = TRUE) %>%
-    purrr::map2(.y = notes_ind, ~ .x[.y]) %>%
-    purrr::modify_depth(1, ~ purrr::map(., replace_names))
+  details <- purrr::map(scraped_data, purrr::pluck, "details")
+  home_games <- purrr::map(scraped_data, purrr::pluck, "home_games")
+  away_games <- purrr::map(scraped_data, purrr::pluck, "away_games")
 
-  home_games <- games %>%
-    purrr::map(1) %>%
-    purrr::map2(.y = home_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
-
-  away_games <- games %>%
-    purrr::map(2) %>%
-    purrr::map2(.y = away_scores, ~ dplyr::mutate(.x, Playing.for = .y[1]))
-
-  games <- home_games %>%
+  games_tot <- home_games %>%
     purrr::map2(.y = away_games, ~ dplyr::bind_rows(.x, .y))
 
   att_lgl <- details %>%
@@ -83,27 +74,27 @@ scrape_afltables_match <- function(match_urls) {
 
   att_fn <- function(x) {
     if (x) {
-      "(?<=Date:\\s)(.*)(?=\\sAtt)"
+      "\\d{1,2}-\\w{3}-\\d{4} \\d{1,2}:\\d{2} [AP]M"
     } else {
-      "(?<=Date:\\s)(.*)(?=\\s)"
+      "\\d{1,2}-\\w{3}-\\d{4} \\d{1,2}:\\d{2} [AP]M"
     }
   }
 
   date_str <- att_lgl %>%
     purrr::map(att_fn)
 
-  args <- list(games, details, date_str)
+  args <- list(games_tot, details, date_str)
 
   games_df <- args %>%
-    purrr::pmap(~ dplyr::mutate(..1, Date = stringr::str_extract(..2[2], ..3)))
+    purrr::pmap(~ dplyr::mutate(..1, Date = stringr::str_extract(..2[1, 2], ..3)))
 
   games_df <- games_df %>%
     purrr::map2(.y = details, ~ dplyr::mutate(
       .x,
-      Round = stringr::str_extract(.y[2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
-      Venue = stringr::str_extract(.y[2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
-      Attendance = stringr::str_extract(.y[2], "(?<=Attendance:\\s)(.*)"),
-      Umpires = .y[length(.y)]
+      Round = stringr::str_extract(.y[1, 2], "(?<=Round:\\s)(.*)(?=\\sVenue)"),
+      Venue = stringr::str_extract(.y[1, 2], "(?<=Venue:\\s)(.*)(?=\\Date)"),
+      Attendance = stringr::str_extract(.y[1, 2], "(?<=Attendance:\\s)(.*)"),
+      Umpires = .y[6, 3] %>% dplyr::pull()
     ))
 
   games_df <- games_df %>%

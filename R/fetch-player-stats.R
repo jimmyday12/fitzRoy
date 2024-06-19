@@ -44,7 +44,6 @@ fetch_player_stats <- function(season = NULL,
                                comp = "AFLM",
                                source = "AFL",
                                ...) {
-
   # Do some data checks
   # season <- check_season(season)
   check_comp_source(comp, source)
@@ -67,8 +66,6 @@ fetch_player_stats <- function(season = NULL,
 #' @rdname fetch_player_stats
 #' @export
 fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
-
-
   # some data checks
   season <- check_season(season)
   if (is.null(round_number)) round_number <- ""
@@ -76,13 +73,13 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   # Get match ids
   cli_id1 <- cli::cli_process_start("Fetching match ids")
   matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
-  
+
   if (is.null(matches)) {
     rlang::warn(glue::glue("No player stats data found for season {season} on AFL.com.au for {comp}"))
     return(NULL)
   }
-  
-  
+
+
   ids <- matches$providerId
   if (length(ids) == 0) {
     rlang::warn(glue::glue("No player stats data found for season {season} on AFL.com.au for {comp}"))
@@ -101,19 +98,20 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
     ))
   cli::cli_process_done(cli_id2)
 
-  if(nrow(match_stats) == 0) {
+  if (nrow(match_stats) == 0) {
     cli::cli_alert_info("No completed matches found")
     return(NULL)
-    
   }
-  
+
   # add match details
-  vars <- c("providerId", "utcStartTime", "status", 
-            "compSeason.shortName", "round.name", "round.roundNumber", 
-            "venue.name", 
-            "home.team.name", "home.team.club.name", 
-            "away.team.name", "away.team.club.name")
-  
+  vars <- c(
+    "providerId", "utcStartTime", "status",
+    "compSeason.shortName", "round.name", "round.roundNumber",
+    "venue.name",
+    "home.team.name", "home.team.club.name",
+    "away.team.name", "away.team.club.name"
+  )
+
   match_details <- matches %>%
     dplyr::select(dplyr::any_of(vars))
 
@@ -137,7 +135,7 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
 }
 
 
-#' @param rescrape Logical, defaults to FALSE. Determines if we should re-scrape data for a given season. By default, we return cached data which is much faster. Re-scraping is slow but sometimes needed if historical data has changed. 
+#' @param rescrape Logical, defaults to FALSE. Determines if we should re-scrape data for a given season. By default, we return cached data which is much faster. Re-scraping is slow but sometimes needed if historical data has changed.
 #' @param rescrape_start_season Numeric, if `rescrape = TRUE`, which season should we start scraping from. Defaults to minimum value of season
 #'
 #' @rdname fetch_player_stats
@@ -167,15 +165,15 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   dat <- load_r_data(dat_url)
   cli::cli_process_done(cli_id1)
 
-  
-  
-  if( rescrape ) {
+
+
+  if (rescrape) {
     if (is.null(rescrape_start_season)) rescrape_start_season <- format(start_date, "%Y")
     max_date <- lubridate::ymd(paste0(rescrape_start_season, "01-01"))
   } else {
     max_date <- max(dat$Date)
   }
-  
+
   dat <- dat %>%
     dplyr::filter(.data$Date <= max_date)
 
@@ -202,7 +200,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
       First.name = dplyr::first(.data$First.name),
       Surname = dplyr::first(.data$Surname)
     )
-
+  
   # fix for finals names being incorrect
   dat$Round[dat$Round == "Grand Final"] <- "GF"
   dat$Round[dat$Round == "Elimination Final"] <- "EF"
@@ -350,4 +348,3 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     return(tibble::as_tibble(dat))
   }
 }
-
