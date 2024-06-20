@@ -185,7 +185,7 @@ scrape_afltables_match <- function(match_urls) {
       Player = paste(.data$First.name, .data$Surname),
       Team = replace_teams(.data$Playing.for)
     ) %>%
-    dplyr::left_join(ids %>% mutate(Team = replace_teams(.data$Team)),
+    dplyr::left_join(ids %>% dplyr::mutate(Team = replace_teams(.data$Team)),
       by = c("Season", "Player", "Team")
     ) # %>% dplyr::select(-"Player")
 
@@ -445,7 +445,7 @@ get_afltables_player_ids <- function(seasons) {
     dplyr::mutate(
       Player = dplyr::coalesce(.data$Player.y, .data$Player.x)
     ) %>%
-    select(Season, Player, ID, Team)
+    dplyr::select("Season", "Player", "ID", "Team")
 
   ids <- ids %>%
     dplyr::bind_rows(id_missing)
