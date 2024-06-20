@@ -10,25 +10,10 @@
 #' @keywords internal
 #' @noRd
 scrape_afltables_match <- function(match_urls) {
-  # For each game url, download data, extract the stats
-  # tables #3 and #5 and bind together
-  cli::cli_process_start("Downloading data")
+  scrape_afltables_data <- function(url) {
+    # Read the webpage content
+    page <- rvest::read_html(url)
 
-  # nolint start
-  # pb <- dplyr::progress_estimated(length(match_urls))
-
-  match_xmls <- match_urls %>%
-    purrr::map(~ {
-      # pb$tick()$print()
-      xml2::read_html(.)
-    })
-  # nolint end
-
-  cli::cli_process_done()
-  cli::cli_process_start("Processing XMLS")
-
-
-  parse_afl_xmls <- function(page) {
     # Extract the first table and get team names from it
     details <- rvest::html_node(page, "table") %>% rvest::html_table()
     team_names <- details$X2[2:3]
@@ -38,7 +23,7 @@ scrape_afltables_match <- function(match_urls) {
       tables <- rvest::html_nodes(page, "table")
       for (i in seq_along(tables)) {
         table <- tables[[i]]
-        if (any(grepl(unique_text, rvest::html_text(table)))) {
+        if (any(stringr::str_starts(rvest::html_text(table), unique_text))) {
           return(rvest::html_table(table) %>%
             janitor::row_to_names(row_number = 1))
         }
@@ -59,8 +44,13 @@ scrape_afltables_match <- function(match_urls) {
       away_games = team2_stats
     ))
   }
+  cli::cli_process_start("Scraping AFL Tables")
 
-  scraped_data <- purrr::map(match_xmls, ~ parse_afl_xmls(.))
+  scraped_data <- purrr::map(match_urls, ~ scrape_afltables_data(.), .progress = TRUE)
+
+  cli::cli_process_done()
+
+  cli::cli_process_start("Cleaning AFL Tables data")
 
   details <- purrr::map(scraped_data, purrr::pluck, "details")
   home_games <- purrr::map(scraped_data, purrr::pluck, "home_games")
@@ -98,22 +88,25 @@ scrape_afltables_match <- function(match_urls) {
     ))
 
   games_df <- games_df %>%
-    purrr::map2(.y = home_scores, ~ dplyr::mutate(
+    purrr::map2(.y = details, ~ dplyr::mutate(
       .x,
-      Home.team = .y[1],
-      HQ1 = .y[2],
-      HQ2 = .y[3],
-      HQ3 = .y[4],
-      HQ4 = .y[5]
-    )) %>%
-    purrr::map2(.y = away_scores, ~ dplyr::mutate(
-      .x,
-      Away.team = .y[1],
-      AQ1 = .y[2],
-      AQ2 = .y[3],
-      AQ3 = .y[4],
-      AQ4 = .y[5]
-    )) %>%
+      Home.team = .y[2, 2] %>% dplyr::pull(),
+      HQ1 = .y[2, 3] %>% dplyr::pull(),
+      HQ2 = .y[2, 4] %>% dplyr::pull(),
+      HQ3 = .y[2, 5] %>% dplyr::pull(),
+      HQ4 = .y[2, 6] %>% dplyr::pull(),
+      HQET = .y[2, 7] %>% dplyr::pull(),
+      Away.team = .y[3, 2] %>% dplyr::pull(),
+      AQ1 = .y[3, 3] %>% dplyr::pull(),
+      AQ2 = .y[3, 4] %>% dplyr::pull(),
+      AQ3 = .y[3, 5] %>% dplyr::pull(),
+      AQ4 = .y[3, 6] %>% dplyr::pull(),
+      AQET = .y[3, 7] %>% dplyr::pull(),
+    ))
+
+
+  games_df <-
+    games_df %>%
     purrr::list_rbind()
 
   games_df <- games_df %>%
@@ -175,24 +168,26 @@ scrape_afltables_match <- function(match_urls) {
     ), sep = "\\.")
   }
 
-  score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")
+  score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "HQET", "AQ1", "AQ2", "AQ3", "AQ4", "AQET")
   games_cleaned <- games_cleaned %>%
     Reduce(f = sep, x = score_cols) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::contains("HQ")), as.integer) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::contains("AQ")), as.integer) %>%
-    dplyr::rename(
-      Home.score = "HQ4P",
-      Away.score = "AQ4P"
+    dplyr::mutate(
+      Home.score = dplyr::coalesce(.data$HQETP, .data$HQ4P),
+      Away.score = dplyr::coalesce(.data$AQETP, .data$AQ4P)
     )
 
   ids <- get_afltables_player_ids(min(games_cleaned$Season):max(games_cleaned$Season))
 
   games_joined <- games_cleaned %>%
-    dplyr::mutate(Player = paste(.data$First.name, .data$Surname)) %>%
-    dplyr::left_join(ids,
-      by = c("Season", "Player", "Playing.for" = "Team")
+    dplyr::mutate(
+      Player = paste(.data$First.name, .data$Surname),
+      Team = replace_teams(.data$Playing.for)
     ) %>%
-    dplyr::select(-"Player")
+    dplyr::left_join(ids %>% mutate(Team = replace_teams(.data$Team)),
+      by = c("Season", "Player", "Team")
+    ) # %>% dplyr::select(-"Player")
 
   df <- games_joined %>%
     dplyr::rename(!!!rlang::syms(with(stat_abbr, setNames(stat.abb, stat))))
@@ -201,14 +196,15 @@ scrape_afltables_match <- function(match_urls) {
     afldata_cols <- afldata_cols[afldata_cols != "Substitute"]
   }
 
-  df <- df %>%
-    dplyr::select(dplyr::one_of(afldata_cols))
+  # df <- df %>%
+  #   dplyr::select(dplyr::one_of(afldata_cols))
 
   df <- df %>%
     dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
     dplyr::mutate(Round = as.character(.data$Round))
 
   cli::cli_process_done()
+
   return(df)
 }
 
@@ -315,6 +311,65 @@ get_afltables_player_ids <- function(seasons) {
     dplyr::select(!!col_vars) %>%
     dplyr::distinct()
 
+
+  # Create an ID tibble for error rows by using tribble
+  id_fix <- tibble::tribble(
+    ~ID, ~Player,
+    4577, "Abe McDougall",
+    4570, "Abe Watson",
+    2695, "Alan Clough",
+    3147, "Alan Joyce",
+    4565, "Alex Hall",
+    5063, "Alex Rosser",
+    7212, "Alf Hayes",
+    5760, "Alick Barningham",
+    5187, "Allan Belcher",
+    3247, "Allen Lynch",
+    3613, "Allen Rogers",
+    5240, "Andy McDonell",
+    5121, "Arnold Moffitt",
+    4264, "Arthur Middleton",
+    15002, "Arthur Richardson",
+    15003, "Bill Richardson",
+    11353, "Brendon Moore",
+    12104, "Cam Sutcliffe",
+    4448, "Charles Sweatman",
+    7346, "Clem Carr",
+    756, "Dani Laidley",
+    9902, "Denis Railton",
+    7256, "Eddie Shaw",
+    10792, "Gary Lowe",
+    4454, "George Callesen",
+    11417, "Gerard Butts",
+    0, "Heber Quinton",
+    5923, "Henry Merrett",
+    8376, "Jack Mathews",
+    12245, "Jay Kennedy Harris",
+    7634, "Jim Kennedy",
+    7725, "Jock McConchie",
+    4695, "John Hooper",
+    9218, "Mac Hill",
+    4643, "Mal Markillie",
+    1931, "Mark Maclure", # lower case L
+    774, "Mathew Capuano",
+    7540, "Morrie Davidson",
+    5234, "Percy Blencowe",
+    4737, "Roy Wawn",
+    8887, "Russell Whelan",
+    435, "Stephen Macpherson", # lower case P
+    1223, "Stephen Schwerdt",
+    11103, "Terry De Koning",
+    10986, "Terry Philippe",
+    5134, "Tom Hawking",
+    10386, "Wennie van Lint" # lower case V
+  )
+
+  # Missing Rows
+  id_missing <- tibble::tribble(
+    ~Season, ~Player, ~ID, ~Team,
+    1902, "Jim Kennedy", 4848, "Essendon"
+  )
+
   # check for new ids
   readUrl <- function(url) {
     out <- tryCatch(
@@ -384,19 +439,23 @@ get_afltables_player_ids <- function(seasons) {
       dplyr::distinct()
   }
 
+  ### Join fixes
+  ids <- ids %>%
+    dplyr::left_join(id_fix, by = "ID") %>%
+    dplyr::mutate(
+      Player = dplyr::coalesce(.data$Player.y, .data$Player.x)
+    ) %>%
+    select(Season, Player, ID, Team)
+
+  ids <- ids %>%
+    dplyr::bind_rows(id_missing)
+
   ### Make sure name is consistent across years
   ids <- ids %>%
     dplyr::group_by(.data$ID) %>%
     dplyr::mutate(Player = dplyr::last(.data$Player)) %>%
-    dplyr::ungroup()
-
-  ### Fix certain players whose names have changed on afltables
-  ids <-
-    ids %>%
-    dplyr::mutate(Player = dplyr::case_when(
-      .data$ID == 12104 ~ "Cam Sutcliffe",
-      TRUE ~ .data$Player
-    ))
+    dplyr::ungroup() %>%
+    dplyr::distinct()
 
   # Filter for required seasons
   ids <- ids %>%
