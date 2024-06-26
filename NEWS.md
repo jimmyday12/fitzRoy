@@ -1,5 +1,17 @@
 # fitzRoy development version
 
+# fitzRoy 1.4.1
+
+## New Features
+- Enhanced AFL tables data handling.
+  - Combined scraping functions into a single cohesive function for better efficiency.
+  - Include Extra-Time scores for any games that went to extra-time (HQET and AQET)
+
+## Bug Fixes
+- Corrected date parsing issues for AFL tables data, ensuring accurate date formats.
+- Change way of fetching umpire names to avoid occasionally grabbing the wrong field from AFL tables
+- Fixes for players with incorrect AFL tables player ids - mainly due to player name changes.
+  
 # fitzRoy 1.4.0
 
 ## New Features
