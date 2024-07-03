@@ -335,7 +335,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
       return(tibble::as_tibble(dat))
     }
   } else {
-    cli::progress_step("Downloading all data. Warning - this takes a long time")
+    cli::cli_progress_step("Downloading all data. Warning - this takes a long time")
     all_data_ids <- fw_ids
 
     dat <- fetch_footywire_stats(all_data_ids)
