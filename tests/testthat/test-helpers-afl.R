@@ -41,6 +41,7 @@ test_that("find comp ID functions work", {
 test_that("find season ID functions work", {
   expect_equal(find_season_id(2020), 20)
   expect_equal(find_season_id(2019), 18)
+  expect_equal(find_season_id(2012), 2)
 
   expect_null(suppressWarnings(find_season_id(2000)))
   expect_warning(find_season_id(2000))

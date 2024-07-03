@@ -245,7 +245,7 @@ find_season_id <- function(season, comp = "AFLM") {
   comp_id <- find_comp_id(comp)
 
   api <- httr::modify_url("https://aflapi.afl.com.au",
-    path = paste0("/afl/v2/competitions/", comp_id, "/compseasons")
+    path = paste0("/afl/v2/competitions/", comp_id, "/compseasons", "?pageSize=100")
   )
 
   resp <- httr::GET(api)
