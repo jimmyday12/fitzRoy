@@ -1,7 +1,7 @@
 # fitzRoy (development version)
 
 * Fixed an issue where `find_season_id` was only returning the last 10 seasons  ([#225](https://github.com/jimmyday12/fitzRoy/issues/225))
-
+* Updating some deprecated CLI messaging functions
 
 # fitzRoy 1.4.0
 

@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @noRd
 fetch_player_details_footywire_current <- function(team) {
-  cli_current <- cli::cli_process_start("Fetching current player details for {team}")
+  cli::cli_progress_step("Fetching current player details for {team}")
   team_abr <- get_team_abrev_footywire(team)
   path <- paste0("tp-", team_abr)
   url <- paste0("https://www.footywire.com/afl/footy/", path)
@@ -40,7 +40,6 @@ fetch_player_details_footywire_current <- function(team) {
     ) %>%
     dplyr::mutate(first_name = trimws(.data$first_name))
 
-  cli::cli_process_done(cli_current)
   return(df)
 }
 
@@ -60,7 +59,7 @@ fetch_player_details_footywire_past <- function(team) {
   url <- paste0("https://www.footywire.com/afl/footy/", path)
   html <- rvest::read_html(url)
 
-  cli_past <- cli::cli_alert_info("Fetching past player details for {team} - this takes some time!")
+  cli::cli_progress_step("Fetching past player details for {team} - this takes some time!")
   players_url <- html %>%
     rvest::html_elements(".lnormtop a") %>%
     rvest::html_attr("href")
@@ -70,7 +69,6 @@ fetch_player_details_footywire_past <- function(team) {
     cli::cli_progress_along() %>%
     purrr::map_dfr(get_past_player_footywire)
 
-  cli::cli_process_done(cli_past)
   return(df)
 }
 

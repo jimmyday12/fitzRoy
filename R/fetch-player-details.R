@@ -128,7 +128,7 @@ fetch_player_details_afl <- function(season, team = NULL, comp = "AFLM", officia
 #' @export
 fetch_player_details_afltables <- function(team = NULL) {
   if (is.null(team)) {
-    cli_all <- cli::cli_process_start("Fetching player details for all teams")
+    cli::cli_progress_step("Fetching player details for all teams")
 
     teams <- c(
       "Adelaide", "Brisbane Lions", "Brisbane Bears",
@@ -142,8 +142,6 @@ fetch_player_details_afltables <- function(team = NULL) {
 
     details_data <- teams %>%
       purrr::map_dfr(get_player_details_afltables)
-
-    cli::cli_process_done(cli_all)
 
     return(details_data)
   } else {

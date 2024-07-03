@@ -476,7 +476,7 @@ fetch_round_results_afl <- function(id, cookie = NULL) {
 #' @keywords internal
 #' @noRd
 fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
-  cli_team <- cli::cli_process_start("Fetching player details for {team}, {season}")
+  cli::cli_progress_step("Fetching player details for {team}, {season}")
   api <- "https://aflapi.afl.com.au//afl/v2/squads"
 
   resp <- httr::GET(
@@ -494,8 +494,6 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
   df <- dplyr::as_tibble(cont$squad$players)
 
   names(df) <- gsub("player.", "", names(df))
-
-  cli::cli_process_done(cli_team)
 
   df %>%
     dplyr::mutate(

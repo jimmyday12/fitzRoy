@@ -74,7 +74,7 @@ get_player_debut_afltables <- function(team = NULL) {
 }
 
 get_player_details_afltables <- function(team) {
-  cli_team <- cli::cli_process_start("Fetching player details for {team}")
+  cli::cli_progress_step("Fetching player details for {team}")
   valid_team <- team_check_afltables(team)
 
   team_abr <- dplyr::case_when(
@@ -145,6 +145,5 @@ get_player_details_afltables <- function(team) {
     ) %>%
     dplyr::arrange(.data$Cap)
 
-  cli::cli_process_done(cli_team)
   return(df)
 }

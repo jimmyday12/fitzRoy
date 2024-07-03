@@ -44,13 +44,11 @@ scrape_afltables_match <- function(match_urls) {
       away_games = team2_stats
     ))
   }
-  cli::cli_process_start("Scraping AFL Tables")
+  cli::cli_progress_step("Scraping AFL Tables")
 
   scraped_data <- purrr::map(match_urls, ~ scrape_afltables_data(.), .progress = TRUE)
 
-  cli::cli_process_done()
-
-  cli::cli_process_start("Cleaning AFL Tables data")
+  cli::cli_progress_step("Cleaning AFL Tables data")
 
   details <- purrr::map(scraped_data, purrr::pluck, "details")
   home_games <- purrr::map(scraped_data, purrr::pluck, "home_games")
@@ -203,7 +201,6 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
     dplyr::mutate(Round = as.character(.data$Round))
 
-  cli::cli_process_done()
 
   return(df)
 }
