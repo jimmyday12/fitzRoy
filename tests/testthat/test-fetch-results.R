@@ -15,7 +15,7 @@ test_that("fetch_results_afl works for various inputs", {
 
   # change year
   expect_s3_class(fetch_results_afl(2018, 1, comp = "AFLM"), "tbl")
-  fetch_results_afl(2000, 1, comp = "AFLM") %>% 
+  fetch_results_afl(2000, 1, comp = "AFLM") %>%
     expect_warning() %>%
     suppressWarnings()
 
@@ -90,7 +90,7 @@ test_that("fetch_results works", {
   # Test some various inputs
   expect_s3_class(fetch_results(2020, round = 1), "data.frame")
   expect_error(fetch_results(20))
-  fetch_results(2000) %>% 
+  fetch_results(2000) %>%
     expect_warning() %>%
     suppressWarnings()
   expect_s3_class(fetch_results(2020, round = 1, source = "footywire", last_n_matches = 1), "data.frame")
@@ -130,17 +130,16 @@ test_that("get_footywire_stats works", {
 test_that("fetch_results works for non-AFL leagues", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # Test each source works
   expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "WAFL"), "tbl")
   expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
   expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
   expect_s3_class(fetch_results(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
   expect_s3_class(fetch_results(2019, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
-  
+
   # Check for warnings thrown
-  fetch_results(2022, round_number = 1, source = "AFL", comp = "U18G") %>% 
+  fetch_results(2022, round_number = 1, source = "AFL", comp = "U18G") %>%
     expect_warning() %>%
     suppressWarnings()
-  
 })

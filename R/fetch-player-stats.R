@@ -197,7 +197,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
       First.name = dplyr::first(.data$First.name),
       Surname = dplyr::first(.data$Surname)
     )
-  
+
   # fix for finals names being incorrect
   dat$Round[dat$Round == "Grand Final"] <- "GF"
   dat$Round[dat$Round == "Elimination Final"] <- "EF"
@@ -321,12 +321,12 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
       n <- length(git_ids)
       url <- "www.footywire.com"
       cli::cli_progress_step("New data found for {.val {n}} matches - downloading from {.url {url}}")
-  
+
 
       new_data <- fetch_footywire_stats(git_ids)
-      
+
       cli::cli_progress_step("Binding new data to old data")
-      
+
       dat <- dat_git %>% dplyr::bind_rows(new_data)
 
       dat <- dat %>%

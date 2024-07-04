@@ -49,7 +49,6 @@ test_that("Squiggle API optional arguments work", {
     ),
     "list"
   )
-
 })
 
 # Legacy Tests - to be removed eventually --------------------------------------

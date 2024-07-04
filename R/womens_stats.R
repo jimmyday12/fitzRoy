@@ -1,10 +1,10 @@
-#' Get AFL Stats cookie 
-#' 
+#' Get AFL Stats cookie
+#'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
+#'
 #' Replaced with a standard function to return cookies for either mens or womens data
-#' 
+#'
 #' @examples
 #' #
 #' \dontrun{
@@ -14,9 +14,11 @@
 #' }
 #' @keywords internal
 get_aflw_cookie <- function() {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_aflw_cookie()",
-                            "get_afl_cookie()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_aflw_cookie()",
+    "get_afl_cookie()"
+  )
   get_afl_cookie()
 }
 
@@ -180,13 +182,13 @@ get_aflw_round_data <- function(roundid, cookie) {
 }
 
 #' Get AFLW match data
-#' 
+#'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_fixture_afl()` instead
-#' 
+#'
 #' @examples
 #' #
 #' \dontrun{
@@ -196,11 +198,12 @@ get_aflw_round_data <- function(roundid, cookie) {
 #' }
 #' @keywords internal
 get_aflw_match_data <- function(start_year = 2017) {
-  
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_aflw_match_data()",
-                            "fetch_results_afl()")
-  
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_aflw_match_data()",
+    "fetch_results_afl()"
+  )
+
   end_year <- Sys.Date() %>%
     format("%Y") %>%
     as.numeric()

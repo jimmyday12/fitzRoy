@@ -1,4 +1,3 @@
-
 #' Check Season
 #'
 #' Checks the season for various things
@@ -113,11 +112,9 @@ verify_year <- function(year) {
   year <- suppressWarnings(as.numeric(year))
   if (is.na(year)) {
     stop(paste("Not a year."))
-  }
-  else if (year >= 1897 & year <= as.numeric(format(Sys.Date(), "%Y"))) {
+  } else if (year >= 1897 & year <= as.numeric(format(Sys.Date(), "%Y"))) {
     return(year)
-  }
-  else {
+  } else {
     stop(paste("Not a valid year within available range."))
   }
 }

@@ -8,16 +8,16 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+not_cran <- identical(Sys.getenv("NOT_CRAN"), "true")
 online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
-	eval = eval_param,
-	message = FALSE,
-	warning = FALSE,
-	collapse = TRUE,
-	comment = "#>"
+  eval = eval_param,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>"
 )
 
 library(fitzRoy)
@@ -35,35 +35,42 @@ Firstly, we can return the fixture for a season or particular round.
 not_cran
 online
 eval_param
-
 ```
 
 ```{r fetch_fixture_aflw2, eval=FALSE, include=TRUE}
 fetch_fixture(season = 2021, comp = "AFLW") %>%
-  select(compSeason.name, round.name, 
-         home.team.name, away.team.name, 
-         venue.name)
+  select(
+    compSeason.name, round.name,
+    home.team.name, away.team.name,
+    venue.name
+  )
 ```
 ```{r fetch_fixture_aflw2_included,  echo=FALSE, eval=eval_param}
 fitzRoy:::fixture_afl_aflw_2021 %>%
-  select(compSeason.name, round.name, 
-         home.team.name, away.team.name, 
-         venue.name)
+  select(
+    compSeason.name, round.name,
+    home.team.name, away.team.name,
+    venue.name
+  )
 ```
 ## Lineup
 We can get the lineup for a given set of matches in a particular round. 
 ```{r lineup, include=TRUE, eval=FALSE}
 fetch_lineup(2021, round_number = 1, comp = "AFLW") %>%
-  select(round.name, status, teamName, 
-         player.playerName.givenName,
-         player.playerName.surname, teamStatus)
+  select(
+    round.name, status, teamName,
+    player.playerName.givenName,
+    player.playerName.surname, teamStatus
+  )
 ```
 
 ```{r lineup_included, echo=FALSE, eval=eval_param}
 fitzRoy:::lineup_aflw_2021_1 %>%
-  select(round.name, status, teamName, 
-         player.playerName.givenName,
-         player.playerName.surname, teamStatus)
+  select(
+    round.name, status, teamName,
+    player.playerName.givenName,
+    player.playerName.surname, teamStatus
+  )
 ```
 
 
@@ -72,16 +79,19 @@ The match results, including the teams playing, venue information and final scor
 
 ```{r fetch_results_aflw, eval=FALSE, include=TRUE}
 fetch_results(2020, round_number = 1, comp = "AFLW") %>%
-  select( match.date, match.name,
-         homeTeamScore.matchScore.totalScore, awayTeamScore.matchScore.totalScore)
-
+  select(
+    match.date, match.name,
+    homeTeamScore.matchScore.totalScore, awayTeamScore.matchScore.totalScore
+  )
 ```
 ```{r fetch_results_aflw_included,  echo=FALSE, eval=eval_param}
 fitzRoy:::results_afl_aflw_2020 %>%
   dplyr::filter(round.roundNumber == 1) %>%
-  select(match.date, match.name,
-         homeTeamScore.matchScore.totalScore,
-         awayTeamScore.matchScore.totalScore)
+  select(
+    match.date, match.name,
+    homeTeamScore.matchScore.totalScore,
+    awayTeamScore.matchScore.totalScore
+  )
 ```
 
 ## Ladder
@@ -89,17 +99,20 @@ We can also get the ladder at any point with `fetch_ladder`.
 
 ```{r fetch_ladder_aflw2, eval=FALSE, include=TRUE}
 fetch_ladder(2020, round_number = 6, comp = "AFLW") %>%
-  select(season, round_name, 
-         position, team.name, played, 
-         pointsFor, pointsAgainst)
-
+  select(
+    season, round_name,
+    position, team.name, played,
+    pointsFor, pointsAgainst
+  )
 ```
 ```{r fetch_ladder_aflw2_included,  echo=FALSE, eval=eval_param}
 fitzRoy:::ladder_afl_aflw_2020 %>%
   dplyr::filter(round_number == 7) %>%
-  select(season, round_name, 
-         position, team.name, played, 
-         pointsFor, pointsAgainst)
+  select(
+    season, round_name,
+    position, team.name, played,
+    pointsFor, pointsAgainst
+  )
 ```
 
 
@@ -109,7 +122,6 @@ Lastly - we have basic player stats. This will return player level statistics su
 ```{r fetch_stats, eval=FALSE, include=TRUE}
 fetch_player_stats(2020, round_number = 1, comp = "AFLW") %>%
   select(player.player.player.givenName:clearances.totalClearances)
-
 ```
 ```{r fetch_stats_included, echo=FALSE, eval=eval_param}
 fitzRoy:::stats_afl_aflw_2020 %>%
@@ -138,7 +150,7 @@ fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "West
 ```
 ```{r fetch_coaches_votes_aflw_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflw_coaches_votes %>%
-  dplyr::filter(Home.Team=="Western Bulldogs" & Round == 9) %>% 
+  dplyr::filter(Home.Team == "Western Bulldogs" & Round == 9) %>%
   head()
 ```
 
@@ -162,8 +174,8 @@ Note - if this is `NULL` the rest of this Vignette won't show any outputs but th
 
 ```{r cookie_param, include=FALSE, eval=eval_param}
 if (is.null(cookie)) {
-    eval_param = FALSE
-  }
+  eval_param <- FALSE
+}
 ```
 
 We can use the `fetch_results()` function to retrieve match data matches.

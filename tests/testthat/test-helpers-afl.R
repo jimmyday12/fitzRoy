@@ -1,4 +1,3 @@
-
 skip_if_no_cookie <- function() {
   testthat::skip_if_offline()
 

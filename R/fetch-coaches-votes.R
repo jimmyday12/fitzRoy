@@ -40,7 +40,6 @@ fetch_coaches_votes <- function(season = NULL,
                                 round_number = NULL,
                                 comp = "AFLM",
                                 team = NULL) {
-
   # error handling
   check_comp(comp)
   if (sum(!team %in% c(

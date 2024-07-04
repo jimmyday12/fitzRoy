@@ -1,4 +1,3 @@
-
 test_that("scape_afltables_ works", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()

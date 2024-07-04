@@ -1,4 +1,3 @@
-
 test_that("replace_teams returns corrected teams", {
   expect_equal(replace_teams("A"), "A")
   expect_equal(replace_teams("Kangaroos"), "North Melbourne")

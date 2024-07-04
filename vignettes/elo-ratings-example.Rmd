@@ -10,16 +10,16 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+not_cran <- identical(Sys.getenv("NOT_CRAN"), "true")
 online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
-	eval = eval_param,
-	message = FALSE,
-	warning = FALSE,
-	collapse = TRUE,
-	comment = "#>"
+  eval = eval_param,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>"
 )
 
 
@@ -71,7 +71,6 @@ Before we create our model, some data preparation. In the ELO package we are usi
 ```{r clean_results, eval=eval_param}
 results <- results %>%
   mutate(seas_rnd = paste0(Season, ".", Round.Number))
-
 ```
 
 Since our `fixture` data and `results` data are coming from different sources, we need to fix a few things up. This is a good time to point out that using similar sources is great when possible! 
@@ -102,9 +101,11 @@ The original ELO models in chess use values of 0 for a loss, 1 for a win and 0.5
 We create that as a function and then use that function in our elo model. 
 
 ```{r margin_outcome, eval=eval_param}
-map_margin_to_outcome <- function(margin, marg.max = 80, marg.min = -80){
-  norm <- (margin - marg.min)/(marg.max - marg.min)
-  norm %>% pmin(1) %>% pmax(0)
+map_margin_to_outcome <- function(margin, marg.max = 80, marg.min = -80) {
+  norm <- (margin - marg.min) / (marg.max - marg.min)
+  norm %>%
+    pmin(1) %>%
+    pmax(0)
 }
 ```
 
@@ -115,14 +116,13 @@ Now we are ready to create our ELO ratings! We can use the `elo.run` function fr
 # Run ELO
 elo.data <- elo.run(
   map_margin_to_outcome(Home.Points - Away.Points) ~
-  adjust(Home.Team, HGA) +
+    adjust(Home.Team, HGA) +
     Away.Team +
     regress(Season, 1500, carryOver) +
     group(seas_rnd),
   k = k_val,
   data = results
 )
-
 ```
 
 Now that is run, we can view our results. The `elo` package provides various ways to do this.

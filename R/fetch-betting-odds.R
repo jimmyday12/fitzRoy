@@ -63,8 +63,8 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
     years <- page[[1]] %>%
       rvest::html_nodes("option") %>%
       rvest::html_text() %>%
-      stringr::str_extract("[0-9]*") 
-    
+      stringr::str_extract("[0-9]*")
+
     as.numeric(years[!years == ""])
   }
 

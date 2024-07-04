@@ -63,7 +63,6 @@ get_team_abrev_footywire <- function(team) {
 #' @keywords internal
 #' @noRd
 footywire_html <- function(x, id) {
-
   # First get extra information
   game_details <- x %>%
     rvest::html_node("tr:nth-child(2) .lnorm") %>%
@@ -103,11 +102,15 @@ footywire_html <- function(x, id) {
       Opposition = away_team,
       Status = "Home"
     ) %>%
-    dplyr::mutate(dplyr::across(c(-"Player", 
-                                  -"Team",
-                                  -"Opposition", 
-                                  -"Status"), 
-                                as.numeric))
+    dplyr::mutate(dplyr::across(
+      c(
+        -"Player",
+        -"Team",
+        -"Opposition",
+        -"Status"
+      ),
+      as.numeric
+    ))
 
   # Now get the table data
   away_stats <- x %>%
@@ -119,11 +122,15 @@ footywire_html <- function(x, id) {
       Opposition = home_team,
       Status = "Away"
     ) %>%
-    dplyr::mutate(dplyr::across(c(-"Player", 
-                                  -"Team",
-                                  -"Opposition", 
-                                  -"Status"), 
-                                as.numeric))
+    dplyr::mutate(dplyr::across(
+      c(
+        -"Player",
+        -"Team",
+        -"Opposition",
+        -"Status"
+      ),
+      as.numeric
+    ))
 
   ## Add data to ind.table
   player_stats <- home_stats %>%
@@ -161,14 +168,13 @@ footywire_html <- function(x, id) {
 #' @keywords internal
 #' @noRd
 get_match_data <- function(id) {
-
   # Create URL
   default_url <- "http://www.footywire.com/afl/footy/ft_match_statistics?mid="
   basic_url <- paste(default_url, id, sep = "")
   advanced_url <- paste(default_url, id, "&advv=Y", sep = "")
 
   cli::cli_progress_step("Getting data from footywire for match id {id}")
-  
+
   # Check if URL exists
   footywire_basic <- tryCatch(
     xml2::read_html(basic_url),
@@ -190,7 +196,6 @@ get_match_data <- function(id) {
     if (advanced_empty) {
       stop("This function only works on matches from 2010 onwards")
     } else {
-
       # If it does, grab the basic data
       player_stats_basic <- footywire_html(footywire_basic, id)
 
@@ -282,8 +287,9 @@ extract_footywire_match_table <- function(xml) {
   tbl <- tbl %>%
     dplyr::rename(Points = "Final") %>%
     dplyr::select(
-      "Team", 
-      "Points") %>%
+      "Team",
+      "Points"
+    ) %>%
     dplyr::mutate(Status = c("Home", "Away")) %>%
     tidyr::pivot_wider(
       names_from = "Status",
@@ -307,13 +313,13 @@ extract_footywire_match_table <- function(xml) {
       Venue = match_details$venue
     ) %>%
     dplyr::select(
-      "Date", 
-      "Time", 
-      "Round", 
+      "Date",
+      "Time",
+      "Round",
       "Venue",
-      "Home.Team", 
+      "Home.Team",
       "Away.Team",
-      "Home.Points", 
+      "Home.Points",
       "Away.Points"
     )
 
@@ -457,7 +463,7 @@ fetch_footywire_stats <- function(ids) {
   # Loop through data using map
   dat <- ids %>%
     purrr::map_df(~
-    get_match_data(id = .x))
+      get_match_data(id = .x))
 
   # Rearrange
   dat <- dat %>%

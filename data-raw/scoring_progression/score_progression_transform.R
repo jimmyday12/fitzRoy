@@ -11,7 +11,6 @@ seasons <- 2008:2017
 scoring_progression <- data.frame()
 
 for (i in seq_along(seasons)) {
-
   # Create main page url
   main.page.url <- paste0("http://afltables.com/afl/seas/", seasons[i], ".html")
   main.page <- read_html(x = main.page.url)

@@ -38,8 +38,8 @@ replace_teams <- function(team) {
     team == "WB" ~ "Footscray",
     team == "PA" ~ "Port Adelaide",
     # keeping this one so that it's the same behaviour for University Blues:
-    team == "Blues" ~ "Carlton", 
-    
+    team == "Blues" ~ "Carlton",
+
     # simplifying the coercing of team names
     stringr::str_detect(tolower(team), "crows") ~ "Adelaide",
     stringr::str_detect(tolower(team), "brisbane|lions|bears") ~ "Brisbane Lions",
@@ -59,11 +59,11 @@ replace_teams <- function(team) {
     stringr::str_detect(tolower(team), "stk|saints") ~ "St Kilda",
     stringr::str_detect(tolower(team), "swans|south melbourne") ~ "Sydney",
     stringr::str_detect(tolower(team), "wce|eagles") ~ "West Coast",
-    
+
     # AFL have also introduced capitalised team names for GC and GWS
     stringr::str_detect(team, "SUNS") ~ "Gold Coast",
     stringr::str_detect(team, "GIANTS") ~ "GWS",
-    
+
     # handle for indigenous round team names
     team == "Narrm" ~ "Melbourne",
     team == "Walyalup" ~ "Fremantle",
@@ -123,7 +123,6 @@ replace_venues <- function(venue) {
 #' @keywords internal
 #' @noRd
 convert_results <- function(results) {
-
   # Convert results to wide format
   results %>%
     tidyr::gather("variable", "value", "Home.Team":"Away.Points") %>%

@@ -5,43 +5,43 @@
 #' @param comp "AFLM" or "AFLW"
 #' @keywords internal
 #' @noRd
-fetch_teams_afl <- function(comp){
-  
+fetch_teams_afl <- function(comp) {
   team_api <- function(page) {
     api <- "https://aflapi.afl.com.au/afl/v2/teams"
-    
+
     resp <- httr::GET(
       url = api,
-      query = list("pageSize" = "1000", 
-                   page = page))
-    
+      query = list(
+        "pageSize" = "1000",
+        page = page
+      )
+    )
+
     cont <- parse_resp_afl(resp)
   }
-  
+
   cont <- team_api(0)
-  
-  #check_for_more
+
+  # check_for_more
   if (cont$meta$pagination$numPages > 1) {
     page_ind <- 0:(cont$meta$pagination$numPages - 1)
-    
+
     teams <- page_ind %>%
       purrr::map(team_api) %>%
       purrr::map_dfr(purrr::pluck, "teams")
-    
-    
   } else {
     teams <- cont$teams
   }
-  
-  
+
+
   df <- teams %>%
     dplyr::select(
       "id", "abbreviation",
       "name", "teamType",
-      "club.id","club.providerId","club.name","club.abbreviation","club.nickname"
+      "club.id", "club.providerId", "club.name", "club.abbreviation", "club.nickname"
     ) %>%
     stats::na.omit()
-  
+
   type <- dplyr::case_when(
     comp == "AFLM" ~ "MEN",
     comp == "AFLW" ~ "WOMEN",
@@ -53,11 +53,12 @@ fetch_teams_afl <- function(comp){
     is.null(comp) ~ "ALL",
     TRUE ~ ""
   )
-  
-  if (type == "ALL") return(df)
-  
+
+  if (type == "ALL") {
+    return(df)
+  }
+
   df[df$teamType == type, ]
-  
 }
 
 
@@ -71,11 +72,10 @@ fetch_teams_afl <- function(comp){
 #' @keywords internal
 #' @noRd
 find_team_id <- function(team_abr, comp = "AFLM") {
-  
   check_comp(comp)
-  
+
   df <- fetch_teams_afl(comp)
-  
+
   if (is.null(team_abr)) {
     return(df)
   }
@@ -90,12 +90,13 @@ find_team_id <- function(team_abr, comp = "AFLM") {
 #' @keywords internal
 #' @noRd
 team_check_afl <- function(team) {
-  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams. 
+  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
               You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
-              .frequency = "regularly",
-              .frequency_id = "fpd_depr",
-              id = "fpd_depr")
-  
+    .frequency = "regularly",
+    .frequency_id = "fpd_depr",
+    id = "fpd_depr"
+  )
+
   valid_teams <- c(
     "Adelaide", "Brisbane Lions",
     "Carlton", "Collingwood", "Essendon",
@@ -105,29 +106,26 @@ team_check_afl <- function(team) {
     "Sydney", "West Coast",
     "Western Bulldogs"
   )
-  
+
   valid <- team %in% valid_teams
-  
+
   if (!valid) {
     rlang::abort(glue::glue("{team} is not a valid input for afl teams.
                             Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
   }
-  
-
 }
 
 #' Internal function to return team name abbreviation for AFL API
 #' @param team Team name
 #' @export
 team_abr_afl <- function(team) {
-  
-  
-  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams. 
+  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
               You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
-              .frequency = "regularly",
-              .frequency_id = "fpd_depr",
-              id = "fpd_depr")
-  
+    .frequency = "regularly",
+    .frequency_id = "fpd_depr",
+    id = "fpd_depr"
+  )
+
   # Internal function
   dplyr::case_when(
     team == "Adelaide" ~ "ADEL",
@@ -149,7 +147,6 @@ team_abr_afl <- function(team) {
     team == "West Coast" ~ "WCE",
     TRUE ~ team
   )
-
 }
 
 
@@ -160,9 +157,8 @@ team_abr_afl <- function(team) {
 #' @keywords internal
 #' @noRd
 team_check_afl2 <- function(team, comp = "AFLM") {
-  
   valid_teams <- fetch_teams_afl(comp)
-  
+
 
   valid <- team %in% valid_teams$name
 
@@ -177,12 +173,10 @@ team_check_afl2 <- function(team, comp = "AFLM") {
 #' @param comp Competition
 #' @keywords internal
 #' @export
-team_abr_afl2 <- function(team, comp ="AFLM") {
-  
+team_abr_afl2 <- function(team, comp = "AFLM") {
   teams <- fetch_teams_afl(comp)
-  
+
   teams$abbreviation[teams$name == team]
-  
 }
 
 #' Find Comp ID
@@ -202,8 +196,8 @@ find_comp_id <- function(comp) {
   resp <- httr::GET(api_url)
 
   cont <- parse_resp_afl(resp)
-  
-  cont$competitions <- cont$competitions %>% 
+
+  cont$competitions <- cont$competitions %>%
     dplyr::filter(!stringr::str_detect(.data$name, "Legacy"))
 
   if (comp == "AFLM") comp <- "AFL"
@@ -345,8 +339,8 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
       "x-media-mis-token" = cookie
     )
   )
-  
-  if(httr::status_code(resp) == 404) {
+
+  if (httr::status_code(resp) == 404) {
     cli::cli_alert_warning("No match found for match ID {.val {id}}. Returning NULL")
     return(NULL)
   }
@@ -488,7 +482,9 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
     )
   )
 
-  if (httr::http_error(resp)) return(NULL)
+  if (httr::http_error(resp)) {
+    return(NULL)
+  }
   cont <- parse_resp_afl(resp)
 
   df <- dplyr::as_tibble(cont$squad$players)
@@ -525,11 +521,12 @@ parse_resp_afl <- function(resp) {
     jsonlite::fromJSON(flatten = TRUE)
 
   if (httr::http_error(resp)) {
-    rlang::abort(glue::glue(
-      "GitHub API request failed
+    rlang::abort(
+      glue::glue(
+        "GitHub API request failed
       {httr::status_code(resp)} - {parsed$techMessage}"
-    ),
-    call. = FALSE
+      ),
+      call. = FALSE
     )
   }
   return(parsed)

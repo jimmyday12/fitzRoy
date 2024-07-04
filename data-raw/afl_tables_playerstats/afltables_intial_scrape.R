@@ -73,32 +73,32 @@ afldata_cols <- names(afldata)
 # Function to fix abbreviations
 fix_abbreviations <- function(x) {
   map_chr(x, ~
-  case_when(
-    . == "KI" ~ "Kicks",
-    . == "MK" ~ "Marks",
-    . == "HB" ~ "Handballs",
-    . == "GL" ~ "Goals",
-    . == "BH" ~ "Behinds",
-    . == "HO" ~ "Hit.Outs",
-    . == "TK" ~ "Tackles",
-    . == "RB" ~ "Rebounds",
-    . == "IF" ~ "Inside.50s",
-    . == "CL" ~ "Clearances",
-    . == "CG" ~ "Clangers",
-    . == "FF" ~ "Frees.For",
-    . == "FA" ~ "Frees.Against",
-    . == "BR" ~ "Brownlow.Votes",
-    . == "CP" ~ "Contested.Possessions",
-    . == "UP" ~ "Uncontested.Possessions",
-    . == "CM" ~ "Contested.Marks",
-    . == "MI" ~ "Marks.Inside.50",
-    . == "One.Percenters" ~ "One.Percenters",
-    . == "BO" ~ "Bounces",
-    . == "GA" ~ "Goal.Assists",
-    . == "TOG" ~ "Time.on.Ground..",
-    . == "Jumper" ~ "Jumper.No",
-    TRUE ~ ""
-  ))
+    case_when(
+      . == "KI" ~ "Kicks",
+      . == "MK" ~ "Marks",
+      . == "HB" ~ "Handballs",
+      . == "GL" ~ "Goals",
+      . == "BH" ~ "Behinds",
+      . == "HO" ~ "Hit.Outs",
+      . == "TK" ~ "Tackles",
+      . == "RB" ~ "Rebounds",
+      . == "IF" ~ "Inside.50s",
+      . == "CL" ~ "Clearances",
+      . == "CG" ~ "Clangers",
+      . == "FF" ~ "Frees.For",
+      . == "FA" ~ "Frees.Against",
+      . == "BR" ~ "Brownlow.Votes",
+      . == "CP" ~ "Contested.Possessions",
+      . == "UP" ~ "Uncontested.Possessions",
+      . == "CM" ~ "Contested.Marks",
+      . == "MI" ~ "Marks.Inside.50",
+      . == "One.Percenters" ~ "One.Percenters",
+      . == "BO" ~ "Bounces",
+      . == "GA" ~ "Goal.Assists",
+      . == "TOG" ~ "Time.on.Ground..",
+      . == "Jumper" ~ "Jumper.No",
+      TRUE ~ ""
+    ))
 }
 
 

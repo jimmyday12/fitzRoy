@@ -59,7 +59,6 @@ fetch_ladder <- function(season = NULL,
                          comp = "AFLM",
                          source = "AFL",
                          ...) {
-
   # Do some data checks
   season <- check_season(season)
   check_comp_source(comp, source)
@@ -78,7 +77,6 @@ fetch_ladder <- function(season = NULL,
 #' @rdname fetch_ladder
 #' @export
 fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") {
-
   # check inputs
   season <- check_season(season)
   comp <- check_comp(comp)
@@ -178,8 +176,10 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 #' @export
 fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_results_df = NULL) {
   suppressWarnings(if (is.null(match_results_df)) {
-    match_results_df <- purrr::map_dfr(.x = c(1:round_number),
-                                       .f  = ~fetch_results_afltables(season, .x))
+    match_results_df <- purrr::map_dfr(
+      .x = c(1:round_number),
+      .f = ~ fetch_results_afltables(season, .x)
+    )
   })
 
   # first some cleaning up
@@ -197,7 +197,7 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   home_dat <- match_results_df %>%
     dplyr::select(
       Team = "Home.Team",
-      "Round.Number", "Season","winner", 
+      "Round.Number", "Season", "winner",
       Score = "Home.Points",
       OppScore = "Away.Points"
     ) %>%
@@ -228,12 +228,14 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   # ie in some rounds, there aren't the right amount of teams in each round
   df <- team_view %>%
     dplyr::distinct(.data$Season, .data$Team) %>%
-    dplyr::left_join(team_view %>% dplyr::distinct(.data$Season, .data$Round.Number), 
-      by = "Season", 
-      multiple = "all") %>%
-    dplyr::left_join(team_view, 
-                     by = c("Season", "Round.Number", "Team"), 
-                     multiple = "all") %>%
+    dplyr::left_join(team_view %>% dplyr::distinct(.data$Season, .data$Round.Number),
+      by = "Season",
+      multiple = "all"
+    ) %>%
+    dplyr::left_join(team_view,
+      by = c("Season", "Round.Number", "Team"),
+      multiple = "all"
+    ) %>%
     dplyr::select(-"winner", -"home_or_away")
 
 
@@ -284,12 +286,13 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
 
   # select final columns for output ladder table
   ladder <- ladder %>%
-    dplyr::select("Season", "Team", "Round.Number", 
-                  Season.Points = "season_points", 
-                  Score.For = "score_for", 
-                  Score.Against = "score_against", 
-                  Percentage = "percentage", 
-                  Ladder.Position = "ladder_pos")
+    dplyr::select("Season", "Team", "Round.Number",
+      Season.Points = "season_points",
+      Score.For = "score_for",
+      Score.Against = "score_against",
+      Percentage = "percentage",
+      Ladder.Position = "ladder_pos"
+    )
 
 
   # Allowing for ladder filtering -------------------------------------------
@@ -318,7 +321,6 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
 #' @export
 fetch_ladder_squiggle <- function(season = NULL,
                                   round_number = NULL) {
-
   # check inputs
   season <- check_season(season)
 

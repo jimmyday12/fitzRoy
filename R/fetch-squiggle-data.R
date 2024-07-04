@@ -2,7 +2,7 @@
 #'
 #' Use `fetch_squiggle_data` to access the [Squiggle](https://squiggle.com.au) API. See instructions at [api.squiggle.com.au](https://api.squiggle.com.au).
 #'
-#' Optional arguments can be provided to further restrict the data you are pulling. 
+#' Optional arguments can be provided to further restrict the data you are pulling.
 #'
 #' For full instructions, see [api.squiggle.com.au](https://api.squiggle.com.au)
 #'
@@ -23,43 +23,44 @@
 #' # Get tips from Squiggle 2019
 #' squiggle <- fetch_squiggle_data(query = "tips", source = 1, year = 2019)
 #' }
-fetch_squiggle_data <- function(query, 
-                                 ...,
-                                 user_agent = "fitzRoy Package https://github.com/jimmyday12/fitzRoy") {
-
+fetch_squiggle_data <- function(query,
+                                ...,
+                                user_agent = "fitzRoy Package https://github.com/jimmyday12/fitzRoy") {
   # Extract optional params
-  params <- list(q = query,
-                 ...)
-  
+  params <- list(
+    q = query,
+    ...
+  )
+
   api_url <- "https://api.squiggle.com.au"
-  
-  req <- httr2::request(api_url) |> 
-    httr2::req_url_query(!!!params, 
-                         format = "JSON") |> 
+
+  req <- httr2::request(api_url) |>
+    httr2::req_url_query(!!!params,
+      format = "JSON"
+    ) |>
     httr2::req_user_agent(user_agent)
-  
+
   cli::cli_progress_step("Getting data from {.field {req$url}}")
-  
-  resp <- req |> 
+
+  resp <- req |>
     httr2::req_perform()
-  
-  cont_type <- resp |> 
+
+  cont_type <- resp |>
     httr2::resp_content_type()
-  
-  
-  if(cont_type == "text/html") {
+
+
+  if (cont_type == "text/html") {
     cli::cli_abort(c(
       "API did not return any data",
       "i" = "Did you check that the queries provided are valid?",
       "x" = "You've supplied the following queries: {.val {names(params)}}"
-      
     ))
-  } 
-  
-  resp |> 
-    httr2::resp_body_string() |> 
-    jsonlite::fromJSON(flatten = TRUE) |> 
-    purrr::pluck(1) |> 
+  }
+
+  resp |>
+    httr2::resp_body_string() |>
+    jsonlite::fromJSON(flatten = TRUE) |>
+    purrr::pluck(1) |>
     tibble::as_tibble()
 }
 
@@ -67,8 +68,8 @@ fetch_squiggle_data <- function(query,
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_squiggle_data()` instead
 #'
 #' @examples
@@ -80,25 +81,19 @@ fetch_squiggle_data <- function(query,
 #' }
 #' @keywords internal
 get_squiggle_data <- function(query = c(
-  "teams",
-  "sources",
-  "games",
-  "tips",
-  "ladder",
-  "standings",
-  "virtual",
-  "pav"
-), ...) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_squiggle_data()",
-                            "fetch_squiggle_data()")
+                                "teams",
+                                "sources",
+                                "games",
+                                "tips",
+                                "ladder",
+                                "standings",
+                                "virtual",
+                                "pav"
+                              ), ...) {
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_squiggle_data()",
+    "fetch_squiggle_data()"
+  )
   fetch_squiggle_data(query = query, ...)
 }
-
-
-
-
-
-
-
-

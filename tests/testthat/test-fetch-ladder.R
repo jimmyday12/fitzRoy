@@ -1,4 +1,3 @@
-
 test_that("fetch_ladder_afl works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
@@ -7,7 +6,9 @@ test_that("fetch_ladder_afl works for various inputs", {
 
   # change year
   expect_s3_class(fetch_ladder_afl(2018, 1, comp = "AFLM"), "tbl")
-  fetch_ladder_afl(2000, 1, comp = "AFLM") %>% expect_warning() %>% suppressWarnings()
+  fetch_ladder_afl(2000, 1, comp = "AFLM") %>%
+    expect_warning() %>%
+    suppressWarnings()
 
   # change round number
   lad <- fetch_ladder_afl(2020, round_number = 2)
@@ -82,17 +83,16 @@ test_that("fetch_ladder works", {
 test_that("fetch_ladder works for non-AFL leagues", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # Test each source works
   expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "WAFL"), "tbl")
   expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
   expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
   expect_s3_class(fetch_ladder(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
   expect_s3_class(fetch_ladder(2019, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
-  
+
   # Check for warnings thrown
-  fetch_ladder(2022, round_number = 1, source = "AFL", comp = "U18G") %>% 
+  fetch_ladder(2022, round_number = 1, source = "AFL", comp = "U18G") %>%
     expect_warning() %>%
     suppressWarnings()
-  
 })

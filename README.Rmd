@@ -18,9 +18,9 @@ knitr::opts_chunk$set(
 library(tidyverse)
 
 # Get version and dependancy from description
-version <- as.vector(read.dcf('DESCRIPTION')[, 'Version']) %>%
-                       gsub('-', '.', .)
-dep <- as.vector(read.dcf('DESCRIPTION')[, 'Depends']) %>%
+version <- as.vector(read.dcf("DESCRIPTION")[, "Version"]) %>%
+  gsub("-", ".", .)
+dep <- as.vector(read.dcf("DESCRIPTION")[, "Depends"]) %>%
   stringr::str_extract("\\d+\\.*\\d+\\.*\\d*")
 ```
 
@@ -80,7 +80,6 @@ fetch_fixture(season = 2020, comp = "AFLW")
 fetch_results(season = 2020, comp = "AFLW")
 fetch_ladder(season = 2020, comp = "AFLW")
 get_aflw_match_data()
-
 ```
 
 ### Non-AFL data

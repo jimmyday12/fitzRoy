@@ -1,4 +1,3 @@
-
 test_that("check_season works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()

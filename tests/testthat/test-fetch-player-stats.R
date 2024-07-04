@@ -1,5 +1,7 @@
 # get most recent season
-current_year <- Sys.Date() %>% format("%Y") %>% as.numeric()
+current_year <- Sys.Date() %>%
+  format("%Y") %>%
+  as.numeric()
 x <- fetch_results_afltables(current_year)
 if (nrow(x) == 0) {
   seas <- current_year - 1
@@ -11,7 +13,7 @@ if (nrow(x) == 0) {
 test_that("fetch_player_stats_afltables works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
 
 
   # test normal function
@@ -29,16 +31,15 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   # change round number - doesn't do anything
   dat_round2 <- fetch_player_stats_afltables(season = 2020, round_number = 2)
   expect_equal(dat_round1, dat_round2)
-  
+
   # Test Brownlow using previous season to ensure votes exist
   previous_season <- seas - 1
   previous_data <- fetch_player_stats_afltables(season = previous_season)
   expect_equal(sum(is.na(previous_data$Brownlow.Votes)), 0)
-  
+
   # Test debutants aren't getting ID of 0
   zero_id <- dat %>% dplyr::filter(ID == 0)
   expect_equal(nrow(zero_id), 0)
-  
 })
 
 test_that("fetch_player_stats_footywire works for various inputs", {
@@ -65,8 +66,8 @@ test_that("fetch_player_stats_footywire works for various inputs", {
   gf <- fetch_player_stats_footywire(season = 2020) %>%
     dplyr::filter(Round == "Grand Final")
   expect_equal(nrow(gf), 44)
-  
-  #specific bug on a game with unused sub
+
+  # specific bug on a game with unused sub
   expect_s3_class(fetch_footywire_stats(10808), "tbl")
 })
 
@@ -120,17 +121,16 @@ test_that("fetch_player_stats works", {
 test_that("fetch_player_stats works for non-AFL leagues", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
-  
+
   # Test each source works
   expect_s3_class(fetch_player_stats(2022, round_number = 1, source = "AFL", comp = "WAFL"), "tbl")
   expect_s3_class(fetch_player_stats(2022, round_number = 1, source = "AFL", comp = "VFL"), "tbl")
   expect_s3_class(fetch_player_stats(2022, round_number = 1, source = "AFL", comp = "VFLW"), "tbl")
   expect_s3_class(fetch_player_stats(2022, round_number = 1, source = "AFL", comp = "U18B"), "tbl")
   expect_s3_class(fetch_player_stats(2019, round_number = 1, source = "AFL", comp = "U18G"), "tbl")
-  
+
   # Check for warnings thrown
-  fetch_player_stats(2022, round_number = 1, source = "AFL", comp = "U18G") %>% 
+  fetch_player_stats(2022, round_number = 1, source = "AFL", comp = "U18G") %>%
     expect_warning() %>%
     suppressWarnings()
-
 })

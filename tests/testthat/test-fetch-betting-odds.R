@@ -1,16 +1,15 @@
-
-
 describe("fetch_betting_odds_footywire", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
 
   # Many regression tests require fetching multiple seasons,
   # so it's most efficient to fetch all years with known potential issues
-  full_betting_df <- 
+  full_betting_df <-
     fetch_betting_odds_footywire(
-      start_season = 2010, 
-      end_season = 2020)
-    
+      start_season = 2010,
+      end_season = 2020
+    )
+
 
   it("works with different inputs ", {
     betting_df <- fetch_betting_odds_footywire(2018, 2019)
@@ -24,13 +23,13 @@ describe("fetch_betting_odds_footywire", {
     fetch_betting_odds_footywire(18, 2010) %>%
       expect_warning() %>%
       suppressWarnings()
-    
-    this_year <- as.numeric(lubridate::year(Sys.Date())) 
-    
+
+    this_year <- as.numeric(lubridate::year(Sys.Date()))
+
     fetch_betting_odds_footywire(this_year - 1, this_year + 1) %>%
       expect_warning() %>%
       suppressWarnings()
-    
+
     expect_error(supressWarnings(fetch_betting_odds_footywire("2018-01-01")))
     expect_error(supressWarnings(fetch_betting_odds_footywire(2016, "2018-01-01")))
   })
@@ -107,8 +106,6 @@ describe("fetch_betting_odds_footywire", {
     fetch_betting_odds_footywire(start_season = next_year, end_season = next_year) %>%
       expect_warning() %>%
       suppressWarnings()
-
-    
   })
 })
 

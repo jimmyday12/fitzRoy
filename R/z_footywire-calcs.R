@@ -2,8 +2,8 @@
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_footywire_stats()` instead
 #'
 #' @examples
@@ -15,9 +15,11 @@
 #' }
 #' @keywords internal
 get_footywire_stats <- function(ids) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_footywire_stats()",
-                            "fetch_footywire_stats()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_footywire_stats()",
+    "fetch_footywire_stats()"
+  )
   return(fetch_footywire_stats(ids))
 }
 
@@ -25,8 +27,8 @@ get_footywire_stats <- function(ids) {
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_player_stats_footywire()` instead
 #'
 #' @examples
@@ -38,9 +40,11 @@ get_footywire_stats <- function(ids) {
 #' }
 #' @keywords internal
 update_footywire_stats <- function(check_existing = TRUE) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "update_footywire_stats()",
-                            "fetch_player_stats_footywire()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "update_footywire_stats()",
+    "fetch_player_stats_footywire()"
+  )
   if (!is.logical(check_existing)) rlang::abort("check_existing should be logical")
   season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
   fetch_player_stats_footywire(season = season)
@@ -52,8 +56,8 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_fixture_footywire()` instead
 #'
 #' @examples
@@ -66,9 +70,11 @@ update_footywire_stats <- function(check_existing = TRUE) {
 #' @keywords internal
 get_fixture <- function(season = lubridate::year(Sys.Date()),
                         convert_date = FALSE) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_fixture()",
-                            "fetch_fixture()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_fixture()",
+    "fetch_fixture()"
+  )
   fetch_fixture(
     season = season,
     source = "footywire",
@@ -80,8 +86,8 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_betting_odds_footywire()` instead
 #'
 #' @examples
@@ -94,9 +100,11 @@ get_fixture <- function(season = lubridate::year(Sys.Date()),
 #' @keywords internal
 get_footywire_betting_odds <- function(start_season = "2010",
                                        end_season = lubridate::year(Sys.Date())) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_footywire_betting_odds()",
-                            "fetch_betting_odds_footywire()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_footywire_betting_odds()",
+    "fetch_betting_odds_footywire()"
+  )
   return(
     fetch_betting_odds_footywire(
       start_season = start_season,

@@ -56,12 +56,11 @@ fetch_results <- function(season = NULL,
                           comp = "AFLM",
                           source = "AFL",
                           ...) {
-
   # Do some data checks
   season <- check_season(season)
   check_comp_source(comp, source)
-  
-  if(!source %in% c("AFL", "afltables", "squiggle", "footywire")) {
+
+  if (!source %in% c("AFL", "afltables", "squiggle", "footywire")) {
     rlang::warn(glue::glue("The source \"{source}\" does not have Results data. Please use one of \"AFL\", \"afltables\", \"footywire\" or \"squiggle\""))
     return(NULL)
   }
@@ -73,7 +72,7 @@ fetch_results <- function(season = NULL,
     "squiggle" = fetch_results_squiggle(season, round_number),
     NULL
   )
-  
+
   return(dat)
 }
 
@@ -88,7 +87,7 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
     rlang::warn(glue::glue("No results data found for season {season} on AFL.com.au for {comp}"))
     return(NULL)
   }
-  
+
   round_ids <- season_id %>%
     purrr::map(~ find_round_id(round_number,
       season_id = .x,
@@ -233,15 +232,15 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
 
   ids <- fetch_footywire_match_ids(season)
   n_ids <- length(ids)
-  
+
   if (is.null(last_n_matches)) {
     last_n_matches <- n_ids
   }
-  
+
   if (last_n_matches > n_ids) {
     last_n_matches <- n_ids
   }
-  
+
   ids <- ids[(n_ids - last_n_matches + 1):n_ids]
 
   if (length(ids) == 0) {
@@ -250,7 +249,7 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
   # get data for ids
 
   dat <- ids %>%
-    purrr::map_dfr(~extract_match_data(.x)) 
+    purrr::map_dfr(~ extract_match_data(.x))
 
 
   return(dat)
@@ -260,7 +259,6 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
 #' @rdname fetch_results
 #' @export
 fetch_results_squiggle <- function(season = NULL, round_number = NULL) {
-
   # check inputs
   season <- check_season(season)
 

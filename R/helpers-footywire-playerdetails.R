@@ -1,4 +1,3 @@
-
 #' Get player details from footwire
 #'
 #' Returns past players

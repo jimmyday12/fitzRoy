@@ -2,8 +2,8 @@
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_results_footywire()` instead
 #'
 #' @examples
@@ -15,9 +15,11 @@
 #' }
 #' @keywords internal
 get_footywire_match_results <- function(season, last_n_matches = NULL) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_footywire_match_results()",
-                            "fetch_results_footywire()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_footywire_match_results()",
+    "fetch_results_footywire()"
+  )
   fetch_results_footywire(
     season = season,
     last_n_matches = last_n_matches
@@ -28,8 +30,8 @@ get_footywire_match_results <- function(season, last_n_matches = NULL) {
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_footywire_match_ids()` instead
 #'
 #' @examples
@@ -41,8 +43,10 @@ get_footywire_match_results <- function(season, last_n_matches = NULL) {
 #' }
 #' @keywords internal
 get_footywire_match_ids <- function(season) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "get_footywire_match_ids()",
-                            "fetch_footywire_match_ids()")
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "get_footywire_match_ids()",
+    "fetch_footywire_match_ids()"
+  )
   fetch_footywire_match_ids(season = season)
 }

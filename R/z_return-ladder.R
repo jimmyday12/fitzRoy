@@ -2,8 +2,8 @@
 #'
 #' @description
 #' `r lifecycle::badge("deprecated")`
-#' 
-#' All `get_` functions were replaced with `fetch_*` functions. 
+#'
+#' All `get_` functions were replaced with `fetch_*` functions.
 #' Please use `fetch_ladder()` instead
 #'
 #' @examples
@@ -15,14 +15,16 @@
 #' }
 #' @keywords internal
 return_ladder <- function(match_results_df = NA, season_round = NA, season = NA) {
-  lifecycle::deprecate_warn("1.0.0",
-                            "return_ladder()",
-                            "fetch_ladder_afltables()")
-  
+  lifecycle::deprecate_warn(
+    "1.0.0",
+    "return_ladder()",
+    "fetch_ladder_afltables()"
+  )
+
   if (is.na(season_round)) season_round <- NULL
   if (is.na(season)) season <- NULL
   if (is.na(match_results_df)) match_results_df <- NULL
-  
+
   return(fetch_ladder(
     season = season,
     round_number = season_round,

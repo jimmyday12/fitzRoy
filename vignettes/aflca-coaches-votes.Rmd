@@ -8,16 +8,16 @@ vignette: >
 ---
 
 ```{r setup, include = FALSE}
-not_cran = identical(Sys.getenv("NOT_CRAN"), "true")
+not_cran <- identical(Sys.getenv("NOT_CRAN"), "true")
 online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
 eval_param <- not_cran & online
 
 knitr::opts_chunk$set(
-	eval = eval_param,
-	message = FALSE,
-	warning = FALSE,
-	collapse = TRUE,
-	comment = "#>"
+  eval = eval_param,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>"
 )
 
 library(fitzRoy)
@@ -64,7 +64,7 @@ fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM")
 ```
 ```{r fetch_coaches_votes2_aflm_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflm_coaches_votes %>%
-  dplyr::filter(Round == 24) %>% 
+  dplyr::filter(Round == 24) %>%
   head()
 ```
 
@@ -73,7 +73,7 @@ fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW")
 ```
 ```{r fetch_coaches_votes2_aflw_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflw_coaches_votes %>%
-  dplyr::filter(Round == 9) %>% 
+  dplyr::filter(Round == 9) %>%
   head()
 ```
 
@@ -84,7 +84,7 @@ fetch_coaches_votes(season = 2021, comp = "AFLM", team = "Western Bulldogs")
 ```
 ```{r fetch_coaches_votes3_aflm_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflm_coaches_votes %>%
-  dplyr::filter(Home.Team == "Western Bulldogs" | Away.Team == "Western Bulldogs") %>% 
+  dplyr::filter(Home.Team == "Western Bulldogs" | Away.Team == "Western Bulldogs") %>%
   head()
 ```
 
@@ -93,7 +93,7 @@ fetch_coaches_votes(season = 2021, comp = "AFLW", team = "Western Bulldogs")
 ```
 ```{r fetch_coaches_votes3_aflw_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflw_coaches_votes %>%
-  dplyr::filter(Home.Team=="Western Bulldogs" | Away.Team == "Western Bulldogs") %>% 
+  dplyr::filter(Home.Team == "Western Bulldogs" | Away.Team == "Western Bulldogs") %>%
   head()
 ```
 
@@ -104,7 +104,7 @@ fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Wes
 ```
 ```{r fetch_coaches_votes4_aflm_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflm_coaches_votes %>%
-  dplyr::filter(Home.Team=="Western Bulldogs" & Round == 24) %>% 
+  dplyr::filter(Home.Team == "Western Bulldogs" & Round == 24) %>%
   head()
 ```
 
@@ -113,7 +113,7 @@ fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "West
 ```
 ```{r fetch_coaches_votes4_aflw_included, echo=FALSE, eval=eval_param}
 fitzRoy:::aflw_coaches_votes %>%
-  dplyr::filter(Home.Team=="Western Bulldogs" & Round == 9) %>% 
+  dplyr::filter(Home.Team == "Western Bulldogs" & Round == 9) %>%
   head()
 ```
 
@@ -141,8 +141,8 @@ The following code will create a data frame manually, then find the possible coa
 
 ```{r calculate_coaches_votes2, eval=eval_param, include=TRUE}
 df <- data.frame(
-                Player.Name = c("Tom Liberatore","Jack Macrae","Marcus Bontempelli","Cody Weightman","Darcy Parish","Aaron Naughton","Jordan Ridley"),
-                Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)
+  Player.Name = c("Tom Liberatore", "Jack Macrae", "Marcus Bontempelli", "Cody Weightman", "Darcy Parish", "Aaron Naughton", "Jordan Ridley"),
+  Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)
 )
 calculate_coaches_vote_possibilities(df, "Player View")
 ```

@@ -1,4 +1,3 @@
-
 #' Scrape Coaches Votes
 #'
 #' Scrapes the AFLCA website for coaches votes for a particular season, round and competition.
@@ -15,7 +14,6 @@ scrape_coaches_votes <- function(season = NULL,
                                  round_number = NULL,
                                  comp = "AFLM",
                                  finals) {
-
   # error checking
   check_comp(comp)
   if (is.null(round_number)) round_number <- 1
@@ -40,7 +38,7 @@ scrape_coaches_votes <- function(season = NULL,
   # read the link
   html <- rvest::read_html(link)
 
-  #closeAllConnections()
+  # closeAllConnections()
 
   # extract each piece of information from the link
   home.teams <- rvest::html_elements(html, ".pr-md-3.votes-by-match .club_logo") %>%

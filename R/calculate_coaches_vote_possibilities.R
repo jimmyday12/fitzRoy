@@ -37,7 +37,6 @@
 #' @importFrom magrittr %>%
 #' @importFrom rlang .data
 calculate_coaches_vote_possibilities <- function(df, output_type) {
-
   # error catching
   if (!output_type %in% c("Coach View", "Player View")) stop("Invalid Output Type")
   if (sum(names(df) %in% c("Player.Name", "Coaches.Votes")) != 2) stop("Input df has the wrong column names")
@@ -58,7 +57,6 @@ calculate_coaches_vote_possibilities <- function(df, output_type) {
   # loop through each player and try differing combinations
   loop <- split(df, 1:nrow(df)) %>%
     lapply(function(row) {
-
       # assign variables
       cv <- row$Coaches.Votes %>% as.numeric()
       nm <- row$Player.Name
@@ -70,10 +68,8 @@ calculate_coaches_vote_possibilities <- function(df, output_type) {
 
       # loop through current eligible options
       for (opt in master_votes) {
-
         # loop through possible vote combinations for that player
         for (n in seq(min_cv, max_cv)) {
-
           # if that combination is blocked out for this eligible option, skip to the next option
           if (n == 0) {
             if (!is.na(dplyr::filter(opt, .data$Votes == cv - n)$C2)) next
@@ -105,13 +101,11 @@ calculate_coaches_vote_possibilities <- function(df, output_type) {
   # loop through outcomes
   if (length(final_outcomes) > 1) {
     for (i in 1:(length(final_outcomes) - 1)) {
-
       # skip if not possible
       if (i >= length(final_outcomes)) next
 
       # loop through pairing outcomes
       for (j in (i + 1):length(final_outcomes)) {
-
         # skip if not possible
         if (j > length(final_outcomes)) next
 
