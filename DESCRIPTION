@@ -35,7 +35,7 @@ License: MIT + file LICENSE
 URL: https://jimmyday12.github.io/fitzRoy/, https://github.com/jimmyday12/fitzRoy 
 BugReports: https://github.com/jimmyday12/fitzRoy/issues
 Depends:
-    R (>= 3.5)
+    R (>= 4.1)
 Imports:
     dplyr,
     httr,
