@@ -159,7 +159,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
     get(ls()[ls() != "fname"])
   }
 
-  cli::cli_progress_step("fetching cached data from {.url github.com}")
+  cli::cli_progress_step("fetching cached data from {.url github.com/jimmyday12/fitzRoy_data}")
   dat <- load_r_data(dat_url)
 
 
@@ -177,7 +177,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
     if (length(urls) != 0) {
-      cli::cli_alert_info("New data found for {.val {length(urls)}} matches")
+      cli::cli_progress_step("Fetching new data from {.val {length(urls)}} matches")
       dat_new <- scrape_afltables_match(urls)
 
       dat <- list(dat, dat_new) %>%
@@ -187,9 +187,10 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
         dplyr::bind_rows(.)
     }
   } else {
-    cli::cli_alert_info("No new data found - returning cached data")
+    cli::cli_progress_step("No new data found - returning cached data")
   }
-  message("Finished getting afltables data")
+  
+  cli::cli_progress_step("Tidying data")
   # Fix for players who's spelling changes on afltables.com
   dat <- dat %>%
     dplyr::group_by(.data$ID) %>%
