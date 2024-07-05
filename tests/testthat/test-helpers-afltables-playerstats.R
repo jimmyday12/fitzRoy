@@ -4,8 +4,10 @@ test_that("scape_afltables_ works", {
 
   url_new <- "https://afltables.com/afl/stats/games/2018/030820180812.html"
   url_old <- "https://afltables.com/afl/stats/games/1897/030618970508.html"
+  url_extra_time <- "https://afltables.com/afl/stats/games/2007/041820070914.html"
   expect_type(scrape_afltables_match(url_new), "list")
   expect_type(scrape_afltables_match(url_old), "list")
+  expect_type(scrape_afltables_match(url_extra_time), "list")
   expect_error(scrape_afltables_match())
   expect_error(scrape_afltables_match(1))
   expect_error(scrape_afltables_match("a"))
