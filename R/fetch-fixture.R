@@ -172,12 +172,12 @@ Check the following url on footywire
       IsRound = !is.na(.data$Round),
       IsHeader = .data$X1 == "Date"
     ) |>
-    tidyr::fill(.data$Round, .direction = "down") |>
+    tidyr::fill("Round", .direction = "down") |>
     dplyr::mutate(Round = ifelse(.data$IsHeader, NA, .data$Round)) # Remove round from header rows
 
   header_names <- df |>
     dplyr::filter(.data$IsHeader) |>
-    dplyr::select(-.data$IsHeader, -.data$Round, -.data$IsRound) |>
+    dplyr::select(-"IsHeader", -"Round", -"IsRound") |>
     dplyr::slice_head(n = 1) |>
     as.character() |>
     c("Round.Name")
@@ -186,7 +186,7 @@ Check the following url on footywire
   df <- df |>
     dplyr::filter(!.data$IsRound) |>
     dplyr::filter(!.data$IsHeader) |>
-    dplyr::select(-.data$IsRound, -.data$IsHeader) |>
+    dplyr::select(-"IsRound", -"IsHeader") |>
     dplyr::filter(.data$X1 != "")
 
   # Add header names

@@ -230,11 +230,13 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
     dplyr::distinct(.data$Season, .data$Team) %>%
     dplyr::left_join(team_view %>% dplyr::distinct(.data$Season, .data$Round.Number),
       by = "Season",
-      multiple = "all"
+      multiple = "all",
+      relationship = "many-to-many"
     ) %>%
     dplyr::left_join(team_view,
       by = c("Season", "Round.Number", "Team"),
-      multiple = "all"
+      multiple = "all",
+      relationship = "many-to-many"
     ) %>%
     dplyr::select(-"winner", -"home_or_away")
 

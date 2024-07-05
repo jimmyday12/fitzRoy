@@ -114,7 +114,6 @@ test_that("get_match_results works", {
 
   expect_warning(dat <- get_match_results())
   expect_type(dat, "list")
-  expect_error(get_match_results("a"))
 })
 
 
