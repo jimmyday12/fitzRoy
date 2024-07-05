@@ -70,7 +70,7 @@ fetch_ladder <- function(season = NULL,
     NULL
   )
 
-  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Ladder data. Please use one of \"AFL\", \"afltables\", or \"squiggle\""))
+  if (is.null(dat)) cli::cli_warn("The source \"{source}\" does not have Ladder data. Please use one of \"AFL\", \"afltables\", or \"squiggle\"")
   return(dat)
 }
 
@@ -83,19 +83,19 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   # if (is.null(round_number)) round_number <- ""
 
   if (length(season) > 1) {
-    rlang::inform("Multiple seasons specified, ignoring round_number")
+    cli::cli_inform("Multiple seasons specified, ignoring round_number")
     round_number <- NULL
   }
   # fetch ids
   season_id <- find_season_id(season, comp)
 
   if (is.null(season_id)) {
-    rlang::warn(glue::glue("No ladder data found for season {season} on AFL.com.au for {comp}"))
+    cli::cli_warn("No ladder data found for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 
   if (is.null(round_number)) {
-    rlang::inform("No round number specified, trying to return most recent ladder for specified season")
+    cli::cli_inform("No round number specified, trying to return most recent ladder for specified season")
     round_id <- ""
   } else {
     round_id <- find_round_id(round_number,
@@ -124,7 +124,7 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
     purrr::map_dbl(purrr::pluck, "status_code")
 
   if (any(status_codes == 404) | any(status_codes == 400)) {
-    rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au/ladder\"?"))
+    cli::cli_abort("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afl.com.au/ladder\"?")
   }
 
   cont <- resp %>%
@@ -309,7 +309,7 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   })
 
   if (nrow(ladder) == 0) {
-    rlang::abort(glue::glue("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afltables.com\"?"))
+    cli::cli_abort("No data found for specified round number and season. Does round number \"{round_number}\" exist for Season \"{season}\" on \"www.afltables.com\"?")
   }
 
   return(ladder)
@@ -325,14 +325,17 @@ fetch_ladder_squiggle <- function(season = NULL,
   season <- check_season(season)
 
   if (is.null(round_number)) {
-    cli::cli_alert_info(
-      "No round specified - returning results for all rounds in {.val {season}}"
+    cli::cli_progress_step(
+      "No round specified - returning most recent ladder in season {.val {season}}"
     )
     dat <- fetch_squiggle_data(
       query = "standings",
       year = season
     )
   } else {
+    cli::cli_progress_step(
+      "Returning ladder as of round {.val {round_number}} in season {.val {season}}"
+    )
     dat <- fetch_squiggle_data(
       query = "standings",
       year = season,

@@ -61,7 +61,7 @@ fetch_results <- function(season = NULL,
   check_comp_source(comp, source)
 
   if (!source %in% c("AFL", "afltables", "squiggle", "footywire")) {
-    rlang::warn(glue::glue("The source \"{source}\" does not have Results data. Please use one of \"AFL\", \"afltables\", \"footywire\" or \"squiggle\""))
+    cli::cli_warn("The source \"{source}\" does not have Results data. Please use one of \"AFL\", \"afltables\", \"footywire\" or \"squiggle\"")
     return(NULL)
   }
 
@@ -84,7 +84,7 @@ fetch_results_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   season_id <- find_season_id(season, comp)
 
   if (is.null(season_id)) {
-    rlang::warn(glue::glue("No results data found for season {season} on AFL.com.au for {comp}"))
+    cli::cli_warn("No results data found for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 
@@ -223,8 +223,7 @@ fetch_results_footywire <- function(season = NULL, round_number = NULL, last_n_m
   season <- check_season(season)
 
   if (season < 1965) {
-    rlang::abort(glue::glue("Season must be greater than 1965.
-                 You provided \"{season}\""))
+    cli::cli_abort("Season must be greater than 1965.You provided \"{season}\"")
   }
 
   cli::cli_progress_step("Downloading {last_n_matches} match{?es} from Footywire")
@@ -263,15 +262,14 @@ fetch_results_squiggle <- function(season = NULL, round_number = NULL) {
   season <- check_season(season)
 
   if (is.null(round_number)) {
-    cli::cli_alert_info("No round specified - returning results for all rounds in {.val {season}}")
-    # rlang::inform(
-    #  glue::glue("No round specified - returning all rounds in {season}"))
+    cli::cli_progress_step("No round specified - returning results for all rounds in season {.val {season}}")
     dat <- fetch_squiggle_data(
       query = "games",
       year = season,
       complete = 100
     )
   } else {
+    cli::cli_progress_step("Returning results for round {.val {round_number}} in season {.val {season}}")
     dat <- fetch_squiggle_data(
       query = "games",
       year = season,

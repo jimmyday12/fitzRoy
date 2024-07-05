@@ -18,8 +18,8 @@ team_check_afltables <- function(team) {
   valid <- team %in% valid_teams
 
   if (!valid) {
-    rlang::abort(glue::glue("{team} is not a valid input for afltables teams.
-                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
+    cli::cli_abort("{team} is not a valid input for afltables teams.
+                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} ")
   }
 
   valid

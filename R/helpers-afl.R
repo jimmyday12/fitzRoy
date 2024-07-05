@@ -90,7 +90,7 @@ find_team_id <- function(team_abr, comp = "AFLM") {
 #' @keywords internal
 #' @noRd
 team_check_afl <- function(team) {
-  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
+  cli::cli_warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
               You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
     .frequency = "regularly",
     .frequency_id = "fpd_depr",
@@ -110,8 +110,8 @@ team_check_afl <- function(team) {
   valid <- team %in% valid_teams
 
   if (!valid) {
-    rlang::abort(glue::glue("{team} is not a valid input for afl teams.
-                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} "))
+    cli::cli_abort("{team} is not a valid input for afl teams.
+                            Should be one of {glue::glue_collapse(valid_teams, sep = \", \")} ")
   }
 }
 
@@ -119,7 +119,7 @@ team_check_afl <- function(team) {
 #' @param team Team name
 #' @export
 team_abr_afl <- function(team) {
-  rlang::warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
+  cli::cli_warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
               You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
     .frequency = "regularly",
     .frequency_id = "fpd_depr",
@@ -163,8 +163,8 @@ team_check_afl2 <- function(team, comp = "AFLM") {
   valid <- team %in% valid_teams$name
 
   if (!valid) {
-    rlang::abort(glue::glue("\"{team}\" is not a valid input for afl teams for the \"{comp}\" comp.
-                            Run `fetch_teams_afl(\"{comp}\")` to see a list of valid teams"))
+    cli::cli_abort("\"{team}\" is not a valid input for afl teams for the \"{comp}\" comp.
+                            Run `fetch_teams_afl(\"{comp}\")` to see a list of valid teams")
   }
 }
 
@@ -255,7 +255,7 @@ find_season_id <- function(season, comp = "AFLM") {
   id <- id[!is.na(id)]
 
   if (length(id) < 1) {
-    rlang::warn(glue::glue("Could not find a matching ID to the {comp} for {season}"))
+    cli::cli_warn("Could not find a matching ID to the {comp} for {season}")
     return(NULL)
   }
   return(id)
@@ -313,7 +313,7 @@ find_round_id <- function(round_number, season = NULL,
 
 
   if (length(id) < 1) {
-    rlang::warn(glue::glue("No data found for specified round number and season"))
+    cli::cli_warn("No data found for specified round number and season")
     return(NULL)
   }
   return(id)
@@ -341,7 +341,7 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
   )
 
   if (httr::status_code(resp) == 404) {
-    cli::cli_alert_warning("No match found for match ID {.val {id}}. Returning NULL")
+    cli::cli_warn("No match found for match ID {.val {id}}. Returning NULL")
     return(NULL)
   }
   cont <- parse_resp_afl(resp)
@@ -513,7 +513,7 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
 #' @noRd
 parse_resp_afl <- function(resp) {
   if (httr::http_type(resp) != "application/json") {
-    rlang::abort("API did not return json", call. = FALSE)
+    cli::cli_abort("API did not return json")
   }
 
   parsed <- resp %>%
@@ -521,13 +521,10 @@ parse_resp_afl <- function(resp) {
     jsonlite::fromJSON(flatten = TRUE)
 
   if (httr::http_error(resp)) {
-    rlang::abort(
-      glue::glue(
+    cli::cli_abort(
         "GitHub API request failed
-      {httr::status_code(resp)} - {parsed$techMessage}"
-      ),
-      call. = FALSE
-    )
+        {httr::status_code(resp)} - {parsed$techMessage}"
+        )
   }
   return(parsed)
 }

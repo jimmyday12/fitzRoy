@@ -50,7 +50,7 @@ fetch_lineup <- function(season = NULL,
     NULL
   )
 
-  if (is.null(dat)) rlang::warn(glue::glue("The source \"{source}\" does not have Lineup data. Please use \"AFL\""))
+  if (is.null(dat)) cli::cli_warn("The source \"{source}\" does not have Lineup data. Please use \"AFL\"")
   return(dat)
 }
 
@@ -66,12 +66,12 @@ fetch_lineup_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
 
   if (is.null(matches)) {
-    rlang::warn(glue::glue("No matches data for season {season} on AFL.com.au for {comp}"))
+    cli::cli_warn("No matches data for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 
   if (nrow(matches) == 0) {
-    rlang::warn(glue::glue("No matches data for season {season} on AFL.com.au for {comp}"))
+    cli::cli_warn("No matches data for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 

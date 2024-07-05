@@ -236,7 +236,7 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
   season_range <- season_range[season_range %in% valid_seasons]
 
   if (length(season_range) < 1) {
-    rlang::warn("No valid seasons found")
+    cli::cli_warn("No valid seasons found")
     return(NA)
   }
 

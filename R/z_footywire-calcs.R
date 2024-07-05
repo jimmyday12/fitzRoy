@@ -45,7 +45,7 @@ update_footywire_stats <- function(check_existing = TRUE) {
     "update_footywire_stats()",
     "fetch_player_stats_footywire()"
   )
-  if (!is.logical(check_existing)) rlang::abort("check_existing should be logical")
+  if (!is.logical(check_existing)) cli::cli_abort("check_existing should be logical")
   season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
   fetch_player_stats_footywire(season = season)
 }

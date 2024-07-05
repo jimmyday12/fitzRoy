@@ -57,8 +57,8 @@ fetch_player_stats <- function(season = NULL,
   )
 
   if (is.null(dat)) {
-    rlang::warn(glue::glue("The source \"{source}\" does not have Player Stats.
-                           Please use one of \"AFL\" \"footywire\", \"afltables\" or \"fryzigg\""))
+    cli::cli_warn("The source \"{source}\" does not have Player Stats.
+                           Please use one of \"AFL\" \"footywire\", \"afltables\" or \"fryzigg\"")
   }
   return(dat)
 }
@@ -75,14 +75,14 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
   matches <- suppressMessages(fetch_fixture_afl(season, round_number, comp))
 
   if (is.null(matches)) {
-    rlang::warn(glue::glue("No player stats data found for season {season} on AFL.com.au for {comp}"))
+    cli::cli_warn("No player stats data found for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 
 
   ids <- matches$providerId
   if (length(ids) == 0) {
-    rlang::warn(glue::glue("No player stats data found for season {season} on AFL.com.au for {comp}"))
+    cli::cli_warn("No player stats data found for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 
@@ -97,7 +97,7 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
     ))
 
   if (nrow(match_stats) == 0) {
-    cli::cli_alert_info("No completed matches found")
+    cli::cli_inform("No completed matches found")
     return(NULL)
   }
 
@@ -140,14 +140,14 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
 #' @export
 fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, rescrape = FALSE, rescrape_start_season = NULL) {
   if (!is.null(round_number)) {
-    cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_afltables}.Returning data for all rounds in specified seasons")
+    cli::cli_inform("{.field round_number} is not currently used for {.code fetch_player_stats_afltables}.Returning data for all rounds in specified seasons")
   }
 
   dates <- return_start_end_dates(season)
   start_date <- dates$start_date
   end_date <- dates$end_date
 
-  cli::cli_alert_info("Looking for data from {.val {start_date}} to {.val {end_date}}")
+  cli::cli_progress_step("Looking for data from {.val {start_date}} to {.val {end_date}}")
 
 
   # nolint start
@@ -159,10 +159,8 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
     get(ls()[ls() != "fname"])
   }
 
-  cli::cli_progress_step("fetching cached data from {.url github.com/jimmyday12/fitzRoy_data}")
+  cli::cli_progress_step("Fetching cached data from {.url github.com/jimmyday12/fitzRoy_data}")
   dat <- load_r_data(dat_url)
-
-
 
   if (rescrape) {
     if (is.null(rescrape_start_season)) rescrape_start_season <- format(start_date, "%Y")
@@ -174,21 +172,33 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   dat <- dat %>%
     dplyr::filter(.data$Date <= max_date)
 
+  # Check for new data
   if (end_date > max_date) {
     urls <- get_afltables_urls(max_date, end_date)
     if (length(urls) != 0) {
-      cli::cli_progress_step("Fetching new data from {.val {length(urls)}} matches")
-      dat_new <- scrape_afltables_match(urls)
-
-      dat <- list(dat, dat_new) %>%
-        # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
-        # so we need to make them consistent before joining to avoid type errors
-        purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
-        dplyr::bind_rows(.)
+      new_data <- TRUE
+    } else {
+      new_data <- FALSE
     }
   } else {
-    cli::cli_progress_step("No new data found - returning cached data")
+    new_data <- FALSE
   }
+  
+
+  
+  if (new_data) {
+    cli::cli_progress_step("New data found! Fetching new data from {.val {length(urls)}} matches")
+    dat_new <- scrape_afltables_match(urls)
+    
+    dat <- list(dat, dat_new) %>%
+      # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
+      # so we need to make them consistent before joining to avoid type errors
+      purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
+      dplyr::bind_rows(.)
+    } else {
+  cli::cli_progress_step("No new data found! Returning cached data")
+    }
+
   
   cli::cli_progress_step("Tidying data")
   # Fix for players who's spelling changes on afltables.com
@@ -220,7 +230,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
 #' @export
 fetch_player_stats_fryzigg <- function(season = NULL, round_number = NULL, comp = "AFLM") {
   if (!is.null(round_number)) {
-    cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_fryzigg}.Returning data for all rounds in specified seasons")
+    cli::cli_inform("{.field round_number} is not currently used for {.code fetch_player_stats_fryzigg}.Returning data for all rounds in specified seasons")
   }
 
   if (is.null(season)) {
@@ -268,7 +278,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
   }
 
   if (!is.null(round_number)) {
-    cli::cli_alert_info("{.field round_number} is not currently used for {.code fetch_player_stats_footywire}.Returning data for all rounds in specified seasons")
+    cli::cli_inform("{.field round_number} is not currently used for {.code fetch_player_stats_footywire}.Returning data for all rounds in specified seasons")
   }
 
   if (is.null(season)) season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
@@ -291,7 +301,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 
   # First, load data from github
   if (check_existing) {
-    url <- "https://github.com/jimmyday12/fitzRoy"
+    url <- "https://github.com/jimmyday12/fitzRoy_data"
     cli::cli_progress_step("Checking data on {.url {url}}")
 
     dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/main/data-raw/player_stats/player_stats.rda" # nolint
@@ -315,7 +325,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 
 
     if (length(git_ids) == 0) {
-      cli::cli_alert_info("No new matches found - returning data cached on github")
+      cli::cli_inform("No new matches found - returning data cached on github")
 
       return(tibble::as_tibble(dat_git))
     } else {
