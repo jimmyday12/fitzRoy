@@ -162,8 +162,10 @@ scrape_afltables_match <- function(match_urls) {
 
   # Check if extra time happened
   games_extra_time <- games_cleaned |> 
-    dplyr::select(Surname, First.name, Playing.for, Date, HQET, AQET) |> 
-    dplyr::filter(HQET != "→")
+    dplyr::select("Surname", "First.name", "Playing.for", "Date", "HQET", "AQET") |> 
+    dplyr::filter(
+      stringr::str_detect("HQET", "[^[:ascii:]]")
+      )
   
   # Update score columns based on it ET happened
   if(nrow(games_extra_time > 0)) {
@@ -182,7 +184,7 @@ scrape_afltables_match <- function(match_urls) {
   # Add ET columns for when it didn't happen
   
   games_scores <- games_cleaned |> 
-    tidyr::separate_wider_delim(cols = all_of(score_cols),
+    tidyr::separate_wider_delim(cols = dplyr::all_of(score_cols),
                                 delim = ".", 
                                 names = c("G", "B", "P"), 
                                 names_sep = "") 
