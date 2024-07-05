@@ -177,7 +177,7 @@ Check the following url on footywire
 
   header_names <- df |>
     dplyr::filter(.data$IsHeader) |>
-    dplyr::select(-.data$IsHeader, -.data$Round, -.data$IsRound) |>
+    dplyr::select(-IsHeader, -Round, -IsRound) |>
     dplyr::slice_head(n = 1) |>
     as.character() |>
     c("Round.Name")

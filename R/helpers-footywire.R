@@ -93,6 +93,7 @@ footywire_html <- function(x, id) {
     rvest::html_text()
 
   # Now get the table data. The Home Team is in the 13th table
+  
   home_stats <- x %>%
     rvest::html_nodes("table") %>%
     .[[13]] %>%
@@ -102,13 +103,12 @@ footywire_html <- function(x, id) {
       Opposition = away_team,
       Status = "Home"
     ) %>%
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::where(is.character),
+        ~ dplyr::na_if(.x, "Unused Substitute"))) %>%
     dplyr::mutate(dplyr::across(
-      c(
-        -"Player",
-        -"Team",
-        -"Opposition",
-        -"Status"
-      ),
+      c(-"Player",-"Team", -"Opposition",-"Status"),
       as.numeric
     ))
 
@@ -122,13 +122,12 @@ footywire_html <- function(x, id) {
       Opposition = home_team,
       Status = "Away"
     ) %>%
+    dplyr::mutate(
+      dplyr::across(
+        dplyr::where(is.character),
+        ~ dplyr::na_if(.x, "Unused Substitute"))) %>%
     dplyr::mutate(dplyr::across(
-      c(
-        -"Player",
-        -"Team",
-        -"Opposition",
-        -"Status"
-      ),
+      c(-"Player",-"Team", -"Opposition",-"Status"),
       as.numeric
     ))
 
