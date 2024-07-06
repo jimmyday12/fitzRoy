@@ -156,7 +156,14 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::mutate_at(
       dplyr::vars(dplyr::starts_with("Umpire")),
       stringr::str_replace, " \\(.*\\)", ""
-    )
+    ) %>%
+    dplyr::mutate(
+      Substitute = dplyr::case_when(
+        stringr::str_detect(.data$Jumper.No., "\u2191") ~ "On",
+        stringr::str_detect(.data$Jumper.No., "\u2193") ~ "Off",
+        TRUE ~ NA_character_),
+      Jumper.No. = stringr::str_remove_all(.data$Jumper.No., "[\u2191\u2193]") %>% as.integer()
+      )
 
  
 
@@ -230,7 +237,10 @@ scrape_afltables_match <- function(match_urls) {
   #   dplyr::select(dplyr::one_of(afldata_cols))
 
   df <- df %>%
-    dplyr::mutate_if(is.numeric, ~ ifelse(is.na(.), 0, .)) %>%
+    dplyr::mutate(dplyr::across(
+      dplyr::where(is.numeric) & !dplyr::any_of(c("HQETG", "HQETB", "HQETP", "AQETG", "AQETB", "AQETP")),
+      ~ ifelse(is.na(.), 0, .)
+    )) %>%
     dplyr::mutate(Round = as.character(.data$Round))
 
 

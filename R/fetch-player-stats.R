@@ -146,6 +146,12 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   dates <- return_start_end_dates(season)
   start_date <- dates$start_date
   end_date <- dates$end_date
+  
+  if (start_date > end_date) {
+    stop(cli::format_error(c(
+      "Cannot fetch player stats for {season} season"
+    )))
+  }
 
   cli::cli_progress_step("Looking for data from {.val {start_date}} to {.val {end_date}}")
 
@@ -170,7 +176,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   }
 
   dat <- dat %>%
-    dplyr::filter(.data$Date <= max_date)
+    dplyr::filter(.data$Date > start_date & .data$Date < max_date)
 
   # Check for new data
   if (end_date > max_date) {
@@ -193,7 +199,8 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
     dat <- list(dat, dat_new) %>%
       # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
       # so we need to make them consistent before joining to avoid type errors
-      purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
+      purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.integer)) %>%
+      purrr::map(~ dplyr::mutate_at(., c("Substitute"), as.character)) %>%
       dplyr::bind_rows(.)
     } else {
   cli::cli_progress_step("No new data found! Returning cached data")
@@ -201,13 +208,6 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
 
   
   cli::cli_progress_step("Tidying data")
-  # Fix for players who's spelling changes on afltables.com
-  dat <- dat %>%
-    dplyr::group_by(.data$ID) %>%
-    dplyr::mutate(
-      First.name = dplyr::first(.data$First.name),
-      Surname = dplyr::first(.data$Surname)
-    )
 
   # fix for finals names being incorrect
   dat$Round[dat$Round == "Grand Final"] <- "GF"
@@ -220,9 +220,8 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   dat <- dat %>%
     dplyr::mutate(Venue = stringr::str_squish(.data$Venue))
 
-  # return data
-  dat <- dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date) %>%
-    dplyr::ungroup()
+  dat <- dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date)
+                       
 }
 
 
