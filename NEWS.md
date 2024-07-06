@@ -2,15 +2,16 @@
 
 ## New Features
 * Combined scraping functions into a single cohesive function for better efficiency.
-* Include Extra-Time scores for any games that went to extra-time (HQET and AQET)
+* Include Extra-Time scores for any games that went to extra-time (HQET and AQET)  ([#155](https://github.com/jimmyday12/fitzRoy/issues/155))
 
 ## Bug Fixes
-* Corrected date parsing issues for AFL tables data, ensuring accurate date formats.
-* Change way of fetching umpire names to avoid occasionally grabbing the wrong field from AFL tables
+* Corrected date parsing issues for AFL tables data, ensuring accurate date formats. ([#136](https://github.com/jimmyday12/fitzRoy/issues/136))
+* Change way of fetching umpire names to avoid occasionally grabbing the wrong field from AFL tables ([#170](https://github.com/jimmyday12/fitzRoy/issues/170))
 * Fix substitute column - now contains on and off for all available games
 * Fixes for players with incorrect AFL tables player ids - mainly due to player name changes.
 * Fixed an issue where `find_season_id` was only returning the last 10 seasons  ([#225](https://github.com/jimmyday12/fitzRoy/issues/225))
 * Updating some deprecated CLI messaging functions
+* Updated `replace_venues` to handle different data source naming conventions ([#164](https://github.com/jimmyday12/fitzRoy/issues/164))
 
 # fitzRoy 1.4.0
 

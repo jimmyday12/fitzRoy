@@ -97,7 +97,7 @@ replace_venues <- function(venue) {
     venue == "GMHBA Stadium" ~ "Kardinia Park",
     venue == "Melbourne Cricket Ground" ~ "M.C.G.",
     venue == "MCG" ~ "M.C.G.",
-    Venue == "UNSW Canberra Oval" ~ "Manuka Oval",
+    venue == "UNSW Canberra Oval" ~ "Manuka Oval",
     venue == "Canberra Oval" ~ "Manuka Oval",
     venue == "TIO Stadium" ~ "Marrara Oval",
     venue == "Optus Stadium" ~ "Perth Stadium",
