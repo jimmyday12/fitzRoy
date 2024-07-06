@@ -121,16 +121,17 @@
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
 <ul><li>Combined scraping functions into a single cohesive function for better efficiency.</li>
-<li>Include Extra-Time scores for any games that went to extra-time (HQET and AQET)</li>
+<li>Include Extra-Time scores for any games that went to extra-time (HQET and AQET) (<a href="https://github.com/jimmyday12/fitzRoy/issues/155" class="external-link">#155</a>)</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
-<ul><li>Corrected date parsing issues for AFL tables data, ensuring accurate date formats.</li>
-<li>Change way of fetching umpire names to avoid occasionally grabbing the wrong field from AFL tables</li>
+<ul><li>Corrected date parsing issues for AFL tables data, ensuring accurate date formats. (<a href="https://github.com/jimmyday12/fitzRoy/issues/136" class="external-link">#136</a>)</li>
+<li>Change way of fetching umpire names to avoid occasionally grabbing the wrong field from AFL tables (<a href="https://github.com/jimmyday12/fitzRoy/issues/170" class="external-link">#170</a>)</li>
 <li>Fix substitute column - now contains on and off for all available games</li>
 <li>Fixes for players with incorrect AFL tables player ids - mainly due to player name changes.</li>
 <li>Fixed an issue where <code>find_season_id</code> was only returning the last 10 seasons (<a href="https://github.com/jimmyday12/fitzRoy/issues/225" class="external-link">#225</a>)</li>
 <li>Updating some deprecated CLI messaging functions</li>
+<li>Updated <code>replace_venues</code> to handle different data source naming conventions (<a href="https://github.com/jimmyday12/fitzRoy/issues/164" class="external-link">#164</a>)</li>
 </ul></div>
 </div>
     <div class="section level2">
