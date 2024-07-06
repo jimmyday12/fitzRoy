@@ -201,7 +201,7 @@ get_match_data <- function(id) {
 
       # If it does, create access the URL and create the data table.
       # Also merge with basic
-      Sys.sleep(2)
+      Sys.sleep(0.5)
 
       # Check if Advanced URL exists
       footywire_advanced <- tryCatch(
