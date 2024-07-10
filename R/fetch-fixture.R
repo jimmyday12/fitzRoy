@@ -109,7 +109,7 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
   }
 
   df <- comp_seas_id %>%
-    purrr::map_dfr(match_request, comp_id, round_number)
+    purrr::map_dfr(match_request, comp_id, round_number, .progress = TRUE)
 
   if (is.null(df) | nrow(df) == 0) {
     return(df)

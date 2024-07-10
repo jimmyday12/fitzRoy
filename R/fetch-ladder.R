@@ -118,7 +118,7 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
     ))
 
   resp <- api_url %>%
-    purrr::map(httr::GET, query = list("roundId" = round_id))
+    purrr::map(httr::GET, query = list("roundId" = round_id), .progress = TRUE)
 
   status_codes <- resp %>%
     purrr::map_dbl(purrr::pluck, "status_code")
