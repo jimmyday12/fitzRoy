@@ -1,180 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/404.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/aflca-coaches-votes.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/docker-support.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/player-details.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/calculate_coaches_vote_possibilities.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_betting_odds_footywire.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_coaches_votes.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_fixture.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_ladder.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_lineup.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_player_details.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_results.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_squiggle_data.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/fitzRoy-package.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_colour_palettes.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_cookie.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_fixture.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_afltables_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_cookie.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_detailed_data.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_detailed_match_data.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_match_data.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_player_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_round_data.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_rounds.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_fixture.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_betting_odds.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_match_ids.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_match_results.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_fryzigg_stats.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_match_results.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_score_progression_raw.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/get_squiggle_data.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/replace_teams.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/replace_venues.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/return_ladder.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/team_abr_afl.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/team_abr_afl2.html</loc>
-  </url>
-  <url>
-    <loc>https://jimmyday12.github.io/fitzRoy/reference/update_footywire_stats.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jimmyday12.github.io/fitzRoy/404.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/CONDUCT.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/CONTRIBUTING.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/ISSUE_TEMPLATE.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/LICENSE-text.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/LICENSE.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/SUPPORT.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/aflca-coaches-votes.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/docker-support.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/elo-ratings-example.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/fitzRoy.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/index.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/player-details.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/authors.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/index.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/news/index.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/calculate_coaches_vote_possibilities.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_betting_odds_footywire.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_coaches_votes.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_fixture.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_ladder.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_lineup.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_player_details.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_results.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_squiggle_data.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fitzRoy-package.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_colour_palettes.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_cookie.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_fixture.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_afltables_stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_cookie.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_detailed_data.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_detailed_match_data.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_match_data.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_player_stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_round_data.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_aflw_rounds.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_fixture.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_betting_odds.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_match_ids.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_match_results.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_footywire_stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_fryzigg_stats.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_match_results.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_score_progression_raw.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_squiggle_data.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/index.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/replace_teams.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/replace_venues.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/return_ladder.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/team_abr_afl.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/team_abr_afl2.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/update_footywire_stats.html</loc></url>
 </urlset>
+
