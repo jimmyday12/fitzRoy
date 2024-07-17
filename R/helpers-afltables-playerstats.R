@@ -162,7 +162,7 @@ scrape_afltables_match <- function(match_urls) {
         stringr::str_detect(.data$Jumper.No., "\u2191") ~ "On",
         stringr::str_detect(.data$Jumper.No., "\u2193") ~ "Off",
         TRUE ~ NA_character_),
-      Jumper.No. = stringr::str_remove_all(.data$Jumper.No., "[\u2191\u2193]") %>% as.integer()
+      Jumper.No. = stringr::str_remove_all(.data$Jumper.No., "[\u2191\u2193]") %>% as.character()
       )
 
  

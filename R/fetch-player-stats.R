@@ -199,7 +199,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
     dat <- list(dat, dat_new) %>%
       # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
       # so we need to make them consistent before joining to avoid type errors
-      purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.integer)) %>%
+      purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
       purrr::map(~ dplyr::mutate_at(., c("Substitute"), as.character)) %>%
       dplyr::bind_rows(.)
     } else {
