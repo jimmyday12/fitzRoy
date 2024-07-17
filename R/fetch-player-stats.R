@@ -176,7 +176,8 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   }
 
   dat <- dat %>%
-    dplyr::filter(.data$Date > start_date & .data$Date < max_date)
+    dplyr::filter(.data$Date > start_date & .data$Date < max_date) %>%
+    dplyr::mutate(Jumper.No. = as.character(.data$Jumper.No.))
 
   # Check for new data
   if (end_date > max_date) {
