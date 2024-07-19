@@ -107,8 +107,8 @@ scrape_afltables_match <- function(match_urls) {
     games_df %>%
     purrr::list_rbind() %>%
     dplyr::mutate(
-      HQET = dplyr::if_else(str_detect(.data$HQET, "^\\d+\\.\\d+\\.\\d+$"), .data$HQET, NA_character_),
-      AQET = dplyr::if_else(str_detect(.data$AQET, "^\\d+\\.\\d+\\.\\d+$"), .data$AQET, NA_character_)
+      HQET = dplyr::if_else(stringr::str_detect(.data$HQET, "^\\d+\\.\\d+\\.\\d+$"), .data$HQET, NA_character_),
+      AQET = dplyr::if_else(stringr::str_detect(.data$AQET, "^\\d+\\.\\d+\\.\\d+$"), .data$AQET, NA_character_)
     )
 
   games_df <- games_df %>%
