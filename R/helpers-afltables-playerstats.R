@@ -105,7 +105,11 @@ scrape_afltables_match <- function(match_urls) {
 
   games_df <-
     games_df %>%
-    purrr::list_rbind()
+    purrr::list_rbind() %>%
+    dplyr::mutate(
+      HQET = dplyr::if_else(str_detect(.data$HQET, "^\\d+\\.\\d+\\.\\d+$"), .data$HQET, NA_character_),
+      AQET = dplyr::if_else(str_detect(.data$AQET, "^\\d+\\.\\d+\\.\\d+$"), .data$AQET, NA_character_)
+    )
 
   games_df <- games_df %>%
     dplyr::mutate(Date = gsub("\\([^]]*", "", .data$Date))
@@ -164,33 +168,12 @@ scrape_afltables_match <- function(match_urls) {
         TRUE ~ NA_character_),
       Jumper.No. = stringr::str_remove_all(.data$Jumper.No., "[\u2191\u2193]") %>% as.character()
       )
-
+  
  
-
-  # Check if extra time happened
-  games_extra_time <- games_cleaned |> 
-    dplyr::select("Surname", "First.name", "Playing.for", "Date", "HQET", "AQET") |> 
-    dplyr::filter(
-      stringr::str_detect("HQET", "[^[:ascii:]]")
-      )
+  # Update score columns
+  score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "HQET", "AQ1", "AQ2", "AQ3", "AQ4", "AQET")
   
-  # Update score columns based on it ET happened
-  if(nrow(games_extra_time > 0)) {
-    extra_time <- TRUE
-    score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "HQET", "AQ1", "AQ2", "AQ3", "AQ4", "AQET")
-  } else {
-    extra_time <- FALSE
-    score_cols <- c("HQ1", "HQ2", "HQ3", "HQ4", "AQ1", "AQ2", "AQ3", "AQ4")
-    
-    games_cleaned <- games_cleaned |> 
-      dplyr::mutate(HQET = NA,
-                    AQET = NA)
-  }
-  
-  
-  # Add ET columns for when it didn't happen
-  
-  games_scores <- games_cleaned |> 
+  games_scores <- games_cleaned %>% 
     tidyr::separate_wider_delim(cols = dplyr::all_of(score_cols),
                                 delim = ".", 
                                 names = c("G", "B", "P"), 
@@ -201,16 +184,11 @@ scrape_afltables_match <- function(match_urls) {
     dplyr::mutate_at(dplyr::vars(dplyr::contains("HQ")), as.integer) %>%
     dplyr::mutate_at(dplyr::vars(dplyr::contains("AQ")), as.integer)
   
-  # Get final score, depending on extra time or not
-  if(extra_time) {
-    games_scores <- games_scores |> 
-      dplyr::mutate(Home.score = .data$HQETP,
-                    Away.score = .data$AQETP)
-  } else {
-    games_scores <- games_scores |> 
-      dplyr::mutate(Home.score = .data$HQ4P,
-                    Away.score = .data$AQ4P)
-  }
+  # Get final score
+  games_scores <- games_scores %>% 
+    dplyr::mutate(Home.score = dplyr::coalesce(.data$HQETP,.data$HQ4P),
+                  Away.score = dplyr::coalesce(.data$AQETP,.data$AQ4P))
+
 
   # Get player ids
   games_index <- min(games_scores$Season):max(games_scores$Season)
