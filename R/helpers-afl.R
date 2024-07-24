@@ -522,9 +522,9 @@ parse_resp_afl <- function(resp) {
 
   if (httr::http_error(resp)) {
     cli::cli_abort(
-        "GitHub API request failed
+      "GitHub API request failed
         {httr::status_code(resp)} - {parsed$techMessage}"
-        )
+    )
   }
   return(parsed)
 }

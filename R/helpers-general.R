@@ -54,7 +54,6 @@ check_comp <- function(x) {
 #' @keywords internal
 #' @noRd
 check_source <- function(x) {
-
   valid <- c(
     "AFL",
     "footywire",
