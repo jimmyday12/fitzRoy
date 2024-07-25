@@ -1,6 +1,6 @@
 "field","data_type"
 "Season","integer"
-"Round","integer"
+"Round","character"
 "Date","date"
 "Local.start.time","integer"
 "Venue","character"

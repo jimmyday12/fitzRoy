@@ -13,4 +13,4 @@ mapping_afltables
 \description{
 A dataframe used for mapping names of data columns when scraping match statistics using the \code{scrape_afltables_match()} function.
 }
-\keyword{datasets}
+\keyword{internal}

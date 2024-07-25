@@ -3,7 +3,7 @@ library(tibble)
 dictionary_afltables <- tibble::tribble(
   ~field, ~data_type,
   "Season", "integer",
-  "Round", "integer",
+  "Round", "character",
   "Date", "date",
   "Local.start.time", "integer",
   "Venue", "character",

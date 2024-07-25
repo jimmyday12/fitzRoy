@@ -13,4 +13,4 @@ player_mapping_afltables
 \description{
 A dataframe used for mapping player name and ID columns when scraping match statistics using the \code{scrape_afltables_match()} function.
 }
-\keyword{datasets}
+\keyword{internal}

@@ -13,4 +13,4 @@ dictionary_afltables
 \description{
 A dataframe containing the data types and formats of columns for AFL Tables data, used in the \code{check_and_convert()} function to ensure correct column types.
 }
-\keyword{datasets}
+\keyword{internal}
