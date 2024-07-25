@@ -120,8 +120,11 @@
 <h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
 <div class="section level3">
 <h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
-<ul><li>Combined scraping functions into a single cohesive function for better efficiency.</li>
-<li>Include Extra-Time scores for any games that went to extra-time (HQET and AQET) (<a href="https://github.com/jimmyday12/fitzRoy/issues/155" class="external-link">#155</a>)</li>
+<ul><li>Include Extra-Time scores in <code>fetch_player_stats_afltables</code> for any games that went to extra-time (HQET and AQET) (<a href="https://github.com/jimmyday12/fitzRoy/issues/155" class="external-link">#155</a>)</li>
+<li>Include afltables url, Age, and Career.Games as at that game for each player in <code>fetch_player_stats_afltables</code>
+</li>
+<li>Include Coach and Home.Away for each team for each game in <code>fetch_player_stats_afltables</code>
+</li>
 </ul></div>
 <div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
