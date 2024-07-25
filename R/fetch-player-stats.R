@@ -138,7 +138,10 @@ fetch_player_stats_afl <- function(season = NULL, round_number = NULL, comp = "A
 #'
 #' @rdname fetch_player_stats
 #' @export
-fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, rescrape = FALSE, rescrape_start_season = NULL) {
+fetch_player_stats_afltables <- function(season = NULL,
+                                         round_number = NULL,
+                                         rescrape = FALSE,
+                                         rescrape_start_season = NULL) {
   if (!is.null(round_number)) {
     cli::cli_inform("{.field round_number} is not currently used for {.code fetch_player_stats_afltables}.Returning data for all rounds in specified seasons")
   }
@@ -146,7 +149,7 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   dates <- return_start_end_dates(season)
   start_date <- dates$start_date
   end_date <- dates$end_date
-  
+
   if (start_date > end_date) {
     stop(cli::format_error(c(
       "Cannot fetch player stats for {season} season"
@@ -177,7 +180,10 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
 
   dat <- dat %>%
     dplyr::filter(.data$Date > start_date & .data$Date < max_date) %>%
-    dplyr::mutate(Jumper.No. = as.character(.data$Jumper.No.))
+    dplyr::mutate(
+      Jumper.No. = as.character(.data$Jumper.No.),
+      Substitute = as.character(.data$Substitute)
+    )
 
   # Check for new data
   if (end_date > max_date) {
@@ -190,24 +196,30 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
   } else {
     new_data <- FALSE
   }
-  
 
-  
+  dat <- dat %>%
+    check_and_convert(dictionary_afltables) %>%
+    dplyr::rename(dplyr::any_of(mapping_afltables))
+
   if (new_data) {
     cli::cli_progress_step("New data found! Fetching new data from {.val {length(urls)}} matches")
     dat_new <- scrape_afltables_match(urls)
-    
+
+    dat_new <- dat_new %>%
+      check_and_convert(dictionary_afltables) %>%
+      dplyr::rename(dplyr::any_of(mapping_afltables))
+
     dat <- list(dat, dat_new) %>%
       # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
       # so we need to make them consistent before joining to avoid type errors
       purrr::map(~ dplyr::mutate_at(., c("Jumper.No."), as.character)) %>%
       purrr::map(~ dplyr::mutate_at(., c("Substitute"), as.character)) %>%
       dplyr::bind_rows(.)
-    } else {
-  cli::cli_progress_step("No new data found! Returning cached data")
-    }
+  } else {
+    cli::cli_progress_step("No new data found! Returning cached data")
+  }
 
-  
+
   cli::cli_progress_step("Tidying data")
 
   # fix for finals names being incorrect
@@ -222,7 +234,11 @@ fetch_player_stats_afltables <- function(season = NULL, round_number = NULL, res
     dplyr::mutate(Venue = stringr::str_squish(.data$Venue))
 
   dat <- dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date)
-                       
+
+  dat <- dat %>%
+    dplyr::select(dplyr::any_of(dictionary_afltables$field))
+
+  return(dat)
 }
 
 
@@ -356,3 +372,6 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     return(tibble::as_tibble(dat))
   }
 }
+
+# silence global variable NOTES
+utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables", "player_mapping_afltables"))
