@@ -35,6 +35,9 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   # Test Brownlow using previous season to ensure votes exist
   previous_season <- seas - 1
   previous_data <- fetch_player_stats_afltables(season = previous_season)
+  # Remove finals games as no Brownlow Votes for finals
+  previous_data <- previous_data %>% 
+    dplyr::filter(!stringr::str_detect(Round,'F'))
   expect_equal(sum(is.na(previous_data$Brownlow.Votes)), 0)
 
   # Test debutants aren't getting ID of 0

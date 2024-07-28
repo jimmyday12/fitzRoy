@@ -35,7 +35,7 @@ dictionary_afltables <- tibble::tribble(
   "One.Percenters", "integer",
   "Bounces", "integer",
   "Goal.Assists", "integer",
-  "Time.on.Ground", "character",
+  "Time.on.Ground", "integer",
   "Substitute", "character",
   "Umpire.1", "character",
   "Umpire.2", "character",
@@ -90,6 +90,7 @@ write.csv(dictionary_afltables, "./data-raw/dictionary_afltables.csv", row.names
 
 dictionary_afltables <- read.csv("./data-raw/dictionary_afltables.csv") |>
   dplyr::mutate_all(stringr::str_squish)
+
 usethis::use_data(dictionary_afltables, overwrite = TRUE)
 
 ####
