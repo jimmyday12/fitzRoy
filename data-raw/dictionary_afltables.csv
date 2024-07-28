@@ -32,7 +32,7 @@
 "One.Percenters","integer"
 "Bounces","integer"
 "Goal.Assists","integer"
-"Time.on.Ground","character"
+"Time.on.Ground","integer"
 "Substitute","character"
 "Umpire.1","character"
 "Umpire.2","character"
