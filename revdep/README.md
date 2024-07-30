@@ -9,18 +9,19 @@
 |language |(EN)                                                                                       |
 |collate  |en_US.UTF-8                                                                                |
 |ctype    |en_US.UTF-8                                                                                |
-|tz       |Australia/Melbourne                                                                        |
-|date     |2024-06-05                                                                                 |
+|tz       |Australia/Brisbane                                                                         |
+|date     |2024-07-30                                                                                 |
 |rstudio  |2023.12.1+402 Ocean Storm (desktop)                                                        |
 |pandoc   |3.1.1 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/tools/ (via rmarkdown) |
 
 # Dependencies
 
-|package |old   |new       |Δ  |
-|:-------|:-----|:---------|:--|
-|fitzRoy |1.3.0 |1.3.0.910 |*  |
-|openssl |NA    |2.2.0     |*  |
-|rlang   |NA    |1.1.3     |*  |
+|package |old   |new        |Δ  |
+|:-------|:-----|:----------|:--|
+|fitzRoy |1.4.0 |1.4.0.9000 |*  |
+|cli     |NA    |3.6.2      |*  |
+|httr2   |NA    |1.0.2      |*  |
+|rlang   |NA    |1.1.3      |*  |
 
 # Revdeps
 
