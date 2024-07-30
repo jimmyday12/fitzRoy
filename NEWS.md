@@ -1,11 +1,13 @@
-# fitzRoy (development version)
+# fitzRoy 1.5.0
 
 ## New Features
+
 * Include Extra-Time scores in `fetch_player_stats_afltables` for any games that went to extra-time (HQET and AQET)  ([#155](https://github.com/jimmyday12/fitzRoy/issues/155))
 * Include afltables url, Age, and Career.Games as at that game for each player in `fetch_player_stats_afltables`
 * Include Coach and Home.Away for each team for each game in `fetch_player_stats_afltables`
 
 ## Bug Fixes
+
 * Corrected date parsing issues for AFL tables data, ensuring accurate date formats. ([#136](https://github.com/jimmyday12/fitzRoy/issues/136))
 * Change way of fetching umpire names to avoid occasionally grabbing the wrong field from AFL tables ([#170](https://github.com/jimmyday12/fitzRoy/issues/170))
 * Fix substitute column - now contains on and off for all available games
