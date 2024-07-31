@@ -1,16 +1,20 @@
 ## Test environments
 local OS X install, R 4.2.2
-Ubuntu Linux 11.4.0 (on R-hub), R-devel
-macOS-arm64 Sonoma 14.5 (on R-hub) R-devel
-macOS Ventura 13.6.7 (on R-hub) R-devel
+ubuntu-latest (on R-hub), R-devel
+macos-13 (on R-hub) R-devel
+macos-latest (on R-hub) R-devel
+windows-latest (on R-hub) R-devel
 win-builder (devel and release)
-
 
 ## R CMD check results
 
-There were no ERRORs, WARNINGs or NOTEs. 
+0 errors | 0 warnings | 0 notes
 
 ## Downstream Dependancies
+
 There are currently no downstream dependencies for this package
+
+
+
 
 

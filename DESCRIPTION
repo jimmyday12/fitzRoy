@@ -1,6 +1,6 @@
 Package: fitzRoy
 Title: Easily Scrape and Process AFL Data
-Version: 1.4.0.9001
+Version: 1.5.0.9000
 Authors@R:
     c(person(given = "James",
              family = "Day",
@@ -32,8 +32,8 @@ Description: An easy package for scraping and processing Australia Rules Footbal
     'The Squiggle' <https://squiggle.com.au>. Further functions allow for easy processing, 
     cleaning and transformation of this data into formats that can be used for analysis. 
 License: MIT + file LICENSE
-URL: https://jimmyday12.github.io/fitzRoy/, https://github.com/jimmyday12/fitzRoy 
-BugReports: https://github.com/jimmyday12/fitzRoy/issues
+URL: https://jimmyday12.github.io/fitzRoy/, https://github.com/jimmyday12/fitzRoy, https://github.com/jimmyday12/fitzroy
+BugReports: https://github.com/jimmyday12/fitzroy/issues
 Depends:
     R (>= 4.1)
 Imports:
