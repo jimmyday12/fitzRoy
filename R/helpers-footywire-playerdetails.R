@@ -119,7 +119,8 @@ get_past_player_footywire <- function(path) {
 
   draft <- players_html %>%
     rvest::html_elements("#playerProfileDraftInfo") %>%
-    rvest::html_text2()
+    rvest::html_text2() %>% 
+    purrr::pluck(1)
 
   if (length(draft) == 0) draft <- NA
 
