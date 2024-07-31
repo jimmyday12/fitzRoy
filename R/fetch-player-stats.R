@@ -179,7 +179,7 @@ fetch_player_stats_afltables <- function(season = NULL,
   }
 
   dat <- dat %>%
-    dplyr::filter(.data$Date > start_date & .data$Date < max_date) %>%
+    dplyr::filter(.data$Date >= start_date & .data$Date <= max_date) %>%
     dplyr::mutate(
       Jumper.No. = as.character(.data$Jumper.No.),
       Substitute = as.character(.data$Substitute)
@@ -233,7 +233,7 @@ fetch_player_stats_afltables <- function(season = NULL,
   dat <- dat %>%
     dplyr::mutate(Venue = stringr::str_squish(.data$Venue))
 
-  dat <- dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date)
+  dat <- dplyr::filter(dat, .data$Date >= start_date & .data$Date <= end_date)
 
   dat <- dat %>%
     dplyr::select(dplyr::any_of(dictionary_afltables$field))

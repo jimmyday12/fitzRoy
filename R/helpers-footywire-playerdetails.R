@@ -62,12 +62,11 @@ fetch_player_details_footywire_past <- function(team) {
   players_url <- html %>%
     rvest::html_elements(".lnormtop a") %>%
     rvest::html_attr("href")
-
-
+  
   df <- players_url %>%
-    cli::cli_progress_along() %>%
-    purrr::map_dfr(get_past_player_footywire)
-
+    purrr::map(~get_past_player_footywire(.x), .progress = TRUE) %>%
+    purrr::list_rbind()
+  
   return(df)
 }
 
@@ -81,6 +80,7 @@ fetch_player_details_footywire_past <- function(team) {
 #' @keywords internal
 #' @noRd
 get_past_player_footywire <- function(path) {
+
   players_html <- rvest::read_html(paste0("https://www.footywire.com/afl/footy/", path))
 
   name <- players_html %>%
@@ -137,5 +137,5 @@ get_past_player_footywire <- function(path) {
     weight = weight,
     draft = draft,
     last_game = last_game
-  )
+    )
 }
