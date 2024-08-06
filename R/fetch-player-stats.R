@@ -297,7 +297,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     cli::cli_inform("{.field round_number} is not currently used for {.code fetch_player_stats_footywire}.Returning data for all rounds in specified seasons")
   }
 
-  if (is.null(season)) season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
+  season <- check_season(season)
 
   start_year <- max(min(season), 2010)
   end_year <- min(max(season), as.numeric(format(Sys.Date(), "%Y")))
@@ -369,6 +369,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 
     dat <- dat %>%
       dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))
+
     return(tibble::as_tibble(dat))
   }
 }
