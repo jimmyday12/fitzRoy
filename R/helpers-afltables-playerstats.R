@@ -270,9 +270,9 @@ scrape_afltables_match <- function(match_urls) {
       player_mapping_afltables %>%
         dplyr::select("url", Player = "player", "ID", DOB = "dob"),
       by = c("url")
-    ) 
+    )
 
-  df <- games_joined %>% 
+  df <- games_joined %>%
     dplyr::rename(dplyr::any_of(mapping_afltables))
 
   df <- df %>%
@@ -416,7 +416,7 @@ check_and_convert <- function(df, column_formats) {
 convert_age_to_years <- function(age_str) {
   years <- as.numeric(sub("y.*", "", age_str))
   days <- as.numeric(sub(".*y ([0-9]+)d.*", "\\1", age_str))
-  days <- tidyr::replace_na(days,0)
+  days <- tidyr::replace_na(days, 0)
   decimal_years <- years + (days / 365.25)
   return(decimal_years)
 }

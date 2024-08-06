@@ -268,7 +268,8 @@ find_season_id <- function(season, comp = "AFLM") {
 #' @param season Season, in YYYY format.
 #' @keywords internal
 #' @noRd
-find_round_id <- function(round_number, season = NULL,
+find_round_id <- function(round_number,
+                          season = NULL,
                           season_id = NULL,
                           comp = "AFLM",
                           providerId = FALSE,
