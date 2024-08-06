@@ -4,11 +4,11 @@ AFLM
 AFLTables
 AFLW
 API's
+AQET
 Afltables
+CLI
 CMD
 Codecov
-Determinse
-DockerHub
 ELO
 FitzRoy
 Footy's
@@ -18,13 +18,13 @@ Fryzigg
 GWS
 Geelong
 HPN
+HQET
 Lifecycle
 Mens
 OscarLane
 PAV
 PlusSixOne
 RStudio
-Rescraping
 Tibble
 VFL
 VFLW
@@ -57,6 +57,7 @@ github
 http
 https
 lifecycle
+magrittr
 matchid
 mens
 modelling
@@ -65,7 +66,6 @@ normalise
 onwards
 optimise
 repo
-rescrape
 roundId
 roundid
 rvest

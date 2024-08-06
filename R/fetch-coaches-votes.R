@@ -63,12 +63,12 @@ fetch_coaches_votes <- function(season = NULL,
       "West Coast Eagles", "Western Bulldogs"
     )
   }
-  
+
   if (min(season) < 2006) {
-   cli::cli_alert_warning("No Data before 2006")
+    cli::cli_alert_warning("No Data before 2006")
   }
 
-  all_coaches_votes <- 
+  all_coaches_votes <-
     expand.grid(Season = season, Round = round_number, Finals = c(F, T)) %>%
     as.data.frame() %>%
     # exclude obvious impossibilities
@@ -79,9 +79,9 @@ fetch_coaches_votes <- function(season = NULL,
     )) %>%
     split(1:nrow(.)) %>%
     # apply function to each round
-    lapply(function(row) {
+    purrr::map(function(row) {
       try(scrape_coaches_votes(row$Season, row$Round, comp, row$Finals), silent = T)
-    })
+    }, .progress = TRUE)
 
   # remove errors
   all_coaches_votes[sapply(all_coaches_votes, typeof) == "character"] <- NULL

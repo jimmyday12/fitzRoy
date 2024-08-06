@@ -6,13 +6,14 @@
 #'
 #' @keywords internal
 #' @noRd
-check_season <- function(x) {
+check_season <- function(x = NULL) {
   if (is.null(x)) {
     x <- Sys.Date() %>%
       format("%Y") %>%
       as.numeric()
   }
   if (min(nchar(x)) < 4) cli::cli_abort("Season should be in YYYY format")
+  if (!is.numeric(x)) cli::cli_abort("Season should be numeric")
   return(x)
 }
 
