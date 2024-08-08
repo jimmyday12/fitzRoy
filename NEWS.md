@@ -1,4 +1,4 @@
-# fitzRoy (development version)
+# fitzRoy 1.5.1
 
 ## New Features
 
