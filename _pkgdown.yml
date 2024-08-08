@@ -41,6 +41,8 @@ reference:
       - fetch_betting_odds_footywire
       - get_afl_colour_palettes
       - calculate_coaches_vote_possibilities
+      - plot_score_worm
+      - plot_score_worm_totals
 
   - title: Internals
     desc: >
