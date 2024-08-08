@@ -2,18 +2,16 @@
 % Please edit documentation in R/plot-score-worm.R
 \name{plot_score_worm_totals}
 \alias{plot_score_worm_totals}
-\title{Return afl match score worm}
+\title{Plot Score Worm Totals}
 \usage{
 plot_score_worm_totals(providerId)
 }
 \arguments{
-\item{providerId}{Integer. AFL match ID.}
+\item{providerId}{AFL match ID can be found using \code{fetch_fixture_afl()}}
 }
 \value{
-A ggplot2 plot object showing the total scores of an AFL match.
-
-A ggplot2 plot object showing the total scores of an AFL match.
+A ggplot object showing the total score worm.
 }
 \description{
-\code{plot_score_worm_totals} returns a plot of an AFL match score worm showing total scores.
+This function plots the team totals score worm for AFL games.
 }

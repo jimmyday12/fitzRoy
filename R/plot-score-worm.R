@@ -1,9 +1,9 @@
-#' Return afl match score worm
+#' Plot Score Worm
 #'
-#' \code{plot_score_worm} returns a plot of an AFL match score worm.
+#' This function plots the score difference score worms for AFL games.
 #'
-#' @param providerId Integer. AFL match ID.
-#' @return A ggplot2 plot object showing the AFL match score worm.
+#' @param providerId AFL match ID can be found using `fetch_fixture_afl()`
+#' @return A ggplot object showing the score worm.
 #' @export
 plot_score_worm <- function(providerId) {
   team_colors <- team_colours()
@@ -81,19 +81,13 @@ plot_score_worm <- function(providerId) {
       legend.box = "horizontal" # Arrange legend items horizontally
     )
 }
-#' Return afl match score worm
+
+#' Plot Score Worm Totals
 #'
-#' \code{plot_score_worm_totals} returns a plot of an AFL match score worm showing total scores.
+#' This function plots the team totals score worm for AFL games.
 #'
-#' @param providerId Integer. AFL match ID.
-#' @return A ggplot2 plot object showing the total scores of an AFL match.
-#' @export
-#' Return afl match score worm totals
-#'
-#' \code{plot_score_worm_totals} returns a plot of an AFL match score worm showing total scores.
-#'
-#' @param providerId Integer. AFL match ID.
-#' @return A ggplot2 plot object showing the total scores of an AFL match.
+#' @param providerId AFL match ID can be found using `fetch_fixture_afl()`
+#' @return A ggplot object showing the total score worm.
 #' @export
 plot_score_worm_totals <- function(providerId) {
   team_colours <- team_colours()
