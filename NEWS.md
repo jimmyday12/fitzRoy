@@ -1,5 +1,15 @@
 # fitzRoy (development version)
 
+## New Features
+
+* New functions to plot match score worms `plot_score_worm` and `plot_score_worm_totals`  
+* Include date of birth for each player in `fetch_player_stats_afltables`
+
+## Bug Fixes
+
+* Fix age for players playing on birthday in `fetch_player_stats_afltables()` ([#240](https://github.com/jimmyday12/fitzRoy/issues/240))
+* Remove dupes for players drafted twice in `fetch_player_details_footywire()` ([#242](https://github.com/jimmyday12/fitzRoy/issues/242))
+
 # fitzRoy 1.5.0
 
 ## New Features
