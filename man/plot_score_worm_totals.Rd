@@ -4,10 +4,10 @@
 \alias{plot_score_worm_totals}
 \title{Plot Score Worm Totals}
 \usage{
-plot_score_worm_totals(providerId)
+plot_score_worm_totals(match_id)
 }
 \arguments{
-\item{providerId}{AFL match ID can be found using \code{fetch_fixture_afl()}}
+\item{match_id}{AFL match ID (providerId) can be found using \code{fetch_fixture_afl()}}
 }
 \value{
 A ggplot object showing the total score worm.

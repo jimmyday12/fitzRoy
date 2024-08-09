@@ -43,6 +43,7 @@ reference:
       - calculate_coaches_vote_possibilities
       - plot_score_worm
       - plot_score_worm_totals
+      - fetch_score_worm_data
 
   - title: Internals
     desc: >

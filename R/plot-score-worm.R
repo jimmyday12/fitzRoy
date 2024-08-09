@@ -2,15 +2,14 @@
 #'
 #' This function plots the score difference score worms for AFL games.
 #'
-#' @param providerId AFL match ID can be found using `fetch_fixture_afl()`
+#' @param match_id AFL match ID (providerId) can be found using `fetch_fixture_afl()`
 #' @return A ggplot object showing the score worm.
 #' @export
-plot_score_worm <- function(providerId) {
+plot_score_worm <- function(match_id) {
   team_colors <- team_colours()
 
-  # Generate match data
-  df <- get_match_score_worm(glue::glue("https://api.afl.com.au/cfs/afl/matchItem/{providerId}"))
-  df <- build_score_worm(df)
+  df <- fetch_score_worm_data(match_id)
+
   periods <- unique(df$periodNumber)
   total_period_seconds <- unique(df$cumsum_secs_end)
   score_differences <- df %>%
@@ -19,8 +18,8 @@ plot_score_worm <- function(providerId) {
     dplyr::pull(.data$sdl)
   home_team <- unique(df %>% dplyr::filter(.data$homeOrAway == "HOME") %>% dplyr::pull(.data$teamName))
   away_team <- unique(df %>% dplyr::filter(.data$homeOrAway == "AWAY") %>% dplyr::pull(.data$teamName))
-  breaks <- c(0,total_period_seconds)
-  labels <- c("Start", paste0("Q", periods, " (", score_differences, ")"))
+  breaks <- c(0, total_period_seconds)
+  labels <- c("Start", paste0("Q", periods, "\n(", score_differences, ")"))
 
   # Create rectangles for score difference and add lead columns
   rects <- df %>%
@@ -75,7 +74,7 @@ plot_score_worm <- function(providerId) {
     ggplot2::geom_vline(xintercept = total_period_seconds, linetype = "dashed", size = 0.5) +
     ggplot2::geom_hline(yintercept = 0, linetype = "solid", color = "black", size = 1) +
     ggplot2::theme(
-      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
+      axis.text.x = ggplot2::element_text(angle = 0, hjust = 0.5),
       axis.title.y.right = ggplot2::element_blank(),
       legend.position = "bottom", # Move legend to bottom
       legend.box = "horizontal" # Arrange legend items horizontally
@@ -86,18 +85,13 @@ plot_score_worm <- function(providerId) {
 #'
 #' This function plots the team totals score worm for AFL games.
 #'
-#' @param providerId AFL match ID can be found using `fetch_fixture_afl()`
+#' @param match_id AFL match ID (providerId) can be found using `fetch_fixture_afl()`
 #' @return A ggplot object showing the total score worm.
 #' @export
-plot_score_worm_totals <- function(providerId) {
+plot_score_worm_totals <- function(match_id) {
   team_colours <- team_colours()
-  headers <- c(
-    "x-media-mis-token" = get_afl_cookie()
-  )
-  # Generate match data
-  df <- get_match_score_worm(glue::glue("https://api.afl.com.au/cfs/afl/matchItem/{providerId}"))
 
-  df <- build_score_worm(df)
+  df <- fetch_score_worm_data(match_id)
 
   periods <- unique(df$periodNumber)
 
@@ -111,14 +105,13 @@ plot_score_worm_totals <- function(providerId) {
   home_team <- unique(df %>% dplyr::filter(.data$homeOrAway == "HOME") %>% dplyr::pull(.data$teamName))
   away_team <- unique(df %>% dplyr::filter(.data$homeOrAway == "AWAY") %>% dplyr::pull(.data$teamName))
 
-  breaks <- c(0,total_period_seconds)
-  quarter_labels <- paste0("Q", 1:4)
+  breaks <- c(0, total_period_seconds)
   score_labels <- c("Start", df %>%
     dplyr::group_by(.data$periodNumber) %>%
     dplyr::summarise(
       sdl = paste0(
         "Q", max(.data$periodNumber),
-        " (", dplyr::last(.data$endHomeScore), "-", dplyr::last(.data$endAwayScore), ")"
+        "\n (", dplyr::last(.data$endHomeScore), "-", dplyr::last(.data$endAwayScore), ")"
       )
     ) %>%
     dplyr::pull(.data$sdl))
@@ -130,13 +123,13 @@ plot_score_worm_totals <- function(providerId) {
       y = "Aggregate Score",
       title = glue::glue("Scores of {home_team} and {away_team} by Period"),
       subtitle = paste("Home Team (", home_team, ") vs Away Team (", away_team, ")", sep = ""),
-      color = "Team Colors"
+      color = "Team Colours"
     ) +
     ggplot2::scale_x_continuous(breaks = breaks, labels = score_labels) +
     ggplot2::scale_y_continuous(sec.axis = ggplot2::dup_axis()) +
     ggplot2::geom_vline(xintercept = total_period_seconds, linetype = "dashed", size = 0.5) +
     ggplot2::theme(
-      axis.text.x = ggplot2::element_text(angle = 45, hjust = 1),
+      axis.text.x = ggplot2::element_text(angle = 0, hjust = 0.5),
       axis.title.y.right = ggplot2::element_blank(),
       legend.position = "bottom", # Move legend to bottom
       legend.box = "horizontal" # Arrange legend items horizontally
@@ -152,20 +145,35 @@ plot_score_worm_totals <- function(providerId) {
 
   if (dplyr::last(df$scoreDifference < 0)) {
     p <- p +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateHomeScore, color = home_team), size = 1.75, lineend = "round") +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateHomeScore), color = home_colours[2], size = 0.5, lineend = "round") +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateAwayScore, color = away_team), size = 1.75, lineend = "round") +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateAwayScore), color = away_colours[2], size = 0.5, lineend = "round")
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateHomeScore, color = home_team), linewidth = 1.75) +
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateHomeScore), color = home_colours[2], linewidth = 0.5) +
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateAwayScore, color = away_team), linewidth = 1.75) +
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateAwayScore), color = away_colours[2], linewidth = 0.5)
   } else {
     p <- p +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateAwayScore, color = away_team), size = 1.75, lineend = "round") +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateAwayScore), color = away_colours[2], size = 0.5, lineend = "round") +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateHomeScore, color = home_team), size = 1.75, lineend = "round") +
-      ggplot2::geom_line(ggplot2::aes(y = .data$aggregateHomeScore), color = home_colours[2], size = 0.5, lineend = "round")
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateAwayScore, color = away_team), linewidth = 1.75) +
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateAwayScore), color = away_colours[2], linewidth = 0.5) +
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateHomeScore, color = home_team), linewidth = 1.75) +
+      ggplot2::geom_step(ggplot2::aes(y = .data$aggregateHomeScore), color = home_colours[2], linewidth = 0.5)
   }
   return(p)
 }
 
+#' Plot Score Worm
+#'
+#' This function plots the score difference score worms for AFL games.
+#'
+#' @param match_id AFL match ID (providerId) can be found using `fetch_fixture_afl()`
+#' @return A ggplot object showing the score worm.
+#' @export
+fetch_score_worm_data <- function(match_id) {
+  # Generate match data
+  worm_list <- purrr::map(match_id, ~ get_match_score_worm(glue::glue("https://api.afl.com.au/cfs/afl/matchItem/{.x}")))
+  df <- purrr::map(worm_list, ~ build_score_worm(.x)) %>%
+    purrr::list_rbind()
+
+  return(df)
+}
 # Example ca
 #' Get AFL match score worm data
 #'
@@ -194,7 +202,9 @@ get_match_score_worm <- function(url) {
   })
 
   df <- period_info %>%
-    dplyr::left_join(get_score_worm(data))
+    dplyr::left_join(get_score_worm(data),
+      by = "periodNumber"
+    )
 
   return(df)
 }
@@ -292,7 +302,9 @@ build_score_worm <- function(df) {
     )
 
   df <- df %>%
-    dplyr::left_join(total_period_seconds_df, by = "periodNumber") %>%
+    dplyr::left_join(total_period_seconds_df,
+      by = "periodNumber"
+    ) %>%
     dplyr::mutate(
       cumulativeSeconds = .data$cumsum_secs_start + .data$periodSeconds,
       scoreDifference = .data$aggregateHomeScore - .data$aggregateAwayScore
