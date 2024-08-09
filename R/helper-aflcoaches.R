@@ -14,18 +14,17 @@ scrape_coaches_votes <- function(season = NULL,
                                  round_number = NULL,
                                  comp = "AFLM",
                                  finals) {
-  
   # error checking
   check_comp(comp)
   if (is.null(round_number)) round_number <- 1
   season <- check_season(season)
-  
+
   # AFLW 2023 Correction
-  if(comp=="AFLW" & season==2022){
+  if (comp == "AFLW" & season == 2022) {
     season_type <- readline("Multiple AFLW 2022 Seasons. Type 'S6' (Jan-Apr) or 'S7' (Aug-Nov): ")
-    if(season_type=="S6") season <- 2022
-    if(season_type=="S7") season <- "season-7"
-    if(!season_type%in%c("S6","S7")) stop("Invalid input. Please enter one of 'S6' or 'S7'.")
+    if (season_type == "S6") season <- 2022
+    if (season_type == "S7") season <- "season-7"
+    if (!season_type %in% c("S6", "S7")) stop("Invalid input. Please enter one of 'S6' or 'S7'.")
   }
 
   # awards are different depending on finals
@@ -42,9 +41,11 @@ scrape_coaches_votes <- function(season = NULL,
     link_base,
     season,
     "/",
-    dplyr::case_when(season=="season-7" ~ 2023,
-                     season>=2023 ~ season+1,
-                     T ~ season),
+    dplyr::case_when(
+      season == "season-7" ~ 2023,
+      season >= 2023 ~ season + 1,
+      T ~ season
+    ),
     ifelse(comp == "AFLW", "02", "01"),
     sprintf("%02d", round_number)
   )

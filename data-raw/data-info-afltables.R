@@ -10,7 +10,7 @@ dictionary_afltables <- tibble::tribble(
   "Attendance", "integer",
   "First.name", "character",
   "Surname", "character",
-  "ID", "character",
+  "ID", "integer",
   "Jumper.No.", "character",
   "Playing.for", "character",
   "Kicks", "integer",
@@ -81,6 +81,7 @@ dictionary_afltables <- tibble::tribble(
   "Age", "numeric",
   "Career.Games", "integer",
   "Coach", "character",
+  "DOB", "character",
   "Home.Away", "character"
 )
 
