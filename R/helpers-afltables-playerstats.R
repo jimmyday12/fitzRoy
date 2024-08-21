@@ -342,7 +342,7 @@ get_afltables_urls <- function(start_date,
     purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     purrr::map(lubridate::dmy) %>%
     purrr::map(~ .x[!is.na(.x)]) %>%
-    purrr::map(~ .x > start_date & .x < end_date)
+    purrr::map(~ .x >= start_date & .x <= end_date)
 
   match_ids <- html_games %>%
     # purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
