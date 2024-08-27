@@ -1,6 +1,7 @@
 # fitzRoy (development version)
 
 * Fixed a bug where certain games weren't getting rescraped automatically in `fetch_player_stats_afltables` ([#243](https://github.com/jimmyday12/fitzRoy/issues/243))
+* Fixed bug where round 25 was returning NA in `fetch_results_afltables`
 
 
 # fitzRoy 1.5.0
