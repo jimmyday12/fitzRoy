@@ -168,7 +168,8 @@ plot_score_worm_totals <- function(match_id) {
 #' @export
 fetch_score_worm_data <- function(match_id) {
   # Generate match data
-  worm_list <- purrr::map(match_id, ~ get_match_score_worm(glue::glue("https://api.afl.com.au/cfs/afl/matchItem/{.x}")))
+  worm_list <- purrr::map(match_id, ~ get_match_score_worm(glue::glue("https://api.afl.com.au/cfs/afl/matchItem/{.x}")) %>%
+                            dplyr::mutate(match_id = .x))
   df <- purrr::map(worm_list, ~ build_score_worm(.x)) %>%
     purrr::list_rbind()
 
@@ -340,7 +341,8 @@ build_score_worm <- function(df) {
     scoreDifference = 0,
     scoreDifference_period = dplyr::first(df$scoreDifference_period),
     scoreDifferenceLabel = dplyr::first(df$scoreDifferenceLabel),
-    cumulativeSeconds = 0
+    cumulativeSeconds = 0,
+    match_id = dplyr::first(df$match_id)
   )
 
   end_row <- df %>%
@@ -374,7 +376,8 @@ build_score_worm <- function(df) {
       scoreDifference = dplyr::last(.data$scoreDifference),
       scoreDifference_period = dplyr::last(.data$scoreDifference_period),
       scoreDifferenceLabel = dplyr::last(.data$scoreDifferenceLabel),
-      cumulativeSeconds = .data$cumsum_secs_start + .data$periodSeconds
+      cumulativeSeconds = .data$cumsum_secs_start + .data$periodSeconds,
+      match_id = dplyr::last(df$match_id)
     )
 
   df <- rbind(initial_row, df, end_row)

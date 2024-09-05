@@ -262,6 +262,13 @@ scrape_afltables_match <- function(match_urls) {
       Home.score = dplyr::coalesce(.data$HQETP, .data$HQ4P),
       Away.score = dplyr::coalesce(.data$AQETP, .data$AQ4P)
     )
+  
+  # fetch IDs
+  id_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/player_mapping_afltables.csv")
+  
+  cli::cli_progress_step("Fetching cached ID data from {.url github.com/jimmyday12/fitzRoy_data}")
+  
+  player_mapping_afltables <- readr::read_csv(id_url)
 
   # Join data
   games_joined <- games_scores %>%
@@ -342,7 +349,7 @@ get_afltables_urls <- function(start_date,
     purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     purrr::map(lubridate::dmy) %>%
     purrr::map(~ .x[!is.na(.x)]) %>%
-    purrr::map(~ .x > start_date & .x < end_date)
+    purrr::map(~ .x >= start_date & .x <= end_date)
 
   match_ids <- html_games %>%
     # purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
@@ -624,4 +631,4 @@ get_afltables_player_ids <- function(seasons) {
 }
 
 # silence global variable NOTES
-utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables", "player_mapping_afltables"))
+utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables"))

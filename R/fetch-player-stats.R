@@ -375,4 +375,4 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 }
 
 # silence global variable NOTES
-utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables", "player_mapping_afltables"))
+utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables"))

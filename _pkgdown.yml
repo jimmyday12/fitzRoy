@@ -51,6 +51,7 @@ reference:
       useful to end users.
     contents:
       - '`replace_teams`'
+      - '`parse_team_abbr`'
       - '`replace_venues`'
       - '`get_aflw_cookie`'
       - '`get_afl_cookie`'

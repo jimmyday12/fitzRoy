@@ -5,8 +5,12 @@ library(dplyr)
 library(janitor)
 library(fitzRoy)
 
-# Ensure the package data is loaded
-player_mapping_afltables <- fitzRoy::player_mapping_afltables
+# fetch IDs
+id_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/player_mapping_afltables.csv")
+
+cli::cli_progress_step("Fetching cached ID data from {.url github.com/jimmyday12/fitzRoy_data}")
+
+player_mapping_afltables <- readr::read_csv(id_url)
 
 # Define the URL
 url <- "https://afltables.com/afl/stats/biglists/bg10.txt"
@@ -171,6 +175,6 @@ if (nrow(player_mapping_afltables) == nrow(data_clean)) {
 
   player_mapping_afltables <- rows_upsert(player_mapping_afltables, loop_df, by = "url")
 
-  # save data
-  usethis::use_data(player_mapping_afltables, overwrite = TRUE)
+  # write data
+  write_csv(player_mapping_afltables, here::here("data-raw", "afl_tables_playerstats", "player_ids.csv"))
 }
