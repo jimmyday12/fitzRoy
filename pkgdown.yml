@@ -8,10 +8,11 @@ articles:
   fitzRoy: fitzRoy.html
   main-fetch-functions: main-fetch-functions.html
   player-details: player-details.html
+  score-worms: score-worms.html
   using-fryzigg-stats: using-fryzigg-stats.html
   using-squiggle-api: using-squiggle-api.html
   womens-stats: womens-stats.html
-last_built: 2024-08-27T02:45Z
+last_built: 2024-09-05T03:10Z
 urls:
   reference: https://jimmyday12.github.io/fitzRoy/reference
   article: https://jimmyday12.github.io/fitzRoy/articles

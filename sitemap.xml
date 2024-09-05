@@ -14,6 +14,7 @@
 <url><loc>https://jimmyday12.github.io/fitzRoy/articles/index.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/articles/player-details.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/articles/score-worms.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/articles/using-fryzigg-stats.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/articles/using-squiggle-api.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html</loc></url>
@@ -30,6 +31,7 @@
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_player_details.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_results.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_score_worm_data.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/fetch_squiggle_data.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/fitzRoy-package.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_afl_colour_palettes.html</loc></url>
@@ -54,7 +56,10 @@
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/get_squiggle_data.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/index.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/mapping_afltables.html</loc></url>
-<url><loc>https://jimmyday12.github.io/fitzRoy/reference/player_mapping_afltables.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/parse_team_abbr.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/pipe.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/plot_score_worm.html</loc></url>
+<url><loc>https://jimmyday12.github.io/fitzRoy/reference/plot_score_worm_totals.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/replace_teams.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/replace_venues.html</loc></url>
 <url><loc>https://jimmyday12.github.io/fitzRoy/reference/return_ladder.html</loc></url>

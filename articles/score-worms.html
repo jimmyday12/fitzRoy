@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fetching Player Details • fitzRoy</title>
+<title>Score-worms • fitzRoy</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/flatly/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Fetching Player Details">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Score-worms">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -148,53 +148,65 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1 data-toc-skip>Fetching Player Details</h1>
+      <h1 data-toc-skip>Score-worms</h1>
             
+            <h4 data-toc-skip class="date">2024-09-05</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzroy/blob/main/vignettes/player-details.Rmd" class="external-link"><code>vignettes/player-details.Rmd</code></a></small>
-      <div class="hidden name"><code>player-details.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzroy/blob/main/vignettes/score-worms.Rmd" class="external-link"><code>vignettes/score-worms.Rmd</code></a></small>
+      <div class="hidden name"><code>score-worms.Rmd</code></div>
 
     </div>
 
     
     
-<p>A special case of the <code>fetch_</code> family of functions is the
-<code>fetch_player_details_</code> set of functions. You can read the
-general explanation of how to use the main fetch functions on the <a href="https://jimmyday12.github.io/fitzRoy/articles/main-fetch-functions.html">Vignette</a>.
-The player details functions accepts slightly different arguments.</p>
+<p>Functions have been added to fitzRoy to plot and analyse AFL score
+worms</p>
+<ul>
+<li>
+<code>plot_score_worm</code> - Plots the score difference between
+two teams throughout a given match.</li>
+<li>
+<code>plot_score_worm_totals</code> - Plots the total scores of both
+teams throughout a given match.</li>
+<li>
+<code>fetch_score_worm_data</code> - Returns score data used to plot
+score worms for a given match</li>
+</ul>
 <div class="section level2">
-<h2 id="basic-usage">Basic Usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
+<h2 id="working-with-score-worms">Working with score worms<a class="anchor" aria-label="anchor" href="#working-with-score-worms"></a>
 </h2>
-<p>You can use <code>fetch_player_details</code> to return a list of
-player details for a given club and source. The source will determine
-exactly what details are returned. The default is the AFL.com.au
-website.</p>
+<p>The <code>plot_score_worm</code>, <code>plot_score_worm</code>, and
+<code>plot_score_worm</code> functions accepts the
+argument<code>match_id</code> to fetch the plot/data for a given
+match.</p>
+<ul>
+<li>
+<code>match_id</code> - the Champion Data match_id of the form
+CD_MSSSS014RRMM where SSSS is the Season, RR is the Round and MM is the
+Match. e.g. ‘CD_M20240142004’</li>
+</ul>
+<div class="section level3">
+<h3 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+</h3>
+<p>The following are some examples of ways to plot and scrape the score
+worm data.</p>
+<p>Fist we can plot the score worm for the 2024 round 20 game between
+Fremantle and West Coast.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Hawthorn"</span><span class="op">)</span></span></code></pre></div>
-<p>The AFL website will return AFLW or AFLM data, while other sources
-only include AFLM data.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_score_worm.html">plot_score_worm</a></span><span class="op">(</span><span class="st">'CD_M20240142004'</span><span class="op">)</span> </span></code></pre></div>
+<p>We can also plot the total scores of each team throughout the
+game.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">details_aflw</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span>team <span class="op">=</span> <span class="st">"Western Bulldogs"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></span></code></pre></div>
-<p>The list of details returned for AFL.com.au website is below.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/plot_score_worm_totals.html">plot_score_worm_totals</a></span><span class="op">(</span><span class="st">'CD_M20240142004'</span><span class="op">)</span> </span></code></pre></div>
+<p>We can also just return the data for the fixture that can be used to
+construct these plots or for other score analysis.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="va">details_aflw</span><span class="op">)</span></span></code></pre></div>
-<p>The AFLTables.com source will return all players who have played for
-the specified team over time.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_score_worm_data.html">fetch_score_worm_data</a></span><span class="op">(</span><span class="st">'CD_M20240142004'</span><span class="op">)</span></span></code></pre></div>
+<p>We can return multiple games worth of data by passing in a vector of
+match_ids.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Hawthorn"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span></span></code></pre></div>
-<p>The Footywire.com source allows you to specify just the current list
-of players, which is fairly quick, or all players over time which can be
-a little slow.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Richmond"</span>, source <span class="op">=</span> <span class="st">"footywire"</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>One challenge is that each source accepts different values for the
-<code>team</code> argument. There is a helper function that will return
-an error if the wrong team is supplied and provide a list of acceptable
-values for that specific source.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_player_details.html">fetch_player_details</a></span><span class="op">(</span><span class="st">"Greater Western Sydney"</span>, source <span class="op">=</span> <span class="st">"afltables"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_score_worm_data.html">fetch_score_worm_data</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CD_M20240142101'</span>,<span class="st">'CD_M20240142102'</span>,<span class="st">'CD_M20240142103'</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
   </div>
 

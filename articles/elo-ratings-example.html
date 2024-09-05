@@ -75,6 +75,9 @@
     <li>
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
+    <li>
+      <a href="../articles/score-worms.html">Score-worms</a>
+    </li>
     <li class="divider">
     </li>
 <li class="dropdown-header">APIs</li>
@@ -148,7 +151,7 @@
       <h1 data-toc-skip>ELO Ratings Example</h1>
                         <h4 data-toc-skip class="author">James Day</h4>
             
-            <h4 data-toc-skip class="date">2024-08-27</h4>
+            <h4 data-toc-skip class="date">2024-09-05</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/jimmyday12/fitzroy/blob/main/vignettes/elo-ratings-example.Rmd" class="external-link"><code>vignettes/elo-ratings-example.Rmd</code></a></small>
       <div class="hidden name"><code>elo-ratings-example.Rmd</code></div>
@@ -195,7 +198,7 @@ that into account.</p>
 <p>We can make sure our results are from before the fixture we are
 trying to predict for.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&lt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&lt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 16</span></span></span>
 <span><span class="co">#&gt;    Game Date       Round Home.Team Home.Goals Home.Behinds Home.Points Away.Team</span></span>
@@ -210,7 +213,7 @@ trying to predict for.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Venue &lt;chr&gt;, Margin &lt;int&gt;, Season &lt;dbl&gt;, Round.Type &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   Round.Number &lt;int&gt;</span></span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="st">"2019-01-01"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 7</span></span></span>
 <span><span class="co">#&gt;   Date                Season Season.Game Round Home.Team      Away.Team    Venue</span></span>
@@ -230,16 +233,16 @@ we are using, we need a way to identify each round as a separate match,
 so we’ll combine <code>season</code> and <code>Round.Number</code> into
 a string as a unique identifier when combined with the team name.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>seas_rnd <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">Season</span>, <span class="st">"."</span>, <span class="va">Round.Number</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Since our <code>fixture</code> data and <code>results</code> data are
 coming from different sources, we need to fix a few things up. This is a
 good time to point out that using similar sources is great when
 possible!</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">Date</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Date</span> <span class="op">&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">Date</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Date <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd.html" class="external-link">ymd</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/format.html" class="external-link">format</a></span><span class="op">(</span><span class="va">Date</span>, <span class="st">"%Y-%m-%d"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span>Round.Number <span class="op">=</span> <span class="va">`Round`</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></span>
@@ -284,8 +287,8 @@ model.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">map_margin_to_outcome</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">margin</span>, <span class="va">marg.max</span> <span class="op">=</span> <span class="fl">80</span>, <span class="va">marg.min</span> <span class="op">=</span> <span class="op">-</span><span class="fl">80</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">norm</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">margin</span> <span class="op">-</span> <span class="va">marg.min</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="va">marg.max</span> <span class="op">-</span> <span class="va">marg.min</span><span class="op">)</span></span>
-<span>  <span class="va">norm</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmin</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="va">norm</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmin</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmax</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 </div>
@@ -316,7 +319,7 @@ and actual result of each game. Also in this table is the change in ELO
 rating for the home and away side. See below for the last few games of
 2018.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;            team.A      team.B       p.A  wins.A   update.A   update.B    elo.A</span></span>
 <span><span class="co">#&gt; 15402  West Coast Collingwood 0.5515137 0.60000  0.9697255 -0.9697255 1539.107</span></span>
 <span><span class="co">#&gt; 15403    Hawthorn   Melbourne 0.5113012 0.29375 -4.3510249  4.3510249 1523.735</span></span>
@@ -336,7 +339,7 @@ using <code>as.matrix</code>. Again - viewing the end of 2018 also shows
 teams that didn’t make the finals have the same ELO as the rounds go on
 since they aren’t playing finals.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">elo.data</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">tail</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         Adelaide Brisbane Lions  Carlton Collingwood Essendon Fitzroy Footscray</span></span>
 <span><span class="co">#&gt; [2776,] 1518.969       1460.671 1407.966    1532.832 1506.459    1500  1459.628</span></span>
 <span><span class="co">#&gt; [2777,] 1526.679       1458.724 1400.256    1532.214 1510.554    1500  1462.985</span></span>
@@ -392,7 +395,7 @@ do some predictions! For this, we just need to use our fixture and the
 <code>prediction</code> function with our ELO model as an input. The
 <code>elo</code> package takes care of the result.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">fixture</span> <span class="op">&lt;-</span> <span class="va">fixture</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>Prob <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html" class="external-link">predict</a></span><span class="op">(</span><span class="va">elo.data</span>, newdata <span class="op">=</span> <span class="va">fixture</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fixture</span><span class="op">)</span></span>

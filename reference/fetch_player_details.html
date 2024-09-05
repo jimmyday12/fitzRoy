@@ -63,6 +63,9 @@ The function will typically be used to return the current team lists. For histor
     <li>
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
+    <li>
+      <a href="../articles/score-worms.html">Score-worms</a>
+    </li>
     <li class="divider">
     <li class="dropdown-header">APIs</li>
     <li>
@@ -139,6 +142,7 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
     <div id="ref-usage">
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">fetch_player_details</span><span class="op">(</span></span>
 <span>  team <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  season <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  comp <span class="op">=</span> <span class="st">"AFLM"</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">"AFL"</span>,</span>
@@ -146,15 +150,16 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">fetch_player_details_afl</span><span class="op">(</span></span>
-<span>  <span class="va">season</span>,</span>
+<span>  season <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  team <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  comp <span class="op">=</span> <span class="st">"AFLM"</span>,</span>
 <span>  official_teams <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">fetch_player_details_afltables</span><span class="op">(</span>team <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">fetch_player_details_footywire</span><span class="op">(</span><span class="va">team</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">fetch_player_details_footywire</span><span class="op">(</span>team <span class="op">=</span> <span class="cn">NULL</span>, current <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -163,6 +168,10 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 
 <dl><dt id="arg-team">team<a class="anchor" aria-label="anchor" href="#arg-team"></a></dt>
 <dd><p>team the player played for in the season for, defaults to NULL which returns all teams</p></dd>
+
+
+<dt id="arg-season">season<a class="anchor" aria-label="anchor" href="#arg-season"></a></dt>
+<dd><p>Season in YYYY format</p></dd>
 
 
 <dt id="arg-current">current<a class="anchor" aria-label="anchor" href="#arg-current"></a></dt>
@@ -179,10 +188,6 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Optional parameters passed onto various functions depending on source.</p></dd>
-
-
-<dt id="arg-season">season<a class="anchor" aria-label="anchor" href="#arg-season"></a></dt>
-<dd><p>Season in YYYY format</p></dd>
 
 
 <dt id="arg-official-teams">official_teams<a class="anchor" aria-label="anchor" href="#arg-official-teams"></a></dt>

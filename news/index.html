@@ -57,6 +57,9 @@
     <li>
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
+    <li>
+      <a href="../articles/score-worms.html">Score-worms</a>
+    </li>
     <li class="divider">
     <li class="dropdown-header">APIs</li>
     <li>
@@ -121,10 +124,21 @@
 
     <div class="section level2">
 <h2 class="page-header" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
-<ul><li>Fixed a bug where certain games weren’t getting rescraped automatically in <code>fetch_player_stats_afltables</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/243" class="external-link">#243</a>)</li>
-<li>Fixed bug where round 25 was returning NA in <code>fetch_results_afltables</code>
+<div class="section level3">
+<h3 id="new-features-development-version">New Features<a class="anchor" aria-label="anchor" href="#new-features-development-version"></a></h3>
+<ul><li>New functions to plot match score worms <code>plot_score_worm</code> and <code>plot_score_worm_totals</code><br></li>
+<li>Include date of birth for each player in <code>fetch_player_stats_afltables</code>
 </li>
 </ul></div>
+<div class="section level3">
+<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<ul><li>Fix age for players playing on birthday in <code><a href="../reference/fetch_player_stats.html">fetch_player_stats_afltables()</a></code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/240" class="external-link">#240</a>)</li>
+<li>Remove dupes for players drafted twice in <code><a href="../reference/fetch_player_details.html">fetch_player_details_footywire()</a></code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/242" class="external-link">#242</a>)</li>
+<li>Fixed bug where round 25 was returning NA in <code>fetch_results_afltables</code>
+</li>
+<li>Fixed a bug where certain games weren’t getting rescraped automatically in <code>fetch_player_stats_afltables</code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/243" class="external-link">#243</a>)</li>
+</ul></div>
+</div>
     <div class="section level2">
 <h2 class="page-header" data-toc-text="1.5.0" id="fitzroy-150">fitzRoy 1.5.0<small>2024-07-30</small><a class="anchor" aria-label="anchor" href="#fitzroy-150"></a></h2>
 <div class="section level3">

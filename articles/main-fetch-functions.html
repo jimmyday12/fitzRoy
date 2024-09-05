@@ -75,6 +75,9 @@
     <li>
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
+    <li>
+      <a href="../articles/score-worms.html">Score-worms</a>
+    </li>
     <li class="divider">
     </li>
 <li class="dropdown-header">APIs</li>
@@ -250,7 +253,7 @@ to any of the family of <code>fetch_</code> functions.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span>, source <span class="op">=</span> <span class="st">"AFL"</span><span class="op">)</span></span></code></pre></div>
 <p>We can return just one round instead of the whole fixture.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, round_number <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">compSeason.name</span>, <span class="va">round.name</span>, <span class="va">home.team.name</span>, <span class="va">away.team.name</span>, <span class="va">venue.name</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 9 × 5</span></span></span>
 <span><span class="co">#&gt;   compSeason.name            round.name home.team.name away.team.name venue.name</span></span>
@@ -266,7 +269,7 @@ to any of the family of <code>fetch_</code> functions.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">9</span> 2021 Toyota AFL Premiersh… Round 2    Fremantle      GWS Giants     Optus Sta…</span></span></code></pre>
 <p>We could also return the AFLW fixture instead.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_fixture.html">fetch_fixture</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span></span>
 <span>    <span class="va">compSeason.name</span>, <span class="va">round.name</span>,</span>
 <span>    <span class="va">home.team.name</span>, <span class="va">away.team.name</span>,</span>

@@ -75,6 +75,9 @@
     <li>
       <a href="../articles/aflca-coaches-votes.html">AFLCA Coaches Votes Functions</a>
     </li>
+    <li>
+      <a href="../articles/score-worms.html">Score-worms</a>
+    </li>
     <li class="divider">
     </li>
 <li class="dropdown-header">APIs</li>
@@ -198,7 +201,7 @@ data.</li>
 votes. Firstly, coaches votes can be retrieved for a season (or an array
 of seasons).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLM"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;     Season Round Home.Team Away.Team           Player.Name Coaches.Votes</span></span>
 <span><span class="co">#&gt; 1.1   2021     1  Richmond   Carlton  Dustin Martin (RICH)            10</span></span>
 <span><span class="co">#&gt; 1.2   2021     1  Richmond   Carlton    Jack Graham (RICH)             7</span></span>
@@ -208,7 +211,7 @@ of seasons).</p>
 <span><span class="co">#&gt; 1.6   2021     1  Richmond   Carlton   Kane Lambert (RICH)             1</span></span></code></pre>
 <p>We can also return votes for AFLW.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fetch_coaches_votes.html">fetch_coaches_votes</a></span><span class="op">(</span>season <span class="op">=</span> <span class="fl">2021</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span> <span class="op"><a href="../reference/pipe.html">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt;     Season Round Home.Team   Away.Team               Player.Name Coaches.Votes</span></span>
 <span><span class="co">#&gt; 1.1   2021     1   Carlton Collingwood   Brittany Bonnici (COLL)             9</span></span>
 <span><span class="co">#&gt; 1.2   2021     1   Carlton Collingwood     Jaimee Lambert (COLL)             5</span></span>
