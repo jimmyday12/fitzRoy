@@ -96,6 +96,7 @@ articles:
   - player-details
   - elo-ratings-example
   - aflca-coaches-votes
+  - score-worms
   
 - title: APIs
   navbar: APIs
