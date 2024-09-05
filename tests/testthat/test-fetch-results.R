@@ -61,6 +61,9 @@ test_that("fetch_results_afltables works for various inputs", {
 
   # change round number
   expect_s3_class(fetch_results_afltables(2020, round = 10), "tbl")
+  
+  # check round 25 works
+  expect_gt(nrow(fetch_results_afltables(2024, round = 25)), 0)
 })
 
 test_that("fetch_results_squiggle returns data frame with required variables", {
