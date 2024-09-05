@@ -6,13 +6,14 @@
 #'
 #' @keywords internal
 #' @noRd
-check_season <- function(x) {
+check_season <- function(x = NULL) {
   if (is.null(x)) {
     x <- Sys.Date() %>%
       format("%Y") %>%
       as.numeric()
   }
   if (min(nchar(x)) < 4) cli::cli_abort("Season should be in YYYY format")
+  if (!is.numeric(x)) cli::cli_abort("Season should be numeric")
   return(x)
 }
 
@@ -165,3 +166,124 @@ return_start_end_dates <- function(season) {
     end_date = end_date
   ))
 }
+
+#' Check if a team is valid for afl website
+#'
+#' @param team Team
+#'
+#' @keywords internal
+#' @noRd
+parse_fitzroy_match_id <- function(df, source = "AFL") {
+  source <- check_source(source)
+
+  round_mapping <- round_mapping
+
+  if (source == "AFL") {
+    df <- df %>%
+      dplyr::mutate(utcStartDate = lubridate::as_date(lubridate::ymd_hms(.data$utcStartTime))) %>%
+      dplyr::left_join(round_mapping, dplyr::join_by(x$utcStartDate >= y$start, x$utcStartDate <= y$end)) %>%
+      dplyr::mutate(
+        fitzroy_match_id =
+          glue::glue(
+            "{season_map}_",
+            "{round_map}_",
+            "{parse_team_abbr(home.team.name)}_",
+            "{parse_team_abbr(away.team.name)}"
+          )
+      )
+  }
+  if (source == "footywire") {
+    df <- df %>%
+      dplyr::left_join(round_mapping, dplyr::join_by(x$Date >= y$start, x$Date <= y$end)) %>%
+      dplyr::mutate(
+        fitzroy_match_id =
+          glue::glue(
+            "{season_map}_",
+            "{round_map}_",
+            "{parse_team_abbr(home.team.name)}_",
+            "{parse_team_abbr(away.team.name)}"
+          )
+      )
+  }
+  if (source == "afltables") {
+    df <- df %>%
+      dplyr::left_join(round_mapping, 
+                       dplyr::join_by(x$Date >= y$start, x$Date <= y$end)) %>%
+      dplyr::mutate(
+        fitzroy_match_id =
+          glue::glue(
+            "{season_map}_",
+            "{round_map}_",
+            "{parse_team_abbr(Home.team)}_",
+            "{parse_team_abbr(Away.team)}"
+          )
+      )
+  }
+  if (source == "squiggle") {
+    df <- df %>%
+      dplyr::left_join(round_mapping, dplyr::join_by(x$date >= y$start, x$date <= y$end)) %>%
+      dplyr::mutate(
+        fitzroy_match_id =
+          glue::glue(
+            "{season_map}_",
+            "{round_map}_",
+            "{parse_team_abbr(hteam)}_",
+            "{parse_team_abbr(ateam)}"
+          )
+      )
+  }
+  if (source == "fryzigg") {
+    df <- df %>%
+      dplyr::left_join(round_mapping, dplyr::join_by(x$match_date >= y$start, x$match_date <= y$end)) %>%
+      dplyr::mutate(
+        fitzroy_match_id =
+          glue::glue(
+            "{season_map}_",
+            "{round_map}_",
+            "{parse_team_abbr(match_home_team)}_",
+            "{parse_team_abbr(match_away_team)}"
+          )
+      )
+  }
+
+  df <- df %>%
+    dplyr::select(.data$fitzroy_match_id, dplyr::everything())
+
+  return(df)
+}
+
+#' Internal function to ensure names match between different sources and also name changes.
+#' This gets applied to any web scraper
+#' @param team_name Team name
+#' @export
+parse_team_abbr <- function(team_name) {
+  team_name <- tolower(team_name)
+
+  dplyr::case_when(
+    # sort teams with similar city names
+    stringr::str_detect(team_name, "port|power|yartapuulti") ~ "POR",
+    stringr::str_detect(team_name, "adelaide|crows|kuwarna") ~ "ADE",
+    stringr::str_detect(team_name, "greater western sydney|gws|giants") ~ "GWS",
+    stringr::str_detect(team_name, "sydney|swans|south melbourne") ~ "SYD",
+    stringr::str_detect(team_name, "north melbourne|kangaroos") ~ "NOR",
+    stringr::str_detect(team_name, "melbourne|demons|narrm") ~ "MEL",
+    stringr::str_detect(team_name, "brisbane|lions|bears") ~ "BRI",
+    stringr::str_detect(team_name, "carlton|blues") ~ "CAR",
+    stringr::str_detect(team_name, "collingwood|pies") ~ "COL",
+    stringr::str_detect(team_name, "essendon|bombers") ~ "ESS",
+    stringr::str_detect(team_name, "fremantle|dockers|walyalup") ~ "FRE",
+    stringr::str_detect(team_name, "geelong|cats") ~ "GEE",
+    stringr::str_detect(team_name, "gold coast|suns") ~ "GCS",
+    stringr::str_detect(team_name, "hawthorn|hawks") ~ "HAW",
+    stringr::str_detect(team_name, "richmond|tigers") ~ "RIC",
+    stringr::str_detect(team_name, "st\\.? kilda|stkilda|saints|yroke") ~ "STK",
+    stringr::str_detect(team_name, "bulldogs|dogs|footscray") ~ "WBD",
+    stringr::str_detect(team_name, "west coast|eagles|waalitj|marawar") ~ "WCE",
+    stringr::str_detect(team_name, "fitzroy") ~ "FTZ",
+    stringr::str_detect(team_name, "university") ~ "UNI",
+    TRUE ~ NA_character_
+  )
+}
+
+# silence global variable NOTES
+utils::globalVariables(names = c("x", "y"))

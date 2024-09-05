@@ -36,8 +36,8 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   previous_season <- seas - 1
   previous_data <- fetch_player_stats_afltables(season = previous_season)
   # Remove finals games as no Brownlow Votes for finals
-  previous_data <- previous_data %>% 
-    dplyr::filter(!stringr::str_detect(Round,'F'))
+  previous_data <- previous_data %>%
+    dplyr::filter(!stringr::str_detect(Round, "F"))
   expect_equal(sum(is.na(previous_data$Brownlow.Votes)), 0)
 
   # Test debutants aren't getting ID of 0
@@ -52,7 +52,7 @@ test_that("fetch_player_stats_footywire works for various inputs", {
   # test normal function
   dat <- fetch_player_stats_footywire()
   expect_s3_class(dat, "tbl")
-  expect_equal(min(dat$Season), 2010)
+  expect_gte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
   expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
 
   # change year

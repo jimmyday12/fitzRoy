@@ -52,7 +52,7 @@ fetch_coaches_votes <- function(season = NULL,
   )) > 0) {
     stop("Invalid team")
   }
-  if (is.null(round_number)) round_number <- 1:27
+  if (is.null(round_number)) round_number <- 1:30
   season <- check_season(season)
   if (is.null(team)) {
     team <- c(
@@ -64,7 +64,12 @@ fetch_coaches_votes <- function(season = NULL,
     )
   }
 
-  all_coaches_votes <- expand.grid(Season = season, Round = round_number, Finals = c(F, T)) %>%
+  if (min(season) < 2006) {
+    cli::cli_alert_warning("No Data before 2006")
+  }
+
+  all_coaches_votes <-
+    expand.grid(Season = season, Round = round_number, Finals = c(F, T)) %>%
     as.data.frame() %>%
     # exclude obvious impossibilities
     dplyr::filter(!(
@@ -74,9 +79,9 @@ fetch_coaches_votes <- function(season = NULL,
     )) %>%
     split(1:nrow(.)) %>%
     # apply function to each round
-    lapply(function(row) {
-      try(scrape_coaches_votes(row$Season, row$Round, comp, row$Finals))
-    })
+    purrr::map(function(row) {
+      try(scrape_coaches_votes(row$Season, row$Round, comp, row$Finals), silent = T)
+    }, .progress = TRUE)
 
   # remove errors
   all_coaches_votes[sapply(all_coaches_votes, typeof) == "character"] <- NULL

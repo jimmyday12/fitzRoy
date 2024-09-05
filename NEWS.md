@@ -1,8 +1,16 @@
 # fitzRoy (development version)
 
-* Fixed a bug where certain games weren't getting rescraped automatically in `fetch_player_stats_afltables` ([#243](https://github.com/jimmyday12/fitzRoy/issues/243))
-* Fixed bug where round 25 was returning NA in `fetch_results_afltables`
+## New Features
 
+* New functions to plot match score worms `plot_score_worm` and `plot_score_worm_totals`  
+* Include date of birth for each player in `fetch_player_stats_afltables`
+
+## Bug Fixes
+
+* Fix age for players playing on birthday in `fetch_player_stats_afltables()` ([#240](https://github.com/jimmyday12/fitzRoy/issues/240))
+* Remove dupes for players drafted twice in `fetch_player_details_footywire()` ([#242](https://github.com/jimmyday12/fitzRoy/issues/242))
+* Fixed bug where round 25 was returning NA in `fetch_results_afltables`
+* Fixed a bug where certain games weren't getting rescraped automatically in `fetch_player_stats_afltables` ([#243](https://github.com/jimmyday12/fitzRoy/issues/243))
 
 # fitzRoy 1.5.0
 

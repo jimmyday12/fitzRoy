@@ -7,37 +7,70 @@
 #'
 #' @keywords internal
 #' @noRd
-fetch_player_details_footywire_current <- function(team) {
-  cli::cli_progress_step("Fetching current player details for {team}")
+fetch_player_details_footywire_current <- function(team = NULL) {
+  if (is.null(team)) {
+    team <- c(
+      "Adelaide",
+      "Brisbane Lions",
+      "Carlton",
+      "Collingwood",
+      "Essendon",
+      "Fremantle",
+      "GWS",
+      "Geelong",
+      "Gold Coast",
+      "Hawthorn",
+      "Melbourne",
+      "Kangaroos",
+      "Port Adelaide",
+      "Richmond",
+      "St Kilda",
+      "Sydney",
+      "West Coast",
+      "Western Bulldogs"
+    )
+  }
+
   team_abr <- get_team_abrev_footywire(team)
   path <- paste0("tp-", team_abr)
   url <- paste0("https://www.footywire.com/afl/footy/", path)
-  html <- rvest::read_html(url)
 
+  fetch_player_details_footywire_current_team <- function(url) {
+    # Extract the portion after "tp-"
+    team <- stringr::str_extract(url, "(?<=tp-).*")
+    cli::cli_progress_step("Fetching player details for {team}")
 
-  header.true <- function(df) {
-    names <- as.character(unlist(df[1, ]))
-    "Age" %in% names
+    html <- rvest::read_html(url)
+
+    header.true <- function(df) {
+      names <- as.character(unlist(df[1, ]))
+      "Age" %in% names
+    }
+
+    tbls <- html %>%
+      rvest::html_table()
+
+    ind <- tbls %>%
+      purrr::map_lgl(header.true)
+
+    df <- tbls[[which(ind)]]
+
+    names(df) <- as.character(unlist(df[1, ]))
+    df <- df[-1, ]
+
+    df <- df %>%
+      dplyr::mutate(Name = stringr::str_remove_all(.data$Name, "\nR")) %>%
+      tidyr::separate("Name", c("surname", "first_name"), sep = ",") %>%
+      tidyr::separate("Position", c("Position_1", "Position_2"),
+        sep = "\n", fill = "right"
+      ) %>%
+      dplyr::mutate(first_name = trimws(.data$first_name))
+
+    return(df)
   }
 
-  tbls <- html %>%
-    rvest::html_table()
-
-  ind <- tbls %>%
-    purrr::map_lgl(header.true)
-
-  df <- tbls[[which(ind)]]
-
-  names(df) <- as.character(unlist(df[1, ]))
-  df <- df[-1, ]
-
-  df <- df %>%
-    dplyr::mutate(Name = stringr::str_remove_all(.data$Name, "\nR")) %>%
-    tidyr::separate("Name", c("surname", "first_name"), sep = ",") %>%
-    tidyr::separate("Position", c("Position_1", "Position_2"),
-      sep = "\n", fill = "right"
-    ) %>%
-    dplyr::mutate(first_name = trimws(.data$first_name))
+  df <- purrr::map(url, ~ fetch_player_details_footywire_current_team(.x)) %>%
+    purrr::list_rbind()
 
   return(df)
 }
@@ -52,7 +85,13 @@ fetch_player_details_footywire_current <- function(team) {
 #'
 #' @keywords internal
 #' @noRd
-fetch_player_details_footywire_past <- function(team) {
+fetch_player_details_footywire_past <- function(team = NULL) {
+  if (is.null(team)) {
+    stop("Must specify team for 'current = FALSE'")
+  }
+  if (length(team) > 1) {
+    stop("Must only specify one team for 'current = FALSE'")
+  }
   team_abr <- get_team_abrev_footywire(team)
   path <- paste0("ti-", team_abr)
   url <- paste0("https://www.footywire.com/afl/footy/", path)
@@ -63,10 +102,9 @@ fetch_player_details_footywire_past <- function(team) {
     rvest::html_elements(".lnormtop a") %>%
     rvest::html_attr("href")
 
-
   df <- players_url %>%
-    cli::cli_progress_along() %>%
-    purrr::map_dfr(get_past_player_footywire)
+    purrr::map(~ get_past_player_footywire(.x), .progress = TRUE) %>%
+    purrr::list_rbind()
 
   return(df)
 }
@@ -119,7 +157,8 @@ get_past_player_footywire <- function(path) {
 
   draft <- players_html %>%
     rvest::html_elements("#playerProfileDraftInfo") %>%
-    rvest::html_text2()
+    rvest::html_text2() %>%
+    purrr::pluck(1)
 
   if (length(draft) == 0) draft <- NA
 

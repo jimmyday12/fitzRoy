@@ -41,6 +41,9 @@ reference:
       - fetch_betting_odds_footywire
       - get_afl_colour_palettes
       - calculate_coaches_vote_possibilities
+      - plot_score_worm
+      - plot_score_worm_totals
+      - fetch_score_worm_data
 
   - title: Internals
     desc: >
@@ -48,6 +51,7 @@ reference:
       useful to end users.
     contents:
       - '`replace_teams`'
+      - '`parse_team_abbr`'
       - '`replace_venues`'
       - '`get_aflw_cookie`'
       - '`get_afl_cookie`'
@@ -92,6 +96,7 @@ articles:
   - player-details
   - elo-ratings-example
   - aflca-coaches-votes
+  - score-worms
   
 - title: APIs
   navbar: APIs

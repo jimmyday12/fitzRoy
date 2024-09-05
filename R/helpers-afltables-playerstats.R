@@ -262,17 +262,24 @@ scrape_afltables_match <- function(match_urls) {
       Home.score = dplyr::coalesce(.data$HQETP, .data$HQ4P),
       Away.score = dplyr::coalesce(.data$AQETP, .data$AQ4P)
     )
+  
+  # fetch IDs
+  id_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/player_mapping_afltables.csv")
+  
+  cli::cli_progress_step("Fetching cached ID data from {.url github.com/jimmyday12/fitzRoy_data}")
+  
+  player_mapping_afltables <- readr::read_csv(id_url)
 
   # Join data
   games_joined <- games_scores %>%
     dplyr::mutate(Team = replace_teams(.data$Playing.for)) %>%
     dplyr::left_join(
       player_mapping_afltables %>%
-        dplyr::select("url", Player = "player", "ID"),
+        dplyr::select("url", Player = "player", "ID", DOB = "dob"),
       by = c("url")
-    ) 
+    )
 
-  df <- games_joined %>% 
+  df <- games_joined %>%
     dplyr::rename(dplyr::any_of(mapping_afltables))
 
   df <- df %>%
@@ -416,6 +423,7 @@ check_and_convert <- function(df, column_formats) {
 convert_age_to_years <- function(age_str) {
   years <- as.numeric(sub("y.*", "", age_str))
   days <- as.numeric(sub(".*y ([0-9]+)d.*", "\\1", age_str))
+  days <- tidyr::replace_na(days, 0)
   decimal_years <- years + (days / 365.25)
   return(decimal_years)
 }
@@ -623,4 +631,4 @@ get_afltables_player_ids <- function(seasons) {
 }
 
 # silence global variable NOTES
-utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables", "player_mapping_afltables"))
+utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables"))

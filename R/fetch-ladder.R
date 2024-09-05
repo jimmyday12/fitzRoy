@@ -100,7 +100,8 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
   } else {
     round_id <- find_round_id(round_number,
       season_id = season_id,
-      comp = comp, providerId = FALSE,
+      comp = comp,
+      providerId = FALSE,
       future_rounds = FALSE
     )
   }
@@ -117,8 +118,7 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
       "/ladders"
     ))
 
-  resp <- api_url %>%
-    purrr::map(httr::GET, query = list("roundId" = round_id), .progress = TRUE)
+  resp <- purrr::map(round_id, ~ httr::GET(api_url, query = list("roundId" = .x)), .progress = TRUE)
 
   status_codes <- resp %>%
     purrr::map_dbl(purrr::pluck, "status_code")
@@ -176,10 +176,12 @@ fetch_ladder_afl <- function(season = NULL, round_number = NULL, comp = "AFLM") 
 #' @export
 fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_results_df = NULL) {
   suppressWarnings(if (is.null(match_results_df)) {
-    match_results_df <- purrr::map_dfr(
-      .x = c(1:round_number),
-      .f = ~ fetch_results_afltables(season, .x)
-    )
+    if (is.null(round_number)) {
+      cli::cli_inform("No round number specified, trying to return most recent ladder for specified season")
+      match_results_df <- fetch_results_afltables(season)
+    } else {
+      match_results_df <- fetch_results_afltables(season)
+    }
   })
 
   # first some cleaning up
@@ -276,6 +278,11 @@ fetch_ladder_afltables <- function(season = NULL, round_number = NULL, match_res
   # Round 1 in 2011, Gold Coast had a bye in round 1, so need to fix the NaN for their percentage (R doesn't like 0 / 0)
   df$percentage[is.nan(df$percentage)] <- 0
 
+  # Find max round if round_number is null
+  if (is.null(round_number)) {
+    round_number <- max(df$Round.Number)
+  }
+
   # arrange teams so that the top ranked team is at the top
   ladder <- df %>%
     dplyr::arrange(.data$Season, .data$Round.Number, dplyr::desc(.data$season_points), dplyr::desc(.data$percentage))
@@ -338,11 +345,14 @@ fetch_ladder_squiggle <- function(season = NULL,
     cli::cli_progress_step(
       "Returning ladder as of round {.val {round_number}} in season {.val {season}}"
     )
-    dat <- fetch_squiggle_data(
-      query = "standings",
-      year = season,
-      round = round_number
-    )
+    dat <-
+      purrr::map(round_number, ~ fetch_squiggle_data(
+        query = "standings",
+        year = season,
+        round = .x
+      ) %>%
+        dplyr::mutate(round = .x)) %>%
+      purrr::list_rbind()
   }
 
   return(dat)

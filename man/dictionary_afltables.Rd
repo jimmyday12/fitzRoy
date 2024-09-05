@@ -5,7 +5,7 @@
 \alias{dictionary_afltables}
 \title{AFL Tables Data Dictionary: AFL Tables Column Formats}
 \format{
-An object of class \code{data.frame} with 80 rows and 2 columns.
+An object of class \code{data.frame} with 81 rows and 2 columns.
 }
 \usage{
 dictionary_afltables

@@ -1,0 +1,65 @@
+---
+title: "Score-worms"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Score-worms}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+date: "2024-09-05"
+---
+
+```{r setup, include = FALSE}
+not_cran <- identical(Sys.getenv("NOT_CRAN"), "true")
+online <- !is.null(curl::nslookup("r-project.org", error = FALSE))
+eval_param <- not_cran & online
+
+knitr::opts_chunk$set(
+  eval = eval_param,
+  message = FALSE,
+  warning = FALSE,
+  collapse = TRUE,
+  comment = "#>"
+)
+
+library(fitzRoy)
+library(dplyr)
+```
+
+Functions have been added to fitzRoy to plot and analyse AFL score worms
+
+* `plot_score_worm` - Plots the score difference between two teams throughout a given match.
+* `plot_score_worm_totals` - Plots the total scores of both teams throughout a given match.
+* `fetch_score_worm_data` - Returns score data used to plot score worms for a given match
+
+# Working with score worms
+The `plot_score_worm`, `plot_score_worm`, and `plot_score_worm` functions accepts the argument`match_id` to fetch the plot/data for a given match.
+
+* `match_id` - the Champion Data match_id of the form CD_MSSSS014RRMM where SSSS is the Season, RR is the Round and MM is the Match. e.g. 'CD_M20240142004'
+
+## Examples
+
+The following are some examples of ways to plot and scrape the score worm data.
+
+Fist we can plot the score worm for the 2024 round 20 game between Fremantle and West Coast.
+
+```{r plot_score_worm, eval=FALSE, include=TRUE}
+plot_score_worm('CD_M20240142004') 
+```
+
+We can also plot the total scores of each team throughout the game.
+
+```{r plot_score_worm_totals, eval=FALSE, include=TRUE}
+plot_score_worm_totals('CD_M20240142004') 
+```
+
+We can also just return the data for the fixture that can be used to construct these plots or for other score analysis.
+
+```{r fetch_score_worm_data, eval=FALSE, include=TRUE}
+fetch_score_worm_data('CD_M20240142004')
+```
+
+We can return multiple games worth of data by passing in a vector of match_ids.
+
+```{r fetch_score_worm_data_multi, eval=FALSE, include=TRUE}
+fetch_score_worm_data(c('CD_M20240142101','CD_M20240142102','CD_M20240142103'))
+```

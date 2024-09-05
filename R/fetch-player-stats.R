@@ -179,7 +179,7 @@ fetch_player_stats_afltables <- function(season = NULL,
   }
 
   dat <- dat %>%
-    dplyr::filter(.data$Date > start_date & .data$Date < max_date) %>%
+    dplyr::filter(.data$Date >= start_date & .data$Date <= max_date) %>%
     dplyr::mutate(
       Jumper.No. = as.character(.data$Jumper.No.),
       Substitute = as.character(.data$Substitute)
@@ -233,7 +233,7 @@ fetch_player_stats_afltables <- function(season = NULL,
   dat <- dat %>%
     dplyr::mutate(Venue = stringr::str_squish(.data$Venue))
 
-  dat <- dplyr::filter(dat, .data$Date > start_date & .data$Date < end_date)
+  dat <- dplyr::filter(dat, .data$Date >= start_date & .data$Date <= end_date)
 
   dat <- dat %>%
     dplyr::select(dplyr::any_of(dictionary_afltables$field))
@@ -297,7 +297,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     cli::cli_inform("{.field round_number} is not currently used for {.code fetch_player_stats_footywire}.Returning data for all rounds in specified seasons")
   }
 
-  if (is.null(season)) season <- 2010:as.numeric(format(Sys.Date(), "%Y"))
+  season <- check_season(season)
 
   start_year <- max(min(season), 2010)
   end_year <- min(max(season), as.numeric(format(Sys.Date(), "%Y")))
@@ -369,9 +369,10 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
 
     dat <- dat %>%
       dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))
+
     return(tibble::as_tibble(dat))
   }
 }
 
 # silence global variable NOTES
-utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables", "player_mapping_afltables"))
+utils::globalVariables(names = c("dictionary_afltables", "mapping_afltables"))
