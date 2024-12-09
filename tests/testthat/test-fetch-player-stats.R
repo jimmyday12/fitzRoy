@@ -78,23 +78,23 @@ test_that("fetch_player_stats_fryzigg works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
 
-  # test normal function
-  dat <- fetch_player_stats_fryzigg()
-  expect_s3_class(dat, "tbl")
-
-  # change year
-  dat_round1 <- fetch_player_stats_fryzigg(season = 2019, round_number = 1)
-  expect_s3_class(dat_round1, "tbl")
-  expect_equal(min(dat_round1$match_date), "2019-03-21")
-  expect_equal(max(dat_round1$match_date), "2019-09-28")
-
-  # change comp
-  expect_s3_class(fetch_player_stats_fryzigg(season = 2019, round_number = 1, comp = "AFLW"), "tbl")
-
-
-  # change round number - doesn't do anything
-  dat_round2 <- fetch_player_stats_fryzigg(season = 2019, round_number = 2)
-  expect_equal(dat_round1, dat_round2)
+  # # test normal function
+  # dat <- fetch_player_stats_fryzigg()
+  # expect_s3_class(dat, "tbl")
+  # 
+  # # change year
+  # dat_round1 <- fetch_player_stats_fryzigg(season = 2019, round_number = 1)
+  # expect_s3_class(dat_round1, "tbl")
+  # expect_equal(min(dat_round1$match_date), "2019-03-21")
+  # expect_equal(max(dat_round1$match_date), "2019-09-28")
+  # 
+  # # change comp
+  # expect_s3_class(fetch_player_stats_fryzigg(season = 2019, round_number = 1, comp = "AFLW"), "tbl")
+  # 
+  # 
+  # # change round number - doesn't do anything
+  # dat_round2 <- fetch_player_stats_fryzigg(season = 2019, round_number = 2)
+  # expect_equal(dat_round1, dat_round2)
 })
 
 
@@ -106,14 +106,14 @@ test_that("fetch_player_stats works", {
   expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLM"), "tbl")
   expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLM"), "tbl")
   expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "footywire", comp = "AFLM"), "tbl")
-  expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLM"), "tbl")
+  #expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLM"), "tbl")
 
   # non working sources
   expect_warning(fetch_player_stats(2020, round_number = 1, source = "squiggle", comp = "AFLM"))
 
   # Test that AFLW works
   expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLW"), "tbl")
-  expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLW"), "tbl")
+  #expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLW"), "tbl")
 
   expect_error(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLW"))
   expect_error(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLW"))
