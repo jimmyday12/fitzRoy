@@ -1,4 +1,4 @@
-# fitzRoy (development version)
+# fitzRoy 1.6.0
 
 ## New Features
 
@@ -11,6 +11,7 @@
 * Remove dupes for players drafted twice in `fetch_player_details_footywire()` ([#242](https://github.com/jimmyday12/fitzRoy/issues/242))
 * Fixed bug where round 25 was returning NA in `fetch_results_afltables`
 * Fixed a bug where certain games weren't getting rescraped automatically in `fetch_player_stats_afltables` ([#243](https://github.com/jimmyday12/fitzRoy/issues/243))
+* Removed Fryzigg tests that were failing
 
 # fitzRoy 1.5.0
 
