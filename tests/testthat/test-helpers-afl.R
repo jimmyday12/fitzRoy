@@ -18,6 +18,7 @@ test_that("cookie returns value", {
 })
 
 test_that("get_aflw_cookie returns a 32 character string", {
+  testthat::skip_if_offline()
   testthat::skip_on_cran()
   skip_if_no_cookie()
   cookie <- suppressWarnings(get_aflw_cookie())
@@ -38,6 +39,9 @@ test_that("find comp ID functions work", {
 })
 
 test_that("find season ID functions work", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
   expect_equal(find_season_id(2020), 20)
   expect_equal(find_season_id(2019), 18)
   expect_equal(find_season_id(2012), 2)
@@ -49,6 +53,9 @@ test_that("find season ID functions work", {
 })
 
 test_that("find round ID functions work", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
   expect_equal(find_round_id(1, 2020), 263)
   expect_equal(find_round_id(10, season_id = 20), 436)
   expect_equal(find_round_id(1, 2020, comp = "AFLW"), 288)

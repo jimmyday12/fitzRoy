@@ -13,5 +13,21 @@
 #' }
 #'
 get_afl_colour_palettes <- function() {
-  return(readRDS(url("http://www.fryziggafl.net/static/team_colours.rda", "rb")))
+  # Try to fetch the data
+  tryCatch({
+    # Read the RDS file from the URL
+    url_connection <- url("http://www.fryziggafl.net/static/team_colours.rda", "rb")
+    on.exit(close(url_connection), add = TRUE) # Ensure the connection is closed
+    
+    readRDS(url_connection)
+  }, 
+  # Handle HTTP errors
+  error = function(e) {
+    # Provide a graceful error message
+    message("Failed to retrieve AFL colour palettes. The resource may be unavailable or the URL might have changed.")
+    message("Error details: ", conditionMessage(e))
+    NULL # Return NULL to indicate failure
+  })
 }
+
+

@@ -112,6 +112,9 @@ describe("fetch_betting_odds_footywire", {
 
 # Legacy Tests - should remove eventually --------------------------------------
 test_that("get_betting_odds works", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
   expect_warning(full_betting_df <- get_footywire_betting_odds(
     start_season = 2010, end_season = 2020
   ))
