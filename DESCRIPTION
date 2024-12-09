@@ -33,7 +33,7 @@ Description: An easy package for scraping and processing Australia Rules Footbal
     cleaning and transformation of this data into formats that can be used for analysis. 
 License: MIT + file LICENSE
 URL: https://jimmyday12.github.io/fitzRoy/, https://github.com/jimmyday12/fitzRoy, https://github.com/jimmyday12/fitzroy
-BugReports: https://github.com/jimmyday12/fitzroy/issues
+BugReports: https://github.com/jimmyday12/fitzRoy/issues
 Depends:
     R (>= 4.1)
 Imports:
