@@ -42,19 +42,19 @@ The following are some examples of ways to plot and scrape the score worm data.
 
 Fist we can plot the score worm for the 2024 round 20 game between Fremantle and West Coast.
 
-```{r plot_score_worm, eval=FALSE, include=TRUE}
+```{r plot_score_worm, eval=TRUE, include=TRUE}
 plot_score_worm('CD_M20240142004') 
 ```
 
 We can also plot the total scores of each team throughout the game.
 
-```{r plot_score_worm_totals, eval=FALSE, include=TRUE}
+```{r plot_score_worm_totals, eval=TRUE, include=TRUE}
 plot_score_worm_totals('CD_M20240142004') 
 ```
 
 We can also just return the data for the fixture that can be used to construct these plots or for other score analysis.
 
-```{r fetch_score_worm_data, eval=FALSE, include=TRUE}
+```{r fetch_score_worm_data, eval=TRUE, include=TRUE}
 fetch_score_worm_data('CD_M20240142004')
 ```
 
