@@ -176,7 +176,7 @@ return_start_end_dates <- function(season) {
 parse_fitzroy_match_id <- function(df, source = "AFL") {
   source <- check_source(source)
 
-  round_mapping <- round_mapping
+  # round_mapping <- round_mapping (build a round mapping)
 
   if (source == "AFL") {
     df <- df %>%
