@@ -286,4 +286,4 @@ parse_team_abbr <- function(team_name) {
 }
 
 # silence global variable NOTES
-utils::globalVariables(names = c("x", "y"))
+utils::globalVariables(names = c("x", "y","round_mapping"))
