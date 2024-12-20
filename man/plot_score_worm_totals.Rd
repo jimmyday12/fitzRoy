@@ -7,7 +7,7 @@
 plot_score_worm_totals(match_id)
 }
 \arguments{
-\item{match_id}{AFL match ID (providerId) can be found using \code{fetch_fixture_afl()}}
+\item{match_id}{Champion Data match_id (providerId) of the form CD_MSSSS014RRMM where SSSS is the Season, RR is the Round and MM is the Match. e.g. ‘CD_M20240142004' - can be found using \code{fetch_fixture_afl()}}
 }
 \value{
 A ggplot object showing the total score worm.

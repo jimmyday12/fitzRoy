@@ -25,7 +25,7 @@ dep <- as.vector(read.dcf("DESCRIPTION")[, "Depends"]) %>%
 ```
 
 
-# fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
+# fitzRoy <img src="man/figures/fitz_hex.png" alt="Hex logo for the fitzRoy package" align="right" width="120" height="139"/>
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![R-CMD-check](https://github.com/jimmyday12/fitzRoy/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/jimmyday12/fitzRoy/actions/workflows/R-CMD-check.yaml)
