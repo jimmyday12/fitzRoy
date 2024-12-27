@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# fitzRoy <img src="man/figures/fitz_hex.png" align="right" width="120" height="139"/>
+# fitzRoy <img src="man/figures/fitz_hex.png" alt="Hex logo for the fitzRoy package" align="right" width="120" height="139"/>
 
 <!-- badges: start -->
 

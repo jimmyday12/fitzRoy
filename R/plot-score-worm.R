@@ -2,7 +2,7 @@
 #'
 #' This function plots the score difference score worms for AFL games.
 #'
-#' @param match_id AFL match ID (providerId) can be found using `fetch_fixture_afl()`
+#' @param match_id Champion Data match_id (providerId) of the form CD_MSSSS014RRMM where SSSS is the Season, RR is the Round and MM is the Match. e.g. ‘CD_M20240142004' - can be found using `fetch_fixture_afl()` 
 #' @return A ggplot object showing the score worm.
 #' @export
 plot_score_worm <- function(match_id) {
@@ -85,7 +85,7 @@ plot_score_worm <- function(match_id) {
 #'
 #' This function plots the team totals score worm for AFL games.
 #'
-#' @param match_id AFL match ID (providerId) can be found using `fetch_fixture_afl()`
+#' @param match_id Champion Data match_id (providerId) of the form CD_MSSSS014RRMM where SSSS is the Season, RR is the Round and MM is the Match. e.g. ‘CD_M20240142004' - can be found using `fetch_fixture_afl()` 
 #' @return A ggplot object showing the total score worm.
 #' @export
 plot_score_worm_totals <- function(match_id) {
@@ -205,7 +205,8 @@ get_match_score_worm <- function(url) {
   df <- period_info %>%
     dplyr::left_join(get_score_worm(data),
       by = "periodNumber"
-    )
+    ) %>% 
+    dplyr::arrange(.data$periodNumber,.data$periodSeconds)
 
   return(df)
 }
@@ -380,7 +381,7 @@ build_score_worm <- function(df) {
       match_id = dplyr::last(df$match_id)
     )
 
-  df <- rbind(initial_row, df, end_row)
+  df <- dplyr::bind_rows(initial_row, df, end_row)
   return(df)
 }
 
@@ -414,3 +415,6 @@ team_colours <- function() {
     "Western Bulldogs" = c("#014896", "#FFFFFF") # Blue, White
   )
 }
+
+# silence global variable NOTES
+utils::globalVariables(names = c('periodNumber','periodSeconds'))
