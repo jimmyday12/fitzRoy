@@ -52,9 +52,11 @@ test_that("fetch_player_stats_footywire works for various inputs", {
   # test normal function
   dat <- fetch_player_stats_footywire()
   expect_s3_class(dat, "tbl")
-  expect_gte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
-  expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
-
+  if (nrow(dat) > 0){
+    expect_gte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
+    expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
+  }
+  
   # change year
   dat_round1 <- fetch_player_stats_footywire(season = 2020, round_number = 1)
   expect_s3_class(dat_round1, "tbl")

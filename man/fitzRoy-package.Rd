@@ -14,7 +14,7 @@ Useful links:
   \item \url{https://jimmyday12.github.io/fitzRoy/}
   \item \url{https://github.com/jimmyday12/fitzRoy}
   \item \url{https://github.com/jimmyday12/fitzroy}
-  \item Report bugs at \url{https://github.com/jimmyday12/fitzroy/issues}
+  \item Report bugs at \url{https://github.com/jimmyday12/fitzRoy/issues}
 }
 
 }
