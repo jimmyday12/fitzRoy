@@ -1,5 +1,5 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
-# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+# Debugging build failures? See https://github.com/r-lib/actions#where-to-find-help
 on:
   push:
     branches: [main, master]
@@ -42,7 +42,7 @@ jobs:
 
       - name: Upload test results
         if: failure()
-        uses: actions/upload-artifact@v3.1.2
+        uses: actions/upload-artifact@9b8a3c7a0ec5d5e85f7d8af1582b9f20b4a76b0f  # Pinned commit SHA from the v2 release branch
         with:
           name: coverage-test-failures
           path: ${{ runner.temp }}/package
