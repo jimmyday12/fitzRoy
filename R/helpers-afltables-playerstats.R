@@ -550,12 +550,14 @@ get_afltables_player_ids <- function(seasons) {
     return(out)
   }
 
-  start <- 2017
+  
 
   # need to check if the current years season has started
   current_year <- Sys.Date() %>%
     format("%Y") %>%
     as.numeric()
+  
+  start <- current_year - 1L
   end <- max(max(seasons), current_year)
 
   urls <- purrr::map_chr(start:end, base_url)
