@@ -349,7 +349,7 @@ get_afltables_urls <- function(start_date,
     purrr::map(stringr::str_extract, "\\d{1,2}-[A-z]{3}-\\d{4}") %>%
     purrr::map(lubridate::dmy) %>%
     purrr::map(~ .x[!is.na(.x)]) %>%
-    purrr::map(~ .x >= start_date & .x <= end_date)
+    purrr::map(~ .x > start_date & .x <= end_date)
 
   match_ids <- html_games %>%
     # purrr::map(rvest::html_nodes, "tr+ tr b+ a") %>%
@@ -550,12 +550,14 @@ get_afltables_player_ids <- function(seasons) {
     return(out)
   }
 
-  start <- 2017
+  
 
   # need to check if the current years season has started
   current_year <- Sys.Date() %>%
     format("%Y") %>%
     as.numeric()
+  
+  start <- current_year - 1L
   end <- max(max(seasons), current_year)
 
   urls <- purrr::map_chr(start:end, base_url)
