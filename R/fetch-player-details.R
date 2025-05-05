@@ -52,19 +52,24 @@ fetch_player_details <- function(team = NULL,
     cli::cli_inform("Returning historical player details from source `{source}`")
   }
 
-  dat <- switch(source,
-    "AFL" = purrr::map_dfr(
-      season,
-      ~ fetch_player_details_afl(
-        season = .x,
-        team = team,
-        comp = comp
-      )
-    ),
-    "afltables" = fetch_player_details_afltables(team),
-    "footywire" = fetch_player_details_footywire(team, current = current),
-    NULL
-  )
+  if(source == "AFL" & is.null(season)) {
+    dat <- fetch_player_details_afl(team = team,
+                                    season = season,
+                                    comp = comp, 
+                                    current = current)
+  } else if (source == "AFL") {
+    dat <- purrr::map_dfr(season, 
+                          ~ fetch_player_details_afl(team = team, 
+                                    season = .x,
+                                    current = current,
+                                    comp = comp))
+  } else if (source == "afltables") {
+    dat <- fetch_player_details_afltables(team = team) 
+  } else if (source == "footywire") {
+    dat <- fetch_player_details_footywire(team = team, current = current)
+  } else {
+    dat <- NULL
+  }
 
   if (is.null(dat)) cli::cli_warn("The source \"{source}\" does not have Player Details data. Please use one of \"afltables\" and \"footywire\"")
   return(dat)
@@ -88,12 +93,18 @@ fetch_player_details_afl <- function(season = NULL, team = NULL, current = TRUE,
   # get season id
   comp_seas_id <- find_season_id(season, comp)
 
+  # If it's not current season, check previous season
+  if (is.null(comp_seas_id) & current) {
+    comp_seas_id <- find_season_id(season - 1, comp)
+    } 
+  
+  # If still not found, return null
   if (is.null(comp_seas_id)) {
     cli::cli_warn("No player details data found for season {season} on AFL.com.au for {comp}")
     return(NULL)
   }
 
-  if (!comp %in% c("AFLM", "AFLW")) official_teams <- TRUE
+  if (!comp %in% c("AFLM", "AFLW") | official_teams == TRUE) official_teams <- TRUE
 
   # return team abbreviation
   if (!is.null(team)) {
@@ -114,6 +125,7 @@ fetch_player_details_afl <- function(season = NULL, team = NULL, current = TRUE,
     team_names <- team_dat$name
   }
 
+  
   args <- list(
     teamId = team_ids,
     team = team_names,

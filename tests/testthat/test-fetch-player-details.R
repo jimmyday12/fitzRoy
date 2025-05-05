@@ -1,6 +1,18 @@
+test_that("fetch_player_details works for various inputs", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+  
+  # Overall
+  expect_gt(nrow(fetch_player_details(team = "Adelaide")), 0)
+  
+})
+
 test_that("fetch_player_details_afl works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
+  
+  # Overall
+  expect_gt(nrow(fetch_player_details(team = "Adelaide")), 0)
 
   # Team
   expect_s3_class(fetch_player_details_afl(2021, team = "Hawthorn") %>% suppressWarnings(), "tbl")
@@ -62,7 +74,7 @@ test_that("fetch_player_details works AFLM", {
     as.numeric()
 
   # first check if there is going to be current data
-  aflm_res <- suppressWarnings(fetch_results_afl(2023, 1, "AFLM"))
+  aflm_res <- suppressWarnings(fetch_results_afl(yr - 1, 1, "AFLM"))
   testthat::skip_if(is.null(aflm_res))
 
   # Test each source works
