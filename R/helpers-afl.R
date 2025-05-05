@@ -470,6 +470,7 @@ fetch_round_results_afl <- function(id, cookie = NULL) {
 #' @param compSeasonId comp season id returned by `find_season_id`
 #' @keywords internal
 #' @noRd
+
 fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
   cli::cli_progress_step("Fetching player details for {team}, {season}")
   api <- "https://aflapi.afl.com.au//afl/v2/squads"
