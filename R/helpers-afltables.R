@@ -71,6 +71,7 @@ replace_teams <- function(team) {
     team == "Euro-Yroke" ~ "St Kilda",
     team == "Kuwarna" ~ "Adelaide",
     team == "Waalitj Marawar" ~ "West Coast",
+    team == "Wallitj Marawar" ~ "West Coast",
     TRUE ~ team
   )
 }
