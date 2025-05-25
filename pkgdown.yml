@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.1.2
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   aflca-coaches-votes: aflca-coaches-votes.html
@@ -12,7 +12,7 @@ articles:
   using-fryzigg-stats: using-fryzigg-stats.html
   using-squiggle-api: using-squiggle-api.html
   womens-stats: womens-stats.html
-last_built: 2025-05-13T10:57Z
+last_built: 2025-05-25T23:28Z
 urls:
   reference: https://jimmyday12.github.io/fitzRoy/reference
   article: https://jimmyday12.github.io/fitzRoy/articles
