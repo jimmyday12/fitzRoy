@@ -4,10 +4,12 @@
 \alias{team_abr_afl}
 \title{Internal function to return team name abbreviation for AFL API}
 \usage{
-team_abr_afl(team)
+team_abr_afl(team, return_id = FALSE)
 }
 \arguments{
 \item{team}{Team name}
+
+\item{return_id}{Should we return the team ID used by the API instead of the abbreviation?}
 }
 \description{
 Internal function to return team name abbreviation for AFL API

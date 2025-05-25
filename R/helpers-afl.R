@@ -117,8 +117,9 @@ team_check_afl <- function(team) {
 
 #' Internal function to return team name abbreviation for AFL API
 #' @param team Team name
+#' @param return_id Should we return the team ID used by the API instead of the abbreviation?
 #' @export
-team_abr_afl <- function(team) {
+team_abr_afl <- function(team, return_id = FALSE) {
   cli::cli_warn("In future versions of `fetch_player_details`, teams will need to match the official AFL API teams.
               You can use `official_teams = TRUE` to test this behaviour and change your code before this breaking change",
     .frequency = "regularly",
@@ -126,27 +127,66 @@ team_abr_afl <- function(team) {
     id = "fpd_depr"
   )
 
-  # Internal function
-  dplyr::case_when(
-    team == "Adelaide" ~ "ADEL",
-    team == "Brisbane Lions" ~ "BL",
-    team == "Collingwood" ~ "COLL",
-    team == "Gold Coast" ~ "GCFC",
-    team == "Carlton" ~ "CARL",
-    team == "North Melbourne" ~ "NMFC",
-    team == "Port Adelaide" ~ "PORT",
-    team == "Western Bulldogs" ~ "WB",
-    team == "Hawthorn" ~ "HAW",
-    team == "Geelong" ~ "GEEL",
-    team == "St Kilda" ~ "STK",
-    team == "Sydney" ~ "SYD",
-    team == "Fremantle" ~ "FRE",
-    team == "GWS" ~ "GWS",
-    team == "Richmond" ~ "RICH",
-    team == "Melbourne" ~ "MELB",
-    team == "West Coast" ~ "WCE",
-    TRUE ~ team
-  )
+  if (return_id) {
+    # Internal function
+    dplyr::case_when(
+      team == "Adelaide" ~ 1,
+      team == "Kuwarna" ~ 1,
+      team == "Brisbane Lions" ~ 2,
+      team == "Collingwood" ~ 3,
+      team == "Gold Coast" ~ 4,
+      team == "Carlton" ~ 5,
+      team == "North Melbourne" ~ 6,
+      team == "Port Adelaide" ~ 7,
+      team == "Yartapuulti" ~ 7,
+      team == "Western Bulldogs" ~ 8,
+      team == "Hawthorn" ~ 9,
+      team == "Geelong" ~ 10,
+      team == "St Kilda" ~ 11,
+      team == "Euro-Yroke" ~ 11,
+      team == "Essendon" ~ 12,
+      team == "Sydney" ~ 13,
+      team == "Fremantle" ~ 14,
+      team == "Walyalup" ~ 14,
+      team == "GWS" ~ 15,
+      team == "Richmond" ~ 16,
+      team == "Melbourne" ~ 17,
+      team == "Narrm" ~ 17,
+      team == "West Coast" ~ 18,
+      team == "Waalitj Marawar" ~ 18,
+      TRUE ~ -1
+    )
+  } else {
+    # Internal function
+    dplyr::case_when(
+      team == "Adelaide" ~ "ADEL",
+      team == "Kuwarna" ~ "KUW",
+      team == "Brisbane Lions" ~ "BL",
+      team == "Collingwood" ~ "COLL",
+      team == "Gold Coast" ~ "GCFC",
+      team == "Carlton" ~ "CARL",
+      team == "North Melbourne" ~ "NMFC",
+      team == "Port Adelaide" ~ "PORT",
+      team == "Yartapuulti" ~ "YAR",
+      team == "Western Bulldogs" ~ "WB",
+      team == "Hawthorn" ~ "HAW",
+      team == "Geelong" ~ "GEEL",
+      team == "St Kilda" ~ "STK",
+      team == "Euro-Yroke" ~ "EUR",
+      team == "Essendon" ~ "ESS",
+      team == "Sydney" ~ "SYD",
+      team == "Fremantle" ~ "FRE",
+      team == "Walyalup" ~ "WAL",
+      team == "GWS" ~ "GWS",
+      team == "Richmond" ~ "RICH",
+      team == "Melbourne" ~ "MELB",
+      team == "Narrm" ~ "NAR",
+      team == "West Coast" ~ "WCE",
+      team == "Waalitj Marawar" ~ "WAA",
+      TRUE ~ team
+    )
+  }
+
 }
 
 
@@ -161,6 +201,10 @@ team_check_afl2 <- function(team, comp = "AFLM") {
 
 
   valid <- team %in% valid_teams$name
+  
+  if (!valid) {
+    valid <- team %in% valid_teams$club.name
+  }
 
   if (!valid) {
     cli::cli_abort("\"{team}\" is not a valid input for afl teams for the \"{comp}\" comp.
@@ -176,7 +220,13 @@ team_check_afl2 <- function(team, comp = "AFLM") {
 team_abr_afl2 <- function(team, comp = "AFLM") {
   teams <- fetch_teams_afl(comp)
 
-  teams$abbreviation[teams$name == team]
+  abr <- teams$abbreviation[teams$name == team]
+  
+  if (length(abr) < 1) {
+    abr <- teams$abbreviation[teams$club.name == team]
+  }
+  
+  return(abr)
 }
 
 #' Find Comp ID

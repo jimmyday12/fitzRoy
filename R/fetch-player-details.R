@@ -115,8 +115,8 @@ fetch_player_details_afl <- function(season = NULL, team = NULL, current = TRUE,
       team_names <- team
     } else {
       team_check_afl(team)
-      team_abr <- team_abr_afl(team)
-      team_ids <- find_team_id(team_abr, comp)
+      #team_abr <- team_abr_afl(team)
+      team_ids <- team_abr_afl(team, return_id = TRUE)
       team_names <- team
     }
   } else {
