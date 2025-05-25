@@ -4,6 +4,7 @@
 
 * Fix duplicates for most recent game in `fetch_player_stats_afltables()` ([#250](https://github.com/jimmyday12/fitzRoy/issues/250))
 * Fix issues for `fetch_player_details` when indigenous names are used ([#262](https://github.com/jimmyday12/fitzRoy/issues/262)), ([#261](https://github.com/jimmyday12/fitzRoy/issues/261))
+* Addresses new afl.com.au spelling of *Wallitj Marawar* in `replace_teams()` ([#259](https://github.com/jimmyday12/fitzRoy/issues/259))
 
 # fitzRoy 1.6.0
 
