@@ -97,6 +97,3 @@ fetch_vfl_game_stats <- function(season = 2025) {
   
   return(stats)
 }
-
-# ---- Run ----
-vfl_stats_2025 <- fetch_vfl_game_stats(2025)
