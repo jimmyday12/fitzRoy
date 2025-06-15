@@ -1,68 +1,85 @@
-# Declare globals to avoid R CMD check notes
-utils::globalVariables(c("Team", "type", "Home.Team", "Away.Team", "Games", "where", "all_of", "setNames"))
+#' Fetch Team Statistics
+#'
+#' General wrapper for fetching team statistics from a specified source.
+#'
+#' @param season Integer. The season to fetch stats for (e.g. 2024).
+#' @param summary_type Character. Either `"totals"` (default) or `"averages"`.
+#' @param source Character. Currently only `"afltables"` is supported.
+#' @param ... Additional arguments passed to the underlying data source function.
+#'
+#' @return A data frame of team stats for the season.
+#' @export
+#'
+#' @examples
+#' fetch_team_stats(2023)
+#' fetch_team_stats(2024, summary_type = "averages")
+fetch_team_stats <- function(season,
+                             summary_type = "totals",
+                             source = "afltables",
+                             ...) {
+  dat <- switch(source,
+                "afltables" = fetch_team_stats_afltables(season, summary_type),
+                NULL
+  )
+  
+  if (is.null(dat)) {
+    cli::cli_warn('The source "{source}" is not supported.')
+  }
+  
+  return(dat)
+}
+
 
 #' Fetch Team Statistics from AFLTables
 #'
 #' Scrapes team-level statistics from AFLTables.com for a given season.
 #'
-#' @param season Integer. A year between 1965 and 2025.
+#' @param season Integer. A season (e.g. 2024).
 #' @param summary_type Character. Either `"totals"` (default) or `"averages"`.
 #'
-#' @return A data frame with team stats in `_for`, `_against`, and `_diff` format.
-#' @export
-#'
-#' @examples
-#' fetch_team_stats(2024)
-#' fetch_team_stats(2023, summary_type = "averages")
-fetch_team_stats <- function(season, summary_type = "totals") {
-  if (!is.numeric(season) || season < 1965 || season > 2025) {
-    stop("Season must be a numeric value between 1965 and 2025.")
+#' @return A data frame with team statistics from AFLTables.
+#' @keywords internal
+fetch_team_stats_afltables <- function(season, summary_type = "totals") {
+  if (!is.numeric(season) || season < 1965) {
+    cli::cli_abort('Season must be numeric and greater than or equal to 1965. You provided "{season}".')
   }
   
-  team_name_map <- c(
-    "Adelaide" = "Adelaide",
-    "Brisbane Lions" = "Brisbane Lions",
-    "Carlton" = "Carlton",
-    "Collingwood" = "Collingwood",
-    "Essendon" = "Essendon",
-    "Fremantle" = "Fremantle",
-    "Geelong" = "Geelong",
-    "Gold Coast" = "Gold Coast",
-    "Greater Western Sydney" = "GWS",
-    "Hawthorn" = "Hawthorn",
-    "Melbourne" = "Melbourne",
-    "North Melbourne" = "North Melbourne",
-    "Port Adelaide" = "Port Adelaide",
-    "Richmond" = "Richmond",
-    "St Kilda" = "St Kilda",
-    "Sydney" = "Sydney",
-    "West Coast" = "West Coast",
-    "Footscray" = "Western Bulldogs"  # Standardize older data
-  )
+  cli::cli_progress_step("Downloading team stats from AFLTables for {season}")
   
-  url <- paste0("https://afltables.com/afl/stats/", season, "s.html")
-  page <- rvest::read_html(url)
-  tables <- page %>% rvest::html_elements("table")
-  if (length(tables) < 3) stop("Insufficient tables found on the page for season: ", season)
+  url <- glue::glue("https://afltables.com/afl/stats/{season}s.html")
+  page <- tryCatch(rvest::read_html(url), error = function(e) NULL)
   
-  team_totals_for <- tables[[2]] %>% rvest::html_table(fill = TRUE)
-  team_totals_against <- tables[[3]] %>% rvest::html_table(fill = TRUE)
+  if (is.null(page)) {
+    cli::cli_abort("Could not access AFLTables page for season {season}.")
+  }
+  
+  tables <- page |> rvest::html_elements("table")
+  
+  if (length(tables) < 3) {
+    cli::cli_abort("Insufficient tables found on the page for season: {season}")
+  }
+  
+  team_totals_for <- tables[[2]] |> rvest::html_table(fill = TRUE)
+  team_totals_against <- tables[[3]] |> rvest::html_table(fill = TRUE)
   
   colnames(team_totals_for)[1] <- "Team"
   colnames(team_totals_against)[1] <- "Team"
   team_totals_for$type <- "for"
   team_totals_against$type <- "against"
   
-  team_stats <- dplyr::bind_rows(team_totals_for, team_totals_against) %>%
-    dplyr::filter(Team != "Totals") %>%
-    dplyr::mutate(dplyr::across(-c(Team, type), ~ as.numeric(.)))
+  team_stats <- dplyr::bind_rows(team_totals_for, team_totals_against) |>
+    dplyr::filter(.data$Team != "Totals") |>
+    dplyr::mutate(
+      dplyr::across(
+        where(is.character) & !dplyr::any_of(c("Team", "type")),
+        readr::parse_number
+      )
+    )
   
-  team_stats$Team <- dplyr::recode(team_stats$Team, !!!team_name_map)
-  
-  team_stats_wide <- team_stats %>%
+  team_stats_wide <- team_stats |>
     tidyr::pivot_wider(
-      names_from = type,
-      values_from = -c(Team, type),
+      names_from = .data$type,
+      values_from = -c(.data$Team, .data$type),
       names_sep = "_"
     )
   
@@ -70,30 +87,43 @@ fetch_team_stats <- function(season, summary_type = "totals") {
   against_cols <- gsub("_for$", "_against", for_cols)
   diff_cols <- gsub("_for$", "_diff", for_cols)
   
-  diff_list <- setNames(
-    Map(function(f, a) team_stats_wide[[f]] - team_stats_wide[[a]], for_cols, against_cols),
+  diff_list <- rlang::set_names(
+    purrr::map2(for_cols, against_cols, ~ team_stats_wide[[.x]] - team_stats_wide[[.y]]),
     diff_cols
   )
   
-  team_stats_final <- dplyr::bind_cols(team_stats_wide, tibble::as_tibble(diff_list)) %>%
-    dplyr::mutate(season = season) %>%
-    dplyr::relocate(season, .before = Team)
+  team_stats_final <- dplyr::bind_cols(team_stats_wide, tibble::as_tibble(diff_list)) |>
+    dplyr::mutate(season = season) |>
+    dplyr::relocate(.data$season, .before = .data$Team)
   
   if (summary_type == "averages") {
-    game_counts <- fitzRoy::fetch_results_afltables(season) %>%
-      dplyr::filter(!is.na(Home.Team), !is.na(Away.Team)) %>%
-      tidyr::pivot_longer(cols = c(Home.Team, Away.Team), names_to = "HomeAway", values_to = "Team") %>%
-      dplyr::count(Team, name = "Games")
+    results <- fitzRoy::fetch_results_afltables(season)
+    
+    game_counts <- results |>
+      dplyr::filter(!is.na(.data$Home.Team), !is.na(.data$Away.Team)) |>
+      tidyr::pivot_longer(cols = c(.data$Home.Team, .data$Away.Team),
+                          names_to = "HomeAway", values_to = "Team") |>
+      dplyr::count(.data$Team, name = "Games")
+    
+    # fetch_results_afltables has these two teams named differently 
+    name_map <- c(
+      "GWS" = "Greater Western Sydney",
+      "Footscray" = "Western Bulldogs"
+    )
+    game_counts <- game_counts |>
+      dplyr::mutate(
+        Team = dplyr::recode(Team, !!!name_map)
+      )
     
     team_stats_final <- dplyr::left_join(team_stats_final, game_counts, by = "Team")
     
-    numeric_cols <- team_stats_final %>%
-      dplyr::select(-season, -Team, -Games) %>%
-      dplyr::select(where(is.numeric)) %>%
+    numeric_cols <- team_stats_final |>
+      dplyr::select(-.data$season, -.data$Team, -.data$Games) |>
+      dplyr::select(where(is.numeric)) |>
       names()
     
-    team_stats_final <- team_stats_final %>%
-      dplyr::mutate(dplyr::across(all_of(numeric_cols), ~ . / Games))
+    team_stats_final <- team_stats_final |>
+      dplyr::mutate(dplyr::across(all_of(numeric_cols), ~ . / .data$Games))
   }
   
   return(team_stats_final)
