@@ -71,7 +71,7 @@ fetch_team_stats_afltables <- function(season, summary_type = "totals") {
     dplyr::filter(.data$Team != "Totals") |>
     dplyr::mutate(
       dplyr::across(
-        where(is.character) & !dplyr::any_of(c("Team", "type")),
+        dplyr::where(is.character) & !dplyr::any_of(c("Team", "type")),
         readr::parse_number
       )
     )
@@ -110,9 +110,9 @@ fetch_team_stats_afltables <- function(season, summary_type = "totals") {
       "GWS" = "Greater Western Sydney",
       "Footscray" = "Western Bulldogs"
     )
-    game_counts <- game_counts |>
+    game_counts <- game_counts |> 
       dplyr::mutate(
-        Team = dplyr::recode(Team, !!!name_map)
+        Team = dplyr::recode(.data$Team, !!!name_map)
       )
     
     team_stats_final <- dplyr::left_join(team_stats_final, game_counts, by = "Team")
@@ -123,7 +123,7 @@ fetch_team_stats_afltables <- function(season, summary_type = "totals") {
       names()
     
     team_stats_final <- team_stats_final |>
-      dplyr::mutate(dplyr::across(all_of(numeric_cols), ~ . / .data$Games))
+      dplyr::mutate(dplyr::across(dplyr::all_of(numeric_cols), ~ . / .data$Games))
   }
   
   return(team_stats_final)
