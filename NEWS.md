@@ -1,5 +1,12 @@
 # fitzRoy (development version)
 
+## Improvements
+
+* Added a new wrapper function `fetch_team_stats()` for retrieving team-level statistics from multiple sources.
+* Improved code clarity and consistency with better error handling (`cli`), safer scoping (`.data$`), and modern `dplyr` syntax.
+* Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.
+
+
 ## Bug Fixes
 
 * Fix duplicates for most recent game in `fetch_player_stats_afltables()` ([#250](https://github.com/jimmyday12/fitzRoy/issues/250))

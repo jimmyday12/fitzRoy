@@ -28,6 +28,7 @@ reference:
     - '`fetch_results`'
     - '`fetch_fixture`'
     - '`fetch_player_stats`'
+    - fetch_team_stats
     - fetch_lineup
     - fetch_player_details
     - fetch_coaches_votes
