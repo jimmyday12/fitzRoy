@@ -36,6 +36,7 @@ There are a number of main functions
 * `fetch_results` - returns the match results for a given round and season
 * `fetch_ladder` - returns the ladder for a given round and season
 * `fetch_player_stats` - returns the detailed player stats for a set of matches within a given round or season
+* `fetch_team_stats` - returns the detailed teams stats for a set of matches within a given round or season
 * `fetch_player_details` - returns details on players such as date of birth, height, weight and debut (depending on source)
 
 # Arguments
