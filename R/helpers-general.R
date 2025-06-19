@@ -30,6 +30,7 @@ check_comp <- function(x) {
     "AFLM",
     "AFLW",
     "VFL",
+    "VFLM",
     "VFLW",
     "WAFL",
     "U18B",
@@ -60,7 +61,8 @@ check_source <- function(x) {
     "footywire",
     "afltables",
     "squiggle",
-    "fryzigg"
+    "fryzigg",
+    "vflstats"
   )
 
   if (!x %in% valid) {
