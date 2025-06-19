@@ -71,6 +71,12 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
 <div class="section level3">
+<h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
+<ul><li>Added a new wrapper function <code><a href="../reference/fetch_team_stats.html">fetch_team_stats()</a></code> for retrieving team-level statistics from multiple sources.</li>
+<li>Improved code clarity and consistency with better error handling (<code>cli</code>), safer scoping (<code>.data$</code>), and modern <code>dplyr</code> syntax.</li>
+<li>Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.</li>
+</ul></div>
+<div class="section level3">
 <h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
 <ul><li>Fix duplicates for most recent game in <code><a href="../reference/fetch_player_stats.html">fetch_player_stats_afltables()</a></code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/250" class="external-link">#250</a>)</li>
 <li>Fix issues for <code>fetch_player_details</code> when indigenous names are used (<a href="https://github.com/jimmyday12/fitzRoy/issues/262" class="external-link">#262</a>), (<a href="https://github.com/jimmyday12/fitzRoy/issues/261" class="external-link">#261</a>)</li>
