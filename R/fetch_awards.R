@@ -25,14 +25,22 @@ fetch_awards <- function(..., award = c("brownlow", "allaustralian", "risingstar
 
 #' Fetch Brownlow Medal Votes from Footywire
 #'
-#' @param season Integer. The AFL season (e.g. 2024).
-#' @param type Character. Either "player" (default) or "team".
+#' @description
+#' Scrapes Brownlow Medal vote data from Footywire for a given season.
+#' Set `type = "player"` for per-player votes, or `"team"` for team summaries.
 #'
-#' @return A tibble with Brownlow Medal vote data.
+#' @param season Integer. The AFL season (e.g. `2024`).
+#' @param type Character. Either `"player"` (default) or `"team"`.
+#'
+#' @return A tibble with cleaned Brownlow data.
 #' @export
-fetch_awards_brownlow <- function(season, type = c("player", "team")) {
+fetch_awards_brownlow <- function(season,
+                                  type = c("player", "team")) {
   type <- match.arg(type)
-  stopifnot(is.numeric(season), length(season) == 1)
+  
+  if (!is.numeric(season) || length(season) != 1) {
+    cli::cli_abort("{.arg season} must be a single numeric value.")
+  }
   
   url <- if (type == "player") {
     glue::glue("https://www.footywire.com/afl/footy/brownlow_medal?year={season}")
@@ -49,23 +57,30 @@ fetch_awards_brownlow <- function(season, type = c("player", "team")) {
   })
   
   if (is.null(matched_table)) {
-    cli::cli_abort("Could not find a valid Brownlow table for {season} ({type}).")
+    cli::cli_abort("Could not find a valid {.val {type}} Brownlow table for {.val {season}} on Footywire.")
   }
   
   df <- dplyr::as_tibble(matched_table)
+  
+  if (type == "player" && all(names(df) == paste0("X", 1:9))) {
+    names(df) <- c("Player", "Team", "V", "3V", "2V", "1V", "Played", "Polled", "V/G")
+  } else if (type == "team" && all(names(df) == paste0("X", 1:7))) {
+    names(df) <- c("Team", "V", "3V", "2V", "1V", "Players With Votes", "Games Polled")
+  }
   
   if (type == "player") {
     if (tolower(df$Player[1]) == "player" || all(is.na(df[1, -1]))) df <- df[-1, ]
     
     df <- df |>
       dplyr::rename(
-        Player = 1, Team = 2, Votes = 3, Votes_3 = 4, Votes_2 = 5, Votes_1 = 6,
+        Player = 1, Team = 2, Votes = 3,
+        Votes_3 = 4, Votes_2 = 5, Votes_1 = 6,
         Games_Played = 7, Games_Polled = 8, Votes_Per_Game = 9
       ) |>
       dplyr::mutate(
-        dplyr::across(dplyr::all_of(c("Votes", "Votes_3", "Votes_2", "Votes_1", "Games_Played", "Games_Polled")), as.integer),
-        .data$Votes_Per_Game := as.numeric(.data$Votes_Per_Game),
-        Season = season,
+        dplyr::across(c(Votes, Votes_3, Votes_2, Votes_1, Games_Played, Games_Polled), as.integer),
+        Votes_Per_Game = as.numeric(Votes_Per_Game),
+        Season = !!season,
         .before = 1
       )
   } else {
@@ -77,8 +92,8 @@ fetch_awards_brownlow <- function(season, type = c("player", "team")) {
         Players_With_Votes = 6, Games_Polled = 7
       ) |>
       dplyr::mutate(
-        dplyr::across(dplyr::all_of(c("Votes", "Votes_3", "Votes_2", "Votes_1", "Players_With_Votes", "Games_Polled")), as.integer),
-        Season = season,
+        dplyr::across(c(Votes, Votes_3, Votes_2, Votes_1, Players_With_Votes, Games_Polled), as.integer),
+        Season = !!season,
         .before = 1
       )
   }
@@ -88,10 +103,10 @@ fetch_awards_brownlow <- function(season, type = c("player", "team")) {
 
 #' Fetch AFL All-Australian Team or Squad
 #'
-#' @param season Integer. The AFL season (e.g. 2023).
-#' @param type Character. Either "team" (final 22) or "squad" (initial 44).
+#' @param season A single year (e.g., 2023)
+#' @param type Either "team" (final 22) or "squad" (initial 44)
 #'
-#' @return A tibble with player and team details.
+#' @return A tibble with player/team info
 #' @export
 fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
   type <- match.arg(type)
@@ -99,14 +114,13 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
   
   url <- glue::glue("https://www.footywire.com/afl/footy/all_australian_selection?year={season}")
   page <- rvest::read_html(url)
-  rows <- rvest::html_elements(page, "tr")
+  rows <- page |> rvest::html_elements("tr")
   
   if (type == "team") {
-    # Rows 46–53 contain All-Australian final 22 team rows
     team_rows <- rows[46:53]
     
-    purrr::map_dfr(team_rows, function(row) {
-      tds <- rvest::html_elements(row, "td")
+    final22 <- purrr::map_dfr(team_rows, function(row) {
+      tds <- row |> rvest::html_elements("td")
       position <- tds[1] |> rvest::html_text2() |> stringr::str_squish()
       player_cells <- tds[-1]
       
@@ -121,12 +135,15 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
         }
       })
     })
-  } else {
-    # Rows 60–72 contain All-Australian initial squad rows
+    
+    return(final22)
+  }
+  
+  if (type == "squad") {
     squad_rows <- rows[60:72]
     
-    purrr::map_dfr(squad_rows, function(row) {
-      tds <- rvest::html_elements(row, "td")
+    squad <- purrr::map_dfr(squad_rows, function(row) {
+      tds <- row |> rvest::html_elements("td")
       if (length(tds) < 2) return(NULL)
       
       team <- tds[1] |> rvest::html_element("a") |> rvest::html_text2() |> stringr::str_squish()
@@ -136,6 +153,8 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
       
       tibble::tibble(Season = season, Team = team, Player = players)
     })
+    
+    return(squad)
   }
 }
 
@@ -147,6 +166,11 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
 #'
 #' @return A tibble with Rising Star data.
 #' @export
+#'
+#' @examples
+#' fetch_rising_star(2024, type = "nominations")
+#' fetch_rising_star(2024, round_number = 5, type = "stats")
+#' fetch_rising_star(2024, type = "stats")
 fetch_rising_star <- function(season, round_number = NULL, type = c("nominations", "stats")) {
   type <- match.arg(type)
   
@@ -157,7 +181,7 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
     parsed <- purrr::map(tables, rvest::html_table, fill = TRUE)
     
     if (length(parsed) < 11) {
-      cli::cli_inform("No stats table found for round {round_number}")
+      cli::cli_warn("No stats table found for round {round_number}")
       return(tibble::tibble())
     }
     
@@ -167,15 +191,9 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
                        "Hitouts", "Goal_Assists", "Inside_50s", "Clearances", "Clangers",
                        "Rebound_50s", "Frees_For", "Frees_Against", "Fantasy", "Supercoach")
     
-    numeric_cols <- setdiff(names(tbl), c("Player", "Nomination", "Team", "Opponent", "Result"))
-    
-    tbl |>
-      dplyr::filter(.data$Player != "Name") |>
-      dplyr::mutate(
-        dplyr::across(dplyr::all_of(numeric_cols), ~ suppressWarnings(as.numeric(.))),
-        Season = season,
-        Round = round_number
-      ) |>
+    tbl |> dplyr::filter(.data$Player != "Name") |>
+      dplyr::mutate(dplyr::across(where(is.character) & !c("Player", "Nomination", "Team", "Opponent", "Result"), ~ suppressWarnings(as.numeric(.)))) |>
+      dplyr::mutate(Season = season, Round = round_number) |>
       dplyr::relocate(Season, Round)
   }
   
@@ -195,18 +213,14 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
                        "Clearances", "Clangers", "Rebound_50s", "Frees_For", "Frees_Against",
                        "Supercoach", "Fantasy")
     
-    numeric_cols <- setdiff(names(tbl), c("Round", "Player", "Team", "Opponent"))
-    
-    tbl |>
-      dplyr::filter(.data$Round != "Rd") |>
-      dplyr::mutate(
-        dplyr::across(dplyr::all_of(numeric_cols), ~ suppressWarnings(as.numeric(.))),
-        Season = season
-      ) |>
+    tbl |> dplyr::filter(.data$Round != "Rd") |>
+      dplyr::mutate(dplyr::across(where(is.character) & !c("Player", "Team", "Opponent"), ~ suppressWarnings(as.numeric(.)))) |>
+      dplyr::mutate(Season = season) |>
       dplyr::relocate(Season, Round)
   } else {
     if (is.null(round_number)) {
-      purrr::map_dfr(0:30, ~ tryCatch(get_stats_table(season, .x), error = function(e) tibble::tibble()))
+      rounds <- 0:30
+      purrr::map_dfr(rounds, ~ tryCatch(get_stats_table(season, .x), error = function(e) tibble::tibble()))
     } else {
       get_stats_table(season, round_number)
     }
