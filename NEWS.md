@@ -2,6 +2,11 @@
 
 ## Improvements
 
+* Added `fetch_awards()` function with support for three AFL awards:
+  - `brownlow` (player and team vote tallies from Footywire)
+  - `allaustralian` (final team and full squad)
+  - `risingstar` (nominations and round-level stats)
+  
 * Added a new wrapper function `fetch_team_stats()` for retrieving team-level statistics from multiple sources.
 * Improved code clarity and consistency with better error handling (`cli`), safer scoping (`.data$`), and modern `dplyr` syntax.
 * Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.
