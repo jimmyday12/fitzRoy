@@ -63,45 +63,53 @@ fetch_awards_brownlow <- function(season,
   df <- dplyr::as_tibble(matched_table)
   
   if (type == "player" && all(names(df) == paste0("X", 1:9))) {
-    names(df) <- c("Player", "Team", "V", "3V", "2V", "1V", "Played", "Polled", "V/G")
+    names(df) <- c("Player", "Team", "3V", "2V", "1V", "Players_With_Votes", "Games_Polled", "Polled", "V/G")
   } else if (type == "team" && all(names(df) == paste0("X", 1:7))) {
-    names(df) <- c("Team", "V", "3V", "2V", "1V", "Players With Votes", "Games Polled")
+    names(df) <- c("Team", "3V", "2V", "1V", "Players_With_Votes", "Games_Polled", "V/G")
   }
   
   if (type == "player") {
-    if (tolower(df$Player[1]) == "player" || all(is.na(df[1, -1]))) df <- df[-1, ]
-    
-    df <- df |> 
-      dplyr::rename(
-        Team = 1, Votes = 2, Votes_3 = 3, Votes_2 = 4, Votes_1 = 5,
-        Players_With_Votes = 6, Games_Polled = 7
-      ) |>
-      dplyr::mutate(
-        dplyr::across(
-          .cols = c(.data$Votes, .data$Votes_3, .data$Votes_2, .data$Votes_1, .data$Players_With_Votes, .data$Games_Polled),
-          .fns = as.integer
-        ),
-        Season = !!season,
-        .before = 1
-      )
-    
-  } else {
-    if (tolower(df$Team[1]) == "team" || all(is.na(df[1, -1]))) df <- df[-1, ]
+    if ("Player" %in% names(df) && (tolower(df$Player[1]) == "player" || all(is.na(df[1, -1])))) {
+      df <- df[-1, ]
+    }
     
     df <- df |>
-      dplyr::rename(
-        Team = 1, Votes = 2, Votes_3 = 3, Votes_2 = 4, Votes_1 = 5,
-        Players_With_Votes = 6, Games_Polled = 7
-      ) |>
       dplyr::mutate(
-        dplyr::across(c(Votes, Votes_3, Votes_2, Votes_1, Players_With_Votes, Games_Polled), as.integer),
-        Season = !!season,
-        .before = 1
-      )
+        Votes_3 = as.integer(`3V`),
+        Votes_2 = as.integer(`2V`),
+        Votes_1 = as.integer(`1V`),
+        Players_With_Votes = as.integer(`Players_With_Votes`),
+        Games_Polled = as.integer(`Games_Polled`),
+        Votes = 3 * Votes_3 + 2 * Votes_2 + 1 * Votes_1,
+        Season = !!season
+      ) |>
+      dplyr::relocate(Season) |>
+      dplyr::select(Season, Player, Team, Votes, Votes_3, Votes_2, Votes_1,
+                    Players_With_Votes, Games_Polled, Polled = `Polled`, V_G = `V/G`)
+    
+  } else {
+    if ("Team" %in% names(df) && (tolower(df$Team[1]) == "team" || all(is.na(df[1, -1])))) {
+      df <- df[-1, ]
+    }
+    
+    df <- df |>
+      dplyr::mutate(
+        Votes_3 = as.integer(`3V`),
+        Votes_2 = as.integer(`2V`),
+        Votes_1 = as.integer(`1V`),
+        Players_With_Votes = as.integer(`Players_With_Votes`),
+        Games_Polled = as.integer(`Games_Polled`),
+        Votes = 3 * Votes_3 + 2 * Votes_2 + 1 * Votes_1,
+        Season = !!season
+      ) |>
+      dplyr::relocate(Season) |>
+      dplyr::select(Season, Team, Votes, Votes_3, Votes_2, Votes_1,
+                    Players_With_Votes, Games_Polled, V_G = `V/G`)
   }
   
   return(df)
 }
+
 
 #' Fetch AFL All-Australian Team or Squad
 #'

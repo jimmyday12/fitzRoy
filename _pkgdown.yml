@@ -29,6 +29,8 @@ reference:
     - '`fetch_fixture`'
     - '`fetch_player_stats`'
     - fetch_scores
+    - fetch_supercoach_scores
+    - fetch_fantasy_scores
     - fetch_team_stats
     - fetch_lineup
     - fetch_player_details
