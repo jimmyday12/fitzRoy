@@ -71,18 +71,20 @@ fetch_awards_brownlow <- function(season,
   if (type == "player") {
     if (tolower(df$Player[1]) == "player" || all(is.na(df[1, -1]))) df <- df[-1, ]
     
-    df <- df |>
+    df <- df |> 
       dplyr::rename(
-        Player = 1, Team = 2, Votes = 3,
-        Votes_3 = 4, Votes_2 = 5, Votes_1 = 6,
-        Games_Played = 7, Games_Polled = 8, Votes_Per_Game = 9
+        Team = 1, Votes = 2, Votes_3 = 3, Votes_2 = 4, Votes_1 = 5,
+        Players_With_Votes = 6, Games_Polled = 7
       ) |>
       dplyr::mutate(
-        dplyr::across(c(Votes, Votes_3, Votes_2, Votes_1, Games_Played, Games_Polled), as.integer),
-        Votes_Per_Game = as.numeric(Votes_Per_Game),
+        dplyr::across(
+          .cols = c(.data$Votes, .data$Votes_3, .data$Votes_2, .data$Votes_1, .data$Players_With_Votes, .data$Games_Polled),
+          .fns = as.integer
+        ),
         Season = !!season,
         .before = 1
       )
+    
   } else {
     if (tolower(df$Team[1]) == "team" || all(is.na(df[1, -1]))) df <- df[-1, ]
     
@@ -191,10 +193,17 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
                        "Hitouts", "Goal_Assists", "Inside_50s", "Clearances", "Clangers",
                        "Rebound_50s", "Frees_For", "Frees_Against", "Fantasy", "Supercoach")
     
-    tbl |> dplyr::filter(.data$Player != "Name") |>
-      dplyr::mutate(dplyr::across(where(is.character) & !c("Player", "Nomination", "Team", "Opponent", "Result"), ~ suppressWarnings(as.numeric(.)))) |>
+    tbl |>
+      dplyr::filter(.data$Player != "Name") |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = dplyr::where(is.character) & !c("Player", "Nomination", "Team", "Opponent", "Result"),
+          .fns = ~ suppressWarnings(as.numeric(.))
+        )
+      ) |>
       dplyr::mutate(Season = season, Round = round_number) |>
-      dplyr::relocate(Season, Round)
+      dplyr::relocate(.data$Season, .data$Round)
+    
   }
   
   if (type == "nominations") {
@@ -213,10 +222,17 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
                        "Clearances", "Clangers", "Rebound_50s", "Frees_For", "Frees_Against",
                        "Supercoach", "Fantasy")
     
-    tbl |> dplyr::filter(.data$Round != "Rd") |>
-      dplyr::mutate(dplyr::across(where(is.character) & !c("Player", "Team", "Opponent"), ~ suppressWarnings(as.numeric(.)))) |>
+    tbl |>
+      dplyr::filter(.data$Round != "Rd") |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = dplyr::where(is.character) & !c("Player", "Team", "Opponent"),
+          .fns = ~ suppressWarnings(as.numeric(.))
+        )
+      ) |>
       dplyr::mutate(Season = season) |>
-      dplyr::relocate(Season, Round)
+      dplyr::relocate(.data$Season, .data$Round)
+    
   } else {
     if (is.null(round_number)) {
       rounds <- 0:30
