@@ -35,6 +35,10 @@ reference:
     - fetch_lineup
     - fetch_player_details
     - fetch_coaches_votes
+    - fetch_awards
+    - fetch_awards_brownlow
+    - fetch_awards_allaustralian
+    - fetch_rising_star
     
   - title: Other
     desc: >
