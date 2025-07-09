@@ -30,8 +30,8 @@ fetch_outofcontract <- function(year = 2026, source = "footywire", ...) {
 #' Fetch Out of Contract AFL Players from FootyWire
 #'
 #' @param year Numeric. Year to fetch (e.g. 2026)
-#'
 #' @return A tibble
+#' @keywords internal
 #' @export
 fetch_outofcontract_footywire <- function(year = 2026) {
   url <- paste0("https://www.footywire.com/afl/footy/out_of_contract_players?year=", year)
