@@ -39,6 +39,7 @@ reference:
     - fetch_awards_brownlow
     - fetch_awards_allaustralian
     - fetch_rising_star
+    - fetch_outofcontract
     
   - title: Other
     desc: >
