@@ -4,14 +4,22 @@
 \alias{fetch_team_stats}
 \title{Fetch Team Statistics}
 \usage{
-fetch_team_stats(season, summary_type = "totals", source = "afltables", ...)
+fetch_team_stats(
+  season,
+  summary_type = "totals",
+  source = c("afltables", "footywire", "vflstats"),
+  comp = NULL,
+  ...
+)
 }
 \arguments{
 \item{season}{Integer. The season to fetch stats for (e.g. 2024).}
 
-\item{summary_type}{Character. Either \code{"totals"} (default) or \code{"averages"}.}
+\item{summary_type}{Character. Either "totals" (default), "averages", or other type depending on source.}
 
-\item{source}{Character. Currently only \code{"afltables"} is supported.}
+\item{source}{Character. One of "afltables" (default), "footywire", or "vflstats".}
+
+\item{comp}{Character. Competition code for vflstats. Either "VFLM" or "VFLW".}
 
 \item{...}{Additional arguments passed to the underlying data source function.}
 }
@@ -20,8 +28,4 @@ A data frame of team stats for the season.
 }
 \description{
 General wrapper for fetching team statistics from a specified source.
-}
-\examples{
-fetch_team_stats(2023)
-fetch_team_stats(2024, summary_type = "averages")
 }

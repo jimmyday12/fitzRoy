@@ -9,7 +9,7 @@ fetch_team_stats_afltables(season, summary_type = "totals")
 \arguments{
 \item{season}{Integer. A season (e.g. 2024).}
 
-\item{summary_type}{Character. Either \code{"totals"} (default) or \code{"averages"}.}
+\item{summary_type}{Character. Either "totals" (default) or "averages".}
 }
 \value{
 A data frame with team statistics from AFLTables.
