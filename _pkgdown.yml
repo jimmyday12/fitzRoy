@@ -32,6 +32,7 @@ reference:
     - fetch_lineup
     - fetch_player_details
     - fetch_coaches_votes
+    - predict_brownlow_votes
     
   - title: Other
     desc: >
