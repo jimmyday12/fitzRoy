@@ -9,6 +9,11 @@ Added `predict_brownlow_votes()` function to model and forecast Brownlow Medal v
 * Improved code clarity and consistency with better error handling (`cli`), safer scoping (`.data$`), and modern `dplyr` syntax.
 * Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.
 
+* Added `fetch_awards()` function with support for three AFL awards:
+  - `brownlow` (player and team vote tallies from Footywire)
+  - `allaustralian` (final team and full squad)
+  - `risingstar` (nominations and round-level stats)
+  
 
 ## Bug Fixes
 
