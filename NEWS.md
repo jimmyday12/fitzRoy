@@ -2,6 +2,8 @@
 
 ## Improvements
 
+Added a new set of functions to fetch AFL Supercoach and AFL Fantasy (Dream Team) scores from Footywire. The main wrapper function fetch_scores() allows users to specify the scoring system ("supercoach" or "dream_team") along with year and round inputs. This addition includes helper functions fetch_supercoach_scores() and fetch_fantasy_scores(), which retrieve round-level performance metrics such as player rankings, salary, scores, and value. 
+
 * Added `fetch_awards()` function with support for three AFL awards:
   - `brownlow` (player and team vote tallies from Footywire)
   - `allaustralian` (final team and full squad)

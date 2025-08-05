@@ -28,10 +28,17 @@ reference:
     - '`fetch_results`'
     - '`fetch_fixture`'
     - '`fetch_player_stats`'
+    - fetch_scores
+    - fetch_supercoach_scores
+    - fetch_fantasy_scores
     - fetch_team_stats
     - fetch_lineup
     - fetch_player_details
     - fetch_coaches_votes
+    - fetch_awards
+    - fetch_awards_brownlow
+    - fetch_awards_allaustralian
+    - fetch_rising_star
     
   - title: Other
     desc: >

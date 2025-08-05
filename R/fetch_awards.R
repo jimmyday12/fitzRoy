@@ -23,19 +23,7 @@ fetch_awards <- function(..., award = c("brownlow", "allaustralian", "risingstar
   )
 }
 
-#' Fetch Brownlow Medal Votes from Footywire
-#'
-#' @description
-#' Scrapes Brownlow Medal vote data from Footywire for a given season.
-#' Set `type = "player"` for per-player votes, or `"team"` for team summaries.
-#'
-#' @param season Integer. The AFL season (e.g. `2024`).
-#' @param type Character. Either `"player"` (default) or `"team"`.
-#'
-#' @return A tibble with cleaned Brownlow data.
-#' @export
-fetch_awards_brownlow <- function(season,
-                                  type = c("player", "team")) {
+fetch_awards_brownlow <- function(season, type = c("player", "team")) {
   type <- match.arg(type)
   
   if (!is.numeric(season) || length(season) != 1) {
@@ -63,38 +51,53 @@ fetch_awards_brownlow <- function(season,
   df <- dplyr::as_tibble(matched_table)
   
   if (type == "player" && all(names(df) == paste0("X", 1:9))) {
-    names(df) <- c("Player", "Team", "V", "3V", "2V", "1V", "Played", "Polled", "V/G")
+    names(df) <- c("Player", "Team", "3V", "2V", "1V", "Players_With_Votes", "Games_Polled", "Polled", "V/G")
   } else if (type == "team" && all(names(df) == paste0("X", 1:7))) {
-    names(df) <- c("Team", "V", "3V", "2V", "1V", "Players With Votes", "Games Polled")
+    names(df) <- c("Team", "3V", "2V", "1V", "Players_With_Votes", "Games_Polled", "V/G")
   }
   
   if (type == "player") {
-    if (tolower(df$Player[1]) == "player" || all(is.na(df[1, -1]))) df <- df[-1, ]
+    if ("Player" %in% names(df) && (tolower(df$Player[1]) == "player" || all(is.na(df[1, -1])))) {
+      df <- df[-1, ]
+    }
     
     df <- df |>
-      dplyr::rename(
-        Player = 1, Team = 2, Votes = 3,
-        Votes_3 = 4, Votes_2 = 5, Votes_1 = 6,
-        Games_Played = 7, Games_Polled = 8, Votes_Per_Game = 9
-      ) |>
       dplyr::mutate(
-        dplyr::across(c(Votes, Votes_3, Votes_2, Votes_1, Games_Played, Games_Polled), as.integer),
-        Votes_Per_Game = as.numeric(Votes_Per_Game),
-        Season = !!season,
-        .before = 1
+        Votes_3 = as.integer(.data$`3V`),
+        Votes_2 = as.integer(.data$`2V`),
+        Votes_1 = as.integer(.data$`1V`),
+        Players_With_Votes = as.integer(.data$Players_With_Votes),
+        Games_Polled = as.integer(.data$Games_Polled),
+        Votes = 3 * .data$Votes_3 + 2 * .data$Votes_2 + 1 * .data$Votes_1,
+        Season = !!season
+      ) |>
+      dplyr::relocate(.data$Season) |>
+      dplyr::select(
+        .data$Season, .data$Player, .data$Team, .data$Votes, .data$Votes_3,
+        .data$Votes_2, .data$Votes_1, .data$Players_With_Votes, .data$Games_Polled,
+        Polled = .data$Polled, V_G = .data$`V/G`
       )
+    
   } else {
-    if (tolower(df$Team[1]) == "team" || all(is.na(df[1, -1]))) df <- df[-1, ]
+    if ("Team" %in% names(df) && (tolower(df$Team[1]) == "team" || all(is.na(df[1, -1])))) {
+      df <- df[-1, ]
+    }
     
     df <- df |>
-      dplyr::rename(
-        Team = 1, Votes = 2, Votes_3 = 3, Votes_2 = 4, Votes_1 = 5,
-        Players_With_Votes = 6, Games_Polled = 7
-      ) |>
       dplyr::mutate(
-        dplyr::across(c(Votes, Votes_3, Votes_2, Votes_1, Players_With_Votes, Games_Polled), as.integer),
-        Season = !!season,
-        .before = 1
+        Votes_3 = as.integer(.data$`3V`),
+        Votes_2 = as.integer(.data$`2V`),
+        Votes_1 = as.integer(.data$`1V`),
+        Players_With_Votes = as.integer(.data$Players_With_Votes),
+        Games_Polled = as.integer(.data$Games_Polled),
+        Votes = 3 * .data$Votes_3 + 2 * .data$Votes_2 + 1 * .data$Votes_1,
+        Season = !!season
+      ) |>
+      dplyr::relocate(.data$Season) |>
+      dplyr::select(
+        .data$Season, .data$Team, .data$Votes, .data$Votes_3,
+        .data$Votes_2, .data$Votes_1, .data$Players_With_Votes,
+        .data$Games_Polled, V_G = .data$`V/G`
       )
   }
   
@@ -158,6 +161,7 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
   }
 }
 
+
 #' Fetch AFL Rising Star Nominations or Stats
 #'
 #' @param season Integer. The year of interest (e.g. 2024).
@@ -191,10 +195,16 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
                        "Hitouts", "Goal_Assists", "Inside_50s", "Clearances", "Clangers",
                        "Rebound_50s", "Frees_For", "Frees_Against", "Fantasy", "Supercoach")
     
-    tbl |> dplyr::filter(.data$Player != "Name") |>
-      dplyr::mutate(dplyr::across(where(is.character) & !c("Player", "Nomination", "Team", "Opponent", "Result"), ~ suppressWarnings(as.numeric(.)))) |>
+    tbl |>
+      dplyr::filter(.data$Player != "Name") |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = dplyr::where(is.character) & !c("Player", "Nomination", "Team", "Opponent", "Result"),
+          .fns = ~ suppressWarnings(as.numeric(.))
+        )
+      ) |>
       dplyr::mutate(Season = season, Round = round_number) |>
-      dplyr::relocate(Season, Round)
+      dplyr::relocate(.data$Season, .data$Round)
   }
   
   if (type == "nominations") {
@@ -213,10 +223,17 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
                        "Clearances", "Clangers", "Rebound_50s", "Frees_For", "Frees_Against",
                        "Supercoach", "Fantasy")
     
-    tbl |> dplyr::filter(.data$Round != "Rd") |>
-      dplyr::mutate(dplyr::across(where(is.character) & !c("Player", "Team", "Opponent"), ~ suppressWarnings(as.numeric(.)))) |>
+    tbl |>
+      dplyr::filter(.data$Round != "Rd") |>
+      dplyr::mutate(
+        dplyr::across(
+          .cols = dplyr::where(is.character) & !c("Player", "Team", "Opponent"),
+          .fns = ~ suppressWarnings(as.numeric(.))
+        )
+      ) |>
       dplyr::mutate(Season = season) |>
-      dplyr::relocate(Season, Round)
+      dplyr::relocate(.data$Season, .data$Round)
+    
   } else {
     if (is.null(round_number)) {
       rounds <- 0:30
