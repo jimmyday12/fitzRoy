@@ -63,81 +63,74 @@ get_team_abrev_footywire <- function(team) {
 #' @keywords internal
 #' @noRd
 footywire_html <- function(x, id) {
-  # First get extra information
-  game_details <- x %>%
-    rvest::html_node("tr:nth-child(2) .lnorm") %>%
-    rvest::html_text()
 
-  # We need to extract Round and venue from that text
-  Round <- stringr::str_split(game_details, ",")[[1]][1] %>% trimws()
-  venue <- stringr::str_split(game_details, ",")[[1]][2] %>% trimws()
-
-  # Get Game date
-  game_details_date <- x %>%
-    rvest::html_node(".lnormtop tr:nth-child(3) .lnorm") %>%
-    rvest::html_text()
-
-  # Again, we have to extract the details
-  game_date <- stringr::str_split(game_details_date, ",")[[1]][2] %>%
-    trimws() %>%
-    lubridate::dmy()
+  game_details <- x %>% rvest::html_node("tr:nth-child(2) .lnorm") %>% rvest::html_text(trim = TRUE)
+  Round <- strsplit(game_details, ",", fixed = TRUE)[[1]][1] %>% trimws()
+  venue <- strsplit(game_details, ",", fixed = TRUE)[[1]][2] %>% trimws()
+  
+  game_details_date <- x %>% rvest::html_node(".lnormtop tr:nth-child(3) .lnorm") %>% rvest::html_text(trim = TRUE)
+  game_date <- strsplit(game_details_date, ",", fixed = TRUE)[[1]][2] %>% trimws() %>% lubridate::dmy()
   season <- lubridate::year(game_date)
-
-  # Get home and away team names
-  home_team <- x %>%
-    rvest::html_node("#matchscoretable tr:nth-child(2) a") %>%
-    rvest::html_text()
-
-  away_team <- x %>%
-    rvest::html_node("#matchscoretable tr~ tr+ tr a") %>%
-    rvest::html_text()
-
-  # Now get the table data. The Home Team is in the 13th table
-
+  
+  home_team <- x %>% rvest::html_node("#matchscoretable tr:nth-child(2) a") %>% rvest::html_text(trim = TRUE)
+  away_team <- x %>% rvest::html_node("#matchscoretable tr~ tr+ tr a") %>% rvest::html_text(trim = TRUE)
+  
+  # normalise player column name before any across/select
+  standardise_player_col <- function(df) {
+    if (!is.data.frame(df) || !nrow(df)) return(df)
+    # replace NBSP & trim
+    names(df) <- names(df) |>
+      stringr::str_replace_all("\u00A0", " ") |>
+      trimws()
+    cand <- which(tolower(names(df)) %in% c("player","name","players","player_name"))
+    if (!length(cand)) cand <- 1L
+    names(df)[cand[1]] <- "Player"
+    df
+  }
+  
   home_stats <- x %>%
     rvest::html_nodes("table") %>%
     .[[13]] %>%
     rvest::html_table(header = TRUE) %>%
+    tibble::as_tibble() %>%
+    janitor::remove_empty("cols") %>%
+    standardise_player_col() %>%
     dplyr::mutate(
       Team = home_team,
       Opposition = away_team,
       Status = "Home"
     ) %>%
-    dplyr::mutate(
-      dplyr::across(
-        dplyr::where(is.character),
-        ~ dplyr::na_if(.x, "Unused Substitute")
-      )
-    ) %>%
     dplyr::mutate(dplyr::across(
-      c(-"Player", -"Team", -"Opposition", -"Status"),
-      as.numeric
+      dplyr::where(is.character),
+      ~ dplyr::na_if(.x, "Unused Substitute")
+    )) %>%
+    dplyr::mutate(dplyr::across(
+      -tidyselect::any_of(c("Player","Team","Opposition","Status")),
+      ~ suppressWarnings(as.numeric(gsub("[^0-9.-]", "", .x)))
     ))
-
-  # Now get the table data
+  
   away_stats <- x %>%
     rvest::html_nodes("table") %>%
     .[[18]] %>%
     rvest::html_table(header = TRUE) %>%
+    tibble::as_tibble() %>%
+    janitor::remove_empty("cols") %>%
+    standardise_player_col() %>%
     dplyr::mutate(
       Team = away_team,
       Opposition = home_team,
       Status = "Away"
     ) %>%
-    dplyr::mutate(
-      dplyr::across(
-        dplyr::where(is.character),
-        ~ dplyr::na_if(.x, "Unused Substitute")
-      )
-    ) %>%
     dplyr::mutate(dplyr::across(
-      c(-"Player", -"Team", -"Opposition", -"Status"),
-      as.numeric
+      dplyr::where(is.character),
+      ~ dplyr::na_if(.x, "Unused Substitute")
+    )) %>%
+    dplyr::mutate(dplyr::across(
+      -tidyselect::any_of(c("Player","Team","Opposition","Status")),
+      ~ suppressWarnings(as.numeric(gsub("[^0-9.-]", "", .x)))
     ))
-
-  ## Add data to ind.table
-  player_stats <- home_stats %>%
-    dplyr::bind_rows(away_stats) %>%
+  
+  player_stats <- dplyr::bind_rows(home_stats, away_stats) %>%
     dplyr::mutate(
       Round = Round,
       Venue = venue,
@@ -145,24 +138,12 @@ footywire_html <- function(x, id) {
       Date = game_date,
       Match_id = id
     ) %>%
-    dplyr::select(
-      "Date",
-      "Season",
-      "Round",
-      "Venue",
-      "Player",
-      "Team",
-      "Opposition",
-      "Status",
-      dplyr::everything()
-    )
-
+    dplyr::relocate(Date, Season, Round, Venue, Player, Team, Opposition, Status, .before = dplyr::everything()) %>%
+    janitor::remove_empty("cols")
+  
   names(player_stats) <- make.names(names(player_stats))
-
-  return(player_stats)
+  player_stats
 }
-
-
 
 #' Helper function for \code{get_footywire_stats}
 #'
