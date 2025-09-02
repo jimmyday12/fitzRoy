@@ -13,6 +13,9 @@ fetch_player_stats(
   round_number = NULL,
   comp = "AFLM",
   source = "AFL",
+  player = NULL,
+  player_id = NULL,
+  match = c("exact", "regex", "fuzzy"),
   ...
 )
 
@@ -42,6 +45,12 @@ corresponding the \code{Sys.Date()}}
 \item{comp}{One of "AFLM" (default), "AFLW", "VFL", "VFLW", "WAFL", "U18B" or "U18G." Not all data sources will have non-AFL data}
 
 \item{source}{One of "AFL" (default), "footywire", "fryzigg", "afltables", "squiggle"}
+
+\item{player}{Character vector. Filter by player name (exact/regex/fuzzy via \code{match}).}
+
+\item{player_id}{Character or numeric vector. Filter by player ID (if an ID column is present).}
+
+\item{match}{One of "exact", "regex", or "fuzzy". Controls how \code{player} is matched. Default "exact".}
 
 \item{...}{Optional parameters passed onto various functions depending on source.}
 
