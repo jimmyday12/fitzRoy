@@ -26,6 +26,20 @@
 #'
 #' @return A Tibble with the details of the relevant players.
 #' @export
+#'
+#' @examples
+#' \dontrun{
+#' # Return data for current Hawthorn players
+#' fetch_player_details("Hawthorn")
+#' fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
+#' fetch_player_details("GWS", current = TRUE, source = "footywire")
+#' }
+#'
+#' @family fetch player details functions
+#' @seealso
+#' * [fetch_player_details_afl] for AFL.com data.
+#' * [fetch_player_details_footywire] for Footywire data.
+#' * [fetch_player_details_afltables] for AFL Tables data.
 fetch_player_details <- function(team = NULL,
                                  season = NULL,
                                  current = TRUE,
@@ -49,7 +63,7 @@ fetch_player_details <- function(team = NULL,
   }
   
   # fetch
-  if (source == "AFL" & is.null(season)) {
+  if (source == "AFL" && is.null(season)) {
     dat <- fetch_player_details_afl(team = team, season = season, comp = comp, current = current)
   } else if (source == "AFL") {
     dat <- purrr::map_dfr(
@@ -69,17 +83,15 @@ fetch_player_details <- function(team = NULL,
     return(dat)
   }
   
-  # filter by player / player_id (uses .filter_players and helpers you added)
+  # optional filtering by player / player_id
   out <- .filter_players(dat, player = player, player_id = player_id, match = match)
   
-  # gentle notice if nothing matched (optional; keep or remove as you like)
   if ((length(player) || length(player_id)) && nrow(out) == 0) {
-    cli::cli_inform("No rows matched the supplied {.field player}/{.field player_id} filter for source {.val {source}}.")
+    cli::cli_inform('No rows matched the supplied player/player_id filter for source "{source}".')
   }
   
   out
 }
-
 
 #' @param season Season in YYYY format
 #' @param official_teams boolean, defaults to FALSE. Indicates if we should match `team` to the official list from the API. If this is TRUE, it will use the list from the API and uou can use `fetch_teams_afl` to see what these names should be
