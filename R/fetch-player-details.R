@@ -10,12 +10,18 @@
 #' [fetch_player_details_afl()], [fetch_player_details_afltables()] and [fetch_player_details_footywire()]
 #' can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
 #'
-#' The function will typically be used to return the current team lists. For historical data, you can use the `current` argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data.
+#' The function will typically be used to return the current team lists. For historical data, you can use
+#' `current = FALSE`. This will return all historical data for AFL.com and Footywire data.
+#' AFLTables data will always return historical data.
 #'
 #' @param team team the player played for in the season for, defaults to NULL which returns all teams
+#' @param season Season in YYYY format
 #' @param current logical, return the current team list for the current calendar year or all historical data
 #' @param comp One of "AFLM" (default) or "AFLW"
 #' @param source One of "AFL" (default), "footywire", "afltables"
+#' @param player Character vector (optional). Filter by player name (exact/regex/fuzzy via `match`).
+#' @param player_id Character or numeric vector (optional). Filter by player ID (if an ID column is present).
+#' @param match One of "exact", "regex", or "fuzzy". Controls how `player` is matched. Default "exact".
 #' @param ... Optional parameters passed onto various functions depending on source.
 #'
 #' @return A Tibble with the details of the relevant players.
@@ -26,53 +32,65 @@
 #' # Return data for current Hawthorn players
 #' fetch_player_details("Hawthorn")
 #' fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
-#' fetch_player_details("GWS", current = TRUE, csource = "footywire")
+#' fetch_player_details("GWS", current = TRUE, source = "footywire")
 #' }
 #'
 #' @family fetch player details functions
 #' @seealso
 #' * [fetch_player_details_afl] for AFL.com data.
 #' * [fetch_player_details_footywire] for Footywire data.
-#' * [fetch_player_details_footywire] for AFL Tables data.
+#' * [fetch_player_details_afltables] for AFL Tables data.
 fetch_player_details <- function(team = NULL,
                                  season = NULL,
                                  current = TRUE,
                                  comp = "AFLM",
                                  source = "AFL",
+                                 player = NULL,
+                                 player_id = NULL,
+                                 match = c("exact","regex","fuzzy"),
                                  ...) {
-  # Do some data checks
+  # checks
   check_comp_source(comp, source)
-
-  # Ignore certain parameters based on source
+  match <- match.arg(match)
+  
+  # messaging
   if (source == "afltables") {
     cli::cli_inform("For the afltables source, details are returned for all seasons. Ignoring `current` argument")
   } else if (current) {
     cli::cli_inform("Returning player details for current season from source `{source}`")
-  } else if (!current) {
+  } else {
     cli::cli_inform("Returning historical player details from source `{source}`")
   }
-
-  if(source == "AFL" & is.null(season)) {
-    dat <- fetch_player_details_afl(team = team,
-                                    season = season,
-                                    comp = comp, 
-                                    current = current)
+  
+  # fetch
+  if (source == "AFL" && is.null(season)) {
+    dat <- fetch_player_details_afl(team = team, season = season, comp = comp, current = current)
   } else if (source == "AFL") {
-    dat <- purrr::map_dfr(season, 
-                          ~ fetch_player_details_afl(team = team, 
-                                    season = .x,
-                                    current = current,
-                                    comp = comp))
+    dat <- purrr::map_dfr(
+      season,
+      ~ fetch_player_details_afl(team = team, season = .x, current = current, comp = comp)
+    )
   } else if (source == "afltables") {
-    dat <- fetch_player_details_afltables(team = team) 
+    dat <- fetch_player_details_afltables(team = team)
   } else if (source == "footywire") {
     dat <- fetch_player_details_footywire(team = team, current = current)
   } else {
     dat <- NULL
   }
-
-  if (is.null(dat)) cli::cli_warn("The source \"{source}\" does not have Player Details data. Please use one of \"afltables\" and \"footywire\"")
-  return(dat)
+  
+  if (is.null(dat)) {
+    cli::cli_warn('The source "{source}" does not have Player Details data. Please use one of "afltables" and "footywire"')
+    return(dat)
+  }
+  
+  # optional filtering by player / player_id
+  out <- .filter_players(dat, player = player, player_id = player_id, match = match)
+  
+  if ((length(player) || length(player_id)) && nrow(out) == 0) {
+    cli::cli_inform('No rows matched the supplied player/player_id filter for source "{source}".')
+  }
+  
+  out
 }
 
 #' @param season Season in YYYY format

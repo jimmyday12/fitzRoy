@@ -39,29 +39,39 @@
 #' * [fetch_player_stats_footywire] for Footywire data.
 #' * [fetch_player_stats_afltables] for AFL Tables data.
 #' * [fetch_player_stats_fryzigg] for Fryzigg data.
+
+#' @param player Character vector. Filter by player name (exact/regex/fuzzy via `match`).
+#' @param player_id Character or numeric vector. Filter by player ID (if an ID column is present).
+#' @param match One of "exact", "regex", or "fuzzy". Controls how `player` is matched. Default "exact".
 fetch_player_stats <- function(season = NULL,
                                round_number = NULL,
                                comp = "AFLM",
                                source = "AFL",
+                               player = NULL,
+                               player_id = NULL,
+                               match = c("exact","regex","fuzzy"),
                                ...) {
-  # Do some data checks
   # season <- check_season(season)
   check_comp_source(comp, source)
-
+  match <- match.arg(match)
+  
   dat <- switch(source,
-    "AFL" = fetch_player_stats_afl(season, round_number, comp),
-    "footywire" = fetch_player_stats_footywire(season, round_number, ...),
-    "afltables" = fetch_player_stats_afltables(season, round_number),
-    "fryzigg" = fetch_player_stats_fryzigg(season, round_number, comp),
-    NULL
+                "AFL"       = fetch_player_stats_afl(season, round_number, comp),
+                "footywire" = fetch_player_stats_footywire(season, round_number, ...),
+                "afltables" = fetch_player_stats_afltables(season, round_number),
+                "fryzigg"   = fetch_player_stats_fryzigg(season, round_number, comp),
+                NULL
   )
-
+  
   if (is.null(dat)) {
-    cli::cli_warn("The source \"{source}\" does not have Player Stats.
-                           Please use one of \"AFL\" \"footywire\", \"afltables\" or \"fryzigg\"")
+    cli::cli_warn('The source "{source}" does not have Player Stats.
+                   Please use one of "AFL" "footywire", "afltables" or "fryzigg"')
+    return(dat)
   }
-  return(dat)
+  
+  .filter_players(dat, player = player, player_id = player_id, match = match)
 }
+
 
 #' @rdname fetch_player_stats
 #' @export
