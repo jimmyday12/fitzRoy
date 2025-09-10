@@ -5,13 +5,17 @@ source is provided.
 By default the source used will be the official AFL website.
 fetch_player_details_afl(), fetch_player_details_afltables() and fetch_player_details_footywire()
 can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
-The function will typically be used to return the current team lists. For historical data, you can use the current argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data."><meta property="og:description" content="fetch_player_details returns player details such as date of birth, debut
+The function will typically be used to return the current team lists. For historical data, you can use
+current = FALSE. This will return all historical data for AFL.com and Footywire data.
+AFLTables data will always return historical data."><meta property="og:description" content="fetch_player_details returns player details such as date of birth, debut
 and other details. The exact details that are returned will depend on which
 source is provided.
 By default the source used will be the official AFL website.
 fetch_player_details_afl(), fetch_player_details_afltables() and fetch_player_details_footywire()
 can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
-The function will typically be used to return the current team lists. For historical data, you can use the current argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data."><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-77406420-2"></script><script>
+The function will typically be used to return the current team lists. For historical data, you can use
+current = FALSE. This will return all historical data for AFL.com and Footywire data.
+AFLTables data will always return historical data."><!-- Global site tag (gtag.js) - Google Analytics --><script async src="https://www.googletagmanager.com/gtag/js?id=UA-77406420-2"></script><script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
@@ -88,7 +92,9 @@ source is provided.</p>
 <p>By default the source used will be the official AFL website.</p>
 <p><code>fetch_player_details_afl()</code>, <code>fetch_player_details_afltables()</code> and <code>fetch_player_details_footywire()</code>
 can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.</p>
-<p>The function will typically be used to return the current team lists. For historical data, you can use the <code>current</code> argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data.</p>
+<p>The function will typically be used to return the current team lists. For historical data, you can use
+<code>current = FALSE</code>. This will return all historical data for AFL.com and Footywire data.
+AFLTables data will always return historical data.</p>
     </div>
 
     <div class="section level2">
@@ -99,6 +105,9 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 <span>  current <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  comp <span class="op">=</span> <span class="st">"AFLM"</span>,</span>
 <span>  source <span class="op">=</span> <span class="st">"AFL"</span>,</span>
+<span>  player <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  player_id <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  match <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exact"</span>, <span class="st">"regex"</span>, <span class="st">"fuzzy"</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -139,6 +148,18 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
 <dd><p>One of "AFL" (default), "footywire", "afltables"</p></dd>
 
 
+<dt id="arg-player">player<a class="anchor" aria-label="anchor" href="#arg-player"></a></dt>
+<dd><p>Character vector (optional). Filter by player name (exact/regex/fuzzy via <code>match</code>).</p></dd>
+
+
+<dt id="arg-player-id">player_id<a class="anchor" aria-label="anchor" href="#arg-player-id"></a></dt>
+<dd><p>Character or numeric vector (optional). Filter by player ID (if an ID column is present).</p></dd>
+
+
+<dt id="arg-match">match<a class="anchor" aria-label="anchor" href="#arg-match"></a></dt>
+<dd><p>One of "exact", "regex", or "fuzzy". Controls how <code>player</code> is matched. Default "exact".</p></dd>
+
+
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Optional parameters passed onto various functions depending on source.</p></dd>
 
@@ -151,26 +172,7 @@ can be called directly and return data from the AFL website, AFL Tables and Foot
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A Tibble with the details of the relevant players.</p>
     </div>
-    <div class="section level2">
-    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index">
-<ul><li><p>fetch_player_details_afl for AFL.com data.</p></li>
-<li><p>fetch_player_details_footywire for Footywire data.</p></li>
-<li><p>fetch_player_details_footywire for AFL Tables data.</p></li>
-</ul></div>
-    </div>
 
-    <div class="section level2">
-    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="co"># Return data for current Hawthorn players</span></span></span>
-<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Hawthorn"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Adelaide"</span>, current <span class="op">=</span> <span class="cn">FALSE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"GWS"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, csource <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
-<span class="r-in"><span></span></span>
-</code></pre></div>
-    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
