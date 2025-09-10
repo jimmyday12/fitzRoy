@@ -287,5 +287,113 @@ parse_team_abbr <- function(team_name) {
   )
 }
 
+# ---- Player filtering helpers (internal)
+
+# find a single name column if it exists; otherwise return NULL
+.find_player_name_col <- function(df) {
+  nm <- tolower(names(df))
+  prefs <- c("player","name","player_name","playername","display_name","displayname","full_name","fullname")
+  idx <- which(nm %in% prefs)
+  if (length(idx)) return(names(df)[idx[1]])
+  NULL  # no fallback to first column
+}
+
+
+# return likely player-id columns across sources/schemas
+.find_player_id_cols <- function(df) {
+  nm <- tolower(names(df))
+  wanted <- c(
+    "id","player_id","playerid","athleteid","athlete_id"
+  )
+  cols <- names(df)[nm %in% wanted]
+  # also accept dotted/underscored variants like player.id, player.id., player_id
+  cols <- union(cols, names(df)[grepl("(^|[._])player(_|\\.)?id$", nm)])
+  unique(cols)
+}
+
+# name matching modes: exact / regex / fuzzy (agrep)
+.match_names <- function(x, q, mode = c("exact","regex","fuzzy")) {
+  mode <- match.arg(mode)
+  x2 <- trimws(tolower(as.character(x)))
+  q  <- trimws(tolower(as.character(q)))
+  if (length(q) == 0L) return(rep(TRUE, length(x2)))
+  switch(
+    mode,
+    exact = x2 %in% q,
+    regex = Reduce(`|`, lapply(q, function(p) grepl(p, x2, ignore.case = TRUE))),
+    fuzzy = Reduce(`|`, lapply(q, function(p) {
+      idx <- agrep(p, x2, max.distance = 0.1, ignore.case = TRUE)
+      out <- rep(FALSE, length(x2)); if (length(idx)) out[idx] <- TRUE; out
+    }))
+  )
+}
+
+# unified post-filter to apply on any fetched player-stats/details df
+.filter_players <- function(df, player = NULL, player_id = NULL, match = c("exact","regex","fuzzy")) {
+  if (is.null(df) || !is.data.frame(df) || !nrow(df)) return(df)
+  match <- match.arg(match)
+  
+  keep <- rep(TRUE, nrow(df))
+  
+  # filter by ID if requested
+  if (!is.null(player_id)) {
+    id_cols <- .find_player_id_cols(df)
+    if (length(id_cols)) {
+      ids <- unique(as.character(player_id))
+      id_hit <- Reduce(`|`, lapply(id_cols, function(col) as.character(df[[col]]) %in% ids))
+      keep <- keep & id_hit
+    } else {
+      keep <- rep(FALSE, nrow(df))
+    }
+  }
+  
+  # filter by name if requested
+  if (!is.null(player)) {
+    name_col <- .find_player_name_col(df)
+    
+    if (is.null(name_col)) {
+      # compose FIRST + SURNAME when no single name column exists
+      nm_raw  <- names(df)
+      nm      <- tolower(nm_raw)
+      nm_norm <- gsub("[^a-z]", "", nm)
+      
+      first_aliases <- c("firstname","givenname","givennames","forename","first")
+      last_aliases  <- c("surname","lastname","familyname","last")
+      
+      first_idx <- match(first_aliases, nm_norm); first_idx <- first_idx[!is.na(first_idx)]
+      last_idx  <- match(last_aliases,  nm_norm); last_idx  <- last_idx[!is.na(last_idx)]
+      
+      if (length(first_idx) && length(last_idx)) {
+        first_col <- nm_raw[first_idx[1]]
+        last_col  <- nm_raw[last_idx[1]]
+        name_vec  <- paste(df[[first_col]], df[[last_col]])
+      } else {
+        
+        bad_like <- c("no","games","age","height","weight","position","position1","position2",
+                      "dateofbirth","dob","origin","guernsey","jumper")
+        cand <- which(!(nm %in% bad_like))
+        if (length(cand)) {
+          text_mask <- vapply(df[cand], function(x) is.character(x) || is.factor(x), TRUE)
+          if (any(text_mask)) {
+            name_vec <- as.character(df[[nm_raw[cand[which(text_mask)[1]]]]])
+          } else {
+            name_vec <- rep(NA_character_, nrow(df))
+          }
+        } else {
+          name_vec <- rep(NA_character_, nrow(df))
+        }
+      }
+    } else {
+      name_vec <- df[[name_col]]
+    }
+    
+    name_hit <- .match_names(name_vec, player, mode = match)
+    keep <- keep & name_hit
+  }
+  
+  df[keep, , drop = FALSE]
+}
+
+
 # silence global variable NOTES
 utils::globalVariables(names = c("x", "y","round_mapping"))

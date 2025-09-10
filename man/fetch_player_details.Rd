@@ -13,6 +13,9 @@ fetch_player_details(
   current = TRUE,
   comp = "AFLM",
   source = "AFL",
+  player = NULL,
+  player_id = NULL,
+  match = c("exact", "regex", "fuzzy"),
   ...
 )
 
@@ -39,6 +42,12 @@ fetch_player_details_footywire(team = NULL, current = TRUE)
 
 \item{source}{One of "AFL" (default), "footywire", "afltables"}
 
+\item{player}{Character vector (optional). Filter by player name (exact/regex/fuzzy via \code{match}).}
+
+\item{player_id}{Character or numeric vector (optional). Filter by player ID (if an ID column is present).}
+
+\item{match}{One of "exact", "regex", or "fuzzy". Controls how \code{player} is matched. Default "exact".}
+
 \item{...}{Optional parameters passed onto various functions depending on source.}
 
 \item{official_teams}{boolean, defaults to FALSE. Indicates if we should match \code{team} to the official list from the API. If this is TRUE, it will use the list from the API and uou can use \code{fetch_teams_afl} to see what these names should be}
@@ -56,22 +65,7 @@ By default the source used will be the official AFL website.
 \code{\link[=fetch_player_details_afl]{fetch_player_details_afl()}}, \code{\link[=fetch_player_details_afltables]{fetch_player_details_afltables()}} and \code{\link[=fetch_player_details_footywire]{fetch_player_details_footywire()}}
 can be called directly and return data from the AFL website, AFL Tables and Footywire respectively.
 
-The function will typically be used to return the current team lists. For historical data, you can use the \code{current} argument set to FALSE. This will return all historical data for AFL.com and Footywire data. AFLTables data will always return historical data.
+The function will typically be used to return the current team lists. For historical data, you can use
+\code{current = FALSE}. This will return all historical data for AFL.com and Footywire data.
+AFLTables data will always return historical data.
 }
-\examples{
-\dontrun{
-# Return data for current Hawthorn players
-fetch_player_details("Hawthorn")
-fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
-fetch_player_details("GWS", current = TRUE, csource = "footywire")
-}
-
-}
-\seealso{
-\itemize{
-\item \link{fetch_player_details_afl} for AFL.com data.
-\item \link{fetch_player_details_footywire} for Footywire data.
-\item \link{fetch_player_details_footywire} for AFL Tables data.
-}
-}
-\concept{fetch player details functions}
