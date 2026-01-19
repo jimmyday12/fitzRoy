@@ -24,7 +24,9 @@ A tibble with Rising Star data.
 Fetch AFL Rising Star Nominations or Stats
 }
 \examples{
+\dontrun{
 fetch_rising_star(2024, type = "nominations")
 fetch_rising_star(2024, round_number = 5, type = "stats")
 fetch_rising_star(2024, type = "stats")
+}
 }

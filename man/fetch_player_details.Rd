@@ -69,3 +69,20 @@ The function will typically be used to return the current team lists. For histor
 \code{current = FALSE}. This will return all historical data for AFL.com and Footywire data.
 AFLTables data will always return historical data.
 }
+\examples{
+\dontrun{
+# Return data for current Hawthorn players
+fetch_player_details("Hawthorn")
+fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
+fetch_player_details("GWS", current = TRUE, source = "footywire")
+}
+
+}
+\seealso{
+\itemize{
+\item \link{fetch_player_details_afl} for AFL.com data.
+\item \link{fetch_player_details_footywire} for Footywire data.
+\item \link{fetch_player_details_afltables} for AFL Tables data.
+}
+}
+\concept{fetch player details functions}

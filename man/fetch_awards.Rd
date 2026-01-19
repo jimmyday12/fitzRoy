@@ -18,7 +18,9 @@ A data frame containing the requested award data.
 General wrapper to fetch Brownlow, All-Australian, or Rising Star awards from Footywire.
 }
 \examples{
+\dontrun{
 fetch_awards(2024, award = "brownlow", type = "player")
 fetch_awards(2023, award = "allaustralian", type = "team")
 fetch_awards(2024, award = "risingstar", type = "nominations")
+}
 }

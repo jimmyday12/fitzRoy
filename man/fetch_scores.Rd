@@ -18,6 +18,8 @@ A data frame of scores.
 Wrapper to fetch either Supercoach or AFL Fantasy (Dream Team) scores from Footywire.
 }
 \examples{
+\dontrun{
 fetch_scores(type = "supercoach", year = 2025, rounds = 1:3)
 fetch_scores(type = "dream_team", year = 2025, rounds = 1:3)
+}
 }
