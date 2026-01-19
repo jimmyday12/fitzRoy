@@ -9,8 +9,10 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' fetch_scores(type = "supercoach", year = 2025, rounds = 1:3)
 #' fetch_scores(type = "dream_team", year = 2025, rounds = 1:3)
+#' }
 fetch_scores <- function(type = c("supercoach", "dream_team"), ...) {
   if (!type[1] %in% c("supercoach", "dream_team")) {
     cli::cli_abort(c(

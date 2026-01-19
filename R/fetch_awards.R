@@ -9,9 +9,11 @@
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' fetch_awards(2024, award = "brownlow", type = "player")
 #' fetch_awards(2023, award = "allaustralian", type = "team")
 #' fetch_awards(2024, award = "risingstar", type = "nominations")
+#' }
 fetch_awards <- function(..., award = c("brownlow", "allaustralian", "risingstar")) {
   award <- match.arg(award)
   
@@ -172,9 +174,11 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' fetch_rising_star(2024, type = "nominations")
 #' fetch_rising_star(2024, round_number = 5, type = "stats")
 #' fetch_rising_star(2024, type = "stats")
+#' }
 fetch_rising_star <- function(season, round_number = NULL, type = c("nominations", "stats")) {
   type <- match.arg(type)
   
