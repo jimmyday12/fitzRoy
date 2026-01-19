@@ -114,7 +114,7 @@ fetch_team_stats_afltables <- function(season, summary_type = "totals") {
     
     numeric_cols <- team_stats_final |>
       dplyr::select(-.data$season, -.data$Team, -.data$Games) |>
-      dplyr::select(where(is.numeric)) |>
+      dplyr::select(dplyr::where(is.numeric)) |>
       names()
     
     team_stats_final <- team_stats_final |>
