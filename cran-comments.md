@@ -1,14 +1,23 @@
-## Test environments
-local OS X install, R 4.2.2
-ubuntu-latest (on R-hub), R-devel
-macos-13 (on R-hub) R-devel
-macos-latest (on R-hub) R-devel
-windows-latest (on R-hub) R-devel
-win-builder (devel and release)
-
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+
+* checking CRAN incoming feasibility ... NOTE
+  - Found the following (possibly) invalid URLs for https://www.footywire.com
+    (Status: 406, Not Acceptable): this URL is correct and functional in a
+    browser. The 406 status is returned because the server rejects automated
+    requests without a browser-like User-Agent header. The site is a primary
+    data source for the package.
+
+## Test environments
+
+* Local macOS (aarch64-apple-darwin20), R 4.2
+* GitHub Actions: macOS (latest), R release
+* GitHub Actions: Windows (latest), R release
+* GitHub Actions: Ubuntu (latest), R devel
+* GitHub Actions: Ubuntu (latest), R release
+* GitHub Actions: Ubuntu (latest), R oldrel-1
+* Windows Server 2022, R-devel (win-builder), 2026-03-12
 
 ## Downstream Dependancies
 

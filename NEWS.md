@@ -1,16 +1,13 @@
-# fitzRoy (development version) 
+# fitzRoy 1.7.0
 
-## Improvements
+## New Features
 
 * Added a `fetch_outofcontract` function (with `fetch_outofcontract_footywire`) to fetch AFL out-of-contract players for a given year (2025 onwards), enabling team list analysis and end-of-season contract reviews.
-
-* Added a new set of functions to fetch AFL Supercoach and AFL Fantasy (Dream Team) scores from Footywire. The main wrapper function fetch_scores() allows users to specify the scoring system ("supercoach" or "dream_team") along with year and round inputs. This addition includes helper functions fetch_supercoach_scores() and fetch_fantasy_scores(), which retrieve round-level performance metrics such as player rankings, salary, scores, and value. 
-
+* Added a new set of functions to fetch AFL Supercoach and AFL Fantasy (Dream Team) scores from Footywire. The main wrapper function `fetch_scores()` allows users to specify the scoring system ("supercoach" or "dream_team") along with year and round inputs. This addition includes helper functions `fetch_supercoach_scores()` and `fetch_fantasy_scores()`, which retrieve round-level performance metrics such as player rankings, salary, scores, and value. 
 * Added `fetch_awards()` function with support for three AFL awards:
   - `brownlow` (player and team vote tallies from Footywire)
   - `allaustralian` (final team and full squad)
   - `risingstar` (nominations and round-level stats)
-  
 * Added a new wrapper function `fetch_team_stats()` for retrieving team-level statistics from multiple sources.
 * Improved code clarity and consistency with better error handling (`cli`), safer scoping (`.data$`), and modern `dplyr` syntax.
 * Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.
