@@ -133,7 +133,7 @@ you use the right source.
 - [`fetch_awards()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_awards.md)
   : Fetch AFL Awards Data
 - [`fetch_awards_brownlow()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_awards_brownlow.md)
-  : Fetch Brownlow Medal Votes from Footywire
+  : Fetch Brownlow Medal Data
 - [`fetch_awards_allaustralian()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_awards_allaustralian.md)
   : Fetch AFL All-Australian Team or Squad
 - [`fetch_rising_star()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_rising_star.md)

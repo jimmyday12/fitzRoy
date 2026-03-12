@@ -96,3 +96,22 @@ fetch_player_details_footywire(team = NULL, current = TRUE)
 ## Value
 
 A Tibble with the details of the relevant players.
+
+## See also
+
+- fetch_player_details_afl for AFL.com data.
+
+- fetch_player_details_footywire for Footywire data.
+
+- fetch_player_details_afltables for AFL Tables data.
+
+## Examples
+
+``` r
+if (FALSE) { # \dontrun{
+# Return data for current Hawthorn players
+fetch_player_details("Hawthorn")
+fetch_player_details("Adelaide", current = FALSE, comp = "AFLW")
+fetch_player_details("GWS", current = TRUE, source = "footywire")
+} # }
+```

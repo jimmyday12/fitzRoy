@@ -172,7 +172,26 @@ AFLTables data will always return historical data.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A Tibble with the details of the relevant players.</p>
     </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index">
+<ul><li><p>fetch_player_details_afl for AFL.com data.</p></li>
+<li><p>fetch_player_details_footywire for Footywire data.</p></li>
+<li><p>fetch_player_details_afltables for AFL Tables data.</p></li>
+</ul></div>
+    </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
+<span class="r-in"><span><span class="co"># Return data for current Hawthorn players</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Hawthorn"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"Adelaide"</span>, current <span class="op">=</span> <span class="cn">FALSE</span>, comp <span class="op">=</span> <span class="st">"AFLW"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">fetch_player_details</span><span class="op">(</span><span class="st">"GWS"</span>, current <span class="op">=</span> <span class="cn">TRUE</span>, source <span class="op">=</span> <span class="st">"footywire"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

@@ -1,7 +1,6 @@
-# Fetch Brownlow Medal Votes from Footywire
+# Fetch Brownlow Medal Data
 
-Scrapes Brownlow Medal vote data from Footywire for a given season. Set
-`type = "player"` for per-player votes, or `"team"` for team summaries.
+Fetch Brownlow Medal Data
 
 ## Usage
 
@@ -13,12 +12,12 @@ fetch_awards_brownlow(season, type = c("player", "team"))
 
 - season:
 
-  Integer. The AFL season (e.g. `2024`).
+  A single numeric year (e.g., 2024).
 
 - type:
 
-  Character. Either `"player"` (default) or `"team"`.
+  Either "player" (default) or "team".
 
 ## Value
 
-A tibble with cleaned Brownlow data.
+A tibble with Brownlow vote data.
