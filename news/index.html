@@ -69,13 +69,12 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.7.0" id="fitzroy-170">fitzRoy 1.7.0<a class="anchor" aria-label="anchor" href="#fitzroy-170"></a></h2>
 <div class="section level3">
-<h3 id="improvements-development-version">Improvements<a class="anchor" aria-label="anchor" href="#improvements-development-version"></a></h3>
-<ul><li><p>Added a <code>fetch_outofcontract</code> function (with <code>fetch_outofcontract_footywire</code>) to fetch AFL out-of-contract players for a given year (2025 onwards), enabling team list analysis and end-of-season contract reviews.</p></li>
-<li><p>Added a new set of functions to fetch AFL Supercoach and AFL Fantasy (Dream Team) scores from Footywire. The main wrapper function fetch_scores() allows users to specify the scoring system (“supercoach” or “dream_team”) along with year and round inputs. This addition includes helper functions fetch_supercoach_scores() and fetch_fantasy_scores(), which retrieve round-level performance metrics such as player rankings, salary, scores, and value.</p></li>
-<li>
-<p>Added <code><a href="../reference/fetch_awards.html">fetch_awards()</a></code> function with support for three AFL awards:</p>
+<h3 id="new-features-1-7-0">New Features<a class="anchor" aria-label="anchor" href="#new-features-1-7-0"></a></h3>
+<ul><li>Added a <code>fetch_outofcontract</code> function (with <code>fetch_outofcontract_footywire</code>) to fetch AFL out-of-contract players for a given year (2025 onwards), enabling team list analysis and end-of-season contract reviews.</li>
+<li>Added a new set of functions to fetch AFL Supercoach and AFL Fantasy (Dream Team) scores from Footywire. The main wrapper function <code><a href="../reference/fetch_scores.html">fetch_scores()</a></code> allows users to specify the scoring system (“supercoach” or “dream_team”) along with year and round inputs. This addition includes helper functions <code><a href="../reference/fetch_supercoach_scores.html">fetch_supercoach_scores()</a></code> and <code><a href="../reference/fetch_fantasy_scores.html">fetch_fantasy_scores()</a></code>, which retrieve round-level performance metrics such as player rankings, salary, scores, and value.</li>
+<li>Added <code><a href="../reference/fetch_awards.html">fetch_awards()</a></code> function with support for three AFL awards:
 <ul><li>
 <code>brownlow</code> (player and team vote tallies from Footywire)</li>
 <li>
@@ -83,12 +82,12 @@
 <li>
 <code>risingstar</code> (nominations and round-level stats)</li>
 </ul></li>
-<li><p>Added a new wrapper function <code><a href="../reference/fetch_team_stats.html">fetch_team_stats()</a></code> for retrieving team-level statistics from multiple sources.</p></li>
-<li><p>Improved code clarity and consistency with better error handling (<code>cli</code>), safer scoping (<code>.data$</code>), and modern <code>dplyr</code> syntax.</p></li>
-<li><p>Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.</p></li>
+<li>Added a new wrapper function <code><a href="../reference/fetch_team_stats.html">fetch_team_stats()</a></code> for retrieving team-level statistics from multiple sources.</li>
+<li>Improved code clarity and consistency with better error handling (<code>cli</code>), safer scoping (<code>.data$</code>), and modern <code>dplyr</code> syntax.</li>
+<li>Enhanced compatibility with other functions by ensuring consistent team naming and structure in outputs.</li>
 </ul></div>
 <div class="section level3">
-<h3 id="bug-fixes-development-version">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-development-version"></a></h3>
+<h3 id="bug-fixes-1-7-0">Bug Fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-1-7-0"></a></h3>
 <ul><li>Fix duplicates for most recent game in <code><a href="../reference/fetch_player_stats.html">fetch_player_stats_afltables()</a></code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/250" class="external-link">#250</a>)</li>
 <li>Fix issues for <code>fetch_player_details</code> when indigenous names are used (<a href="https://github.com/jimmyday12/fitzRoy/issues/262" class="external-link">#262</a>), (<a href="https://github.com/jimmyday12/fitzRoy/issues/261" class="external-link">#261</a>)</li>
 <li>Addresses new afl.com.au spelling of <em>Wallitj Marawar</em> in <code><a href="../reference/replace_teams.html">replace_teams()</a></code> (<a href="https://github.com/jimmyday12/fitzRoy/issues/259" class="external-link">#259</a>)</li>
