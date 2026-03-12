@@ -132,11 +132,11 @@ footywire_html <- function(x, id) {
   
   player_stats <- dplyr::bind_rows(home_stats, away_stats) %>%
     dplyr::mutate(
-      Round = "Round",
-      Venue = "venue",
-      Season = "season",
-      Date = "game_date",
-      Match_id = "id"
+      Round = Round,
+      Venue = venue,
+      Season = season,
+      Date = game_date,
+      Match_id = id
     ) %>%
     dplyr::relocate("Date", "Season", "Round", "Venue", 
                     "Player", "Team", "Opposition", "Status", 
