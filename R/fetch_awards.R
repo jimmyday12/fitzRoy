@@ -25,6 +25,12 @@ fetch_awards <- function(..., award = c("brownlow", "allaustralian", "risingstar
   )
 }
 
+#' Fetch Brownlow Medal Data
+#'
+#' @param season A single numeric year (e.g., 2024).
+#' @param type Either "player" (default) or "team".
+#' @return A tibble with Brownlow vote data.
+#' @export
 fetch_awards_brownlow <- function(season, type = c("player", "team")) {
   type <- match.arg(type)
   
