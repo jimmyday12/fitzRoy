@@ -1,5 +1,7 @@
 # Changelog
 
+## fitzRoy (development version)
+
 ## fitzRoy 1.7.0
 
 CRAN release: 2026-03-12
