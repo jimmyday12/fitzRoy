@@ -2,6 +2,8 @@
 
 ## fitzRoy 1.7.0
 
+CRAN release: 2026-03-12
+
 ### New Features
 
 - Added a `fetch_outofcontract` function (with
