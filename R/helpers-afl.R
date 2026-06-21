@@ -83,6 +83,160 @@ find_team_id <- function(team_abr, comp = "AFLM") {
   ids <- df$id[df$abbreviation == team_abr]
   min(ids, na.rm = TRUE)
 }
+
+#' Create comprehensive team name mapping
+#'
+#' @keywords internal
+#' @noRd
+create_team_mapping <- function() {
+  list(
+    # Adelaide variations
+    "Adelaide" = c("Adelaide", "Adelaide Crows", "Crows", "Kuwarna", "Adelaide Football Club", "AFC"),
+    "Adelaide Crows" = c("Adelaide", "Adelaide Crows", "Crows", "Kuwarna", "Adelaide Football Club", "AFC"),
+    "Crows" = c("Adelaide", "Adelaide Crows", "Crows", "Kuwarna", "Adelaide Football Club", "AFC"),
+    "Kuwarna" = c("Adelaide", "Adelaide Crows", "Crows", "Kuwarna", "Adelaide Football Club", "AFC"),
+    
+    # Brisbane variations
+    "Brisbane" = c("Brisbane", "Brisbane Lions", "Lions", "Brisbane Football Club", "BFC"),
+    "Brisbane Lions" = c("Brisbane", "Brisbane Lions", "Lions", "Brisbane Football Club", "BFC"),
+    "Lions" = c("Brisbane", "Brisbane Lions", "Lions", "Brisbane Football Club", "BFC"),
+    
+    # Carlton variations
+    "Carlton" = c("Carlton", "Blues", "Carlton Football Club", "CFC"),
+    "Blues" = c("Carlton", "Blues", "Carlton Football Club", "CFC"),
+    
+    # Collingwood variations
+    "Collingwood" = c("Collingwood", "Magpies", "Pies", "Collingwood Football Club"),
+    "Magpies" = c("Collingwood", "Magpies", "Pies", "Collingwood Football Club"),
+    
+    # Essendon variations
+    "Essendon" = c("Essendon", "Bombers", "Essendon Football Club", "EFC"),
+    "Bombers" = c("Essendon", "Bombers", "Essendon Football Club", "EFC"),
+    
+    # Fremantle variations
+    "Fremantle" = c("Fremantle", "Dockers", "Walyalup", "Fremantle Football Club", "FFC"),
+    "Dockers" = c("Fremantle", "Dockers", "Walyalup", "Fremantle Football Club", "FFC"),
+    "Walyalup" = c("Fremantle", "Dockers", "Walyalup", "Fremantle Football Club", "FFC"),
+    
+    # GWS variations
+    "GWS" = c("GWS", "GWS GIANTS", "GWS Giants", "GIANTS", "Giants", "Greater Western Sydney", "Greater Western Sydney Giants"),
+    "GWS GIANTS" = c("GWS", "GWS GIANTS", "GWS Giants", "GIANTS", "Giants", "Greater Western Sydney", "Greater Western Sydney Giants"),
+    "GIANTS" = c("GWS", "GWS GIANTS", "GWS Giants", "GIANTS", "Giants", "Greater Western Sydney", "Greater Western Sydney Giants"),
+    
+    # Geelong variations
+    "Geelong" = c("Geelong", "Geelong Cats", "Cats", "Geelong Football Club", "GFC"),
+    "Geelong Cats" = c("Geelong", "Geelong Cats", "Cats", "Geelong Football Club", "GFC"),
+    "Cats" = c("Geelong", "Geelong Cats", "Cats", "Geelong Football Club", "GFC"),
+    
+    # Gold Coast variations
+    "Gold Coast" = c("Gold Coast", "Gold Coast SUNS", "SUNS", "Suns", "Gold Coast Football Club", "GCFC"),
+    "Gold Coast SUNS" = c("Gold Coast", "Gold Coast SUNS", "SUNS", "Suns", "Gold Coast Football Club", "GCFC"),
+    "SUNS" = c("Gold Coast", "Gold Coast SUNS", "SUNS", "Suns", "Gold Coast Football Club", "GCFC"),
+    
+    # Hawthorn variations
+    "Hawthorn" = c("Hawthorn", "Hawks", "Hawthorn Football Club", "HFC"),
+    "Hawks" = c("Hawthorn", "Hawks", "Hawthorn Football Club", "HFC"),
+    
+    # Melbourne variations
+    "Melbourne" = c("Melbourne", "Demons", "Narrm", "Melbourne Football Club", "MFC"),
+    "Demons" = c("Melbourne", "Demons", "Narrm", "Melbourne Football Club", "MFC"),
+    "Narrm" = c("Melbourne", "Demons", "Narrm", "Melbourne Football Club", "MFC"),
+    
+    # North Melbourne variations
+    "North Melbourne" = c("North Melbourne", "Kangaroos", "North", "North Melbourne Football Club", "NMFC"),
+    "Kangaroos" = c("North Melbourne", "Kangaroos", "North", "North Melbourne Football Club", "NMFC"),
+    
+    # Port Adelaide variations
+    "Port Adelaide" = c("Port Adelaide", "Power", "Yartapuulti", "Port Adelaide Football Club", "PAFC"),
+    "Power" = c("Port Adelaide", "Power", "Yartapuulti", "Port Adelaide Football Club", "PAFC"),
+    "Yartapuulti" = c("Port Adelaide", "Power", "Yartapuulti", "Port Adelaide Football Club", "PAFC"),
+    
+    # Richmond variations
+    "Richmond" = c("Richmond", "Tigers", "Richmond Football Club", "RFC"),
+    "Tigers" = c("Richmond", "Tigers", "Richmond Football Club", "RFC"),
+    
+    # St Kilda variations
+    "St Kilda" = c("St Kilda", "Saints", "Euro-Yroke", "St Kilda Football Club", "SKFC"),
+    "Saints" = c("St Kilda", "Saints", "Euro-Yroke", "St Kilda Football Club", "SKFC"),
+    "Euro-Yroke" = c("St Kilda", "Saints", "Euro-Yroke", "St Kilda Football Club", "SKFC"),
+    
+    # Sydney variations
+    "Sydney" = c("Sydney", "Sydney Swans", "Swans", "Sydney Football Club", "SFC"),
+    "Sydney Swans" = c("Sydney", "Sydney Swans", "Swans", "Sydney Football Club", "SFC"),
+    "Swans" = c("Sydney", "Sydney Swans", "Swans", "Sydney Football Club", "SFC"),
+    
+    # West Coast variations
+    "West Coast" = c("West Coast", "West Coast Eagles", "Eagles", "Waalitj Marawar", "Wallitj Marawar", "West Coast Football Club", "WCFC"),
+    "West Coast Eagles" = c("West Coast", "West Coast Eagles", "Eagles", "Waalitj Marawar", "Wallitj Marawar", "West Coast Football Club", "WCFC"),
+    "Eagles" = c("West Coast", "West Coast Eagles", "Eagles", "Waalitj Marawar", "Wallitj Marawar", "West Coast Football Club", "WCFC"),
+    "Waalitj Marawar" = c("West Coast", "West Coast Eagles", "Eagles", "Waalitj Marawar", "Wallitj Marawar", "West Coast Football Club", "WCFC"),
+    "Wallitj Marawar" = c("West Coast", "West Coast Eagles", "Eagles", "Waalitj Marawar", "Wallitj Marawar", "West Coast Football Club", "WCFC"),
+    
+    # Western Bulldogs variations
+    "Western Bulldogs" = c("Western Bulldogs", "Bulldogs", "Dogs", "Footscray", "Western Bulldogs Football Club", "WBFC"),
+    "Bulldogs" = c("Western Bulldogs", "Bulldogs", "Dogs", "Footscray", "Western Bulldogs Football Club", "WBFC")
+  )
+}
+
+#' Find matching team name from API response using comprehensive mapping
+#'
+#' @param input_team Team name provided by user
+#' @param api_teams Data frame from fetch_teams_afl
+#' @keywords internal
+#' @noRd
+find_matching_team <- function(input_team, api_teams) {
+  team_mapping <- create_team_mapping()
+  
+  # Direct match first
+  if (input_team %in% api_teams$name) {
+    return(input_team)
+  }
+  
+  if (input_team %in% api_teams$club.name) {
+    return(api_teams$name[api_teams$club.name == input_team][1])
+  }
+  
+  if (input_team %in% api_teams$club.nickname) {
+    return(api_teams$name[api_teams$club.nickname == input_team][1])
+  }
+  
+  # Try comprehensive mapping
+  possible_names <- team_mapping[[input_team]]
+  if (!is.null(possible_names)) {
+    for (name in possible_names) {
+      if (name %in% api_teams$name) {
+        return(name)
+      }
+      if (name %in% api_teams$club.name) {
+        return(api_teams$name[api_teams$club.name == name][1])
+      }
+      if (name %in% api_teams$club.nickname) {
+        return(api_teams$name[api_teams$club.nickname == name][1])
+      }
+    }
+  }
+  
+  # Reverse lookup - check if any API team names match our input through the mapping
+  for (api_name in api_teams$name) {
+    mapped_names <- team_mapping[[api_name]]
+    if (!is.null(mapped_names) && input_team %in% mapped_names) {
+      return(api_name)
+    }
+  }
+  
+  # Check club names too
+  for (i in seq_len(nrow(api_teams))) {
+    club_name <- api_teams$club.name[i]
+    api_name <- api_teams$name[i]
+    mapped_names <- team_mapping[[club_name]]
+    if (!is.null(mapped_names) && input_team %in% mapped_names) {
+      return(api_name)
+    }
+  }
+  
+  return(NULL)
+}
+
 #' Check if a team is valid for afl website
 #'
 #' @param team Team
@@ -198,15 +352,9 @@ team_abr_afl <- function(team, return_id = FALSE) {
 #' @noRd
 team_check_afl2 <- function(team, comp = "AFLM") {
   valid_teams <- fetch_teams_afl(comp)
-
-
-  valid <- team %in% valid_teams$name
+  matched_team <- find_matching_team(team, valid_teams)
   
-  if (!valid) {
-    valid <- team %in% valid_teams$club.name
-  }
-
-  if (!valid) {
+  if (is.null(matched_team)) {
     cli::cli_abort("\"{team}\" is not a valid input for afl teams for the \"{comp}\" comp.
                             Run `fetch_teams_afl(\"{comp}\")` to see a list of valid teams")
   }
@@ -219,14 +367,14 @@ team_check_afl2 <- function(team, comp = "AFLM") {
 #' @export
 team_abr_afl2 <- function(team, comp = "AFLM") {
   teams <- fetch_teams_afl(comp)
-
-  abr <- teams$abbreviation[teams$name == team]
+  matched_team <- find_matching_team(team, teams)
   
-  if (length(abr) < 1) {
-    abr <- teams$abbreviation[teams$club.name == team]
+  if (is.null(matched_team)) {
+    return(NULL)
   }
   
-  return(abr)
+  abr <- teams$abbreviation[teams$name == matched_team]
+  return(abr[1])
 }
 
 #' Find Comp ID
