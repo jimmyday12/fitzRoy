@@ -14,6 +14,7 @@ vignette.
 Firstly, we can return the fixture for a season or particular round.
 
 ``` r
+
 not_cran
 #> [1] TRUE
 online
@@ -23,6 +24,7 @@ eval_param
 ```
 
 ``` r
+
 fetch_fixture(season = 2021, comp = "AFLW") %>%
   select(
     compSeason.name, round.name,
@@ -51,6 +53,7 @@ fetch_fixture(season = 2021, comp = "AFLW") %>%
 We can get the lineup for a given set of matches in a particular round.
 
 ``` r
+
 fetch_lineup(2021, round_number = 1, comp = "AFLW") %>%
   select(
     round.name, status, teamName,
@@ -82,6 +85,7 @@ The match results, including the teams playing, venue information and
 final scores are returned via `fetch_results`.
 
 ``` r
+
 fetch_results(2020, round_number = 1, comp = "AFLW") %>%
   select(
     match.date, match.name,
@@ -107,6 +111,7 @@ fetch_results(2020, round_number = 1, comp = "AFLW") %>%
 We can also get the ladder at any point with `fetch_ladder`.
 
 ``` r
+
 fetch_ladder(2020, round_number = 6, comp = "AFLW") %>%
   select(
     season, round_name,
@@ -140,6 +145,7 @@ statistics such as possessions, time on ground, fantasy points and a
 myriad of other statistics.
 
 ``` r
+
 fetch_player_stats(2020, round_number = 1, comp = "AFLW") %>%
   select(player.player.player.givenName:clearances.totalClearances)
 ```
@@ -171,6 +177,7 @@ We can return player details such as data of birth and listed height and
 weight.
 
 ``` r
+
 details_aflw <- fetch_player_details(team = "Western Bulldogs", current = TRUE, comp = "AFLW", source = "AFL")
 
 head(details_aflw)
@@ -194,6 +201,7 @@ We can also return the coaches votes for a particular season, team or
 round.
 
 ``` r
+
 fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "Western Bulldogs")
 ```
 
@@ -216,6 +224,7 @@ A good thing to check is that the cookie is working. Often this gets
 changed or moved and without it, the code won’t work.
 
 ``` r
+
 cookie <- get_afl_cookie()
 print(cookie)
 ```
@@ -230,6 +239,7 @@ We can use the
 function to retrieve match data matches.
 
 ``` r
+
 match_data <- fetch_results(2020, round_number = 1, comp = "AFLW")
 ```
 
@@ -238,6 +248,7 @@ data has been added yet. If this is the case, make sure you don’t try to
 request detailed match stats for these match IDs.
 
 ``` r
+
 glimpse(match_data)
 #> Rows: 7
 #> Columns: 75
@@ -328,6 +339,7 @@ say we want detailed stats for the first 10 games in `match_data` above.
 Then we would do:
 
 ``` r
+
 first10 <- head(match_data, 10)
 first10_ids <- first10$Match.Id
 first10_ids
@@ -335,6 +347,7 @@ first10_ids
 ```
 
 ``` r
+
 detailed <- get_aflw_detailed_data(first10_ids)
 glimpse(detailed)
 ```

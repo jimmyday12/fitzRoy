@@ -13,6 +13,7 @@ for a given club and source. The source will determine exactly what
 details are returned. The default is the AFL.com.au website.
 
 ``` r
+
 fetch_player_details("Hawthorn")
 ```
 
@@ -20,6 +21,7 @@ The AFL website will return AFLW or AFLM data, while other sources only
 include AFLM data.
 
 ``` r
+
 details_aflw <- fetch_player_details(team = "Western Bulldogs", current = TRUE, comp = "AFLW", source = "AFL")
 
 head(details_aflw)
@@ -28,6 +30,7 @@ head(details_aflw)
 The list of details returned for AFL.com.au website is below.
 
 ``` r
+
 glimpse(details_aflw)
 ```
 
@@ -35,6 +38,7 @@ The AFLTables.com source will return all players who have played for the
 specified team over time.
 
 ``` r
+
 fetch_player_details("Hawthorn", source = "afltables")
 ```
 
@@ -43,6 +47,7 @@ players, which is fairly quick, or all players over time which can be a
 little slow.
 
 ``` r
+
 fetch_player_details("Richmond", source = "footywire", current = TRUE)
 ```
 
@@ -52,5 +57,6 @@ the wrong team is supplied and provide a list of acceptable values for
 that specific source.
 
 ``` r
+
 fetch_player_details("Greater Western Sydney", source = "afltables")
 ```

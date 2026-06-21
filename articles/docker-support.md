@@ -1,6 +1,7 @@
 # Docker Support
 
 ``` r
+
 library(fitzRoy)
 ```
 

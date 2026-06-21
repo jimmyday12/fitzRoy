@@ -12,12 +12,14 @@ and statistics from various data sources.
 Install the released version of fitzRoy from CRAN:
 
 ``` r
+
 install.packages("fitzRoy")
 ```
 
 Or install the development version from GitHub with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("jimmyday12/fitzRoy")
 ```
@@ -34,6 +36,7 @@ The main functions are `fetch_fixture`, `fetch_lineup`, `fetch_results`,
 `fetch_ladder` and `fetch_player_stats`.
 
 ``` r
+
 fetch_fixture(season = 2020, comp = "AFLM")
 fetch_lineup(season = 2021, round_number = 1, comp = "AFLW")
 fetch_results(season = 2020, round_number = 1, comp = "AFLW")
@@ -54,6 +57,7 @@ Vingette](https://jimmyday12.github.io/fitzRoy/articles/womens-stats.html)
 for details on how to access it.
 
 ``` r
+
 fetch_fixture(season = 2020, comp = "AFLW")
 fetch_results(season = 2020, comp = "AFLW")
 fetch_ladder(season = 2020, comp = "AFLW")
@@ -68,6 +72,7 @@ that are available. These comps do not have as much data as the AFLM and
 AFLW comps but some functions will work.
 
 ``` r
+
 fetch_fixture(2022, source = "AFL", comp = "VFL")
 fetch_player_stats(2022, round = 1, source = "AFL", comp = "VFLW")
 fetch_fixture(2022, source = "AFL", comp = "WAFL")

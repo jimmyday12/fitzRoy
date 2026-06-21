@@ -28,6 +28,7 @@ Fist we can plot the score worm for the 2024 round 20 game between
 Fremantle and West Coast.
 
 ``` r
+
 plot_score_worm('CD_M20240142004') 
 ```
 
@@ -36,6 +37,7 @@ plot_score_worm('CD_M20240142004')
 We can also plot the total scores of each team throughout the game.
 
 ``` r
+
 plot_score_worm_totals('CD_M20240142004') 
 ```
 
@@ -45,6 +47,7 @@ We can also just return the data for the fixture that can be used to
 construct these plots or for other score analysis.
 
 ``` r
+
 fetch_score_worm_data('CD_M20240142004')
 #>    periodNumber TotalPeriodSeconds teamAbbr          teamName teamNickname
 #> 1             1               1999     <NA>              <NA>         <NA>
@@ -388,5 +391,6 @@ We can return multiple games worth of data by passing in a vector of
 match_ids.
 
 ``` r
+
 fetch_score_worm_data(c('CD_M20240142101','CD_M20240142102','CD_M20240142103'))
 ```

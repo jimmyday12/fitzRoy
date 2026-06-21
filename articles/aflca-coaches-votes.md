@@ -33,6 +33,7 @@ votes. Firstly, coaches votes can be retrieved for a season (or an array
 of seasons).
 
 ``` r
+
 fetch_coaches_votes(season = 2021, comp = "AFLM") %>% head()
 ```
 
@@ -47,6 +48,7 @@ fetch_coaches_votes(season = 2021, comp = "AFLM") %>% head()
 We can also return votes for AFLW.
 
 ``` r
+
 fetch_coaches_votes(season = 2021, comp = "AFLW") %>% head()
 ```
 
@@ -61,6 +63,7 @@ fetch_coaches_votes(season = 2021, comp = "AFLW") %>% head()
 We can return just one round instead of the whole fixture.
 
 ``` r
+
 fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM")
 ```
 
@@ -80,6 +83,7 @@ fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM")
     #> 29.6             2
 
 ``` r
+
 fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW")
 ```
 
@@ -95,6 +99,7 @@ We could also return coaches votes for matches including a particular
 team.
 
 ``` r
+
 fetch_coaches_votes(season = 2021, comp = "AFLM", team = "Western Bulldogs")
 ```
 
@@ -114,6 +119,7 @@ fetch_coaches_votes(season = 2021, comp = "AFLM", team = "Western Bulldogs")
     #> 1.12             1
 
 ``` r
+
 fetch_coaches_votes(season = 2021, comp = "AFLW", team = "Western Bulldogs")
 ```
 
@@ -135,6 +141,7 @@ fetch_coaches_votes(season = 2021, comp = "AFLW", team = "Western Bulldogs")
 Combining these, we can return coaches votes for a single match.
 
 ``` r
+
 fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Western Bulldogs")
 ```
 
@@ -154,6 +161,7 @@ fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Wes
     #> 29.25             2
 
 ``` r
+
 fetch_coaches_votes(season = 2021, round_number = 9, comp = "AFLW", team = "Western Bulldogs")
 ```
 
@@ -184,6 +192,7 @@ The following code will return the coaches votes for a particular match,
 then find the possible coaches vote breakdowns.
 
 ``` r
+
 df <- fetch_coaches_votes(season = 2021, round_number = 24, comp = "AFLM", team = "Western Bulldogs")
 calculate_coaches_vote_possibilities(df, "Coach View")
 ```
@@ -272,6 +281,7 @@ The following code will create a data frame manually, then find the
 possible coaches vote breakdowns.
 
 ``` r
+
 df <- data.frame(
   Player.Name = c("Tom Liberatore", "Jack Macrae", "Marcus Bontempelli", "Cody Weightman", "Darcy Parish", "Aaron Naughton", "Jordan Ridley"),
   Coaches.Votes = c(7, 6, 5, 5, 4, 2, 1)

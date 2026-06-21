@@ -16,12 +16,14 @@ It takes one arguments - `season` which can be a single year or multiple
 years.
 
 ``` r
+
 dat <- fitzRoy::fetch_player_stats_fryzigg(2019)
 ```
 
 We can get a quick view the the fields returned from the `fryzigg` API.
 
 ``` r
+
 dplyr::glimpse(dat)
 #> Rows: 9,108
 #> Columns: 81
@@ -112,6 +114,7 @@ You can see the data includes both player and team data, where each row
 is a game by a player.
 
 ``` r
+
 head(dat)
 #> # A tibble: 6 × 81
 #>   venue_name match_id match_home_team match_away_team match_date

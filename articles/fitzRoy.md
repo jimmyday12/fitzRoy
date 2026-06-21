@@ -6,6 +6,7 @@ data such as match results, fixtures and player statistics from multiple
 data sources.
 
 ``` r
+
 library(dplyr)
 library(fitzRoy)
 ```
@@ -99,6 +100,7 @@ can specify either the Mens or Womens competitions using the `comp`
 argument.
 
 ``` r
+
 fixture <- fetch_fixture(2021, comp = "AFLW")
 fixture %>%
   select(
@@ -125,6 +127,7 @@ fixture %>%
 If wanted, you could return just a single round.
 
 ``` r
+
 fetch_fixture(2021, round_number = 5, comp = "AFLM") %>%
   select(
     utcStartTime, round.name,
@@ -151,6 +154,7 @@ You can get results data from other sources including `Squiggle` and
 is the AFL.com.au website.
 
 ``` r
+
 fixture_afl <- fetch_fixture(2020)
 fixture_aflw <- fetch_fixture(2020, round_number = 1, comp = "AFLW")
 fixture_squiggle <- fetch_fixture_squiggle(2020, round_number = 10)
@@ -166,6 +170,7 @@ has been played.
 The only data source with lineup data is the AFL.com.au website.
 
 ``` r
+
 fetch_lineup(2021, round_number = 1, comp = "AFLW") %>%
   select(
     round.name, status, teamName,
@@ -198,6 +203,7 @@ complete is the [AFL Tables](https://afltables.com/afl/afl_index.html)
 data, which includes all matches from 1897-current.
 
 ``` r
+
 results <- fetch_match_results_afltables(1897:2019)
 results
 ```
@@ -225,6 +231,7 @@ practice to only return a small amount of data - such as a single season
 or round - and keep your own offline database of historical data.
 
 ``` r
+
 results_new <- fetch_results_afltables(2021)
 bind_rows(results, results_new)
 ```
@@ -253,6 +260,7 @@ and `Footywire`. The default source for
 is the AFL.com.au website.
 
 ``` r
+
 results_afl <- fetch_results(2020, round_number = 11)
 results_aflw <- fetch_results(2020, comp = "AFLW")
 results_squiggle <- fetch_results_squiggle(2019, round_number = 1)
@@ -262,6 +270,7 @@ results_footywire <- fetch_results_footywire(1990)
 You can get AFLW results by using the `comp` argument.
 
 ``` r
+
 fetch_results(2020, comp = "AFLW") %>%
   select(
     match.name, venue.name, round.name,
@@ -294,6 +303,7 @@ Usually this only makes sense to return for one round at a time,
 although it is possible to return multiple rounds.
 
 ``` r
+
 ladder <- fetch_ladder(2020, round_number = 7, comp = "AFLW") %>%
   select(
     season, round_name, position,
@@ -323,6 +333,7 @@ ladder
 There are many variables included in the AFL.com.au ladder.
 
 ``` r
+
 ladder <- fetch_ladder(2020, round_number = 7, comp = "AFLW")
 ncol(ladder)
 ```
@@ -335,6 +346,7 @@ You can get ladder data from other sources including `Squiggle` and
 is the AFL.com.au website.
 
 ``` r
+
 ladder_afl <- fetch_ladder(2020, round_number = 11)
 ladder_aflw <- fetch_ladder(2020, comp = "AFLW")
 ladder_squiggle <- fetch_ladder_squiggle(2019, round_number = 1)
@@ -349,6 +361,7 @@ that are included varies quite a bit between data sources.
 The default is again the AFL.com.au which is fairly comprehensive.
 
 ``` r
+
 fetch_player_stats(2020, comp = "AFLW")
 ```
 
@@ -376,6 +389,7 @@ fetch_player_stats(2020, comp = "AFLW")
 We also have detailed player stats courtesy of Fryzigg.
 
 ``` r
+
 fetch_player_stats(2019, source = "fryzigg")
 ```
 
@@ -403,6 +417,7 @@ fetch_player_stats(2019, source = "fryzigg")
 Other providers include Afltables and Footywire.
 
 ``` r
+
 stats_afl <- fetch_player_stats(2020, round_number = 11)
 stats_aflw <- fetch_player_stats(2020, source = "AFL", comp = "AFLW")
 stats_footywire <- fetch_player_stats(2019, round_number = 1, source = "footywire")

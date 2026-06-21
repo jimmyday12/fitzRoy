@@ -54,6 +54,7 @@ using the `fetch_fixture` function but can equally be applied to any of
 the family of `fetch_` functions.
 
 ``` r
+
 fetch_fixture(2021)
 ```
 
@@ -81,12 +82,14 @@ fetch_fixture(2021)
 This is the same as
 
 ``` r
+
 fetch_fixture(season = 2021, comp = "AFLM", source = "AFL")
 ```
 
 We can return just one round instead of the whole fixture.
 
 ``` r
+
 fetch_fixture(season = 2021, round_number = 2) %>%
   select(compSeason.name, round.name, home.team.name, away.team.name, venue.name)
 ```
@@ -107,6 +110,7 @@ fetch_fixture(season = 2021, round_number = 2) %>%
 We could also return the AFLW fixture instead.
 
 ``` r
+
 fetch_fixture(season = 2021, comp = "AFLW") %>%
   select(
     compSeason.name, round.name,
@@ -135,6 +139,7 @@ even the names of the teams and/or venues will be different for
 difference sources.
 
 ``` r
+
 fetch_fixture(2021, round_number = 1, source = "squiggle")
 ```
 
@@ -161,6 +166,7 @@ It should also be noted that the various sources of data have their own
 functions that can be called directly.
 
 ``` r
+
 # The following are the same
 fetch_fixture(2021, round_number = 5, source = "squiggle")
 fetch_fixture_squiggle(2021, round_number = 5)
@@ -188,6 +194,7 @@ that are available. These comps do not have as much data as the AFLM and
 AFLW comps but some functions will work.
 
 ``` r
+
 fetch_fixture(2022, source = "AFL", comp = "VFL")
 fetch_player_stats(2022, round = 1, source = "AFL", comp = "VFLW")
 fetch_fixture(2022, source = "AFL", comp = "WAFL")

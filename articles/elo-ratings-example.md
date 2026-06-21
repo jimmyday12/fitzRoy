@@ -15,6 +15,7 @@ First we need to grab a few packages. If you don’t have any of these,
 you’ll need to install them.
 
 ``` r
+
 library(fitzRoy)
 library(dplyr)
 library(elo)
@@ -37,6 +38,7 @@ data to be inconsistent. This example will try to show some ways to take
 that into account.
 
 ``` r
+
 # Get data
 results <- fitzRoy::fetch_results_afltables(1897:2019)
 fixture <- fitzRoy::fetch_fixture_footywire(2019)
@@ -46,6 +48,7 @@ We can make sure our results are from before the fixture we are trying
 to predict for.
 
 ``` r
+
 results <- results %>% filter(Date < "2019-01-01")
 tail(results)
 #> # A tibble: 6 × 16
@@ -63,6 +66,7 @@ tail(results)
 ```
 
 ``` r
+
 fixture <- fixture %>% filter(Date > "2019-01-01")
 head(fixture)
 #> # A tibble: 6 × 7
@@ -84,6 +88,7 @@ we’ll combine `season` and `Round.Number` into a string as a unique
 identifier when combined with the team name.
 
 ``` r
+
 results <- results %>%
   mutate(seas_rnd = paste0(Season, ".", Round.Number))
 ```
@@ -93,6 +98,7 @@ sources, we need to fix a few things up. This is a good time to point
 out that using similar sources is great when possible!
 
 ``` r
+
 fixture <- fixture %>%
   filter(Date > max(results$Date)) %>%
   mutate(Date = ymd(format(Date, "%Y-%m-%d"))) %>%
@@ -121,6 +127,7 @@ Stats](http://www.matterofstats.com/mafl-stats-journal/2013/10/13/building-your-
 for a great explainer on the types of parameters that could be included.
 
 ``` r
+
 # Set parameters
 HGA <- 30 # home ground advantage
 carryOver <- 0.5 # season carry over
@@ -140,6 +147,7 @@ We create that as a function and then use that function in our elo
 model.
 
 ``` r
+
 map_margin_to_outcome <- function(margin, marg.max = 80, marg.min = -80) {
   norm <- (margin - marg.min) / (marg.max - marg.min)
   norm %>%
@@ -158,6 +166,7 @@ provide a function that indicates what is included in our model, as well
 as some model parameters.
 
 ``` r
+
 # Run ELO
 elo.data <- elo.run(
   map_margin_to_outcome(Home.Points - Away.Points) ~
@@ -178,6 +187,7 @@ result of each game. Also in this table is the change in ELO rating for
 the home and away side. See below for the last few games of 2018.
 
 ``` r
+
 as.data.frame(elo.data) %>% tail()
 #>            team.A      team.B       p.A  wins.A   update.A   update.B    elo.A
 #> 15402  West Coast Collingwood 0.5515137 0.60000  0.9697255 -0.9697255 1539.107
@@ -201,6 +211,7 @@ didn’t make the finals have the same ELO as the rounds go on since they
 aren’t playing finals.
 
 ``` r
+
 as.matrix(elo.data) %>% tail()
 #>         Adelaide Brisbane Lions  Carlton Collingwood Essendon Fitzroy Footscray
 #> [2776,] 1518.969       1460.671 1407.966    1532.832 1506.459    1500  1459.628
@@ -236,6 +247,7 @@ Lastly, we can check the final ELO ratings of each team at the end of
 our data using `final.elos` (here - up to end of 2018).
 
 ``` r
+
 final.elos(elo.data)
 #>        Adelaide  Brisbane Lions         Carlton     Collingwood        Essendon 
 #>        1526.679        1458.724        1400.256        1538.855        1510.554 
@@ -261,6 +273,7 @@ some predictions! For this, we just need to use our fixture and the
 takes care of the result.
 
 ``` r
+
 fixture <- fixture %>%
   mutate(Prob = predict(elo.data, newdata = fixture))
 
