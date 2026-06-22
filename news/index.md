@@ -2,6 +2,14 @@
 
 ## fitzRoy (development version)
 
+- [`fetch_player_stats_afltables()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.md)
+  and
+  [`fetch_player_stats_footywire()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.md)
+  now read canonical Parquet files from the `fitzroy_data` release
+  instead of legacy `.rda` files. This is faster and more reliable.
+  Returned data is unchanged.
+- Added `nanoparquet` to Imports for lightweight Parquet reading.
+
 ## fitzRoy 1.7.0
 
 CRAN release: 2026-03-12
