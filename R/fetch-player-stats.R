@@ -170,16 +170,14 @@ fetch_player_stats_afltables <- function(season = NULL,
 
 
   # nolint start
-  dat_url <- url("https://github.com/jimmyday12/fitzRoy_data/raw/main/data-raw/afl_tables_playerstats/afldata.rda")
+  dat_url <- "https://github.com/jimmyday12/fitzroy_data/releases/download/data/afltables_player_stats.parquet"
   # nolint end
 
-  load_r_data <- function(fname) {
-    load(fname)
-    get(ls()[ls() != "fname"])
-  }
-
   cli::cli_progress_step("Fetching cached data from {.url github.com/jimmyday12/fitzRoy_data}")
-  dat <- load_r_data(dat_url)
+  tmp <- tempfile(fileext = ".parquet")
+  utils::download.file(dat_url, tmp, quiet = TRUE, mode = "wb")
+  dat <- nanoparquet::read_parquet(tmp)
+  unlink(tmp)
 
   if (rescrape) {
     if (is.null(rescrape_start_season)) rescrape_start_season <- format(start_date, "%Y")
@@ -330,18 +328,12 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
     url <- "https://github.com/jimmyday12/fitzRoy_data"
     cli::cli_progress_step("Checking data on {.url {url}}")
 
-    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/raw/main/data-raw/player_stats/player_stats.rda" # nolint
+    dat_url2 <- "https://github.com/jimmyday12/fitzroy_data/releases/download/data/footywire_player_stats.parquet" # nolint
 
-    load_r_data <- function(fname) {
-      tmp <- tempfile(fileext = ".rda")
-      utils::download.file(fname, tmp, quiet = TRUE)
-
-      load(tmp)
-      unlink(tmp)
-      get(ls()[!ls() %in% c("tmp", "fname")])
-    }
-
-    dat_git <- load_r_data(dat_url2)
+    tmp <- tempfile(fileext = ".parquet")
+    utils::download.file(dat_url2, tmp, quiet = TRUE, mode = "wb")
+    dat_git <- nanoparquet::read_parquet(tmp)
+    unlink(tmp)
 
     dat_git <- dat_git %>%
       dplyr::filter(.data$Season >= min(season) & .data$Season <= max(season))

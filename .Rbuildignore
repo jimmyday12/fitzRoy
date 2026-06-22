@@ -25,3 +25,5 @@ create_package.R
 ^NEWS.md$
 ^pkgdown$
 ^CRAN-SUBMISSION$
+^\.claude$
+^PHASE2_BRIEF\.md$

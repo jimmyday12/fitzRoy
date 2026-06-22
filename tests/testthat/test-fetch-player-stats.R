@@ -123,6 +123,30 @@ test_that("fetch_player_stats works", {
 })
 
 
+test_that("fetch_player_stats_afltables returns expected column names and types", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+
+  dat <- fetch_player_stats_afltables(season = 2020)
+  col_names <- names(dat)
+  col_classes <- vapply(dat, function(x) class(x)[[1L]], character(1L))
+
+  expect_snapshot(col_names)
+  expect_snapshot(col_classes)
+})
+
+test_that("fetch_player_stats_footywire returns expected column names and types", {
+  testthat::skip_if_offline()
+  testthat::skip_on_cran()
+
+  dat <- fetch_player_stats_footywire(season = 2020)
+  col_names <- names(dat)
+  col_classes <- vapply(dat, function(x) class(x)[[1L]], character(1L))
+
+  expect_snapshot(col_names)
+  expect_snapshot(col_classes)
+})
+
 test_that("fetch_player_stats works for non-AFL leagues", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
