@@ -55,7 +55,8 @@ Imports:
     cli,
     lifecycle,
     httr2,
-    janitor
+    janitor,
+    nanoparquet
 Suggests:
     covr,
     elo,
