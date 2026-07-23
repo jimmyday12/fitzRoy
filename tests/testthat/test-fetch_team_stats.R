@@ -25,9 +25,8 @@ test_that("fetch_team_stats_afltables returns averages", {
 })
 
 test_that("fetch_team_stats_footywire returns multiple summary types", {
-  skip_on_cran()
-  skip_if_offline()
-  
+  skip_if_footywire_unreachable()
+
   result <- fetch_team_stats(2023, source = "footywire", summary_type = c("totals", "averages"))
   
   expect_s3_class(result, "data.frame")

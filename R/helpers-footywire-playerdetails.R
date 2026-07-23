@@ -40,7 +40,7 @@ fetch_player_details_footywire_current <- function(team = NULL) {
     team <- stringr::str_extract(url, "(?<=tp-).*")
     cli::cli_progress_step("Fetching player details for {team}")
 
-    html <- rvest::read_html(url)
+    html <- read_html_fitzroy(url)
 
     header.true <- function(df) {
       names <- as.character(unlist(df[1, ]))
@@ -95,7 +95,7 @@ fetch_player_details_footywire_past <- function(team = NULL) {
   team_abr <- get_team_abrev_footywire(team)
   path <- paste0("ti-", team_abr)
   url <- paste0("https://www.footywire.com/afl/footy/", path)
-  html <- rvest::read_html(url)
+  html <- read_html_fitzroy(url)
 
   cli::cli_progress_step("Fetching past player details for {team} - this takes some time!")
   players_url <- html %>%
@@ -119,7 +119,7 @@ fetch_player_details_footywire_past <- function(team = NULL) {
 #' @keywords internal
 #' @noRd
 get_past_player_footywire <- function(path) {
-  players_html <- rvest::read_html(paste0("https://www.footywire.com/afl/footy/", path))
+  players_html <- read_html_fitzroy(paste0("https://www.footywire.com/afl/footy/", path))
 
   name <- players_html %>%
     rvest::html_elements("#playerProfileName") %>%

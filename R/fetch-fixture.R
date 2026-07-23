@@ -98,7 +98,8 @@ fetch_fixture_afl <- function(season = NULL, round_number = NULL, comp = "AFLM")
         "compSeasonId" = comp_seas_id,
         "roundNumber" = round_number,
         "pageSize" = "1000"
-      )
+      ),
+      fitzroy_ua()
     )
 
     cont <- resp %>%

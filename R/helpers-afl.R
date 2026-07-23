@@ -14,7 +14,8 @@ fetch_teams_afl <- function(comp) {
       query = list(
         "pageSize" = "1000",
         page = page
-      )
+      ),
+      fitzroy_ua()
     )
 
     cont <- parse_resp_afl(resp)
@@ -391,7 +392,7 @@ find_comp_id <- function(comp) {
     path = "/afl/v2/competitions?pageSize=50"
   )
 
-  resp <- httr::GET(api_url)
+  resp <- httr::GET(api_url, fitzroy_ua())
 
   cont <- parse_resp_afl(resp)
 
@@ -418,7 +419,7 @@ find_comp_id <- function(comp) {
 #' }
 #' @export
 get_afl_cookie <- function() {
-  response <- httr::POST("https://api.afl.com.au/cfs/afl/WMCTok") # nolint
+  response <- httr::POST("https://api.afl.com.au/cfs/afl/WMCTok", fitzroy_ua()) # nolint
   httr::content(response)$token
 }
 
@@ -440,7 +441,7 @@ find_season_id <- function(season, comp = "AFLM") {
     path = paste0("/afl/v2/competitions/", comp_id, "/compseasons", "?pageSize=100")
   )
 
-  resp <- httr::GET(api)
+  resp <- httr::GET(api, fitzroy_ua())
 
   cont <- parse_resp_afl(resp)
 
@@ -493,7 +494,8 @@ find_round_id <- function(round_number,
   )
 
   resp <- httr::GET(api,
-    query = list(pageSize = 30)
+    query = list(pageSize = 30),
+    fitzroy_ua()
   )
 
   cont <- parse_resp_afl(resp)
@@ -536,7 +538,8 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
     url = api,
     httr::add_headers(
       "x-media-mis-token" = cookie
-    )
+    ),
+    fitzroy_ua()
   )
 
   if (httr::status_code(resp) == 404) {
@@ -586,7 +589,8 @@ fetch_match_stats_afl <- function(id, cookie = NULL) {
     url = api,
     httr::add_headers(
       "x-media-mis-token" = cookie
-    )
+    ),
+    fitzroy_ua()
   )
 
   cont <- parse_resp_afl(resp)
@@ -640,7 +644,8 @@ fetch_round_results_afl <- function(id, cookie = NULL) {
 
   resp <- httr::GET(
     url_api,
-    httr::add_headers("x-media-mis-token" = cookie)
+    httr::add_headers("x-media-mis-token" = cookie),
+    fitzroy_ua()
   )
 
   cont <- parse_resp_afl(resp)
@@ -679,7 +684,8 @@ fetch_squad_afl <- function(teamId, team, season, compSeasonId) {
       "teamId" = teamId,
       "compSeasonId" = compSeasonId,
       "pageSize" = "1000"
-    )
+    ),
+    fitzroy_ua()
   )
 
   if (httr::http_error(resp)) {

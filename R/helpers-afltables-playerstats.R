@@ -39,7 +39,7 @@ scrape_afltables_match <- function(match_urls) {
 
   scrape_afltables_data <- function(url) {
     # Read the webpage content
-    page <- rvest::read_html(url)
+    page <- read_html_fitzroy(url)
 
     # Extract the first table and get team names from it
     details <- rvest::html_node(page, "table") %>% rvest::html_table()
@@ -326,7 +326,7 @@ get_afltables_urls <- function(start_date,
 
   url_works <- function(url) {
     tryCatch(
-      xml2::read_html(url),
+      read_html_fitzroy(url),
       error = function(e) {
         NULL
       }

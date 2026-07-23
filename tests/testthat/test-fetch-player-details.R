@@ -46,8 +46,7 @@ test_that("fetch_player_details_afltables works for various inputs", {
 })
 
 test_that("fetch_player_details_footywire works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
 
   # test normal function
@@ -66,8 +65,7 @@ test_that("fetch_player_details_footywire works for various inputs", {
 
 
 test_that("fetch_player_details works AFLM", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   yr <- Sys.Date() %>%
     format("%Y") %>%

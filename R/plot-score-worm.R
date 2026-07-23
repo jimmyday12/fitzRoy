@@ -187,7 +187,7 @@ fetch_score_worm_data <- function(match_id) {
 get_match_score_worm <- function(url) {
   headers <- c("x-media-mis-token" = get_afl_cookie())
 
-  res <- httr::GET(url = url, httr::add_headers(headers))
+  res <- httr::GET(url = url, httr::add_headers(headers), fitzroy_ua())
 
   match_info <- jsonlite::parse_json(httr::content(res, "text", encoding = "UTF-8"))
 

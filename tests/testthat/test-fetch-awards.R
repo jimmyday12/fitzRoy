@@ -1,6 +1,5 @@
 test_that("fetch_awards - Brownlow player-level works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   result <- fetch_awards(season = 2023, award = "brownlow", type = "player")
   
@@ -12,8 +11,7 @@ test_that("fetch_awards - Brownlow player-level works", {
 })
 
 test_that("fetch_awards - Brownlow team-level works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   result <- fetch_awards(season = 2023, award = "brownlow", type = "team")
   
@@ -25,8 +23,7 @@ test_that("fetch_awards - Brownlow team-level works", {
 })
 
 test_that("fetch_awards - All-Australian team works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   result <- fetch_awards(season = 2023, award = "allaustralian", type = "team")
   
@@ -37,8 +34,7 @@ test_that("fetch_awards - All-Australian team works", {
 })
 
 test_that("fetch_awards - All-Australian squad works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   result <- fetch_awards(season = 2023, award = "allaustralian", type = "squad")
   
@@ -48,8 +44,7 @@ test_that("fetch_awards - All-Australian squad works", {
 })
 
 test_that("fetch_awards - Rising Star nominations works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   result <- fetch_awards(season = 2023, award = "risingstar", type = "nominations")
   
@@ -60,8 +55,7 @@ test_that("fetch_awards - Rising Star nominations works", {
 })
 
 test_that("fetch_awards - Rising Star round stats works for one round", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   result <- fetch_awards(season = 2023, award = "risingstar", type = "stats", round_number = 15)
   

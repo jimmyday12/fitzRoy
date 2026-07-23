@@ -1,6 +1,5 @@
 test_that("fetch_scores() returns Supercoach data for type = 'supercoach'", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   result <- fetch_scores(type = "supercoach", year = 2025, rounds = 1)
   
   expect_s3_class(result, "data.frame")
@@ -14,8 +13,7 @@ test_that("fetch_scores() returns Supercoach data for type = 'supercoach'", {
 })
 
 test_that("fetch_scores() returns Dream Team data for type = 'dream_team'", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   result <- fetch_scores(type = "dream_team", year = 2025, rounds = 1)
   
   expect_s3_class(result, "data.frame")
@@ -29,8 +27,7 @@ test_that("fetch_scores() returns Dream Team data for type = 'dream_team'", {
 })
 
 test_that("fetch_scores() errors with invalid type input", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   expect_error(
     fetch_scores(type = "nonsense", year = 2025, rounds = 1),
     regexp = "must be one of"

@@ -30,8 +30,7 @@ test_that("fetch_results_afl works for various inputs", {
 })
 
 test_that("fetch_results_footywire works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # TODO fix warnings
 
@@ -87,8 +86,7 @@ test_that("fetch_results_squiggle returns data frame with required variables", {
 })
 
 test_that("fetch_results works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # Test some various inputs
   expect_s3_class(fetch_results(2020, round = 1), "data.frame")
@@ -101,8 +99,7 @@ test_that("fetch_results works", {
 })
 
 test_that("old results functions returns deprecated warning", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   expect_warning(get_match_results(), regexp = "deprecated")
   expect_warning(get_footywire_match_results(2020, 1), regexp = "deprecated")
@@ -121,8 +118,7 @@ test_that("get_match_results works", {
 
 
 test_that("get_footywire_stats works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   expect_warning(results <- get_footywire_match_results(2020, 2))
   expect_s3_class(results, "data.frame")

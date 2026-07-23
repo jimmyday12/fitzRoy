@@ -57,8 +57,7 @@ test_that("fetch_lineup works", {
 
 ## Legacy tests - should remove eventually -------------------------------------
 test_that("get_fixture works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   expect_warning(fix <- get_fixture(2012))
   expect_s3_class(fix, "tbl")
@@ -71,8 +70,7 @@ test_that("get_fixture works", {
 })
 
 test_that("get_fixture works with different inputs ", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   expect_warning(fixture_df <- get_fixture(2019))
   expect_s3_class(fixture_df, "data.frame")
@@ -84,8 +82,7 @@ test_that("get_fixture works with different inputs ", {
 })
 
 test_that("get_fixture filters out unplayed matches ", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # On footywire.com.au/afl/footy/ft_match_list, the 2015 season has two
   # matches marked MATCH CANCELLED along with multiple byes that result in
@@ -95,8 +92,7 @@ test_that("get_fixture filters out unplayed matches ", {
 })
 
 test_that("2020 season round numbers are correct through round 13", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # We filter for matches through round 12, because we don't want
   # unknown, future data changes to break tests
@@ -117,8 +113,7 @@ test_that("2020 season round numbers are correct through round 13", {
 })
 
 test_that("round numbers don't increment across bye weeks without matches", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   calculate_max_round_lag <- function(rounds) {
     rounds %>%

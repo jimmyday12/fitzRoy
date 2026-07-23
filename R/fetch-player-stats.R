@@ -315,7 +315,7 @@ fetch_player_stats_footywire <- function(season = NULL, round_number = NULL, che
   fw_ids <- start_year:end_year %>%
     purrr::map(~ paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", .)) %>%
     # nolint
-    purrr::map(xml2::read_html) %>%
+    purrr::map(read_html_fitzroy) %>%
     purrr::map(~ rvest::html_nodes(., ".data:nth-child(5) a")) %>%
     purrr::map(~ rvest::html_attr(., "href")) %>%
     purrr::map(~ stringr::str_extract(., "\\d+")) %>%

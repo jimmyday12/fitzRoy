@@ -120,7 +120,7 @@ fetch_betting_odds_footywire <- function(start_season = "2010",
 
     season %>%
       paste0(footywire_betting_url, "?year=", .) %>%
-      xml2::read_html(.) %>%
+      read_html_fitzroy(.) %>%
       list(., season)
   }
 

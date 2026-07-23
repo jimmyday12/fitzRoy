@@ -49,7 +49,8 @@ get_aflw_rounds <- function(cookie) {
     )
     match_data_json <- httr::GET(
       meta_url,
-      httr::add_headers(`X-media-mis-token` = cookie)
+      httr::add_headers(`X-media-mis-token` = cookie),
+      fitzroy_ua()
     )
     response_code <- match_data_json$status_code
     # Status code should be 200 unless year missing
@@ -100,7 +101,8 @@ get_aflw_round_data <- function(roundid, cookie) {
   # Extract round data JSON and flatten into data frame
   round_data <- httr::GET(
     url_head,
-    httr::add_headers(`X-media-mis-token` = cookie)
+    httr::add_headers(`X-media-mis-token` = cookie),
+    fitzroy_ua()
   ) %>%
     httr::content(as = "text", encoding = "UTF-8") %>%
     jsonlite::fromJSON(flatten = TRUE) %>%
@@ -279,7 +281,8 @@ get_aflw_detailed_match_data <- function(matchid, roundid, competitionid,
       roundId = roundid,
       competitionId = competitionid
     ),
-    httr::add_headers(`X-media-mis-token` = cookie)
+    httr::add_headers(`X-media-mis-token` = cookie),
+    fitzroy_ua()
   ) %>%
     httr::content(as = "text", encoding = "UTF-8")
 

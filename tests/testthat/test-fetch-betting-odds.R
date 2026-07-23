@@ -1,6 +1,5 @@
 describe("fetch_betting_odds_footywire", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # Many regression tests require fetching multiple seasons,
   # so it's most efficient to fetch all years with known potential issues
@@ -112,8 +111,7 @@ describe("fetch_betting_odds_footywire", {
 
 # Legacy Tests - should remove eventually --------------------------------------
 test_that("get_betting_odds works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   expect_warning(full_betting_df <- get_footywire_betting_odds(
     start_season = 2010, end_season = 2020
@@ -122,8 +120,7 @@ test_that("get_betting_odds works", {
 })
 
 test_that("round numbers don't increment across bye weeks without matches", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   calculate_max_round_lag <- function(rounds) {
     rounds %>%

@@ -1,6 +1,5 @@
 test_that("fetch_outofcontract_footywire returns valid tibble", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   yr <- Sys.Date() %>%
     format("%Y") %>%
@@ -14,8 +13,7 @@ test_that("fetch_outofcontract_footywire returns valid tibble", {
 })
 
 test_that("fetch_outofcontract works with footywire for multiple years", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   yr <- Sys.Date() %>%
     format("%Y") %>%
@@ -30,8 +28,7 @@ test_that("fetch_outofcontract works with footywire for multiple years", {
 })
 
 test_that("fetch_outofcontract errors on unsupported source", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   yr <- Sys.Date() %>%
     format("%Y") %>%
@@ -44,8 +41,7 @@ test_that("fetch_outofcontract errors on unsupported source", {
 })
 
 test_that("fetch_outofcontract errors on unsupported year", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
   
   yr <- Sys.Date() %>%
     format("%Y") %>%

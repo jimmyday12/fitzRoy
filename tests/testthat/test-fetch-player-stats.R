@@ -46,8 +46,7 @@ test_that("fetch_player_stats_afltables works for various inputs", {
 })
 
 test_that("fetch_player_stats_footywire works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # test normal function
   dat <- fetch_player_stats_footywire()
@@ -101,8 +100,7 @@ test_that("fetch_player_stats_fryzigg works for various inputs", {
 
 
 test_that("fetch_player_stats works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # Test each source works
   expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLM"), "tbl")
@@ -136,8 +134,7 @@ test_that("fetch_player_stats_afltables returns expected column names and types"
 })
 
 test_that("fetch_player_stats_footywire returns expected column names and types", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   dat <- fetch_player_stats_footywire(season = 2020)
   col_names <- names(dat)

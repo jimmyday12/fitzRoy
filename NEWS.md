@@ -4,6 +4,11 @@
   canonical Parquet files from the `fitzroy_data` release instead of legacy `.rda`
   files. This is faster and more reliable. Returned data is unchanged.
 * Added `nanoparquet` to Imports for lightweight Parquet reading.
+* Fixed web-scraping requests being blocked by some sites' bot protection, which
+  was causing spurious connection failures (e.g. `fetch_player_details_footywire()`,
+  `fetch_awards()`, `fetch_team_stats()`). fitzRoy now identifies itself with a
+  descriptive User-Agent instead of R's/curl's generic default. Override it with
+  `options(fitzRoy.user_agent = "your string")` if needed.
 
 # fitzRoy 1.7.0
 

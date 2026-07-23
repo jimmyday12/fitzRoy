@@ -44,7 +44,7 @@ fetch_awards_brownlow <- function(season, type = c("player", "team")) {
     glue::glue("https://www.footywire.com/afl/footy/team_brownlow_medal_summaries?year={season}")
   }
   
-  page <- rvest::read_html(url)
+  page <- read_html_fitzroy(url)
   all_tables <- rvest::html_elements(page, "table")
   parsed_tables <- rvest::html_table(all_tables, fill = TRUE)
   
@@ -124,7 +124,7 @@ fetch_awards_allaustralian <- function(season, type = c("team", "squad")) {
   stopifnot(is.numeric(season), length(season) == 1)
   
   url <- glue::glue("https://www.footywire.com/afl/footy/all_australian_selection?year={season}")
-  page <- rvest::read_html(url)
+  page <- read_html_fitzroy(url)
   rows <- page |> rvest::html_elements("tr")
   
   if (type == "team") {
@@ -190,7 +190,7 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
   
   get_stats_table <- function(season, round_number) {
     url <- glue::glue("https://www.footywire.com/afl/footy/ft_rising_stars_round_performances?year={season}&round={round_number}&sby=2")
-    page <- rvest::read_html(url)
+    page <- read_html_fitzroy(url)
     tables <- rvest::html_elements(page, "table")
     parsed <- purrr::map(tables, rvest::html_table, fill = TRUE)
     
@@ -219,7 +219,7 @@ fetch_rising_star <- function(season, round_number = NULL, type = c("nominations
   
   if (type == "nominations") {
     url <- glue::glue("https://www.footywire.com/afl/footy/rising_star_nominations?year={season}")
-    page <- rvest::read_html(url)
+    page <- read_html_fitzroy(url)
     tables <- rvest::html_elements(page, "table")
     parsed <- purrr::map(tables, rvest::html_table, fill = TRUE)
     

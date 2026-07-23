@@ -35,7 +35,7 @@ fetch_outofcontract <- function(year = 2026, source = "footywire", ...) {
 #' @export
 fetch_outofcontract_footywire <- function(year = 2026) {
   url <- paste0("https://www.footywire.com/afl/footy/out_of_contract_players?year=", year)
-  page <- rvest::read_html(url)
+  page <- read_html_fitzroy(url)
   
   # Extract tables
   tables_all <- rvest::html_elements(page, "table")
