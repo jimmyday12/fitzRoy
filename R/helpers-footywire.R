@@ -163,7 +163,7 @@ get_match_data <- function(id) {
 
   # Check if URL exists
   footywire_basic <- tryCatch(
-    xml2::read_html(basic_url),
+    read_html_fitzroy(basic_url),
     error = function(e) FALSE
   )
 
@@ -191,7 +191,7 @@ get_match_data <- function(id) {
 
       # Check if Advanced URL exists
       footywire_advanced <- tryCatch(
-        xml2::read_html(advanced_url),
+        read_html_fitzroy(advanced_url),
         error = function(e) FALSE
       )
 
@@ -233,7 +233,7 @@ fetch_footywire_match_ids <- function(season) {
   url <- paste0("https://www.footywire.com/afl/footy/ft_match_list?year=", season)
 
   url %>%
-    xml2::read_html() %>%
+    read_html_fitzroy() %>%
     rvest::html_nodes(".data:nth-child(5) a") %>%
     rvest::html_attr("href") %>%
     stringr::str_extract("[0-9]+")
@@ -251,7 +251,7 @@ extract_match_data <- function(match_id) {
   # pb$tick()
   match_url <- paste0("https://www.footywire.com/afl/footy/ft_match_statistics?mid=", match_id)
 
-  xml <- xml2::read_html(match_url)
+  xml <- read_html_fitzroy(match_url)
   extract_footywire_match_table(xml)
 }
 

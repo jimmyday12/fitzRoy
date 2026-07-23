@@ -106,7 +106,7 @@ get_player_details_afltables <- function(team) {
   )
 
   url <- paste0("https://afltables.com/afl/stats/alltime/", team_abr, ".html")
-  html <- rvest::read_html(url)
+  html <- read_html_fitzroy(url)
 
   df <- html %>%
     rvest::html_table() %>%

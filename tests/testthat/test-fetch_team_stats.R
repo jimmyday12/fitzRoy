@@ -25,15 +25,17 @@ test_that("fetch_team_stats_afltables returns averages", {
 })
 
 test_that("fetch_team_stats_footywire returns multiple summary types", {
-  skip_on_cran()
-  skip_if_offline()
+  skip_if_footywire_unreachable()
+
+  footywire_resilient({
+
+    result <- fetch_team_stats(2023, source = "footywire", summary_type = c("totals", "averages"))
   
-  result <- fetch_team_stats(2023, source = "footywire", summary_type = c("totals", "averages"))
-  
-  expect_s3_class(result, "data.frame")
-  expect_true("summary" %in% names(result))
-  expect_true(all(result$summary %in% c("totals", "averages")))
-  expect_true("Team" %in% names(result))
+    expect_s3_class(result, "data.frame")
+    expect_true("summary" %in% names(result))
+    expect_true(all(result$summary %in% c("totals", "averages")))
+    expect_true("Team" %in% names(result))
+  })
 })
 
 test_that("fetch_team_stats_vflstats returns VFLM totals", {

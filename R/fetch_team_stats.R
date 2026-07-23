@@ -48,7 +48,7 @@ fetch_team_stats_afltables <- function(season, summary_type = "totals") {
   cli::cli_progress_step("Downloading team stats from AFLTables for {season}")
   
   url <- glue::glue("https://afltables.com/afl/stats/{season}s.html")
-  page <- tryCatch(rvest::read_html(url), error = function(e) NULL)
+  page <- tryCatch(read_html_fitzroy(url), error = function(e) NULL)
   
   if (is.null(page)) {
     cli::cli_abort("Could not access AFLTables page for season {season}.")
@@ -143,7 +143,7 @@ fetch_team_stats_footywire <- function(season,
   fetch_single_type <- function(season, type) {
     cli::cli_progress_step("Fetching {type} team stats from Footywire for {season}")
     url <- glue::glue("https://www.footywire.com/afl/footy/ft_team_rankings?year={season}&type={type_map[type]}&sby=2")
-    page <- tryCatch(rvest::read_html(url), error = function(e) cli::cli_abort("Could not read page: {url}"))
+    page <- tryCatch(read_html_fitzroy(url), error = function(e) cli::cli_abort("Could not read page: {url}"))
     
     tables <- page |> rvest::html_elements("table")
     main_table <- tables[[11]]
@@ -204,7 +204,7 @@ fetch_team_stats_vflstats <- function(season = 2025,
   url <- paste0(base_url, "/players/", season)
   cli::cli_progress_step("Fetching team stats from {comp} {season}...")
   
-  page <- tryCatch(rvest::read_html(url), error = function(e) cli::cli_abort("Failed to load page: {url}"))
+  page <- tryCatch(read_html_fitzroy(url), error = function(e) cli::cli_abort("Failed to load page: {url}"))
   rows <- rvest::html_elements(page, "table tbody tr")
   
   player_data <- purrr::map_dfr(rows, function(row) {

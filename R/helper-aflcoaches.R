@@ -51,7 +51,7 @@ scrape_coaches_votes <- function(season = NULL,
   )
 
   # read the link
-  html <- rvest::read_html(link)
+  html <- read_html_fitzroy(link)
 
   # closeAllConnections()
 

@@ -1,37 +1,39 @@
 describe("fetch_betting_odds_footywire", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
   # Many regression tests require fetching multiple seasons,
   # so it's most efficient to fetch all years with known potential issues
-  full_betting_df <-
+  full_betting_df <- footywire_resilient({
     fetch_betting_odds_footywire(
       start_season = 2010,
       end_season = 2020
     )
+  })
 
 
   it("works with different inputs ", {
-    betting_df <- fetch_betting_odds_footywire(2018, 2019)
-    expect_s3_class(betting_df, "data.frame")
-    expect_s3_class(betting_df$Date[1], "Date")
+    footywire_resilient({
+      betting_df <- fetch_betting_odds_footywire(2018, 2019)
+      expect_s3_class(betting_df, "data.frame")
+      expect_s3_class(betting_df$Date[1], "Date")
 
-    betting_df <- fetch_betting_odds_footywire("2018", "2019")
-    expect_s3_class(betting_df, "data.frame")
-    expect_s3_class(betting_df$Date[1], "Date")
+      betting_df <- fetch_betting_odds_footywire("2018", "2019")
+      expect_s3_class(betting_df, "data.frame")
+      expect_s3_class(betting_df$Date[1], "Date")
 
-    fetch_betting_odds_footywire(18, 2010) %>%
-      expect_warning() %>%
-      suppressWarnings()
+      fetch_betting_odds_footywire(18, 2010) %>%
+        expect_warning() %>%
+        suppressWarnings()
 
-    this_year <- as.numeric(lubridate::year(Sys.Date()))
+      this_year <- as.numeric(lubridate::year(Sys.Date()))
 
-    fetch_betting_odds_footywire(this_year - 1, this_year + 1) %>%
-      expect_warning() %>%
-      suppressWarnings()
+      fetch_betting_odds_footywire(this_year - 1, this_year + 1) %>%
+        expect_warning() %>%
+        suppressWarnings()
 
-    expect_error(supressWarnings(fetch_betting_odds_footywire("2018-01-01")))
-    expect_error(supressWarnings(fetch_betting_odds_footywire(2016, "2018-01-01")))
+      expect_error(supressWarnings(fetch_betting_odds_footywire("2018-01-01")))
+      expect_error(supressWarnings(fetch_betting_odds_footywire(2016, "2018-01-01")))
+    })
   })
 
   it("starts all seasons at round 1", {
@@ -100,40 +102,44 @@ describe("fetch_betting_odds_footywire", {
   })
 
   it("returns an empty data frame when a future season is requested", {
-    this_year <- as.numeric(lubridate::year(Sys.Date()))
-    next_year <- this_year + 1
+    footywire_resilient({
+      this_year <- as.numeric(lubridate::year(Sys.Date()))
+      next_year <- this_year + 1
 
-    fetch_betting_odds_footywire(start_season = next_year, end_season = next_year) %>%
-      expect_warning() %>%
-      suppressWarnings()
+      fetch_betting_odds_footywire(start_season = next_year, end_season = next_year) %>%
+        expect_warning() %>%
+        suppressWarnings()
+    })
   })
 })
 
 
 # Legacy Tests - should remove eventually --------------------------------------
 test_that("get_betting_odds works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-  
-  expect_warning(full_betting_df <- get_footywire_betting_odds(
-    start_season = 2010, end_season = 2020
-  ))
-  expect_s3_class(full_betting_df, "tbl")
+  skip_if_footywire_unreachable()
+
+  footywire_resilient({
+    expect_warning(full_betting_df <- get_footywire_betting_odds(
+      start_season = 2010, end_season = 2020
+    ))
+    expect_s3_class(full_betting_df, "tbl")
+  })
 })
 
 test_that("round numbers don't increment across bye weeks without matches", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_footywire_unreachable()
 
-  calculate_max_round_lag <- function(rounds) {
-    rounds %>%
-      unique() %>%
-      (function(round) {
-        round - dplyr::lag(round, default = 0)
-      }) %>%
-      max()
-  }
+  footywire_resilient({
+    calculate_max_round_lag <- function(rounds) {
+      rounds %>%
+        unique() %>%
+        (function(round) {
+          round - dplyr::lag(round, default = 0)
+        }) %>%
+        max()
+    }
 
-  expect_warning(betting_rounds <- get_footywire_betting_odds(2019, 2020))
-  expect_equal(calculate_max_round_lag(betting_rounds$Round), 1)
+    expect_warning(betting_rounds <- get_footywire_betting_odds(2019, 2020))
+    expect_equal(calculate_max_round_lag(betting_rounds$Round), 1)
+  })
 })

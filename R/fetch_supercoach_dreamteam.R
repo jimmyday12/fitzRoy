@@ -68,7 +68,7 @@ fetch_scores_by_type <- function(year, rounds, type = c("supercoach", "dream_tea
     cli::cli_inform("Fetching {.val {type}} {.val {year}} Round {.val {round}} ...")
     
     url <- paste0("https://www.footywire.com/afl/footy/", type, "_round?year=", year, "&round=", round, "&p=&s=T")
-    page <- tryCatch(xml2::read_html(url), error = function(e) NULL)
+    page <- tryCatch(read_html_fitzroy(url), error = function(e) NULL)
     if (is.null(page)) next
     
     tables <- rvest::html_elements(page, "table")
