@@ -48,31 +48,34 @@ test_that("fetch_player_stats_afltables works for various inputs", {
 test_that("fetch_player_stats_footywire works for various inputs", {
   skip_if_footywire_unreachable()
 
-  # test normal function
-  dat <- fetch_player_stats_footywire()
-  expect_s3_class(dat, "tbl")
-  if (nrow(dat) > 0){
-    expect_gte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
-    expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
-  }
+  footywire_resilient({
+
+    # test normal function
+    dat <- fetch_player_stats_footywire()
+    expect_s3_class(dat, "tbl")
+    if (nrow(dat) > 0){
+      expect_gte(min(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
+      expect_gte(max(dat$Season), Sys.Date() %>% format("%Y") %>% as.numeric() - 1)
+    }
   
-  # change year
-  dat_round1 <- fetch_player_stats_footywire(season = 2020, round_number = 1)
-  expect_s3_class(dat_round1, "tbl")
-  expect_equal(max(dat_round1$Season), 2020)
-  expect_equal(min(dat_round1$Season), 2020)
+    # change year
+    dat_round1 <- fetch_player_stats_footywire(season = 2020, round_number = 1)
+    expect_s3_class(dat_round1, "tbl")
+    expect_equal(max(dat_round1$Season), 2020)
+    expect_equal(min(dat_round1$Season), 2020)
 
-  # change round number - doesn't do anything
-  dat_round2 <- fetch_player_stats_footywire(season = 2020, round_number = 2)
-  expect_equal(dat_round1, dat_round2)
+    # change round number - doesn't do anything
+    dat_round2 <- fetch_player_stats_footywire(season = 2020, round_number = 2)
+    expect_equal(dat_round1, dat_round2)
 
-  # certain games are correct - relates to bug in original data scrape
-  gf <- fetch_player_stats_footywire(season = 2020) %>%
-    dplyr::filter(Round == "Grand Final")
-  expect_equal(nrow(gf), 44)
+    # certain games are correct - relates to bug in original data scrape
+    gf <- fetch_player_stats_footywire(season = 2020) %>%
+      dplyr::filter(Round == "Grand Final")
+    expect_equal(nrow(gf), 44)
 
-  # specific bug on a game with unused sub
-  expect_s3_class(fetch_footywire_stats(10808), "tbl")
+    # specific bug on a game with unused sub
+    expect_s3_class(fetch_footywire_stats(10808), "tbl")
+  })
 })
 
 test_that("fetch_player_stats_fryzigg works for various inputs", {
@@ -102,22 +105,25 @@ test_that("fetch_player_stats_fryzigg works for various inputs", {
 test_that("fetch_player_stats works", {
   skip_if_footywire_unreachable()
 
-  # Test each source works
-  expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLM"), "tbl")
-  expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLM"), "tbl")
-  expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "footywire", comp = "AFLM"), "tbl")
-  #expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLM"), "tbl")
+  footywire_resilient({
 
-  # non working sources
-  expect_warning(fetch_player_stats(2020, round_number = 1, source = "squiggle", comp = "AFLM"))
+    # Test each source works
+    expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLM"), "tbl")
+    expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLM"), "tbl")
+    expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "footywire", comp = "AFLM"), "tbl")
+    #expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLM"), "tbl")
 
-  # Test that AFLW works
-  expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLW"), "tbl")
-  #expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLW"), "tbl")
+    # non working sources
+    expect_warning(fetch_player_stats(2020, round_number = 1, source = "squiggle", comp = "AFLM"))
 
-  expect_error(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLW"))
-  expect_error(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLW"))
-  expect_error(fetch_player_stats(2020, round_number = 1, source = "footywire", comp = "AFLW"))
+    # Test that AFLW works
+    expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "AFL", comp = "AFLW"), "tbl")
+    #expect_s3_class(fetch_player_stats(2020, round_number = 1, source = "fryzigg", comp = "AFLW"), "tbl")
+
+    expect_error(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLW"))
+    expect_error(fetch_player_stats(2020, round_number = 1, source = "afltables", comp = "AFLW"))
+    expect_error(fetch_player_stats(2020, round_number = 1, source = "footywire", comp = "AFLW"))
+  })
 })
 
 
@@ -136,12 +142,15 @@ test_that("fetch_player_stats_afltables returns expected column names and types"
 test_that("fetch_player_stats_footywire returns expected column names and types", {
   skip_if_footywire_unreachable()
 
-  dat <- fetch_player_stats_footywire(season = 2020)
-  col_names <- names(dat)
-  col_classes <- vapply(dat, function(x) class(x)[[1L]], character(1L))
+  footywire_resilient({
 
-  expect_snapshot(col_names)
-  expect_snapshot(col_classes)
+    dat <- fetch_player_stats_footywire(season = 2020)
+    col_names <- names(dat)
+    col_classes <- vapply(dat, function(x) class(x)[[1L]], character(1L))
+
+    expect_snapshot(col_names)
+    expect_snapshot(col_classes)
+  })
 })
 
 test_that("fetch_player_stats works for non-AFL leagues", {

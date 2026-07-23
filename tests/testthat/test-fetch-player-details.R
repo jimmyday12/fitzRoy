@@ -48,17 +48,20 @@ test_that("fetch_player_details_afltables works for various inputs", {
 test_that("fetch_player_details_footywire works for various inputs", {
   skip_if_footywire_unreachable()
 
+  footywire_resilient({
 
-  # test normal function
-  df <- fetch_player_details_footywire("Hawthorn", current = TRUE)
-  expect_s3_class(df, "tbl")
-  expect_gt(nrow(df), 0)
 
-  # Check old team - not doing because it's so slow
-  # expect_s3_class(fetch_player_details_footywire("GWS", current = FALSE), "tbl")
+    # test normal function
+    df <- fetch_player_details_footywire("Hawthorn", current = TRUE)
+    expect_s3_class(df, "tbl")
+    expect_gt(nrow(df), 0)
 
-  # Check wrong team
-  expect_error(fetch_player_details_footywire("Hawks"))
+    # Check old team - not doing because it's so slow
+    # expect_s3_class(fetch_player_details_footywire("GWS", current = FALSE), "tbl")
+
+    # Check wrong team
+    expect_error(fetch_player_details_footywire("Hawks"))
+  })
 })
 
 
@@ -67,27 +70,30 @@ test_that("fetch_player_details_footywire works for various inputs", {
 test_that("fetch_player_details works AFLM", {
   skip_if_footywire_unreachable()
 
-  yr <- Sys.Date() %>%
-    format("%Y") %>%
-    as.numeric()
+  footywire_resilient({
 
-  # first check if there is going to be current data
-  aflm_res <- suppressWarnings(fetch_results_afl(yr - 1, 1, "AFLM"))
-  testthat::skip_if(is.null(aflm_res))
+    yr <- Sys.Date() %>%
+      format("%Y") %>%
+      as.numeric()
 
-  # Test each source works
+    # first check if there is going to be current data
+    aflm_res <- suppressWarnings(fetch_results_afl(yr - 1, 1, "AFLM"))
+    testthat::skip_if(is.null(aflm_res))
 
-  expect_s3_class(fetch_player_details(current = TRUE, team = "Hawthorn", source = "afltables", comp = "AFLM"), "tbl")
-  expect_s3_class(fetch_player_details(current = TRUE, team = "Hawthorn", source = "footywire", comp = "AFLM"), "tbl")
-  expect_s3_class(fetch_player_details(current = TRUE, team = "Hawthorn", source = "AFL", comp = "AFLM"), "tbl")
+    # Test each source works
 
-  # non working sources
-  # expect_warning(fetch_player_details("Hawthorn", source = "AFL", comp = "AFLM"))
+    expect_s3_class(fetch_player_details(current = TRUE, team = "Hawthorn", source = "afltables", comp = "AFLM"), "tbl")
+    expect_s3_class(fetch_player_details(current = TRUE, team = "Hawthorn", source = "footywire", comp = "AFLM"), "tbl")
+    expect_s3_class(fetch_player_details(current = TRUE, team = "Hawthorn", source = "AFL", comp = "AFLM"), "tbl")
 
-  # Test that AFLW works for AFL and fails for others
-  expect_s3_class(fetch_player_details(current = TRUE, team = "Geelong", source = "AFL", comp = "AFLW"), "tbl")
-  expect_error(fetch_player_details(current = TRUE, team = "Hawthorn", source = "afltables", comp = "AFLW"))
-  expect_error(fetch_player_details(current = TRUE, team = "Hawthorn", source = "footywire", comp = "AFLW"))
+    # non working sources
+    # expect_warning(fetch_player_details("Hawthorn", source = "AFL", comp = "AFLM"))
+
+    # Test that AFLW works for AFL and fails for others
+    expect_s3_class(fetch_player_details(current = TRUE, team = "Geelong", source = "AFL", comp = "AFLW"), "tbl")
+    expect_error(fetch_player_details(current = TRUE, team = "Hawthorn", source = "afltables", comp = "AFLW"))
+    expect_error(fetch_player_details(current = TRUE, team = "Hawthorn", source = "footywire", comp = "AFLW"))
+  })
 })
 
 test_that("fetch_player_details works AFLW", {
