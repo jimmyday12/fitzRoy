@@ -3,7 +3,8 @@ test_that("fetch_scores() returns Supercoach data for type = 'supercoach'", {
 
   footywire_resilient({
     result <- fetch_scores(type = "supercoach", year = 2025, rounds = 1)
-  
+    skip_if_footywire_empty(result)
+
     expect_s3_class(result, "data.frame")
     expect_true(nrow(result) > 0)
   
@@ -20,7 +21,8 @@ test_that("fetch_scores() returns Dream Team data for type = 'dream_team'", {
 
   footywire_resilient({
     result <- fetch_scores(type = "dream_team", year = 2025, rounds = 1)
-  
+    skip_if_footywire_empty(result)
+
     expect_s3_class(result, "data.frame")
     expect_true(nrow(result) > 0)
   
