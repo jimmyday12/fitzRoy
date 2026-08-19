@@ -1,5 +1,22 @@
 # fitzRoy 1.8.0
 
+* Made the test suite resilient to a data source being briefly unreachable
+  ([#292](https://github.com/jimmyday12/fitzRoy/issues/292)). `R CMD check` on CI
+  was failing most runs because afltables.com or footywire.com timed out from a
+  GitHub runner mid-run, which is a network blip rather than a code defect. The
+  footywire-only test helpers are now source-agnostic
+  (`tests/testthat/helper-network.R`) and applied to the afltables tests too, so
+  a network failure skips the affected test instead of failing the build - and
+  the resulting skip now names the source that actually failed rather than
+  always blaming footywire.
+* `get_afltables_urls()` and `get_afltables_player_ids()` now fail gracefully
+  when afltables.com cannot be reached, returning an empty result / the stored
+  player ids with an informative warning, instead of surfacing a confusing
+  ``Must supply `.init` when `.x` is empty`` or `subscript out of bounds` error
+  from downstream code.
+* `get_afltables_player_ids()` now reports an informative message naming the
+  resource when the cached player id file cannot be read, instead of readr's
+  bare "cannot open the connection".
 * `get_aflw_detailed_data()` no longer emits a deprecation warning naming
   `get_aflw_cookie()`, a function callers never invoked and cannot reach through
   the public API. It (and the internal `fetch_match_stats_afl()`) now call

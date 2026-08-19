@@ -1,7 +1,4 @@
 test_that("check_season works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-
   expect_equal(check_season(2000), 2000)
   expect_equal(check_season(2020), 2020)
   expect_gte(check_season(NULL), Sys.Date() %>% format("%Y") %>% as.numeric())
@@ -11,9 +8,6 @@ test_that("check_season works for various inputs", {
 })
 
 test_that("check_comp works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-
   expect_equal(check_comp("AFLW"), "AFLW")
   expect_equal(check_comp("AFLM"), "AFLM")
   expect_equal(check_comp("VFL"), "VFL")
@@ -24,9 +18,6 @@ test_that("check_comp works for various inputs", {
 })
 
 test_that("check_source works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-
   # successes
   expect_equal(check_source("AFL"), "AFL")
   expect_equal(check_source("afltables"), "afltables")
@@ -41,9 +32,6 @@ test_that("check_source works for various inputs", {
 })
 
 test_that("check_source works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-
   # AFLM
   expect_invisible(check_comp_source("AFLM", "AFL"))
   expect_invisible(check_comp_source("AFLM", "afltables"))
@@ -66,9 +54,6 @@ test_that("check_source works for various inputs", {
 })
 
 test_that("return_start_end_date works for various inputs", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
-
   # 1 year
   x <- return_start_end_dates(2018)
   expect_equal(x$start_date, as.POSIXct("2018-01-01", tz = "UTC"))
