@@ -17,6 +17,12 @@
 * `get_afltables_player_ids()` now reports an informative message naming the
   resource when the cached player id file cannot be read, instead of readr's
   bare "cannot open the connection".
+* `get_aflw_detailed_data()` no longer emits a deprecation warning naming
+  `get_aflw_cookie()`, a function callers never invoked and cannot reach through
+  the public API. It (and the internal `fetch_match_stats_afl()`) now call
+  `get_afl_cookie()` directly. `get_aflw_cookie()` remains deprecated and
+  unchanged for anyone calling it themselves
+  ([#291](https://github.com/jimmyday12/fitzRoy/issues/291)).
 * Fixed an `R CMD check` ERROR on CRAN's machines. `test-fetch-player-stats.R`
   called `fetch_results_afltables()` at the top level of the file to work out the
   current season. Top-level test code runs before the `skip_on_cran()` /
