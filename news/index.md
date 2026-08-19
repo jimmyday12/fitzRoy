@@ -2,6 +2,16 @@
 
 ## fitzRoy 1.8.0
 
+- [`get_aflw_detailed_data()`](https://jimmyday12.github.io/fitzRoy/reference/get_aflw_detailed_data.md)
+  no longer emits a deprecation warning naming
+  [`get_aflw_cookie()`](https://jimmyday12.github.io/fitzRoy/reference/get_aflw_cookie.md),
+  a function callers never invoked and cannot reach through the public
+  API. It (and the internal `fetch_match_stats_afl()`) now call
+  [`get_afl_cookie()`](https://jimmyday12.github.io/fitzRoy/reference/get_afl_cookie.md)
+  directly.
+  [`get_aflw_cookie()`](https://jimmyday12.github.io/fitzRoy/reference/get_aflw_cookie.md)
+  remains deprecated and unchanged for anyone calling it themselves
+  ([\#291](https://github.com/jimmyday12/fitzRoy/issues/291)).
 - Fixed an `R CMD check` ERROR on CRAN’s machines.
   `test-fetch-player-stats.R` called
   [`fetch_results_afltables()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_results.md)

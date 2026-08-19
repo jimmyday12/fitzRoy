@@ -15,8 +15,6 @@ get_score_progression_raw()
 ``` r
 #
 if (FALSE) { # \dontrun{
-get_match_results()
-# ->
-fetch_results_afltables()
+get_score_progression_raw()
 } # }
 ```

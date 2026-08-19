@@ -18,6 +18,6 @@ get_aflw_cookie()
 if (FALSE) { # \dontrun{
 get_aflw_cookie()
 # ->
-get_aflw_cookie()
+get_afl_cookie()
 } # }
 ```
