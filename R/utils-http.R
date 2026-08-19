@@ -74,3 +74,35 @@ read_fwf_fitzroy <- function(url, ...) {
     }
   )
 }
+
+#' Read a CSV file from a URL, failing gracefully
+#'
+#' Wraps [readr::read_csv()] so that a network-level failure (host
+#' unreachable, no internet, timeout, non-2xx response) produces an
+#' informative message naming the resource rather than readr's bare
+#' "cannot open the connection", as required by CRAN policy for packages
+#' using internet resources.
+#'
+#' @param url A URL to read.
+#' @param ... Passed through to [readr::read_csv()].
+#' @keywords internal
+#' @noRd
+read_csv_fitzroy <- function(url, ...) {
+  old_ua <- getOption("HTTPUserAgent")
+  options(HTTPUserAgent = fitzroy_user_agent())
+  on.exit(options(HTTPUserAgent = old_ua), add = TRUE)
+
+  tryCatch(
+    readr::read_csv(url, ...),
+    error = function(e) {
+      cli::cli_abort(
+        c(
+          "Could not read data from {.url {url}}.",
+          "i" = "The site may be unavailable, or you may not have an internet connection.",
+          "x" = conditionMessage(e)
+        ),
+        call = NULL
+      )
+    }
+  )
+}

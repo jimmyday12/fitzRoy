@@ -339,6 +339,18 @@ get_afltables_urls <- function(start_date,
 
   html_games <- Filter(Negate(is.null), html_games)
 
+  # url_works() swallows per-season errors so a single bad season doesn't
+  # sink the lot - but if afltables.com is unreachable every season drops
+  # out, and the purrr::reduce() below would then fail with a cryptic
+  # "Must supply `.init` when `.x` is empty". Fail gracefully instead.
+  if (length(html_games) == 0) {
+    cli::cli_warn(c(
+      "Could not read any season pages from {.url https://afltables.com/afl/seas/}.",
+      "i" = "The site may be unavailable, or you may not have an internet connection."
+    ))
+    return(character(0))
+  }
+
   dates <- html_games %>%
     purrr::map(
       rvest::html_nodes,
@@ -360,7 +372,7 @@ get_afltables_urls <- function(start_date,
   # Return only id's that match
   match_ids <- match_ids %>%
     purrr::map2(.y = dates, ~ magrittr::extract(.x, .y)) %>%
-    purrr::reduce(c)
+    purrr::reduce(c, .init = character(0))
 
   match_ids[!is.na(match_ids)]
 }
@@ -471,7 +483,7 @@ get_afltables_player_ids <- function(seasons) {
   col_vars <- c("Season", "Player", "ID", "Team")
 
   ids_old <- git_url %>%
-    readr::read_csv(col_types = c("dcdc")) %>%
+    read_csv_fitzroy(col_types = c("dcdc")) %>%
     dplyr::mutate(ID = as.integer(.data$ID)) %>%
     dplyr::select(!!col_vars) %>%
     dplyr::distinct()
@@ -568,43 +580,57 @@ get_afltables_player_ids <- function(seasons) {
     purrr::discard(~ nrow(.x) == 0)
 
 
-  # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
-  # so we need to make them consistent before joining to avoid type errors
-  mixed_cols <- c("Round", "Jumper.No.")
-  cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
+  # readUrl() swallows per-season errors so partial data is still usable -
+  # but if afltables.com is unreachable every season drops out, leaving an
+  # empty list. Fall back to the stored ids rather than erroring on
+  # `ids_new[[1]]` with a confusing "subscript out of bounds".
+  if (length(ids_new) == 0) {
+    cli::cli_warn(c(
+      "Could not read any player id files from {.url https://afltables.com/afl/stats/}.",
+      "i" = "The site may be unavailable, or you may not have an internet connection.",
+      "i" = "Returning stored player ids, which may be missing the most recent seasons."
+    ))
+    ids_new <- tibble::tibble()
+  } else {
+    # Some DFs have numeric columns as 'chr' and some have them as 'dbl',
+    # so we need to make them consistent before joining to avoid type errors
+    mixed_cols <- c("Round", "Jumper.No.")
+    cols_to_convert <- intersect(mixed_cols, colnames(ids_new[[1]]))
 
-  ids_new <- ids_new %>%
-    purrr::map(~ dplyr::mutate_at(., cols_to_convert, as.character)) %>%
-    purrr::list_rbind(names_to = "Season") %>%
-    dplyr::mutate(
-      Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
-      Season = stringr::str_remove(.data$Season, "_stats.txt"),
-      Season = as.numeric(.data$Season)
-    )
-
-  if (nrow(ids_new) < 1) {
-    return(ids)
+    ids_new <- ids_new %>%
+      purrr::map(~ dplyr::mutate_at(., cols_to_convert, as.character)) %>%
+      purrr::list_rbind(names_to = "Season") %>%
+      dplyr::mutate(
+        Season = stringr::str_remove(.data$Season, "https://afltables.com/afl/stats/"),
+        Season = stringr::str_remove(.data$Season, "_stats.txt"),
+        Season = as.numeric(.data$Season)
+      )
   }
 
-  ids_new <- ids_new %>%
-    dplyr::select(!!col_vars) %>%
-    dplyr::distinct() %>%
-    dplyr::rename(Team.abb = "Team") %>%
-    dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
-    dplyr::select(!!col_vars)
-
-  ids_new_min <- min(ids_new$Season)
-  ids_new_max <- max(ids_new$Season)
-
-  ids_old <- ids_old %>%
-    dplyr::filter(.data$Season < ids_new_min | .data$Season > ids_new_max)
-
-  if (nrow(ids_old) < 1) {
-    ids <- ids_new %>%
+  if (nrow(ids_new) < 1) {
+    ids <- ids_old %>%
       dplyr::distinct()
   } else {
-    ids <- dplyr::bind_rows(ids_old, ids_new) %>%
-      dplyr::distinct()
+    ids_new <- ids_new %>%
+      dplyr::select(!!col_vars) %>%
+      dplyr::distinct() %>%
+      dplyr::rename(Team.abb = "Team") %>%
+      dplyr::left_join(team_abbr, by = c("Team.abb" = "Team.abb")) %>%
+      dplyr::select(!!col_vars)
+
+    ids_new_min <- min(ids_new$Season)
+    ids_new_max <- max(ids_new$Season)
+
+    ids_old <- ids_old %>%
+      dplyr::filter(.data$Season < ids_new_min | .data$Season > ids_new_max)
+
+    if (nrow(ids_old) < 1) {
+      ids <- ids_new %>%
+        dplyr::distinct()
+    } else {
+      ids <- dplyr::bind_rows(ids_old, ids_new) %>%
+        dplyr::distinct()
+    }
   }
 
   ### Join fixes

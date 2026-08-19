@@ -16,9 +16,13 @@ test_that("replace_venues returns corrected venues", {
 })
 
 test_that("conver_results works", {
-  testthat::skip_if_offline()
-  testthat::skip_on_cran()
+  skip_if_afltables_unreachable()
 
-  expect_type(convert_results(fetch_results_afltables(2020)), "list")
-  expect_error(convert_results("a"))
+  afltables_resilient({
+    results <- fetch_results_afltables(2020)
+    skip_if_afltables_empty(results)
+
+    expect_type(convert_results(results), "list")
+    expect_error(convert_results("a"))
+  })
 })
