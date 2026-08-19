@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fitzRoy</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.7.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.8.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,8 +70,11 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="development version" id="fitzroy-development-version">fitzRoy (development version)<a class="anchor" aria-label="anchor" href="#fitzroy-development-version"></a></h2>
-<ul><li>
+<h2 class="pkg-version" data-toc-text="1.8.0" id="fitzroy-180">fitzRoy 1.8.0<a class="anchor" aria-label="anchor" href="#fitzroy-180"></a></h2>
+<ul><li>Fixed an <code>R CMD check</code> ERROR on CRAN’s machines. <code>test-fetch-player-stats.R</code> called <code><a href="../reference/fetch_results.html">fetch_results_afltables()</a></code> at the top level of the file to work out the current season. Top-level test code runs before the <code>skip_on_cran()</code> / <code>skip_if_offline()</code> guards inside the <code>test_that()</code> blocks, so this made a network request on check machines with no internet access and failed the whole file with “cannot open the connection”. The season is now resolved lazily from inside the tests, after the skips.</li>
+<li>
+<code><a href="../reference/fetch_results.html">fetch_results_afltables()</a></code> now fails gracefully with an informative message naming the resource when afltables.com cannot be reached, instead of surfacing readr’s bare “cannot open the connection” error.</li>
+<li>
 <code><a href="../reference/fetch_player_stats.html">fetch_player_stats_afltables()</a></code> and <code><a href="../reference/fetch_player_stats.html">fetch_player_stats_footywire()</a></code> now read canonical Parquet files from the <code>fitzroy_data</code> release instead of legacy <code>.rda</code> files. This is faster and more reliable. Returned data is unchanged.</li>
 <li>Added <code>nanoparquet</code> to Imports for lightweight Parquet reading.</li>
 <li>Fixed web-scraping requests being blocked by some sites’ bot protection, which was causing spurious connection failures (e.g. <code><a href="../reference/fetch_player_details.html">fetch_player_details_footywire()</a></code>, <code><a href="../reference/fetch_awards.html">fetch_awards()</a></code>, <code><a href="../reference/fetch_team_stats.html">fetch_team_stats()</a></code>). fitzRoy now identifies itself with a descriptive User-Agent instead of R’s/curl’s generic default. Override it with <code>options(fitzRoy.user_agent = "your string")</code> if needed.</li>

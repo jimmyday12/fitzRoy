@@ -1,7 +1,20 @@
 # Changelog
 
-## fitzRoy (development version)
+## fitzRoy 1.8.0
 
+- Fixed an `R CMD check` ERROR on CRAN’s machines.
+  `test-fetch-player-stats.R` called
+  [`fetch_results_afltables()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_results.md)
+  at the top level of the file to work out the current season. Top-level
+  test code runs before the `skip_on_cran()` / `skip_if_offline()`
+  guards inside the `test_that()` blocks, so this made a network request
+  on check machines with no internet access and failed the whole file
+  with “cannot open the connection”. The season is now resolved lazily
+  from inside the tests, after the skips.
+- [`fetch_results_afltables()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_results.md)
+  now fails gracefully with an informative message naming the resource
+  when afltables.com cannot be reached, instead of surfacing readr’s
+  bare “cannot open the connection” error.
 - [`fetch_player_stats_afltables()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.md)
   and
   [`fetch_player_stats_footywire()`](https://jimmyday12.github.io/fitzRoy/reference/fetch_player_stats.md)
