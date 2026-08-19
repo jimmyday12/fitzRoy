@@ -14,8 +14,6 @@ This function has been deprecated due to its inefficiency
 \examples{
 #
 \dontrun{
-get_match_results()
-# ->
-fetch_results_afltables()
+get_score_progression_raw()
 }
 }

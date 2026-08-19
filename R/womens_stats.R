@@ -10,7 +10,7 @@
 #' \dontrun{
 #' get_aflw_cookie()
 #' # ->
-#' get_aflw_cookie()
+#' get_afl_cookie()
 #' }
 #' @keywords internal
 get_aflw_cookie <- function() {
@@ -231,7 +231,7 @@ get_aflw_match_data <- function(start_year = 2017) {
 #' get_aflw_detailed_data(c("CD_M20172640101", "CD_M20172640102"))
 #' }
 get_aflw_detailed_data <- function(matchids) {
-  cookie <- get_aflw_cookie()
+  cookie <- get_afl_cookie()
   # Round and competition IDs can be inferred from match Ids:
   # Match ID:       "CD_M20172640101"
   # Round ID:       "CD_R201726401"     M->R, last two characters removed
