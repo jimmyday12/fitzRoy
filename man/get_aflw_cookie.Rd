@@ -16,7 +16,7 @@ Replaced with a standard function to return cookies for either mens or womens da
 \dontrun{
 get_aflw_cookie()
 # ->
-get_aflw_cookie()
+get_afl_cookie()
 }
 }
 \keyword{internal}

@@ -578,7 +578,7 @@ fetch_match_roster_afl <- function(id, cookie = NULL) {
 #' @keywords internal
 #' @noRd
 fetch_match_stats_afl <- function(id, cookie = NULL) {
-  if (is.null(cookie)) cookie <- get_aflw_cookie()
+  if (is.null(cookie)) cookie <- get_afl_cookie()
 
   api <- httr::modify_url(
     url = "https://api.afl.com.au",

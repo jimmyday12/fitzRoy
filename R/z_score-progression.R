@@ -8,9 +8,7 @@
 #' @examples
 #' #
 #' \dontrun{
-#' get_match_results()
-#' # ->
-#' fetch_results_afltables()
+#' get_score_progression_raw()
 #' }
 get_score_progression_raw <- function() {
   lifecycle::deprecate_stop(
