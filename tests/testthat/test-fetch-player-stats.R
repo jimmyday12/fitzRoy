@@ -1,12 +1,30 @@
-# get most recent season
-current_year <- Sys.Date() %>%
-  format("%Y") %>%
-  as.numeric()
-x <- fetch_results_afltables(current_year)
-if (nrow(x) == 0) {
-  seas <- current_year - 1
-} else {
-  seas <- current_year
+# Determine the most recent season that has afltables results.
+#
+# This *must not* run at file load time - top-level code in a test file runs
+# before any `skip_on_cran()`/`skip_if_offline()` inside a `test_that()` block,
+# so a network call here errors out the whole file on CRAN's check machines
+# (which have no internet access) regardless of the skips below. Instead it is
+# called lazily from inside each test that needs it, after the skips, and the
+# result is cached for the remainder of the file's run.
+.seas_cache <- NULL
+
+latest_afltables_season <- function() {
+  if (!is.null(.seas_cache)) {
+    return(.seas_cache)
+  }
+
+  current_year <- as.numeric(format(Sys.Date(), "%Y"))
+
+  x <- tryCatch(
+    fetch_results_afltables(current_year),
+    error = function(e) {
+      testthat::skip(paste0("afltables results unavailable: ", conditionMessage(e)))
+    }
+  )
+
+  seas <- if (nrow(x) == 0) current_year - 1 else current_year
+  .seas_cache <<- seas
+  seas
 }
 
 
@@ -14,7 +32,7 @@ test_that("fetch_player_stats_afltables works for various inputs", {
   testthat::skip_if_offline()
   testthat::skip_on_cran()
 
-
+  seas <- latest_afltables_season()
 
   # test normal function
   dat <- fetch_player_stats_afltables(seas)

@@ -1,13 +1,33 @@
+## Resubmission
+
+This release fixes the ERROR shown on
+<https://cran.r-project.org/web/checks/check_results_fitzRoy.html> for
+r-devel-linux-x86_64-fedora-gcc, as requested by the CRAN team on 2026-08-14.
+
+The cause was test code, not package code. `tests/testthat/test-fetch-player-stats.R`
+computed the current season at the *top level* of the test file by calling
+`fetch_results_afltables()`. Top-level code in a test file runs before the
+`testthat::skip_on_cran()` and `testthat::skip_if_offline()` guards inside the
+`test_that()` blocks, so the internet resource was contacted unconditionally on
+check machines without network access, and the file failed with
+"cannot open the connection".
+
+The season is now resolved lazily from inside the tests, after the skip guards,
+so no network access occurs on CRAN. All tests in the package are now correctly
+guarded by `skip_on_cran()`/`skip_if_offline()`.
+
+In addition, and in line with the policy quoted in your message,
+`fetch_results_afltables()` now fails gracefully with an informative message
+naming the unavailable resource rather than propagating readr's bare
+"cannot open the connection" error.
+
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-* checking CRAN incoming feasibility ... NOTE
-  - Found the following (possibly) invalid URLs for https://www.footywire.com
-    (Status: 406, Not Acceptable): this URL is correct and functional in a
-    browser. The 406 status is returned because the server rejects automated
-    requests without a browser-like User-Agent header. The site is a primary
-    data source for the package.
+`urlchecker::url_check()` is clean. The footywire.com URL NOTE reported against
+earlier versions no longer occurs, as fitzRoy now sends a descriptive
+User-Agent rather than R's generic default.
 
 ## Test environments
 
@@ -17,13 +37,7 @@
 * GitHub Actions: Ubuntu (latest), R devel
 * GitHub Actions: Ubuntu (latest), R release
 * GitHub Actions: Ubuntu (latest), R oldrel-1
-* Windows Server 2022, R-devel (win-builder), 2026-03-12
 
-## Downstream Dependancies
+## Downstream Dependencies
 
 There are currently no downstream dependencies for this package
-
-
-
-
-

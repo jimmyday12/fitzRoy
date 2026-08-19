@@ -27,3 +27,4 @@ create_package.R
 ^CRAN-SUBMISSION$
 ^\.claude$
 ^PHASE2_BRIEF\.md$
+^\.git$

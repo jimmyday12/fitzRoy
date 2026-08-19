@@ -133,7 +133,7 @@ fetch_results_afltables <- function(season = NULL, round_number = NULL) {
     Venue = NA
   )
 
-  match_data <- readr::read_fwf(url_text,
+  match_data <- read_fwf_fitzroy(url_text,
     skip = 2,
     col_positions = cols,
     col_types = c("dcccccccc")
