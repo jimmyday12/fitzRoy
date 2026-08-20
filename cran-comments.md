@@ -5,14 +5,14 @@ This release fixes the ERROR shown on
 r-devel-linux-x86_64-fedora-gcc, as requested by the CRAN team on 2026-08-14.
 
 The cause was test code, not package code. `tests/testthat/test-fetch-player-stats.R`
-computed the current season at the *top level* of the test file by calling
-`fetch_results_afltables()`. Top-level code in a test file runs before the
+computed a variable at the *top level* of the test file by calling
+a function that required a network connection. Top-level code in a test file runs before the
 `testthat::skip_on_cran()` and `testthat::skip_if_offline()` guards inside the
 `test_that()` blocks, so the internet resource was contacted unconditionally on
 check machines without network access, and the file failed with
 "cannot open the connection".
 
-The season is now resolved lazily from inside the tests, after the skip guards,
+The variable is now resolved lazily from inside the tests, after the skip guards,
 so no network access occurs on CRAN. All tests in the package are now correctly
 guarded by `skip_on_cran()`/`skip_if_offline()`.
 
@@ -24,10 +24,6 @@ naming the unavailable resource rather than propagating readr's bare
 ## R CMD check results
 
 0 errors | 0 warnings | 0 notes
-
-`urlchecker::url_check()` is clean. The footywire.com URL NOTE reported against
-earlier versions no longer occurs, as fitzRoy now sends a descriptive
-User-Agent rather than R's generic default.
 
 ## Test environments
 
